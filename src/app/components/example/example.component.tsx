@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ExampleComponent: React.FC = () => {
+const ExampleComponent = () => {
     return <div>Hello World</div>;
 };
 

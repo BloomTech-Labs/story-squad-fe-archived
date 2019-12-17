@@ -15,12 +15,16 @@ const PrivateRoute: React.FunctionComponent<PrivateRoute> = ({
     render: Render,
     ...rest
 }) => {
-    const jwt = localStorage.getItem('jwt');
+    const [jwt, setJwt] = React.useState(localStorage.getItem('jwt'));
     const history = useHistory();
+
+    window.addEventListener('storage', () => {
+        setJwt(localStorage.getItem('jwt'));
+    });
 
     React.useEffect(() => {
         if (!jwt) history.push(redirect);
-    });
+    }, [history, jwt, redirect]);
 
     return (
         <Route

@@ -18,10 +18,12 @@ const PrivateRoute: React.FunctionComponent<PrivateRoute> = ({
     const [jwt, setJwt] = React.useState(localStorage.getItem('jwt'));
     const history = useHistory();
 
+    // Listen for local storage changes and update JWT on storage change
     window.addEventListener('storage', () => {
         setJwt(localStorage.getItem('jwt'));
     });
 
+    // Redirect if JWT is not set
     React.useEffect(() => {
         if (!jwt) history.push(redirect);
     }, [history, jwt, redirect]);

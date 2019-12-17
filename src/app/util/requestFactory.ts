@@ -6,6 +6,7 @@ export const requestFactory = () =>
     axios.create({
         baseURL: endpoint,
         headers: {
+            // Bearer Schema, see https://jwt.io/introduction/
             Authorization: `Bearer ${localStorage.getItem('jwt')}`,
         },
     });

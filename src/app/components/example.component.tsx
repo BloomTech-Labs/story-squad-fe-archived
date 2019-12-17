@@ -1,7 +1,7 @@
 import React from 'react';
 
-const App: React.FC = () => {
-  return <div></div>;
+const ExampleComponent: React.FC = () => {
+    return <div>Hello World</div>;
 };
 
-export { App };
+export { ExampleComponent };

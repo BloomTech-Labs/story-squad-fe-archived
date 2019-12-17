@@ -1,8 +1,9 @@
 import React from 'react';
-import './App.css';
 
-const App: React.FC = () => {
-  return <div></div>;
+import { ExampleComponent } from '../components/example.component';
+
+const ExamplePage: React.FC = () => {
+    return <ExampleComponent />;
 };
 
-export { App };
+export { ExamplePage };

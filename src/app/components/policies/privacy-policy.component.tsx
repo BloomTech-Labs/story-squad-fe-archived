@@ -125,11 +125,12 @@ const PrivacyPolicy = () => {
                     and interact with content such as avatar selection, text fields, and image
                     upload buttons, through which they can submit their own creative content. The
                     types of creative content collected include fictional stories, art, and written
-                    reviews of other children's content.
+                    reviews of other children's content. All creative work is understood by all
+                    parties to be fictional in nature and not a factual account of any real-world
+                    experience.
                 </p>
 
                 <p>
-                    {' '}
                     Creation of a child account (which includes a payment process) will be
                     considered 'high-level consent' for the above outlined activities in accordance
                     with COPPA. In the case that we become aware of information collected from a

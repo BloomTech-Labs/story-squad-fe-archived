@@ -1,18 +1,9 @@
 import React from 'react';
 
-import {
-    Button,
-    Checkbox,
-    FormControlLabel,
-    Grid,
-    Paper,
-    Tab,
-    Tabs,
-    TextField,
-    Typography,
-    useMediaQuery,
-} from '@material-ui/core';
+import { Grid, Paper, Tab, Tabs, useMediaQuery } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { SignIn } from '../components/sign-up/sign-in.component';
+import { SignUp } from '../components/sign-up/sign-up.component';
 
 const useStyles = makeStyles((theme) => ({
     sidebar: {
@@ -40,6 +31,10 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'space-evenly',
         height: '35vh',
+    },
+    checkboxes: {
+        display: 'flex',
+        flexDirection: 'column',
     },
     onboarding: {
         paddingRight: theme.spacing(4),
@@ -71,7 +66,7 @@ const SignUpPage: React.FC = () => {
 
     return (
         <Grid container direction='row' justify='flex-end' alignItems='stretch'>
-            <Grid item xs={md ? 5 : 12}>
+            <Grid item xs={md ? 4 : 12}>
                 <Paper className={classes.sidebar}>
                     <Tabs
                         className={classes.tabs}
@@ -83,43 +78,10 @@ const SignUpPage: React.FC = () => {
                         <Tab value='sign-up' label='Sign Up' />
                         <Tab value='sign-in' label='Sign In' />
                     </Tabs>
-                    {value === 'sign-up' && (
-                        <div className={classes.onboarding}>
-                            <Typography variant='h3' gutterBottom>
-                                Sign Up
-                            </Typography>
-                            <Typography variant='subtitle2'>
-                                Start your child reading stories today!
-                            </Typography>
-                            <form className={classes.form}>
-                                <TextField fullWidth label='Username' />
-                                <TextField fullWidth label='Password' />
-                                <TextField fullWidth label='Confirm Password' />
-                                <div>
-                                    <FormControlLabel
-                                        control={<Checkbox />}
-                                        label='I accept the Terms of Service'
-                                    />
-                                    <FormControlLabel
-                                        control={<Checkbox />}
-                                        label='I accept the Privacy Policy'
-                                    />
-                                </div>
-                                <Button variant='contained' size='large'>
-                                    Sign In
-                                </Button>
-                            </form>
-                        </div>
-                    )}
-                    {value === 'sign-in' && (
-                        <div className={classes.onboarding}>
-                            <Typography variant='h4'>Sign In</Typography>
-                            <form className={classes.form}>
-                                <TextField fullWidth label='Username' />
-                                <TextField fullWidth label='Password' />
-                            </form>
-                        </div>
-                    )}
+                    <div className={classes.onboarding}>
+                        {value === 'sign-up' && <SignUp form={classes.form} checkboxes ={classes.checkboxes} />}
+                        {value === 'sign-in' && <SignIn form={classes.form } />}
+                    </div>
                 </Paper>
             </Grid>
         </Grid>

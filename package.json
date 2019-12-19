@@ -9,6 +9,7 @@
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
     },
     "dependencies": {
+        "@material-ui/core": "^4.8.0",
         "axios": "^0.19.0",
         "node-sass": "^4.13.0",
         "react": "^16.12.0",

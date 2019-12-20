@@ -1,31 +1,94 @@
 import React from 'react';
 
 import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@material-ui/core';
+import { useAPI } from '../../hooks/api.hook';
 
 interface SignUpProps {
     form: string;
     checkboxes: string;
 }
 
-const SignUp: React.FC<SignUpProps> = ({ form , checkboxes }) => {
+interface SignUpState {
+    username: string;
+    password: string;
+    comparePassword: string;
+    termsOfService: boolean;
+    privacyPolicy: boolean;
+}
+
+const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
+    const { response, loading, error, request } = useAPI('/auth/register', 'POST');
+    const [state, setState] = React.useState<SignUpState>({
+        username: '',
+        password: '',
+        comparePassword: '',
+        termsOfService: false,
+        privacyPolicy: false,
+    });
+
+    const handleStringChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
+        setState({ ...state, [key]: e.target.value });
+
+    const handleBoolChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
+        setState({ ...state, [key]: e.target.checked });
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const { username, password, comparePassword } = state;
+        if (password === comparePassword) request({ username, password });
+    };
+
+    const { username, password, comparePassword, termsOfService, privacyPolicy } = state;
     return (
         <>
             <Typography variant='h3' gutterBottom>
                 Sign Up
             </Typography>
             <Typography variant='subtitle2'>Start your child reading stories today!</Typography>
-            <form className={form}>
-                <TextField fullWidth label='Username' />
-                <TextField fullWidth label='Password' />
-                <TextField fullWidth label='Confirm Password' />
+            <form className={form} onSubmit={handleSubmit}>
+                <TextField
+                    fullWidth
+                    type='email'
+                    label='Username'
+                    value={username}
+                    onChange={handleStringChange('username')}
+                />
+                <TextField
+                    fullWidth
+                    type='password'
+                    label='Password'
+                    value={password}
+                    onChange={handleStringChange('password')}
+                />
+                <TextField
+                    fullWidth
+                    type='password'
+                    label='Confirm Password'
+                    value={comparePassword}
+                    onChange={handleStringChange('comparePassword')}
+                />
                 <div className={checkboxes}>
                     <FormControlLabel
-                        control={<Checkbox />}
+                        control={
+                            <Checkbox
+                                value={termsOfService}
+                                onChange={handleBoolChange('termsOfService')}
+                            />
+                        }
                         label='I accept the Terms of Service'
                     />
-                    <FormControlLabel control={<Checkbox />} label='I accept the Privacy Policy' />
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                value={privacyPolicy}
+                                onChange={handleBoolChange('privacyPolicy')}
+                            />
+                        }
+                        label='I accept the Privacy Policy'
+                    />
                 </div>
-                <Button variant='contained' size='large'>
+                <Button type='submit' variant='contained' size='large'>
                     Sign In
                 </Button>
             </form>

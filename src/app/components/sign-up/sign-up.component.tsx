@@ -89,7 +89,7 @@ const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
                     />
                 </div>
                 <Button type='submit' variant='contained' size='large'>
-                    Sign In
+                    Sign Up
                 </Button>
             </form>
         </>

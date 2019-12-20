@@ -1,6 +1,8 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@material-ui/core';
+
 import { useAPI } from '../../hooks/api.hook';
 
 interface SignUpProps {
@@ -18,6 +20,7 @@ interface SignUpState {
 
 const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
     const { response, loading, error, request } = useAPI('/auth/register', 'POST');
+    const history = useHistory();
     const [state, setState] = React.useState<SignUpState>({
         username: '',
         password: '',
@@ -25,6 +28,13 @@ const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
         termsOfService: false,
         privacyPolicy: false,
     });
+
+    React.useEffect(() => {
+        if (response?.token) {
+            localStorage.setItem('jwt', response.token);
+            history.push('/dashboard');
+        }
+    }, [history, response]);
 
     const handleStringChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
         setState({ ...state, [key]: e.target.value });

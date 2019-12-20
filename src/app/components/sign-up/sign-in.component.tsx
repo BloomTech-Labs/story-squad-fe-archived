@@ -1,6 +1,8 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { Button, TextField, Typography } from '@material-ui/core';
+
 import { useAPI } from '../../hooks/api.hook';
 
 interface SignInProps {
@@ -14,6 +16,7 @@ interface SignInState {
 
 const SignIn: React.FC<SignInProps> = ({ form }) => {
     const { response, loading, error, request } = useAPI('/auth/login', 'POST');
+    const history = useHistory();
     const [state, setState] = React.useState<SignInState>({
         username: '',
         password: '',
@@ -28,6 +31,13 @@ const SignIn: React.FC<SignInProps> = ({ form }) => {
         const { username, password } = state;
         request({ username, password });
     };
+
+    React.useEffect(() => {
+        if (response?.token) {
+            localStorage.setItem('jwt', response.token);
+            history.push('/dashboard');
+        }
+    }, [history, response]);
 
     const { username, password } = state;
     return (

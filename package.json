@@ -13,7 +13,7 @@
         "node-sass": "^4.13.0",
         "react": "^16.12.0",
         "react-dom": "^16.12.0",
-        "react-read-pdf": "^2.0.9",
+        "react-read-pdf-b": "^2.0.9-fixed",
         "react-router-dom": "^5.1.2"
     },
     "devDependencies": {

@@ -1,5 +1,6 @@
+import './pdf-display.component.scss';
 import React from 'react';
-import { PDFReader } from 'react-read-pdf';
+import { PDFReader } from 'react-read-pdf-b';
 
 const PdfDisplay: React.FC = () => {
     const [file, setFile] = React.useState<Buffer>();
@@ -12,7 +13,7 @@ const PdfDisplay: React.FC = () => {
         // setFile(Buffer.from(pdf, 'base64'));
     }, []);
 
-    const handler = (pages: number) => {
+    const multiPageHandler = (pages: number) => {
         // create an array 2, 3, ..., pages
         const extraPagesArray: number[] = [];
         for (let i = 2; i <= pages; i++) {
@@ -23,9 +24,9 @@ const PdfDisplay: React.FC = () => {
 
     return (
         <div className='pdf-container'>
-            {file && <PDFReader data={file} page={1} onDocumentComplete={handler} />}
+            {file && <PDFReader data={file} scale={1.5} onDocumentComplete={multiPageHandler} />}
             {pages.map((page: number) => (
-                <PDFReader data={file} page={page} />
+                <PDFReader data={file} page={page} scale={1.5} />
             ))}
         </div>
     );

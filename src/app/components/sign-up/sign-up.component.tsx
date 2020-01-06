@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@material-ui/core';
 
 import { useAPI } from '../../hooks/api.hook';
+import { useForm } from '../../hooks/form.hook';
 
 interface SignUpProps {
     form: string;
@@ -21,7 +22,9 @@ interface SignUpState {
 const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
     const { response, loading, error, request } = useAPI('/auth/register', 'POST');
     const history = useHistory();
-    const [state, setState] = React.useState<SignUpState>({
+    const { state, handleStringChange, handleBoolChange, handleSubmitBuilder } = useForm<
+        SignUpState
+    >({
         username: '',
         password: '',
         comparePassword: '',
@@ -29,25 +32,14 @@ const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
         privacyPolicy: false,
     });
 
+    const handleSubmit = handleSubmitBuilder(request);
+
     React.useEffect(() => {
         if (response?.token) {
             localStorage.setItem('jwt', response.token);
             history.push('/dashboard');
         }
     }, [history, response]);
-
-    const handleStringChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
-        setState({ ...state, [key]: e.target.value });
-
-    const handleBoolChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
-        setState({ ...state, [key]: e.target.checked });
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const { username, password, comparePassword } = state;
-        if (password === comparePassword) request({ username, password });
-    };
 
     const { username, password, comparePassword, termsOfService, privacyPolicy } = state;
     return (

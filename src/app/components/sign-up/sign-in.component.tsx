@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Button, TextField, Typography } from '@material-ui/core';
 
 import { useAPI } from '../../hooks/api.hook';
+import { useForm } from '../../hooks/form.hook';
 
 interface SignInProps {
     form: string;
@@ -17,20 +18,12 @@ interface SignInState {
 const SignIn: React.FC<SignInProps> = ({ form }) => {
     const { response, loading, error, request } = useAPI('/auth/login', 'POST');
     const history = useHistory();
-    const [state, setState] = React.useState<SignInState>({
+    const { state, handleStringChange, handleSubmitBuilder } = useForm<SignInState>({
         username: '',
         password: '',
     });
 
-    const handleStringChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
-        setState({ ...state, [key]: e.target.value });
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const { username, password } = state;
-        request({ username, password });
-    };
+    const handleSubmit = handleSubmitBuilder(request);
 
     React.useEffect(() => {
         if (response?.token) {

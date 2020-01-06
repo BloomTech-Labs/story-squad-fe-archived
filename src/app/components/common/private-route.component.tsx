@@ -2,6 +2,8 @@ import React from 'react';
 import { RouteComponentProps, StaticContext } from 'react-router';
 import { Redirect, Route, useHistory } from 'react-router-dom';
 
+import { useLocalStorage } from '../../hooks/local-storage.hook';
+
 type PrivateRoute = {
     redirect: string;
     component?: React.FC<any>;
@@ -15,13 +17,16 @@ const PrivateRoute: React.FunctionComponent<PrivateRoute> = ({
     render: Render,
     ...rest
 }) => {
-    const [jwt, setJwt] = React.useState(localStorage.getItem('jwt'));
     const history = useHistory();
+    const {
+        storedValue: jwt,
+        updateValue: updateJwt,
+        removeValue: removeJwt,
+    } = useLocalStorage('jwt', null, { objects: false });
 
-    // Listen for local storage changes and update JWT on storage change
-    window.addEventListener('storage', () => {
-        setJwt(localStorage.getItem('jwt'));
-    });
+    // List for JWT Changes
+    window.addEventListener('storage', updateJwt);
+    window.addEventListener('logout', removeJwt);
 
     // Redirect if JWT is not set
     React.useEffect(() => {

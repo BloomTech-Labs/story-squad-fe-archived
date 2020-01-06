@@ -1,21 +1,18 @@
 const plugins = [
     [
-        'babel-plugin-import',
+        'babel-plugin-transform-imports',
         {
-            libraryName: '@material-ui/core',
-            libraryDirectory: 'esm',
-            camel2DashComponentName: false,
+            '@material-ui/core': {
+                // Use "transform: '@material-ui/core/${member}'," if your bundler does not support ES modules
+                transform: '@material-ui/core/${member}',
+                preventFullImport: true,
+            },
+            '@material-ui/icons': {
+                // Use "transform: '@material-ui/icons/${member}'," if your bundler does not support ES modules
+                transform: '@material-ui/icons/${member}',
+                preventFullImport: true,
+            },
         },
-        'core',
-    ],
-    [
-        'babel-plugin-import',
-        {
-            libraryName: '@material-ui/icons',
-            libraryDirectory: 'esm',
-            camel2DashComponentName: false,
-        },
-        'icons',
     ],
 ];
 

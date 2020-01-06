@@ -5,6 +5,8 @@ const ChildPreferences: any = (props) => {
 
     // TODO: handlers for input/submit
 
+    // TODO: delete child
+
     return (
         <form>
             <label>

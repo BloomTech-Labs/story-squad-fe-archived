@@ -1,8 +1,6 @@
 import React from 'react';
 
-
 import { ToS } from '../components/policies/tos.component';
-
 
 const ToSPage: React.FC = () => {
     return (
@@ -12,4 +10,4 @@ const ToSPage: React.FC = () => {
     );
 };
 
-export { PrivacyPage };
+export { ToSPage };

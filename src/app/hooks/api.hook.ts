@@ -42,7 +42,7 @@ const useAPI = <T>(url: string, method: Method = 'GET'): GetHook<T> => {
                 }
                 setResponse(res.data);
             } catch (err) {
-                console.log(err);
+                setError(err);
             }
 
             setLoading(false);

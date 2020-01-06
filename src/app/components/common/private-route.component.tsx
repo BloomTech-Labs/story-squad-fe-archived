@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps, StaticContext } from 'react-router';
 import { Redirect, Route, useHistory } from 'react-router-dom';
 
-import { useLocalStorage } from '../../hooks/local-storage.hook';
+import { useLocalStorage } from '../../hooks/local-storage/local-storage.hook';
 
 type PrivateRoute = {
     redirect: string;

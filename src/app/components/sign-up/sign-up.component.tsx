@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 
 import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@material-ui/core';
 
-import { useAPI } from '../../hooks/api.hook';
-import { useForm } from '../../hooks/form.hook';
+import { useAPI } from '../../hooks/api/api.hook';
+import { useForm } from '../../hooks/form/form.hook';
 
 interface SignUpProps {
     form: string;

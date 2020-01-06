@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { AxiosResponse } from 'axios';
 
-import requestFactory from '../util/requestFactory';
+import requestFactory from '../../util/requestFactory';
 
 interface GetHook<T> {
     response: T | undefined;
@@ -49,10 +49,6 @@ const useAPI = <T>(url: string, method: Method = 'GET'): GetHook<T> => {
         },
         [method, url]
     );
-
-    useEffect(() => {
-        if (method === 'GET') request();
-    }, [method, request]);
 
     return { response, error, loading, request };
 };

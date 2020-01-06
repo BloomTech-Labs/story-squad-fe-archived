@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PrivacyPolicy = () => {
+const PrivacyPolicy: <React className="FC"></React> = () => {
     return (
         <div>
             <h1>Story Squad Privacy Policy</h1>

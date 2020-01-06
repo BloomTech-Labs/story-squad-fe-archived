@@ -20,6 +20,8 @@ interface SignUpState {
 }
 
 const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
+    // TODO: Setup Loading and Error States
+    // eslint-disable-next-line
     const { response, loading, error, request } = useAPI('/auth/register', 'POST');
     const history = useHistory();
     const { state, handleStringChange, handleBoolChange, handleSubmitBuilder } = useForm<

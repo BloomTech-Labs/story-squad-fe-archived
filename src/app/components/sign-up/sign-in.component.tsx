@@ -16,6 +16,8 @@ interface SignInState {
 }
 
 const SignIn: React.FC<SignInProps> = ({ form }) => {
+    // TODO: Setup Loading and Error States
+    // eslint-disable-next-line
     const { response, loading, error, request } = useAPI('/auth/login', 'POST');
     const history = useHistory();
     const { state, handleStringChange, handleSubmitBuilder } = useForm<SignInState>({

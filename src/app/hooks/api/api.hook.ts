@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { AxiosResponse } from 'axios';
 
 import requestFactory from '../../util/requestFactory';

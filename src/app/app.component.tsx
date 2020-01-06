@@ -12,9 +12,9 @@ const App: React.FC = () => {
     return (
         <Router>
             <Switch>
-                <PrivateRoute redirect='/signup' path='/dashboard' component={DashboardPage} /> 
+                <PrivateRoute redirect='/signup' path='/dashboard' component={DashboardPage} />
                 <Route path='/signup' component={SignUpPage} />
-               
+                <Route path='/' component={ExamplePage} />
             </Switch>
         </Router>
     );

@@ -42,7 +42,7 @@ const SignIn: React.FC<SignInProps> = ({ form }) => {
                 <TextField
                     fullWidth
                     type='email'
-                    label='Username'
+                    label='Email'
                     value={email}
                     onChange={handleStringChange('email')}
                 />

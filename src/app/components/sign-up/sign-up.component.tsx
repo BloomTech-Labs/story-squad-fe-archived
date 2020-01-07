@@ -12,7 +12,7 @@ interface SignUpProps {
 }
 
 interface SignUpState {
-    username: string;
+    email: string;
     password: string;
     comparePassword: string;
     termsOfService: boolean;
@@ -27,7 +27,7 @@ const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
     const { state, handleStringChange, handleBoolChange, handleSubmitBuilder } = useForm<
         SignUpState
     >({
-        username: '',
+        email: '',
         password: '',
         comparePassword: '',
         termsOfService: false,
@@ -43,7 +43,7 @@ const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
         }
     }, [history, response]);
 
-    const { username, password, comparePassword, termsOfService, privacyPolicy } = state;
+    const { email, password, comparePassword, termsOfService, privacyPolicy } = state;
     return (
         <>
             <Typography variant='h3' gutterBottom>
@@ -54,9 +54,9 @@ const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
                 <TextField
                     fullWidth
                     type='email'
-                    label='Username'
-                    value={username}
-                    onChange={handleStringChange('username')}
+                    label='Email'
+                    value={email}
+                    onChange={handleStringChange('email')}
                 />
                 <TextField
                     fullWidth

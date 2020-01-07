@@ -11,7 +11,7 @@ interface SignInProps {
 }
 
 interface SignInState {
-    username: string;
+    email: string;
     password: string;
 }
 
@@ -21,7 +21,7 @@ const SignIn: React.FC<SignInProps> = ({ form }) => {
     const { response, loading, error, request } = useAPI('/auth/login', 'POST');
     const history = useHistory();
     const { state, handleStringChange, handleSubmitBuilder } = useForm<SignInState>({
-        username: '',
+        email: '',
         password: '',
     });
 
@@ -34,7 +34,7 @@ const SignIn: React.FC<SignInProps> = ({ form }) => {
         }
     }, [history, response]);
 
-    const { username, password } = state;
+    const { email, password } = state;
     return (
         <>
             <Typography variant='h4'>Welcome Back!</Typography>
@@ -43,8 +43,8 @@ const SignIn: React.FC<SignInProps> = ({ form }) => {
                     fullWidth
                     type='email'
                     label='Username'
-                    value={username}
-                    onChange={handleStringChange('username')}
+                    value={email}
+                    onChange={handleStringChange('email')}
                 />
                 <TextField
                     fullWidth

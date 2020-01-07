@@ -8,8 +8,7 @@ const PdfDisplay: React.FC = () => {
 
     React.useEffect(() => {
         // get pdf as base64 from backend
-        // const pdf =
-        //     'base64 string';
+        // const pdf = '';
         // setFile(Buffer.from(pdf, 'base64'));
     }, []);
 

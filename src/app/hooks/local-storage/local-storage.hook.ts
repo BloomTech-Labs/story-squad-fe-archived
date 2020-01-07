@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 type LocalStorageHook<T> = {
     value: T | null;
@@ -18,7 +18,8 @@ type LocalStorageHook<T> = {
  * - `updateValue()` refresh the current value from local storage
  * - `removeValue()` remove the current value including in local storage
  *
- * TODO: Setup event listener to update values when changes occur outside of the hook.
+ * Note: This value will update automatically when other windows change the value, but manual updates must be done when changing within this applicaiton.
+ * @see https://stackoverflow.com/questions/35865481/storage-event-not-firing
  */
 const useLocalStorage = <T>(key: string, initialValue: T): LocalStorageHook<T> => {
     const parse = (item: string): T | null => {
@@ -30,20 +31,28 @@ const useLocalStorage = <T>(key: string, initialValue: T): LocalStorageHook<T> =
         return item ? parse(item) : initialValue;
     });
 
-    const setValue = (value: T) => {
-        setStoredValue(value);
-        localStorage.setItem(key, JSON.stringify(value));
-    };
+    const setValue = useCallback(
+        (value: T) => {
+            setStoredValue(value);
+            localStorage.setItem(key, JSON.stringify(value));
+        },
+        [key]
+    );
 
-    const updateValue = () => {
+    const updateValue = useCallback(() => {
         const stringyValue = localStorage.getItem(key);
         setStoredValue(stringyValue ? JSON.parse(stringyValue) : null);
-    };
+    }, [key]);
 
-    const removeValue = () => {
+    const removeValue = useCallback(() => {
         setStoredValue(null);
         localStorage.removeItem(key);
-    };
+    }, [key]);
+
+    useEffect(() => {
+        window.addEventListener('storage', updateValue);
+        return () => window.removeEventListener('storage', updateValue);
+    }, [updateValue]);
 
     return { value, setValue, updateValue, removeValue };
 };

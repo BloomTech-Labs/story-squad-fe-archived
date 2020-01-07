@@ -6,7 +6,7 @@ import { PrivateRoute } from './components/common/private-route.component';
 
 import { ExamplePage } from './pages/example.page';
 import { Private } from './pages/private.page';
-import { ChildCard } from './components/dashboard/child-card.component';
+import { ChildPage } from './pages/child.page'
 
 const App: React.FC = () => {
     return (
@@ -14,7 +14,7 @@ const App: React.FC = () => {
             <Switch>
                 <PrivateRoute redirect='/' path='/private' component={Private} />
                 <Route path='/' component={ExamplePage} />
-                <Route path='/child' component={ChildCard} />
+                <Route path='/child' component={ChildPage} />
             </Switch>
         </Router>
     );

@@ -10,7 +10,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 
 
-function CardAvatar({ ...props }: any) {
+const CardAvatar:any = ({ ...props }: any) => {
   const { classes, children, className, plain, profile, ...rest } = props;
   const cardAvatarClasses = classNames({
     [classes.cardAvatar]: true,

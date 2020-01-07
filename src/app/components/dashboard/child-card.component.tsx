@@ -37,11 +37,11 @@ const ChildCard: React.FC<ChildCardProps> = (props) => {
     return (
         <Card className={classes.card}>
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
+        <Typography variant="h6" component="h1">
+          Welcome back {child.username}
         </Typography>
         <Typography variant="h5" component="h2">
-          Test
+          Let's see how each participant is doing this week.
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           adjective

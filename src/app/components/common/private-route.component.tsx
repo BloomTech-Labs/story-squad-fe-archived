@@ -19,10 +19,10 @@ const PrivateRoute: React.FunctionComponent<PrivateRoute> = ({
 }) => {
     const history = useHistory();
     const {
-        storedValue: jwt,
+        value: jwt,
         updateValue: updateJwt,
         removeValue: removeJwt,
-    } = useLocalStorage('jwt', null, { objects: false });
+    } = useLocalStorage('jwt', null);
 
     // List for JWT Changes
     window.addEventListener('storage', updateJwt);

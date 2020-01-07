@@ -1,26 +1,29 @@
 import { useState } from 'react';
 
 type LocalStorageHook<T> = {
-    storedValue: T | null;
+    value: T | null;
     setValue: (value: T) => void;
     updateValue: () => void;
     removeValue: () => void;
 };
 
-interface LocalStorageHookOptions {
-    objects: boolean;
-}
-
-const useLocalStorage = <T>(
-    key: string,
-    initialValue: T,
-    options?: LocalStorageHookOptions
-): LocalStorageHook<T> => {
+/**
+ * @description A hook used to store data in Local Storage
+ * @template T The type of data being stored
+ * @param {string} key The key to use in Local Storage
+ * @param {T} initialValue The initial value of the data if it is not found in Local Storage
+ * @returns {LocalStorageHook<T>} The return of this hook has four parts in an object:
+ * - `value` the current value
+ * - `setValue()` set the current value
+ * - `updateValue()` refresh the current value from local storage
+ * - `removeValue()` remove the current value including in local storage
+ */
+const useLocalStorage = <T>(key: string, initialValue: T): LocalStorageHook<T> => {
     const parse = (item: string): T | null => {
-        return options?.objects ? JSON.parse(item) : item;
+        return initialValue instanceof String ? JSON.parse(item) : item;
     };
 
-    const [storedValue, setStoredValue] = useState<T | null>(() => {
+    const [value, setStoredValue] = useState<T | null>(() => {
         const item = localStorage.getItem(key);
         return item ? parse(item) : initialValue;
     });
@@ -40,7 +43,7 @@ const useLocalStorage = <T>(
         localStorage.removeItem(key);
     };
 
-    return { storedValue, setValue, updateValue, removeValue };
+    return { value, setValue, updateValue, removeValue };
 };
 
 export { useLocalStorage };

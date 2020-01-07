@@ -5,7 +5,8 @@ const DashboardPage: React.FC = () => {
 
     return (
         <div>
-            <span>Dashboard</span> <button onClick={logout}>Logout</button>{' '}
+            <span>Dashboard</span>
+            <button onClick={logout}>Logout</button>
         </div>
     );
 };

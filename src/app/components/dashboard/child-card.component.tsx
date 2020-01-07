@@ -24,16 +24,14 @@ const useStyles = makeStyles({
     },
   });
 
-  export default function SimpleCard() {
-    const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
-  
+
 
 interface ChildCardProps {
     child: Child;
 }
 
 const ChildCard: React.FC<ChildCardProps> = (props) => {
+    const classes = useStyles();
     const child = props.child;
 
     return (
@@ -43,7 +41,7 @@ const ChildCard: React.FC<ChildCardProps> = (props) => {
           Word of the Day
         </Typography>
         <Typography variant="h5" component="h2">
-          be{bull}nev{bull}o{bull}lent
+          Test
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           adjective
@@ -60,6 +58,6 @@ const ChildCard: React.FC<ChildCardProps> = (props) => {
     </Card>
     );
 };
-  }
+  
 export { ChildCard };
   

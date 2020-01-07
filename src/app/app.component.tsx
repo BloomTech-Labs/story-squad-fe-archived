@@ -2,7 +2,7 @@ import './app.component.scss';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { PrivateRoute } from './components/common/private-route.component';
+import { PrivateRoute } from './components/common/private-route/private-route.component';
 
 import { ExamplePage } from './pages/example.page';
 import { Private } from './pages/private.page';

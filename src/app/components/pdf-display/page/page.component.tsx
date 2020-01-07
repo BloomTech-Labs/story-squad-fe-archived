@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useContext } from 'react';
 
-import { DocumentContext } from './document.component';
+import { DocumentContext } from '../document/document.component';
 
 const Page = (props) => {
     const canvasRef = useRef(null);

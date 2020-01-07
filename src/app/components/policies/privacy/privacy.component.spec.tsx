@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { PrivacyPolicy } from './privacy-policy.component';
+import { PrivacyPolicy } from './privacy.component';
 
 describe('PrivacyPolicy', () => {
     it('renders without errors', () => {

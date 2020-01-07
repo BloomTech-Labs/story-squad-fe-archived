@@ -1,9 +1,12 @@
 import React from 'react';
+import { Child } from '../../models';
 
-const ChildCard: any = (props) => {
-    const [child] = props.child;
+interface ChildCardProps {
+    child: Child;
+}
 
-    // add link to preferences
+const ChildCard: React.FC<ChildCardProps> = (props) => {
+    const child = props.child;
 
     return (
         <div>

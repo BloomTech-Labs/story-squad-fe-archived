@@ -1,0 +1,6 @@
+[context.production.environment]
+    REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"
+
+
+[context."create-account".environment]
+    REACT_APP_ENDPOINT="https://staging-create-account-46n6xrs.herokuapp.com"

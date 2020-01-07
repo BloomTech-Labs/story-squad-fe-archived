@@ -17,6 +17,8 @@ type LocalStorageHook<T> = {
  * - `setValue()` set the current value
  * - `updateValue()` refresh the current value from local storage
  * - `removeValue()` remove the current value including in local storage
+ *
+ * TODO: Setup event listener to update values when changes occur outside of the hook.
  */
 const useLocalStorage = <T>(key: string, initialValue: T): LocalStorageHook<T> => {
     const parse = (item: string): T | null => {

@@ -1,17 +1,17 @@
 import React from 'react';
-import { RouteComponentProps, StaticContext } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import { Redirect, Route } from 'react-router-dom';
 
 import { useLocalStorage } from '../../hooks/local-storage/local-storage.hook';
 
-type PrivateRoute = {
+type PrivateRouteProps<P = {}> = {
     redirect: string;
-    component?: React.FC<any>;
-    render?: (props: RouteComponentProps<any, StaticContext, any>) => React.ReactNode;
+    component?: React.FC<RouteComponentProps<P>>;
+    render?: (props: RouteComponentProps) => React.ReactNode;
     [key: string]: any;
 };
 
-const PrivateRoute: React.FunctionComponent<PrivateRoute> = ({
+const PrivateRoute: React.FC<PrivateRouteProps> = ({
     redirect,
     component: Component,
     render: Render,

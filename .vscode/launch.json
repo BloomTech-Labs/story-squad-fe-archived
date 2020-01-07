@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug - Windows",
+            "name": "Debug",
             "type": "chrome",
             "request": "launch",
             "port": 9986,
@@ -16,31 +16,7 @@
                 " --disable-session-crashed-bubble"
             ],
             "userDataDir": "${workspaceRoot}.vscode/chrome",
-            "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}",
-            "sourceMaps": true,
-            "sourceMapPathOverrides": {
-                "webpack:/*": "${webRoot}/*",
-                "/./*": "${webRoot}/*",
-                "/src/*": "${webRoot}/*",
-                "/*": "*",
-                "/./~/*": "${webRoot}/node_modules/*"
-            }
-        },
-        {
-            "name": "Debug - macOS",
-            "type": "chrome",
-            "request": "launch",
-            "port": 9986,
-            "preLaunchTask": "npm: start",
-            "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-            "runtimeArgs": [
-                "--profile-directory=Debug",
-                "--disable-infobars",
-                " --disable-session-crashed-bubble"
-            ],
-            "userDataDir": "${workspaceRoot}.vscode/chrome",
-            "url": "http://localhost:3000",
+            "url": "http://localhost:3000/signup",
             "webRoot": "${workspaceFolder}",
             "sourceMaps": true,
             "sourceMapPathOverrides": {

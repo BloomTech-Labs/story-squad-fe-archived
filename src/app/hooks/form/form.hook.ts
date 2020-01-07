@@ -10,7 +10,7 @@ interface FormHook<T> {
 }
 
 /**
- * @description A hook used to simplify the process of building forums
+ * @description A hook used to simplify the process of building forms
  * @template S The state data for the forum
  * @param {S} initial The initial state of the forum
  * @returns {FormHook<S>} The return of this hook has four parts in an object:

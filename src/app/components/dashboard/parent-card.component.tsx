@@ -1,10 +1,8 @@
 import React from 'react';
-import { Child } from '../../models';
+import { User } from '../../models';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
@@ -24,13 +22,13 @@ const useStyles = makeStyles({
     },
 });
 
-interface ChildCardProps {
-    child: Child;
+interface ParentCardProps {
+    user: User;
 }
 
-const ChildCard: React.FC<ChildCardProps> = (props) => {
+const ParentCard: React.FC<ParentCardProps> = (props) => {
     const classes = useStyles();
-    const child = props.child;
+    const child = props.user;
 
     return (
         <Card className={classes.card}>
@@ -46,4 +44,4 @@ const ChildCard: React.FC<ChildCardProps> = (props) => {
     );
 };
 
-export { ChildCard };
+export { ParentCard };

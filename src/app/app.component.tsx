@@ -15,10 +15,16 @@ const App: React.FC = () => {
     return (
         <Router>
             <Switch>
-                <PrivateRoute redirect='/signup' path='/dashboard' component={DashboardPage} />
+                <PrivateRoute
+                    redirect='/signup'
+                    path='/dashboard'
+                    only='parent'
+                    component={DashboardPage}
+                />
                 <PrivateRoute
                     redirect='/signup'
                     path='/kids-dashboard'
+                    only='child'
                     component={ChildDashboard}
                 />
                 <Route path='/signup' component={SignUpPage} />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Redirect, Route } from 'react-router-dom';
+import { decode } from 'jsonwebtoken';
 
 import { useLocalStorage } from '../../../hooks/local-storage/local-storage.hook';
 
@@ -40,7 +41,15 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
             {...rest}
             render={(props) => {
                 if (!jwt) return <Redirect to={redirect} />;
-                // check jwt if child or parent
+                if (only) {
+                    const decoded = decode(jwt);
+                    if (only === 'child' && !decoded.childId) {
+                        return <Redirect to={redirect} />;
+                    }
+                    if (only === 'parent' && !decoded.parentId) {
+                        return <Redirect to={redirect} />;
+                    }
+                }
                 if (Component) return <Component {...props} />;
                 if (Render) return Render(props);
             }}

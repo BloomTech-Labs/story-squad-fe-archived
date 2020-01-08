@@ -9,12 +9,18 @@ import { SignUpPage } from './pages/sign-up.page';
 import { DashboardPage } from './pages/dashboard.page';
 import { PrivacyPage } from './pages/privacy-policy.page';
 import { ToSPage } from './pages/tos.page';
+import { ChildDashboard } from './pages/child-dashboard.page';
 
 const App: React.FC = () => {
     return (
         <Router>
             <Switch>
                 <PrivateRoute redirect='/signup' path='/dashboard' component={DashboardPage} />
+                <PrivateRoute
+                    redirect='/signup'
+                    path='/kids-dashboard'
+                    component={ChildDashboard}
+                />
                 <Route path='/signup' component={SignUpPage} />
                 <Route path='/privacy-policy' component={PrivacyPage} />
                 <Route path='/terms-of-service' component={ToSPage} />

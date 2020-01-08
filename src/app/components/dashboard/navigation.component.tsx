@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function PermanentDrawerLeft() {
+const NavigationDrawer = () => {
   const classes = useStyles();
 
   return (
@@ -67,3 +67,5 @@ export default function PermanentDrawerLeft() {
     </div>
   );
 }
+
+export {NavigationDrawer} ;

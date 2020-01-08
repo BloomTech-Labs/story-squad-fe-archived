@@ -32,7 +32,7 @@ interface NotificationsCardProps {
     child: Child;
 }
 
-const ChildCard: React.FC<NotificationsCardProps> = (props) => {
+const NotificationsCard: React.FC<NotificationsCardProps> = (props) => {
     const classes = useStyles();
     const child = props.child;
 

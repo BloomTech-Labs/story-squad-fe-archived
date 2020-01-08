@@ -1,24 +1,25 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+import {
+    Card,
+    CardContent,
+    Button,
+    Typography,
+    CardActions,
+    CardHeader,
+    IconButton,
+    Icon,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+
 import { Child } from '../../models';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { useAPI } from '../../hooks';
+import { CardIcon } from './child-card-icon.component';
 
 const useStyles = makeStyles({
     card: {
         minWidth: 275,
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
     },
     title: {
         fontSize: 14,
@@ -26,37 +27,65 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
+    statusIcons: {
+        display: 'flex',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    },
+    header: {
+        backgroundColor: 'dodgerblue',
+        color: 'white',
+        alignItems: 'center',
+    },
+    headerIcon: { color: 'white' },
+    actions: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
 });
 
 interface ChildCardProps {
     child: Child;
+    onUpdate: () => void;
 }
 
-const ChildCard: React.FC<ChildCardProps> = (props) => {
-    const classes = useStyles();
-    const child = props.child;
+const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
+    const classes = useStyles({});
+    const history = useHistory();
+    const { request: signIn, response } = useAPI(`/child/${child.id}/login`, 'POST');
+
+    React.useEffect(() => {
+        if (!response?.token) return;
+        localStorage.setItem('jwt', response.token);
+        history.push('/');
+    }, [history, response]);
 
     return (
         <Card className={classes.card}>
+            <CardHeader
+                className={classes.header}
+                title={child.username}
+                action={
+                    <IconButton>
+                        <Icon className={classes.headerIcon}>edit</Icon>
+                    </IconButton>
+                }
+            />
             <CardContent>
-                <Typography variant='h3' component='h1' gutterBottom>
-                     {child.username}
-                </Typography>
-                <Typography variant='h5' component='h2'>
-                   Weekly Progress
-                </Typography>
-                <Typography variant='h6' component='h3'>
-                   2/5 lessons completed this week
-                </Typography>
-                <List>
-          {['Reading Level', 'Accessability', 'Week', 'Current Phase'].map((text, index) => (
-            <ListItem button key={text}>
-             <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Button>View Account</Button>
+                <Typography variant='h5'>Weekly Progress</Typography>
+
+                <Typography variant='subtitle1'>2/5 lessons completed this week</Typography>
+
+                <div className={classes.statusIcons}>
+                    <CardIcon title='Reading Level' status='4th Grade' />
+                    <CardIcon title='Accessability' status='None' />
+                    <CardIcon title='Week' status='12' />
+                    <CardIcon title='Current Phase' status='Allocating Points' />
+                </div>
             </CardContent>
+            <CardActions className={classes.actions}>
+                <Button onClick={() => signIn()}>View Account</Button>
+            </CardActions>
         </Card>
     );
 };

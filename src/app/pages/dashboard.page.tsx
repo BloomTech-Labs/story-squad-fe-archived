@@ -1,41 +1,28 @@
 import React from 'react';
-import { Child, User } from '../models';
+
+import { Button } from '@material-ui/core';
+
+import { User } from '../models';
+import { useAPI } from '../hooks';
 import { ParentCard } from '../components/dashboard/parent-card.component';
-import { ChildCard } from '../components/dashboard/child-card.component';
-import { NavigationDrawer } from '../components/dashboard/navigation.component';
-import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
+import { ChildrenList } from '../components/dashboard/children-list.component';
 
 const DashboardPage: React.FC = () => {
+    const { request, response: user } = useAPI('/parent/me');
     const logout = () => window.dispatchEvent(new Event('logout'));
 
-    const user: User = { username: 'Joseph' };
-    const children: Child[] = [
-        {
-            username: 'Tom',
-        },
-        {
-            username: 'Sarah',
-        },
-    ];
+    React.useEffect(() => {
+        request();
+    }, [request]);
 
+    if (!user) return <div></div>;
     return (
         <div>
             <span>Dashboard</span>
-            <button onClick={logout}>Logout</button>
+            <Button onClick={logout}>Logout</Button>
             {/* <NavigationDrawer/> */}
             <ParentCard user={user} />
-            <br />
-            <Typography variant='h3' component='h1' gutterBottom>
-                Child Account
-            </Typography>
-            <Link to='/child/create'>
-                <button>Add Child</button>
-            </Link>
-
-            {children.map((child) => (
-                <ChildCard child={child}></ChildCard>
-            ))}
+            <ChildrenList />
         </div>
     );
 };

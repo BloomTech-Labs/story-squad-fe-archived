@@ -3,7 +3,7 @@ import { Child, User } from '../models';
 import { ParentCard } from '../components/dashboard/parent-card.component';
 import { ChildCard } from '../components/dashboard/child-card.component';
 import { NavigationDrawer } from '../components/dashboard/navigation.component';
-
+import Typography from '@material-ui/core/Typography';
 
 const DashboardPage: React.FC = () => {
     const logout = () => window.dispatchEvent(new Event('logout'));
@@ -25,6 +25,10 @@ const DashboardPage: React.FC = () => {
             {/* <NavigationDrawer/> */}
             <ParentCard user={user} />
             <br />
+            <Typography variant='h3' component='h1' gutterBottom>
+                     Child Account
+                </Typography>  
+            <button>Add Child</button>  
             {children.map((child) => (
                 <ChildCard child={child}></ChildCard>
             ))}

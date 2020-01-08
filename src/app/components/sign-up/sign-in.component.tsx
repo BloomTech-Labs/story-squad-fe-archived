@@ -20,7 +20,7 @@ const SignIn: React.FC<SignInProps> = ({ form }) => {
     // eslint-disable-next-line
     const { response, loading, error, request } = useAPI('/auth/login', 'POST');
     const history = useHistory();
-    const { state, handleStringChange, handleSubmitBuilder } = useForm<SignInState>({
+    const { state, handleInputChange: handleStringChange, handleSubmitBuilder } = useForm<SignInState>({
         email: '',
         password: '',
     });

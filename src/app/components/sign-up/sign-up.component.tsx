@@ -24,7 +24,7 @@ const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
     // eslint-disable-next-line
     const { response, loading, error, request } = useAPI('/auth/register', 'POST');
     const history = useHistory();
-    const { state, handleStringChange, handleBoolChange, handleSubmitBuilder } = useForm<
+    const { state, handleInputChange, handleBoolChange, handleSubmitBuilder } = useForm<
         SignUpState
     >({
         email: '',
@@ -56,21 +56,21 @@ const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
                     type='email'
                     label='Email'
                     value={email}
-                    onChange={handleStringChange('email')}
+                    onChange={handleInputChange('email')}
                 />
                 <TextField
                     fullWidth
                     type='password'
                     label='Password'
                     value={password}
-                    onChange={handleStringChange('password')}
+                    onChange={handleInputChange('password')}
                 />
                 <TextField
                     fullWidth
                     type='password'
                     label='Confirm Password'
                     value={comparePassword}
-                    onChange={handleStringChange('comparePassword')}
+                    onChange={handleInputChange('comparePassword')}
                 />
                 <div className={checkboxes}>
                     <FormControlLabel

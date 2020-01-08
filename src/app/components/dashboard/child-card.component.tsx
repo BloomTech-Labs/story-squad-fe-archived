@@ -6,6 +6,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles({
     card: {
@@ -36,11 +40,21 @@ const ChildCard: React.FC<ChildCardProps> = (props) => {
         <Card className={classes.card}>
             <CardContent>
                 <Typography variant='h3' component='h1' gutterBottom>
-                    Welcome back {child.username}
+                     {child.username}
                 </Typography>
                 <Typography variant='h5' component='h2'>
-                    Let's see how each participant is doing this week.
+                   Weekly Progress
                 </Typography>
+                <Typography variant='h6' component='h3'>
+                   2/5 lessons completed this week
+                </Typography>
+                <List>
+          {['Reading Level', 'Accessability', 'Week', 'Current Phase'].map((text, index) => (
+            <ListItem button key={text}>
+             <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
             </CardContent>
         </Card>
     );

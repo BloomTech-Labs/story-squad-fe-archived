@@ -2,12 +2,13 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Redirect, Route } from 'react-router-dom';
 
-import { useLocalStorage } from '../../hooks/local-storage/local-storage.hook';
+import { useLocalStorage } from '../../../hooks/local-storage/local-storage.hook';
 
 type PrivateRouteProps<P = {}> = {
     redirect: string;
     component?: React.FC<RouteComponentProps<P>>;
     render?: (props: RouteComponentProps) => React.ReactNode;
+    only?: 'child' | 'parent';
     [key: string]: any;
 };
 
@@ -15,6 +16,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
     redirect,
     component: Component,
     render: Render,
+    only,
     ...rest
 }) => {
     const { value: jwt, removeValue: logout, updateValue: switchAccounts } = useLocalStorage(
@@ -38,6 +40,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
             {...rest}
             render={(props) => {
                 if (!jwt) return <Redirect to={redirect} />;
+                // check jwt if child or parent
                 if (Component) return <Component {...props} />;
                 if (Render) return Render(props);
             }}

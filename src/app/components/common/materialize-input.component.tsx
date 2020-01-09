@@ -6,6 +6,7 @@ import { fade, useTheme } from '@material-ui/core/styles';
 const BaseInput: React.ElementType<InputBaseComponentProps> = ({
     'component': Component,
     inputRef,
+    //Discard for stripe elements start
     'aria-invalid': ariaInvalid,
     'aria-describedby': ariaDescribeBy,
     defaultValue,
@@ -19,6 +20,7 @@ const BaseInput: React.ElementType<InputBaseComponentProps> = ({
     type,
     name,
     rows,
+    //Discard for stripe end
     ...other
 }) => {
     const theme = useTheme();

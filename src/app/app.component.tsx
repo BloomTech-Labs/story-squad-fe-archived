@@ -4,11 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { PrivateRoute } from './components/common/private-route.component';
 
-import { ExamplePage } from './pages/example.page';
-import { SignUpPage } from './pages/sign-up.page';
-import { DashboardPage } from './pages/dashboard.page';
-import { PrivacyPage } from './pages/privacy-policy.page';
-import { ToSPage } from './pages/tos.page';
+import { CheckoutPage, SignUpPage, DashboardPage, PrivacyPage, ToSPage } from './pages';
 
 const App: React.FC = () => {
     return (
@@ -18,7 +14,7 @@ const App: React.FC = () => {
                 <Route path='/signup' component={SignUpPage} />
                 <Route path='/privacy-policy' component={PrivacyPage} />
                 <Route path='/terms-of-service' component={ToSPage} />
-                <Route path='/' component={ExamplePage} />
+                <Route path='/' component={CheckoutPage} />
             </Switch>
         </Router>
     );

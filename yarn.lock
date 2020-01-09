@@ -1458,6 +1458,14 @@
     "@types/history" "*"
     "@types/react" "*"
 
+"@types/react-stripe-elements@^6.0.2":
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/@types/react-stripe-elements/-/react-stripe-elements-6.0.2.tgz#ce26e08369116613144d6da52874c59f0b656f2d"
+  integrity sha512-PohNK1cGMcAZapaDsSwOVu7+WfM1BPEXThADZzGrcrPP0/74BmdyNr3Nood4XqK7tD/D/mOpkzPMFq4ZNEeRuQ==
+  dependencies:
+    "@types/react" "*"
+    "@types/stripe-v3" "*"
+
 "@types/react-test-renderer@*":
   version "16.9.1"
   resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-16.9.1.tgz#9d432c46c515ebe50c45fa92c6fb5acdc22e39c4"
@@ -1484,6 +1492,11 @@
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
+
+"@types/stripe-v3@*":
+  version "3.1.14"
+  resolved "https://registry.yarnpkg.com/@types/stripe-v3/-/stripe-v3-3.1.14.tgz#5eefbec24754d23f6a039e8fb5c7ea0253007836"
+  integrity sha512-2hT1xOiS4312NsrT1dYuAM7qvoMcegS12wcQ78e7hdRrzetM4d91QJn6IYWP5qWP5v4Rc4acDfoIR9cbhpSgMA==
 
 "@types/testing-library__dom@*", "@types/testing-library__dom@^6.0.0":
   version "6.11.0"

@@ -1,27 +1,36 @@
-  
 import React from 'react';
-import { CardElement, injectStripe } from 'react-stripe-elements';
-import axios from 'axios';
+import {
+    ReactStripeElements,
+    CardNumberElement,
+    CardExpiryElement,
+    CardCvcElement,
+    injectStripe,
+} from 'react-stripe-elements';
 
-interface CheckoutFormProps {}
+import { Button } from '@material-ui/core';
+import { MaterializeInput } from '../../components/common/materialize-input.component';
 
-const CheckoutForm = injectStripe((props) => {
-    const submit = async (ev) => {
-        if (!props.stripe) return;
-        const { token } = await props.stripe.createToken({ name: 'Name' });
-        console.log(token);
+import { useAPI } from '../../hooks/api/api.hook';
+
+const _CheckoutForm: React.FC<ReactStripeElements.InjectedStripeProps> = ({ stripe }) => {
+    const { request, response } = useAPI('/payment/cards', 'POST');
+
+    const submit = async () => {
+        const { token } = await stripe!.createToken({ name: 'Name' });
         if (!token) return;
-        const response = await axios.post('http://localhost:4000/subscribe', { token: token.id });
-        console.log(response);
+
+        request({ card: { id: token.id } });
     };
 
     return (
         <div className='checkout'>
-            <p>Would you like to complete the purchase?</p>
-            <CardElement />
-            <button onClick={submit}>Purchase</button>
+            <MaterializeInput label='Credit Card Number' component={CardNumberElement} />
+            <MaterializeInput label='Expiration Date' component={CardExpiryElement} />
+            <MaterializeInput label='Security Code' component={CardCvcElement} />
+            <Button onClick={submit}>Add Card</Button>
         </div>
     );
-});
+};
 
+const CheckoutForm = injectStripe(_CheckoutForm);
 export { CheckoutForm };

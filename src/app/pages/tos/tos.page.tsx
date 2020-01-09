@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ToS } from '../components/policies/tos.component';
+import { ToS } from '../../components';
 
 const ToSPage: React.FC = () => {
     return (

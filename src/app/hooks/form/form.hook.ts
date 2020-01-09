@@ -2,8 +2,9 @@ import React from 'react';
 
 interface FormHook<T> {
     state: T;
-    handleBoolChange: (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleStringChange: (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+    setState: React.Dispatch<React.SetStateAction<T>>;
+    handleBoolChange: (key: keyof T) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleInputChange: (key: keyof T) => (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleSubmitBuilder: (
         callback: (state: T) => void
     ) => (e: React.FormEvent<HTMLFormElement>) => void;
@@ -30,13 +31,20 @@ interface FormHook<T> {
  * </form>
  * ```
  */
-const useForm = <S>(initial: S): FormHook<S> => {
+const useForm = <S extends { [key: string]: any }>(initial: S): FormHook<S> => {
     const [state, setState] = React.useState<S>(initial);
 
-    const handleStringChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
-        setState({ ...state, [key]: e.target.value });
+    const handleInputChange = (key: keyof S) => (e: React.ChangeEvent<HTMLInputElement>) =>
+        setState({
+            ...state,
+            [key]: (() => {
+                if (e.target.value === '') return '';
+                else if (Number.isInteger(initial[key])) return Number(e.target.value);
+                else return String(e.target.value);
+            })(),
+        });
 
-    const handleBoolChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
+    const handleBoolChange = (key: keyof S) => (e: React.ChangeEvent<HTMLInputElement>) =>
         setState({ ...state, [key]: e.target.checked });
 
     const handleSubmitBuilder = (callback: (state: S) => void) => (
@@ -46,7 +54,7 @@ const useForm = <S>(initial: S): FormHook<S> => {
         callback(state);
     };
 
-    return { state, handleBoolChange, handleStringChange, handleSubmitBuilder };
+    return { state, setState, handleBoolChange, handleInputChange, handleSubmitBuilder };
 };
 
 export { useForm };

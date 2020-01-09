@@ -2,25 +2,37 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Button, TextField, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { useAPI } from '../../hooks/api/api.hook';
-import { useForm } from '../../hooks/form/form.hook';
+import { useAPI } from '../../../hooks/api/api.hook';
+import { useForm } from '../../../hooks/form/form.hook';
 
-interface SignInProps {
-    form: string;
-}
+const useStyles = makeStyles(() => ({
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        height: '35vh',
+    },
+}));
+
+interface SignInProps {}
 
 interface SignInState {
     email: string;
     password: string;
 }
 
-const SignIn: React.FC<SignInProps> = ({ form }) => {
+const SignIn: React.FC<SignInProps> = ({}) => {
+    const classes = useStyles({});
+
     // TODO: Setup Loading and Error States
     // eslint-disable-next-line
     const { response, loading, error, request } = useAPI('/auth/login', 'POST');
     const history = useHistory();
-    const { state, handleStringChange, handleSubmitBuilder } = useForm<SignInState>({
+    const { state, handleInputChange: handleStringChange, handleSubmitBuilder } = useForm<
+        SignInState
+    >({
         email: '',
         password: '',
     });
@@ -38,7 +50,7 @@ const SignIn: React.FC<SignInProps> = ({ form }) => {
     return (
         <>
             <Typography variant='h4'>Welcome Back!</Typography>
-            <form className={form} onSubmit={handleSubmit}>
+            <form className={classes.form} onSubmit={handleSubmit}>
                 <TextField
                     fullWidth
                     type='email'

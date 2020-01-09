@@ -1,14 +1,15 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { SignIn } from './sign-in.component';
+import { ToSPage } from './tos.page';
 import { BrowserRouter } from 'react-router-dom';
+import { ToS } from '../components/policies/tos.component';
 
-describe('SignIn', () => {
+describe('ToSPage', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>
-                <SignIn />
+                <ToSPage />
             </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();

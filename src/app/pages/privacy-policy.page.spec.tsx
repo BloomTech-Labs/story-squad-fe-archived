@@ -1,14 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { SignIn } from './sign-in.component';
+import { PrivacyPage } from './privacy-policy.page';
 import { BrowserRouter } from 'react-router-dom';
 
-describe('SignIn', () => {
+describe('PrivacyPage', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>
-                <SignIn />
+                <PrivacyPage />
             </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();

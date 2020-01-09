@@ -16,7 +16,11 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const ChildList: React.FC = () => {
+interface ChildListProps {
+    className: string;
+}
+
+const ChildList: React.FC<ChildListProps> = ({ className }) => {
     const classes = useStyles({});
     const { request, response } = useAPI<{ children: Child[] }>('/child');
 
@@ -27,7 +31,7 @@ const ChildList: React.FC = () => {
     if (!response?.children) return <div></div>;
     const { children } = response;
     return (
-        <div>
+        <div className={className}>
             <div className={classes.header}>
                 <Typography variant='h4' gutterBottom>
                     Child Accounts

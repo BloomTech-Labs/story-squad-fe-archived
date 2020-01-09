@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI } from '../hooks';
 
-import { NavigationDrawer, ParentCard, ChildList } from '../components';
+import { NavigationDrawer, ParentCard, ChildList, NotificationsCard } from '../components';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,11 +15,26 @@ const useStyles = makeStyles((theme) => ({
         width: `calc(100% - 240px)`,
         marginLeft: 240,
     },
-    toolbar: theme.mixins.toolbar,
+    toolbar: { gridArea: 'toolbar' },
     content: {
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
+        display: 'grid',
+        gridTemplate: `
+            "toolbar toolbar" ${theme.mixins.toolbar.minHeight}px
+            "header header" auto
+            "children notifications" auto`,
+        gridGap: theme.spacing(3),
+    },
+    header: {
+        gridArea: 'header',
+    },
+    children: {
+        gridArea: 'children',
+    },
+    notifications: {
+        gridArea: 'notifications',
     },
     spacer: {
         flex: '1',
@@ -56,8 +71,9 @@ const DashboardPage: React.FC = () => {
 
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <ParentCard user={user} />
-                <ChildList />
+                <ParentCard className={classes.header} user={user} />
+                <ChildList className={classes.children} />
+                <NotificationsCard className={classes.notifications} />
             </main>
         </div>
     );

@@ -23,14 +23,15 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface ParentCardProps {
+    className: string;
     user: User;
 }
 
-const ParentCard: React.FC<ParentCardProps> = ({ user }) => {
+const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {
     const classes = useStyles({});
 
     return (
-        <Card className={classes.card}>
+        <Card className={`${className} ${classes.card}`}>
             <CardContent>
                 <Typography variant='h3' component='h1' gutterBottom>
                     Welcome back {user.email}

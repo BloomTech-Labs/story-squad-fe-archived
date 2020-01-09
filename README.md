@@ -105,11 +105,9 @@ Story Squad is a paid service; parents are required to create the account for th
 
 Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
 
-## 2️⃣ Stripe
+## Stripe
 
-🚫Replace text below with a description of the API
-
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
+[Stripe](https://stripe.com/docs/api) is a RESTful API which "has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs." It was chosen for this project because of Stripe's reliability and trustworthiness in the world of online transactions, as well as the way in which the API allows us to bypass storing sensative information.
 
 
 

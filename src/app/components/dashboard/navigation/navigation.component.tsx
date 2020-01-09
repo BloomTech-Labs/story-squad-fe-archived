@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import { Drawer, List, ListItem, ListItemText } from '@material-ui/core';
 import { Theme, makeStyles } from '@material-ui/core/styles';
@@ -28,19 +29,25 @@ const NavigationDrawer = () => {
             }}
             anchor='left'>
             <List>
-                {[
-                    'StorySquad',
-                    'Dashboard',
-                    'Settings',
-                    'Payment',
-                    'Angel302Account',
-                    'DragonM2Account',
-                    'Help',
-                ].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemText primary={text} />
+                <ListItem button>
+                    <ListItemText primary='Story Squad' />
+                </ListItem>
+                <NavLink to='/dashboard'>
+                    <ListItem button>
+                        <ListItemText primary='Dashboard' />
                     </ListItem>
-                ))}
+                </NavLink>
+                <ListItem button>
+                    <ListItemText primary='Settings' />
+                </ListItem>
+                <NavLink to='/dashboard/cards/add'>
+                    <ListItem button>
+                        <ListItemText primary='Payment' />
+                    </ListItem>
+                </NavLink>
+                <ListItem button>
+                    <ListItemText primary='Help' />
+                </ListItem>
             </List>
         </Drawer>
     );

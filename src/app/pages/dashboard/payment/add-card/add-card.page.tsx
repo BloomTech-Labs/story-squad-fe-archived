@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StripeWrapper, CardForm } from '../../components';
+import { StripeWrapper, CardForm } from '../../../../components';
 
 const AddCardPage: React.FC = () => {
     return (

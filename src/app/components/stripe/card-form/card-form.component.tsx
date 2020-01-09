@@ -13,14 +13,9 @@ import { makeStyles } from '@material-ui/styles';
 import { useAPI } from '../../../hooks';
 import { StripeInput } from '../input/input.component';
 
-const useStyles = makeStyles(() => ({
-    addCard: {
-        padding: 30,
-    },
-}));
-
 const _CardForm: React.FC<ReactStripeElements.InjectedStripeProps> = ({ stripe }) => {
-    const classes = useStyles({});
+    // Todo: Handle Card Response
+    // eslint-disable-next-line
     const { request, response } = useAPI('/payment/cards', 'POST');
     const [validForm, setValidForm] = React.useState({
         numberValid: false,
@@ -42,7 +37,7 @@ const _CardForm: React.FC<ReactStripeElements.InjectedStripeProps> = ({ stripe }
     const { numberValid, expiryValid, cvcValid } = validForm;
     const isValid = numberValid && expiryValid && cvcValid;
     return (
-        <div className={classes.addCard}>
+        <div>
             <StripeInput
                 label='Credit Card Number'
                 component={CardNumberElement}

@@ -11,13 +11,13 @@ import {
     IconButton,
     Icon,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 import { CardIcon } from './icon.component';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     card: {
         minWidth: 275,
     },
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
         alignItems: 'center',
     },
     header: {
-        backgroundColor: 'dodgerblue',
+        backgroundColor: theme.palette.primary.main,
         color: 'white',
         alignItems: 'center',
     },
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
         display: 'flex',
         justifyContent: 'center',
     },
-});
+}));
 
 interface ChildCardProps {
     child: Child;
@@ -66,7 +66,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
                 className={classes.header}
                 title={child.username}
                 action={
-                    <Link to={`/child/edit/${child.id}`}>
+                    <Link to={`/dashboard/child/edit/${child.id}`}>
                         <IconButton>
                             <Icon className={classes.headerIcon}>edit</Icon>
                         </IconButton>

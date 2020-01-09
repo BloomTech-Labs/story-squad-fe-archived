@@ -1,12 +1,14 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import { CssBaseline, Button, AppBar, Toolbar, Typography } from '@material-ui/core';
+import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAPI } from '../../hooks';
-
-import { NavigationDrawer, ParentCard, ChildList, NotificationsCard } from '../../components';
-import { User } from '../../models';
+import { NavigationDrawer } from '../../components';
+import { HomePage } from './home/home.page';
+import { AddCardPage } from './payment/add-card/add-card.page';
+import { EditProfilePage } from './child/edit/edit.page';
+import { CreateChildPage } from './child/create/child.page';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,46 +18,25 @@ const useStyles = makeStyles((theme) => ({
         width: `calc(100% - 240px)`,
         marginLeft: 240,
     },
-    toolbar: { gridArea: 'toolbar' },
-    content: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
-        padding: theme.spacing(3),
-        display: 'grid',
-        gridTemplate: `
-            "toolbar toolbar" ${theme.mixins.toolbar.minHeight}px
-            "header header" auto
-            "children notifications" auto`,
-        gridGap: theme.spacing(3),
-    },
-    header: {
-        gridArea: 'header',
-    },
-    children: {
-        gridArea: 'children',
-    },
-    notifications: {
-        gridArea: 'notifications',
-    },
     spacer: {
         flex: '1',
     },
+    main: {
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing(3),
+    },
+    toolbar: theme.mixins.toolbar,
 }));
 
 const DashboardPage: React.FC = () => {
     const classes = useStyles();
-    const { request, response } = useAPI<{ me: User }>('/parents/me');
     const logout = () => window.dispatchEvent(new Event('logout'));
 
-    React.useEffect(() => {
-        request();
-    }, [request]);
-
-    if (!response?.me) return <div></div>;
     return (
         <div className={classes.root}>
-            <CssBaseline />
-
             <AppBar position='fixed' className={classes.appBar}>
                 <Toolbar>
                     <Typography variant='h6' noWrap>
@@ -70,11 +51,14 @@ const DashboardPage: React.FC = () => {
 
             <NavigationDrawer />
 
-            <main className={classes.content}>
+            <main className={classes.main}>
                 <div className={classes.toolbar} />
-                <ParentCard className={classes.header} user={response.me} />
-                <ChildList className={classes.children} />
-                <NotificationsCard className={classes.notifications} />
+                <Switch>
+                    <Route path='/dashboard/child/create' component={CreateChildPage} />
+                    <Route path='/dashboard/child/edit/:id' component={EditProfilePage} />
+                    <Route path='/dashboard/cards/add' component={AddCardPage} />
+                    <Route path='/dashboard' component={HomePage} />
+                </Switch>
             </main>
         </div>
     );

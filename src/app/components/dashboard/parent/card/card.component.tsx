@@ -33,10 +33,10 @@ const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {
     return (
         <Card className={`${className} ${classes.card}`}>
             <CardContent>
-                <Typography variant='h3' component='h1' gutterBottom>
+                <Typography variant='h4' component='h1' gutterBottom>
                     Welcome back {user.email}
                 </Typography>
-                <Typography variant='h5' component='h2'>
+                <Typography variant='h6' component='h2'>
                     Let's see how each participant is doing this week.
                 </Typography>
             </CardContent>

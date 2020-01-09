@@ -79,10 +79,8 @@ const SignUpPage: React.FC = () => {
                         <Tab value='sign-in' label='Sign In' />
                     </Tabs>
                     <div className={classes.onboarding}>
-                        {value === 'sign-up' && (
-                            <SignUp form={classes.form} checkboxes={classes.checkboxes} />
-                        )}
-                        {value === 'sign-in' && <SignIn form={classes.form} />}
+                        {value === 'sign-up' && <SignUp />}
+                        {value === 'sign-in' && <SignIn />}
                     </div>
                 </Paper>
             </Grid>

@@ -11,7 +11,7 @@ const CheckoutForm = injectStripe((props) => {
         const { token } = await props.stripe.createToken({ name: 'Name' });
         console.log(token);
         if (!token) return;
-        const response = await axios.post('http://localhost:4000/charge', { token: token.id });
+        const response = await axios.post('http://localhost:4000/subscribe', { token: token.id });
         console.log(response);
     };
 

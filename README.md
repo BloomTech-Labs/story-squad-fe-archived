@@ -43,8 +43,8 @@ Story Squad is a paid service; parents are required to create the account for th
 ### 4️⃣ Key Features
 
 -   A _Custom, Serialized Novel_ geared toward children in 3rd-6th grade.
--   Parental Controls 
--   feature three
+-   _Parental Controls_ which allow parents to add and customize child accounts.
+-   _Secure Payment Handling_ via Stripe.
 -   feature four
 -   feature five
 

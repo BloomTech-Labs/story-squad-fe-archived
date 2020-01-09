@@ -61,7 +61,7 @@ const useAPI = <T>(url: string, method: Method = 'GET'): APIHook<T> => {
         [method, url]
     );
 
-    return { response, error, loading, request };
+    return { request, response, loading, error };
 };
 
 export { useAPI };

@@ -6,7 +6,7 @@ describe('useForm()', () => {
         const { result } = renderHook(() => useForm({ name: 'Joe' }));
 
         act(() => {
-            result.current.handleStringChange('name')({ target: { value: 'Sam' } } as any);
+            result.current.handleInputChange('name')({ target: { value: 'Sam' } } as any);
         });
 
         expect(result.current.state).toStrictEqual({ name: 'Sam' });

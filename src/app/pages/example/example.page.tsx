@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { PdfDisplay } from '../components';
+import { ExampleComponent } from '../../components';
 
 const ExamplePage: React.FC = () => {
-    return <PdfDisplay />;
+    return <ExampleComponent />;
 };
 
 export { ExamplePage };

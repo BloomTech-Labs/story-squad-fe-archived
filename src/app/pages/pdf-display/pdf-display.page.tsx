@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PdfDisplay } from '../components/pdf-display/index';
+import { PdfDisplay } from '../../components';
 
 const PdfDisplayPage: React.FC = (props) => {
     return (

@@ -4,13 +4,17 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { PrivateRoute } from './components/common/private-route/private-route.component';
 
-import { ExamplePage } from './pages/example.page';
-import { SignUpPage } from './pages/sign-up.page';
-import { DashboardPage } from './pages/dashboard.page';
-import { PrivacyPage } from './pages/privacy-policy.page';
-import { ToSPage } from './pages/tos.page';
-import { ChildDashboard } from './pages/child-dashboard.page';
-import { PdfDisplayPage } from './pages/pdf-display.page';
+import {
+    ExamplePage,
+    SignUpPage,
+    DashboardPage,
+    PrivacyPage,
+    ToSPage,
+    CreateChildPage,
+    EditProfilePage,
+    ChildDashboard,
+    PdfDisplayPage,
+} from './pages';
 
 const App: React.FC = () => {
     return (
@@ -21,6 +25,12 @@ const App: React.FC = () => {
                     path='/dashboard'
                     only='parent'
                     component={DashboardPage}
+                />
+                <PrivateRoute redirect='/signup' path='/child/create' component={CreateChildPage} />
+                <PrivateRoute
+                    redirect='/dashboard'
+                    path='/child/edit/:id'
+                    component={EditProfilePage}
                 />
                 <PrivateRoute
                     redirect='/signup'

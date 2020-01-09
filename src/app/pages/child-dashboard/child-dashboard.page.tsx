@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CurrentChapterLink } from '../components/child-dashboard';
+import { CurrentChapterLink } from '../../components';
 
 const ChildDashboard: React.FC = () => {
     return (

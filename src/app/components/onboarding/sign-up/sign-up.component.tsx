@@ -2,14 +2,25 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { useAPI } from '../../hooks/api/api.hook';
-import { useForm } from '../../hooks/form/form.hook';
+import { useAPI } from '../../../hooks';
+import { useForm } from '../../../hooks';
 
-interface SignUpProps {
-    form: string;
-    checkboxes: string;
-}
+const useStyles = makeStyles(() => ({
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        height: '35vh',
+    },
+    checkboxes: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+}));
+
+interface SignUpProps {}
 
 interface SignUpState {
     email: string;
@@ -19,12 +30,14 @@ interface SignUpState {
     privacyPolicy: boolean;
 }
 
-const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
+const SignUp: React.FC<SignUpProps> = ({}) => {
+    const classes = useStyles({});
+
     // TODO: Setup Loading and Error States
     // eslint-disable-next-line
     const { response, loading, error, request } = useAPI('/auth/register', 'POST');
     const history = useHistory();
-    const { state, handleStringChange, handleBoolChange, handleSubmitBuilder } = useForm<
+    const { state, handleInputChange, handleBoolChange, handleSubmitBuilder } = useForm<
         SignUpState
     >({
         email: '',
@@ -50,29 +63,29 @@ const SignUp: React.FC<SignUpProps> = ({ form, checkboxes }) => {
                 Sign Up
             </Typography>
             <Typography variant='subtitle2'>Start your child reading stories today!</Typography>
-            <form className={form} onSubmit={handleSubmit}>
+            <form className={classes.form} onSubmit={handleSubmit}>
                 <TextField
                     fullWidth
                     type='email'
                     label='Email'
                     value={email}
-                    onChange={handleStringChange('email')}
+                    onChange={handleInputChange('email')}
                 />
                 <TextField
                     fullWidth
                     type='password'
                     label='Password'
                     value={password}
-                    onChange={handleStringChange('password')}
+                    onChange={handleInputChange('password')}
                 />
                 <TextField
                     fullWidth
                     type='password'
                     label='Confirm Password'
                     value={comparePassword}
-                    onChange={handleStringChange('comparePassword')}
+                    onChange={handleInputChange('comparePassword')}
                 />
-                <div className={checkboxes}>
+                <div className={classes.checkboxes}>
                     <FormControlLabel
                         control={
                             <Checkbox

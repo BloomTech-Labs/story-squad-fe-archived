@@ -6,11 +6,11 @@ import { PrivateRoute } from './components/common/private-route/private-route.co
 
 import {
     ExamplePage,
-    CheckoutPage,
     SignUpPage,
-    DashboardPage,
     PrivacyPage,
     ToSPage,
+    DashboardPage,
+    AddCardPage,
     CreateChildPage,
     EditProfilePage,
 } from './pages';
@@ -29,7 +29,8 @@ const App: React.FC = () => {
                 <Route path='/signup' component={SignUpPage} />
                 <Route path='/privacy-policy' component={PrivacyPage} />
                 <Route path='/terms-of-service' component={ToSPage} />
-                <Route path='/' component={CheckoutPage} />
+                <Route path='/cards/add' component={AddCardPage} />
+                <Route path='/' component={ExamplePage} />
             </Switch>
         </Router>
     );

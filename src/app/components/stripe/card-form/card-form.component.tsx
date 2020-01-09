@@ -10,9 +10,8 @@ import {
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import { MaterializeInput } from '../../components/common/materialize-input.component';
-import { useAPI } from '../../hooks/api/api.hook';
-import { StripeInput } from './stripe-input.component';
+import { useAPI } from '../../../hooks';
+import { StripeInput } from '../input/input.component';
 
 const useStyles = makeStyles(() => ({
     addCard: {
@@ -20,7 +19,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const _CheckoutForm: React.FC<ReactStripeElements.InjectedStripeProps> = ({ stripe }) => {
+const _CardForm: React.FC<ReactStripeElements.InjectedStripeProps> = ({ stripe }) => {
     const classes = useStyles({});
     const { request, response } = useAPI('/payment/cards', 'POST');
     const [validForm, setValidForm] = React.useState({
@@ -66,5 +65,5 @@ const _CheckoutForm: React.FC<ReactStripeElements.InjectedStripeProps> = ({ stri
     );
 };
 
-const CheckoutForm = injectStripe(_CheckoutForm);
-export { CheckoutForm };
+const CardForm = injectStripe(_CardForm);
+export { CardForm };

@@ -40,7 +40,14 @@ const PdfDisplay: React.FC = () => {
 
     return (
         <div className='pdf-container'>
-            {file && <PDFReader data={file} scale={1.5} onDocumentComplete={multiPageHandler} />}
+            {file && (
+                <PDFReader
+                    data={file}
+                    scale={1.5}
+                    onDocumentComplete={multiPageHandler}
+                    data-testid='pdf-reader'
+                />
+            )}
             {pages.map((page: number) => (
                 <PDFReader data={file} page={page} key={page} scale={1.5} />
             ))}

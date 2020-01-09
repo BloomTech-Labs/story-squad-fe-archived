@@ -1,7 +1,6 @@
 import React from 'react';
-import { render, act } from '@testing-library/react';
+import { render, waitForDomChange } from '@testing-library/react';
 
-import requestFactory from '../../../util/requestFactory';
 import { PdfDisplay } from './pdf-display.component';
 
 jest.mock('react-router-dom', () => ({
@@ -21,8 +20,9 @@ jest.mock('../../../util/requestFactory', () => () => ({
 }));
 
 describe('PdfDisplay', () => {
-    it('renders without errors', () => {
+    it('renders without errors', async () => {
         const { baseElement } = render(<PdfDisplay />);
+        await waitForDomChange({ container: baseElement });
         expect(baseElement).toBeInTheDocument();
     });
 });

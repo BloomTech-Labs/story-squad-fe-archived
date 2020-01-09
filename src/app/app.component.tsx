@@ -10,6 +10,7 @@ import { DashboardPage } from './pages/dashboard.page';
 import { PrivacyPage } from './pages/privacy-policy.page';
 import { ToSPage } from './pages/tos.page';
 import { ChildDashboard } from './pages/child-dashboard.page';
+import { PdfDisplayPage } from './pages/pdf-display.page';
 
 const App: React.FC = () => {
     return (
@@ -27,6 +28,7 @@ const App: React.FC = () => {
                     only='child'
                     component={ChildDashboard}
                 />
+                <Route path='/story/:week' component={PdfDisplayPage} />
                 <Route path='/signup' component={SignUpPage} />
                 <Route path='/privacy-policy' component={PrivacyPage} />
                 <Route path='/terms-of-service' component={ToSPage} />

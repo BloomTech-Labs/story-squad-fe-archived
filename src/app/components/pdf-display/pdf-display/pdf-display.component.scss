@@ -1,3 +1,10 @@
-.pdf-container > canvas {
-    max-width: 100%;
+.pdf-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    & > canvas {
+        max-width: 100%;
+    }
 }

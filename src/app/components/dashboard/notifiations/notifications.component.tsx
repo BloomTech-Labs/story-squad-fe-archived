@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 interface NotificationsCardProps {
-    className: string;
+    className?: string;
 }
 
 const NotificationsCard: React.FC<NotificationsCardProps> = ({ className }) => {

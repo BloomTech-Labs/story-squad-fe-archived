@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAPI } from '../../hooks/api/api.hook';
-import { useForm } from '../../hooks/form/form.hook';
+import { useAPI } from '../../../hooks';
+import { useForm } from '../../../hooks';
 
 const useStyles = makeStyles(() => ({
     form: {

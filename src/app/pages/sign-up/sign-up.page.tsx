@@ -3,7 +3,7 @@ import React from 'react';
 import { Grid, Paper, Tab, Tabs, useMediaQuery } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-import { SignIn, SignUp } from '../components';
+import { SignIn, SignUp } from '../../components';
 
 const useStyles = makeStyles((theme) => ({
     sidebar: {

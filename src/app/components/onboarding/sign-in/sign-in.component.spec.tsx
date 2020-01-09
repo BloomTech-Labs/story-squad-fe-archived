@@ -1,13 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { BrowserRouter as Router, Route, Switch, BrowserRouter } from 'react-router-dom';
-import { SignUpPage } from './sign-up.page';
+import { BrowserRouter } from 'react-router-dom';
+
+import { SignIn } from './sign-in.component';
 
 describe('App', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>
-                <SignUpPage />{' '}
+                <SignIn />
             </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();

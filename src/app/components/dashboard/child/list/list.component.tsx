@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface ChildListProps {
-    className: string;
+    className?: string;
 }
 
 const ChildList: React.FC<ChildListProps> = ({ className }) => {

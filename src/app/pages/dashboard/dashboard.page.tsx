@@ -3,10 +3,10 @@ import React from 'react';
 import { CssBaseline, Button, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAPI } from '../hooks';
+import { useAPI } from '../../hooks';
 
-import { NavigationDrawer, ParentCard, ChildList, NotificationsCard } from '../components';
-import { User } from '../models';
+import { NavigationDrawer, ParentCard, ChildList, NotificationsCard } from '../../components';
+import { User } from '../../models';
 
 const useStyles = makeStyles((theme) => ({
     root: {

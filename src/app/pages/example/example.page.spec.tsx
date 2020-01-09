@@ -1,13 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { BrowserRouter as Router, Route, Switch, BrowserRouter } from 'react-router-dom';
-import { CreateChildPage } from './create-child.page';
+import { BrowserRouter } from 'react-router-dom';
+
+import { ExamplePage } from './example.page';
 
 describe('App', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>
-                <CreateChildPage />
+                <ExamplePage />
             </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();

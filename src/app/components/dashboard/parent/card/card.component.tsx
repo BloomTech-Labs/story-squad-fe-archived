@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface ParentCardProps {
-    className: string;
+    className?: string;
     user: User;
 }
 

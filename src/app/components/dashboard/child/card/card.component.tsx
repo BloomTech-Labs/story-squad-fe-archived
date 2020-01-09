@@ -46,7 +46,7 @@ const useStyles = makeStyles({
 
 interface ChildCardProps {
     child: Child;
-    onUpdate: () => void;
+    onUpdate?: () => void;
 }
 
 const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
@@ -79,7 +79,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
                 <Typography variant='subtitle1'>2/5 lessons completed this week</Typography>
 
                 <div className={classes.statusIcons}>
-                    <CardIcon title='Reading Level' status='4th Grade' />
+                    <CardIcon title='Reading Level' status={`Grade ${child.grade}`} />
                     <CardIcon title='Accessability' status='None' />
                     <CardIcon title='Week' status='12' />
                     <CardIcon title='Current Phase' status='Allocating Points' />

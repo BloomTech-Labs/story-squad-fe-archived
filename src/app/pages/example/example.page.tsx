@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ExampleComponent } from '../components';
+import { ExampleComponent } from '../../components';
 
 const ExamplePage: React.FC = () => {
     return <ExampleComponent />;

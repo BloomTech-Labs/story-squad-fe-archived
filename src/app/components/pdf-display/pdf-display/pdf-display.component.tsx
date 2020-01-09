@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { PDFReader } from 'react-read-pdf-b';
 import requestFactory from '../../../util/requestFactory';
 
-const PdfDisplay: React.FC = (props) => {
+const PdfDisplay: React.FC = () => {
     const [file, setFile] = React.useState<Buffer>();
     const [pages, setPages] = React.useState<number[]>([]);
 

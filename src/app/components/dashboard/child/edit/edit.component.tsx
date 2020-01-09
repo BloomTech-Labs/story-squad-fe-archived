@@ -10,9 +10,9 @@ const ChildEdit: React.FC = () => {
     const history = useHistory();
     const { id } = useParams();
 
-    const { request: fetch, response: fetchResponse } = useAPI<{ child: Child }>(`/child/${id}`);
-    const { request: update, response: updateResponse } = useAPI(`/child/${id}`, 'PUT');
-    const { request: remove, response: removeResponse } = useAPI(`/child/${id}`, 'DELETE');
+    const { request: fetch, response: fetchResponse } = useAPI<{ child: Child }>(`/children/${id}`);
+    const { request: update, response: updateResponse } = useAPI(`/children/${id}`, 'PUT');
+    const { request: remove, response: removeResponse } = useAPI(`/children/${id}`, 'DELETE');
 
     const { state, setState, handleInputChange, handleSubmitBuilder } = useForm<Omit<Child, 'id'>>({
         username: '',

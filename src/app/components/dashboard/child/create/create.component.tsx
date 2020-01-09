@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 
 const ChildCreate: React.FC = () => {
     const history = useHistory();
-    const { request, response } = useAPI('/child', 'POST');
+    const { request, response } = useAPI('/children', 'POST');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({ username: '', grade: 3 });
     const handleChange = handleSubmitBuilder(request);
 

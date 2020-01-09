@@ -22,7 +22,7 @@ interface ChildListProps {
 
 const ChildList: React.FC<ChildListProps> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ children: Child[] }>('/child');
+    const { request, response } = useAPI<{ children: Child[] }>('/children');
 
     React.useEffect(() => {
         request();

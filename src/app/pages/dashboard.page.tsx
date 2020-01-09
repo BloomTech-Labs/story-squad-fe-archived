@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useAPI } from '../hooks';
 
 import { NavigationDrawer, ParentCard, ChildList, NotificationsCard } from '../components';
+import { User } from '../models';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,14 +44,14 @@ const useStyles = makeStyles((theme) => ({
 
 const DashboardPage: React.FC = () => {
     const classes = useStyles();
-    const { request, response: user } = useAPI('/parent/me');
+    const { request, response } = useAPI<{ me: User }>('/parents/me');
     const logout = () => window.dispatchEvent(new Event('logout'));
 
     React.useEffect(() => {
         request();
     }, [request]);
 
-    if (!user) return <div></div>;
+    if (!response?.me) return <div></div>;
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -71,7 +72,7 @@ const DashboardPage: React.FC = () => {
 
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <ParentCard className={classes.header} user={user} />
+                <ParentCard className={classes.header} user={response.me} />
                 <ChildList className={classes.children} />
                 <NotificationsCard className={classes.notifications} />
             </main>

@@ -52,7 +52,7 @@ interface ChildCardProps {
 const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
     const classes = useStyles({});
     const history = useHistory();
-    const { request: signIn, response } = useAPI(`/child/${child.id}/login`, 'POST');
+    const { request: signIn, response } = useAPI(`/children/${child.id}/login`, 'POST');
 
     React.useEffect(() => {
         if (!response?.token) return;

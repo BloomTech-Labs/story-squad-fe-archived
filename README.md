@@ -14,7 +14,6 @@
 <br>
 <br>
 
-🚫 4️⃣ Optional examples of using images with links for your tech stack, make sure to change these to fit your project
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
@@ -22,7 +21,6 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](netlify link goes in these parenthesis)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-🚫 more info on using badges [here](https://github.com/badges/shields)
 
 ## Project Overview
 
@@ -54,61 +52,50 @@ Story Squad is a paid service; parents are required to create the account for th
 
 #### React
 
--   We are familiar with it.
--   We can make a progressive web app for both web and mobile.
--   Allows for easy creation of single page applications with routing.
+-   Familiar
+-   Easy cross-platform development via progressive web app
+-   Simplifies routing
 
 #### Jest
 
--   It simplifies all testing.
--   It allows mocking dependencies.
--   Used for unit testing.
+-   Simplifies testing
+-   Allows mocking dependencies
+-   Promotes consistent unit testing
 
 #### Typescript
 
-🚫 Why did you choose this framework?
+-   Minimal learning curve
+-   Excellent error catching
 
--   point one
--   point two
--   point three
--   point four
+#### Material UI
 
-🚫List the rest of the front end features and libraries in the same format as the framework above.
+-   Clean, modern components out of the box
+-   Easy to fine-tune per UX designs
 
 #### Front end deployed to `🚫insert service here`
 
-#### [Back end](🚫link to back end repo here) built using:
+#### [Back end](https://github.com/Lambda-School-Labs/story-squad-be) built using:
 
 #### Express
 
--   We're familiar with it.
--   It has lots of add-ons such as helmet and CORS.
--   It is well documented.
+-   Familiar
+-   Useful add-ons such as helmet and CORS.
+-   Well documented.
 
 #### TypeORM
 
--   It simplifies database creation, connections, queries, etc.
--   It is designed to use a lot of features of typescript.
--   It has add-ons for seeding.
+-   Simplifies database creation, connections, queries, etc
+-   Plays well with Typescript
+-   Add-ons simplify seeding.
 
 #### Jest
 
--   It simplifies all testing.
--   It allows mocking dependencies.
--   Used for unit testing.
+-   Maintains consistency with front-end testing
 
 #### SuperTest
 
--   It simplifies testing endpoints.
--   Used for integration testing.
-
-#### 🚫 back end framework goes here
-
--   point one
--   point two
--   point three
-
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
+-   Simplifies endpoint testing
+-   Intigration testing
 
 # APIs
 

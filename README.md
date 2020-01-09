@@ -30,16 +30,20 @@
 
 [Product Canvas](https://www.notion.so/Story-Squad-a5bff36c779a44bd91fa97e9af27a944)
 
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
+[Ux Design by Lauren Chandler](https://www.figma.com/file/s0tJgdtWaFDnlG78xigIVv/Story-Squad-Lauren-Chandler?node-id=344%3A336)
 
-🚫 Replace lorem ipsum with a description of your project
+Welcome to Story Squad! We are an interactive learning platform targeted at grade school children, and we help build reading comprehension as well as artistic, writing, and analytical/critical thinking skills through weekly competitions. 
 
-Welcome to Story Squad! We are a platform targeted at young children and we help build writing, comprehension, art, and analytical/critical thinking skills through weekly creative competitions. Children are placed in teams of 2 VS 2 and are encouraged to read a story and then comprehend what they read by writing their own spin-off story as well as drawing an illustration to accompany it. Children are then directed to vote on others projects and gain points to become the winning team. Upon winning, they are given badges with an incentive to collect more as they continue the program. Parents are required to create the account for their children and pay a monthly subscription fee to continue allowing their children to compete.
+Each week features a new chapter in an exciting novel, written and serialized specifically for Story Squad by author and educator Graig Peterson. Children are provided with prompts based on the chapter they've just read, and participants are then divided into teams of two. Students create art and fanfiction to match the prompt, before going head to head in a bracket-style tournament.
+
+In addition to growing their literary and artistic skills, students learn team building and critical thinking skills through a unique voting system, where each child must weight their own work against their teammate in order to increase their odds of winning. Badges and points incentivize winning and encourage participation.
+
+Story Squad is a paid service; parents are required to create the account for their children and pay a monthly subscription fee in order for their children to compete. This brings the platform into compliance with COPPA and ensures a long future for the project. 
 
 ### 4️⃣ Key Features
 
--   feature one
--   feature two
+-   A _Custom, Serialized Novel_ geared toward children in 3rd-6th grade.
+-   Parental Controls 
 -   feature three
 -   feature four
 -   feature five
@@ -50,9 +54,8 @@ Welcome to Story Squad! We are a platform targeted at young children and we help
 
 #### React
 
--   We familiar with it.
+-   We are familiar with it.
 -   We can make a progressive web app for both web and mobile.
--   Based on our knowledge, React is the most viable option to put what we know to use.
 -   Allows for easy creation of single page applications with routing.
 
 #### Jest
@@ -61,7 +64,7 @@ Welcome to Story Squad! We are a platform targeted at young children and we help
 -   It allows mocking dependencies.
 -   Used for unit testing.
 
-#### _Front end framework goes here_
+#### Typescript
 
 🚫 Why did you choose this framework?
 

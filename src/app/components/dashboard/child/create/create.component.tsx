@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { useAPI, useForm } from '../../hooks';
+import { useAPI, useForm } from '../../../../hooks';
 import { TextField, Button } from '@material-ui/core';
 import { useHistory } from 'react-router';
 
-const ChildCreation: React.FC = () => {
+const ChildCreate: React.FC = () => {
     const history = useHistory();
     const { request, response } = useAPI('/child', 'POST');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({ username: '', grade: 3 });
@@ -40,4 +40,4 @@ const ChildCreation: React.FC = () => {
     );
 };
 
-export { ChildCreation };
+export { ChildCreate };

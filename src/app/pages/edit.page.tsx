@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { EditProfile} from '../components/dashboard/edit.component';
+import { ChildEdit } from '../components';
 
 const EditProfilePage: React.FC = () => {
-   
-
-    return <EditProfile/>
+    return <ChildEdit />;
 };
 
 export { EditProfilePage };

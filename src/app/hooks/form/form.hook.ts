@@ -2,6 +2,7 @@ import React from 'react';
 
 interface FormHook<T> {
     state: T;
+    setState: React.Dispatch<React.SetStateAction<T>>;
     handleBoolChange: (key: keyof T) => (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleInputChange: (key: keyof T) => (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleSubmitBuilder: (
@@ -53,7 +54,7 @@ const useForm = <S extends { [key: string]: any }>(initial: S): FormHook<S> => {
         callback(state);
     };
 
-    return { state, handleBoolChange, handleInputChange, handleSubmitBuilder };
+    return { state, setState, handleBoolChange, handleInputChange, handleSubmitBuilder };
 };
 
 export { useForm };

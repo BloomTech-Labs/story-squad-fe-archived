@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { ChildCreation} from '../components/dashboard/child-creation.component';
+import { ChildCreate } from '../components';
 
 const CreateChildPage: React.FC = () => {
-   
-
-    return <ChildCreation/>
+    return <ChildCreate />;
 };
 
 export { CreateChildPage };

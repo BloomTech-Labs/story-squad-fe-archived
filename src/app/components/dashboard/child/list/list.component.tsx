@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import { Child } from '../../models';
-import { useAPI } from '../../hooks';
-import { ChildCard } from './child-card.component';
+import { Child } from '../../../../models';
+import { useAPI } from '../../../../hooks';
+import { ChildCard } from '../card/card.component';
 
 const useStyles = makeStyles(() => ({
     header: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const ChildrenList: React.FC = () => {
+const ChildList: React.FC = () => {
     const classes = useStyles({});
     const { request, response } = useAPI<{ children: Child[] }>('/child');
 
@@ -45,4 +45,4 @@ const ChildrenList: React.FC = () => {
     );
 };
 
-export { ChildrenList };
+export { ChildList };

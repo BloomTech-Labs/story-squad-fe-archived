@@ -1,5 +1,5 @@
 import React from 'react';
-import { Child } from '../../models';
+import { Child } from '../../../models';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -34,22 +34,21 @@ interface NotificationsCardProps {
 
 const NotificationsCard: React.FC<NotificationsCardProps> = (props) => {
     const classes = useStyles();
-    const child = props.child;
 
     return (
         <Card className={classes.card}>
             <CardContent>
                 <Typography variant='h5' component='h2'>
-                   Notifications Center
+                    Notifications Center
                 </Typography>
                 <List>
-          {['1/8', '1/7', '1/7', '1/7'].map((text, index) => (
-            <ListItem button key={text}>
-             <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Button>View Account</Button>
+                    {['1/8', '1/7', '1/7', '1/7'].map((text, index) => (
+                        <ListItem button key={text}>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    ))}
+                </List>
+                <Button>View Account</Button>
             </CardContent>
         </Card>
     );

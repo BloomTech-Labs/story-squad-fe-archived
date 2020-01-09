@@ -1,0 +1,71 @@
+import React from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+
+import { TextField, Button } from '@material-ui/core';
+
+import { useAPI, useForm } from '../../../../hooks';
+import { Child } from '../../../../models';
+
+const ChildEdit: React.FC = () => {
+    const history = useHistory();
+    const { id } = useParams();
+
+    const { request: fetch, response: fetchResponse } = useAPI<{ child: Child }>(`/child/${id}`);
+    const { request: update, response: updateResponse } = useAPI(`/child/${id}`, 'PUT');
+    const { request: remove, response: removeResponse } = useAPI(`/child/${id}`, 'DELETE');
+
+    const { state, setState, handleInputChange, handleSubmitBuilder } = useForm<Omit<Child, 'id'>>({
+        username: '',
+        grade: 3,
+    });
+    const handleSubmit = handleSubmitBuilder(update);
+
+    React.useEffect(() => {
+        fetch();
+    }, [fetch]);
+
+    React.useEffect(() => {
+        if (!fetchResponse) return;
+        const { id, ...child } = fetchResponse.child;
+        setState({ ...child });
+    }, [fetchResponse, setState]);
+
+    React.useEffect(() => {
+        if (updateResponse) history.push('/dashboard');
+        if (removeResponse) history.push('/dashboard');
+    }, [history, removeResponse, updateResponse]);
+
+    if (!fetchResponse) return <div></div>;
+
+    const { username, grade } = state;
+    return (
+        <>
+            <form onSubmit={handleSubmit}>
+                <TextField
+                    type='text'
+                    label='Username'
+                    required
+                    value={username}
+                    onChange={handleInputChange('username')}
+                />
+
+                <TextField
+                    type='number'
+                    label='Grade'
+                    required
+                    value={grade}
+                    onChange={handleInputChange('grade')}
+                />
+
+                <Button type='submit' variant='contained' color='primary'>
+                    Edit Account
+                </Button>
+            </form>
+            <Button type='submit' variant='contained' color='primary' onClick={remove}>
+                Delete Account
+            </Button>
+        </>
+    );
+};
+
+export { ChildEdit };

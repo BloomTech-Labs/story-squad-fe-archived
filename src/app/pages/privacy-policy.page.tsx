@@ -1,8 +1,6 @@
 import React from 'react';
 
-
-import { PrivacyPolicy } from '../components/policies/privacy-policy.component';
-
+import { PrivacyPolicy } from '../components';
 
 const PrivacyPage: React.FC = () => {
     return (

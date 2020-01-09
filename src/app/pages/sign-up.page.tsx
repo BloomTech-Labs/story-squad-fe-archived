@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Grid, Paper, Tab, Tabs, useMediaQuery } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { SignIn } from '../components/sign-up/sign-in.component';
-import { SignUp } from '../components/sign-up/sign-up.component';
+
+import { SignIn, SignUp } from '../components';
 
 const useStyles = makeStyles((theme) => ({
     sidebar: {
@@ -79,8 +79,10 @@ const SignUpPage: React.FC = () => {
                         <Tab value='sign-in' label='Sign In' />
                     </Tabs>
                     <div className={classes.onboarding}>
-                        {value === 'sign-up' && <SignUp form={classes.form} checkboxes ={classes.checkboxes} />}
-                        {value === 'sign-in' && <SignIn form={classes.form } />}
+                        {value === 'sign-up' && (
+                            <SignUp form={classes.form} checkboxes={classes.checkboxes} />
+                        )}
+                        {value === 'sign-in' && <SignIn form={classes.form} />}
                     </div>
                 </Paper>
             </Grid>

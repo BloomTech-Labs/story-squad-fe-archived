@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import {
     Card,
@@ -13,9 +13,9 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import { Child } from '../../models';
-import { useAPI } from '../../hooks';
-import { CardIcon } from './child-card-icon.component';
+import { Child } from '../../../../models';
+import { useAPI } from '../../../../hooks';
+import { CardIcon } from './icon.component';
 
 const useStyles = makeStyles({
     card: {
@@ -66,9 +66,11 @@ const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
                 className={classes.header}
                 title={child.username}
                 action={
-                    <IconButton>
-                        <Icon className={classes.headerIcon}>edit</Icon>
-                    </IconButton>
+                    <Link to={`/child/edit/${child.id}`}>
+                        <IconButton>
+                            <Icon className={classes.headerIcon}>edit</Icon>
+                        </IconButton>
+                    </Link>
                 }
             />
             <CardContent>

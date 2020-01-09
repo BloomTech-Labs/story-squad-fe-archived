@@ -1,13 +1,33 @@
 import React from 'react';
 
-import { Button } from '@material-ui/core';
+import { CssBaseline, Button, AppBar, Toolbar, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { User } from '../models';
 import { useAPI } from '../hooks';
-import { ParentCard } from '../components/dashboard/parent-card.component';
-import { ChildrenList } from '../components/dashboard/children-list.component';
+
+import { NavigationDrawer, ParentCard, ChildList } from '../components';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+    },
+    appBar: {
+        width: `calc(100% - 240px)`,
+        marginLeft: 240,
+    },
+    toolbar: theme.mixins.toolbar,
+    content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing(3),
+    },
+    spacer: {
+        flex: '1',
+    },
+}));
 
 const DashboardPage: React.FC = () => {
+    const classes = useStyles();
     const { request, response: user } = useAPI('/parent/me');
     const logout = () => window.dispatchEvent(new Event('logout'));
 
@@ -17,12 +37,28 @@ const DashboardPage: React.FC = () => {
 
     if (!user) return <div></div>;
     return (
-        <div>
-            <span>Dashboard</span>
-            <Button onClick={logout}>Logout</Button>
-            {/* <NavigationDrawer/> */}
-            <ParentCard user={user} />
-            <ChildrenList />
+        <div className={classes.root}>
+            <CssBaseline />
+
+            <AppBar position='fixed' className={classes.appBar}>
+                <Toolbar>
+                    <Typography variant='h6' noWrap>
+                        Dashboard
+                    </Typography>
+                    <div className={classes.spacer} />
+                    <Button onClick={logout} color='inherit'>
+                        Logout
+                    </Button>
+                </Toolbar>
+            </AppBar>
+
+            <NavigationDrawer />
+
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                <ParentCard user={user} />
+                <ChildList />
+            </main>
         </div>
     );
 };

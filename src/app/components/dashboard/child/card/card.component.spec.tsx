@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { ChildCard } from './card.component';
 
-describe('App', () => {
+describe('ChildCard', () => {
     it('renders without errors', () => {
         const child = { id: 1, username: 'Sam', grade: 3 };
         const { baseElement } = render(

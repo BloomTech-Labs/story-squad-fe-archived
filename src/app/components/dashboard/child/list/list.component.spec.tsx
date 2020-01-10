@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import { ChildList } from './list.component';
 
-describe('App', () => {
+describe('ChildList', () => {
     it('renders without errors', () => {
         const { baseElement } = render(<ChildList />);
         expect(baseElement).toBeInTheDocument();

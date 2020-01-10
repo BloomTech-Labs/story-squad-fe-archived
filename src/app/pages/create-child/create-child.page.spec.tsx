@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { CreateChildPage } from './create-child.page';
 
-describe('App', () => {
+describe('CreateChildPage', () => {
     it('renders without errors', () => {
         act(() => {
             const { baseElement } = render(

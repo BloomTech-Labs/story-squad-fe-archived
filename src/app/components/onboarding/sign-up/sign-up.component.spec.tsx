@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { SignUp } from './sign-up.component';
 
-describe('App', () => {
+describe('SignUp', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>

@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { ExamplePage } from './example.page';
 
-describe('App', () => {
+describe('ExamplePage', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>

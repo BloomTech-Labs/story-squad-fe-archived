@@ -61,37 +61,32 @@ const ToS: React.FC = () => {
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Typography variant='h2' component='h2' gutterBottom>
-                    Story Squad Terms of Service{' '}
+                    Story Squad Terms of Service
                 </Typography>
-
+                <br /> <br />
                 <Typography variant='h4' component='h4' gutterBottom>
                     Table of Contents
                 </Typography>
-
+                <br /> <br />
                 <Typography variant='h4' component='h4' gutterBottom>
                     Acceptance of Use
                 </Typography>
-
                 <Typography paragraph>
                     Story Squad is pleased to offer its services and resources to parents and their
                     children.
                 </Typography>
-
                 <Typography paragraph>
                     By registering for an account, purchasing a subscription, or using the site, you
                     confirm that you understand and accept the following terms.
                 </Typography>
-
                 <Typography paragraph>
                     If you (the adult user) do not agree with the following terms of service, you
                     and your children should not use Story Squad. We may immediately terminate your
                     access to Story Squad if you fail to comply with any provision of these terms.
                 </Typography>
-
                 <Typography variant='h4' component='h4' gutterBottom>
                     Term Changes
                 </Typography>
-
                 <Typography paragraph>
                     The following terms may occasionally be updated at Story Squad's discretion.
                     Should Story Squad's \(\'our\'\) Terms of Service change, we (Story Squad) will
@@ -100,11 +95,9 @@ const ToS: React.FC = () => {
                     ensure that you still understand and accept their contents. By continuing to use
                     the site, you are agreeing to and accepting any amendments.
                 </Typography>
-
                 <Typography variant='h4' component='h4' gutterBottom>
                     Intended Audience
                 </Typography>
-
                 <Typography paragraph>
                     Story Squad is intended for children in 3rd through 6th grade, as well as their
                     parents or legal guardians. Anyone who is not part of one of these audiences may
@@ -112,11 +105,9 @@ const ToS: React.FC = () => {
                     by someone who is not part of our target audience will be immediately deleted,
                     and the user's access will be blocked.
                 </Typography>
-
                 <Typography variant='h4' component='h4' gutterBottom>
                     Account Access and Security
                 </Typography>
-
                 <Typography paragraph>
                     Every Story Squad account consists of at least two users: the designated
                     Parental User - who must be a legal adult in accordance with the laws of their
@@ -127,25 +118,20 @@ const ToS: React.FC = () => {
                     reasonable measures to maintain your own confidentiality and to promptly notify
                     us of any unauthorized use of your Story Squad account.
                 </Typography>
-
                 <Typography paragraph>
                     By creating an account, you agree that any information you provide is accurate
                     and up-to-date. You also agree not to impersonate or misrepresent your identity
                     or affiliation with anyone else's identity. We reserve the right to verify the
                     accuracy of information you provide.
                 </Typography>
-
                 <Typography paragraph>
                     Story Squad does not allow search-indexing or public access to the profiles or
                     creative content of its users.
                 </Typography>
-
                 <Typography variant='h4' component='h4' gutterBottom>
                     Subscription Fees
                 </Typography>
-
                 <Typography paragraph>Story Squad is a paid subscription service.</Typography>
-
                 <Typography paragraph>
                     By activating a subscription, you agree that we may automatically renew your
                     subscription under the same subscription terms on the next business day after
@@ -155,7 +141,6 @@ const ToS: React.FC = () => {
                     occur on the 31st, in a month like February which has only 28 days) your
                     subscription will renew on the last day of the current month.
                 </Typography>
-
                 <Typography paragraph>
                     We retain the right to change our fee structure at any time at our sole
                     discretion, and these changes will apply to you and your account at the end of
@@ -163,20 +148,17 @@ const ToS: React.FC = () => {
                     the subscription price before renewing at said price. You may cancel your
                     subscription at any time by visiting the subscription section of your dashboard.
                 </Typography>
-
                 <Typography paragraph>
                     We may offer promotional trial subscriptions, fee waivers, or special pricing at
                     our discretion. These special subscriptions are subject to their own payment
                     terms.
                 </Typography>
-
                 <Typography paragraph>
                     As part of the process of registering a child user, you must either use a credit
                     card or other payment mechanism accepted by us to create your subscription,
                     which provides us with verified parental consent for your child's use of the
                     service.
                 </Typography>
-
                 <Typography paragraph>
                     By providing your payment information, you authorize us to charge you through a
                     third-party payment processor. By accepting these terms, you acknowledge that,
@@ -184,7 +166,6 @@ const ToS: React.FC = () => {
                     fault of Story Squad, Story Squad is in no way liable or responsible to you for
                     the breach or any consequences thereof.
                 </Typography>
-
                 <Typography paragraph>
                     You are responsible for charges (including any applicable taxes) relating to any
                     subscription, service, or merchandise that you order through Story Squad. If we
@@ -193,11 +174,9 @@ const ToS: React.FC = () => {
                     your financial institution or payment provider, and for any charges which your
                     provider levies against you.
                 </Typography>
-
                 <Typography variant='h4' component='h4' gutterBottom>
                     Our Intellectual Property
                 </Typography>
-
                 <Typography paragraph>
                     All text, graphics, photographs, illustrations, works of fiction, logos,
                     animations, videos, sounds, music, artwork, computer code, likenesses, and the
@@ -213,11 +192,9 @@ const ToS: React.FC = () => {
                     not authorized to modify, distribute, upload, post, publicly display, or
                     otherwise use our content in ways not covered by these terms.
                 </Typography>
-
                 <Typography variant='h4' component='h4' gutterBottom>
                     Your Intellectual Property
                 </Typography>
-
                 <Typography paragraph>
                     In order to participate in Story Squad, children must submit creative content
                     including fictional stories, artwork, and peer reviewing (hereafter referred to
@@ -228,7 +205,6 @@ const ToS: React.FC = () => {
                     person. Plagiarized content will immediately be removed and the account placed
                     under review.
                 </Typography>
-
                 <Typography paragraph>
                     By uploading your content to Story Squad, you grant us a limited, nonexclusive,
                     revocable, worldwide, fully paid license to use, store, copy, and display your
@@ -238,23 +214,19 @@ const ToS: React.FC = () => {
                     that revocation of this license on your part may require us to terminate your
                     account.
                 </Typography>
-
                 <Typography paragraph>
                     We may monitor, screen, modify, and remove your content at any time in order to
                     conform to these terms, remove content we deem offensive, and/or protect the
                     privacy of our users.
                 </Typography>
-
                 <Typography paragraph>
                     The subject matter of all content, both ours and yours, is understood to be
                     fictional in nature. Any similarities to real world events are purely
                     coincidental.
                 </Typography>
-
                 <Typography variant='h4' component='h4' gutterBottom>
                     General Disclaimer and Limitation of Liability
                 </Typography>
-
                 <Typography paragraph>
                     Our services and content are provided on an 'as is', 'as available' basis with
                     all faults. We make no representation or warranty of any kind, express or
@@ -262,7 +234,6 @@ const ToS: React.FC = () => {
                     site, app, service, or content therein. Your access to and use of our site, app,
                     and service are at your sole risk.
                 </Typography>
-
                 <Typography paragraph>
                     By using the site or service you understand and agree that, to the fullest
                     extent permissible by law, Story Squad is not responsible or liable for damages
@@ -270,17 +241,14 @@ const ToS: React.FC = () => {
                     omissions on the part of either party, or a child user's performance on the
                     platform.
                 </Typography>
-
                 <Typography paragraph>
                     We have made every reasonable effort to account for common situations in the
                     terms above. However, some situations may not be covered. We reserve the right
                     to take any and all action on your account and content, at our discretion.
                 </Typography>
-
                 <Typography variant='h4' component='h4' gutterBottom>
                     Contacting Us{' '}
                 </Typography>
-
                 <Typography paragraph>
                     For any questions or concerns regarding these terms, please do not hesitate to
                     contact us at storysquadHQ@gmail.com.

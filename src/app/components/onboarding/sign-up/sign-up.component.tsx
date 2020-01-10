@@ -18,8 +18,14 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
     },
+    label: {
+        display: 'flex',
+        alignItems: 'center',
+    },
     link: {
-        color: 'red',
+        color: 'black',
+        textDecoration: 'underline',
+        paddingTop: '8px',
     },
 }));
 
@@ -89,30 +95,36 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
                     onChange={handleInputChange('comparePassword')}
                 />
                 <div className={classes.checkboxes}>
-                    <Link className={classes.link} to='/terms-of-service'>
+                    {/* <Link className={classes.link} to='/terms-of-service'>
                         <Typography>Terms Of Service</Typography>
                     </Link>
                     <Link className={classes.link} to='/privacy-policy'>
                         <Typography>Privacy Policy</Typography>
-                    </Link>
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                value={termsOfService}
-                                onChange={handleBoolChange('termsOfService')}
-                            />
-                        }
-                        label='I accept the Terms of Service'
-                    />
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                value={privacyPolicy}
-                                onChange={handleBoolChange('privacyPolicy')}
-                            />
-                        }
-                        label='I accept the Privacy Policy'
-                    />
+                    </Link> */}
+                    <label className={classes.label}>
+                        <Checkbox
+                            value={termsOfService}
+                            onChange={handleBoolChange('termsOfService')}
+                        />
+                        <Typography>
+                            I Accept the{' '}
+                            <Link className={classes.link} to='/terms-of-service'>
+                                Terms Of Service
+                            </Link>
+                        </Typography>
+                    </label>
+                    <label className={classes.label}>
+                        <Checkbox
+                            value={termsOfService}
+                            onChange={handleBoolChange('privacyPolicy')}
+                        />
+                        <Typography>
+                            I Accept the{' '}
+                            <Link className={classes.link} to='/privacy-policy'>
+                                Privacy Policy{' '}
+                            </Link>
+                        </Typography>
+                    </label>
                 </div>
                 <Button type='submit' variant='contained' size='large'>
                     Sign Up

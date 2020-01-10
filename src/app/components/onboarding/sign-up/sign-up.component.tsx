@@ -30,7 +30,7 @@ interface SignUpState {
     privacyPolicy: boolean;
 }
 
-const SignUp: React.FC<SignUpProps> = ({}) => {
+const SignUp: React.FC<SignUpProps> = () => {
     const classes = useStyles({});
 
     // TODO: Setup Loading and Error States

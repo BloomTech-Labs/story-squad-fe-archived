@@ -62,6 +62,10 @@ Welcome to Story Squad! We are a platform targeted at young children and we help
 -   Based on our knowledge, React is the most viable option to put what we know to use.
 -   Allows for easy creation of single page applications with routing.
 
+#### React Read PDF B
+
+-   Allows for easy conversion from pdf to canvas.
+
 #### Jest
 
 -   It simplifies all testing.

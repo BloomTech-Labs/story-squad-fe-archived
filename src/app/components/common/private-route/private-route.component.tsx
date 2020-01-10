@@ -43,7 +43,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
                 if (!jwt) return <Redirect to={redirect} />;
                 if (only) {
                     const decoded = decode(jwt);
-                    console.log(decoded);
+                    console.log(decoded, window.location.pathname);
                     if (only === 'child' && decoded && !decoded.childID) {
                         return <Redirect to={redirect} />;
                     }

@@ -5,8 +5,10 @@ import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { NavigationDrawer } from '../../components';
+
 import { HomePage } from './home/home.page';
-import { AddCardPage } from './payment/add-card/add-card.page';
+import { CardAddPage } from './payment/add/add.page';
+import { CardListPage } from './payment/list/list.page';
 import { EditProfilePage } from './child/edit/edit.page';
 import { CreateChildPage } from './child/create/child.page';
 
@@ -56,7 +58,8 @@ const DashboardPage: React.FC = () => {
                 <Switch>
                     <Route path='/dashboard/child/create' component={CreateChildPage} />
                     <Route path='/dashboard/child/edit/:id' component={EditProfilePage} />
-                    <Route path='/dashboard/cards/add' component={AddCardPage} />
+                    <Route path='/dashboard/cards/add' component={CardAddPage} />
+                    <Route path='/dashboard/cards' component={CardListPage} />
                     <Route path='/dashboard' component={HomePage} />
                 </Switch>
             </main>

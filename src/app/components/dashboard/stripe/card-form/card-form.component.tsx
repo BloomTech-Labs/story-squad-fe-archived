@@ -8,15 +8,22 @@ import {
 } from 'react-stripe-elements';
 
 import { Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
 
-import { useAPI } from '../../../hooks';
+import { useAPI } from '../../../../hooks';
+import { Message } from '../../../../models';
 import { StripeInput } from '../input/input.component';
 
-const _CardForm: React.FC<ReactStripeElements.InjectedStripeProps> = ({ stripe }) => {
+interface CardFormProps {
+    onAdded?: () => void;
+}
+
+const _CardForm: React.FC<CardFormProps & ReactStripeElements.InjectedStripeProps> = ({
+    stripe,
+    onAdded,
+}) => {
     // Todo: Handle Card Response
     // eslint-disable-next-line
-    const { request, response } = useAPI('/payment/cards', 'POST');
+    const { request, response } = useAPI<Message>('/payment/cards', 'POST');
     const [validForm, setValidForm] = React.useState({
         numberValid: false,
         expiryValid: false,
@@ -33,6 +40,10 @@ const _CardForm: React.FC<ReactStripeElements.InjectedStripeProps> = ({ stripe }
 
         request({ card: { id: token.id } });
     };
+
+    React.useEffect(() => {
+        if (response?.message && onAdded) onAdded();
+    }, [onAdded, response]);
 
     const { numberValid, expiryValid, cvcValid } = validForm;
     const isValid = numberValid && expiryValid && cvcValid;

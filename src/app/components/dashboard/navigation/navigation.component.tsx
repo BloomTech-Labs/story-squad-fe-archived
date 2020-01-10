@@ -40,7 +40,7 @@ const NavigationDrawer = () => {
                 <ListItem button>
                     <ListItemText primary='Settings' />
                 </ListItem>
-                <NavLink to='/dashboard/cards/add'>
+                <NavLink to='/dashboard/cards'>
                     <ListItem button>
                         <ListItemText primary='Payment' />
                     </ListItem>

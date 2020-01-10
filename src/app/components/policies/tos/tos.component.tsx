@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
     },
+    drawerItem: {
+        color: 'black',
+    },
 }));
 
 const ToS: React.FC = () => {
@@ -40,7 +43,7 @@ const ToS: React.FC = () => {
                 }}
                 anchor='left'>
                 <div className={classes.toolbar} />
-                <List>
+                <List className={classes.drawerItem}>
                     {[
                         'Acceptance of Use',
                         'Term Changes',
@@ -52,9 +55,11 @@ const ToS: React.FC = () => {
                         'General Disclaimer and Limitation',
                         'Contacting Us',
                     ].map((text, _index) => (
-                        <ListItem button key={text}>
-                            <ListItemText primary={text} />
-                        </ListItem>
+                        <a href={'#' + text.toLowerCase().replace(/ /g, '-')}>
+                            <ListItem button key={text}>
+                                <ListItemText primary={text} />
+                            </ListItem>
+                        </a>
                     ))}
                 </List>
             </Drawer>
@@ -68,7 +73,13 @@ const ToS: React.FC = () => {
                     Table of Contents
                 </Typography>
                 <br /> <br />
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography
+                    variant='h4'
+                    component='h4'
+                    gutterBottom
+                    id='acceptance-of-use'
+                    // style={{ color: 'black' }}
+                    >
                     Acceptance of Use
                 </Typography>
                 <Typography paragraph>
@@ -84,7 +95,7 @@ const ToS: React.FC = () => {
                     and your children should not use Story Squad. We may immediately terminate your
                     access to Story Squad if you fail to comply with any provision of these terms.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography variant='h4' component='h4' gutterBottom id='term-changes'>
                     Term Changes
                 </Typography>
                 <Typography paragraph>
@@ -95,7 +106,7 @@ const ToS: React.FC = () => {
                     ensure that you still understand and accept their contents. By continuing to use
                     the site, you are agreeing to and accepting any amendments.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography variant='h4' component='h4' gutterBottom id='intended-audience'>
                     Intended Audience
                 </Typography>
                 <Typography paragraph>
@@ -105,7 +116,11 @@ const ToS: React.FC = () => {
                     by someone who is not part of our target audience will be immediately deleted,
                     and the user's access will be blocked.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography
+                    variant='h4'
+                    component='h4'
+                    gutterBottom
+                    id='account-access-and-security'>
                     Account Access and Security
                 </Typography>
                 <Typography paragraph>
@@ -128,7 +143,7 @@ const ToS: React.FC = () => {
                     Story Squad does not allow search-indexing or public access to the profiles or
                     creative content of its users.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography variant='h4' component='h4' gutterBottom id='subscription-fees'>
                     Subscription Fees
                 </Typography>
                 <Typography paragraph>Story Squad is a paid subscription service.</Typography>
@@ -174,7 +189,7 @@ const ToS: React.FC = () => {
                     your financial institution or payment provider, and for any charges which your
                     provider levies against you.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography variant='h4' component='h4' gutterBottom id='our-intellectual-property'>
                     Our Intellectual Property
                 </Typography>
                 <Typography paragraph>
@@ -192,7 +207,11 @@ const ToS: React.FC = () => {
                     not authorized to modify, distribute, upload, post, publicly display, or
                     otherwise use our content in ways not covered by these terms.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography
+                    variant='h4'
+                    component='h4'
+                    gutterBottom
+                    id='your-intellectual-property'>
                     Your Intellectual Property
                 </Typography>
                 <Typography paragraph>
@@ -224,7 +243,11 @@ const ToS: React.FC = () => {
                     fictional in nature. Any similarities to real world events are purely
                     coincidental.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography
+                    variant='h4'
+                    component='h4'
+                    gutterBottom
+                    id='general-disclaimer-and-limitation-of-liability'>
                     General Disclaimer and Limitation of Liability
                 </Typography>
                 <Typography paragraph>
@@ -246,8 +269,8 @@ const ToS: React.FC = () => {
                     terms above. However, some situations may not be covered. We reserve the right
                     to take any and all action on your account and content, at our discretion.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
-                    Contacting Us{' '}
+                <Typography variant='h4' component='h4' gutterBottom id='contacting-us'>
+                    Contacting Us
                 </Typography>
                 <Typography paragraph>
                     For any questions or concerns regarding these terms, please do not hesitate to

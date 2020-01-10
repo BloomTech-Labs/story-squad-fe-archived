@@ -56,6 +56,10 @@ Story Squad is a paid service; parents are required to create the account for th
 -   Easy cross-platform development via progressive web app
 -   Simplifies routing
 
+#### React Read PDF B
+
+-   Allows for easy conversion from pdf to canvas.
+
 #### Jest
 
 -   Simplifies testing

@@ -57,7 +57,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
     React.useEffect(() => {
         if (!response?.token) return;
         localStorage.setItem('jwt', response.token);
-        // window.dispatchEvent(new Event('switch-accounts'));
+        window.dispatchEvent(new Event('switch-accounts'));
         history.push('/kids-dashboard');
     }, [history, response]);
 

@@ -13,10 +13,8 @@ const CurrentChapterLink: React.FC = (props) => {
             axios
                 .get(`/children/me`)
                 .then((res) => {
-                    console.log(res.data);
                     if (res && res.data) {
-                        // setWeek(res.data.week);
-                        setWeek(1);
+                        setWeek(res.data.week || 1); // default to week 1 if not set
                     }
                 })
                 .catch((err) => {

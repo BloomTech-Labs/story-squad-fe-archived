@@ -38,7 +38,12 @@ const App: React.FC = () => {
                     only='child'
                     component={ChildDashboard}
                 />
-                <Route path='/story/:week' component={PdfDisplayPage} />
+                <PrivateRoute
+                    redirect='/signup'
+                    path='/story/:week'
+                    only='child'
+                    component={PdfDisplayPage}
+                />
                 <Route path='/signup' component={SignUpPage} />
                 <Route path='/privacy-policy' component={PrivacyPage} />
                 <Route path='/terms-of-service' component={ToSPage} />

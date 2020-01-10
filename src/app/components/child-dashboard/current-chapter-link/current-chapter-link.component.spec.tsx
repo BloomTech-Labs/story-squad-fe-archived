@@ -15,7 +15,7 @@ jest.mock('../../../util/requestFactory', () => () => ({
 describe('CurrentChapterLink', () => {
     it('renders without errors', async () => {
         const { baseElement } = render(<CurrentChapterLink />);
-        // await waitForDomChange({ container: baseElement }); // disabled until axios call is reimplemented
+        await waitForDomChange({ container: baseElement });
         expect(baseElement).toBeInTheDocument();
     });
 });

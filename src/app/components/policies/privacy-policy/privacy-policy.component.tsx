@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
     },
+    link: {
+        color: 'red',
+    },
 }));
 
 const PrivacyPolicy: React.FC = () => {
@@ -133,6 +136,7 @@ const PrivacyPolicy: React.FC = () => {
                     Commission (FTC). Story Squad operates in full compliance with COPPA. For more
                     information on what the Act entails, please visit the FTC's{' '}
                     <Link
+                        className={classes.link}
                         href='https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/childrens-online-privacy-protection-rule'
                         color='inherit'>
                         website

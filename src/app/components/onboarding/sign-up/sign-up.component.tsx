@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,6 +17,9 @@ const useStyles = makeStyles(() => ({
     checkboxes: {
         display: 'flex',
         flexDirection: 'column',
+    },
+    link: {
+        color: 'red',
     },
 }));
 
@@ -86,6 +89,12 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
                     onChange={handleInputChange('comparePassword')}
                 />
                 <div className={classes.checkboxes}>
+                    <Link className={classes.link} to='/terms-of-service'>
+                        <Typography>Terms Of Service</Typography>
+                    </Link>
+                    <Link className={classes.link} to='/privacy-policy'>
+                        <Typography>Privacy Policy</Typography>
+                    </Link>
                     <FormControlLabel
                         control={
                             <Checkbox

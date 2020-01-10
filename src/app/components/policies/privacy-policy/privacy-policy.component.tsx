@@ -60,92 +60,86 @@ const PrivacyPolicy: React.FC = () => {
             <main className={classes.content}>
                 <div className={classes.toolbar} />
 
-                <Typography paragraph>Story Squad Privacy Policy</Typography>
+                <Typography variant='h2' component='h2' gutterBottom>
+                    Story Squad Privacy Policy
+                </Typography>
 
-                <Typography paragraph>Table of Contents</Typography>
-                <Typography paragraph>Frequently Used Terms</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Table of Contents
+                </Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Frequently Used Terms
+                </Typography>
 
                 <Typography paragraph>
-                    {' '}
                     At Story Squad, we believe it is important to use plain, clear language wherever
                     possible. The following terms and definitions are provided in order to clarify
                     the policy's language.
                 </Typography>
 
                 <Typography paragraph>
-                    {' '}
-                    <span>Story Squad </span>- hereafter also referred to as "us" or "we."
+                    Story Squad - hereafter also referred to as "us" or "we."
                 </Typography>
 
                 <Typography paragraph>
-                    {' '}
-                    <span>Users</span> - anyone who accesses or uses the Story Squad app or site.
-                    Users may further be categorized into two groups, as follows:
+                    Users - anyone who accesses or uses the Story Squad app or site. Users may
+                    further be categorized into two groups, as follows:
                 </Typography>
 
                 <Typography paragraph>
-                    {' '}
-                    <span>Parental User</span> - hereafter also referenced as "you." It is
-                    understood that the primary user of an account is an adult over the age of 18,
-                    who serves as the parent or legal guardian of a minor or minors who access the
-                    site.
+                    Parental User - hereafter also referenced as "you." It is understood that the
+                    primary user of an account is an adult over the age of 18, who serves as the
+                    parent or legal guardian of a minor or minors who access the site.
                 </Typography>
 
                 <Typography paragraph>
-                    {' '}
-                    <span>Child(ren)</span> - the minor or minors, under the age of 13, for whom you
-                    are creating a Child Account and to whom the site's content is primarily
-                    targeted.
+                    Child(ren) - the minor or minors, under the age of 13, for whom you are creating
+                    a Child Account and to whom the site's content is primarily targeted.
                 </Typography>
 
                 <Typography paragraph>
-                    {' '}
-                    <span>Parent Account</span> - your account, through which you will control your
-                    subscription, account settings, and privacy options as well as any child
-                    accounts that you create.
+                    Parent Account - your account, through which you will control your subscription,
+                    account settings, and privacy options as well as any child accounts that you
+                    create.
                 </Typography>
 
                 <Typography paragraph>
-                    {' '}
-                    <span>Child Account</span> - a subsection of your parent account. The Child
-                    Account consists of any personal information about a minor that you provide, as
-                    well as the platform through which a child under your care may interact with the
-                    site.
+                    Child Account - a subsection of your parent account. The Child Account consists
+                    of any personal information about a minor that you provide, as well as the
+                    platform through which a child under your care may interact with the site.
                 </Typography>
 
                 <Typography paragraph>
-                    {' '}
-                    <span>Personal Information</span> - information that directly or indirectly
-                    identifies a user, such as the user's name, email, or payment details. In
-                    addition, anonymous information which is associated with a specific user (or
-                    that user's personal details) is also considered personal information for the
-                    purposes of this policy.
+                    Personal Information - information that directly or indirectly identifies a
+                    user, such as the user's name, email, or payment details. In addition, anonymous
+                    information which is associated with a specific user (or that user's personal
+                    details) is also considered personal information for the purposes of this
+                    policy.
                 </Typography>
 
                 <Typography paragraph>
-                    {' '}
-                    <span>Anonymous Information</span> - information that cannot reasonably be used
-                    to identify, directly or indirectly, an individual.
+                    Anonymous Information - information that cannot reasonably be used to identify,
+                    directly or indirectly, an individual.
                 </Typography>
 
                 <Typography paragraph>
-                    {' '}
-                    <span>Aggregate Information</span> - information about groups or categories of
-                    users which cannot be used to identify an individual user.
+                    Aggregate Information - information about groups or categories of users which
+                    cannot be used to identify an individual user.
                 </Typography>
 
                 <Typography paragraph>
-                    {' '}
-                    <span>COPPA</span> - COPPA stands for the Children's Online Privacy Protection
-                    Act, a federal regulation passed by U.S. Congress in 1998 and enforced by the
-                    Federal Trade Commission (FTC). Story Squad operates in full compliance with
-                    COPPA. For more information on what the Act entails, please visit the FTC's
+                    COPPA - COPPA stands for the Children's Online Privacy Protection Act, a federal
+                    regulation passed by U.S. Congress in 1998 and enforced by the Federal Trade
+                    Commission (FTC). Story Squad operates in full compliance with COPPA. For more
+                    information on what the Act entails, please visit the FTC's
                     <a href='https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/childrens-online-privacy-protection-rule'>
                         website
                     </a>{' '}
                 </Typography>
 
-                <Typography paragraph>Policy Scope</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Policy Scope
+                </Typography>
 
                 <Typography paragraph>
                     Story Squad is committed to protecting the privacy of anyone who access our site
@@ -166,33 +160,33 @@ const PrivacyPolicy: React.FC = () => {
                     responsible for the privacy practices of entities we do not own.
                 </Typography>
 
-                <Typography paragraph>What Information We Collect</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    What Information We Collect
+                </Typography>
 
                 <Typography paragraph>
                     Story Squad requires and collects from users only that information which is
                     necessary to fulfill the functions of our site and app. This information falls
-                    into two categories: <span>Information Users Provide to Us</span> and
-                    <span>Information We Collect from Users</span>. In addition, we may combine
-                    these two types of information to create <span>Aggregate Information</span>, as
-                    defined in the frequently used terms above.
+                    into two categories: Information Users Provide to Us and Information We Collect
+                    from Users. In addition, we may combine these two types of information to create
+                    Aggregate Information, as defined in the frequently used terms above.
                 </Typography>
 
                 <Typography paragraph>
-                    <span>Information You Provide</span> - We ask Parental Users for personal
-                    information about themselves and their child(ren) in order to provide our
-                    services. This information includes the parental user's first and last name,
-                    email address, password, and payment information as well as the child's grade
-                    level, display name, and site preferences.
+                    Information You Provide - We ask Parental Users for personal information about
+                    themselves and their child(ren) in order to provide our services. This
+                    information includes the parental user's first and last name, email address,
+                    password, and payment information as well as the child's grade level, display
+                    name, and site preferences.
                 </Typography>
                 <Typography paragraph>
-                    <span>Information Children Provide</span> - Story Squad features activities
-                    which rely on child generated content. These activities allow children to submit
-                    and interact with content such as avatar selection, text fields, and image
-                    upload buttons, through which they can submit their own creative content. The
-                    types of creative content collected include fictional stories, art, and written
-                    reviews of other children's content. All creative work is understood by all
-                    parties to be fictional in nature and not a factual account of any real-world
-                    experience.
+                    Information Children Provide - Story Squad features activities which rely on
+                    child generated content. These activities allow children to submit and interact
+                    with content such as avatar selection, text fields, and image upload buttons,
+                    through which they can submit their own creative content. The types of creative
+                    content collected include fictional stories, art, and written reviews of other
+                    children's content. All creative work is understood by all parties to be
+                    fictional in nature and not a factual account of any real-world experience.
                 </Typography>
                 <Typography paragraph>
                     Creation of a child account (which includes a payment process) will be
@@ -203,17 +197,19 @@ const PrivacyPolicy: React.FC = () => {
                     from the parental account in relation to the collected information.
                 </Typography>
                 <Typography paragraph>
-                    <span>Information We Collect</span> - We may automatically collect certain
-                    information from the computers or mobile devices of users, such as type of
-                    operating system, IP address, web browser, information about the websites that
-                    users visit from and go to after visiting Story Squad, links clicked and pages
-                    viewed within the site or app, interactions with e-mail messages we send, ISP
-                    info, and other standard server log information. We may use tracking
-                    technologies like tokens, software development tools, and program interfaces to
-                    collect this information automatically.
+                    Information We Collect - We may automatically collect certain information from
+                    the computers or mobile devices of users, such as type of operating system, IP
+                    address, web browser, information about the websites that users visit from and
+                    go to after visiting Story Squad, links clicked and pages viewed within the site
+                    or app, interactions with e-mail messages we send, ISP info, and other standard
+                    server log information. We may use tracking technologies like tokens, software
+                    development tools, and program interfaces to collect this information
+                    automatically.
                 </Typography>
 
-                <Typography paragraph>How We Use Your Information</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    How We Use Your Information
+                </Typography>
 
                 <Typography paragraph>
                     Story Squad uses your information only to provide and improve on our services to
@@ -232,7 +228,9 @@ const PrivacyPolicy: React.FC = () => {
                     delete it from our database.
                 </Typography>
 
-                <Typography paragraph>When and How We Share Information</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    When and How We Share Information
+                </Typography>
 
                 <Typography paragraph>
                     The information we share with others (and which entities we share it with)
@@ -259,7 +257,9 @@ const PrivacyPolicy: React.FC = () => {
                     purposes of advertisement or monetization outside of the program's stated
                     services.
                 </Typography>
-                <Typography paragraph>Your Options and Control of Information</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Your Options and Control of Information
+                </Typography>
 
                 <Typography paragraph>
                     As a parental user, you have a variety of options for controlling, updating, and
@@ -277,7 +277,9 @@ const PrivacyPolicy: React.FC = () => {
                     permissions or deleting information may limit or terminate the ability of you or
                     your child to participate in the service.
                 </Typography>
-                <Typography paragraph>Data Retention and Security Story Squad</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Data Retention and Security Story Squad
+                </Typography>
 
                 <Typography paragraph>
                     highly values the privacy, integrity, and security of your information. As such,
@@ -289,7 +291,9 @@ const PrivacyPolicy: React.FC = () => {
                     only retain your information for as long as it is needed to fulfill the
                     functions outlined in this privacy policy, or in accordance with applicable law.
                 </Typography>
-                <Typography paragraph>Policy Changes</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Policy Changes
+                </Typography>
 
                 <Typography paragraph>
                     It may occasionally become necessary to update this policy in order to comply
@@ -300,10 +304,11 @@ const PrivacyPolicy: React.FC = () => {
                     or as a notification on our own platforms as best suits the circumstances or the
                     policy changes themselves.
                 </Typography>
-                <Typography paragraph>Contacting Us</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Contacting Us
+                </Typography>
 
                 <Typography paragraph>
-                    
                     For any questions or concerns regarding this policy, please do not hesitate to
                     contact us at storysquadHQ@gmail.com.
                 </Typography>

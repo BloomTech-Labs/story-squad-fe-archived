@@ -23,7 +23,7 @@ interface SignInState {
     password: string;
 }
 
-const SignIn: React.FC<SignInProps> = ({}) => {
+const SignIn: React.FC<SignInProps> = () => {
     const classes = useStyles({});
 
     // TODO: Setup Loading and Error States

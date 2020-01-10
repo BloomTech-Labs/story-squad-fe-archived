@@ -60,11 +60,17 @@ const ToS: React.FC = () => {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Typography paragraph>Story Squad Terms of Service </Typography>
+                <Typography variant='h2' component='h2' gutterBottom>
+                    Story Squad Terms of Service{' '}
+                </Typography>
 
-                <Typography paragraph> Table of Contents</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Table of Contents
+                </Typography>
 
-                <Typography paragraph>Acceptance of Use</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Acceptance of Use
+                </Typography>
 
                 <Typography paragraph>
                     Story Squad is pleased to offer its services and resources to parents and their
@@ -82,7 +88,9 @@ const ToS: React.FC = () => {
                     access to Story Squad if you fail to comply with any provision of these terms.
                 </Typography>
 
-                <Typography paragraph>Term Changes </Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Term Changes
+                </Typography>
 
                 <Typography paragraph>
                     The following terms may occasionally be updated at Story Squad's discretion.
@@ -93,7 +101,9 @@ const ToS: React.FC = () => {
                     the site, you are agreeing to and accepting any amendments.
                 </Typography>
 
-                <Typography paragraph>Intended Audience</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Intended Audience
+                </Typography>
 
                 <Typography paragraph>
                     Story Squad is intended for children in 3rd through 6th grade, as well as their
@@ -103,7 +113,9 @@ const ToS: React.FC = () => {
                     and the user's access will be blocked.
                 </Typography>
 
-                <Typography paragraph>Account Access and Security</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Account Access and Security
+                </Typography>
 
                 <Typography paragraph>
                     Every Story Squad account consists of at least two users: the designated
@@ -128,7 +140,9 @@ const ToS: React.FC = () => {
                     creative content of its users.
                 </Typography>
 
-                <Typography paragraph> Subscription Fees</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Subscription Fees
+                </Typography>
 
                 <Typography paragraph>Story Squad is a paid subscription service.</Typography>
 
@@ -180,7 +194,9 @@ const ToS: React.FC = () => {
                     provider levies against you.
                 </Typography>
 
-                <Typography paragraph> Our Intellectual Property</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Our Intellectual Property
+                </Typography>
 
                 <Typography paragraph>
                     All text, graphics, photographs, illustrations, works of fiction, logos,
@@ -198,7 +214,9 @@ const ToS: React.FC = () => {
                     otherwise use our content in ways not covered by these terms.
                 </Typography>
 
-                <Typography paragraph> Your Intellectual Property</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Your Intellectual Property
+                </Typography>
 
                 <Typography paragraph>
                     In order to participate in Story Squad, children must submit creative content
@@ -233,7 +251,9 @@ const ToS: React.FC = () => {
                     coincidental.
                 </Typography>
 
-                <Typography paragraph>General Disclaimer and Limitation of Liability</Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    General Disclaimer and Limitation of Liability
+                </Typography>
 
                 <Typography paragraph>
                     Our services and content are provided on an 'as is', 'as available' basis with
@@ -257,7 +277,9 @@ const ToS: React.FC = () => {
                     to take any and all action on your account and content, at our discretion.
                 </Typography>
 
-                <Typography paragraph> Contacting Us </Typography>
+                <Typography variant='h4' component='h4' gutterBottom>
+                    Contacting Us{' '}
+                </Typography>
 
                 <Typography paragraph>
                     For any questions or concerns regarding these terms, please do not hesitate to

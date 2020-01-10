@@ -1,6 +1,6 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Drawer, List, Typography, ListItem, ListItemText } from '@material-ui/core';
+import { Drawer, List, Typography, ListItem, ListItemText, Link } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -131,10 +131,12 @@ const PrivacyPolicy: React.FC = () => {
                     COPPA - COPPA stands for the Children's Online Privacy Protection Act, a federal
                     regulation passed by U.S. Congress in 1998 and enforced by the Federal Trade
                     Commission (FTC). Story Squad operates in full compliance with COPPA. For more
-                    information on what the Act entails, please visit the FTC's
-                    <a href='https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/childrens-online-privacy-protection-rule'>
+                    information on what the Act entails, please visit the FTC's{' '}
+                    <Link
+                        href='https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/childrens-online-privacy-protection-rule'
+                        color='inherit'>
                         website
-                    </a>{' '}
+                    </Link>
                 </Typography>
 
                 <Typography variant='h4' component='h4' gutterBottom>

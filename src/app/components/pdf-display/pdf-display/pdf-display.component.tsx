@@ -38,6 +38,8 @@ const PdfDisplay: React.FC = () => {
         setPages(extraPagesArray);
     };
 
+    if (!file) return <div>Loading...</div>;
+
     return (
         <div className='pdf-container'>
             {file && (

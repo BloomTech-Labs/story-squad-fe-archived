@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { CardAddPage } from './add.page';
 
-describe('App', () => {
+describe('AddCard', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>

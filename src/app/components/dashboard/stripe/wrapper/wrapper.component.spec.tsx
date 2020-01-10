@@ -5,7 +5,11 @@ import { StripeWrapper } from './wrapper.component';
 
 describe('CheckoutPage', () => {
     it('renders without errors', () => {
-        const { baseElement } = render(<StripeWrapper />);
+        const { baseElement } = render(
+            <StripeWrapper>
+                <></>
+            </StripeWrapper>
+        );
         expect(baseElement).toBeInTheDocument();
     });
 });

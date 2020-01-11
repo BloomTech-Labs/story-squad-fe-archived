@@ -69,10 +69,7 @@ const ToS: React.FC = () => {
                     Story Squad Terms of Service
                 </Typography>
                 <br /> <br />
-                <Typography variant='h4' component='h4' gutterBottom>
-                    Table of Contents
-                </Typography>
-                <br /> <br />
+                
                 <Typography variant='h4' component='h4' gutterBottom id='acceptance-of-use'>
                     Acceptance of Use
                 </Typography>

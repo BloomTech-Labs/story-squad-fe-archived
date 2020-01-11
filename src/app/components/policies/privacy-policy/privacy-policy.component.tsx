@@ -74,9 +74,7 @@ const PrivacyPolicy: React.FC = () => {
                     Story Squad Privacy Policy
                 </Typography>
 
-                <Typography variant='h4' component='h4' gutterBottom>
-                    Table of Contents
-                </Typography>
+             
                 <Typography variant='h4' component='h4' gutterBottom id='frequently-used-terms'>
                     Frequently Used Terms
                 </Typography>

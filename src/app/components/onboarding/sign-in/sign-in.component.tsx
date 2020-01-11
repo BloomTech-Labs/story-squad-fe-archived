@@ -16,14 +16,12 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-interface SignInProps {}
-
 interface SignInState {
     email: string;
     password: string;
 }
 
-const SignIn: React.FC<SignInProps> = ({}) => {
+const SignIn: React.FC = () => {
     const classes = useStyles({});
 
     // TODO: Setup Loading and Error States

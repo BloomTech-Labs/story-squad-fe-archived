@@ -1,5 +1,4 @@
 import React from 'react';
-import { CardNumberElement } from 'react-stripe-elements';
 
 import { MaterializeInput } from '../../../common/materialize-input/materialize-input.component';
 

@@ -22,9 +22,12 @@ type LocalStorageHook<T> = {
  * @see https://stackoverflow.com/questions/35865481/storage-event-not-firing
  */
 const useLocalStorage = <T>(key: string, initialValue: T): LocalStorageHook<T> => {
-    const parse = (item: string): T | null => {
-        return initialValue instanceof String ? JSON.parse(item) : item;
-    };
+    const parse = useCallback(
+        (item: string): T | null => {
+            return initialValue instanceof String ? JSON.parse(item) : item;
+        },
+        [initialValue]
+    );
 
     const [value, setStoredValue] = useState<T | null>(() => {
         const item = localStorage.getItem(key);
@@ -41,8 +44,8 @@ const useLocalStorage = <T>(key: string, initialValue: T): LocalStorageHook<T> =
 
     const updateValue = useCallback(() => {
         const stringyValue = localStorage.getItem(key);
-        setStoredValue(stringyValue ? JSON.parse(stringyValue) : null);
-    }, [key]);
+        setStoredValue(stringyValue ? parse(stringyValue) : null);
+    }, [key, parse]);
 
     const removeValue = useCallback(() => {
         setStoredValue(null);

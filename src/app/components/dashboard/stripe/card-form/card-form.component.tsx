@@ -35,7 +35,8 @@ const _CardForm: React.FC<CardFormProps & ReactStripeElements.InjectedStripeProp
     };
 
     const submit = async () => {
-        const { token } = await stripe!.createToken({ name: 'Name' });
+        if (!stripe) return;
+        const { token } = await stripe.createToken({ name: 'Name' });
         if (!token) return;
 
         request({ card: { id: token.id } });

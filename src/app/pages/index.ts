@@ -10,3 +10,6 @@ export * from './dashboard/payment/list/list.page';
 export * from './dashboard/child/create/child.page';
 export * from './dashboard/child/edit/edit.page';
 export * from './example/example.page';
+
+export * from './child-dashboard/child-dashboard.page';
+export * from './pdf-display/pdf-display.page';

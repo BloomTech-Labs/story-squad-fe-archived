@@ -30,26 +30,28 @@ const _CardForm: React.FC<CardFormProps & ReactStripeElements.InjectedStripeProp
         cvcValid: false,
     });
 
+    React.useEffect(() => {
+        if (response?.message && onAdded) onAdded();
+    }, [onAdded, response]);
+
     const handleChanges = (key: keyof typeof validForm) => (valid: boolean) => {
         setValidForm({ ...validForm, [key]: valid });
     };
 
-    const submit = async () => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         if (!stripe) return;
+
         const { token } = await stripe.createToken({ name: 'Name' });
         if (!token) return;
 
         request({ card: { id: token.id } });
     };
 
-    React.useEffect(() => {
-        if (response?.message && onAdded) onAdded();
-    }, [onAdded, response]);
-
     const { numberValid, expiryValid, cvcValid } = validForm;
     const isValid = numberValid && expiryValid && cvcValid;
     return (
-        <div>
+        <form onSubmit={handleSubmit}>
             <StripeInput
                 label='Credit Card Number'
                 component={CardNumberElement}
@@ -65,10 +67,10 @@ const _CardForm: React.FC<CardFormProps & ReactStripeElements.InjectedStripeProp
                 component={CardCvcElement}
                 onChange={handleChanges('cvcValid')}
             />
-            <Button onClick={submit} disabled={!isValid}>
+            <Button type='submit' disabled={!isValid}>
                 Add Card
             </Button>
-        </div>
+        </form>
     );
 };
 

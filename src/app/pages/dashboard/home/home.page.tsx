@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
         gridTemplate: `
             "header header" auto
             "children notifications" auto`,
+        gridTemplateColumns: '1fr 1fr',
         gridGap: theme.spacing(3),
     },
     header: {

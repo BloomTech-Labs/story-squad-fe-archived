@@ -6,7 +6,6 @@ import { CssBaseline } from '@material-ui/core';
 
 import { PrivateRoute } from './components';
 import {
-    ExamplePage,
     SignUpPage,
     PrivacyPage,
     ToSPage,
@@ -22,27 +21,26 @@ const App: React.FC = () => {
             <Router>
                 <Switch>
                     <PrivateRoute
-                        redirect='/signup'
+                        redirect='/'
                         path='/dashboard'
                         only='parent'
                         component={DashboardPage}
                     />
                     <PrivateRoute
-                        redirect='/signup'
+                        redirect='/'
                         path='/kids-dashboard'
                         only='child'
                         component={ChildDashboard}
                     />
                     <PrivateRoute
-                        redirect='/signup'
+                        redirect='/'
                         path='/story/:week'
                         only='child'
                         component={PdfDisplayPage}
                     />
-                    <Route path='/signup' component={SignUpPage} />
                     <Route path='/privacy-policy' component={PrivacyPage} />
                     <Route path='/terms-of-service' component={ToSPage} />
-                    <Route path='/' component={ExamplePage} />
+                    <Route path='/' component={SignUpPage} />
                 </Switch>
             </Router>
         </main>

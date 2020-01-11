@@ -25,8 +25,11 @@ const useStyles = makeStyles((theme: Theme) => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
     },
+    drawerItem: {
+        color: 'black',
+    },
     link: {
-        color: 'red',
+        textDecoration: 'underline',
     },
 }));
 
@@ -54,9 +57,13 @@ const PrivacyPolicy: React.FC = () => {
                         'Policy Changes',
                         'Contacting Us',
                     ].map((text, _index) => (
-                        <ListItem button key={text}>
-                            <ListItemText primary={text} />
-                        </ListItem>
+                        <a
+                            className={classes.drawerItem}
+                            href={'#' + text.toLowerCase().replace(/ /g, '-')}>
+                            <ListItem button key={text}>
+                                <ListItemText primary={text} />
+                            </ListItem>
+                        </a>
                     ))}
                 </List>
             </Drawer>
@@ -70,7 +77,7 @@ const PrivacyPolicy: React.FC = () => {
                 <Typography variant='h4' component='h4' gutterBottom>
                     Table of Contents
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography variant='h4' component='h4' gutterBottom id='frequently-used-terms'>
                     Frequently Used Terms
                 </Typography>
 
@@ -134,7 +141,7 @@ const PrivacyPolicy: React.FC = () => {
                     COPPA - COPPA stands for the Children's Online Privacy Protection Act, a federal
                     regulation passed by U.S. Congress in 1998 and enforced by the Federal Trade
                     Commission (FTC). Story Squad operates in full compliance with COPPA. For more
-                    information on what the Act entails, please visit the FTC's{' '}
+                    information on what the Act entails, please visit the FTC's {' '}
                     <Link
                         className={classes.link}
                         href='https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/childrens-online-privacy-protection-rule'
@@ -143,7 +150,7 @@ const PrivacyPolicy: React.FC = () => {
                     </Link>
                 </Typography>
 
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography variant='h4' component='h4' gutterBottom id='policy-scope'>
                     Policy Scope
                 </Typography>
 
@@ -166,7 +173,11 @@ const PrivacyPolicy: React.FC = () => {
                     responsible for the privacy practices of entities we do not own.
                 </Typography>
 
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography
+                    variant='h4'
+                    component='h4'
+                    gutterBottom
+                    id='what-information-we-collect'>
                     What Information We Collect
                 </Typography>
 
@@ -213,7 +224,11 @@ const PrivacyPolicy: React.FC = () => {
                     automatically.
                 </Typography>
 
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography
+                    variant='h4'
+                    component='h4'
+                    gutterBottom
+                    id='how-we-use-your-information'>
                     How We Use Your Information
                 </Typography>
 
@@ -234,7 +249,11 @@ const PrivacyPolicy: React.FC = () => {
                     delete it from our database.
                 </Typography>
 
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography
+                    variant='h4'
+                    component='h4'
+                    gutterBottom
+                    id='when-and-how-we-share-information'>
                     When and How We Share Information
                 </Typography>
 
@@ -263,7 +282,11 @@ const PrivacyPolicy: React.FC = () => {
                     purposes of advertisement or monetization outside of the program's stated
                     services.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography
+                    variant='h4'
+                    component='h4'
+                    gutterBottom
+                    id='your-options-and-control-of-information'>
                     Your Options and Control of Information
                 </Typography>
 
@@ -283,7 +306,11 @@ const PrivacyPolicy: React.FC = () => {
                     permissions or deleting information may limit or terminate the ability of you or
                     your child to participate in the service.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography
+                    variant='h4'
+                    component='h4'
+                    gutterBottom
+                    id='data-retention-and-security-story-squad'>
                     Data Retention and Security Story Squad
                 </Typography>
 
@@ -297,7 +324,7 @@ const PrivacyPolicy: React.FC = () => {
                     only retain your information for as long as it is needed to fulfill the
                     functions outlined in this privacy policy, or in accordance with applicable law.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography variant='h4' component='h4' gutterBottom id='policy-changes'>
                     Policy Changes
                 </Typography>
 
@@ -310,7 +337,7 @@ const PrivacyPolicy: React.FC = () => {
                     or as a notification on our own platforms as best suits the circumstances or the
                     policy changes themselves.
                 </Typography>
-                <Typography variant='h4' component='h4' gutterBottom>
+                <Typography variant='h4' component='h4' gutterBottom id='contacting-us'>
                     Contacting Us
                 </Typography>
 

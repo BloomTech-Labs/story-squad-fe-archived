@@ -43,7 +43,7 @@ const ToS: React.FC = () => {
                 }}
                 anchor='left'>
                 <div className={classes.toolbar} />
-                <List className={classes.drawerItem}>
+                <List>
                     {[
                         'Acceptance of Use',
                         'Term Changes',
@@ -55,7 +55,7 @@ const ToS: React.FC = () => {
                         'General Disclaimer and Limitation',
                         'Contacting Us',
                     ].map((text, _index) => (
-                        <a href={'#' + text.toLowerCase().replace(/ /g, '-')}>
+                        <a  className={classes.drawerItem} href={'#' + text.toLowerCase().replace(/ /g, '-')}>
                             <ListItem button key={text}>
                                 <ListItemText primary={text} />
                             </ListItem>
@@ -73,13 +73,7 @@ const ToS: React.FC = () => {
                     Table of Contents
                 </Typography>
                 <br /> <br />
-                <Typography
-                    variant='h4'
-                    component='h4'
-                    gutterBottom
-                    id='acceptance-of-use'
-                    // style={{ color: 'black' }}
-                    >
+                <Typography variant='h4' component='h4' gutterBottom id='acceptance-of-use'>
                     Acceptance of Use
                 </Typography>
                 <Typography paragraph>

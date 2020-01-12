@@ -55,8 +55,11 @@ const ToS: React.FC = () => {
                         'General Disclaimer and Limitation',
                         'Contacting Us',
                     ].map((text, _index) => (
-                        <a  className={classes.drawerItem} href={'#' + text.toLowerCase().replace(/ /g, '-')}>
-                            <ListItem button key={text}>
+                        <a
+                            className={classes.drawerItem}
+                            href={'#' + text.toLowerCase().replace(/ /g, '-')}
+                            key={text}>
+                            <ListItem button>
                                 <ListItemText primary={text} />
                             </ListItem>
                         </a>
@@ -69,7 +72,6 @@ const ToS: React.FC = () => {
                     Story Squad Terms of Service
                 </Typography>
                 <br /> <br />
-                
                 <Typography variant='h4' component='h4' gutterBottom id='acceptance-of-use'>
                     Acceptance of Use
                 </Typography>

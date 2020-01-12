@@ -59,8 +59,9 @@ const PrivacyPolicy: React.FC = () => {
                     ].map((text, _index) => (
                         <a
                             className={classes.drawerItem}
-                            href={'#' + text.toLowerCase().replace(/ /g, '-')}>
-                            <ListItem button key={text}>
+                            href={'#' + text.toLowerCase().replace(/ /g, '-')}
+                            key={text}>
+                            <ListItem button>
                                 <ListItemText primary={text} />
                             </ListItem>
                         </a>
@@ -74,7 +75,6 @@ const PrivacyPolicy: React.FC = () => {
                     Story Squad Privacy Policy
                 </Typography>
 
-             
                 <Typography variant='h4' component='h4' gutterBottom id='frequently-used-terms'>
                     Frequently Used Terms
                 </Typography>
@@ -139,7 +139,7 @@ const PrivacyPolicy: React.FC = () => {
                     COPPA - COPPA stands for the Children's Online Privacy Protection Act, a federal
                     regulation passed by U.S. Congress in 1998 and enforced by the Federal Trade
                     Commission (FTC). Story Squad operates in full compliance with COPPA. For more
-                    information on what the Act entails, please visit the FTC's {' '}
+                    information on what the Act entails, please visit the FTC's{' '}
                     <Link
                         className={classes.link}
                         href='https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/childrens-online-privacy-protection-rule'

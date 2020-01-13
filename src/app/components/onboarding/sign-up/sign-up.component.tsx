@@ -29,8 +29,6 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-interface SignUpProps {}
-
 interface SignUpState {
     email: string;
     password: string;
@@ -39,7 +37,7 @@ interface SignUpState {
     privacyPolicy: boolean;
 }
 
-const SignUp: React.FC<SignUpProps> = ({}) => {
+const SignUp: React.FC = () => {
     const classes = useStyles({});
 
     // TODO: Setup Loading and Error States

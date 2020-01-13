@@ -37,7 +37,7 @@ const ChildList: React.FC<ChildListProps> = ({ className }) => {
                     Child Accounts
                 </Typography>
 
-                <Link to='/child/create'>
+                <Link to='/dashboard/child/create'>
                     <Button>Add Child</Button>
                 </Link>
             </div>

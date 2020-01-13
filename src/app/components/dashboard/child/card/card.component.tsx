@@ -11,29 +11,21 @@ import {
     IconButton,
     Icon,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 import { CardIcon } from './icon.component';
 
-const useStyles = makeStyles({
-    card: {
-        minWidth: 275,
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
+const useStyles = makeStyles((theme) => ({
+    card: {},
     statusIcons: {
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
     },
     header: {
-        backgroundColor: 'dodgerblue',
+        backgroundColor: theme.palette.primary.main,
         color: 'white',
         alignItems: 'center',
     },
@@ -42,23 +34,36 @@ const useStyles = makeStyles({
         display: 'flex',
         justifyContent: 'center',
     },
-});
+}));
 
 interface ChildCardProps {
     child: Child;
     onUpdate?: () => void;
 }
 
-const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
+const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
+
     const { request: signIn, response } = useAPI(`/children/${child.id}/login`, 'POST');
+    const { request: remove, response: removeResponse, reset: removeReset } = useAPI(
+        `/children/${child.id}`,
+        'DELETE'
+    );
 
     React.useEffect(() => {
         if (!response?.token) return;
         localStorage.setItem('jwt', response.token);
-        history.push('/');
+        window.dispatchEvent(new Event('switch-accounts'));
+        history.push('/kids-dashboard');
     }, [history, response]);
+
+    React.useEffect(() => {
+        if (removeResponse && onUpdate) {
+            onUpdate();
+            removeReset();
+        }
+    }, [history, onUpdate, removeReset, removeResponse]);
 
     return (
         <Card className={classes.card}>
@@ -66,11 +71,17 @@ const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
                 className={classes.header}
                 title={child.username}
                 action={
-                    <Link to={`/child/edit/${child.id}`}>
-                        <IconButton>
-                            <Icon className={classes.headerIcon}>edit</Icon>
+                    <>
+                        <Link to={`/dashboard/child/edit/${child.id}`}>
+                            <IconButton>
+                                <Icon className={classes.headerIcon}>edit</Icon>
+                            </IconButton>
+                        </Link>
+
+                        <IconButton onClick={remove}>
+                            <Icon className={classes.headerIcon}>delete</Icon>
                         </IconButton>
-                    </Link>
+                    </>
                 }
             />
             <CardContent>

@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import { StripeWrapper } from './wrapper.component';
 
-describe('CheckoutPage', () => {
+describe('StripeWrapper', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <StripeWrapper>

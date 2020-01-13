@@ -4,23 +4,20 @@ You can find the deployed project at [Netlify](https://story-squad.netlify.com).
 
 ## Contributors
 
-
-|                                                                  [Lauren Chandler](https://github.com/)                                                                  |                                              [Eric Banker](https://github.com/)                                              |                                                      [Forrest Darabian](https://github.com/Forrestdarabian)                                                       |                                                       [Shruti Malik](https://github.com/ShrutiMalik123)                                                        |                                                      [Brittany Moyers](https://github.com/)                                                       |                                                      [William Sedlacek](https://github.com/wSedlacek)                                                       |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://cdn.dribbble.com/users/3544732/avatars/small/86309611d9ca8644b858ffc8eee7c13e.jpg?1566863792" width = "200" />](https://dribbble.com/Lauren-Chandler) |  [<img src="https://avatars3.githubusercontent.com/u/13811826?s=400&v=4" width = "200" />](https://github.com/EricBanker12)  | [<img src="https://avatars1.githubusercontent.com/u/51133091?s=460&v=4" width = "200" />](https://github.com/Forrestdarabian) | [<img src="https://avatars1.githubusercontent.com/u/53457204?s=460&v=4" width = "200" />](https://github.com/ShrutiMalik123) | [<img src="https://avatars3.githubusercontent.com/u/50836425?s=460&v=4" width = "200" />](https://github.com/BNMoyers) | [<img src="https://avatars3.githubusercontent.com/u/8206108?s=460&v=4" width = "200" />](https://github.com/wSedlacek) |
-|                       [<img src="https://developer.dribbble.com/images/icon-team-dribbble.png" width="15"> ](https://dribbble.com/Lauren-Chandler)                       |                  [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/EricBanker12)                   |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Forrestdarabian)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ShrutiMalik123)                           |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/BNMoyers)                            |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wSedlacek)                            |
-|                    [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/lauren-b-chandler/)                    | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/eric-banker/) |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/forrest-darabian-588061193/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/shruti-malik123/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/britt-moyers/)                |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/wsedlacek/)                |
+|                                                                  [Lauren Chandler](https://github.com/)                                                                  |                                             [Eric Banker](https://github.com/)                                             |                                          [Forrest Darabian](https://github.com/Forrestdarabian)                                           |                                       [Shruti Malik](https://github.com/ShrutiMalik123)                                        |                                           [Brittany Moyers](https://github.com/)                                            |                                      [William Sedlacek](https://github.com/wSedlacek)                                      |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://cdn.dribbble.com/users/3544732/avatars/small/86309611d9ca8644b858ffc8eee7c13e.jpg?1566863792" width = "200" />](https://dribbble.com/Lauren-Chandler) | [<img src="https://avatars3.githubusercontent.com/u/13811826?s=400&v=4" width = "200" />](https://github.com/EricBanker12) |       [<img src="https://avatars1.githubusercontent.com/u/51133091?s=460&v=4" width = "200" />](https://github.com/Forrestdarabian)       |  [<img src="https://avatars1.githubusercontent.com/u/53457204?s=460&v=4" width = "200" />](https://github.com/ShrutiMalik123)  |   [<img src="https://avatars3.githubusercontent.com/u/50836425?s=460&v=4" width = "200" />](https://github.com/BNMoyers)    |   [<img src="https://avatars3.githubusercontent.com/u/8206108?s=460&v=4" width = "200" />](https://github.com/wSedlacek)   |
+|                       [<img src="https://developer.dribbble.com/images/icon-team-dribbble.png" width="15">](https://dribbble.com/Lauren-Chandler)                        |                  [<img src="https://github.com/favicon.ico" width="15">](https://github.com/EricBanker12)                  |                        [<img src="https://github.com/favicon.ico" width="15">](https://github.com/Forrestdarabian)                        |                   [<img src="https://github.com/favicon.ico" width="15">](https://github.com/ShrutiMalik123)                   |                    [<img src="https://github.com/favicon.ico" width="15">](https://github.com/BNMoyers)                     |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wSedlacek)                   |
+|                     [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/lauren-b-chandler/)                     | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/eric-banker/) | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/forrest-darabian-588061193/) | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/shruti-malik123/) | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/britt-moyers/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/wsedlacek/) |
 
 <br>
 <br>
-
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
 ![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)(netlify link goes in these parenthesis)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-
 
 ## Project Overview
 
@@ -30,44 +27,41 @@ You can find the deployed project at [Netlify](https://story-squad.netlify.com).
 
 [Ux Design by Lauren Chandler](https://www.figma.com/file/s0tJgdtWaFDnlG78xigIVv/Story-Squad-Lauren-Chandler?node-id=344%3A336)
 
-Welcome to Story Squad! We are an interactive learning platform targeted at grade school children, and we help build reading comprehension as well as artistic, writing, and analytical/critical thinking skills through weekly competitions. 
+Welcome to Story Squad! We are an interactive learning platform targeted at grade school children, and we help build reading comprehension as well as artistic, writing, and analytical/critical thinking skills through weekly competitions.
 
 Each week features a new chapter in an exciting novel, written and serialized specifically for Story Squad by author and educator Graig Peterson. Children are provided with prompts based on the chapter they've just read, and participants are then divided into teams of two. Students create art and fanfiction to match the prompt, before going head to head in a bracket-style tournament.
 
 In addition to growing their literary and artistic skills, students learn team building and critical thinking skills through a unique voting system, where each child must weight their own work against their teammate in order to increase their odds of winning. Badges and points incentivize winning and encourage participation.
 
-Story Squad is a paid service; parents are required to create the account for their children and pay a monthly subscription fee in order for their children to compete. This brings the platform into compliance with COPPA and ensures a long future for the project. 
+Story Squad is a paid service; parents are required to create the account for their children and pay a monthly subscription fee in order for their children to compete. This brings the platform into compliance with COPPA and ensures a long future for the project.
 
 ### 4️⃣ Key Features
 
--   A _Custom, Serialized Novel_ geared toward children in 3rd-6th grade.
--   _Parental Controls_ which allow parents to add and customize child accounts.
--   _Secure Payment Handling_ via Stripe.
+-   A _Custom, Serialized Novel_ geared toward children in 3rd-6th grade
+-   _Parental Controls_ which allow parents to add and customize child accounts
+-   _Secure Payment Handling_ via Stripe
 -   feature four
 -   feature five
 
 ## Tech Stack
 
-### Front end built using:
+### Front end built using
 
 #### React
 
+-   First Class Performance with Virtual DOM
+-   Lightweight Library resulting in low bundle size/improved load times
 -   Easy cross-platform development via progressive web app
--   Simplifies routing
+-   Simple routing
 
-#### React Read PDF B
+#### Forked React Read PDF
 
--   Allows for easy conversion from pdf to canvas.
-
-#### Jest
-
--   Simplifies testing
--   Allows mocking dependencies
--   Promotes consistent unit testing
+-   Accurately displays PDFs as canvas elements
+-   Added styling options via edits in fork
 
 #### Typescript
 
--   Minimal learning curve
+-   VS Code Tooling (Autocomplete/Tooltips)
 -   Excellent error catching
 
 #### Material UI
@@ -75,61 +69,38 @@ Story Squad is a paid service; parents are required to create the account for th
 -   Clean, modern components out of the box
 -   Easy to fine-tune per UX designs
 
-#### Front end deployed to `🚫insert service here`
+#### Front end deployed to `Netlify`
 
-#### [Back end](https://github.com/Lambda-School-Labs/story-squad-be) built using:
+### [Back end](https://github.com/Lambda-School-Labs/story-squad-be) built using
 
 #### Express
 
--   Familiar
--   Useful add-ons such as helmet and CORS.
--   Well documented.
+-   Built in routing and middleware
+-   Useful add-ons such as helmet and CORS
+-   Well documented
 
 #### TypeORM
 
--   Simplifies database creation, connections, queries, etc
+-   Simple database creation, connections, queries, etc
 -   Plays well with Typescript
--   Add-ons simplify seeding.
-
-#### Jest
-
--   Maintains consistency with front-end testing
-
-#### SuperTest
-
--   Simplifies endpoint testing
--   Intigration testing
+-   Libraries simplify seeding
 
 # APIs
 
-## 2️⃣ Authentication API here
+## JWT & BCrypt
 
-🚫Replace text below with a description of the API
-
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+JSON Web Tokens are an industry standard authentication solution. Paired with BCrypt for hashing passwords, this allows secure local password authentication without reliance on third party solutions.
 
 ## Stripe
 
 [Stripe](https://stripe.com/docs/api) is a RESTful API which "has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs." It was chosen for this project because of Stripe's reliability and trustworthiness in the world of online transactions, as well as the way in which the API allows us to bypass storing sensative information.
 
-
-
-# 3️⃣ Environment Variables
+# Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
-🚫These are just examples, replace them with the specifics for your app
-
-    *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
-    *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
-    *  REACT_APP_databaseURL - in the Firebase dashboard
-    *  REACT_APP_projectID - in the Firebase dashboard
-    *  REACT_APP_storageBucket - in the Firebase dashboard
-    *  REACT_APP_messagingSenderId - in the Firebase dashboard
-    *  REACT_APP_stripe_API - this is your public Stripe API key, generated in the Stripe dashboard
-    *  REACT_APP_backendURL - optional for your local development server
-    *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
-    *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
+    *  BROWSER=none
+    *  REACT_APP_ENDPOINT=http://localhost:4000
 
 # 5️⃣ Content Licenses
 
@@ -140,22 +111,49 @@ In order for the app to function correctly, the user must set up their own envir
 | doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
 | rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
 
-# 4️⃣ Testing
+# Testing
 
-🚫Document what you used for testing and why
+#### Jest
 
-# 4️⃣ Installation Instructions
+-   Simple testing
+-   Mocking of dependencies
+-   Promotes consistent unit testing
 
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
+# Installation Instructions
+
+Clone repo
+
+```
+git clone git@github.com:Lambda-School-Labs/story-squad-fe.git
+cd story-squad-fe
+```
+
+Install dependencies
+
+```
+yarn install
+```
+
+Run test
+
+```
+yarn test
+```
+
+Clone and download the [back end](https://github.com/Lambda-School-Labs/story-squad-be)
+
+Run the application locally
+
+```
+yarn start
+```
 
 ## Other Scripts
 
-🚫replace these examples with your own
-
-    * typecheck - runs the TypeScript compiler
     * build - creates a build of the application
-    * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
+    * start - runs the development server
+    * test - runs tests as defined in *.spec.ts files
+    * lint - format and correct errors with prettier
 
 # Contributing
 

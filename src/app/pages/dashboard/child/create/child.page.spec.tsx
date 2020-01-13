@@ -2,7 +2,7 @@ import React from 'react';
 import { act, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { CreateChildPage } from './create-child.page';
+import { CreateChildPage } from './child.page';
 
 describe('CreateChildPage', () => {
     it('renders without errors', () => {

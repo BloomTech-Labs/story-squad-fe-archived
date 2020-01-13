@@ -1,11 +1,15 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
-import { PdfDisplay } from '../../components';
+import { PDFDisplay } from '../../components';
 
-const PdfDisplayPage: React.FC = (props) => {
+const PdfDisplayPage: React.FC = () => {
+    const { week } = useParams();
+
+    if (!week) return <div></div>;
     return (
         <div>
-            <PdfDisplay {...props} />
+            <PDFDisplay week={week} />
         </div>
     );
 };

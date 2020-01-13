@@ -8,6 +8,7 @@ interface APIHook<T> {
     error: Error | undefined;
     loading: boolean;
     request: (...args: any) => Promise<void>;
+    reset: () => void;
 }
 
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -62,7 +63,13 @@ const useAPI = <T>(url: string, method: Method = 'GET'): APIHook<T> => {
         [method, url]
     );
 
-    return { request, response, loading, error };
+    const reset = useCallback(() => {
+        setResponse(undefined);
+        setLoading(false);
+        setError(undefined);
+    }, []);
+
+    return { request, response, loading, error, reset };
 };
 
 export { useAPI };

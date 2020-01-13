@@ -35,13 +35,11 @@ In addition to growing their literary and artistic skills, students learn team b
 
 Story Squad is a paid service; parents are required to create the account for their children and pay a monthly subscription fee in order for their children to compete. This brings the platform into compliance with COPPA and ensures a long future for the project.
 
-### 4️⃣ Key Features
+### Key Features
 
 -   A _Custom, Serialized Novel_ geared toward children in 3rd-6th grade
 -   _Parental Controls_ which allow parents to add and customize child accounts
 -   _Secure Payment Handling_ via Stripe
--   feature four
--   feature five
 
 ## Tech Stack
 
@@ -102,14 +100,11 @@ In order for the app to function correctly, the user must set up their own envir
     *  BROWSER=none
     *  REACT_APP_ENDPOINT=http://localhost:4000
 
-# 5️⃣ Content Licenses
+# Content Licenses
 
-🚫For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
-
-| Image Filename | Source / Creator | License                                                                      |
-| -------------- | ---------------- | ---------------------------------------------------------------------------- |
-| doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
-| rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
+| Image Filename | Source / Creator | License                                                                                   |
+| -------------- | ---------------- | ----------------------------------------------------------------------------------------- |
+| Material Icon  | Google           | [Apache License 2.0](https://github.com/google/material-design-icons/blob/master/LICENSE) |
 
 # Testing
 
@@ -118,6 +113,11 @@ In order for the app to function correctly, the user must set up their own envir
 -   Simple testing
 -   Mocking of dependencies
 -   Promotes consistent unit testing
+
+#### React Testing Library
+
+-   Rendering React Components
+-   Fire Events like onClick for testing user interactions
 
 # Installation Instructions
 

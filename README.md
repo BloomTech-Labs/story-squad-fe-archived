@@ -67,6 +67,11 @@ Story Squad is a paid service; parents are required to create the account for th
 -   Clean, modern components out of the box
 -   Easy to fine-tune per UX designs
 
+#### React Stipe Elements
+
+-   Includes stripe input building blocks
+-   Manages Stripe prop injection
+
 #### Front end deployed to `Netlify`
 
 ### [Back end](https://github.com/Lambda-School-Labs/story-squad-be) built using

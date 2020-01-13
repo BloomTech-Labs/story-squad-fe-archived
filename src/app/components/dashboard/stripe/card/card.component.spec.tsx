@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 import { CreditCard } from '../../../../models';
 import { StripeCard } from './card.component';
 
-describe('CheckoutPage', () => {
+describe('StripeCard', () => {
     it('renders without errors', () => {
         const card: CreditCard = {
             id: '',

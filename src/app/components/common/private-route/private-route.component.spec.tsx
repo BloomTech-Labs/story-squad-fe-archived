@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { PrivateRoute } from './private-route.component';
 import { ExampleComponent } from '../../example';
 
-describe('App', () => {
+describe('PrivateRoute', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>

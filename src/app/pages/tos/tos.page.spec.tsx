@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { ToSPage } from './tos.page';
 
-describe('App', () => {
+describe('ToSPage', () => {
     it('renders without errors', () => {
         act(() => {
             const { baseElement } = render(

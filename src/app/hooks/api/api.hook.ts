@@ -52,6 +52,7 @@ const useAPI = <T>(url: string, method: Method = 'GET'): APIHook<T> => {
                         res = await axios.get<T>(url, ...args);
                         break;
                 }
+
                 setResponse(res.data);
             } catch (err) {
                 setError(err);

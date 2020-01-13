@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { EditProfilePage } from './edit.page';
 
-describe('App', () => {
+describe('EditProfilePage', () => {
     it('renders without errors', () => {
         act(() => {
             const { baseElement } = render(

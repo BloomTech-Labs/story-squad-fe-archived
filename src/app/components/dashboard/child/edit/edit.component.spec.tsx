@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { ChildEdit } from './edit.component';
 
-describe('App', () => {
+describe('ChildEdit', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>

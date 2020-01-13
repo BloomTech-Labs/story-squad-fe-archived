@@ -9687,10 +9687,10 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
 
-react-read-pdf-b@^2.0.9-fixed:
-  version "2.0.9-fixed"
-  resolved "https://registry.yarnpkg.com/react-read-pdf-b/-/react-read-pdf-b-2.0.9-fixed.tgz#2381caae16b6104f87d548657b549de18575d2dc"
-  integrity sha512-tBeKgfSNF3Bh45UKUsJcaF+4IUAtKjxnQj956oCmmC8TFr4x8xLPHKZIrGmbrOBqYSHwpO0AHM81hPhKYnJwSw==
+react-read-pdf-b@^2.0.10:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/react-read-pdf-b/-/react-read-pdf-b-2.0.10.tgz#34e8d57163710c4a492ae546857c48e01530efe2"
+  integrity sha512-IjrCX7M/yQuZabv0p26CH06Zo1F3Nm5bMxsJgaNwHZ5uEF/dOlko+AfvKUhkeTce4L/1cakNFNgn3WDCMzSNyA==
   dependencies:
     babel-polyfill "^6.26.0"
     babel-preset-stage-2 "^6.24.1"

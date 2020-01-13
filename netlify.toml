@@ -6,6 +6,10 @@
     REACT_APP_ENDPOINT="https://staging-create-account-46n6xrs.herokuapp.com"
 
 
+[context."stripe-elements".environment]
+    REACT_APP_ENDPOINT="https://staging-stripe-fbfrcgrex3bgx7v.herokuapp.com"
+
+
 [context."child-account-management".environment]
     REACT_APP_ENDPOINT="https://staging-child-account-m-8xrbt8.herokuapp.com"
 

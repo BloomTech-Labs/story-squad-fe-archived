@@ -1,60 +1,61 @@
-import './pdf-display.component.scss';
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { PDFReader } from 'react-read-pdf-b';
-import requestFactory from '../../../util/requestFactory';
 
-const PdfDisplay: React.FC = () => {
+import { makeStyles } from '@material-ui/core/styles';
+
+import { useAPI } from '../../../hooks';
+import { numbersBetweenZero } from '../../../util';
+
+import * as pdfjsLib from 'pdfjs-dist';
+import * as pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry';
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+
+const useStyles = makeStyles(() => ({
+    root: {
+        'display': 'flex',
+        'flexDirection': 'column',
+        'justifyContent': 'flex-start',
+        'alignItems': 'center',
+        '& > canvas': {
+            maxWidth: '100%',
+        },
+    },
+}));
+
+interface PDFDisplayProps {
+    week: string | number;
+}
+
+const PDFDisplay: React.FC<PDFDisplayProps> = ({ week }) => {
+    const classes = useStyles();
     const [file, setFile] = React.useState<Buffer>();
-    const [pages, setPages] = React.useState<number[]>([]);
-
-    const axios = requestFactory();
-
-    const { week } = useParams();
+    const [pages, setPages] = React.useState<number[]>();
+    const { request, response } = useAPI(`/canon/${week}`);
 
     React.useEffect(() => {
-        // get pdf as base64 from backend
-        if (!file) {
-            axios
-                .get(`/canon/${week}`)
-                .then((res) => {
-                    // console.log(res.data);
-                    if (res && res.data) {
-                        setFile(Buffer.from(res.data.base64, 'base64'));
-                    }
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-        }
-    }, [axios, file, week]);
+        request();
+    }, [request]);
 
-    const multiPageHandler = (pages: number) => {
-        // create an array 2, 3, ..., pages
-        const extraPagesArray: number[] = [];
-        for (let i = 2; i <= pages; i++) {
-            extraPagesArray.push(i);
-        }
-        setPages(extraPagesArray);
-    };
+    React.useEffect(() => {
+        if (!response?.canon) return;
+        setFile(Buffer.from(response.canon.base64, 'base64'));
+    }, [response]);
 
-    if (!file) return <div>Loading...</div>;
+    React.useEffect(() => {
+        if (!file) return;
+        const { promise } = pdfjsLib.getDocument({ data: file });
+        promise.then(({ numPages }) => setPages(numbersBetweenZero(numPages)));
+    }, [file]);
 
+    if (!file) return <div>Downloading...</div>;
+    if (!pages) return <div>Loading...</div>;
     return (
-        <div className='pdf-container'>
-            {file && (
-                <PDFReader
-                    data={file}
-                    scale={1.5}
-                    onDocumentComplete={multiPageHandler}
-                    data-testid='pdf-reader'
-                />
-            )}
+        <div className={classes.root}>
             {pages.map((page: number) => (
-                <PDFReader data={file} page={page} key={page} scale={1.5} />
+                <PDFReader key={page} data={file} page={page} scale={1.5} />
             ))}
         </div>
     );
 };
 
-export { PdfDisplay };
+export { PDFDisplay };

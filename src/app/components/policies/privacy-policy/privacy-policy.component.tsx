@@ -46,26 +46,53 @@ const PrivacyPolicy: React.FC = () => {
                 anchor='left'>
                 <div className={classes.toolbar} />
                 <List>
-                    {[
-                        'Frequently Used Terms',
-                        'Policy Scope',
-                        'What Information We Collect',
-                        'How We Use Your Information',
-                        'When and How We Share Information',
-                        'Your Options and Control of Information',
-                        'Data Retention and Security',
-                        'Policy Changes',
-                        'Contacting Us',
-                    ].map((text, _index) => (
-                        <a
-                            className={classes.drawerItem}
-                            href={'#' + text.toLowerCase().replace(/ /g, '-')}
-                            key={text}>
-                            <ListItem button>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        </a>
-                    ))}
+                    <a className={classes.drawerItem} href='#frequently-used-terms'>
+                        <ListItem button>
+                            <ListItemText primary='Frequently Used Terms' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#policy-scope'>
+                        <ListItem button>
+                            <ListItemText primary='Policy Scope' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#what-information-we-collect'>
+                        <ListItem button>
+                            <ListItemText primary='what-information-we-collect' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#how-we-use-your-information'>
+                        <ListItem button>
+                            <ListItemText primary='How We Use Your Information' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#when-and-how-we-share-information'>
+                        <ListItem button>
+                            <ListItemText primary='When and How We Share Information' />
+                        </ListItem>
+                    </a>
+                    <a
+                        className={classes.drawerItem}
+                        href='#your-options-and-control-of-information'>
+                        <ListItem button>
+                            <ListItemText primary='your-options-and-control-of-information' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#data-retention-and-security'>
+                        <ListItem button>
+                            <ListItemText primary='Data Retention and Security' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#policy-changes'>
+                        <ListItem button>
+                            <ListItemText primary='Policy Changes' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#contacting-us'>
+                        <ListItem button>
+                            <ListItemText primary='Contacting Us' />
+                        </ListItem>
+                    </a>
                 </List>
             </Drawer>
             <main className={classes.content}>

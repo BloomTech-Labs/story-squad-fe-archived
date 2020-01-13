@@ -44,26 +44,52 @@ const ToS: React.FC = () => {
                 anchor='left'>
                 <div className={classes.toolbar} />
                 <List>
-                    {[
-                        'Acceptance of Use',
-                        'Term Changes',
-                        'Intended Audience',
-                        'Account Access and Security',
-                        'Subscription Fees',
-                        'Our Intellectual Property',
-                        'Your Intellectual Property',
-                        'General Disclaimer and Limitation',
-                        'Contacting Us',
-                    ].map((text, _index) => (
-                        <a
-                            className={classes.drawerItem}
-                            href={'#' + text.toLowerCase().replace(/ /g, '-')}
-                            key={text}>
-                            <ListItem button>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        </a>
-                    ))}
+                    <a className={classes.drawerItem} href='#acceptance-of-use'>
+                        <ListItem button>
+                            <ListItemText primary='Acceptance of Use' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#term-changes'>
+                        <ListItem button>
+                            <ListItemText primary='Term Changes' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#intended-audience'>
+                        <ListItem button>
+                            <ListItemText primary='Intended Audience' />
+                        </ListItem>
+                    </a>
+
+                    <a className={classes.drawerItem} href='#account-access-and-security'>
+                        <ListItem button>
+                            <ListItemText primary='Account Access and Security' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#subscription-fees'>
+                        <ListItem button>
+                            <ListItemText primary='Subscription Fees' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#our-intellectual-property'>
+                        <ListItem button>
+                            <ListItemText primary='Our Intellectual Property' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#your-intellectual-property'>
+                        <ListItem button>
+                            <ListItemText primary='Your Intellectual Property' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#general-disclaimer-and-limitation'>
+                        <ListItem button>
+                            <ListItemText primary='General Disclaimer and Limitation' />
+                        </ListItem>
+                    </a>
+                    <a className={classes.drawerItem} href='#contacting-us'>
+                        <ListItem button>
+                            <ListItemText primary='Contacting Us' />
+                        </ListItem>
+                    </a>
                 </List>
             </Drawer>
             <main className={classes.content}>

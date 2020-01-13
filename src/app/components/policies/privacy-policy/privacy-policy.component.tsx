@@ -58,7 +58,7 @@ const PrivacyPolicy: React.FC = () => {
                     </a>
                     <a className={classes.drawerItem} href='#what-information-we-collect'>
                         <ListItem button>
-                            <ListItemText primary='what-information-we-collect' />
+                            <ListItemText primary='What Information We Collect' />
                         </ListItem>
                     </a>
                     <a className={classes.drawerItem} href='#how-we-use-your-information'>
@@ -75,10 +75,12 @@ const PrivacyPolicy: React.FC = () => {
                         className={classes.drawerItem}
                         href='#your-options-and-control-of-information'>
                         <ListItem button>
-                            <ListItemText primary='your-options-and-control-of-information' />
+                            <ListItemText primary='Your Options and Control of Information' />
                         </ListItem>
                     </a>
-                    <a className={classes.drawerItem} href='#data-retention-and-security'>
+                    <a
+                        className={classes.drawerItem}
+                        href='#data-retention-and-security-story-squad'>
                         <ListItem button>
                             <ListItemText primary='Data Retention and Security' />
                         </ListItem>

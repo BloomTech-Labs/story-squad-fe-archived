@@ -80,7 +80,9 @@ const ToS: React.FC = () => {
                             <ListItemText primary='Your Intellectual Property' />
                         </ListItem>
                     </a>
-                    <a className={classes.drawerItem} href='#general-disclaimer-and-limitation'>
+                    <a
+                        className={classes.drawerItem}
+                        href='#general-disclaimer-and-limitation-of-liability'>
                         <ListItem button>
                             <ListItemText primary='General Disclaimer and Limitation' />
                         </ListItem>

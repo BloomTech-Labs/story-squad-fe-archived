@@ -1,27 +1,35 @@
 import React from 'react';
 import { render, waitForDomChange } from '@testing-library/react';
+import * as pdfjsLib from 'pdfjs-dist';
+import { PDFReader } from 'react-read-pdf-b';
 
-import { PdfDisplay } from './pdf-display.component';
+import { useAPI } from '../../../hooks';
+import { PDFDisplay } from './pdf-display.component';
 
-jest.mock('react-router-dom', () => ({
-    useParams: () => ({
-        week: 1,
-    }),
-}));
+jest.mock('../../../hooks/api/api.hook');
+(useAPI as jest.Mock).mockReturnValue({
+    request: async () => {},
+    response: {
+        canon: {
+            base64: 'some file',
+        },
+    },
+    loading: false,
+    error: undefined,
+});
 
-jest.mock('../../../util/requestFactory', () => () => ({
-    get: () =>
-        Promise.resolve({
-            data: {
-                base64:
-                    'JVBERi0xLjANCjEgMCBvYmo8PC9QYWdlcyAyIDAgUj4+ZW5kb2JqIDIgMCBvYmo8PC9LaWRzWzMgMCBSXS9Db3VudCAxPj5lbmRvYmogMyAwIG9iajw8L01lZGlhQm94WzAgMCAzIDNdPj5lbmRvYmoNCnRyYWlsZXI8PC9Sb290IDEgMCBSPj4=',
-            },
-        }),
+jest.mock('pdfjs-dist');
+(pdfjsLib.getDocument as jest.Mock).mockReturnValue({
+    promise: Promise.resolve({ numPages: 1 }),
+});
+
+jest.mock('react-read-pdf-b', () => ({
+    PDFReader: () => <canvas></canvas>,
 }));
 
 describe('PdfDisplay', () => {
     it('renders without errors', async () => {
-        const { baseElement } = render(<PdfDisplay />);
+        const { baseElement } = render(<PDFDisplay week={1} />);
         await waitForDomChange({ container: baseElement });
         expect(baseElement).toBeInTheDocument();
     });

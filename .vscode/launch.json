@@ -16,7 +16,7 @@
                 " --disable-session-crashed-bubble"
             ],
             "userDataDir": "${workspaceRoot}.vscode/chrome",
-            "url": "http://localhost:3000/signup",
+            "url": "http://localhost:3000/",
             "webRoot": "${workspaceFolder}",
             "sourceMaps": true,
             "sourceMapPathOverrides": {

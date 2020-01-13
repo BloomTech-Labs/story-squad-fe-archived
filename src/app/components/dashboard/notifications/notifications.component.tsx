@@ -34,7 +34,12 @@ const NotificationsCard: React.FC<NotificationsCardProps> = ({ className }) => {
                     Notifications Center
                 </Typography>
                 <List>
-                    {['1/8', '1/6', '1/5', '1/4'].map((text, index) => (
+                    {[
+                        '1/8 Completed Submission',
+                        '1/6 Completed Submission',
+                        '1/5 Completed Submission',
+                        '1/4 Completed Submission',
+                    ].map((text, index) => (
                         <ListItem button key={text}>
                             <ListItemText primary={text} />
                         </ListItem>

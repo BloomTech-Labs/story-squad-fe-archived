@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router';
 import { Redirect, Route } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 
-import { useLocalStorage } from '../../../hooks/local-storage/local-storage.hook';
+import { useLocalStorage } from '../../../hooks';
 
 type PrivateRouteProps<P = {}> = {
     redirect: string;

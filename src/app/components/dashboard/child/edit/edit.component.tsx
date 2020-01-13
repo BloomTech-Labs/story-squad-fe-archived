@@ -12,7 +12,6 @@ const ChildEdit: React.FC = () => {
 
     const { request: fetch, response: fetchResponse } = useAPI<{ child: Child }>(`/children/${id}`);
     const { request: update, response: updateResponse } = useAPI(`/children/${id}`, 'PUT');
-    const { request: remove, response: removeResponse } = useAPI(`/children/${id}`, 'DELETE');
 
     const { state, setState, handleInputChange, handleSubmitBuilder } = useForm<Omit<Child, 'id'>>({
         username: '',
@@ -32,8 +31,7 @@ const ChildEdit: React.FC = () => {
 
     React.useEffect(() => {
         if (updateResponse) history.push('/dashboard');
-        if (removeResponse) history.push('/dashboard');
-    }, [history, removeResponse, updateResponse]);
+    }, [history, updateResponse]);
 
     if (!fetchResponse) return <div></div>;
 
@@ -61,9 +59,6 @@ const ChildEdit: React.FC = () => {
                     Edit Account
                 </Button>
             </form>
-            <Button type='submit' variant='contained' color='primary' onClick={remove}>
-                Delete Account
-            </Button>
         </>
     );
 };

@@ -21,7 +21,10 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
+        'react/prop-types': 'off',
+        'react/no-unescaped-entities': 'off',
     },
+    ignorePatterns: ['./node_modules'],
     settings: {
         react: {
             version: 'detect',

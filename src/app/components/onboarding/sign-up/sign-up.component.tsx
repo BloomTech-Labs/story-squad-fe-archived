@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@material-ui/core';
+import { Button, Checkbox, TextField, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI } from '../../../hooks';
@@ -95,12 +95,6 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
                     onChange={handleInputChange('comparePassword')}
                 />
                 <div className={classes.checkboxes}>
-                    {/* <Link className={classes.link} to='/terms-of-service'>
-                        <Typography>Terms Of Service</Typography>
-                    </Link>
-                    <Link className={classes.link} to='/privacy-policy'>
-                        <Typography>Privacy Policy</Typography>
-                    </Link> */}
                     <label className={classes.label}>
                         <Checkbox
                             value={termsOfService}
@@ -115,13 +109,13 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
                     </label>
                     <label className={classes.label}>
                         <Checkbox
-                            value={termsOfService}
+                            value={privacyPolicy}
                             onChange={handleBoolChange('privacyPolicy')}
                         />
                         <Typography>
                             I Accept the{' '}
                             <Link className={classes.link} to='/privacy-policy'>
-                                Privacy Policy{' '}
+                                Privacy Policy
                             </Link>
                         </Typography>
                     </label>

@@ -1,12 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { ChildCard } from './welcome-card.component';
+import { WelcomeCard } from './welcome-card.component';
 
-describe('ParentCard', () => {
+describe('WelcomeCard', () => {
     it('renders without errors', () => {
         const user = { email: 'test@mail.com' };
-        const { baseElement } = render(<ChildCard child={child} />);
+        const { baseElement } = render(<WelcomeCard child={child} />);
         expect(baseElement).toBeInTheDocument();
     });
 });

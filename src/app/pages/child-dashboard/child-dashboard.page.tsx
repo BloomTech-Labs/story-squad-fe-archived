@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { ChildCard, CurrentChapterLink, SimpleBottomNavigation } from '../../components';
+import { WelcomeCard, CurrentChapterLink, SimpleBottomNavigation } from '../../components';
 import { Child } from '../../models';
 
 const ChildDashboard: React.FC = () => {
     return (
         <div>
-            {/* <ChildCard /> */}
+            <WelcomeCard />
             <CurrentChapterLink />
             <SimpleBottomNavigation />
         </div>

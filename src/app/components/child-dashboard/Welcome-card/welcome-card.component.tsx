@@ -17,12 +17,11 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-interface ChildCardProps {
+interface WelcomeCardProps {
     className?: string;
-    child: Child;
 }
 
-const ChildCard: React.FC<ChildCardProps> = ({ child, className }) => {
+const WelcomeCard: React.FC<WelcomeCardProps> = ({ className }) => {
     const classes = useStyles({});
 
     return (
@@ -30,7 +29,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, className }) => {
             <CardContent className={classes.cardContent}>
                 <section>
                     <Typography variant='h4' component='h1' gutterBottom>
-                        Welcome back {child.id}
+                        Welcome back
                     </Typography>
                     <Typography variant='h6' component='h2'>
                         Let's read the story of this week.
@@ -44,4 +43,4 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, className }) => {
     );
 };
 
-export { ChildCard };
+export { WelcomeCard };

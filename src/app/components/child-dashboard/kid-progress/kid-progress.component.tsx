@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
-import { CardIcon } from './icon.component';
+import { CardIcon } from '../../dashboard/child/card/icon.component';
 
 const useStyles = makeStyles((theme) => ({
     card: {},

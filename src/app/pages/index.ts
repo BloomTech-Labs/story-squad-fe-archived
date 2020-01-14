@@ -13,3 +13,5 @@ export * from './example/example.page';
 
 export * from './child-dashboard/child-dashboard.page';
 export * from './pdf-display/pdf-display.page';
+
+export * from './admin-dashboard/admin-dashboard';

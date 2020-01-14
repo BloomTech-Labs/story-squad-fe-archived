@@ -1,6 +1,8 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
-import { StripeWrapper, AddSubscription } from '../../../../components'
+import { StripeWrapper} from '../../../../components'
+import { AddSubscription} from '../../../../components/dashboard/stripe/subscription/add-subscription.component'
+
 
 const SubscribePage: React.FC = () => {
     const history = useHistory();

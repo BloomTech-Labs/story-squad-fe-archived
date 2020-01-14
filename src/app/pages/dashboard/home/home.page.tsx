@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'grid',
         gridTemplate: `
             "header header" auto
-            "children notifications" auto`,
+            "children children" auto`,
         gridTemplateColumns: '1fr 1fr',
         gridGap: theme.spacing(3),
     },
@@ -20,9 +20,6 @@ const useStyles = makeStyles((theme) => ({
     },
     children: {
         gridArea: 'children',
-    },
-    notifications: {
-        gridArea: 'notifications',
     },
 }));
 
@@ -43,7 +40,6 @@ const HomePage: React.FC<MainPageProps> = ({ className }) => {
         <section className={`${className} ${classes.content}`}>
             <ParentCard className={classes.header} user={response.me} />
             <ChildList className={classes.children} />
-            <NotificationsCard className={classes.notifications} />
         </section>
     );
 };

@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { Button, Checkbox, TextField, Typography } from '@material-ui/core';
+import { Button, Checkbox, CircularProgress, TextField, Typography } from '@material-ui/core';
+
 import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 
 import { useAPI } from '../../../hooks';
 import { useForm } from '../../../hooks';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     form: {
         display: 'flex',
         flexDirection: 'column',
@@ -26,6 +28,18 @@ const useStyles = makeStyles(() => ({
         color: 'black',
         textDecoration: 'underline',
         paddingTop: '8px',
+    },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
     },
 }));
 
@@ -118,9 +132,17 @@ const SignUp: React.FC = () => {
                         </Typography>
                     </label>
                 </div>
-                <Button type='submit' variant='contained' size='large'>
-                    Sign Up
-                </Button>
+                <div className={classes.wrapper}>
+                    <Button
+                        fullWidth
+                        disabled={loading}
+                        type='submit'
+                        variant='contained'
+                        size='large'>
+                        Sign Up
+                    </Button>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
             </form>
         </>
     );

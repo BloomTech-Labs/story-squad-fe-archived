@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { User } from '../../../models';
 import { useAPI } from '../../../hooks';
 import { ParentCard, ChildList, NotificationsCard } from '../../../components';
+import { CircularDeterminate } from '../../../components/common/circular-progress';
 
 const useStyles = makeStyles((theme) => ({
     content: {

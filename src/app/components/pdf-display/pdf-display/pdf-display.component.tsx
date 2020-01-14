@@ -3,6 +3,7 @@ import { PDFReader } from 'react-read-pdf-b';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import { CircularDeterminate } from '../../common/circular-progress';
 import { useAPI } from '../../../hooks';
 import { numbersBetweenZero } from '../../../util';
 
@@ -10,7 +11,7 @@ import * as pdfjsLib from 'pdfjs-dist';
 import * as pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry';
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         'display': 'flex',
         'flexDirection': 'column',

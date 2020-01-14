@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Button, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 import { ChildCard } from '../card/card.component';
+import { CircularDeterminate } from '../../../common/circular-progress';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     header: {
         display: 'flex',
         justifyContent: 'space-between',

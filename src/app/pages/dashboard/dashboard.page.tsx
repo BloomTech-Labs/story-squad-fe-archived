@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { CircularDeterminate } from '../../components/common/circular-progress';
 import { NavigationDrawer } from '../../components';
 
 import { HomePage } from './home/home.page';

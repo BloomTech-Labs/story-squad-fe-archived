@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { CircularDeterminate } from '../../../common/circular-progress';
 import { Child } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 import { CardIcon } from './icon.component';

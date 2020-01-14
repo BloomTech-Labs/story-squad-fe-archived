@@ -1,18 +1,32 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Button, TextField, Typography } from '@material-ui/core';
+import { Button, TextField, CircularProgress, Typography } from '@material-ui/core';
+
 import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 
 import { useAPI } from '../../../hooks/api/api.hook';
 import { useForm } from '../../../hooks/form/form.hook';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     form: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
         height: '35vh',
+    },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -14,
+        marginLeft: -12,
     },
 }));
 
@@ -63,10 +77,18 @@ const SignIn: React.FC = () => {
                     value={password}
                     onChange={handleStringChange('password')}
                 />
-                <Button type='submit' variant='contained' size='large'>
-                    Sign In
-                </Button>
-                <Typography variant='body1'>Don't have an account? Sign up</Typography>
+                <div className={classes.wrapper}>
+                    <Button
+                        fullWidth
+                        disabled={loading}
+                        type='submit'
+                        variant='contained'
+                        size='large'>
+                        Sign In
+                    </Button>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                    <Typography variant='body1'>Don't have an account? Sign up</Typography>
+                </div>
             </form>
         </>
     );

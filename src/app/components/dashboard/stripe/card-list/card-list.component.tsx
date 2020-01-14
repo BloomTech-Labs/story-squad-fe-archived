@@ -2,6 +2,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import { CircularDeterminate } from '../../../common/circular-progress';
 import { CreditCard } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 import { StripeCard } from '../card/card.component';

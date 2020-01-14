@@ -26,7 +26,7 @@ type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
  */
 const useAPI = <T>(url: string, method: Method = 'GET'): APIHook<T> => {
     const [response, setResponse] = useState<T>();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState<Error>();
 
     const request = useCallback(

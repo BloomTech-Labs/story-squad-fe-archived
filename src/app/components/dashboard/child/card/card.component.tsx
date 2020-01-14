@@ -45,25 +45,20 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
 
-    const { request: signIn, response } = useAPI(`/children/${child.id}/login`, 'POST');
-    const { request: remove, response: removeResponse, reset: removeReset } = useAPI(
-        `/children/${child.id}`,
-        'DELETE'
-    );
+    const signIn = useAPI(`/children/${child.id}/login`, 'POST');
+    const remove = useAPI(`/children/${child.id}`, 'DELETE');
 
     React.useEffect(() => {
-        if (!response?.token) return;
-        localStorage.setItem('jwt', response.token);
+        if (!signIn.response?.token) return;
+        localStorage.setItem('jwt', signIn.response.token);
         window.dispatchEvent(new Event('switch-accounts'));
         history.push('/kids-dashboard');
-    }, [history, response]);
+    }, [history, signIn.response]);
 
     React.useEffect(() => {
-        if (removeResponse && onUpdate) {
-            onUpdate();
-            removeReset();
-        }
-    }, [history, onUpdate, removeReset, removeResponse]);
+        if (remove.response && onUpdate) onUpdate();
+        if (remove.response) remove.reset();
+    }, [history, onUpdate, remove]);
 
     return (
         <Card className={classes.card}>
@@ -78,7 +73,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                             </IconButton>
                         </Link>
 
-                        <IconButton onClick={remove}>
+                        <IconButton onClick={remove.request}>
                             <Icon className={classes.headerIcon}>delete</Icon>
                         </IconButton>
                     </>
@@ -97,7 +92,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                 </div>
             </CardContent>
             <CardActions className={classes.actions}>
-                <Button onClick={() => signIn()}>View Account</Button>
+                <Button onClick={signIn.request}>View Account</Button>
             </CardActions>
         </Card>
     );

@@ -24,7 +24,7 @@ type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
  * - `loading` a boolean which represents if a request is in a pending state.
  * - `request()` a function that makes the request, any arguments passed in will be passed into the axios call.
  */
-const useAPI = <T>(url: string, method: Method = 'GET'): APIHook<T> => {
+const useAPI = <T = any>(url: string, method: Method = 'GET'): APIHook<T> => {
     const [response, setResponse] = useState<T>();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error>();

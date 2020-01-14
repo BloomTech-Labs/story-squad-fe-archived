@@ -1,32 +1,29 @@
 import React from 'react';
-import { makeStyles, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
-
-import {RestoreIcon ,FavoriteIcon , LocationOnIcon}  from '@material-ui/icons';
+import { BottomNavigation, BottomNavigationAction, Icon } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  root: {
-    width: 500,
-  },
+    root: {
+        width: 500,
+    },
 });
 
-export default function SimpleBottomNavigation() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+const SimpleBottomNavigation: React.FC = () => {
+    const classes = useStyles();
+    const [value, setValue] = React.useState(0);
 
-  return (
-    <BottomNavigation
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
-      showLabels
-      className={classes.root}
-    >
-      <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-      <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-    </BottomNavigation>
-  );
-}
+    return (
+        <BottomNavigation
+            value={value}
+            onChange={(event, newValue) => {
+                setValue(newValue);
+            }}
+            showLabels
+            className={classes.root}>
+            <BottomNavigationAction label='Recents' icon={<Icon> restore </Icon>} />
+            <BottomNavigationAction label='Favorites' icon={<Icon>favorite</Icon>} />
+        </BottomNavigation>
+    );
+};
 
 export { SimpleBottomNavigation };

@@ -14,7 +14,7 @@ jest.mock('../../../util/requestFactory', () => () => ({
 
 describe('CurrentChapterLink', () => {
     it('renders without errors', async () => {
-        const { baseElement } = render(<SimpleBottonNavigation />);
+        const { baseElement } = render(<SimpleBottomNavigation />);
         await waitForDomChange({ container: baseElement });
         expect(baseElement).toBeInTheDocument();
     });

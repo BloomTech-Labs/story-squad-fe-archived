@@ -98,13 +98,11 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                     </section>
                 }
                 action={
-                    <>
-                        <Link to={`/dashboard/child/edit/${child.id}`}>
-                            <Button className={classes.actionButton} color='inherit'>
-                                Edit
-                            </Button>
-                        </Link>
-                    </>
+                    <Link to={`/dashboard/child/edit/${child.id}`}>
+                        <Button className={classes.actionButton} color='inherit'>
+                            Edit
+                        </Button>
+                    </Link>
                 }
             />
             <CardContent>

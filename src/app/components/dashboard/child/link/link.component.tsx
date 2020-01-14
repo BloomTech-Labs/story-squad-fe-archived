@@ -25,7 +25,7 @@ const ChildLink: React.FC<ChildLinkProps> = ({ child }) => {
     }, [history, signInResponse]);
 
     return (
-        <ListItem button onClick={signIn}>
+        <ListItem button onClick={() => signIn()}>
             <ListItemText primary={`${child.username} Account`} />
         </ListItem>
     );

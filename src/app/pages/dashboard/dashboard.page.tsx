@@ -9,7 +9,7 @@ import { NavigationDrawer } from '../../components';
 import { HomePage } from './home/home.page';
 import { CardAddPage } from './payment/add/add.page';
 import { CardListPage } from './payment/list/list.page';
-import { SubscribePage } from './payment/subscribe/subscribe.page'
+import { SubscribePage } from './payment/subscribe/subscribe.page';
 import { EditProfilePage } from './child/edit/edit.page';
 import { CreateChildPage } from './child/create/child.page';
 

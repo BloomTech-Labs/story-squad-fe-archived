@@ -11,7 +11,7 @@ const ChildCreate: React.FC = () => {
     const handleChange = handleSubmitBuilder(request);
 
     React.useEffect(() => {
-        if (response) history.push('/subscribe');
+        if (response) history.push('/dashboard/subscribe');
     }, [history, response]);
 
     const { username, grade } = state;

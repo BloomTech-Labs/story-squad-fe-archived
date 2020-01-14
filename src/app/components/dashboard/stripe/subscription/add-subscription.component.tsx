@@ -1,15 +1,24 @@
 import React from 'react';
+import { Button } from '@material-ui/core';
 import { ReactStripeElements, injectStripe } from 'react-stripe-elements';
 
 interface AddSubscriptionProps {
     onComplete?: () => void;
 }
 
-const _AddSubscription: React.FC<AddSubscriptionProps & ReactStripeElements.InjectedStripeProps> = ({ stripe, onComplete })=> {
-    return (
-        null
-    )
-}
+const _AddSubscription: React.FC<AddSubscriptionProps &
+    ReactStripeElements.InjectedStripeProps> = ({ stripe, onComplete }) => {
+    // React.useEffect(() => {
 
-const AddSubscription = injectStripe(_AddSubscription)
-export { AddSubscription }
+    // });
+    return (
+        <form>
+            <Button type='submit' color='primary'>
+                Subscribe
+            </Button>
+        </form>
+    );
+};
+
+const AddSubscription = injectStripe(_AddSubscription);
+export { AddSubscription };

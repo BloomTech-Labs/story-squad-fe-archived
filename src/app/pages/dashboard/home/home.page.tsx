@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { User } from '../../../models';
 import { useAPI } from '../../../hooks';
-import { ParentCard, ChildList, NotificationsCard } from '../../../components';
+import { ParentCard, ChildList } from '../../../components';
 
 const useStyles = makeStyles((theme) => ({
     content: {

@@ -13,7 +13,6 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { CircularDeterminate } from '../../common/circular-progress';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({

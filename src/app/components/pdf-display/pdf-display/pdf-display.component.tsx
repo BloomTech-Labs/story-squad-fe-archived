@@ -3,7 +3,6 @@ import { PDFReader } from 'react-read-pdf-b';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import { CircularDeterminate } from '../../common/circular-progress';
 import { useAPI } from '../../../hooks';
 import { numbersBetweenZero } from '../../../util';
 

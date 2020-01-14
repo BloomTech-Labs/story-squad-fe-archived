@@ -3,7 +3,6 @@ import React from 'react';
 import { Card, CardContent, Typography, CardHeader, IconButton, Icon } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { CircularDeterminate } from '../../../common/circular-progress';
 import { CreditCard } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 import { create } from 'react-test-renderer';

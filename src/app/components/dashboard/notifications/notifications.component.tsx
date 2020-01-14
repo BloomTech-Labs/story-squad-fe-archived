@@ -3,7 +3,6 @@ import React from 'react';
 import { Card, CardContent, Typography, List, ListItem, ListItemText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { CircularDeterminate } from '../../common/circular-progress';
 
 const useStyles = makeStyles((theme) => ({
     card: {

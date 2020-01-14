@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { CircularDeterminate } from '../../../../components/common/circular-progress';
 import { CardList } from '../../../../components';
 
 const useStyles = makeStyles((theme) => ({

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         top: '50%',
         left: '50%',
-        marginTop: -14,
+        marginTop: -24,
         marginLeft: -12,
     },
 }));

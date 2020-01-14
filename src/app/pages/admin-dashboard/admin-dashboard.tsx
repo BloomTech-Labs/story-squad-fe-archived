@@ -1,7 +1,12 @@
 import React from 'react';
+import { PdfCreate } from '../../components/admin-dashboard';
 
 const AdminDashboard: React.FC = () => {
-    return <div>Admin Dashboard</div>;
+    return (
+        <div>
+            <PdfCreate />
+        </div>
+    );
 };
 
 export { AdminDashboard };

@@ -1,23 +1,76 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { TextField, Button } from '@material-ui/core';
+import {
+    Fab,
+    TextField,
+    Icon,
+    Card,
+    CardContent,
+    CardHeader,
+    Typography,
+    Switch,
+    FormControlLabel,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI, useForm } from '../../../../hooks';
-import { Child } from '../../../../models';
 
-const ChildEdit: React.FC = () => {
+const useStyles = makeStyles((theme) => ({
+    header: {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
+    },
+    form: {
+        display: 'grid',
+        gridGap: theme.spacing(3),
+    },
+    preferences: {
+        display: 'grid',
+        gridGap: theme.spacing(3),
+        gridTemplateColumns: 'repeat(auto-fit, 250px)',
+    },
+    fab: {
+        position: 'absolute',
+        bottom: theme.spacing(3),
+        right: theme.spacing(3),
+    },
+}));
+
+interface ChildEdit {
+    newChild?: boolean;
+}
+
+const ChildEdit: React.FC<ChildEdit> = ({ newChild }) => {
+    const classes = useStyles();
     const history = useHistory();
     const { id } = useParams();
 
-    const { request: fetch, response: fetchResponse } = useAPI<{ child: Child }>(`/children/${id}`);
+    const { request: fetch, response: fetchResponse } = useAPI(`/children/${id}`);
     const { request: update, response: updateResponse } = useAPI(`/children/${id}`, 'PUT');
 
-    const { state, setState, handleInputChange, handleSubmitBuilder } = useForm<Omit<Child, 'id'>>({
+    const { state: child, setState: setChild, handleInputChange: handleChildChange } = useForm({
         username: '',
-        grade: 3,
+        grade: 0,
     });
-    const handleSubmit = handleSubmitBuilder(update);
+
+    const {
+        state: preferences,
+        setState: setPreferences,
+        handleBoolChange: handlePreferenceChange,
+    } = useForm({
+        dyslexia: false,
+    });
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        update({
+            ...child,
+            preferences: {
+                ...preferences,
+            },
+        });
+    };
 
     React.useEffect(() => {
         fetch();
@@ -26,8 +79,9 @@ const ChildEdit: React.FC = () => {
     React.useEffect(() => {
         if (!fetchResponse) return;
         const { id, ...child } = fetchResponse.child;
-        setState({ ...child });
-    }, [fetchResponse, setState]);
+        setChild({ ...child });
+        setPreferences({ ...child.preferences });
+    }, [fetchResponse, setChild, setPreferences]);
 
     React.useEffect(() => {
         if (updateResponse) history.push('/dashboard');
@@ -35,29 +89,43 @@ const ChildEdit: React.FC = () => {
 
     if (!fetchResponse) return <div></div>;
 
-    const { username, grade } = state;
+    const { username, grade } = child;
+    const { dyslexia } = preferences;
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <TextField
-                    type='text'
-                    label='Username'
-                    required
-                    value={username}
-                    onChange={handleInputChange('username')}
-                />
+                <Card>
+                    <CardHeader
+                        className={classes.header}
+                        title={<Typography variant='h5'>{username}</Typography>}
+                    />
+                    <CardContent className={classes.form}>
+                        <TextField
+                            type='number'
+                            label='Grade'
+                            required
+                            value={grade}
+                            onChange={handleChildChange('grade')}
+                        />
+                        <Typography variant='overline'>Preferences</Typography>
+                        <section className={classes.preferences}>
+                            <FormControlLabel
+                                label='Dyslexia'
+                                labelPlacement='bottom'
+                                control={
+                                    <Switch
+                                        checked={dyslexia}
+                                        onChange={handlePreferenceChange('dyslexia')}
+                                    />
+                                }
+                            />
+                        </section>
+                    </CardContent>
+                </Card>
 
-                <TextField
-                    type='number'
-                    label='Grade'
-                    required
-                    value={grade}
-                    onChange={handleInputChange('grade')}
-                />
-
-                <Button type='submit' variant='contained' color='primary'>
-                    Edit Account
-                </Button>
+                <Fab className={classes.fab} type='submit' color='primary'>
+                    <Icon>check</Icon>
+                </Fab>
             </form>
         </>
     );

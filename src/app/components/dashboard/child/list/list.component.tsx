@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button, Typography } from '@material-ui/core';
+import { Button, Typography, Icon, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../../models';
@@ -12,13 +12,22 @@ const useStyles = makeStyles((theme) => ({
     header: {
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'baseline',
+        alignItems: 'center',
     },
     list: {
-        margin: theme.spacing(3),
+        marginTop: theme.spacing(1),
         display: 'grid',
-        gridGap: theme.spacing(3),
+        gridGap: theme.spacing(2),
         gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))',
+    },
+    empty: {
+        'display': 'flex',
+        'flexDirection': 'column',
+        'justifyContent': 'center',
+        'alignItems': 'center',
+        '& > .MuiIcon-fontSizeLarge': {
+            fontSize: '30vh',
+        },
     },
 }));
 
@@ -44,7 +53,9 @@ const ChildList: React.FC<ChildListProps> = ({ className }) => {
                 </Typography>
 
                 <Link to='/dashboard/child/create'>
-                    <Button>Add Child</Button>
+                    <IconButton>
+                        <Icon>add_circle_outline</Icon>
+                    </IconButton>
                 </Link>
             </section>
 
@@ -52,6 +63,15 @@ const ChildList: React.FC<ChildListProps> = ({ className }) => {
                 {children.map((child) => (
                     <ChildCard key={child.id} child={child} onUpdate={request}></ChildCard>
                 ))}
+                {children.length === 0 && (
+                    <section className={classes.empty}>
+                        <Icon fontSize='large'>child_care</Icon>
+                        <Typography variant='subtitle1'>0 Child Accounts</Typography>
+                        <Link to='/dashboard/child/create'>
+                            <Button>Add Child</Button>
+                        </Link>
+                    </section>
+                )}
             </section>
         </div>
     );

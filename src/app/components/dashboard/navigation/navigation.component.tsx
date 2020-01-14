@@ -13,6 +13,10 @@ import {
     useMediaQuery,
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useAPI } from '../../../hooks';
+
+import { Child } from '../../../models';
+import { ChildLink } from '../child';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +45,12 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
     const classes = useStyles();
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('md'));
+
+    const { request, response } = useAPI<{ children: Child[] }>('/children');
+
+    React.useEffect(() => {
+        request();
+    }, [request]);
 
     return (
         <Drawer
@@ -71,6 +81,8 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                         <ListItemText primary='Payment' />
                     </ListItem>
                 </NavLink>
+                {response?.children &&
+                    response.children.map((child) => <ChildLink key={child.id} child={child} />)}
                 <ListItem button>
                     <ListItemText primary='Help' />
                 </ListItem>

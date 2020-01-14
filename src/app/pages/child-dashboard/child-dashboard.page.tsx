@@ -16,8 +16,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
     },
     appBar: {
-        width: `calc(100% - 240px)`,
-        marginLeft: 240,
+        width: `calc(100% )`,
     },
     spacer: {
         flex: '1',

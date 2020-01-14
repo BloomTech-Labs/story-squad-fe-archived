@@ -10,8 +10,9 @@ import {
     ListItemText,
     Toolbar,
     Typography,
+    useMediaQuery,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -31,17 +32,26 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const NavigationDrawer = () => {
+interface NavigationDrawerProps {
+    open?: boolean;
+    onClose?: () => void;
+}
+
+const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) => {
     const classes = useStyles();
+    const theme = useTheme();
+    const desktop = useMediaQuery(theme.breakpoints.up('md'));
 
     return (
         <Drawer
             className={classes.drawer}
-            variant='permanent'
+            variant={desktop ? 'permanent' : 'temporary'}
             classes={{
                 paper: classes.drawerPaper,
             }}
-            anchor='left'>
+            anchor='left'
+            onClose={onClose}
+            open={open}>
             <Toolbar className={classes.toolbar}>
                 <Icon className={classes.icon}>book</Icon>
                 <Typography variant='h6'>Story Squad</Typography>

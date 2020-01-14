@@ -50,6 +50,15 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
         `/children/${child.id}`,
         'DELETE'
     );
+    const subscriptionStatus = child.subscription;
+    let buttonToggle;
+    if (subscriptionStatus === true) {
+        buttonToggle = <Button onClick={() => signIn()}>View Account</Button>;
+    } else {
+        buttonToggle = (
+            <Button onClick={() => history.push('/dashboard/subscribe')}>Subscribe</Button>
+        );
+    }
 
     React.useEffect(() => {
         if (!response?.token) return;
@@ -96,9 +105,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                     <CardIcon title='Current Phase' status='Allocating Points' />
                 </div>
             </CardContent>
-            <CardActions className={classes.actions}>
-                <Button onClick={() => signIn()}>View Account</Button>
-            </CardActions>
+            <CardActions className={classes.actions}>{buttonToggle}</CardActions>{' '}
         </Card>
     );
 };

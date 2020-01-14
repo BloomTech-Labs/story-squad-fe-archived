@@ -7,7 +7,11 @@ import { useHistory } from 'react-router';
 const ChildCreate: React.FC = () => {
     const history = useHistory();
     const { request, response } = useAPI('/children', 'POST');
-    const { state, handleInputChange, handleSubmitBuilder } = useForm({ username: '', grade: 3 });
+    const { state, handleInputChange, handleSubmitBuilder } = useForm({
+        username: '',
+        grade: 3,
+        subscription: false,
+    });
     const handleChange = handleSubmitBuilder(request);
 
     React.useEffect(() => {

@@ -16,6 +16,7 @@ const ChildEdit: React.FC = () => {
     const { state, setState, handleInputChange, handleSubmitBuilder } = useForm<Omit<Child, 'id'>>({
         username: '',
         grade: 3,
+        subscription: false,
     });
     const handleSubmit = handleSubmitBuilder(update);
 

@@ -18,9 +18,7 @@ import { useAPI } from '../../../hooks';
 import { CardIcon } from '../../dashboard/child/card/icon.component';
 
 const useStyles = makeStyles((theme) => ({
-    card: {
-        padding: '30px',
-    },
+    card: {},
     statusIcons: {
         display: 'flex',
         justifyContent: 'center',

@@ -3,12 +3,13 @@ import { BottomNavigation, BottomNavigationAction, Icon } from '@material-ui/cor
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-    root: {
-        width: 500,
-    },
+    root: {},
 });
 
-const SimpleBottomNavigation: React.FC = () => {
+interface SimpleBottomNavigationProps {
+    className: string;
+}
+const SimpleBottomNavigation: React.FC<SimpleBottomNavigationProps> = ({ className }) => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -19,7 +20,7 @@ const SimpleBottomNavigation: React.FC = () => {
                 setValue(newValue);
             }}
             showLabels
-            className={classes.root}>
+            className={`${className} ${classes.root}`}>
             <BottomNavigationAction label='Recents' icon={<Icon> restore </Icon>} />
             <BottomNavigationAction label='Favorites' icon={<Icon>favorite</Icon>} />
         </BottomNavigation>

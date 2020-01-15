@@ -41,7 +41,14 @@ const ChildList: React.FC<ChildListProps> = ({ className }) => {
         request();
     }, [request]);
 
-    if (!response?.children) return <div></div>;
+    if (!response?.children)
+        return (
+            <div>
+                <div className={classes.wrapper}>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
+            </div>
+        );
     const { children } = response;
     return (
         <div className={className}>

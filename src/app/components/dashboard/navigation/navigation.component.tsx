@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import {
-    Divider,
     Drawer,
     Icon,
     List,
@@ -18,7 +17,7 @@ import { useAPI } from '../../../hooks';
 import { Child } from '../../../models';
 import { ChildLink } from '../child';
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 const useStyles = makeStyles((theme) => ({
     drawer: {
         width: drawerWidth,
@@ -26,13 +25,23 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
         width: drawerWidth,
+        // background: theme.palette.background.default,
     },
     toolbar: {
+        paddingTop: theme.spacing(4),
+        paddingBottom: theme.spacing(4),
+        paddingLeft: theme.spacing(4),
+    },
+    menuItem: {
         display: 'flex',
-        justifyContent: 'center',
+        alignItems: 'center',
+        paddingLeft: theme.spacing(2),
     },
     icon: {
-        marginRight: theme.spacing(1),
+        marginRight: theme.spacing(4),
+    },
+    selected: {
+        borderRight: 'solid black 1px',
     },
 }));
 
@@ -64,13 +73,17 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
             open={open}>
             <Toolbar className={classes.toolbar}>
                 <Icon className={classes.icon}>book</Icon>
-                <Typography variant='h6'>Story Squad</Typography>
+                <Typography variant='h5'>Story Squad</Typography>
             </Toolbar>
-            <Divider />
             <List>
-                <NavLink to='/dashboard'>
+                <NavLink to='/dashboard' activeClassName={classes.selected}>
                     <ListItem button>
-                        <ListItemText primary='Dashboard' />
+                        <div className={classes.menuItem}>
+                            <Icon className={classes.icon}>
+                                <img src='assets/dashboard.svg' width='100%' height='100%' />
+                            </Icon>
+                            <Typography variant='h6'>Dashboard</Typography>
+                        </div>
                     </ListItem>
                 </NavLink>
                 <ListItem button>

@@ -14,8 +14,8 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     appBar: {
         [theme.breakpoints.up('md')]: {
-            width: `calc(100% - 240px)`,
-            marginLeft: 240,
+            width: `calc(100% - 260px)`,
+            marginLeft: 260,
         },
     },
     menuButton: {
@@ -37,28 +37,7 @@ const Heading: React.FC<HeadingProps> = ({ onMenuClick }) => {
 
     const logout = () => window.dispatchEvent(new Event('logout'));
 
-    return (
-        <AppBar position='fixed' className={classes.appBar}>
-            <Toolbar>
-                {!desktop && (
-                    <IconButton
-                        className={classes.menuButton}
-                        edge='start'
-                        color='inherit'
-                        onClick={onMenuClick}>
-                        <Icon>menu</Icon>
-                    </IconButton>
-                )}
-                <Typography variant='h6' noWrap>
-                    Dashboard
-                </Typography>
-                <div className={classes.spacer} />
-                <Button onClick={logout} color='inherit'>
-                    Logout
-                </Button>
-            </Toolbar>
-        </AppBar>
-    );
+    return <></>;
 };
 
 export { Heading };

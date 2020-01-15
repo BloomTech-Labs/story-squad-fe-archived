@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     list: {
-        marginTop: theme.spacing(1),
+        marginTop: theme.spacing(3),
         display: 'grid',
         gridGap: theme.spacing(2),
         gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
         '& > .MuiIcon-fontSizeLarge': {
             fontSize: '30vh',
         },
+    },
+    button: {
+        borderRadius: theme.shape.borderRadius,
     },
 }));
 
@@ -53,9 +56,9 @@ const ChildList: React.FC<ChildListProps> = ({ className }) => {
                 </Typography>
 
                 <Link to='/dashboard/child/create'>
-                    <IconButton>
-                        <Icon>add_circle_outline</Icon>
-                    </IconButton>
+                    <Button variant='outlined' color='primary' className={classes.button}>
+                        Add Child
+                    </Button>
                 </Link>
             </section>
 

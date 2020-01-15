@@ -35,13 +35,15 @@ const useStyles = makeStyles((theme) => ({
     menuItem: {
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: theme.spacing(2),
+        paddingLeft: theme.spacing(4),
     },
     icon: {
         marginRight: theme.spacing(4),
     },
     selected: {
-        borderRight: 'solid black 1px',
+        '& > .MuiListItem-root': {
+            borderRight: 'solid black 2px',
+        },
     },
 }));
 
@@ -76,27 +78,57 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                 <Typography variant='h5'>Story Squad</Typography>
             </Toolbar>
             <List>
-                <NavLink to='/dashboard' activeClassName={classes.selected}>
-                    <ListItem button>
-                        <div className={classes.menuItem}>
-                            <Icon className={classes.icon}>
-                                <img src='assets/dashboard.svg' width='100%' height='100%' />
-                            </Icon>
-                            <Typography variant='h6'>Dashboard</Typography>
-                        </div>
+                <NavLink to='/dashboard/home' activeClassName={classes.selected}>
+                    <ListItem button className={classes.menuItem}>
+                        <Icon className={classes.icon}>
+                            <img
+                                src={`${process.env.PUBLIC_URL}/assets/dashboard.svg`}
+                                width='100%'
+                                height='100%'
+                            />
+                        </Icon>
+                        <ListItemText primary='Dashboard' />
                     </ListItem>
                 </NavLink>
-                <ListItem button>
+                <ListItem button className={classes.menuItem}>
+                    <Icon className={classes.icon}>
+                        <img
+                            src={`${process.env.PUBLIC_URL}/assets/dashboard.svg`}
+                            width='100%'
+                            height='100%'
+                        />
+                    </Icon>
                     <ListItemText primary='Settings' />
                 </ListItem>
-                <NavLink to='/dashboard/cards'>
-                    <ListItem button>
+                <NavLink to='/dashboard/cards' activeClassName={classes.selected}>
+                    <ListItem button className={classes.menuItem}>
+                        <Icon className={classes.icon}>
+                            <img
+                                src={`${process.env.PUBLIC_URL}/assets/dashboard.svg`}
+                                width='100%'
+                                height='100%'
+                            />
+                        </Icon>
                         <ListItemText primary='Payment' />
                     </ListItem>
                 </NavLink>
                 {response?.children &&
-                    response.children.map((child) => <ChildLink key={child.id} child={child} />)}
-                <ListItem button>
+                    response.children.map((child) => (
+                        <ChildLink
+                            key={child.id}
+                            className={classes.menuItem}
+                            iconClass={classes.icon}
+                            child={child}
+                        />
+                    ))}
+                <ListItem button className={classes.menuItem}>
+                    <Icon className={classes.icon}>
+                        <img
+                            src={`${process.env.PUBLIC_URL}/assets/dashboard.svg`}
+                            width='100%'
+                            height='100%'
+                        />
+                    </Icon>
                     <ListItemText primary='Help' />
                 </ListItem>
             </List>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -38,13 +38,13 @@ const DashboardPage: React.FC = () => {
             <NavigationDrawer open={navOpen} onClose={closeNav} />
 
             <main className={classes.main}>
-                <div className={classes.toolbar} />
                 <Switch>
                     <Route path='/dashboard/child/create' component={CreateChildPage} />
                     <Route path='/dashboard/child/edit/:id' component={EditProfilePage} />
                     <Route path='/dashboard/cards/add' component={CardAddPage} />
                     <Route path='/dashboard/cards' component={CardListPage} />
-                    <Route path='/dashboard' component={HomePage} />
+                    <Route path='/dashboard/home' component={HomePage} />
+                    <Redirect to='/dashboard/home' />
                 </Switch>
             </main>
         </div>

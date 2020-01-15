@@ -30,17 +30,17 @@ const useStyles = makeStyles((theme) => ({
         'alignItems': 'center',
         '& > .MuiCardHeader-action': {
             margin: 0,
+            marginTop: theme.spacing(0.75),
         },
     },
     titleBar: {
         display: 'flex',
     },
     title: {
+        marginLeft: theme.spacing(7),
         lineHeight: '2.5rem',
     },
-    progress: {
-        marginLeft: theme.spacing(2),
-    },
+    progress: {},
     progressBackground: {
         position: 'absolute',
         color: theme.palette.grey[500],
@@ -78,9 +78,6 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                 className={classes.header}
                 title={
                     <section className={classes.titleBar}>
-                        <Typography className={classes.title} variant='h5'>
-                            {child.username}
-                        </Typography>
                         <div className={classes.progress}>
                             <CircularProgress
                                 className={classes.progressBackground}
@@ -95,11 +92,14 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                                 value={35}
                             />
                         </div>
+                        <Typography className={classes.title} variant='h5'>
+                            {child.username}
+                        </Typography>
                     </section>
                 }
                 action={
                     <Link to={`/dashboard/child/edit/${child.id}`}>
-                        <Button className={classes.actionButton} color='inherit'>
+                        <Button className={classes.actionButton} size='small' color='inherit'>
                             Edit
                         </Button>
                     </Link>

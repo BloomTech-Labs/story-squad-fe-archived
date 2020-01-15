@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
-        height: '35vh',
+        minHeight: 300,
     },
 }));
 
@@ -66,7 +66,6 @@ const SignIn: React.FC = () => {
                 <Button type='submit' variant='contained' size='large'>
                     Sign In
                 </Button>
-                <Typography variant='body1'>Don't have an account? Sign up</Typography>
             </form>
         </>
     );

@@ -26,16 +26,6 @@ const useStyles = makeStyles((theme) => ({
         },
         borderBottom: '1px solid gray',
     },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        height: '35vh',
-    },
-    checkboxes: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
     onboarding: {
         paddingRight: theme.spacing(4),
         paddingLeft: theme.spacing(4),

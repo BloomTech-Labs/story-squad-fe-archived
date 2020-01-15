@@ -101,7 +101,7 @@ const SignUp: React.FC = () => {
                         <Typography>
                             I Accept the{' '}
                             <Link className={classes.link} to='/terms-of-service'>
-                                Terms Of Service
+                                Terms of Service
                             </Link>
                         </Typography>
                     </label>

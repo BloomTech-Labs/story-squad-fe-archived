@@ -54,10 +54,10 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
 
                 <div className={classes.statusIcons}>
                     <CardIcon title='Phase of the game' status={`Upload Fan Fiction`} />
-                    <CardIcon title='Assignments Completed' status='None' />
-                    <CardIcon title='Time left to submit' status='1 week' />
-                    <CardIcon title='Current Badges' status='All the loot' />
-                    <CardIcon title='Assigned Points' status='0' />
+                    <CardIcon title='Assignments Completed' status={'None'} />
+                    <CardIcon title='Time left to submit' status={'1 week'} />
+                    <CardIcon title='Current Badges' status={'All the loot'} />
+                    <CardIcon title='Assigned Points' status={'0'} />
                 </div>
             </CardContent>
             <CardActions className={classes.actions}>

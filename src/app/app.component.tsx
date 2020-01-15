@@ -41,8 +41,8 @@ const App: React.FC = () => {
                     />
                     <Route path='/privacy-policy' component={PrivacyPage} />
                     <Route path='/terms-of-service' component={ToSPage} />
-                    <Route path='/' component={SignUpPage} />
-                    <Route path='*' component={ErrorPage} />
+                    <Route exact path='/' component={SignUpPage} />
+                    <Route path='/' component={ErrorPage} />
                 </Switch>
             </Router>
         </main>

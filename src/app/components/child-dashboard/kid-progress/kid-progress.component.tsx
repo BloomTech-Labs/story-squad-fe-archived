@@ -18,10 +18,12 @@ import { useAPI } from '../../../hooks';
 import { CardIcon } from '../../dashboard/child/card/icon.component';
 
 const useStyles = makeStyles((theme) => ({
-    card: {},
+    card: {
+        padding: '30px',
+    },
     statusIcons: {
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     header: {
@@ -47,13 +49,9 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
         <Card className={classes.card}>
             <CardHeader className={classes.header} title={'Tom'} />
             <CardContent>
-                <Typography variant='h5'>Weekly Progress</Typography>
-
-                <Typography variant='subtitle1'>2/5 lessons completed this week</Typography>
-
                 <div className={classes.statusIcons}>
-                    <CardIcon title='Phase of the game' status={`Upload Fan Fiction`} />
-                    <CardIcon title='Assignments Completed' status={'None'} />
+                    <CardIcon title='Phase' status={`Grade Fan Fiction`} />
+                    <CardIcon title='Assignments Completed' status={'2'} />
                     <CardIcon title='Time left to submit' status={'1 week'} />
                     <CardIcon title='Current Badges' status={'All the loot'} />
                     <CardIcon title='Assigned Points' status={'0'} />

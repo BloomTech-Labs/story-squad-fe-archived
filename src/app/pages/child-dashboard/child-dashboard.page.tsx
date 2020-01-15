@@ -31,6 +31,13 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
     },
+    progress: {
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing(3),
+        width: `calc(100% )`,
+    },
     toolbar: theme.mixins.toolbar,
 }));
 
@@ -62,7 +69,9 @@ const ChildDashboard: React.FC = () => {
                     <br></br>
                     <SimpleBottomNavigation />
                 </section>
-                <section className={classes.section}>
+                <section className={classes.progress}>
+                    <br></br>
+                    <br></br>
                     <KidProgressCard />
                 </section>
             </main>

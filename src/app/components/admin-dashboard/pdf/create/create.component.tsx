@@ -7,9 +7,9 @@ import { useHistory } from 'react-router';
 const PdfCreate: React.FC = () => {
     const history = useHistory();
     const { request, response } = useAPI('/canon', 'POST');
-    const [state, setState] = React.useState({ week: '', pdf: '', pdfAlt: '' });
+    const [state, setState] = React.useState({ week: '', base64: '', altbase64: '' });
 
-    const { week, pdf, pdfAlt } = state;
+    const { week } = state;
 
     const handleInputChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
         setState({ ...state, [key]: e.target.value });
@@ -51,7 +51,7 @@ const PdfCreate: React.FC = () => {
                 type='file'
                 inputProps={{ accept: '.pdf' }}
                 required
-                onChange={handleFileChange('pdf')}
+                onChange={handleFileChange('base64')}
             />
 
             <InputLabel htmlFor='pdfAlt'>Dyslexic PDF</InputLabel>
@@ -59,7 +59,7 @@ const PdfCreate: React.FC = () => {
                 id='pdfAlt'
                 type='file'
                 inputProps={{ accept: '.pdf' }}
-                onChange={handleFileChange('pdfAlt')}
+                onChange={handleFileChange('altbase64')}
             />
 
             <Button type='submit' variant='contained' color='primary'>

@@ -31,8 +31,8 @@ interface PdfListProps {
 
 interface Canon {
     week: number;
-    pdf: string;
-    pdfAlt?: string;
+    base64: string;
+    altbase64?: string;
 }
 
 const PdfList: React.FC<PdfListProps> = ({ className }) => {
@@ -72,7 +72,9 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                         <TableRow key={pdf.week}>
                             <TableCell>{pdf.week}</TableCell>
                             <TableCell>{'TO DO: link to view pdf'}</TableCell>
-                            <TableCell>{pdf.pdfAlt ? 'TO DO: link to view pdf' : 'None'}</TableCell>
+                            <TableCell>
+                                {pdf.altbase64 ? 'TO DO: link to view pdf' : 'None'}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

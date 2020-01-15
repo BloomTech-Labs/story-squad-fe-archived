@@ -5,35 +5,23 @@ import Slide from '@material-ui/core/Slide';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { Route, Router } from 'react-router-dom';
-import { DashboardPage } from '../dashboard/dashboard.page';
-// import { BrowserHistory } from 'react-router/lib/BrowserHistory';
+import { useHistory } from 'react-router-dom';
 
-class ErrorPage extends Component {
-    render() {
-        return (
-            <div id='error'>
-                <h1 className='notFoundTitle'>Oops... Don't Worry</h1>
-                <p className='notFoundDesc'>
-                    The page you're looking for isn't available, but we'll help you continue your
-                    mission!
-                </p>
-                <div>
-                    {' '}
-                    <Button>Let's go back</Button>
-                    {/* onClick={BrowserHistory.goBack}>Let's go back</Button> */}
-                </div>{' '}
+const ErrorPage = () => {
+    const history = useHistory();
+    return (
+        <div id='error'>
+            <h1 className='notFoundTitle'>Oops... Don't Worry</h1>
+            <p className='notFoundDesc'>
+                The page you're looking for isn't available, but we'll help you continue your
+                mission!
+            </p>
+            <div>
+                <Button onClick={history.goBack}>Let's go back</Button>
             </div>
-        );
-    }
-}
-
-// React.render(
-//     <Router history={BrowserHistory}>
-//         <Route path='/' component={DashboardPage} />
-//     </Router>,
-//     document.body
-// );
+        </div>
+    );
+};
 
 const useStyles = makeStyles((theme) => ({
     root: {

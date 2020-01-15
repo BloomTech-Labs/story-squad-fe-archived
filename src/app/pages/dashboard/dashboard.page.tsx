@@ -61,7 +61,7 @@ const DashboardPage: React.FC = () => {
                     <Route path='/dashboard/child/edit/:id' component={EditProfilePage} />
                     <Route path='/dashboard/cards/add' component={CardAddPage} />
                     <Route path='/dashboard/cards' component={CardListPage} />
-                    <Route path='/dashboard/subscribe' component={SubscribePage} />
+                    <Route path='/dashboard/subscribe/:id' component={SubscribePage} />
                     <Route path='/dashboard' component={HomePage} />
                 </Switch>
             </main>

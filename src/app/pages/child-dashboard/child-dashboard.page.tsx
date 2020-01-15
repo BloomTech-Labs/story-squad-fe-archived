@@ -5,6 +5,7 @@ import {
     CurrentChapterLink,
     SimpleBottomNavigation,
     FanFictionUpload,
+    KidProgressCard,
 } from '../../components';
 import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
         flex: '1',
     },
     main: {
+        display: 'flex',
+    },
+    section: {
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: theme.palette.background.default,
@@ -48,14 +52,19 @@ const ChildDashboard: React.FC = () => {
             </AppBar>
 
             <main className={classes.main}>
-                <div className={classes.toolbar} />
-                <WelcomeCard />
-                <br></br>
-                <CurrentChapterLink />
-                <br></br>
-                <FanFictionUpload />
-                <br></br>
-                <SimpleBottomNavigation />
+                <section className={classes.section}>
+                    <div className={classes.toolbar} />
+                    <WelcomeCard />
+                    <br></br>
+                    <CurrentChapterLink />
+                    <br></br>
+                    <FanFictionUpload />
+                    <br></br>
+                    <SimpleBottomNavigation />
+                </section>
+                <section className={classes.section}>
+                    <KidProgressCard />
+                </section>
             </main>
         </div>
     );

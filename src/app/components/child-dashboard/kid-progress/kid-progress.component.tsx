@@ -36,17 +36,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 interface KidProgressProps {
-    child: Child;
     onUpdate?: () => void;
 }
 
-const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
+const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
 
     return (
         <Card className={classes.card}>
-            <CardHeader className={classes.header} title={child.username} />
+            <CardHeader className={classes.header} title={'Tom'} />
             <CardContent>
                 <Typography variant='h5'>Weekly Progress</Typography>
 

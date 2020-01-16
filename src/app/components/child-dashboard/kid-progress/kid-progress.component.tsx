@@ -78,17 +78,46 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
                 </>
 
                 <>
-                    <Typography className={classes.gridItem}>Read the story</Typography>
+                    <Typography className={classes.gridItem}>Write your story</Typography>
                     <Typography className={classes.gridItem}>Mon 1/2</Typography>
                     <Typography className={classes.gridItem}>Complete</Typography>
                     <Button className={classes.gridItem}>Submit</Button>
                 </>
 
                 <>
-                    <Typography className={classes.gridItem}>Read the story</Typography>
+                    <Typography className={classes.gridItem}>Draw a picture</Typography>
                     <Typography className={classes.gridItem}>Mon 1/2</Typography>
                     <Typography className={classes.gridItem}>Complete</Typography>
+                    <Button className={classes.gridItem}>Draw</Button>
+                </>
+
+                <>
+                    <Typography className={classes.gridItem}>
+                        Review partner's work and assign points
+                    </Typography>
+                    <Typography className={classes.gridItem}>Tues 1/3</Typography>
+                    <Typography className={classes.gridItem}>
+                        Its not too late - finish by Wed 1/4
+                    </Typography>
                     <Button className={classes.gridItem}>Invest points</Button>
+                </>
+
+                <>
+                    <Typography className={classes.gridItem}>Evaluate 3 stories</Typography>
+                    <Typography className={classes.gridItem}>Wed 1/4</Typography>
+                    <Typography className={classes.gridItem}>
+                        Rock on! Lets get this in by Thurs 1/5
+                    </Typography>
+                    <Button className={classes.gridItem}>Evaluate</Button>
+                </>
+
+                <>
+                    <Typography className={classes.gridItem}>
+                        Get the results and review feedbacks
+                    </Typography>
+                    <Typography className={classes.gridItem}>Sat 1/7</Typography>
+                    <Typography className={classes.gridItem}>Complete</Typography>
+                    <Button className={classes.gridItem}>See Feedback</Button>
                 </>
             </section>
         </Card>

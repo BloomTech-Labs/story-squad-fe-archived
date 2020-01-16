@@ -66,16 +66,15 @@ const ChildDashboard: React.FC = () => {
                     </Button>
                 </Toolbar>
             </AppBar>
-
+            <Typography variant='h6' component='h3'>
+                Daily Mission
+            </Typography>
             <main className={classes.main}>
                 <div className={classes.toolbar} />
                 <WelcomeCard />
                 <div className={classes.sections}>
                     <section className={classes.section}>
                         <KidProgressCard child={response.me} />
-                    </section>
-                    <section className={classes.section}>
-                        <FanFictionUpload />
                     </section>
                 </div>
             </main>

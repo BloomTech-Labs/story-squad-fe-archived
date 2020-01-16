@@ -41,11 +41,36 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
     },
+    table: {
+        minWidth: 650,
+    },
 }));
+
+function createData(Missions: string, Due: string, Progress: string, Complete: string) {
+    return { Missions, Due, Progress, Complete };
+}
+
 interface KidProgressProps {
     onUpdate?: () => void;
 }
-
+const rows = [
+    createData('Read the story', 'Mon 1/2', 'Complete', 'Invest points'),
+    createData('Write your story', 'Mon 1/2', 'Complete', 'Invest points'),
+    createData('Draw a picture', 'Mon 1/2', 'Complete', 'Invest points'),
+    createData(
+        'Review partners work and assign points',
+        'Tues 1/3',
+        'Its not too late, finish by wed 1/4',
+        'Invest points'
+    ),
+    createData(
+        'Evaluate 3 stories',
+        'Wed 1/4',
+        'Rock on, lets get in this bus by Thurs 1/5',
+        'Evaluate'
+    ),
+    createData('Get the results and review feedback', 'Sat 1/7', '', 'See Feedback'),
+];
 const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();

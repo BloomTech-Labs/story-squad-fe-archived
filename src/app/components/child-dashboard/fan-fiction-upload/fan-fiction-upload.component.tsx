@@ -27,7 +27,7 @@ const FanFictionUpload: React.FC = (props) => {
 
     return (
         <Button variant='contained' color='primary' href={``}>
-            Upload Fan Fiction
+            Write and Draw
         </Button>
     );
 };

@@ -65,11 +65,11 @@ const ChildDashboard: React.FC = () => {
                 <WelcomeCard />
                 <div className={classes.sections}>
                     <section className={classes.section}>
-                        <CurrentChapterLink />
-                        <FanFictionUpload />
+                        <KidProgressCard />
                     </section>
                     <section className={classes.section}>
-                        <KidProgressCard />
+                        <CurrentChapterLink />
+                        <FanFictionUpload />
                     </section>
                 </div>
             </main>

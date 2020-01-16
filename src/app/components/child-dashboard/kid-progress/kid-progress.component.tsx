@@ -102,7 +102,6 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            >
         </Card>
     );
 };

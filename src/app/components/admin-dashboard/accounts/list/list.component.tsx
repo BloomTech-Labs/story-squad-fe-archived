@@ -63,7 +63,7 @@ const AccountsList: React.FC<Props> = ({ className }) => {
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Email</TableCell>
+                        <TableCell>Username/Email</TableCell>
                         <TableCell>Role</TableCell>
                     </TableRow>
                 </TableHead>

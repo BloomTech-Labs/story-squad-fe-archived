@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { AdminNavigationDrawer } from '../../components';
+import { AdminNavigationDrawer, PdfCreate } from '../../components';
 import { AdminHomePage } from './home/home.page';
 
 const useStyles = makeStyles((theme) => ({
@@ -51,6 +51,7 @@ const AdminDashboardPage: React.FC = () => {
             <main className={classes.main}>
                 <div className={classes.toolbar} />
                 <Switch>
+                    <Route path='/admin/dashboard/pdf/create' component={PdfCreate} />
                     <Route path='/admin/dashboard' component={AdminHomePage} />
                 </Switch>
             </main>

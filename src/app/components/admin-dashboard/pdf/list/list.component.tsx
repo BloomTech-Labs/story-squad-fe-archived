@@ -54,7 +54,7 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                     Stories
                 </Typography>
 
-                <Link to='/admin/pdf/create'>
+                <Link to='/admin/dashboard/pdf/create'>
                     <Button>Add Story</Button>
                 </Link>
             </div>

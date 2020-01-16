@@ -18,6 +18,7 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
     });
 
     const handleChange = handleSubmitBuilder(request);
+    console.log('request', request);
     React.useEffect(() => {
         if (response) history.push('/dashboard');
     }, [history, response]);

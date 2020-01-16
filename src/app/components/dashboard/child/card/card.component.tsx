@@ -56,7 +56,9 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
         buttonToggle = <Button onClick={() => signIn()}>View Account</Button>;
     } else {
         buttonToggle = (
-            <Button onClick={() => history.push('/dashboard/subscribe')}>Subscribe</Button>
+            <Button onClick={() => history.push(`/dashboard/subscribe/${child.id}`)}>
+                Subscribe
+            </Button>
         );
     }
 

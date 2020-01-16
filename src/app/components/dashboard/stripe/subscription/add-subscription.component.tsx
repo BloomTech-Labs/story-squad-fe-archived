@@ -16,6 +16,7 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
         child: childID,
         plan: '',
     });
+
     const handleChange = handleSubmitBuilder(request);
     React.useEffect(() => {
         if (response) history.push('/dashboard');
@@ -36,16 +37,12 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
                     control={<Radio />}
                     label='Test Subscription - $1/month'
                 />
-                <FormControlLabel
-                    value=''
-                    control={<Radio />}
-                    label='I do not wish to subscribe at this time'
-                />
             </RadioGroup>
 
             <Button type='submit' color='primary'>
                 Subscribe
             </Button>
+            <Button onClick={() => history.push('/dashboard')}>Cancel</Button>
         </form>
     );
 };

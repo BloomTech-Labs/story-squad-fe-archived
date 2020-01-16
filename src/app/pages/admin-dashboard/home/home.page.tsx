@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         gridTemplate: `
             "accounts story" auto`,
         gridTemplateColumns: '1fr 1fr',
-        gridGap: theme.spacing(3),
+        gridGap: theme.spacing(10),
     },
     accounts: {
         gridArea: 'accounts',
@@ -42,7 +42,7 @@ const AdminHomePage: React.FC<Props> = ({ className }) => {
     }, [request]);
 
     if (!response?.me) return <div></div>;
-    if (response.me.role !== 'admin') return <Redirect to='/admin' />;
+    if (response.me.role !== 'admin') return <Redirect to='/moderator/dashboard' />;
     return (
         <section className={`${className} ${classes.content}`}>
             <AccountsList />

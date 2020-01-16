@@ -69,7 +69,12 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
     return (
         <Card className={classes.card}>
             <CardHeader className={classes.header} title={'Tom'} />
-            <LinearProgress variant='determinate' value={completed} color='secondary' />
+            <LinearProgress
+                className={classes.header}
+                variant='determinate'
+                value={completed}
+                color='secondary'
+            />
             <section className={classes.grid}>
                 <>
                     <Typography className={classes.gridItem} variant='h6'>

@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function createData(Missions: string, Due: string, Progress: string, Complete: string) {
-    return { Missions, Due, Progress, Complete };
+function createData(name: string, Due: string, Progress: string, Complete: string) {
+    return { name, Due, Progress, Complete };
 }
 
 interface KidProgressProps {
@@ -78,18 +78,31 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
     return (
         <Card className={classes.card}>
             <CardHeader className={classes.header} title={'Tom'} />
-            <CardContent>
-                <div className={classes.statusIcons}>
-                    <CardIcon title='Phase' status={`Grade Fan Fiction`} />
-                    <CardIcon title='Assignments Completed' status={'2'} />
-                    <CardIcon title='Time left to submit' status={'1 week'} />
-                    <CardIcon title='Current Badges' status={'All the loot'} />
-                    <CardIcon title='Assigned Points' status={'0'} />
-                </div>
-            </CardContent>
-            <CardActions className={classes.actions}>
-                <Button>View Partner's Account</Button>
-            </CardActions>
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label='simple table'>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Week 12 Missions</TableCell>
+                            <TableCell align='right'>Due</TableCell>
+                            <TableCell align='right'>Progress</TableCell>
+                            <TableCell align='right'>Complete</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row) => (
+                            <TableRow key={row.name}>
+                                <TableCell component='th' scope='row'>
+                                    {row.name}
+                                </TableCell>
+                                <TableCell align='right'>{row.Due}</TableCell>
+                                <TableCell align='right'>{row.Progress}</TableCell>
+                                <TableCell align='right'>{row.Complete}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            >
         </Card>
     );
 };

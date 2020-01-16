@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Card, CardHeader, Divider, Button, Typography } from '@material-ui/core';
+import { Card, CardHeader, Divider, Button, Typography, LinearProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../models';
@@ -46,11 +46,30 @@ interface KidProgressProps {
 
 const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
     const classes = useStyles({});
-
+    const [completed, setCompleted] = React.useState(0);
     const { week } = child;
+
+    React.useEffect(() => {
+        function progress() {
+            setCompleted((oldCompleted) => {
+                if (oldCompleted === 100) {
+                    return 0;
+                }
+                const diff = Math.random() * 10;
+                return Math.min(oldCompleted + diff, 100);
+            });
+        }
+
+        const timer = setInterval(progress, 500);
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
+
     return (
         <Card className={classes.card}>
             <CardHeader className={classes.header} title={'Tom'} />
+            <LinearProgress variant='determinate' value={completed} color='secondary' />
             <section className={classes.grid}>
                 <>
                     <Typography className={classes.gridItem} variant='h6'>

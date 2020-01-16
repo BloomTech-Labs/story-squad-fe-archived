@@ -62,9 +62,9 @@ const ChildDashboard: React.FC = () => {
 
             <main className={classes.main}>
                 <div className={classes.toolbar} />
+                <WelcomeCard />
                 <div className={classes.sections}>
                     <section className={classes.section}>
-                        <WelcomeCard />
                         <CurrentChapterLink />
                         <FanFictionUpload />
                     </section>

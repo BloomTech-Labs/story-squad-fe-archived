@@ -29,14 +29,16 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({ className }) => {
             <CardContent className={classes.cardContent}>
                 <section>
                     <Typography variant='h4' component='h1' gutterBottom>
-                        Welcome back
+                        Welcome back!
                     </Typography>
                     <Typography variant='h6' component='h2'>
-                        Let's read the story of this week.
+                        Yay! You have completed your picture and story of the week!
                     </Typography>
                 </section>
                 <section>
-                    <Avatar className={classes.avatar} />
+                    <Typography variant='h6' component='h3'>
+                        Tuesday, Jan 7, 2019
+                    </Typography>
                 </section>
             </CardContent>
         </Card>

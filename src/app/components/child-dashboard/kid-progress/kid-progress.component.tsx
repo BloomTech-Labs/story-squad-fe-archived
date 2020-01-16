@@ -8,21 +8,22 @@ import { Child } from '../../../models';
 
 const useStyles = makeStyles((theme) => ({
     card: {},
-    statusIcons: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     header: {
         display: 'flex',
         backgroundColor: theme.palette.primary.main,
         color: 'white',
         justifyContent: 'space-evenly',
     },
-    headerIcon: { color: 'white' },
-    actions: {
+    title: {
         display: 'flex',
-        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    progress: {
+        marginLeft: theme.spacing(8),
+        marginRight: theme.spacing(8),
+        flexGrow: 1,
+        height: theme.spacing(1),
+        borderRadius: 30,
     },
     grid: {
         display: 'grid',
@@ -47,34 +48,23 @@ interface KidProgressProps {
 
 const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
     const classes = useStyles({});
-    const [completed, setCompleted] = React.useState(0);
     const { week } = child;
-
-    React.useEffect(() => {
-        function progress() {
-            setCompleted((oldCompleted) => {
-                if (oldCompleted === 100) {
-                    return 0;
-                }
-                const diff = Math.random() * 10;
-                return Math.min(oldCompleted + diff, 100);
-            });
-        }
-
-        const timer = setInterval(progress, 500);
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
 
     return (
         <Card className={classes.card}>
-            <CardHeader className={classes.header} title={'Tom'} />
-            <LinearProgress
+            <CardHeader
                 className={classes.header}
-                variant='determinate'
-                value={completed}
-                color='secondary'
+                title={
+                    <div className={classes.title}>
+                        <Typography variant='h6'>Tom</Typography>
+                        <LinearProgress
+                            className={classes.progress}
+                            variant='determinate'
+                            color='secondary'
+                            value={20}
+                        />
+                    </div>
+                }
             />
             <section className={classes.grid}>
                 <>

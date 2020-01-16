@@ -42,12 +42,14 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
             render={(props) => {
                 if (!jwt) return <Redirect to={redirect} />;
                 if (only) {
-                    const decoded = decode(jwt);
-                    if (only === 'child' && decoded && !decoded.childID) {
-                        return <Redirect to={redirect} />;
-                    }
-                    if (only === 'parent' && decoded && decoded.childID) {
-                        return <Redirect to={redirect} />;
+                    const { adminID, childID } = decode(jwt);
+                    if (!adminID) {
+                        if (only === 'child' && !childID) {
+                            return <Redirect to={redirect} />;
+                        }
+                        if (only === 'parent' && childID) {
+                            return <Redirect to={redirect} />;
+                        }
                     }
                 }
                 if (Component) return <Component {...props} />;

@@ -71,7 +71,9 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                     {canon.map((pdf) => (
                         <TableRow key={pdf.week}>
                             <TableCell>{pdf.week}</TableCell>
-                            <TableCell>{'TO DO: link to view pdf'}</TableCell>
+                            <TableCell>
+                                <Link to={`/story/${pdf.week}`}>View</Link>
+                            </TableCell>
                             <TableCell>
                                 {pdf.altbase64 ? 'TO DO: link to view pdf' : 'None'}
                             </TableCell>

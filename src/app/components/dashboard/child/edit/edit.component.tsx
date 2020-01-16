@@ -13,7 +13,7 @@ const ChildEdit: React.FC = () => {
     const { request: fetch, response: fetchResponse } = useAPI<{ child: Child }>(`/children/${id}`);
     const { request: update, response: updateResponse } = useAPI(`/children/${id}`, 'PUT');
 
-    const { state, setState, handleInputChange, handleSubmitBuilder } = useForm<Omit<Child, 'id'>>({
+    const { state, setState, handleInputChange, handleSubmitBuilder } = useForm({
         username: '',
         grade: 3,
     });

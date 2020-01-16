@@ -1,28 +1,10 @@
 import React from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import {
-    Card,
-    CardContent,
-    Button,
-    Typography,
-    CardActions,
-    CardHeader,
-    IconButton,
-    Icon,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Paper,
-} from '@material-ui/core';
+import { Card, CardHeader, Divider, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../models';
-import { useAPI } from '../../../hooks';
-import { CardIcon } from '../../dashboard/child/card/icon.component';
 
 const useStyles = makeStyles((theme) => ({
     card: {},
@@ -41,67 +23,74 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
     },
-    table: {
-        minWidth: 650,
+    grid: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr 1fr 1fr',
+        margin: theme.spacing(3),
+        alignItems: 'center',
+        justifyItems: 'center',
+    },
+    gridItem: {
+        margin: theme.spacing(1.5),
+    },
+    divider: {
+        gridColumnStart: '1',
+        gridColumnEnd: '5',
+        width: '100%',
     },
 }));
 
-function createData(name: string, Due: string, Progress: string, Complete: string) {
-    return { name, Due, Progress, Complete };
-}
-
 interface KidProgressProps {
-    onUpdate?: () => void;
+    child: Child;
 }
-const rows = [
-    createData('Read the story', 'Mon 1/2', 'Complete', 'Invest points'),
-    createData('Write your story', 'Mon 1/2', 'Complete', 'Invest points'),
-    createData('Draw a picture', 'Mon 1/2', 'Complete', 'Invest points'),
-    createData(
-        'Review partners work and assign points',
-        'Tues 1/3',
-        'Its not too late, finish by wed 1/4',
-        'Invest points'
-    ),
-    createData(
-        'Evaluate 3 stories',
-        'Wed 1/4',
-        'Rock on, lets get in this bus by Thurs 1/5',
-        'Evaluate'
-    ),
-    createData('Get the results and review feedback', 'Sat 1/7', '', 'See Feedback'),
-];
-const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
-    const classes = useStyles({});
-    const history = useHistory();
 
+const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
+    const classes = useStyles({});
+
+    const { week } = child;
     return (
         <Card className={classes.card}>
             <CardHeader className={classes.header} title={'Tom'} />
-            <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label='simple table'>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Week 12 Missions</TableCell>
-                            <TableCell align='right'>Due</TableCell>
-                            <TableCell align='right'>Progress</TableCell>
-                            <TableCell align='right'>Complete</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.name}>
-                                <TableCell component='th' scope='row'>
-                                    {row.name}
-                                </TableCell>
-                                <TableCell align='right'>{row.Due}</TableCell>
-                                <TableCell align='right'>{row.Progress}</TableCell>
-                                <TableCell align='right'>{row.Complete}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <section className={classes.grid}>
+                <>
+                    <Typography className={classes.gridItem} variant='h6'>
+                        Week 12 Missions
+                    </Typography>
+                    <Typography className={classes.gridItem} variant='h6'>
+                        Due
+                    </Typography>
+                    <Typography className={classes.gridItem} variant='h6'>
+                        Progress
+                    </Typography>
+                    <Typography className={classes.gridItem} variant='h6'>
+                        Complete
+                    </Typography>
+                </>
+                <Divider className={classes.divider} variant='fullWidth' />
+
+                <>
+                    <Typography className={classes.gridItem}>Read the story</Typography>
+                    <Typography className={classes.gridItem}>Mon 1/2</Typography>
+                    <Typography className={classes.gridItem}>Complete</Typography>
+                    <Link to={`/story/${week}`}>
+                        <Button className={classes.gridItem}>Read</Button>
+                    </Link>
+                </>
+
+                <>
+                    <Typography className={classes.gridItem}>Read the story</Typography>
+                    <Typography className={classes.gridItem}>Mon 1/2</Typography>
+                    <Typography className={classes.gridItem}>Complete</Typography>
+                    <Button className={classes.gridItem}>Submit</Button>
+                </>
+
+                <>
+                    <Typography className={classes.gridItem}>Read the story</Typography>
+                    <Typography className={classes.gridItem}>Mon 1/2</Typography>
+                    <Typography className={classes.gridItem}>Complete</Typography>
+                    <Button className={classes.gridItem}>Invest points</Button>
+                </>
+            </section>
         </Card>
     );
 };

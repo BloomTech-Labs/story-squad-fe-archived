@@ -3,9 +3,9 @@ import React from 'react';
 import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { useAPI } from '../../hooks';
 import {
     WelcomeCard,
-    CurrentChapterLink,
     SimpleBottomNavigation,
     FanFictionUpload,
     KidProgressCard,
@@ -46,6 +46,13 @@ const useStyles = makeStyles((theme) => ({
 const ChildDashboard: React.FC = () => {
     const classes = useStyles();
     const logout = () => window.dispatchEvent(new Event('logout'));
+    const { request, response } = useAPI('/children/me');
+
+    React.useEffect(() => {
+        request();
+    }, [request]);
+
+    if (!response?.me) return <div></div>;
     return (
         <div className={classes.root}>
             <AppBar position='fixed' className={classes.appBar}>
@@ -65,10 +72,9 @@ const ChildDashboard: React.FC = () => {
                 <WelcomeCard />
                 <div className={classes.sections}>
                     <section className={classes.section}>
-                        <KidProgressCard />
+                        <KidProgressCard child={response.me} />
                     </section>
                     <section className={classes.section}>
-                        <CurrentChapterLink />
                         <FanFictionUpload />
                     </section>
                 </div>

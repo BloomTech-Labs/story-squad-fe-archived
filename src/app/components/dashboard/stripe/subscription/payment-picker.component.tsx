@@ -8,7 +8,6 @@ const PaymentPicker: React.FC = () => {
             <CardForm />
         </StripeWrapper>
     );
-    
 };
 
 export { PaymentPicker };

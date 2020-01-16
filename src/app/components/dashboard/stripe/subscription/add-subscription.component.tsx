@@ -12,24 +12,22 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
     ReactStripeElements.InjectedStripeProps> = ({ stripe, onComplete, childID }) => {
     const history = useHistory();
     const { request, response } = useAPI('/payment/subscribe', 'POST');
-    const { state, handleInputChange, handleSubmitBuilder } = useForm({
+    const { handleInputChange, handleSubmitBuilder } = useForm({
         child: childID,
         plan: '',
     });
 
     const handleChange = handleSubmitBuilder(request);
-    const redirectButton = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        history.push('/dashboard');
-
-        React.useEffect(() => {
-            if (response) history.push('/dashboard');
-        }, []);
-    };
+    React.useEffect(() => {
+        if (response) history.push('/dashboard');
+    }, [history, response]);
     return (
         <form onSubmit={handleChange}>
             <FormLabel>Subscription Options</FormLabel>
-            <RadioGroup defaultValue='plan_GVQ796LiwZugJ9' name='plans'>
+            <RadioGroup
+                defaultValue='plan_GVQ796LiwZugJ9'
+                name='plans'
+                onChange={handleInputChange('plan')}>
                 <FormControlLabel
                     value='plan_GVQ796LiwZugJ9'
                     control={<Radio />}

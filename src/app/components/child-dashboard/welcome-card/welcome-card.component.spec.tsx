@@ -5,8 +5,7 @@ import { WelcomeCard } from './welcome-card.component';
 
 describe('WelcomeCard', () => {
     it('renders without errors', () => {
-        const user = { email: 'test@mail.com' };
-        const { baseElement } = render(<WelcomeCard child={child} />);
+        const { baseElement } = render(<WelcomeCard />);
         expect(baseElement).toBeInTheDocument();
     });
 });

@@ -14,9 +14,10 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     header: {
+        display: 'flex',
         backgroundColor: theme.palette.primary.main,
         color: 'white',
-        alignItems: 'center',
+        justifyContent: 'space-evenly',
     },
     headerIcon: { color: 'white' },
     actions: {

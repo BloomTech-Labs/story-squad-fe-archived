@@ -12,9 +12,8 @@ import {
     useMediaQuery,
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useAPI } from '../../../hooks';
 
-import { Child } from '../../../models';
+import { ChildListContext } from '../../../state';
 import { ChildLink } from '../child';
 
 const drawerWidth = 260;
@@ -25,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
         width: drawerWidth,
-        // background: theme.palette.background.default,
     },
     toolbar: {
         paddingTop: theme.spacing(4),
@@ -42,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
     selected: {
         '& > .MuiListItem-root': {
-            borderRight: 'solid black 2px',
+            borderRight: `solid black ${theme.spacing(0.4)}px`,
         },
     },
 }));
@@ -56,12 +54,7 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
     const classes = useStyles();
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('md'));
-
-    const { request, response } = useAPI<{ children: Child[] }>('/children');
-
-    React.useEffect(() => {
-        request();
-    }, [request]);
+    const list = React.useContext(ChildListContext);
 
     return (
         <Drawer
@@ -74,7 +67,13 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
             onClose={onClose}
             open={open}>
             <Toolbar className={classes.toolbar}>
-                <Icon className={classes.icon}>book</Icon>
+                <Icon className={classes.icon}>
+                    <img
+                        src={`${process.env.PUBLIC_URL}/assets/book.svg`}
+                        width='100%'
+                        height='100%'
+                    />
+                </Icon>
                 <Typography variant='h5'>Story Squad</Typography>
             </Toolbar>
             <List>
@@ -93,7 +92,7 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                 <ListItem button className={classes.menuItem}>
                     <Icon className={classes.icon}>
                         <img
-                            src={`${process.env.PUBLIC_URL}/assets/dashboard.svg`}
+                            src={`${process.env.PUBLIC_URL}/assets/accessability.svg`}
                             width='100%'
                             height='100%'
                         />
@@ -104,7 +103,7 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                     <ListItem button className={classes.menuItem}>
                         <Icon className={classes.icon}>
                             <img
-                                src={`${process.env.PUBLIC_URL}/assets/dashboard.svg`}
+                                src={`${process.env.PUBLIC_URL}/assets/check.svg`}
                                 width='100%'
                                 height='100%'
                             />
@@ -112,19 +111,19 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                         <ListItemText primary='Payment' />
                     </ListItem>
                 </NavLink>
-                {response?.children &&
-                    response.children.map((child) => (
-                        <ChildLink
-                            key={child.id}
-                            className={classes.menuItem}
-                            iconClass={classes.icon}
-                            child={child}
-                        />
-                    ))}
+                {list.map((child) => (
+                    <ChildLink
+                        key={child.id}
+                        className={classes.menuItem}
+                        iconClass={classes.icon}
+                        selectedClass={classes.selected}
+                        child={child}
+                    />
+                ))}
                 <ListItem button className={classes.menuItem}>
                     <Icon className={classes.icon}>
                         <img
-                            src={`${process.env.PUBLIC_URL}/assets/dashboard.svg`}
+                            src={`${process.env.PUBLIC_URL}/assets/calendar.svg`}
                             width='100%'
                             height='100%'
                         />

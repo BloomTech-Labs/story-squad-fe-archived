@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button, Typography, Icon, IconButton } from '@material-ui/core';
+import { Button, Typography, Icon } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../../models';
-import { useAPI } from '../../../../hooks';
 import { ChildCard } from '../card/card.component';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,8 +16,11 @@ const useStyles = makeStyles((theme) => ({
     list: {
         marginTop: theme.spacing(3),
         display: 'grid',
-        gridGap: theme.spacing(2),
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gridGap: theme.spacing(4),
+        gridTemplateColumns: '1fr',
+        [theme.breakpoints.up('lg')]: {
+            gridTemplateColumns: '1fr 1fr',
+        },
     },
     empty: {
         'display': 'flex',
@@ -36,18 +38,13 @@ const useStyles = makeStyles((theme) => ({
 
 interface ChildListProps {
     className?: string;
+    list: Child[];
 }
 
-const ChildList: React.FC<ChildListProps> = ({ className }) => {
+const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ children: Child[] }>('/children');
 
-    React.useEffect(() => {
-        request();
-    }, [request]);
-
-    if (!response?.children) return <div></div>;
-    const { children } = response;
+    if (!list) return <div></div>;
     return (
         <div className={className}>
             <section className={classes.header}>
@@ -63,10 +60,10 @@ const ChildList: React.FC<ChildListProps> = ({ className }) => {
             </section>
 
             <section className={classes.list}>
-                {children.map((child) => (
-                    <ChildCard key={child.id} child={child} onUpdate={request}></ChildCard>
+                {list.map((child) => (
+                    <ChildCard key={child.id} child={child}></ChildCard>
                 ))}
-                {children.length === 0 && (
+                {list.length === 0 && (
                     <section className={classes.empty}>
                         <Icon fontSize='large'>child_care</Icon>
                         <Typography variant='subtitle1'>0 Child Accounts</Typography>

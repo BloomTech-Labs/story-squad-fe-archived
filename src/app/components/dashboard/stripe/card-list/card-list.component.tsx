@@ -2,8 +2,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import { CreditCard } from '../../../../models';
-import { useAPI } from '../../../../hooks';
+import { PaymentContext, creditCardsRefresh } from '../../../../state';
 import { StripeCard } from '../card/card.component';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,18 +19,13 @@ interface CardListProps {
 
 const CardList: React.FC<CardListProps> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ cards: CreditCard[] }>('/payment/cards');
+    const cards = React.useContext(PaymentContext);
 
-    React.useEffect(() => {
-        request();
-    }, [request]);
-
-    if (!response) return <div></div>;
-    const { cards } = response;
+    if (!cards?.length) return <div></div>;
     return (
         <div className={`${className} ${classes.list}`}>
             {cards.map((card) => (
-                <StripeCard key={card.id} card={card} onDelete={request} />
+                <StripeCard key={card.id} card={card} onDelete={creditCardsRefresh} />
             ))}
         </div>
     );

@@ -1,16 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import {
     Card,
     CardContent,
-    Button,
     Typography,
-    CardActions,
     CardHeader,
     CircularProgress,
-    IconButton,
-    Icon,
+    CardActions,
+    Button,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -53,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     actionButton: {},
     actions: {
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
     },
 }));
 
@@ -64,13 +62,16 @@ interface ChildCardProps {
 
 const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
+    const history = useHistory();
 
-    const remove = useAPI(`/children/${child.id}`, 'DELETE');
+    const signIn = useAPI(`/children/${child.id}/login`, 'POST');
 
     React.useEffect(() => {
-        if (remove.response && onUpdate) onUpdate();
-        if (remove.response) remove.reset();
-    }, [onUpdate, remove]);
+        if (!signIn.response?.token) return;
+        localStorage.setItem('jwt', signIn.response.token);
+        window.dispatchEvent(new Event('switch-accounts'));
+        history.push(`/kids-dashboard`);
+    }, [child.id, history, signIn.response]);
 
     return (
         <Card className={classes.card}>
@@ -97,19 +98,15 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                         </Typography>
                     </section>
                 }
-                action={
-                    <Link to={`/dashboard/child/edit/${child.id}`}>
-                        <Button className={classes.actionButton} size='small' color='inherit'>
-                            Edit
-                        </Button>
-                    </Link>
-                }
             />
             <CardContent>
                 <Typography variant='h5'>Week {child.week} Progress</Typography>
 
                 <Typography variant='subtitle1'>2/5 lessons completed this week</Typography>
             </CardContent>
+            <CardActions className={classes.actions}>
+                <Button onClick={() => signIn.request()}>Get going!</Button>
+            </CardActions>
         </Card>
     );
 };

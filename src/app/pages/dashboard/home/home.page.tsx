@@ -2,8 +2,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import { User } from '../../../models';
-import { useAPI } from '../../../hooks';
+import { ParentContext, ChildListContext } from '../../../state';
 import { ParentCard, ChildList } from '../../../components';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,17 +28,14 @@ interface MainPageProps {
 
 const HomePage: React.FC<MainPageProps> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ me: User }>('/parents/me');
+    const me = React.useContext(ParentContext);
+    const list = React.useContext(ChildListContext);
 
-    React.useEffect(() => {
-        request();
-    }, [request]);
-
-    if (!response?.me) return <div></div>;
+    if (!me) return <div></div>;
     return (
         <section className={`${className} ${classes.content}`}>
-            <ParentCard className={classes.header} user={response.me} />
-            <ChildList className={classes.children} />
+            <ParentCard className={classes.header} user={me} />
+            <ChildList className={classes.children} list={list} />
         </section>
     );
 };

@@ -1,42 +1,31 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { Icon, ListItem, ListItemText } from '@material-ui/core';
 
 import { Child } from '../../../../models';
-import { useAPI } from '../../../../hooks';
 
 interface ChildLinkProps {
     className?: string;
     iconClass?: string;
+    selectedClass?: string;
     child: Child;
 }
 
-const ChildLink: React.FC<ChildLinkProps> = ({ className, iconClass, child }) => {
-    const history = useHistory();
-    const { request: signIn, response: signInResponse } = useAPI(
-        `/children/${child.id}/login`,
-        'POST'
-    );
-
-    React.useEffect(() => {
-        if (!signInResponse?.token) return;
-        localStorage.setItem('jwt', signInResponse.token);
-        window.dispatchEvent(new Event('switch-accounts'));
-        history.push('/kids-dashboard');
-    }, [history, signInResponse]);
-
+const ChildLink: React.FC<ChildLinkProps> = ({ className, iconClass, selectedClass, child }) => {
     return (
-        <ListItem button onClick={() => signIn()} className={className}>
-            <Icon className={iconClass}>
-                <img
-                    src={`${process.env.PUBLIC_URL}/assets/dashboard.svg`}
-                    width='100%'
-                    height='100%'
-                />
-            </Icon>
-            <ListItemText primary={`${child.username} Account`} />
-        </ListItem>
+        <NavLink to={`/dashboard/child/edit/${child.id}`} activeClassName={selectedClass}>
+            <ListItem button className={className}>
+                <Icon className={iconClass}>
+                    <img
+                        src={`${process.env.PUBLIC_URL}/assets/book.svg`}
+                        width='100%'
+                        height='100%'
+                    />
+                </Icon>
+                <ListItemText primary={`${child.username} Account`} />
+            </ListItem>
+        </NavLink>
     );
 };
 

@@ -27,11 +27,7 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
     return (
         <form onSubmit={handleChange}>
             <FormLabel>Subscription Options</FormLabel>
-            <RadioGroup
-                defaultValue='monthly'
-                name='plans'
-                value={plan}
-                onChange={handleInputChange('plan')}>
+            <RadioGroup name='plans' value={plan} onChange={handleInputChange('plan')}>
                 <FormControlLabel
                     value='plan_GVQ796LiwZugJ9'
                     control={<Radio />}

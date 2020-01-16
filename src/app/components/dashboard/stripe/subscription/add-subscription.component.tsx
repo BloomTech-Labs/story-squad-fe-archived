@@ -12,22 +12,24 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
     ReactStripeElements.InjectedStripeProps> = ({ stripe, onComplete, childID }) => {
     const history = useHistory();
     const { request, response } = useAPI('/payment/subscribe', 'POST');
-    const { handleInputChange, handleSubmitBuilder } = useForm({
+    const { state, handleInputChange, handleSubmitBuilder } = useForm({
         child: childID,
         plan: '',
     });
-
     const handleChange = handleSubmitBuilder(request);
-    console.log('request', request);
     React.useEffect(() => {
         if (response) history.push('/dashboard');
     }, [history, response]);
+
+    const { plan } = state;
+
     return (
         <form onSubmit={handleChange}>
             <FormLabel>Subscription Options</FormLabel>
             <RadioGroup
-                defaultValue='plan_GVQ796LiwZugJ9'
+                defaultValue='monthly'
                 name='plans'
+                value={plan}
                 onChange={handleInputChange('plan')}>
                 <FormControlLabel
                     value='plan_GVQ796LiwZugJ9'

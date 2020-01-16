@@ -1,27 +1,35 @@
 import React, { Component } from 'react';
-import Switch from '@material-ui/core/Switch';
-import Paper from '@material-ui/core/Paper';
 import Slide from '@material-ui/core/Slide';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { findByLabelText } from '@testing-library/dom';
 
 const ErrorPage = () => {
     const history = useHistory();
+    const classes = useStyles();
     return (
-        <div id='error'>
-            <h1 className='notFoundTitle'>OOPS...DON'T WORRY</h1>
+        <div className={classes.content}>
+            <div className={classes.toolbar} />
+            <Typography variant='h6' component='h6'>
+                Story Squad
+            </Typography>
+            <br />
+            <Typography variant='h3' component='h3'>
+                OOPS...DON'T WORRY
+            </Typography>
+            <br />
             <div className='animation'>
                 <SimpleSlide />
             </div>
-            <h5 className='notFoundDesc'>
+            <Typography variant='h6' component='h6'>
                 The page you're looking for isn't available, but we'll help you continue your
                 mission!
-            </h5>
+            </Typography>
+            <br />
             <div>
-                <Button onClick={history.goBack}>Let's go back</Button>
+                <Button variant='contained' color='primary' onClick={history.goBack}>
+                    Let's go back
+                </Button>
             </div>
         </div>
     );
@@ -31,11 +39,18 @@ const useStyles = makeStyles((theme) => ({
     root: {
         height: 180,
         float: 'right',
+        marginRight: 100,
     },
     wrapper: {
         width: 400 + theme.spacing(2),
         display: 'flex',
         alignContent: 'flexEnd',
+    },
+    toolbar: theme.mixins.toolbar,
+    content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing(3),
     },
 }));
 

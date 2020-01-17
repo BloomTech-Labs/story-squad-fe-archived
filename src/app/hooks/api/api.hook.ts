@@ -1,11 +1,15 @@
 import { useState, useCallback } from 'react';
-import { AxiosResponse } from 'axios';
+import { AxiosResponse, AxiosError } from 'axios';
 
 import requestFactory from '../../util/requestFactory';
 
+interface ErrorObject {
+    [key: string]: string | string[];
+}
+
 interface APIHook<T> {
     response: T | undefined;
-    error: Error | undefined;
+    error: ErrorObject | undefined;
     loading: boolean;
     request: (...args: any) => Promise<void>;
     reset: () => void;
@@ -27,7 +31,7 @@ type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 const useAPI = <T>(url: string, method: Method = 'GET'): APIHook<T> => {
     const [response, setResponse] = useState<T>();
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<Error>();
+    const [error, setError] = useState<ErrorObject>();
 
     const request = useCallback(
         async (...args) => {
@@ -55,7 +59,8 @@ const useAPI = <T>(url: string, method: Method = 'GET'): APIHook<T> => {
 
                 setResponse(res.data);
             } catch (err) {
-                setError(err);
+                const error = err as AxiosError;
+                setError(error?.response?.data);
             }
 
             setLoading(false);

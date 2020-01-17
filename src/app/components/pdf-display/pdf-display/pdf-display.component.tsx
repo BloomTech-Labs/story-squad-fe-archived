@@ -3,6 +3,7 @@ import { PDFReader } from 'react-read-pdf-b';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import { displayError } from '../../../state';
 import { useAPI } from '../../../hooks';
 import { numbersBetweenZero } from '../../../util';
 
@@ -30,7 +31,7 @@ const PDFDisplay: React.FC<PDFDisplayProps> = ({ week }) => {
     const classes = useStyles();
     const [file, setFile] = React.useState<Buffer>();
     const [pages, setPages] = React.useState<number[]>();
-    const { request, response } = useAPI(`/canon/${week}`);
+    const { request, response, error } = useAPI(`/canon/${week}`);
 
     React.useEffect(() => {
         request();
@@ -46,6 +47,10 @@ const PDFDisplay: React.FC<PDFDisplayProps> = ({ week }) => {
         const { promise } = pdfjsLib.getDocument({ data: file });
         promise.then(({ numPages }) => setPages(numbersBetweenZero(numPages)));
     }, [file]);
+
+    React.useEffect(() => {
+        if (typeof error?.message === 'string') displayError(error?.message);
+    }, [error]);
 
     if (!file) return <div>Downloading...</div>;
     if (!pages) return <div>Loading...</div>;

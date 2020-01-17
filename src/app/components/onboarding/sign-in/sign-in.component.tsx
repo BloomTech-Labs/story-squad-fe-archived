@@ -6,9 +6,8 @@ import { Button, TextField, CircularProgress, Typography } from '@material-ui/co
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
-import { useAPI } from '../../../hooks/api/api.hook';
-import { useForm } from '../../../hooks/form/form.hook';
-import { CustomizedSnackbars } from '../../../pages/snackbar/sign-in-snackbar';
+import { displayError } from '../../../state';
+import { useAPI, useForm } from '../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -59,8 +58,11 @@ const SignIn: React.FC = () => {
         }
     }, [history, response]);
 
-    const { email, password } = state;
+    React.useEffect(() => {
+        if (typeof error?.message === 'string') displayError(error?.message);
+    }, [error]);
 
+    const { email, password } = state;
     return (
         <>
             <Typography variant='h4'>Welcome Back!</Typography>
@@ -80,8 +82,6 @@ const SignIn: React.FC = () => {
                     onChange={handleStringChange('password')}
                 />
                 <div className={classes.wrapper}>
-                    <CustomizedSnackbars />
-
                     <Button
                         fullWidth
                         disabled={loading}
@@ -91,7 +91,6 @@ const SignIn: React.FC = () => {
                         Sign In
                     </Button>
                     {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
-                    <Typography variant='body1'>Don't have an account? Sign up</Typography>
                 </div>
             </form>
         </>

@@ -6,8 +6,8 @@ import { Button, Checkbox, CircularProgress, TextField, Typography } from '@mate
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
-import { useAPI } from '../../../hooks';
-import { useForm } from '../../../hooks';
+import { displayError } from '../../../state';
+import { useAPI, useForm } from '../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -54,8 +54,6 @@ interface SignUpState {
 const SignUp: React.FC = () => {
     const classes = useStyles({});
 
-    // TODO: Setup Loading and Error States
-    // eslint-disable-next-line
     const { response, loading, error, request } = useAPI('/auth/register', 'POST');
     const history = useHistory();
     const { state, handleInputChange, handleBoolChange, handleSubmitBuilder } = useForm<
@@ -76,6 +74,11 @@ const SignUp: React.FC = () => {
             history.push('/dashboard');
         }
     }, [history, response]);
+
+    React.useEffect(() => {
+        if (error?.errors) displayError(error?.errors[0]);
+        if (typeof error?.message === 'string') displayError(error?.message);
+    }, [error]);
 
     const { email, password, comparePassword, termsOfService, privacyPolicy } = state;
     return (
@@ -117,15 +120,8 @@ const SignUp: React.FC = () => {
                             <Link className={classes.link} to='/terms-of-service'>
                                 Terms Of Service
                             </Link>
-                        </Typography>
-                    </label>
-                    <label className={classes.label}>
-                        <Checkbox
-                            value={privacyPolicy}
-                            onChange={handleBoolChange('privacyPolicy')}
-                        />
-                        <Typography>
-                            I Accept the{' '}
+                            <br />
+                            and{' '}
                             <Link className={classes.link} to='/privacy-policy'>
                                 Privacy Policy
                             </Link>

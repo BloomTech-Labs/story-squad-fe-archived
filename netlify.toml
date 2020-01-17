@@ -16,3 +16,6 @@
 
 [context."story-reader".environment]
     REACT_APP_ENDPOINT="https://core-story-reader-h0lubqoocdfi.herokuapp.com"
+
+[context."loading-error".environment]
+    REACT_APP_ENDPOINT="https://core-loading-error-ppljkxrfvsu.herokuapp.com"

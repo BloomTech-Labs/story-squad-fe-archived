@@ -57,6 +57,7 @@ const ErrorPage = () => {
             <section className={classes.image}>
                 <Slide direction='left' in={true} mountOnEnter unmountOnExit>
                     <img
+                        alt='Smiling Face'
                         src={`${process.env.PUBLIC_URL}/assets/smile.png`}
                         width={400}
                         height={400}

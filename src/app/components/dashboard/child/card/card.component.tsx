@@ -5,6 +5,7 @@ import {
     Card,
     CardContent,
     Button,
+    CircularProgress,
     Typography,
     CardActions,
     CardHeader,
@@ -12,6 +13,7 @@ import {
     Icon,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 
 import { Child } from '../../../../models';
 import { useAPI } from '../../../../hooks';
@@ -34,6 +36,18 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
     },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -24,
+        marginLeft: -12,
+    },
 }));
 
 interface ChildCardProps {
@@ -45,7 +59,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
 
-    const { request: signIn, response } = useAPI(`/children/${child.id}/login`, 'POST');
+    const { request: signIn, response, loading } = useAPI(`/children/${child.id}/login`, 'POST');
     const { request: remove, response: removeResponse, reset: removeReset } = useAPI(
         `/children/${child.id}`,
         'DELETE'
@@ -97,7 +111,12 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                 </div>
             </CardContent>
             <CardActions className={classes.actions}>
-                <Button onClick={() => signIn()}>View Account</Button>
+                <div className={classes.wrapper}>
+                    <Button fullWidth disabled={loading} onClick={() => signIn()}>
+                        View Account
+                    </Button>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
             </CardActions>
         </Card>
     );

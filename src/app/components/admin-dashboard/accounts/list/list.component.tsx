@@ -56,7 +56,13 @@ const AccountsList: React.FC<Props> = ({ className }) => {
                 </Typography>
 
                 <Link to='/admin/dashboard/account/create'>
-                    <Button>Add Account</Button>
+                    <Button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            window.alert('Not Yet Implemented');
+                        }}>
+                        Add Account
+                    </Button>
                 </Link>
             </div>
 

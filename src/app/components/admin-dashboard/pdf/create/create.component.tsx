@@ -77,6 +77,7 @@ const PdfCreate: React.FC = () => {
                     id='pdfAlt'
                     type='file'
                     inputProps={{ accept: '.pdf' }}
+                    disabled
                     onChange={handleFileChange('altbase64')}
                 />
 

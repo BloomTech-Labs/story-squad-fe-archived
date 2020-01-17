@@ -4,7 +4,6 @@ import { ReactStripeElements, injectStripe } from 'react-stripe-elements';
 import { useHistory } from 'react-router';
 import { useAPI, useForm } from '../../../../hooks';
 
-import { PaymentPicker } from './payment-picker.component';
 interface AddSubscriptionProps {
     onComplete?: () => void;
     childID: {};
@@ -28,7 +27,6 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
 
     return (
         <>
-            <PaymentPicker />
             <form onSubmit={handleChange}>
                 <FormLabel>Subscription Options</FormLabel>
                 <RadioGroup name='plans' value={plan} onChange={handleInputChange('plan')}>

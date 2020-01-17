@@ -8,6 +8,7 @@ import { green } from '@material-ui/core/colors';
 
 import { useAPI } from '../../../hooks/api/api.hook';
 import { useForm } from '../../../hooks/form/form.hook';
+import { CustomizedSnackbars } from '../../../pages/snackbar/sign-in-snackbar';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -59,6 +60,7 @@ const SignIn: React.FC = () => {
     }, [history, response]);
 
     const { email, password } = state;
+
     return (
         <>
             <Typography variant='h4'>Welcome Back!</Typography>
@@ -78,6 +80,8 @@ const SignIn: React.FC = () => {
                     onChange={handleStringChange('password')}
                 />
                 <div className={classes.wrapper}>
+                    <CustomizedSnackbars />
+
                     <Button
                         fullWidth
                         disabled={loading}

@@ -64,7 +64,6 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
         `/children/${child.id}`,
         'DELETE'
     );
-    const subscriptionStatus = child.subscription;
 
     React.useEffect(() => {
         if (!response?.token) return;
@@ -113,7 +112,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
             </CardContent>
             <CardActions className={classes.actions}>
                 <div className={classes.wrapper}>
-                    {subscriptionStatus === true ? (
+                    {child.subscription === true ? (
                         <Button fullWidth disabled={loading} onClick={() => signIn()}>
                             View Account
                         </Button>

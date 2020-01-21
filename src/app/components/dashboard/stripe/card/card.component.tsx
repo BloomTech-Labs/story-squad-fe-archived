@@ -70,6 +70,15 @@ const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, defaultCard }) 
                     </IconButton>
                 }
             />
+            <Chip
+                size='small'
+                clickable
+                label='Make Default'
+                color='primary'
+                variant='outlined'
+                className={classes.chip}
+            />
+
             <CardContent className={classes.cardContent}>
                 <Typography variant='subtitle2'>
                     {card.exp_month}/{card.exp_year}

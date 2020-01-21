@@ -1,16 +1,17 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import {
+    Button,
     Card,
+    CardActions,
     CardContent,
-    Typography,
     CardHeader,
     CircularProgress,
-    CardActions,
-    Button,
+    Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 
 import { Child } from '../../../../models';
 import { useAPI } from '../../../../hooks';
@@ -53,6 +54,18 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'flex-end',
     },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -24,
+        marginLeft: -12,
+    },
 }));
 
 interface ChildCardProps {
@@ -63,7 +76,6 @@ interface ChildCardProps {
 const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
-
     const signIn = useAPI(`/children/${child.id}/login`, 'POST');
 
     React.useEffect(() => {
@@ -105,7 +117,24 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                 <Typography variant='subtitle1'>2/5 lessons completed this week</Typography>
             </CardContent>
             <CardActions className={classes.actions}>
-                <Button onClick={() => signIn.request()}>Get going!</Button>
+                <div className={classes.wrapper}>
+                    {child.subscription === true ? (
+                        <Button
+                            fullWidth
+                            disabled={signIn.loading}
+                            onClick={() => signIn.request()}>
+                            View Account
+                        </Button>
+                    ) : (
+                        <Link to={`/dashboard/subscribe/${child.id}`}>
+                            <Button fullWidth>Subscribe</Button>
+                        </Link>
+                    )}
+
+                    {signIn.loading && (
+                        <CircularProgress size={24} className={classes.buttonProgress} />
+                    )}
+                </div>
             </CardActions>
         </Card>
     );

@@ -3,4 +3,5 @@ export interface Child {
     username: string;
     grade: number;
     week: number;
+    subscription: boolean;
 }

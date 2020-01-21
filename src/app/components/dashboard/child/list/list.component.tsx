@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button, Typography, Icon } from '@material-ui/core';
+import { Button, CircularProgress, Icon, Typography } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../../models';
@@ -34,6 +35,18 @@ const useStyles = makeStyles((theme) => ({
     button: {
         borderRadius: theme.shape.borderRadius,
     },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
 }));
 
 interface ChildListProps {
@@ -44,7 +57,7 @@ interface ChildListProps {
 const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
     const classes = useStyles({});
 
-    if (!list) return <div></div>;
+    if (!list) return <CircularProgress size={24} className={classes.buttonProgress} />;
     return (
         <div className={className}>
             <section className={classes.header}>

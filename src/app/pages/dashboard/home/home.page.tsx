@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
+import { CircularProgress } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
 
 import { ParentContext, ChildListContext } from '../../../state';
 import { ParentCard, ChildList } from '../../../components';
@@ -28,10 +30,11 @@ interface MainPageProps {
 
 const HomePage: React.FC<MainPageProps> = ({ className }) => {
     const classes = useStyles({});
+
     const me = React.useContext(ParentContext);
     const list = React.useContext(ChildListContext);
 
-    if (!me) return <div></div>;
+    if (!me) return <CircularProgress size={24} />;
     return (
         <section className={`${className} ${classes.content}`}>
             <ParentCard className={classes.header} user={me} />

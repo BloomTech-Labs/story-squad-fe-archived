@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { CreditCard } from '../../../../models';
 import { useAPI } from '../../../../hooks';
+import { create } from 'react-test-renderer';
 
 interface StripeCardProps {
     card: CreditCard;

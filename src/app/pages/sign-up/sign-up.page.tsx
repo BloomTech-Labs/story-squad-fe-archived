@@ -4,6 +4,7 @@ import { Grid, Paper, Tab, Tabs, useMediaQuery } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import { SignIn, SignUp } from '../../components';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     sidebar: {

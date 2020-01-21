@@ -1,5 +1,5 @@
 import React from 'react';
-import { StripeWrapper, CardForm } from '../../../../components';
+import { StripeWrapper, CardForm } from '../../..';
 import { CardList } from '../card-list/card-list.component';
 import { useAPI } from '../../../../hooks';
 import { CreditCard } from '../../../../models';

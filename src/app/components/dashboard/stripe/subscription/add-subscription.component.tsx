@@ -6,7 +6,7 @@ import { useAPI, useForm } from '../../../../hooks';
 
 interface AddSubscriptionProps {
     onComplete?: () => void;
-    childID: {};
+    childID: number;
 }
 
 const _AddSubscription: React.FC<AddSubscriptionProps &
@@ -14,7 +14,7 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
     const history = useHistory();
     const { request, response } = useAPI('/payment/subscribe', 'POST');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
-        child: childID,
+        childID,
         plan: '',
     });
 

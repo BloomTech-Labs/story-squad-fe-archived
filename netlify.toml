@@ -16,3 +16,7 @@
 
 [context."story-reader".environment]
     REACT_APP_ENDPOINT="https://core-story-reader-h0lubqoocdfi.herokuapp.com"
+
+
+[context."subscription".environment]
+    REACT_APP_ENDPOINT="https://core-subscription-en3dd0fa4gli.herokuapp.com"

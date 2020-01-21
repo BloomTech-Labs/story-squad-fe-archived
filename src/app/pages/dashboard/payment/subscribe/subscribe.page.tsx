@@ -5,12 +5,12 @@ import { AddSubscription } from '../../../../components/dashboard/stripe/subscri
 
 const SubscribePage: React.FC = () => {
     const history = useHistory();
-    const id = useParams();
+    const { id } = useParams();
     const redirect = () => history.push('/dashboard');
 
     return (
         <StripeWrapper>
-            <AddSubscription childID={id} onComplete={redirect} />
+            <AddSubscription childID={Number(id)} onComplete={redirect} />
         </StripeWrapper>
     );
 };

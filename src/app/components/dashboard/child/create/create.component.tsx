@@ -10,7 +10,6 @@ const ChildCreate: React.FC = () => {
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
         username: '',
         grade: 3,
-        subscription: false,
     });
     const handleChange = handleSubmitBuilder(request);
 

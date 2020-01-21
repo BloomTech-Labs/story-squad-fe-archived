@@ -13,6 +13,8 @@ import {
     DashboardPage,
     ChildDashboard,
     PdfDisplayPage,
+    AdminDashboardPage,
+    AdminSignInPage,
     ErrorPage,
 } from './pages';
 
@@ -41,8 +43,14 @@ const App: React.FC = () => {
                             only='child'
                             component={PdfDisplayPage}
                         />
+                        <PrivateRoute
+                            redirect='/admin'
+                            path='/admin/dashboard'
+                            component={AdminDashboardPage}
+                        />
                         <Route path='/privacy-policy' component={PrivacyPage} />
                         <Route path='/terms-of-service' component={ToSPage} />
+                        <Route path='/admin' component={AdminSignInPage} />
                         <Route exact path='/' component={SignUpPage} />
                         <Route path='/' component={ErrorPage} />
                     </Switch>

@@ -9,6 +9,12 @@ import { Child } from '../../../../models';
 import { ChildCard } from '../card/card.component';
 
 const useStyles = makeStyles((theme) => ({
+    loading: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100%',
+    },
     header: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -57,7 +63,12 @@ interface ChildListProps {
 const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
     const classes = useStyles({});
 
-    if (!list) return <CircularProgress size={24} className={classes.buttonProgress} />;
+    if (!list)
+        return (
+            <section className={classes.loading}>
+                <CircularProgress size={56} />
+            </section>
+        );
     return (
         <div className={className}>
             <section className={classes.header}>

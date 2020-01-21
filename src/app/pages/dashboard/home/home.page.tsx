@@ -2,12 +2,17 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress } from '@material-ui/core';
-import { green } from '@material-ui/core/colors';
 
 import { ParentContext, ChildListContext } from '../../../state';
 import { ParentCard, ChildList } from '../../../components';
 
 const useStyles = makeStyles((theme) => ({
+    loading: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100%',
+    },
     content: {
         display: 'grid',
         gridTemplate: `
@@ -34,7 +39,12 @@ const HomePage: React.FC<MainPageProps> = ({ className }) => {
     const me = React.useContext(ParentContext);
     const list = React.useContext(ChildListContext);
 
-    if (!me) return <CircularProgress size={24} />;
+    if (!me)
+        return (
+            <section className={classes.loading}>
+                <CircularProgress size={56} />
+            </section>
+        );
     return (
         <section className={`${className} ${classes.content}`}>
             <ParentCard className={classes.header} user={me} />

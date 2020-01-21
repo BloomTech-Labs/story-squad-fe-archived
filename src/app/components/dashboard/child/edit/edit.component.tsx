@@ -97,7 +97,7 @@ const ChildEdit: React.FC<ChildEdit> = ({ id, onUpdate }) => {
 
     React.useEffect(() => {
         if (!fetchResponse) return;
-        const { id, ...child } = fetchResponse.child;
+        const { id, subscription, ...child } = fetchResponse.child;
         setChild({ ...child });
         setPreferences({ ...child.preferences });
     }, [fetchResponse, setChild, setPreferences]);

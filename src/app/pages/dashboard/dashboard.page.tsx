@@ -16,6 +16,7 @@ import { CreateChildPage } from './child/create/child.page';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        minHeight: '100vh',
     },
     main: {
         display: 'flex',

@@ -34,8 +34,9 @@ interface CardListProps {
 
 const CardList: React.FC<CardListProps> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response, loading } = useAPI<{ cards: CreditCard[] }>('/payment/cards');
-
+    const { request, response, loading } = useAPI<{ cards: CreditCard[]; customer }>(
+        '/payment/cards'
+    );
     React.useEffect(() => {
         request();
     }, [request]);
@@ -48,11 +49,16 @@ const CardList: React.FC<CardListProps> = ({ className }) => {
                 </div>
             </div>
         );
-    const { cards } = response;
+    const { cards, customer } = response;
     return (
         <div className={`${className} ${classes.list}`}>
             {cards.map((card) => (
-                <StripeCard key={card.id} card={card} onDelete={request} />
+                <StripeCard
+                    key={card.id}
+                    card={card}
+                    onDelete={request}
+                    defaultCard={customer.default_card}
+                />
             ))}
         </div>
     );

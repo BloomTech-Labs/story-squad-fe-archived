@@ -1,6 +1,14 @@
 import React from 'react';
 
-import { Card, CardContent, Typography, CardHeader, IconButton, Icon } from '@material-ui/core';
+import {
+    Card,
+    CardContent,
+    Typography,
+    CardHeader,
+    IconButton,
+    Icon,
+    Chip,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { CreditCard } from '../../../../models';
@@ -10,6 +18,7 @@ import { create } from 'react-test-renderer';
 interface StripeCardProps {
     card: CreditCard;
     onDelete?: () => void;
+    defaultCard: string;
 }
 
 const useStyles = makeStyles((theme) => ({

@@ -12,6 +12,7 @@ const PaymentPicker: React.FC = () => {
         request();
     }, [request]);
 
+    //add ability to submit and then load card list
     if (!response) {
         //if parent doesn't have a card
         return (
@@ -22,6 +23,8 @@ const PaymentPicker: React.FC = () => {
     } else {
         //if parent has a card
         return <CardList />;
+
+        //let parent pick default
     }
 };
 

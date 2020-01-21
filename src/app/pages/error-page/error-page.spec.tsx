@@ -2,14 +2,13 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ChildCard } from './card.component';
+import { ErrorPage } from './error-page';
 
-describe('ChildCard', () => {
+describe('ErrorPage', () => {
     it('renders without errors', () => {
-        const child = { id: 1, username: 'Sam', grade: 3, subscription: true };
         const { baseElement } = render(
             <BrowserRouter>
-                <ChildCard child={child} />
+                <ErrorPage />
             </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();

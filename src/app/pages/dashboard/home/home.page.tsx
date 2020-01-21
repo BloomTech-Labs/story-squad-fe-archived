@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
+import { CircularProgress } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
 
 import { User } from '../../../models';
 import { useAPI } from '../../../hooks';
@@ -24,6 +26,18 @@ const useStyles = makeStyles((theme) => ({
     notifications: {
         gridArea: 'notifications',
     },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
 }));
 
 interface MainPageProps {
@@ -32,13 +46,20 @@ interface MainPageProps {
 
 const HomePage: React.FC<MainPageProps> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ me: User }>('/parents/me');
+    const { request, response, loading } = useAPI<{ me: User }>('/parents/me');
 
     React.useEffect(() => {
         request();
     }, [request]);
 
-    if (!response?.me) return <div></div>;
+    if (!response?.me)
+        return (
+            <div>
+                <div className={classes.wrapper}>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
+            </div>
+        );
     return (
         <section className={`${className} ${classes.content}`}>
             <ParentCard className={classes.header} user={response.me} />

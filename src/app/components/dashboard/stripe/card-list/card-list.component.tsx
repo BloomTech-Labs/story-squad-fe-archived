@@ -40,7 +40,6 @@ const CardList: React.FC<CardListProps> = ({ className }) => {
     React.useEffect(() => {
         request();
     }, [request]);
-
     if (!response)
         return (
             <div>
@@ -50,6 +49,7 @@ const CardList: React.FC<CardListProps> = ({ className }) => {
             </div>
         );
     const { cards, customer } = response;
+    console.log('customer', customer);
     return (
         <div className={`${className} ${classes.list}`}>
             {cards.map((card) => (
@@ -57,7 +57,7 @@ const CardList: React.FC<CardListProps> = ({ className }) => {
                     key={card.id}
                     card={card}
                     onDelete={request}
-                    defaultCard={customer.default_card}
+                    defaultCard={customer.default_source}
                 />
             ))}
         </div>

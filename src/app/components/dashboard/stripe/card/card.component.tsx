@@ -27,17 +27,39 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'flex-end',
     },
+    chip: {
+        marginLeft: 12,
+    },
 }));
 
-const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete }) => {
+const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, defaultCard }) => {
     const { request, response } = useAPI(`/payment/cards/${card.id}`, 'DELETE');
     const classes = useStyles({});
-
+    console.log('id', card.id);
+    console.log('default', defaultCard);
     React.useEffect(() => {
         if (response?.message && onDelete) onDelete();
     }, [onDelete, response]);
 
-    return (
+    return card.id === defaultCard ? (
+        <Card className={classes.card}>
+            <CardHeader
+                title={card.brand}
+                subheader={card.last4}
+                action={
+                    <IconButton onClick={request}>
+                        <Icon>delete</Icon>
+                    </IconButton>
+                }
+            />
+            <Chip size='small' label='Default' color='primary' className={classes.chip} />
+            <CardContent className={classes.cardContent}>
+                <Typography variant='subtitle2'>
+                    {card.exp_month}/{card.exp_year}
+                </Typography>
+            </CardContent>
+        </Card>
+    ) : (
         <Card className={classes.card}>
             <CardHeader
                 title={card.brand}

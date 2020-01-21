@@ -80,8 +80,10 @@ const SignUpPage: React.FC = () => {
                         <Tab value='sign-in' label='Sign In' />
                     </Tabs>
                     <div className={classes.onboarding}>
-                        {value === 'sign-up' && <SignUp />}
-                        {value === 'sign-in' && <SignIn />}
+                        <Switch>
+                            {value === 'sign-up' && <Route exact path='/' component={SignUp} />}
+                            {value === 'sign-in' && <Route exact path='/' component={SignIn} />}
+                        </Switch>
                     </div>
                 </Paper>
             </Grid>

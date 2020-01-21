@@ -43,7 +43,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
                 if (!jwt) return <Redirect to={redirect} />;
                 if (only) {
                     const decoded = decode(jwt);
-                    if (only === 'child' && decoded && !decoded.childID) {
+                    if (only === 'child' && decoded && !decoded.childID && !decoded.subscription) {
                         return <Redirect to={redirect} />;
                     }
                     if (only === 'parent' && decoded && decoded.childID) {

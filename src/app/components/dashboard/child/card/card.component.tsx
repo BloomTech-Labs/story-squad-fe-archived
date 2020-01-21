@@ -112,9 +112,16 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
             </CardContent>
             <CardActions className={classes.actions}>
                 <div className={classes.wrapper}>
-                    <Button fullWidth disabled={loading} onClick={() => signIn()}>
-                        View Account
-                    </Button>
+                    {child.subscription === true ? (
+                        <Button fullWidth disabled={loading} onClick={() => signIn()}>
+                            View Account
+                        </Button>
+                    ) : (
+                        <Link to={`/dashboard/subscribe/${child.id}`}>
+                            <Button fullWidth>Subscribe</Button>
+                        </Link>
+                    )}
+
                     {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                 </div>
             </CardActions>

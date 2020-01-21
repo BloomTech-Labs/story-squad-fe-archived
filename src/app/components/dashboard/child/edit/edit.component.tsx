@@ -34,7 +34,9 @@ const ChildEdit: React.FC = () => {
     );
     const { request: update, response: updateResponse } = useAPI(`/children/${id}`, 'PUT');
 
-    const { state, setState, handleInputChange, handleSubmitBuilder } = useForm<Omit<Child, 'id'>>({
+    const { state, setState, handleInputChange, handleSubmitBuilder } = useForm<
+        Omit<Child, 'id' | 'subscription'>
+    >({
         username: '',
         grade: 3,
     });

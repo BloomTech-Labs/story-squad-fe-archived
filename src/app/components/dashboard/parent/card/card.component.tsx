@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { User } from '../../../../models';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     card: {},
     cardContent: {
         display: 'flex',

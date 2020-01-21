@@ -5,6 +5,7 @@ import {
     Card,
     CardContent,
     Button,
+    CircularProgress,
     Typography,
     CardActions,
     CardHeader,
@@ -12,6 +13,7 @@ import {
     Icon,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 
 import { Child } from '../../../../models';
 import { useAPI } from '../../../../hooks';
@@ -34,6 +36,18 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
     },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -24,
+        marginLeft: -12,
+    },
 }));
 
 interface ChildCardProps {
@@ -45,22 +59,12 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
 
-    const { request: signIn, response } = useAPI(`/children/${child.id}/login`, 'POST');
+    const { request: signIn, response, loading } = useAPI(`/children/${child.id}/login`, 'POST');
     const { request: remove, response: removeResponse, reset: removeReset } = useAPI(
         `/children/${child.id}`,
         'DELETE'
     );
     const subscriptionStatus = child.subscription;
-    let buttonToggle;
-    if (subscriptionStatus === true) {
-        buttonToggle = <Button onClick={() => signIn()}>View Account</Button>;
-    } else {
-        buttonToggle = (
-            <Button onClick={() => history.push(`/dashboard/subscribe/${child.id}`)}>
-                Subscribe
-            </Button>
-        );
-    }
 
     React.useEffect(() => {
         if (!response?.token) return;
@@ -107,7 +111,21 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                     <CardIcon title='Current Phase' status='Allocating Points' />
                 </div>
             </CardContent>
-            <CardActions className={classes.actions}>{buttonToggle}</CardActions>{' '}
+            <CardActions className={classes.actions}>
+                <div className={classes.wrapper}>
+                    {subscriptionStatus === true ? (
+                        <Button fullWidth disabled={loading} onClick={() => signIn()}>
+                            View Account
+                        </Button>
+                    ) : (
+                        <Link to={`/dashboard/subscribe/${child.id}`}>
+                            <Button fullWidth>Subscribe</Button>
+                        </Link>
+                    )}
+
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
+            </CardActions>
         </Card>
     );
 };

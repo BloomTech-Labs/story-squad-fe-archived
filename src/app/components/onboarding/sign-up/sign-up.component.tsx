@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { Button, Checkbox, TextField, Typography } from '@material-ui/core';
+import { Button, Checkbox, CircularProgress, TextField, Typography } from '@material-ui/core';
+
 import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 
-import { useAPI } from '../../../hooks';
-import { useForm } from '../../../hooks';
+import { displayError } from '../../../state';
+import { useAPI, useForm } from '../../../hooks';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     form: {
         display: 'flex',
         flexDirection: 'column',
@@ -27,6 +29,18 @@ const useStyles = makeStyles(() => ({
         textDecoration: 'underline',
         paddingTop: '8px',
     },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
 }));
 
 interface SignUpState {
@@ -40,8 +54,6 @@ interface SignUpState {
 const SignUp: React.FC = () => {
     const classes = useStyles({});
 
-    // TODO: Setup Loading and Error States
-    // eslint-disable-next-line
     const { response, loading, error, request } = useAPI('/auth/register', 'POST');
     const history = useHistory();
     const { state, handleInputChange, handleBoolChange, handleSubmitBuilder } = useForm<
@@ -62,6 +74,11 @@ const SignUp: React.FC = () => {
             history.push('/dashboard');
         }
     }, [history, response]);
+
+    React.useEffect(() => {
+        if (error?.errors) displayError(error?.errors[0]);
+        if (typeof error?.message === 'string') displayError(error?.message);
+    }, [error]);
 
     const { email, password, comparePassword, termsOfService, privacyPolicy } = state;
     return (
@@ -103,24 +120,25 @@ const SignUp: React.FC = () => {
                             <Link className={classes.link} to='/terms-of-service'>
                                 Terms Of Service
                             </Link>
-                        </Typography>
-                    </label>
-                    <label className={classes.label}>
-                        <Checkbox
-                            value={privacyPolicy}
-                            onChange={handleBoolChange('privacyPolicy')}
-                        />
-                        <Typography>
-                            I Accept the{' '}
+                            <br />
+                            and{' '}
                             <Link className={classes.link} to='/privacy-policy'>
                                 Privacy Policy
                             </Link>
                         </Typography>
                     </label>
                 </div>
-                <Button type='submit' variant='contained' size='large'>
-                    Sign Up
-                </Button>
+                <div className={classes.wrapper}>
+                    <Button
+                        fullWidth
+                        disabled={loading}
+                        type='submit'
+                        variant='contained'
+                        size='large'>
+                        Sign Up
+                    </Button>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
             </form>
         </>
     );

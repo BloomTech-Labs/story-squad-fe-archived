@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { CssBaseline } from '@material-ui/core';
 
-import { PrivateRoute } from './components';
+import { AppProvider } from './state';
+import { PrivateRoute, ErrorHandler } from './components';
 import {
     SignUpPage,
     PrivacyPage,
@@ -12,37 +13,42 @@ import {
     DashboardPage,
     ChildDashboard,
     PdfDisplayPage,
+    ErrorPage,
 } from './pages';
 
 const App: React.FC = () => {
     return (
         <main>
-            <CssBaseline />
-            <Router>
-                <Switch>
-                    <PrivateRoute
-                        redirect='/'
-                        path='/dashboard'
-                        only='parent'
-                        component={DashboardPage}
-                    />
-                    <PrivateRoute
-                        redirect='/'
-                        path='/kids-dashboard'
-                        only='child'
-                        component={ChildDashboard}
-                    />
-                    <PrivateRoute
-                        redirect='/'
-                        path='/story/:week'
-                        only='child'
-                        component={PdfDisplayPage}
-                    />
-                    <Route path='/privacy-policy' component={PrivacyPage} />
-                    <Route path='/terms-of-service' component={ToSPage} />
-                    <Route path='/' component={SignUpPage} />
-                </Switch>
-            </Router>
+            <AppProvider>
+                <CssBaseline />
+                <Router>
+                    <Switch>
+                        <PrivateRoute
+                            redirect='/'
+                            path='/dashboard'
+                            only='parent'
+                            component={DashboardPage}
+                        />
+                        <PrivateRoute
+                            redirect='/'
+                            path='/kids-dashboard'
+                            only='child'
+                            component={ChildDashboard}
+                        />
+                        <PrivateRoute
+                            redirect='/'
+                            path='/story/:week'
+                            only='child'
+                            component={PdfDisplayPage}
+                        />
+                        <Route path='/privacy-policy' component={PrivacyPage} />
+                        <Route path='/terms-of-service' component={ToSPage} />
+                        <Route exact path='/' component={SignUpPage} />
+                        <Route path='/' component={ErrorPage} />
+                    </Switch>
+                </Router>
+                <ErrorHandler />
+            </AppProvider>
         </main>
     );
 };

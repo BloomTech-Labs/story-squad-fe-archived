@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
-        height: '35vh',
+        minHeight: 300,
     },
     wrapper: {
         margin: theme.spacing(1),
@@ -87,6 +87,7 @@ const SignIn: React.FC = () => {
                         disabled={loading}
                         type='submit'
                         variant='contained'
+                        color='primary'
                         size='large'>
                         Sign In
                     </Button>

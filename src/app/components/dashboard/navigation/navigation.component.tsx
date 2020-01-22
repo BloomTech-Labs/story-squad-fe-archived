@@ -70,6 +70,7 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                 <Icon className={classes.icon}>
                     <img
                         src={`${process.env.PUBLIC_URL}/assets/book.svg`}
+                        alt='book'
                         width='100%'
                         height='100%'
                     />
@@ -82,6 +83,7 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                         <Icon className={classes.icon}>
                             <img
                                 src={`${process.env.PUBLIC_URL}/assets/dashboard.svg`}
+                                alt='dashboard'
                                 width='100%'
                                 height='100%'
                             />
@@ -93,6 +95,7 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                     <Icon className={classes.icon}>
                         <img
                             src={`${process.env.PUBLIC_URL}/assets/accessability.svg`}
+                            alt='accessability'
                             width='100%'
                             height='100%'
                         />
@@ -104,6 +107,7 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                         <Icon className={classes.icon}>
                             <img
                                 src={`${process.env.PUBLIC_URL}/assets/check.svg`}
+                                alt='check'
                                 width='100%'
                                 height='100%'
                             />
@@ -124,6 +128,7 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                     <Icon className={classes.icon}>
                         <img
                             src={`${process.env.PUBLIC_URL}/assets/calendar.svg`}
+                            alt='calendar'
                             width='100%'
                             height='100%'
                         />

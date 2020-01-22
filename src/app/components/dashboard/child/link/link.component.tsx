@@ -19,6 +19,7 @@ const ChildLink: React.FC<ChildLinkProps> = ({ className, iconClass, selectedCla
                 <Icon className={iconClass}>
                     <img
                         src={`${process.env.PUBLIC_URL}/assets/book.svg`}
+                        alt='book'
                         width='100%'
                         height='100%'
                     />

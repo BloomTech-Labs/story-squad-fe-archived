@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { CurrentChapterLink, CreativeContentSubmission } from '../../components';
+import { CurrentChapterLink } from '../../components';
 
 const ChildDashboard: React.FC = () => {
     return (
         <div>
             <CurrentChapterLink />
-            <CreativeContentSubmission user={{ week: 5 }} />
         </div>
     );
 };

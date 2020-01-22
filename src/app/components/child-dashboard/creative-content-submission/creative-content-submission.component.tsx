@@ -50,6 +50,7 @@ const CreativeContentSubmission: any = ({ user }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (state.story) setState({ ...state, storyText: '' });
         postSubmission(state);
     };
 
@@ -72,7 +73,7 @@ const CreativeContentSubmission: any = ({ user }) => {
         <>
             <Typography variant='h4'>Creative Content Submission</Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
-                <Typography variant='h6'>Story Submission</Typography>
+                <Typography variant='h5'>Story Submission</Typography>
 
                 <InputLabel htmlFor='story'>Image Submission</InputLabel>
                 <Input
@@ -93,7 +94,7 @@ const CreativeContentSubmission: any = ({ user }) => {
                     disabled={!!state.story}
                 />
 
-                <Typography variant='h6'>Illustration Submission</Typography>
+                <Typography variant='h5'>Illustration Submission</Typography>
 
                 <InputLabel htmlFor='illustration'>Image Submission</InputLabel>
                 <Input
@@ -105,7 +106,7 @@ const CreativeContentSubmission: any = ({ user }) => {
 
                 {state.illustration && <img className={classes.preview} src={state.illustration} />}
 
-                <Button type='submit' variant='contained' color='primary'>
+                <Button type='submit' variant='contained' color='primary' disabled={!!getResponse}>
                     submit
                 </Button>
             </form>

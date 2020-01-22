@@ -12,6 +12,7 @@ import { CardListPage } from './payment/list/list.page';
 import { SubscribePage } from './payment/subscribe/subscribe.page';
 import { EditProfilePage } from './child/edit/edit.page';
 import { CreateChildPage } from './child/create/child.page';
+import { CohortManagementPage } from '../../pages/admin-dashboard/cohort-management.page';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,6 +50,10 @@ const DashboardPage: React.FC = () => {
                         <Route path='/dashboard/cards/add' component={CardAddPage} />
                         <Route path='/dashboard/cards' component={CardListPage} />
                         <Route path='/dashboard/home' component={HomePage} />
+                        <Route
+                            path='/dashboard/cohort-management'
+                            component={CohortManagementPage}
+                        />
                         <Redirect to='/dashboard/home' />
                     </Switch>
                 </main>

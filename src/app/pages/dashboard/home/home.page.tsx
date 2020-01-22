@@ -1,17 +1,23 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
+import { CircularProgress } from '@material-ui/core';
 
-import { User } from '../../../models';
-import { useAPI } from '../../../hooks';
-import { ParentCard, ChildList, NotificationsCard } from '../../../components';
+import { ParentContext, ChildListContext } from '../../../state';
+import { ParentCard, ChildList } from '../../../components';
 
 const useStyles = makeStyles((theme) => ({
+    loading: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100%',
+    },
     content: {
         display: 'grid',
         gridTemplate: `
             "header header" auto
-            "children notifications" auto`,
+            "children children" auto`,
         gridTemplateColumns: '1fr 1fr',
         gridGap: theme.spacing(3),
     },
@@ -21,9 +27,6 @@ const useStyles = makeStyles((theme) => ({
     children: {
         gridArea: 'children',
     },
-    notifications: {
-        gridArea: 'notifications',
-    },
 }));
 
 interface MainPageProps {
@@ -32,18 +35,20 @@ interface MainPageProps {
 
 const HomePage: React.FC<MainPageProps> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ me: User }>('/parents/me');
 
-    React.useEffect(() => {
-        request();
-    }, [request]);
+    const me = React.useContext(ParentContext);
+    const list = React.useContext(ChildListContext);
 
-    if (!response?.me) return <div></div>;
+    if (!me)
+        return (
+            <section className={classes.loading}>
+                <CircularProgress size={56} />
+            </section>
+        );
     return (
         <section className={`${className} ${classes.content}`}>
-            <ParentCard className={classes.header} user={response.me} />
-            <ChildList className={classes.children} />
-            <NotificationsCard className={classes.notifications} />
+            <ParentCard className={classes.header} user={me} />
+            <ChildList className={classes.children} list={list} />
         </section>
     );
 };

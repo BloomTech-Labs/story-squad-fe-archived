@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, Typography, List, ListItem, ListItemText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     card: {
         minWidth: 275,
     },
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
-});
+}));
 
 interface NotificationsCardProps {
     className?: string;

@@ -20,10 +20,9 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
     only,
     ...rest
 }) => {
-    const { value: jwt, removeValue: logout, updateValue: switchAccounts } = useLocalStorage(
-        'jwt',
-        null
-    );
+    const { value: jwt, removeValue: logout, updateValue: switchAccounts } = useLocalStorage<
+        string | null
+    >('jwt', null);
 
     // Listen for events relating to user changing.
     React.useEffect(() => {
@@ -42,12 +41,14 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
             render={(props) => {
                 if (!jwt) return <Redirect to={redirect} />;
                 if (only) {
-                    const decoded = decode(jwt);
-                    if (only === 'child' && decoded && !decoded.childID) {
-                        return <Redirect to={redirect} />;
-                    }
-                    if (only === 'parent' && decoded && decoded.childID) {
-                        return <Redirect to={redirect} />;
+                    const { adminID, childID, subscription } = decode(jwt);
+                    if (!adminID) {
+                        if (only === 'child' && (!childID || !subscription)) {
+                            return <Redirect to={redirect} />;
+                        }
+                        if (only === 'parent' && childID) {
+                            return <Redirect to={redirect} />;
+                        }
                     }
                 }
                 if (Component) return <Component {...props} />;

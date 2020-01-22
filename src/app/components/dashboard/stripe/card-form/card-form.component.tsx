@@ -7,11 +7,28 @@ import {
     injectStripe,
 } from 'react-stripe-elements';
 
-import { Button } from '@material-ui/core';
+import { CircularProgress, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 
 import { useAPI } from '../../../../hooks';
 import { Message } from '../../../../models';
 import { StripeInput } from '../input/input.component';
+
+const useStyles = makeStyles((theme) => ({
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
+}));
 
 interface CardFormProps {
     onAdded?: () => void;
@@ -23,7 +40,8 @@ const _CardForm: React.FC<CardFormProps & ReactStripeElements.InjectedStripeProp
 }) => {
     // Todo: Handle Card Response
     // eslint-disable-next-line
-    const { request, response } = useAPI<Message>('/payment/cards', 'POST');
+    const classes = useStyles({});
+    const { request, response, loading } = useAPI<Message>('/payment/cards', 'POST');
     const [validForm, setValidForm] = React.useState({
         numberValid: false,
         expiryValid: false,
@@ -67,9 +85,12 @@ const _CardForm: React.FC<CardFormProps & ReactStripeElements.InjectedStripeProp
                 component={CardCvcElement}
                 onChange={handleChanges('cvcValid')}
             />
-            <Button type='submit' disabled={!isValid}>
-                Add Card
-            </Button>
+            <div className={classes.wrapper}>
+                <Button type='submit' disabled={!isValid}>
+                    Add Card
+                </Button>
+                {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+            </div>
         </form>
     );
 };

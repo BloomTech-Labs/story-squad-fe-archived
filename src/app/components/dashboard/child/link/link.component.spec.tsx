@@ -2,14 +2,14 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ChildCard } from './card.component';
+import { ChildLink } from './link.component';
 
-describe('ChildCard', () => {
+describe('ChildLink', () => {
     it('renders without errors', () => {
-        const child = { id: 1, username: 'Sam', grade: 3, week: 4, subscription: true };
+        const child = { id: 1, username: 'Sam', grade: 3, week: 4 };
         const { baseElement } = render(
             <BrowserRouter>
-                <ChildCard child={child} />
+                <ChildLink child={child} />
             </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();

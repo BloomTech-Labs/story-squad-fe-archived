@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { PaymentPicker } from './payment-picker.component';
+import { Heading } from './heading.component';
 
-describe('Payment Picker', () => {
+describe('Heading', () => {
     it('renders without errors', () => {
-        const { baseElement } = render(<PaymentPicker />);
+        const { baseElement } = render(<Heading />);
         expect(baseElement).toBeInTheDocument();
     });
 });

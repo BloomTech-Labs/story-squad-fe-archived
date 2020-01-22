@@ -121,7 +121,7 @@ const SignUp: React.FC = () => {
                         <Typography className={classes.multiline}>
                             I Accept the{' '}
                             <Link className={classes.link} to='/terms-of-service'>
-                                Terms Of Service
+                                Terms of Service
                             </Link>
                             <br />
                             and{' '}

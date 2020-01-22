@@ -1,19 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button, CircularProgress, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button, CircularProgress, Icon, Typography } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../../models';
-import { useAPI } from '../../../../hooks';
 import { ChildCard } from '../card/card.component';
 
 const useStyles = makeStyles((theme) => ({
+    loading: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100%',
+    },
     header: {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    list: {
+        marginTop: theme.spacing(3),
+        display: 'grid',
+        gridGap: theme.spacing(4),
+        gridTemplateColumns: '1fr',
+        [theme.breakpoints.up('lg')]: {
+            gridTemplateColumns: '1fr 1fr',
+        },
+    },
+    empty: {
+        'display': 'flex',
+        'flexDirection': 'column',
+        'justifyContent': 'center',
+        'alignItems': 'center',
+        '& > .MuiIcon-fontSizeLarge': {
+            fontSize: '30vh',
+        },
+    },
+    button: {
+        borderRadius: theme.shape.borderRadius,
     },
     wrapper: {
         margin: theme.spacing(1),
@@ -31,45 +57,46 @@ const useStyles = makeStyles((theme) => ({
 
 interface ChildListProps {
     className?: string;
+    list: Child[];
 }
 
-const ChildList: React.FC<ChildListProps> = ({ className }) => {
+const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
     const classes = useStyles({});
-    const { request, response, loading } = useAPI<{ children: Child[] }>('/children');
 
-    React.useEffect(() => {
-        request();
-    }, [request]);
-
-    if (!response?.children)
+    if (!list)
         return (
-            <div>
-                <div className={classes.wrapper}>
-                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
-                </div>
-            </div>
+            <section className={classes.loading}>
+                <CircularProgress size={56} />
+            </section>
         );
-    const { children } = response;
     return (
         <div className={className}>
-            <div className={classes.header}>
-                <Typography variant='h4' gutterBottom>
+            <section className={classes.header}>
+                <Typography variant='overline' gutterBottom>
                     Child Accounts
                 </Typography>
 
                 <Link to='/dashboard/child/create'>
-                    <div className={classes.wrapper}>
-                        <Button>Add Child</Button>
-                        {loading && (
-                            <CircularProgress size={24} className={classes.buttonProgress} />
-                        )}
-                    </div>
+                    <Button variant='outlined' color='primary' className={classes.button}>
+                        Add Child
+                    </Button>
                 </Link>
-            </div>
+            </section>
 
-            {children.map((child) => (
-                <ChildCard key={child.id} child={child} onUpdate={request}></ChildCard>
-            ))}
+            <section className={classes.list}>
+                {list.map((child) => (
+                    <ChildCard key={child.id} child={child}></ChildCard>
+                ))}
+                {list.length === 0 && (
+                    <section className={classes.empty}>
+                        <Icon fontSize='large'>child_care</Icon>
+                        <Typography variant='subtitle1'>0 Child Accounts</Typography>
+                        <Link to='/dashboard/child/create'>
+                            <Button>Add Child</Button>
+                        </Link>
+                    </section>
+                )}
+            </section>
         </div>
     );
 };

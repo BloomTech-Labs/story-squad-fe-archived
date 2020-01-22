@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     sidebar: {
         paddingTop: theme.spacing(6),
         flexGrow: 1,
-        height: '100vh',
+        minHeight: '100vh',
         margin: 0,
         borderRadius: 0,
     },

@@ -7,11 +7,15 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { SignIn, SignUp } from '../../components';
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        background: `linear-gradient(-30deg, #64b5f6, #512da8)`,
+    },
     sidebar: {
         paddingTop: theme.spacing(6),
         flexGrow: 1,
         height: '100vh',
         margin: 0,
+        borderRadius: 0,
     },
     tabs: {
         paddingRight: theme.spacing(4),
@@ -26,16 +30,6 @@ const useStyles = makeStyles((theme) => ({
             paddingRight: theme.spacing(10),
         },
         borderBottom: '1px solid gray',
-    },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        height: '35vh',
-    },
-    checkboxes: {
-        display: 'flex',
-        flexDirection: 'column',
     },
     onboarding: {
         paddingRight: theme.spacing(4),
@@ -65,9 +59,14 @@ const SignUpPage: React.FC = () => {
     };
 
     return (
-        <Grid container direction='row' justify='flex-end' alignItems='stretch'>
+        <Grid
+            className={classes.root}
+            container
+            direction='row'
+            justify='flex-end'
+            alignItems='stretch'>
             <Grid item xs={md ? 4 : 12}>
-                <Paper className={classes.sidebar}>
+                <Paper className={classes.sidebar} elevation={16}>
                     <Tabs
                         value={history.location.pathname}
                         onChange={handleChange}

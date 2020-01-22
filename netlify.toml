@@ -1,7 +1,7 @@
 [context.production.environment]
     REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"
 
-[context.deploy-preview]
+[context.deploy-preview.environment]
     REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"
 
 [context."create-account".environment]
@@ -30,3 +30,6 @@
 
 [context."admin-management".environment]
     REACT_APP_ENDPOINT="https://core-admin-management-a3dhivni.herokuapp.com"
+
+[context."preferences".environment]
+    REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"

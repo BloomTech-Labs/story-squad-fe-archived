@@ -5,7 +5,9 @@ import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { AdminNavigationDrawer, PdfCreate } from '../../components';
+
 import { AdminHomePage } from './home/home.page';
+import { CohortManagementPage } from './cohort-management.page';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -52,6 +54,10 @@ const AdminDashboardPage: React.FC = () => {
                 <div className={classes.toolbar} />
                 <Switch>
                     <Route path='/admin/dashboard/pdf/create' component={PdfCreate} />
+                    <Route
+                        path='/admin/dashboard/cohort-management'
+                        component={CohortManagementPage}
+                    />
                     <Route path='/admin/dashboard' component={AdminHomePage} />
                 </Switch>
             </main>

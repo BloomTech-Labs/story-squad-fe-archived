@@ -56,12 +56,16 @@ const AdminNavigationDrawer = () => {
                         <ListItemText primary='Admin Dashboard' />
                     </ListItem>
                 </NavLink>
-                <ListItem button>
-                    <ListItemText primary='Moderator Dashboard' />
-                </ListItem>
-                <ListItem button>
-                    <ListItemText primary='Help' />
-                </ListItem>
+                <NavLink to='/admin/dashboard/moderator-dashboard'>
+                    <ListItem button>
+                        <ListItemText primary='Moderator Dashboard' />
+                    </ListItem>
+                </NavLink>
+                <NavLink to='/admin/dashboard/help'>
+                    <ListItem button>
+                        <ListItemText primary='Help' />
+                    </ListItem>
+                </NavLink>
                 <NavLink to='/admin/dashboard/cohort-management'>
                     <ListItem button>
                         <ListItemText primary='Cohort Management' />

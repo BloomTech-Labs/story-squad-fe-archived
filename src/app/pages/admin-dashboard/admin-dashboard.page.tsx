@@ -8,6 +8,8 @@ import { AdminNavigationDrawer, PdfCreate } from '../../components';
 
 import { AdminHomePage } from './home/home.page';
 import { CohortManagementPage } from './cohort-management.page';
+import { ModeratorDashboardPage } from './moderator-dashboard.page';
+import { HelpPage } from './help.page';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,6 +56,11 @@ const AdminDashboardPage: React.FC = () => {
                 <div className={classes.toolbar} />
                 <Switch>
                     <Route path='/admin/dashboard/pdf/create' component={PdfCreate} />
+                    <Route
+                        path='/admin/dashboard/moderator-dashboard'
+                        component={ModeratorDashboardPage}
+                    />
+                    <Route path='/admin/dashboard/help' component={HelpPage} />
                     <Route
                         path='/admin/dashboard/cohort-management'
                         component={CohortManagementPage}

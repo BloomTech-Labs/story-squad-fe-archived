@@ -13,10 +13,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CohortManagementPage: React.FC = () => {
+const ModeratorDashboardPage: React.FC = () => {
     const classes = useStyles({});
 
-    return <div className={classes.root}>Cohort Management</div>;
+    return <div className={classes.root}>Moderator Dashboard</div>;
 };
 
-export { CohortManagementPage };
+export { ModeratorDashboardPage };

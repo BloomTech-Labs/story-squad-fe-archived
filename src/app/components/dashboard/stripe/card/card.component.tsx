@@ -18,6 +18,7 @@ import { create } from 'react-test-renderer';
 interface StripeCardProps {
     card: CreditCard;
     onDelete?: () => void;
+    onUpdate?: () => void;
     defaultCard: string;
 }
 
@@ -32,14 +33,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, defaultCard }) => {
-    const { request, response } = useAPI(`/payment/cards/${card.id}`, 'DELETE');
-    const classes = useStyles({});
-    console.log('id', card.id);
+const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, onUpdate, defaultCard }) => {
     console.log('default', defaultCard);
+    const { request: updateRequest, response: updateResponse } = useAPI(
+        `/payment/default/${card.id}`,
+        'PUT'
+    );
+    const { request: deleteRequest, response: deleteResponse } = useAPI(
+        `/payment/cards/${card.id}`,
+        'DELETE'
+    );
+    console.log('response', updateResponse);
+    const classes = useStyles({});
+
     React.useEffect(() => {
-        if (response?.message && onDelete) onDelete();
-    }, [onDelete, response]);
+        if (deleteResponse?.message && onDelete) onDelete();
+    }, [onDelete, deleteResponse]);
+    React.useEffect(() => {
+        if (updateResponse?.message && onUpdate) onUpdate();
+    }, [onUpdate, updateResponse]);
 
     return card.id === defaultCard ? (
         <Card className={classes.card}>
@@ -47,7 +59,7 @@ const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, defaultCard }) 
                 title={card.brand}
                 subheader={card.last4}
                 action={
-                    <IconButton onClick={request}>
+                    <IconButton onClick={deleteRequest}>
                         <Icon>delete</Icon>
                     </IconButton>
                 }
@@ -65,7 +77,7 @@ const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, defaultCard }) 
                 title={card.brand}
                 subheader={card.last4}
                 action={
-                    <IconButton onClick={request}>
+                    <IconButton onClick={deleteRequest}>
                         <Icon>delete</Icon>
                     </IconButton>
                 }
@@ -77,6 +89,7 @@ const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, defaultCard }) 
                 color='primary'
                 variant='outlined'
                 className={classes.chip}
+                onClick={updateRequest}
             />
 
             <CardContent className={classes.cardContent}>

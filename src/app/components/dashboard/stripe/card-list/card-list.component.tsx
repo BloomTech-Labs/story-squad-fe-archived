@@ -49,7 +49,6 @@ const CardList: React.FC<CardListProps> = ({ className }) => {
             </div>
         );
     const { cards, customer } = response;
-    console.log('customer', customer);
     return (
         <div className={`${className} ${classes.list}`}>
             {cards.map((card) => (
@@ -57,6 +56,7 @@ const CardList: React.FC<CardListProps> = ({ className }) => {
                     key={card.id}
                     card={card}
                     onDelete={request}
+                    onUpdate={request}
                     defaultCard={customer.default_source}
                 />
             ))}

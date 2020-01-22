@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         width: drawerWidth,
     },
+    drawerItem: {
+        color: 'black',
+    },
     toolbar: {
         display: 'flex',
         justifyContent: 'center',
@@ -59,6 +62,11 @@ const AdminNavigationDrawer = () => {
                 <ListItem button>
                     <ListItemText primary='Help' />
                 </ListItem>
+                <NavLink to='/admin/dashboard/cohort-management'>
+                    <ListItem button>
+                        <ListItemText primary='Cohort Management' />
+                    </ListItem>
+                </NavLink>
             </List>
         </Drawer>
     );

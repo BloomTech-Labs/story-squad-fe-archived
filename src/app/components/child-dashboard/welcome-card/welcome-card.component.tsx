@@ -19,9 +19,10 @@ const useStyles = makeStyles(() => ({
 
 interface WelcomeCardProps {
     className?: string;
+    child: Child;
 }
 
-const WelcomeCard: React.FC<WelcomeCardProps> = ({ className }) => {
+const WelcomeCard: React.FC<WelcomeCardProps> = ({ className, child }) => {
     const classes = useStyles({});
 
     return (
@@ -29,7 +30,7 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({ className }) => {
             <CardContent className={classes.cardContent}>
                 <section>
                     <Typography variant='h4' component='h1' gutterBottom>
-                        Welcome back!
+                        Welcome back {child.username}!
                     </Typography>
                     <Typography variant='h6' component='h2'>
                         Yay! You have completed your picture and story of the week!

@@ -1,17 +1,18 @@
 import React from 'react';
 
-import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, CircularProgress, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI } from '../../hooks';
-import {
-    WelcomeCard,
-    SimpleBottomNavigation,
-    FanFictionUpload,
-    KidProgressCard,
-} from '../../components';
+import { WelcomeCard, SimpleBottomNavigation, KidProgressCard } from '../../components';
 
 const useStyles = makeStyles((theme) => ({
+    loading: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+    },
     root: {
         display: 'flex',
         flexDirection: 'column',
@@ -25,15 +26,14 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         flexGrow: 1,
     },
-    sections: {
-        display: 'flex',
-        justifyContent: 'center',
-    },
-    section: {
+    content: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: theme.palette.background.default,
+        justifyContent: 'center',
         margin: theme.spacing(3),
+    },
+    welcome: {
+        marginBottom: theme.spacing(2),
     },
     bottomBar: {
         position: 'absolute',
@@ -52,7 +52,14 @@ const ChildDashboard: React.FC = () => {
         request();
     }, [request]);
 
-    if (!response?.me) return <div></div>;
+    if (!response?.me)
+        return (
+            <section className={classes.loading}>
+                <CircularProgress size={56} />
+            </section>
+        );
+
+    console.log(response?.me);
     return (
         <div className={classes.root}>
             <AppBar position='fixed' className={classes.appBar}>
@@ -68,11 +75,10 @@ const ChildDashboard: React.FC = () => {
             </AppBar>
             <main className={classes.main}>
                 <div className={classes.toolbar} />
-                <WelcomeCard />
-                <div className={classes.sections}>
-                    <section className={classes.section}>
-                        <KidProgressCard child={response.me} />
-                    </section>
+
+                <div className={classes.content}>
+                    <WelcomeCard className={classes.welcome} child={response.me} />
+                    <KidProgressCard child={response.me} />
                 </div>
             </main>
             <SimpleBottomNavigation className={classes.bottomBar} />

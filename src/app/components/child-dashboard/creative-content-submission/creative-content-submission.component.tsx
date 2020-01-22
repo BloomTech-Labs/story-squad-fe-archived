@@ -29,6 +29,10 @@ const CreativeContentSubmission: any = ({ user }) => {
     const history = useHistory();
     const { request: getSubmission, response: getResponse } = useAPI(`/submissions/${user.week}`);
     const { request: postSubmission, response: postResponse } = useAPI('/submissions', 'POST');
+    const { request: deleteSubmission, response: deleteResponse } = useAPI(
+        `/submissions/${user.week}`,
+        'DELETE'
+    );
     const [state, setState] = React.useState({ story: '', storyText: '', illustration: '' });
 
     const handleInputChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +58,11 @@ const CreativeContentSubmission: any = ({ user }) => {
         postSubmission(state);
     };
 
+    const handleDelete = (e) => {
+        e.preventDefault();
+        deleteSubmission();
+    };
+
     React.useEffect(() => {
         getSubmission();
     }, [getSubmission]);
@@ -66,8 +75,8 @@ const CreativeContentSubmission: any = ({ user }) => {
     }, [getResponse]);
 
     React.useEffect(() => {
-        if (postResponse) history.push('/kids-dashboard');
-    }, [history, postResponse]);
+        if (postResponse || deleteResponse) history.push('/kids-dashboard');
+    }, [history, postResponse, deleteResponse]);
 
     return (
         <>
@@ -81,6 +90,7 @@ const CreativeContentSubmission: any = ({ user }) => {
                     type='file'
                     inputProps={{ accept: 'image/*' }}
                     onChange={handleFileChange('story')}
+                    disabled={!!getResponse}
                 />
 
                 {state.story && <img className={classes.preview} src={state.story} />}
@@ -91,7 +101,7 @@ const CreativeContentSubmission: any = ({ user }) => {
                     rows='8'
                     value={state.storyText}
                     onChange={handleInputChange('storyText')}
-                    disabled={!!state.story}
+                    disabled={!!state.story || !!getResponse}
                 />
 
                 <Typography variant='h5'>Illustration Submission</Typography>
@@ -102,13 +112,23 @@ const CreativeContentSubmission: any = ({ user }) => {
                     type='file'
                     inputProps={{ accept: 'image/*' }}
                     onChange={handleFileChange('illustration')}
+                    disabled={!!getResponse}
                 />
 
                 {state.illustration && <img className={classes.preview} src={state.illustration} />}
 
                 <Button type='submit' variant='contained' color='primary' disabled={!!getResponse}>
-                    submit
+                    Submit
                 </Button>
+                {getResponse && (
+                    <Button
+                        type='submit'
+                        variant='contained'
+                        color='primary'
+                        onClick={handleDelete}>
+                        Delete
+                    </Button>
+                )}
             </form>
         </>
     );

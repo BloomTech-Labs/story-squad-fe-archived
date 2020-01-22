@@ -43,7 +43,7 @@ const App: React.FC = () => {
                         />
                         <Route path='/privacy-policy' component={PrivacyPage} />
                         <Route path='/terms-of-service' component={ToSPage} />
-                        <Route exact path='/' component={SignUpPage} />
+                        <Route exact path={['/', '/signup']} component={SignUpPage} />
                         <Route path='/' component={ErrorPage} />
                     </Switch>
                 </Router>

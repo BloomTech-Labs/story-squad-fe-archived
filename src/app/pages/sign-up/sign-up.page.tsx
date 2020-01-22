@@ -1,10 +1,10 @@
 import React from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
 
 import { Grid, Paper, Tab, Tabs, useMediaQuery } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import { SignIn, SignUp } from '../../components';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     sidebar: {
@@ -57,12 +57,11 @@ const useStyles = makeStyles((theme) => ({
 const SignUpPage: React.FC = () => {
     const classes = useStyles();
     const theme = useTheme();
+    const history = useHistory();
     const md = useMediaQuery(theme.breakpoints.up('md'));
 
-    const [value, setValue] = React.useState('sign-up');
-
-    const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
-        setValue(newValue);
+    const handleChange = (_e, path: string) => {
+        history.push(path);
     };
 
     return (
@@ -70,19 +69,19 @@ const SignUpPage: React.FC = () => {
             <Grid item xs={md ? 4 : 12}>
                 <Paper className={classes.sidebar}>
                     <Tabs
-                        className={classes.tabs}
-                        value={value}
+                        value={history.location.pathname}
                         onChange={handleChange}
+                        className={classes.tabs}
                         indicatorColor='primary'
                         textColor='primary'
                         variant='fullWidth'>
-                        <Tab value='sign-up' label='Sign Up' />
-                        <Tab value='sign-in' label='Sign In' />
+                        <Tab value='/' label='Sign In' />
+                        <Tab value='/signup' label='Sign Up' />
                     </Tabs>
                     <div className={classes.onboarding}>
                         <Switch>
-                            {value === 'sign-up' && <Route exact path='/' component={SignUp} />}
-                            {value === 'sign-in' && <Route exact path='/' component={SignIn} />}
+                            <Route exact path='/' component={SignIn} />
+                            <Route exact path='/signup' component={SignUp} />
                         </Switch>
                     </div>
                 </Paper>

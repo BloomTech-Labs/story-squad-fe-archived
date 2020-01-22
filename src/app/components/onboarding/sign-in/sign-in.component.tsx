@@ -87,6 +87,7 @@ const SignIn: React.FC = () => {
                         disabled={loading}
                         type='submit'
                         variant='contained'
+                        color='primary'
                         size='large'>
                         Sign In
                     </Button>

@@ -1,12 +1,8 @@
 import React from 'react';
-import { Switch, Link, Route } from 'react-router-dom';
-import { TableCell } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
-import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
-import { AdminNavigationDrawer, PdfCreate } from '../../components';
-import { AdminHomePage } from './home/home.page';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,7 +19,7 @@ const ModeratorDashboardPage: React.FC = () => {
                 Moderator Dashboard
             </Typography>
 
-            <TableCell>Moderation Options</TableCell>
+            <Typography>Moderation Options</Typography>
 
             <Link to='/admin/dashboard/moderator-dashboard'>
                 <Button

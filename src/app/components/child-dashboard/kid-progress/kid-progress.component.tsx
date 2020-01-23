@@ -6,6 +6,7 @@ import { Card, CardHeader, Divider, Button, Typography, LinearProgress } from '@
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../models';
+import { useAPI } from '../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
     card: {},
@@ -48,15 +49,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface KidProgressProps {
+    onUpdate?: () => void;
     child: Child;
 }
 
-const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
+const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
+    const { request: updateProgress, response } = useAPI('/children/progress', 'POST');
+
+    React.useEffect(() => {
+        if (response?.progress && onUpdate) onUpdate();
+        if (response?.progress) response.progress = undefined;
+    }, [onUpdate, response]);
 
     const { cohort, progress, username } = child;
     const { dueDates: dueDateStrings } = cohort;
-
     const dueDates = Object.fromEntries(
         Object.entries(dueDateStrings).map(([key, date]) => [key, moment(date)])
     );
@@ -109,7 +116,9 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
                             ? 'Due'
                             : 'Upcoming'}
                     </Typography>
-                    <Link to={`/story/${cohort.week}`}>
+                    <Link
+                        to={`/story/${cohort.week}`}
+                        onClick={() => updateProgress({ reading: true })}>
                         <Button className={classes.gridItem}>Read</Button>
                     </Link>
                 </>
@@ -126,7 +135,11 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
                             ? 'Due'
                             : 'Upcoming'}
                     </Typography>
-                    <Button className={classes.gridItem}>Submit</Button>
+                    <Button
+                        className={classes.gridItem}
+                        onClick={() => updateProgress({ writing: true })}>
+                        Complete
+                    </Button>
                 </>
 
                 {/* <>

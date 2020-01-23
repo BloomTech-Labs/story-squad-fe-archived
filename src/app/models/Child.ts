@@ -7,9 +7,9 @@ export interface Child {
         reading: boolean;
         writing: boolean;
         submission: boolean;
-        teamReview: boolean;
-        randomReview: boolean;
-        results: boolean;
+        // teamReview: boolean;
+        // randomReview: boolean;
+        // results: boolean;
     };
 
     cohort: {
@@ -18,9 +18,9 @@ export interface Child {
             reading: string;
             writing: string;
             submission: string;
-            teamReview: string;
-            randomReview: string;
-            results: string;
+            // teamReview: string;
+            // randomReview: string;
+            // results: string;
         };
     };
 }

@@ -1,20 +1,9 @@
 import React from 'react';
-import { Switch, Link, Route } from 'react-router-dom';
-import {
-    Button,
-    AppBar,
-    Toolbar,
-    Typography,
-    Table,
-    TableBody,
-    TableHead,
-    TableRow,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { TableCell } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
-import { AdminNavigationDrawer } from '../../components';
-import { AdminHomePage } from './home/home.page';
+import { Button, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
 import { useAPI } from '../../hooks';
 
 const useStyles = makeStyles(() => ({

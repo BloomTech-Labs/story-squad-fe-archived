@@ -4,7 +4,7 @@ import { AppBar, Button, CircularProgress, Toolbar, Typography } from '@material
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI } from '../../hooks';
-import { WelcomeCard, SimpleBottomNavigation, KidProgressCard } from '../../components';
+import { WelcomeCard, KidProgressCard } from '../../components';
 
 const useStyles = makeStyles((theme) => ({
     loading: {
@@ -34,11 +34,6 @@ const useStyles = makeStyles((theme) => ({
     },
     welcome: {
         marginBottom: theme.spacing(2),
-    },
-    bottomBar: {
-        position: 'absolute',
-        bottom: 0,
-        width: '100vw',
     },
     toolbar: theme.mixins.toolbar,
 }));
@@ -78,10 +73,9 @@ const ChildDashboard: React.FC = () => {
 
                 <div className={classes.content}>
                     <WelcomeCard className={classes.welcome} child={response.me} />
-                    <KidProgressCard child={response.me} />
+                    <KidProgressCard child={response.me} onUpdate={request} />
                 </div>
             </main>
-            <SimpleBottomNavigation className={classes.bottomBar} />
         </div>
     );
 };

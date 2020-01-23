@@ -3,7 +3,8 @@ import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
 import { PrivateRoute } from './private-route.component';
-import { ExampleComponent } from '../../example';
+
+const ExampleComponent = () => <></>;
 
 describe('PrivateRoute', () => {
     it('renders without errors', () => {

@@ -60,7 +60,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     React.useEffect(() => {
         if (response?.progress && onUpdate) onUpdate();
         if (response?.progress) response.progress = undefined;
-    }, [onUpdate, response, response?.progress]);
+    }, [onUpdate, response]);
 
     const { cohort, progress, username } = child;
     const { dueDates: dueDateStrings } = cohort;

@@ -1,7 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button, Typography } from '@material-ui/core';
+import {
+    Button,
+    Typography,
+    Table,
+    TableHead,
+    TableBody,
+    TableRow,
+    TableCell,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI } from '../../hooks';
@@ -15,63 +23,56 @@ const useStyles = makeStyles(() => ({
         width: '100%',
         maxWidth: '80ch',
     },
+    header: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
     loading: {
         marginLeft: '1ch',
     },
 }));
 
-interface PdfListProps {
+interface CohortManagementProps {
     className?: string;
 }
 
 interface Cohort {
     id: number;
+    name: string;
     week: string;
     activity?: string;
 }
 
-const CohortManagementPage: React.FC<PdfListProps> = ({ className }) => {
+const CohortManagementPage: React.FC<CohortManagementProps> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ cohort: Cohort[] }>('/cohort');
+    const { request, response } = useAPI<{ cohort: Cohort[] }>('/cohort/list');
 
     React.useEffect(() => {
         request();
     }, [request]);
 
-    // if (response?.cohort) return <h4 className={classes.loading}>Loading...</h4>;
-
-    // const { week } = response;
-
     return (
-        <div>
-            <Typography variant='h4' gutterBottom>
-                Cohort Management
-            </Typography>
+        <div className={className}>
+            <div className={classes.header}>
+                <Typography variant='h4' gutterBottom>
+                    Cohort Management
+                </Typography>
 
-            <Link to='/admin/dashboard/create-cohort'>
-                <Button>Create Cohort</Button>
-            </Link>
-
-            {/* <Table>
+                <Link to='/admin/dashboard/create-cohort'>
+                    <Button>Create Cohort</Button>
+                </Link>
+            </div>
+            <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Cohort #</TableCell>
+                        <TableCell>Cohort Name</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
-                    {cohort.map((cohort) => (
-                        <TableRow key={cohort.week}>
-                            <TableCell>{cohort.week}</TableCell>
-                            <TableCell>
-                                <Link to={`/story/${cohort.week}`}>View</Link>
-                            </TableCell>
-                            <TableCell>
-                                {cohort.week ? 'TO DO: link to view pdf' : 'None'}
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table> */}
+                <Button>Edit Cohort</Button>
+                <Button>Delete Cohort</Button>
+                <TableBody></TableBody>
+            </Table>
         </div>
     );
 };

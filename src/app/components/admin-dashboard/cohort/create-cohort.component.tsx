@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { TextField, Button, Input, InputLabel, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAPI } from '../../../../hooks';
+import { useAPI } from '../../../hooks';
 
 const useStyles = makeStyles(() => ({
     form: {
@@ -21,7 +21,7 @@ const CohortCreate: React.FC = () => {
     const classes = useStyles({});
 
     const history = useHistory();
-    const { request, response } = useAPI('/cohort', 'POST');
+    const { request, response } = useAPI('/cohort/list', 'POST');
     const [state, setState] = React.useState({ id: '', week: '', activity: '' });
 
     const { id } = state;
@@ -44,8 +44,8 @@ const CohortCreate: React.FC = () => {
             <Typography variant='h4'>Create a Cohort</Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
                 <TextField
-                    type='number'
-                    label='Week'
+                    type='string'
+                    label='Cohort Name'
                     inputProps={{ min: '1' }}
                     required
                     value={id}

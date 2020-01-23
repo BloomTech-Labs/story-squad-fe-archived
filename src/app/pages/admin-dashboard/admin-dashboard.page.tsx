@@ -10,7 +10,7 @@ import { AdminHomePage } from './home/home.page';
 import { CohortManagementPage } from './cohort-management.page';
 import { ModeratorDashboardPage } from './moderator-dashboard.page';
 import { HelpPage } from './help.page';
-import { CohortCreate } from '../../components/admin-dashboard/pdf/create/create-cohort.component';
+import { CohortCreate } from '../../components/admin-dashboard/cohort/create-cohort.component';
 
 const useStyles = makeStyles((theme) => ({
     root: {

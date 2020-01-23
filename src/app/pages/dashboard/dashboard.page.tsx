@@ -13,7 +13,7 @@ import { SubscribePage } from './payment/subscribe/subscribe.page';
 import { EditProfilePage } from './child/edit/edit.page';
 import { CreateChildPage } from './child/create/child.page';
 import { CohortManagementPage } from '../../pages/admin-dashboard/cohort-management.page';
-import { CohortCreate } from '../../components/admin-dashboard/pdf/create/create-cohort.component';
+import { CohortCreate } from '../../components/admin-dashboard/cohort/create-cohort.component';
 
 const useStyles = makeStyles((theme) => ({
     root: {

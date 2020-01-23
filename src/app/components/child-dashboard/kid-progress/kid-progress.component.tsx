@@ -54,13 +54,14 @@ interface KidProgressProps {
 const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
     const classes = useStyles({});
 
-    const { cohort, progress } = child;
+    const { cohort, progress, username } = child;
     const { dueDates: dueDateStrings } = cohort;
 
     const dueDates = Object.fromEntries(
         Object.entries(dueDateStrings).map(([key, date]) => [key, moment(date)])
     );
     const today = moment(new Date());
+
     return (
         <Card className={classes.card}>
             <CardHeader
@@ -68,7 +69,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
                 title={
                     <div className={classes.titleBar}>
                         <Typography variant='h6' className={classes.title}>
-                            Tom
+                            {username}
                         </Typography>
                         <LinearProgress
                             className={classes.progress}
@@ -113,25 +114,22 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
                     </Link>
                 </>
 
-                {/* <>
+                <>
                     <Typography className={classes.gridItem}>Write your story</Typography>
-                    <Typography className={classes.gridItem}>{dueDates.writing}</Typography>
                     <Typography className={classes.gridItem}>
-                        {progress.writing ? 'Complete' : 'Due'}
+                        {dueDates.writing.from(today)}
+                    </Typography>
+                    <Typography className={classes.gridItem}>
+                        {progress.writing
+                            ? 'Complete'
+                            : today.diff(dueDates.writing) > 0
+                            ? 'Due'
+                            : 'Upcoming'}
                     </Typography>
                     <Button className={classes.gridItem}>Submit</Button>
                 </>
 
-                <>
-                    <Typography className={classes.gridItem}>Draw a picture</Typography>
-                    <Typography className={classes.gridItem}>{dueDates.submission}</Typography>
-                    <Typography className={classes.gridItem}>
-                        {progress.submission ? 'Complete' : 'Due'}
-                    </Typography>
-                    <Button className={classes.gridItem}>Draw</Button>
-                </>
-
-                <>
+                {/* <>
                     <Typography className={classes.gridItem}>
                         Review partner's work and assign points
                     </Typography>

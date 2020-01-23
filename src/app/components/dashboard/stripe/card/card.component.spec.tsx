@@ -14,7 +14,7 @@ describe('StripeCard', () => {
             exp_month: 1,
             exp_year: 2001,
         };
-        const { baseElement } = render(<StripeCard card={card} />);
+        const { baseElement } = render(<StripeCard defaultCard={card.id} card={card} />);
         expect(baseElement).toBeInTheDocument();
     });
 });

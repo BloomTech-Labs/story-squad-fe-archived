@@ -1,72 +1,67 @@
 import React from 'react';
 import { Switch, Link, Route } from 'react-router-dom';
+import { TableCell } from '@material-ui/core';
 import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { TableCell } from '@material-ui/core';
 
-import { AdminNavigationDrawer } from '../../components';
-import { AdminHomePage } from './home/home.page';
-
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        height: '35vh',
-        width: '100%',
-        maxWidth: '80ch',
     },
 }));
 
-const CohortManagementPage: React.FC = () => {
+const HelpPage: React.FC = () => {
     const classes = useStyles({});
 
     return (
         <div>
             <Typography variant='h4' gutterBottom>
-                Cohort Management
+                Help
             </Typography>
 
-            <TableCell>All Current Cohorts are Displayed Below</TableCell>
+            <TableCell>Select a Section Below to Get Help on the Topic!</TableCell>
 
-            <Link to='/admin/dashboard/cohort-management'>
+            <Link to='/admin/dashboard/help'>
                 <Button
                     onClick={(e) => {
                         e.preventDefault();
                         window.alert('Not Yet Implemented');
                     }}>
-                    Cohort 1
+                    Frequently asked Questions
                 </Button>
             </Link>
-            <Link to='/admin/dashboard/cohort-management'>
+
+            <Link to='/admin/dashboard/help'>
                 <Button
                     onClick={(e) => {
                         e.preventDefault();
                         window.alert('Not Yet Implemented');
                     }}>
-                    Cohort 2
+                    Cohorts and How they are Implemented
                 </Button>
             </Link>
-            <Link to='/admin/dashboard/cohort-management'>
+
+            <Link to='/admin/dashboard/help'>
                 <Button
                     onClick={(e) => {
                         e.preventDefault();
                         window.alert('Not Yet Implemented');
                     }}>
-                    Cohort 3
+                    Child Creation Help
                 </Button>
             </Link>
-            <Link to='/admin/dashboard/cohort-management'>
+
+            <Link to='/admin/dashboard/help'>
                 <Button
                     onClick={(e) => {
                         e.preventDefault();
                         window.alert('Not Yet Implemented');
                     }}>
-                    Cohort 4
+                    Parent Creation Help
                 </Button>
             </Link>
         </div>
     );
 };
 
-export { CohortManagementPage };
+export { HelpPage };

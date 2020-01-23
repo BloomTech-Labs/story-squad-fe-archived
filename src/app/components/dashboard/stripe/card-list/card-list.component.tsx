@@ -2,7 +2,6 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress } from '@material-ui/core';
-import { green } from '@material-ui/core/colors';
 
 import { PaymentContext, creditCardsRefresh } from '../../../../state';
 import { StripeCard } from '../card/card.component';
@@ -21,13 +20,19 @@ interface CardListProps {
 
 const CardList: React.FC<CardListProps> = ({ className }) => {
     const classes = useStyles({});
-    const cards = React.useContext(PaymentContext);
+    const paymentInfo = React.useContext(PaymentContext);
 
-    if (!cards?.length) return <CircularProgress size={24} />;
+    if (!paymentInfo.cards?.length) return <CircularProgress size={24} />;
     return (
         <div className={`${className} ${classes.list}`}>
-            {cards.map((card) => (
-                <StripeCard key={card.id} card={card} onDelete={creditCardsRefresh} />
+            {paymentInfo.cards.map((card) => (
+                <StripeCard
+                    key={card.id}
+                    card={card}
+                    onDelete={creditCardsRefresh}
+                    onUpdate={creditCardsRefresh}
+                    defaultCard={paymentInfo.customer?.default_source === card.id}
+                />
             ))}
         </div>
     );

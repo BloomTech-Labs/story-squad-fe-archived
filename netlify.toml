@@ -33,3 +33,6 @@
 
 [context."preferences".environment]
     REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"
+
+[context."payment-manager".environment]
+    REACT_APP_ENDPOINT="https://core-payment-manager-mviusj96c.herokuapp.com"

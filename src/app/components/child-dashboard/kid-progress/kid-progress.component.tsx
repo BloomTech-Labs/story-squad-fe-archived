@@ -138,7 +138,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     <Button
                         className={classes.gridItem}
                         onClick={() => updateProgress({ writing: true })}>
-                        >Submit
+                        Complete
                     </Button>
                 </>
 

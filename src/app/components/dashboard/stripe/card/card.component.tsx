@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, onUpdate, defaultCard }) => {
-    console.log('default', defaultCard);
     const { request: updateRequest, response: updateResponse } = useAPI(
         `/payment/default/${card.id}`,
         'PUT'
@@ -43,14 +42,17 @@ const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, onUpdate, defau
         `/payment/cards/${card.id}`,
         'DELETE'
     );
-    console.log('response', updateResponse);
+
     const classes = useStyles({});
 
     React.useEffect(() => {
         if (deleteResponse?.message && onDelete) onDelete();
+        if (deleteResponse?.message) deleteResponse.message = undefined;
     }, [onDelete, deleteResponse]);
+
     React.useEffect(() => {
         if (updateResponse?.message && onUpdate) onUpdate();
+        if (updateResponse?.message) updateResponse.message = undefined;
     }, [onUpdate, updateResponse]);
 
     return card.id === defaultCard ? (
@@ -77,7 +79,7 @@ const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, onUpdate, defau
                 title={card.brand}
                 subheader={card.last4}
                 action={
-                    <IconButton onClick={deleteRequest}>
+                    <IconButton onClick={() => deleteRequest()}>
                         <Icon>delete</Icon>
                     </IconButton>
                 }
@@ -89,7 +91,7 @@ const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, onUpdate, defau
                 color='primary'
                 variant='outlined'
                 className={classes.chip}
-                onClick={updateRequest}
+                onClick={() => updateRequest()}
             />
 
             <CardContent className={classes.cardContent}>

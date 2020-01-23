@@ -47,7 +47,7 @@ const HelpPage: React.FC = () => {
                         e.preventDefault();
                         window.alert('Not Yet Implemented');
                     }}>
-                    Child Creation Help
+                    How to Add a Story
                 </Button>
             </Link>
 
@@ -57,7 +57,7 @@ const HelpPage: React.FC = () => {
                         e.preventDefault();
                         window.alert('Not Yet Implemented');
                     }}>
-                    Parent Creation Help
+                    How to Add an Account
                 </Button>
             </Link>
         </div>

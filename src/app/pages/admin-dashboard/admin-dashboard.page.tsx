@@ -10,6 +10,7 @@ import { AdminHomePage } from './home/home.page';
 import { CohortManagementPage } from './cohort-management.page';
 import { ModeratorDashboardPage } from './moderator-dashboard.page';
 import { HelpPage } from './help.page';
+import { CohortCreate } from '../../components/admin-dashboard/pdf/create/create-cohort.component';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -65,6 +66,8 @@ const AdminDashboardPage: React.FC = () => {
                         path='/admin/dashboard/cohort-management'
                         component={CohortManagementPage}
                     />
+                    <Route path='/admin/dashboard/create-cohort' component={CohortCreate} />
+
                     <Route path='/admin/dashboard' component={AdminHomePage} />
                 </Switch>
             </main>

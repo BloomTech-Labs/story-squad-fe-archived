@@ -1,11 +1,8 @@
 import React from 'react';
-import { Switch, Link, Route } from 'react-router-dom';
-import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { TableCell } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
-import { AdminNavigationDrawer } from '../../components';
-import { AdminHomePage } from './home/home.page';
+import { Button, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -27,7 +24,7 @@ const CohortManagementPage: React.FC = () => {
                 Cohort Management
             </Typography>
 
-            <TableCell>All Current Cohorts are Displayed Below</TableCell>
+            <Typography>All Current Cohorts are Displayed Below</Typography>
 
             <Link to='/admin/dashboard/cohort-management'>
                 <Button

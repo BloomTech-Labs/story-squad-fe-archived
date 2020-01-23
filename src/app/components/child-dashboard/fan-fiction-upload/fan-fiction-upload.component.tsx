@@ -1,13 +1,8 @@
 import React from 'react';
 
 import { Button } from '@material-ui/core';
-import requestFactory from '../../../util/requestFactory';
 
 const FanFictionUpload: React.FC = (props) => {
-    const [week, setWeek] = React.useState<number>();
-
-    const axios = requestFactory();
-
     // React.useEffect(() => {
     //if (!week) {
     //   axios

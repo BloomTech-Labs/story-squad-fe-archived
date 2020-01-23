@@ -30,7 +30,7 @@ const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {
             <CardContent className={classes.cardContent}>
                 <section>
                     <Typography variant='h4' component='h1' gutterBottom>
-                        Welcome back {user.email}
+                        Welcome back!
                     </Typography>
                     <Typography variant='h6' component='h2'>
                         Let's see how each participant is doing this week.

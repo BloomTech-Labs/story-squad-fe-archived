@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { TextField, Button, Input, InputLabel, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAPI } from '../../../hooks';
+import { useAPI } from '../../../../hooks';
 
 const useStyles = makeStyles(() => ({
     form: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const CreativeContentSubmission: any = ({ user }) => {
+const CCSForm: any = ({ user }) => {
     const classes = useStyles({});
 
     const history = useHistory();
@@ -93,7 +93,13 @@ const CreativeContentSubmission: any = ({ user }) => {
                     disabled={!!getResponse}
                 />
 
-                {state.story && <img className={classes.preview} src={state.story} />}
+                {state.story && (
+                    <img
+                        className={classes.preview}
+                        src={state.story}
+                        alt='your story submission'
+                    />
+                )}
 
                 <TextField
                     label='Typed Submission'
@@ -115,7 +121,13 @@ const CreativeContentSubmission: any = ({ user }) => {
                     disabled={!!getResponse}
                 />
 
-                {state.illustration && <img className={classes.preview} src={state.illustration} />}
+                {state.illustration && (
+                    <img
+                        className={classes.preview}
+                        src={state.illustration}
+                        alt='your illustration submission'
+                    />
+                )}
 
                 <Button type='submit' variant='contained' color='primary' disabled={!!getResponse}>
                     Submit
@@ -134,4 +146,4 @@ const CreativeContentSubmission: any = ({ user }) => {
     );
 };
 
-export { CreativeContentSubmission };
+export { CCSForm };

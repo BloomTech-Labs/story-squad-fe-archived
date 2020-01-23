@@ -12,6 +12,9 @@ export * from './dashboard/child/edit/edit.page';
 export * from './child-dashboard/child-dashboard.page';
 export * from './pdf-display/pdf-display.page';
 
+export * from './admin-dashboard/admin-dashboard.page';
+export * from './admin-sign-in/admin-sign-in.page';
+
 export * from './error-page/error-page';
 
 export * from './example/example.page';

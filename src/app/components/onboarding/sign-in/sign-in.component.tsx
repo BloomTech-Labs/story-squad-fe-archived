@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
-        height: '35vh',
+        minHeight: 300,
     },
     wrapper: {
         margin: theme.spacing(1),
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         top: '50%',
         left: '50%',
-        marginTop: -24,
+        marginTop: -12,
         marginLeft: -12,
     },
 }));
@@ -40,7 +40,7 @@ const SignIn: React.FC = () => {
 
     // TODO: Setup Loading and Error States
     // eslint-disable-next-line
-    const { response, loading, error, request } = useAPI('/auth/login', 'POST');
+    const { response, request, loading, error } = useAPI('/auth/login', 'POST');
     const history = useHistory();
     const { state, handleInputChange: handleStringChange, handleSubmitBuilder } = useForm<
         SignInState
@@ -87,6 +87,7 @@ const SignIn: React.FC = () => {
                         disabled={loading}
                         type='submit'
                         variant='contained'
+                        color='primary'
                         size='large'>
                         Sign In
                     </Button>

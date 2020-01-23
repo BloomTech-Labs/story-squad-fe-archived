@@ -19,7 +19,7 @@ interface StripeCardProps {
     card: CreditCard;
     onDelete?: () => void;
     onUpdate?: () => void;
-    defaultCard: string;
+    defaultCard: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -55,25 +55,7 @@ const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, onUpdate, defau
         if (updateResponse?.message) updateResponse.message = undefined;
     }, [onUpdate, updateResponse]);
 
-    return card.id === defaultCard ? (
-        <Card className={classes.card}>
-            <CardHeader
-                title={card.brand}
-                subheader={card.last4}
-                action={
-                    <IconButton onClick={deleteRequest}>
-                        <Icon>delete</Icon>
-                    </IconButton>
-                }
-            />
-            <Chip size='small' label='Default' color='primary' className={classes.chip} />
-            <CardContent className={classes.cardContent}>
-                <Typography variant='subtitle2'>
-                    {card.exp_month}/{card.exp_year}
-                </Typography>
-            </CardContent>
-        </Card>
-    ) : (
+    return (
         <Card className={classes.card}>
             <CardHeader
                 title={card.brand}
@@ -84,14 +66,15 @@ const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, onUpdate, defau
                     </IconButton>
                 }
             />
+
             <Chip
-                size='small'
-                clickable
-                label='Make Default'
-                color='primary'
-                variant='outlined'
                 className={classes.chip}
-                onClick={() => updateRequest()}
+                size='small'
+                clickable={!defaultCard}
+                label={defaultCard ? 'Default' : 'Make Default'}
+                color='primary'
+                variant={defaultCard ? 'default' : 'outlined'}
+                onClick={defaultCard ? undefined : () => updateRequest()}
             />
 
             <CardContent className={classes.cardContent}>

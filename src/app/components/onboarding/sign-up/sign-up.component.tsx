@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
-        height: '35vh',
+        minHeight: 400,
     },
     checkboxes: {
         display: 'flex',
@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     label: {
         display: 'flex',
         alignItems: 'center',
+    },
+    multiline: {
+        lineHeight: 1.3,
     },
     link: {
         color: 'black',
@@ -115,10 +118,10 @@ const SignUp: React.FC = () => {
                             value={termsOfService}
                             onChange={handleBoolChange('termsOfService')}
                         />
-                        <Typography>
+                        <Typography className={classes.multiline}>
                             I Accept the{' '}
                             <Link className={classes.link} to='/terms-of-service'>
-                                Terms Of Service
+                                Terms of Service
                             </Link>
                             <br />
                             and{' '}
@@ -134,6 +137,7 @@ const SignUp: React.FC = () => {
                         disabled={loading}
                         type='submit'
                         variant='contained'
+                        color='primary'
                         size='large'>
                         Sign Up
                     </Button>

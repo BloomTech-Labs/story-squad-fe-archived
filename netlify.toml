@@ -1,6 +1,8 @@
 [context.production.environment]
     REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"
 
+[context.deploy-preview.environment]
+    REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"
 
 [context."create-account".environment]
     REACT_APP_ENDPOINT="https://staging-create-account-46n6xrs.herokuapp.com"
@@ -25,3 +27,9 @@
 [context."loading-error".environment]
     REACT_APP_ENDPOINT="https://core-loading-error-ppljkxrfvsu.herokuapp.com"
 
+
+[context."admin-management".environment]
+    REACT_APP_ENDPOINT="https://core-admin-management-a3dhivni.herokuapp.com"
+
+[context."preferences".environment]
+    REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"

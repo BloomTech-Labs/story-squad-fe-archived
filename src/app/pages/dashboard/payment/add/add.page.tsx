@@ -1,11 +1,15 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { creditCardsRefresh } from '../../../../state';
 import { StripeWrapper, CardForm } from '../../../../components';
 
 const CardAddPage: React.FC = () => {
     const history = useHistory();
-    const handleAdded = () => history.push('/dashboard/cards');
+    const handleAdded = () => {
+        creditCardsRefresh();
+        history.push('/dashboard/cards');
+    };
 
     return (
         <StripeWrapper>

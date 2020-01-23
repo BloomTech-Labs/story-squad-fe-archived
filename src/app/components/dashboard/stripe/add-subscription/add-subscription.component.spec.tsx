@@ -2,7 +2,9 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
+import { ChildListProvider } from '../../../../state';
 import { StripeWrapper } from '../wrapper/wrapper.component';
+
 import { AddSubscription } from './add-subscription.component';
 
 describe('AddCard', () => {
@@ -10,7 +12,9 @@ describe('AddCard', () => {
         const { baseElement } = render(
             <BrowserRouter>
                 <StripeWrapper>
-                    <AddSubscription childID={1} />
+                    <ChildListProvider>
+                        <AddSubscription childID={1} />
+                    </ChildListProvider>
                 </StripeWrapper>
             </BrowserRouter>
         );

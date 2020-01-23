@@ -2,22 +2,19 @@ import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
 import {
-    Card,
-    CardContent,
     Button,
+    Card,
+    CardActions,
+    CardContent,
+    CardHeader,
     CircularProgress,
     Typography,
-    CardActions,
-    CardHeader,
-    IconButton,
-    Icon,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
 import { Child } from '../../../../models';
 import { useAPI } from '../../../../hooks';
-import { CardIcon } from './icon.component';
 
 const useStyles = makeStyles((theme) => ({
     card: {},
@@ -27,14 +24,35 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     header: {
-        backgroundColor: theme.palette.primary.main,
-        color: 'white',
-        alignItems: 'center',
+        'backgroundColor': theme.palette.primary.main,
+        'color': 'white',
+        'alignItems': 'center',
+        '& > .MuiCardHeader-action': {
+            margin: 0,
+            marginTop: theme.spacing(0.75),
+        },
     },
-    headerIcon: { color: 'white' },
+    titleBar: {
+        display: 'flex',
+    },
+    title: {
+        marginLeft: theme.spacing(7),
+        lineHeight: '2.5rem',
+    },
+    progress: {},
+    progressBackground: {
+        position: 'absolute',
+        color: theme.palette.grey[500],
+        opacity: 0.2,
+    },
+    progressForeground: {
+        position: 'absolute',
+        color: theme.palette.secondary.main,
+    },
+    actionButton: {},
     actions: {
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
     },
     wrapper: {
         margin: theme.spacing(1),
@@ -58,62 +76,53 @@ interface ChildCardProps {
 const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
-
-    const { request: signIn, response, loading } = useAPI(`/children/${child.id}/login`, 'POST');
-    const { request: remove, response: removeResponse, reset: removeReset } = useAPI(
-        `/children/${child.id}`,
-        'DELETE'
-    );
+    const signIn = useAPI(`/children/${child.id}/login`, 'POST');
 
     React.useEffect(() => {
-        if (!response?.token) return;
-        localStorage.setItem('jwt', response.token);
+        if (!signIn.response?.token) return;
+        localStorage.setItem('jwt', signIn.response.token);
         window.dispatchEvent(new Event('switch-accounts'));
-        history.push('/kids-dashboard');
-    }, [history, response]);
-
-    React.useEffect(() => {
-        if (removeResponse && onUpdate) {
-            onUpdate();
-            removeReset();
-        }
-    }, [history, onUpdate, removeReset, removeResponse]);
+        history.push(`/kids-dashboard`);
+    }, [child.id, history, signIn.response]);
 
     return (
         <Card className={classes.card}>
             <CardHeader
                 className={classes.header}
-                title={child.username}
-                action={
-                    <>
-                        <Link to={`/dashboard/child/edit/${child.id}`}>
-                            <IconButton>
-                                <Icon className={classes.headerIcon}>edit</Icon>
-                            </IconButton>
-                        </Link>
-
-                        <IconButton onClick={remove}>
-                            <Icon className={classes.headerIcon}>delete</Icon>
-                        </IconButton>
-                    </>
+                title={
+                    <section className={classes.titleBar}>
+                        <div className={classes.progress}>
+                            <CircularProgress
+                                className={classes.progressBackground}
+                                color='inherit'
+                                variant='static'
+                                value={100}
+                            />
+                            <CircularProgress
+                                className={classes.progressForeground}
+                                color='inherit'
+                                variant='static'
+                                value={35}
+                            />
+                        </div>
+                        <Typography className={classes.title} variant='h5'>
+                            {child.username}
+                        </Typography>
+                    </section>
                 }
             />
             <CardContent>
-                <Typography variant='h5'>Weekly Progress</Typography>
+                <Typography variant='h5'>Week {child.week} Progress</Typography>
 
                 <Typography variant='subtitle1'>2/5 lessons completed this week</Typography>
-
-                <div className={classes.statusIcons}>
-                    <CardIcon title='Reading Level' status={`Grade ${child.grade}`} />
-                    <CardIcon title='Accessability' status='None' />
-                    <CardIcon title='Week' status='12' />
-                    <CardIcon title='Current Phase' status='Allocating Points' />
-                </div>
             </CardContent>
             <CardActions className={classes.actions}>
                 <div className={classes.wrapper}>
                     {child.subscription === true ? (
-                        <Button fullWidth disabled={loading} onClick={() => signIn()}>
+                        <Button
+                            fullWidth
+                            disabled={signIn.loading}
+                            onClick={() => signIn.request()}>
                             View Account
                         </Button>
                     ) : (
@@ -122,7 +131,9 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                         </Link>
                     )}
 
-                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                    {signIn.loading && (
+                        <CircularProgress size={24} className={classes.buttonProgress} />
+                    )}
                 </div>
             </CardActions>
         </Card>

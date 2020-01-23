@@ -13,6 +13,7 @@ import {
 import { green } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { childListRefresh } from '../../../../state';
 import { useAPI, useForm } from '../../../../hooks';
 import { displayError } from '../../../../state';
 
@@ -49,6 +50,7 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
 
     const handleChange = handleSubmitBuilder(request);
     React.useEffect(() => {
+        childListRefresh();
         if (response) history.push('/dashboard');
     }, [history, response]);
 

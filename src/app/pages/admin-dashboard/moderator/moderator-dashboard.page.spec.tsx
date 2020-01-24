@@ -2,15 +2,13 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { PrivateRoute } from './private-route.component';
+import { ModeratorDashboardPage } from './moderator-dashboard.page';
 
-const ExampleComponent = () => <></>;
-
-describe('PrivateRoute', () => {
+describe('ModeratorDashboardPage', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>
-                <PrivateRoute redirect='/' component={ExampleComponent} />
+                <ModeratorDashboardPage />
             </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();

@@ -30,7 +30,7 @@ interface ChildCreateProps {
 const ChildCreate: React.FC<ChildCreateProps> = ({ onCreate }) => {
     const classes = useStyles({});
 
-    const { request, response, loading, error } = useAPI('/children', 'POST');
+    const { request, response, loading, error } = useAPI('/children/list', 'POST');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({ username: '', grade: 3 });
     const handleChange = handleSubmitBuilder(request);
 

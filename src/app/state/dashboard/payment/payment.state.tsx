@@ -1,11 +1,19 @@
 import React from 'react';
 
-import { CreditCard } from '../../../models';
+import { CreditCard, Customer } from '../../../models';
 import { useAPI } from '../../../hooks';
 
 let creditCardsRefresh: () => void;
 
-const PaymentContext = React.createContext<CreditCard[]>([]);
+interface PaymentContextState {
+    cards: CreditCard[];
+    customer: Customer | undefined;
+}
+
+const PaymentContext = React.createContext<PaymentContextState>({
+    cards: [],
+    customer: undefined,
+});
 const PaymentProvider: React.FC = ({ children }) => {
     const { request, response } = useAPI('/payment/cards');
     creditCardsRefresh = request;
@@ -14,7 +22,8 @@ const PaymentProvider: React.FC = ({ children }) => {
         request();
     }, [request]);
 
-    return <PaymentContext.Provider value={response?.cards}>{children}</PaymentContext.Provider>;
+    const state = { cards: response?.cards, customer: response?.customer };
+    return <PaymentContext.Provider value={state}>{children}</PaymentContext.Provider>;
 };
 
 export { PaymentContext, PaymentProvider, creditCardsRefresh };

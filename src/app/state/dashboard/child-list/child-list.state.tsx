@@ -7,7 +7,7 @@ let childListRefresh: () => void;
 
 const ChildListContext = React.createContext<Child[]>([]);
 const ChildListProvider: React.FC = ({ children }) => {
-    const { request, response } = useAPI('/children');
+    const { request, response } = useAPI('/children/list');
     childListRefresh = request;
 
     React.useEffect(() => {

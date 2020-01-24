@@ -63,7 +63,7 @@ const _CardForm: React.FC<CardFormProps & ReactStripeElements.InjectedStripeProp
         const { token } = await stripe.createToken({ name: 'Name' });
         if (!token) return;
 
-        request({ card: { id: token.id } });
+        request({ id: token.id });
     };
 
     const { numberValid, expiryValid, cvcValid } = validForm;

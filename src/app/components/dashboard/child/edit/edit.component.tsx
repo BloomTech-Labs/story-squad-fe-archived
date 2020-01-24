@@ -64,9 +64,9 @@ interface ChildEdit {
 const ChildEdit: React.FC<ChildEdit> = ({ id, onUpdate }) => {
     const classes = useStyles();
 
-    const { request: fetch, response: fetchResponse } = useAPI(`/children/${id}`);
-    const { request: update, response: updateResponse } = useAPI(`/children/${id}`, 'PUT');
-    const { request: remove, response: removeResponse } = useAPI(`/children/${id}`, 'DELETE');
+    const { request: fetch, response: fetchResponse } = useAPI(`/children/list/${id}`);
+    const { request: update, response: updateResponse } = useAPI(`/children/list/${id}`, 'PUT');
+    const { request: remove, response: removeResponse } = useAPI(`/children/list/${id}`, 'DELETE');
 
     const { state: child, setState: setChild, handleInputChange: handleChildChange } = useForm({
         username: '',

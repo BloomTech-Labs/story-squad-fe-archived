@@ -2,9 +2,9 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ChildCard } from './card.component';
+import { KidProgressCard } from './kid-progress.component';
 
-describe('ChildCard', () => {
+describe('KidProgressCard', () => {
     it('renders without errors', () => {
         const child = {
             id: 1,
@@ -27,7 +27,7 @@ describe('ChildCard', () => {
         };
         const { baseElement } = render(
             <BrowserRouter>
-                <ChildCard child={child} />
+                <KidProgressCard child={child} />
             </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();

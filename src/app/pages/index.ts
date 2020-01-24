@@ -16,5 +16,3 @@ export * from './admin-dashboard/admin-dashboard.page';
 export * from './admin-sign-in/admin-sign-in.page';
 
 export * from './error-page/error-page';
-
-export * from './example/example.page';

@@ -54,7 +54,6 @@ const ChildDashboard: React.FC = () => {
             </section>
         );
 
-    console.log(response?.me);
     return (
         <div className={classes.root}>
             <AppBar position='fixed' className={classes.appBar}>

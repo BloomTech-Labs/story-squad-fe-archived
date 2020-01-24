@@ -5,6 +5,7 @@ import { TextField, Button, Input, InputLabel, Typography } from '@material-ui/c
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI } from '../../../../hooks';
+import { Child } from '../../../../models';
 
 const useStyles = makeStyles(() => ({
     form: {
@@ -23,15 +24,26 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const CCSForm: any = ({ user }) => {
+interface Props {
+    onUpdate?: () => void;
+    child: Child;
+}
+
+const CCSForm: React.FC<Props> = ({ child, onUpdate }) => {
     const classes = useStyles({});
 
     const history = useHistory();
-    const { request: getSubmission, response: getResponse } = useAPI(`/submissions/${user.week}`);
+    const { request: getSubmission, response: getResponse } = useAPI(
+        `/submissions/${child.cohort.week}`
+    );
     const { request: postSubmission, response: postResponse } = useAPI('/submissions', 'POST');
     const { request: deleteSubmission, response: deleteResponse } = useAPI(
-        `/submissions/${user.week}`,
+        `/submissions/${child.cohort.week}`,
         'DELETE'
+    );
+    const { request: postProgress, response: progressResponse } = useAPI(
+        '/children/progress',
+        'POST'
     );
     const [state, setState] = React.useState({ story: '', storyText: '', illustration: '' });
 
@@ -75,8 +87,16 @@ const CCSForm: any = ({ user }) => {
     }, [getResponse]);
 
     React.useEffect(() => {
-        if (postResponse || deleteResponse) history.push('/kids-dashboard');
-    }, [history, postResponse, deleteResponse]);
+        if (postResponse) postProgress({ writing: true });
+        if (deleteResponse) postProgress({ writing: false });
+    }, [postResponse, deleteResponse, postProgress]);
+
+    React.useEffect(() => {
+        if (progressResponse && onUpdate) {
+            onUpdate();
+            history.push('/kids-dashboard');
+        }
+    }, [history, onUpdate, progressResponse]);
 
     return (
         <>

@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
 import { CCSForm } from './form.component';
+import { Child } from '../../../../models';
 
 jest.mock('../../../../hooks', () => ({
     useAPI: (path, method = 'GET') => ({
@@ -11,11 +12,13 @@ jest.mock('../../../../hooks', () => ({
     }),
 }));
 
+const child = { cohort: { week: 1 } } as Child;
+
 describe('CCSForm', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <Router>
-                <CCSForm user={{ week: 1 }} />
+                <CCSForm child={child} onUpdate={() => {}} />
             </Router>
         );
         expect(baseElement).toBeInTheDocument();

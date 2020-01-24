@@ -89,7 +89,9 @@ const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
                 ))}
                 {list.length === 0 && (
                     <section className={classes.empty}>
-                        <Icon fontSize='large'>child_care</Icon>
+                        <Icon color='disabled' fontSize='large'>
+                            child_care
+                        </Icon>
                         <Typography variant='subtitle1'>0 Child Accounts</Typography>
                         <Link to='/dashboard/child/create'>
                             <Button>Add Child</Button>

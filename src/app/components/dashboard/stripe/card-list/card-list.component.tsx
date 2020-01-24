@@ -38,10 +38,19 @@ const CardList: React.FC<CardListProps> = ({ className }) => {
     const classes = useStyles({});
     const paymentInfo = React.useContext(PaymentContext);
 
+    console.log(paymentInfo.cards);
+    if (!paymentInfo.cards)
+        return (
+            <section className={classes.loading}>
+                <CircularProgress size={56} />
+            </section>
+        );
     if (!paymentInfo.cards?.length)
         return (
             <section className={classes.empty}>
-                <Icon fontSize='large'>credit_card</Icon>
+                <Icon color='disabled' fontSize='large'>
+                    credit_card
+                </Icon>
                 <Typography variant='subtitle1'>0 Payment Methods</Typography>
                 <Link to='/dashboard/cards/add'>
                     <Button>Add Card</Button>

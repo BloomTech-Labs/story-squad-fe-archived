@@ -6,12 +6,12 @@ import { useAPI } from '../../../hooks';
 let creditCardsRefresh: () => void;
 
 interface PaymentContextState {
-    cards: CreditCard[];
+    cards: CreditCard[] | undefined;
     customer: Customer | undefined;
 }
 
 const PaymentContext = React.createContext<PaymentContextState>({
-    cards: [],
+    cards: undefined,
     customer: undefined,
 });
 const PaymentProvider: React.FC = ({ children }) => {

@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 
-import { CreateCohort } from './create.component';
+import { EditCohortPage } from './edit.page';
 
-describe('CohortCreate', () => {
+describe('CohortManagementPage', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
-            <Router>
-                <CreateCohort />
-            </Router>
+            <BrowserRouter>
+                <EditCohortPage />
+            </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();
     });

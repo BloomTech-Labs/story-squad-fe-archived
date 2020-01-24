@@ -13,24 +13,41 @@ const useStyles = makeStyles(() => ({
         justifyContent: 'space-evenly',
         height: '35vh',
         width: '100%',
-        maxWidth: '80ch',
     },
 }));
 
-const EditCohort: React.FC = () => {
+interface EditCohortProps {
+    id?: string | number;
+    onUpdate?: () => void;
+}
+
+const EditCohort: React.FC<EditCohortProps> = ({ id, onUpdate }) => {
     const classes = useStyles({});
 
-    const history = useHistory();
-    const { request, response } = useAPI('/cohort/list', 'POST');
-    const { state, handleInputChange, handleSubmitBuilder } = useForm({
+    const { request: fetch, response: details } = useAPI(`/cohort/list/${id}`);
+    const { request: update, response: updated } = useAPI(
+        `/cohort/list${id ? `/${id}` : ''}`,
+        id ? 'PUT' : 'POST'
+    );
+
+    const { state, setState, handleInputChange, handleSubmitBuilder } = useForm({
         name: '',
     });
 
-    const handleSubmit = handleSubmitBuilder(request);
+    const handleSubmit = handleSubmitBuilder(update);
 
     React.useEffect(() => {
-        if (response?.cohort) history.push('/admin/dashboard/cohort-management');
-    }, [history, response]);
+        if (id) fetch();
+    }, [id, fetch]);
+
+    React.useEffect(() => {
+        if (details?.cohort) setState({ name: details.cohort.name });
+    }, [details, setState]);
+
+    React.useEffect(() => {
+        if (updated?.cohort && onUpdate) onUpdate();
+        if (updated?.cohort) updated.cohort = undefined;
+    }, [updated, onUpdate]);
 
     const { name } = state;
     return (
@@ -38,16 +55,14 @@ const EditCohort: React.FC = () => {
             <Typography variant='h4'>Create a Cohort</Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
                 <TextField
-                    type='string'
                     label='Cohort Name'
-                    inputProps={{ min: '1' }}
                     required
                     value={name}
                     onChange={handleInputChange('name')}
                 />
 
                 <Button type='submit' variant='contained' color='primary'>
-                    submit
+                    SUBMIT
                 </Button>
             </form>
         </>

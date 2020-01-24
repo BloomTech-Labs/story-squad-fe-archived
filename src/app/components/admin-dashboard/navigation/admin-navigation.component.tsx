@@ -56,7 +56,7 @@ const AdminNavigationDrawer = () => {
                         <ListItemText primary='Admin Dashboard' />
                     </ListItem>
                 </NavLink>
-                <NavLink to='/admin/dashboard/moderator-dashboard'>
+                <NavLink to='/admin/dashboard/moderator'>
                     <ListItem button>
                         <ListItemText primary='Moderator Dashboard' />
                     </ListItem>
@@ -66,7 +66,7 @@ const AdminNavigationDrawer = () => {
                         <ListItemText primary='Help' />
                     </ListItem>
                 </NavLink>
-                <NavLink to='/admin/dashboard/cohort-management'>
+                <NavLink to='/admin/dashboard/cohort'>
                     <ListItem button>
                         <ListItemText primary='Cohort Management' />
                     </ListItem>

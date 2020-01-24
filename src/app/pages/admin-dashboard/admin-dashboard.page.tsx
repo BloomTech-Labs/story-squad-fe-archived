@@ -11,7 +11,7 @@ import { HelpPage } from './help/help.page';
 import { ModeratorDashboardPage } from './moderator/moderator-dashboard.page';
 
 import { ManageCohortPage } from './cohort/manage/manage.page';
-import { CreateCohortPage } from './cohort/create/create.page';
+import { EditCohortPage } from './cohort/edit/edit.page';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -58,14 +58,11 @@ const AdminDashboardPage: React.FC = () => {
                 <div className={classes.toolbar} />
                 <Switch>
                     <Route path='/admin/dashboard/pdf/create' component={PdfCreate} />
-                    <Route
-                        path='/admin/dashboard/moderator-dashboard'
-                        component={ModeratorDashboardPage}
-                    />
+                    <Route path='/admin/dashboard/moderator' component={ModeratorDashboardPage} />
                     <Route path='/admin/dashboard/help' component={HelpPage} />
-                    <Route path='/admin/dashboard/cohort-management' component={ManageCohortPage} />
-                    <Route path='/admin/dashboard/create-cohort' component={CreateCohortPage} />
-
+                    <Route path='/admin/dashboard/cohort/:id/edit' component={EditCohortPage} />
+                    <Route path='/admin/dashboard/cohort/create' component={EditCohortPage} />
+                    <Route path='/admin/dashboard/cohort' component={ManageCohortPage} />
                     <Route path='/admin/dashboard' component={AdminHomePage} />
                 </Switch>
             </main>

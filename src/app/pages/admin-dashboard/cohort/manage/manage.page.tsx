@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ListCohorts } from '../../../../components/admin-dashboard/cohort/list/list.component';
+import { ListCohorts } from '../../../../components';
 import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -9,9 +9,7 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
-        height: '35vh',
         width: '100%',
-        maxWidth: '80ch',
     },
     header: {
         display: 'flex',
@@ -31,10 +29,11 @@ const ManageCohortPage: React.FC = () => {
                 <Typography variant='h4' gutterBottom>
                     Cohort Management
                 </Typography>
+
+                <Link to='/admin/dashboard/cohort/create'>
+                    <Button>Create Cohort</Button>
+                </Link>
             </div>
-            <Link to='/admin/dashboard/create-cohort'>
-                <Button>Create Cohort</Button>
-            </Link>
             <ListCohorts />
         </div>
     );

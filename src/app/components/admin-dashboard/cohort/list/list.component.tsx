@@ -1,9 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { Cohort } from '../../../../models';
 import { useAPI } from '../../../../hooks';
+import { CohortListItem } from './item.component';
 
 const useStyles = makeStyles(() => ({
     form: {
@@ -28,13 +30,6 @@ interface ListCohortsProps {
     className?: string;
 }
 
-interface Cohort {
-    id: number;
-    name: string;
-    week: string;
-    activity?: string;
-}
-
 const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
     const classes = useStyles({});
     const { request, response } = useAPI<{ cohorts: Cohort[] }>('/cohort/list');
@@ -44,9 +39,6 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
     }, [request]);
 
     if (!response?.cohorts) return <h4 className={classes.loading}>Loading...</h4>;
-
-    const { cohorts } = response;
-
     return (
         <div className={className}>
             <div className={classes.header}>
@@ -56,15 +48,17 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
                             <TableCell>Cohort Name</TableCell>
                             <TableCell>Cohort Week</TableCell>
                             <TableCell>Cohort Activity</TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {cohorts.map((account) => (
-                            <TableRow key={account.id}>
-                                <TableCell>{account.name}</TableCell>
-                                <TableCell>{account.week}</TableCell>
-                                <TableCell>{account.activity}</TableCell>
-                            </TableRow>
+                        {response.cohorts.map((cohort) => (
+                            <CohortListItem
+                                key={cohort.id}
+                                cohort={cohort}
+                                onUpdate={() => request()}
+                            />
                         ))}
                     </TableBody>
                 </Table>

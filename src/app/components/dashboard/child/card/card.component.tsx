@@ -98,12 +98,6 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                                 variant='static'
                                 value={100}
                             />
-                            <CircularProgress
-                                className={classes.progressForeground}
-                                color='inherit'
-                                variant='static'
-                                value={35}
-                            />
                         </div>
                         <Typography className={classes.title} variant='h5'>
                             {child.username}

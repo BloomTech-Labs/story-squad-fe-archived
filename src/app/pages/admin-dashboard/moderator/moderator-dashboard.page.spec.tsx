@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ModeratorDashboardPage } from '../admin-dashboard/moderator-dashboard.page';
+import { ModeratorDashboardPage } from './moderator-dashboard.page';
 
 describe('ModeratorDashboardPage', () => {
     it('renders without errors', () => {

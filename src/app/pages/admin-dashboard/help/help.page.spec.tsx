@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { HelpPage } from '../admin-dashboard/help.page';
+import { HelpPage } from './help.page';
 
 describe('HelpPage', () => {
     it('renders without errors', () => {

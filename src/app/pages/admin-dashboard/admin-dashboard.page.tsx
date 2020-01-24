@@ -7,10 +7,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AdminNavigationDrawer, PdfCreate } from '../../components';
 
 import { AdminHomePage } from './home/home.page';
-import { CohortManagementPage } from './cohort-management.page';
-import { ModeratorDashboardPage } from './moderator-dashboard.page';
-import { HelpPage } from './help.page';
-import { CohortCreate } from '../../components/admin-dashboard/cohort/create-cohort.component';
+import { HelpPage } from './help/help.page';
+import { ModeratorDashboardPage } from './moderator/moderator-dashboard.page';
+
+import { ManageCohortPage } from './cohort/manage/manage.page';
+import { CreateCohortPage } from './cohort/create/create.page';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -62,11 +63,8 @@ const AdminDashboardPage: React.FC = () => {
                         component={ModeratorDashboardPage}
                     />
                     <Route path='/admin/dashboard/help' component={HelpPage} />
-                    <Route
-                        path='/admin/dashboard/cohort-management'
-                        component={CohortManagementPage}
-                    />
-                    <Route path='/admin/dashboard/create-cohort' component={CohortCreate} />
+                    <Route path='/admin/dashboard/cohort-management' component={ManageCohortPage} />
+                    <Route path='/admin/dashboard/create-cohort' component={CreateCohortPage} />
 
                     <Route path='/admin/dashboard' component={AdminHomePage} />
                 </Switch>

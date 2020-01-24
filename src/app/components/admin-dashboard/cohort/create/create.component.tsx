@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAPI, useForm } from '../../../hooks';
+import { useAPI, useForm } from '../../../../hooks';
 
 const useStyles = makeStyles(() => ({
     form: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const CohortCreate: React.FC = () => {
+const CreateCohort: React.FC = () => {
     const classes = useStyles({});
 
     const history = useHistory();
@@ -54,4 +54,4 @@ const CohortCreate: React.FC = () => {
     );
 };
 
-export { CohortCreate };
+export { CreateCohort };

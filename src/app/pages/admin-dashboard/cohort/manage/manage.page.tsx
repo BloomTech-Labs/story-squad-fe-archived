@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAPI } from '../../hooks';
+import { useAPI } from '../../../../hooks';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -44,7 +44,7 @@ interface Cohort {
     activity?: string;
 }
 
-const CohortManagementPage: React.FC<CohortManagementProps> = ({ className }) => {
+const ManageCohortPage: React.FC<CohortManagementProps> = ({ className }) => {
     const classes = useStyles({});
     const { request, response } = useAPI<{ cohort: Cohort[] }>('/cohort/list');
 
@@ -77,4 +77,4 @@ const CohortManagementPage: React.FC<CohortManagementProps> = ({ className }) =>
     );
 };
 
-export { CohortManagementPage };
+export { ManageCohortPage };

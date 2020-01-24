@@ -2,13 +2,13 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { CohortManagementPage } from './cohort-management.page';
+import { ManageCohortPage } from './manage.page';
 
 describe('CohortManagementPage', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>
-                <CohortManagementPage />
+                <ManageCohortPage />
             </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();

@@ -2,13 +2,13 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
-import { CohortCreate } from './create-cohort.component';
+import { ListCohort } from './list.component';
 
 describe('CohortCreate', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <Router>
-                <CohortCreate />
+                <ListCohort />
             </Router>
         );
         expect(baseElement).toBeInTheDocument();

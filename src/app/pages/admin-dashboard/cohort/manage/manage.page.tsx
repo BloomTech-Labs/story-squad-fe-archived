@@ -1,18 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import {
-    Button,
-    Typography,
-    Table,
-    TableHead,
-    TableBody,
-    TableRow,
-    TableCell,
-} from '@material-ui/core';
+import { ListCohorts } from '../../../../components/admin-dashboard/cohort/list/list.component';
+import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
-import { useAPI } from '../../../../hooks';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -33,46 +23,19 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-interface CohortManagementProps {
-    className?: string;
-}
-
-interface Cohort {
-    id: number;
-    name: string;
-    week: string;
-    activity?: string;
-}
-
-const ManageCohortPage: React.FC<CohortManagementProps> = ({ className }) => {
-    const classes = useStyles({});
-    const { request, response } = useAPI<{ cohort: Cohort[] }>('/cohort/list');
-
-    React.useEffect(() => {
-        request();
-    }, [request]);
-
+const ManageCohortPage: React.FC = () => {
+    const classes = useStyles();
     return (
-        <div className={className}>
+        <div className={classes.root}>
             <div className={classes.header}>
                 <Typography variant='h4' gutterBottom>
                     Cohort Management
                 </Typography>
-
-                <Link to='/admin/dashboard/create-cohort'>
-                    <Button>Create Cohort</Button>
-                </Link>
             </div>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Cohort Name</TableCell>
-                    </TableRow>
-                </TableHead>
-                <Button>Edit Cohort</Button>
-                <Button>Delete Cohort</Button>
-                <TableBody></TableBody>
-            </Table>
+            <Link to='/admin/dashboard/create-cohort'>
+                <Button>Create Cohort</Button>
+            </Link>
+            <ListCohorts />
         </div>
     );
 };

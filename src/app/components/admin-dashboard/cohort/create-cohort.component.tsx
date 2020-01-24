@@ -1,10 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 
-import { TextField, Button, Input, InputLabel, Typography } from '@material-ui/core';
+import { TextField, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAPI } from '../../../hooks';
+import { useAPI, useForm } from '../../../hooks';
 
 const useStyles = makeStyles(() => ({
     form: {
@@ -22,23 +22,17 @@ const CohortCreate: React.FC = () => {
 
     const history = useHistory();
     const { request, response } = useAPI('/cohort/list', 'POST');
-    const [state, setState] = React.useState({ id: '', week: '', activity: '' });
+    const { state, handleInputChange, handleSubmitBuilder } = useForm({
+        name: '',
+    });
 
-    const { id } = state;
-
-    const handleInputChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        setState({ ...state, [key]: e.target.value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        request({ ...state, id: Number(id) });
-    };
+    const handleSubmit = handleSubmitBuilder(request);
 
     React.useEffect(() => {
-        if (response) history.push('/admin/dashboard/cohort-management');
+        if (response?.cohort) history.push('/admin/dashboard/cohort-management');
     }, [history, response]);
 
+    const { name } = state;
     return (
         <>
             <Typography variant='h4'>Create a Cohort</Typography>
@@ -48,8 +42,8 @@ const CohortCreate: React.FC = () => {
                     label='Cohort Name'
                     inputProps={{ min: '1' }}
                     required
-                    value={id}
-                    onChange={handleInputChange('id')}
+                    value={name}
+                    onChange={handleInputChange('name')}
                 />
 
                 <Button type='submit' variant='contained' color='primary'>

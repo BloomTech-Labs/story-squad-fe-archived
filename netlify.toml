@@ -2,29 +2,9 @@
     REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"
 
 
-[context."create-account".environment]
-    REACT_APP_ENDPOINT="https://staging-create-account-46n6xrs.herokuapp.com"
+[context.deploy-preview.environment]
+    REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"
 
 
-[context."stripe-elements".environment]
-    REACT_APP_ENDPOINT="https://staging-stripe-fbfrcgrex3bgx7v.herokuapp.com"
-
-
-[context."child-account-management".environment]
-    REACT_APP_ENDPOINT="https://staging-child-account-m-8xrbt8.herokuapp.com"
-
-
-[context."story-reader".environment]
-    REACT_APP_ENDPOINT="https://core-story-reader-h0lubqoocdfi.herokuapp.com"
-
-
-[context."subscription".environment]
-    REACT_APP_ENDPOINT="https://core-subscription-en3dd0fa4gli.herokuapp.com"
-
-
-[context."loading-error".environment]
-    REACT_APP_ENDPOINT="https://core-loading-error-ppljkxrfvsu.herokuapp.com"
-
-
-[context."admin-management".environment]
-    REACT_APP_ENDPOINT="https://core-admin-management-a3dhivni.herokuapp.com"
+[context."child-dashboard".environment]
+    REACT_APP_ENDPOINT="https://core-cohort-u0jqfkw2s4t9lyeads.herokuapp.com"

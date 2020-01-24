@@ -1,8 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { ExampleComponent } from '../../example';
 import { MaterializeInput } from './materialize-input.component';
+
+const ExampleComponent = () => <></>;
 
 describe('CheckoutPage', () => {
     it('renders without errors', () => {

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Button } from '@material-ui/core';
 import requestFactory from '../../../util/requestFactory';
 
 const CurrentChapterLink: React.FC = (props) => {
@@ -25,7 +26,11 @@ const CurrentChapterLink: React.FC = (props) => {
 
     if (!week) return <span>Loading...</span>;
 
-    return <a href={`/story/${week}`}>Current Story</a>;
+    return (
+        <Button variant='contained' color='primary' href={`/story/${week}`}>
+            Current Story
+        </Button>
+    );
 };
 
 export { CurrentChapterLink };

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Avatar, Card, CardContent, Typography } from '@material-ui/core';
+import { Card, CardContent, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { User } from '../../../../models';
+import { Parent } from '../../../../models';
 
 const useStyles = makeStyles((theme) => ({
     card: {},
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface ParentCardProps {
     className?: string;
-    user: User;
+    user: Parent;
 }
 
 const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {
@@ -30,14 +30,11 @@ const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {
             <CardContent className={classes.cardContent}>
                 <section>
                     <Typography variant='h4' component='h1' gutterBottom>
-                        Welcome back {user.email}
+                        Welcome back!
                     </Typography>
                     <Typography variant='h6' component='h2'>
                         Let's see how each participant is doing this week.
                     </Typography>
-                </section>
-                <section>
-                    <Avatar className={classes.avatar} />
                 </section>
             </CardContent>
         </Card>

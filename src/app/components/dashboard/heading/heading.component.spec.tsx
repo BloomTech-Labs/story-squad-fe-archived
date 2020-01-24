@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { ExampleComponent } from './example.component';
+import { Heading } from './heading.component';
 
-describe('ExampleComponent', () => {
+describe('Heading', () => {
     it('renders without errors', () => {
-        const { baseElement } = render(<ExampleComponent />);
+        const { baseElement } = render(<Heading />);
         expect(baseElement).toBeInTheDocument();
     });
 });

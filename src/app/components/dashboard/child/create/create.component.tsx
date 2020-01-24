@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { useAPI, useForm } from '../../../../hooks';
-import { TextField, CircularProgress, Button } from '@material-ui/core';
-import { useHistory } from 'react-router';
-
+import { Button, CircularProgress, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
+
+import { Child } from '../../../../models';
+import { childListRefresh, displayError } from '../../../../state';
+import { useAPI, useForm } from '../../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
     wrapper: {
@@ -22,16 +23,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ChildCreate: React.FC = () => {
+interface ChildCreateProps {
+    onCreate: (child: Child) => void;
+}
+
+const ChildCreate: React.FC<ChildCreateProps> = ({ onCreate }) => {
     const classes = useStyles({});
-    const history = useHistory();
-    const { request, response, loading } = useAPI('/children', 'POST');
+
+    const { request, response, loading, error } = useAPI('/children/list', 'POST');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({ username: '', grade: 3 });
     const handleChange = handleSubmitBuilder(request);
 
     React.useEffect(() => {
-        if (response?.child) history.push(`/dashboard/subscribe/${response.child.id}`);
-    }, [history, response]);
+        if (response) childListRefresh();
+        if (response && onCreate) onCreate(response.child);
+    }, [response, onCreate]);
+
+    React.useEffect(() => {
+        if (typeof error?.message === 'string') displayError(error?.message);
+    }, [error]);
 
     const { username, grade } = state;
     return (

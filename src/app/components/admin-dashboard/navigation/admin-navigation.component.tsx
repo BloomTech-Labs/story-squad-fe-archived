@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         width: drawerWidth,
     },
+    drawerItem: {
+        color: 'black',
+    },
     toolbar: {
         display: 'flex',
         justifyContent: 'center',
@@ -53,12 +56,21 @@ const AdminNavigationDrawer = () => {
                         <ListItemText primary='Admin Dashboard' />
                     </ListItem>
                 </NavLink>
-                <ListItem button>
-                    <ListItemText primary='Moderator Dashboard' />
-                </ListItem>
-                <ListItem button>
-                    <ListItemText primary='Help' />
-                </ListItem>
+                <NavLink to='/admin/dashboard/moderator'>
+                    <ListItem button>
+                        <ListItemText primary='Moderator Dashboard' />
+                    </ListItem>
+                </NavLink>
+                <NavLink to='/admin/dashboard/help'>
+                    <ListItem button>
+                        <ListItemText primary='Help' />
+                    </ListItem>
+                </NavLink>
+                <NavLink to='/admin/dashboard/cohort'>
+                    <ListItem button>
+                        <ListItemText primary='Cohort Management' />
+                    </ListItem>
+                </NavLink>
             </List>
         </Drawer>
     );

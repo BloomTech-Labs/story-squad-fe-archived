@@ -1,10 +1,10 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { NavigationDrawer } from '../../components';
+import { DashboardProvider } from '../../state';
+import { Heading, NavigationDrawer } from '../../components';
 
 import { HomePage } from './home/home.page';
 import { CardAddPage } from './payment/add/add.page';
@@ -16,13 +16,7 @@ import { CreateChildPage } from './child/create/child.page';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-    },
-    appBar: {
-        width: `calc(100% - 240px)`,
-        marginLeft: 240,
-    },
-    spacer: {
-        flex: '1',
+        minHeight: '100vh',
     },
     main: {
         display: 'flex',
@@ -36,35 +30,29 @@ const useStyles = makeStyles((theme) => ({
 
 const DashboardPage: React.FC = () => {
     const classes = useStyles();
-    const logout = () => window.dispatchEvent(new Event('logout'));
+    const [navOpen, setNavOpen] = React.useState(false);
+
+    const openNav = () => setNavOpen(true);
+    const closeNav = () => setNavOpen(false);
 
     return (
         <div className={classes.root}>
-            <AppBar position='fixed' className={classes.appBar}>
-                <Toolbar>
-                    <Typography variant='h6' noWrap>
-                        Dashboard
-                    </Typography>
-                    <div className={classes.spacer} />
-                    <Button onClick={logout} color='inherit'>
-                        Logout
-                    </Button>
-                </Toolbar>
-            </AppBar>
+            <DashboardProvider>
+                <Heading onMenuClick={openNav} />
+                <NavigationDrawer open={navOpen} onClose={closeNav} />
 
-            <NavigationDrawer />
-
-            <main className={classes.main}>
-                <div className={classes.toolbar} />
-                <Switch>
-                    <Route path='/dashboard/child/create' component={CreateChildPage} />
-                    <Route path='/dashboard/child/edit/:id' component={EditProfilePage} />
-                    <Route path='/dashboard/cards/add' component={CardAddPage} />
-                    <Route path='/dashboard/cards' component={CardListPage} />
-                    <Route path='/dashboard/subscribe/:id' component={SubscribePage} />
-                    <Route path='/dashboard' component={HomePage} />
-                </Switch>
-            </main>
+                <main className={classes.main}>
+                    <Switch>
+                        <Route path='/dashboard/subscribe/:id' component={SubscribePage} />
+                        <Route path='/dashboard/child/create' component={CreateChildPage} />
+                        <Route path='/dashboard/child/edit/:id' component={EditProfilePage} />
+                        <Route path='/dashboard/cards/add' component={CardAddPage} />
+                        <Route path='/dashboard/cards' component={CardListPage} />
+                        <Route path='/dashboard/home' component={HomePage} />
+                        <Redirect to='/dashboard/home' />
+                    </Switch>
+                </main>
+            </DashboardProvider>
         </div>
     );
 };

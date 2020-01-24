@@ -2,13 +2,13 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ExamplePage } from './example.page';
+import { HelpPage } from './help.page';
 
-describe('ExamplePage', () => {
+describe('HelpPage', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <BrowserRouter>
-                <ExamplePage />
+                <HelpPage />
             </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();

@@ -1,6 +1,14 @@
 import React from 'react';
 
-import { Card, CardContent, Typography, CardHeader, IconButton, Icon } from '@material-ui/core';
+import {
+    Card,
+    CardContent,
+    Typography,
+    CardHeader,
+    IconButton,
+    Icon,
+    Chip,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { CreditCard } from '../../../../models';
@@ -10,6 +18,8 @@ import { create } from 'react-test-renderer';
 interface StripeCardProps {
     card: CreditCard;
     onDelete?: () => void;
+    onUpdate?: () => void;
+    defaultCard: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -18,15 +28,32 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'flex-end',
     },
+    chip: {
+        marginLeft: 12,
+    },
 }));
 
-const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete }) => {
-    const { request, response } = useAPI(`/payment/cards/${card.id}`, 'DELETE');
+const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, onUpdate, defaultCard }) => {
+    const { request: updateRequest, response: updateResponse } = useAPI(
+        `/payment/default/${card.id}`,
+        'PUT'
+    );
+    const { request: deleteRequest, response: deleteResponse } = useAPI(
+        `/payment/cards/${card.id}`,
+        'DELETE'
+    );
+
     const classes = useStyles({});
 
     React.useEffect(() => {
-        if (response?.message && onDelete) onDelete();
-    }, [onDelete, response]);
+        if (deleteResponse?.message && onDelete) onDelete();
+        if (deleteResponse?.message) deleteResponse.message = undefined;
+    }, [onDelete, deleteResponse]);
+
+    React.useEffect(() => {
+        if (updateResponse?.message && onUpdate) onUpdate();
+        if (updateResponse?.message) updateResponse.message = undefined;
+    }, [onUpdate, updateResponse]);
 
     return (
         <Card className={classes.card}>
@@ -34,11 +61,22 @@ const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete }) => {
                 title={card.brand}
                 subheader={card.last4}
                 action={
-                    <IconButton onClick={request}>
+                    <IconButton onClick={() => deleteRequest()}>
                         <Icon>delete</Icon>
                     </IconButton>
                 }
             />
+
+            <Chip
+                className={classes.chip}
+                size='small'
+                clickable={!defaultCard}
+                label={defaultCard ? 'Default' : 'Make Default'}
+                color='primary'
+                variant={defaultCard ? 'default' : 'outlined'}
+                onClick={defaultCard ? undefined : () => updateRequest()}
+            />
+
             <CardContent className={classes.cardContent}>
                 <Typography variant='subtitle2'>
                     {card.exp_month}/{card.exp_year}

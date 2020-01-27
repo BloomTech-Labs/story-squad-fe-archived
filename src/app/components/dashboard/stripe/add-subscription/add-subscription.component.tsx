@@ -3,33 +3,41 @@ import { ReactStripeElements, injectStripe } from 'react-stripe-elements';
 import { useHistory } from 'react-router';
 
 import {
-    Button,
+    Card,
+    CardContent,
+    CardHeader,
     CircularProgress,
+    Fab,
     FormLabel,
     FormControlLabel,
+    Icon,
     Radio,
     RadioGroup,
 } from '@material-ui/core';
-import { green } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 
 import { childListRefresh } from '../../../../state';
 import { useAPI, useForm } from '../../../../hooks';
 import { displayError } from '../../../../state';
 
 const useStyles = makeStyles((theme) => ({
+    header: {
+        color: theme.palette.primary.contrastText,
+        backgroundColor: theme.palette.primary.main,
+    },
     wrapper: {
-        height: 'fit-content',
-        width: 'fit-content',
-        position: 'relative',
+        margin: theme.spacing(1),
+        position: 'absolute',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
     },
     buttonProgress: {
         color: green[500],
         position: 'absolute',
-        top: '50%',
-        left: '50%',
-        marginTop: -12,
-        marginLeft: -12,
+        top: -6,
+        left: -6,
+        zIndex: 1,
     },
 }));
 
@@ -62,22 +70,26 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
     return (
         <>
             <form onSubmit={handleChange}>
-                <FormLabel>Subscription Options</FormLabel>
-                <RadioGroup name='plans' value={plan} onChange={handleInputChange('plan')}>
-                    <FormControlLabel
-                        value='plan_GVQ796LiwZugJ9'
-                        control={<Radio />}
-                        label='Test Subscription - $1/month'
-                    />
-                </RadioGroup>
+                <Card>
+                    <CardHeader className={classes.header} title='Subscribe' />
+                    <CardContent>
+                        <FormLabel>Subscription Options</FormLabel>
+                        <RadioGroup name='plans' value={plan} onChange={handleInputChange('plan')}>
+                            <FormControlLabel
+                                value='plan_GVQ796LiwZugJ9'
+                                control={<Radio />}
+                                label='Test Subscription - $1/month'
+                            />
+                        </RadioGroup>
+                    </CardContent>
+                </Card>
 
                 <div className={classes.wrapper}>
-                    <Button disabled={loading} type='submit' color='primary'>
-                        Subscribe
-                    </Button>
-                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                    <Fab disabled={loading} type='submit' color='primary'>
+                        <Icon>add_shopping_cart</Icon>
+                    </Fab>
+                    {loading && <CircularProgress size={68} className={classes.buttonProgress} />}
                 </div>
-                <Button onClick={() => history.push('/dashboard')}>Cancel</Button>
             </form>
         </>
     );

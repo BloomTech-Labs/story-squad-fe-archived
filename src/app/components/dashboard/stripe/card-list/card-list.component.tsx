@@ -20,16 +20,16 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '100%',
     },
     empty: {
-        'height': '80%',
+        'overflow': 'hidden',
+        'maxWidth': '100%',
         'display': 'flex',
         'flexDirection': 'column',
         'justifyContent': 'center',
         'alignItems': 'center',
         '& > .MuiIcon-fontSizeLarge': {
-            fontSize: 400,
+            fontSize: 320,
         },
     },
 }));

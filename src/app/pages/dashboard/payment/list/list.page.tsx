@@ -12,12 +12,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         alignItems: 'baseline',
     },
-    loading: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100%',
-    },
     list: {
         marginTop: theme.spacing(2),
     },
@@ -40,7 +34,9 @@ const CardListPage: React.FC = () => {
                     </Button>
                 </Link>
             </header>
-            <CardList className={classes.list} />
+            <section className={classes.list}>
+                <CardList />
+            </section>
         </>
     );
 };

@@ -30,13 +30,12 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     empty: {
-        'marginTop': '15vh',
         'display': 'flex',
         'flexDirection': 'column',
         'justifyContent': 'center',
         'alignItems': 'center',
         '& > .MuiIcon-fontSizeLarge': {
-            fontSize: 400,
+            fontSize: 320,
         },
     },
     button: {

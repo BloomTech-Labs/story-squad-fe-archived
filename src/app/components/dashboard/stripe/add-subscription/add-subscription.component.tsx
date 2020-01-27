@@ -56,7 +56,11 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
         plan: '',
     });
 
-    const handleChange = handleSubmitBuilder(request);
+    const handleChange = handleSubmitBuilder(({ plan, ...otherState }) => {
+        if (plan === 'later') history.push('/dashboard');
+        else request({ plan, ...otherState });
+    });
+
     React.useEffect(() => {
         childListRefresh();
         if (response) history.push('/dashboard');
@@ -79,6 +83,11 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
                                 value='plan_GVQ796LiwZugJ9'
                                 control={<Radio />}
                                 label='Test Subscription - $1/month'
+                            />
+                            <FormControlLabel
+                                value='later'
+                                control={<Radio />}
+                                label='Subscribe Later'
                             />
                         </RadioGroup>
                     </CardContent>

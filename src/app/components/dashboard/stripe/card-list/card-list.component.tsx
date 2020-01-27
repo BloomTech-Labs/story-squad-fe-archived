@@ -7,17 +7,13 @@ import { Button, Typography, Icon, CircularProgress } from '@material-ui/core';
 import { PaymentContext, creditCardsRefresh } from '../../../../state';
 import { StripeCard } from '../card/card.component';
 
-interface StyleProps {
-    cards: number | undefined;
-}
-
 const useStyles = makeStyles((theme) => ({
     list: {
         display: 'grid',
         gridGap: theme.spacing(1),
-        gridTemplateColumns: ({ cards }: StyleProps) => (!cards ? '1fr' : '1fr 1fr'),
-        [theme.breakpoints.down('md')]: {
-            gridTemplateColumns: () => '1fr',
+        gridTemplateColumns: '1fr',
+        [theme.breakpoints.up('lg')]: {
+            gridTemplateColumns: '1fr 1fr',
         },
     },
     loading: {
@@ -27,12 +23,13 @@ const useStyles = makeStyles((theme) => ({
         minHeight: '100%',
     },
     empty: {
+        'height': '80%',
         'display': 'flex',
         'flexDirection': 'column',
         'justifyContent': 'center',
         'alignItems': 'center',
         '& > .MuiIcon-fontSizeLarge': {
-            fontSize: '30vh',
+            fontSize: 400,
         },
     },
 }));

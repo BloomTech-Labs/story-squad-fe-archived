@@ -3,7 +3,7 @@ import React from 'react';
 import { CreditCard, Customer } from '../../../models';
 import { useAPI } from '../../../hooks';
 
-let creditCardsRefresh: () => void | Promise<void>;
+let creditCardsRefresh: () => Promise<void>;
 
 interface PaymentContextState {
     cards: CreditCard[] | undefined;

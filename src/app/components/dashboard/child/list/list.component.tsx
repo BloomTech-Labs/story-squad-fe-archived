@@ -8,10 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Child } from '../../../../models';
 import { ChildCard } from '../card/card.component';
 
-interface StyleProps {
-    children: number | undefined;
-}
-
 const useStyles = makeStyles((theme) => ({
     loading: {
         display: 'flex',
@@ -28,18 +24,19 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
         display: 'grid',
         gridGap: theme.spacing(4),
-        gridTemplateColumns: ({ children }: StyleProps) => (children === 0 ? '1fr' : '1fr 1fr'),
-        [theme.breakpoints.down('md')]: {
-            gridTemplateColumns: () => '1fr',
+        gridTemplateColumns: '1fr',
+        [theme.breakpoints.up('lg')]: {
+            gridTemplateColumns: '1fr 1fr',
         },
     },
     empty: {
+        'marginTop': '15vh',
         'display': 'flex',
         'flexDirection': 'column',
         'justifyContent': 'center',
         'alignItems': 'center',
         '& > .MuiIcon-fontSizeLarge': {
-            fontSize: '30vh',
+            fontSize: 400,
         },
     },
     button: {
@@ -65,7 +62,7 @@ interface ChildListProps {
 }
 
 const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
-    const classes = useStyles({ children: list.length });
+    const classes = useStyles({});
 
     if (!list)
         return (
@@ -87,21 +84,22 @@ const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
                 </Link>
             </section>
 
+            {list.length === 0 && (
+                <section className={classes.empty}>
+                    <Icon color='disabled' fontSize='large'>
+                        child_care
+                    </Icon>
+                    <Typography variant='subtitle1'>0 Child Accounts</Typography>
+                    <Link to='/dashboard/child/create'>
+                        <Button>Add Child</Button>
+                    </Link>
+                </section>
+            )}
+
             <section className={classes.list}>
                 {list.map((child) => (
                     <ChildCard key={child.id} child={child}></ChildCard>
                 ))}
-                {list.length === 0 && (
-                    <section className={classes.empty}>
-                        <Icon color='disabled' fontSize='large'>
-                            child_care
-                        </Icon>
-                        <Typography variant='subtitle1'>0 Child Accounts</Typography>
-                        <Link to='/dashboard/child/create'>
-                            <Button>Add Child</Button>
-                        </Link>
-                    </section>
-                )}
             </section>
         </div>
     );

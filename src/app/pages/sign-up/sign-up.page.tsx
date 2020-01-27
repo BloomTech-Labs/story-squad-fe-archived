@@ -65,7 +65,7 @@ const SignUpPage: React.FC = () => {
             direction='row'
             justify='flex-end'
             alignItems='stretch'>
-            <Grid item xs={md ? 4 : 12}>
+            <Grid item xs={md ? undefined : 12}>
                 <Paper className={classes.sidebar} elevation={16}>
                     <Tabs
                         value={history.location.pathname}

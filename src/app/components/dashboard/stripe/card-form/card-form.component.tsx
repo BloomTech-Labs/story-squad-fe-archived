@@ -7,7 +7,7 @@ import {
     injectStripe,
 } from 'react-stripe-elements';
 
-import { CircularProgress, Button } from '@material-ui/core';
+import { Card, CardContent, CardHeader, CircularProgress, Fab, Icon } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
@@ -16,17 +16,26 @@ import { Message } from '../../../../models';
 import { StripeInput } from '../input/input.component';
 
 const useStyles = makeStyles((theme) => ({
+    header: {
+        color: theme.palette.primary.contrastText,
+        backgroundColor: theme.palette.primary.main,
+    },
+    content: {
+        display: 'grid',
+        gridGap: theme.spacing(3),
+    },
     wrapper: {
         margin: theme.spacing(1),
-        position: 'relative',
+        position: 'fixed',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
     },
     buttonProgress: {
         color: green[500],
         position: 'absolute',
-        top: '50%',
-        left: '50%',
-        marginTop: -12,
-        marginLeft: -12,
+        top: -6,
+        left: -6,
+        zIndex: 1,
     },
 }));
 
@@ -70,26 +79,31 @@ const _CardForm: React.FC<CardFormProps & ReactStripeElements.InjectedStripeProp
     const isValid = numberValid && expiryValid && cvcValid;
     return (
         <form onSubmit={handleSubmit}>
-            <StripeInput
-                label='Credit Card Number'
-                component={CardNumberElement}
-                onChange={handleChanges('numberValid')}
-            />
-            <StripeInput
-                label='Expiration Date'
-                component={CardExpiryElement}
-                onChange={handleChanges('expiryValid')}
-            />
-            <StripeInput
-                label='Security Code'
-                component={CardCvcElement}
-                onChange={handleChanges('cvcValid')}
-            />
+            <Card>
+                <CardHeader className={classes.header} title='Add Payment Method' />
+                <CardContent>
+                    <StripeInput
+                        label='Credit Card Number'
+                        component={CardNumberElement}
+                        onChange={handleChanges('numberValid')}
+                    />
+                    <StripeInput
+                        label='Expiration Date'
+                        component={CardExpiryElement}
+                        onChange={handleChanges('expiryValid')}
+                    />
+                    <StripeInput
+                        label='Security Code'
+                        component={CardCvcElement}
+                        onChange={handleChanges('cvcValid')}
+                    />
+                </CardContent>
+            </Card>
             <div className={classes.wrapper}>
-                <Button type='submit' disabled={!isValid}>
-                    Add Card
-                </Button>
-                {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                <Fab type='submit' color='primary' disabled={!isValid}>
+                    <Icon>save</Icon>
+                </Fab>
+                {loading && <CircularProgress size={68} className={classes.buttonProgress} />}
             </div>
         </form>
     );

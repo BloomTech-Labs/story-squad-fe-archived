@@ -135,7 +135,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                             ? 'Due'
                             : 'Upcoming'}
                     </Typography>
-                    <Link to={`/kids-dashboard/write-your-story`}>
+                    <Link to={`/kids-dashboard/upload`}>
                         <Button className={classes.gridItem}>
                             {progress.writing ? 'View' : 'Complete'}
                         </Button>

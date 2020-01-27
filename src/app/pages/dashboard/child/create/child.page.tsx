@@ -7,8 +7,8 @@ import { ChildCreate } from '../../../../components';
 const CreateChildPage: React.FC = () => {
     const history = useHistory();
 
-    const handleCreate = ({ id }) => {
-        childListRefresh();
+    const handleCreate = async ({ id }) => {
+        await childListRefresh();
         history.push(`/dashboard/subscribe/${id}`);
     };
 

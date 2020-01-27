@@ -1,19 +1,18 @@
 import React from 'react';
 
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Button, Card, CardHeader } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Parent } from '../../../../models';
 
 const useStyles = makeStyles((theme) => ({
     card: {},
-    cardContent: {
-        display: 'flex',
-        justifyContent: 'space-between',
-    },
-    avatar: {
-        width: 128,
-        height: 128,
+    cardHeader: {
+        '& .MuiCardHeader-action': {
+            [theme.breakpoints.down('sm')]: {
+                display: 'none',
+            },
+        },
     },
 }));
 
@@ -24,19 +23,20 @@ interface ParentCardProps {
 
 const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {
     const classes = useStyles({});
+    const logout = () => window.dispatchEvent(new Event('logout'));
 
     return (
         <Card className={`${className} ${classes.card}`}>
-            <CardContent className={classes.cardContent}>
-                <section>
-                    <Typography variant='h4' component='h1' gutterBottom>
-                        Welcome back!
-                    </Typography>
-                    <Typography variant='h6' component='h2'>
-                        Let's see how each participant is doing this week.
-                    </Typography>
-                </section>
-            </CardContent>
+            <CardHeader
+                className={classes.cardHeader}
+                action={
+                    <Button aria-label='logout' onClick={() => logout()}>
+                        logout
+                    </Button>
+                }
+                title='Welcome back!'
+                subheader="Let's see how each participant is doing this week."
+            />
         </Card>
     );
 };

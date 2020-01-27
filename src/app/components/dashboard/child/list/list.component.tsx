@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         'justifyContent': 'center',
         'alignItems': 'center',
         '& > .MuiIcon-fontSizeLarge': {
-            fontSize: '30vh',
+            fontSize: 320,
         },
     },
     button: {
@@ -83,19 +83,22 @@ const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
                 </Link>
             </section>
 
+            {list.length === 0 && (
+                <section className={classes.empty}>
+                    <Icon color='disabled' fontSize='large'>
+                        child_care
+                    </Icon>
+                    <Typography variant='subtitle1'>0 Child Accounts</Typography>
+                    <Link to='/dashboard/child/create'>
+                        <Button>Add Child</Button>
+                    </Link>
+                </section>
+            )}
+
             <section className={classes.list}>
                 {list.map((child) => (
                     <ChildCard key={child.id} child={child}></ChildCard>
                 ))}
-                {list.length === 0 && (
-                    <section className={classes.empty}>
-                        <Icon fontSize='large'>child_care</Icon>
-                        <Typography variant='subtitle1'>0 Child Accounts</Typography>
-                        <Link to='/dashboard/child/create'>
-                            <Button>Add Child</Button>
-                        </Link>
-                    </section>
-                )}
             </section>
         </div>
     );

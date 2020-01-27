@@ -1,6 +1,14 @@
 import React from 'react';
 
-import { Button, CircularProgress, TextField } from '@material-ui/core';
+import {
+    Card,
+    CardContent,
+    CircularProgress,
+    Fab,
+    Icon,
+    TextField,
+    CardHeader,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
@@ -9,17 +17,26 @@ import { childListRefresh, displayError } from '../../../../state';
 import { useAPI, useForm } from '../../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
+    header: {
+        color: theme.palette.primary.contrastText,
+        backgroundColor: theme.palette.primary.main,
+    },
+    content: {
+        display: 'grid',
+        gridGap: theme.spacing(3),
+    },
     wrapper: {
         margin: theme.spacing(1),
-        position: 'relative',
+        position: 'fixed',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
     },
     buttonProgress: {
         color: green[500],
         position: 'absolute',
-        top: '50%',
-        left: '50%',
-        marginTop: -12,
-        marginLeft: -12,
+        top: -6,
+        left: -6,
+        zIndex: 1,
     },
 }));
 
@@ -41,31 +58,37 @@ const ChildCreate: React.FC<ChildCreateProps> = ({ onCreate }) => {
 
     React.useEffect(() => {
         if (typeof error?.message === 'string') displayError(error?.message);
+        if (!!error?.errors?.length) displayError(error?.errors[0]);
     }, [error]);
 
     const { username, grade } = state;
     return (
         <form onSubmit={handleChange}>
-            <TextField
-                type='text'
-                label='Username'
-                required
-                value={username}
-                onChange={handleInputChange('username')}
-            />
+            <Card>
+                <CardHeader className={classes.header} title='Add Child' />
+                <CardContent className={classes.content}>
+                    <TextField
+                        type='text'
+                        label='Username'
+                        required
+                        value={username}
+                        onChange={handleInputChange('username')}
+                    />
 
-            <TextField
-                type='number'
-                label='Grade'
-                required
-                value={grade}
-                onChange={handleInputChange('grade')}
-            />
+                    <TextField
+                        type='number'
+                        label='Grade (3-6)'
+                        required
+                        value={grade}
+                        onChange={handleInputChange('grade')}
+                    />
+                </CardContent>
+            </Card>
             <div className={classes.wrapper}>
-                <Button type='submit' variant='contained' color='primary'>
-                    submit
-                </Button>
-                {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                <Fab aria-label='save' color='primary' type='submit'>
+                    <Icon>save</Icon>
+                </Fab>
+                {loading && <CircularProgress size={68} className={classes.buttonProgress} />}
             </div>
         </form>
     );

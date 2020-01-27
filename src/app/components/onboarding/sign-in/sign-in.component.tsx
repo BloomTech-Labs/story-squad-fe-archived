@@ -65,7 +65,7 @@ const SignIn: React.FC = () => {
     const { email, password } = state;
     return (
         <>
-            <Typography variant='h4'>Welcome Back!</Typography>
+            <Typography variant='h3'>Welcome Back!</Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
                 <TextField
                     fullWidth

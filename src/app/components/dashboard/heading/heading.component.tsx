@@ -37,7 +37,26 @@ const Heading: React.FC<HeadingProps> = ({ onMenuClick }) => {
 
     const logout = () => window.dispatchEvent(new Event('logout'));
 
-    return <></>;
+    if (desktop) return <></>;
+    return (
+        <AppBar className={classes.appBar}>
+            <Toolbar>
+                <IconButton
+                    className={classes.menuButton}
+                    edge='start'
+                    color='inherit'
+                    aria-label='menu'
+                    onClick={onMenuClick}>
+                    <Icon>menu</Icon>
+                </IconButton>
+                <Typography variant='h6'>Dashboard</Typography>
+                <div className={classes.spacer} />
+                <Button color='inherit' onClick={() => logout()}>
+                    Logout
+                </Button>
+            </Toolbar>
+        </AppBar>
+    );
 };
 
 export { Heading };

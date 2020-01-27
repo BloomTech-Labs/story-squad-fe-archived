@@ -5,6 +5,7 @@ import {
     Card,
     CardContent,
     CardHeader,
+    CircularProgress,
     Fab,
     FormControlLabel,
     Icon,
@@ -18,6 +19,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useAPI, useForm } from '../../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
+    loading: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100%',
+    },
     header: {
         'backgroundColor': theme.palette.primary.main,
         'color': theme.palette.primary.contrastText,
@@ -38,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
         gridTemplateColumns: 'repeat(auto-fit, 250px)',
     },
     fab: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: theme.spacing(3),
         right: theme.spacing(3),
     },
@@ -64,7 +71,7 @@ interface ChildEdit {
 const ChildEdit: React.FC<ChildEdit> = ({ id, onUpdate }) => {
     const classes = useStyles();
 
-    const { request: fetch, response: fetchResponse } = useAPI(`/children/list/${id}`);
+    const { request: fetch, response: fetchResponse, loading } = useAPI(`/children/list/${id}`);
     const { request: update, response: updateResponse } = useAPI(`/children/list/${id}`, 'PUT');
     const { request: remove, response: removeResponse } = useAPI(`/children/list/${id}`, 'DELETE');
 
@@ -110,7 +117,13 @@ const ChildEdit: React.FC<ChildEdit> = ({ id, onUpdate }) => {
         if (removeResponse && onUpdate) onUpdate();
     }, [onUpdate, removeResponse]);
 
-    if (!fetchResponse) return <div></div>;
+    if (loading)
+        return (
+            <section className={classes.loading}>
+                <CircularProgress size={56} />
+            </section>
+        );
+
     const { username, grade } = child;
     const { dyslexia } = preferences;
     return (

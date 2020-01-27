@@ -6,8 +6,8 @@ import { StripeWrapper, CardForm } from '../../../../components';
 
 const CardAddPage: React.FC = () => {
     const history = useHistory();
-    const handleAdded = () => {
-        creditCardsRefresh();
+    const handleAdded = async () => {
+        await creditCardsRefresh();
         history.push('/dashboard/cards');
     };
 

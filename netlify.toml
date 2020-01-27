@@ -6,8 +6,5 @@
     REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"
 
 
-[context."child-dashboard".environment]
-    REACT_APP_ENDPOINT="https://core-cohort-u0jqfkw2s4t9lyeads.herokuapp.com"
-
-[context."creative-content-submission".environment]
-    REACT_APP_ENDPOINT="https://core-creative-content-s-tjyyoo.herokuapp.com/"
+[context."polish".environment]
+    REACT_APP_ENDPOINT="https://core-polish-ggzspu1w8t31chhldk.herokuapp.com"

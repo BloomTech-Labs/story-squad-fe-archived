@@ -24,12 +24,12 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-interface Props {
+interface CCSFormProps {
     onUpdate?: () => void;
     child: Child;
 }
 
-const CCSForm: React.FC<Props> = ({ child, onUpdate }) => {
+const CCSForm: React.FC<CCSFormProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
 
     const history = useHistory();

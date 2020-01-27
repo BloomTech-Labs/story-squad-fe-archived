@@ -57,8 +57,8 @@ const ChildCreate: React.FC<ChildCreateProps> = ({ onCreate }) => {
     }, [response, onCreate]);
 
     React.useEffect(() => {
-        if (typeof error?.errors[0] === 'string') displayError(error?.errors[0]);
         if (typeof error?.message === 'string') displayError(error?.message);
+        if (!!error?.errors?.length) displayError(error?.errors[0]);
     }, [error]);
 
     const { username, grade } = state;

@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
         gridTemplateColumns: 'repeat(auto-fit, 250px)',
     },
     fab: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: theme.spacing(3),
         right: theme.spacing(3),
     },

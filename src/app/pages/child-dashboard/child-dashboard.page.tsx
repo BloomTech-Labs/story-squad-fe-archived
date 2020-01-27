@@ -73,8 +73,8 @@ const ChildDashboard: React.FC = () => {
 
                 <Switch>
                     <Route
-                        path='/kids-dashboard/write-your-story'
-                        render={() => <CCSForm child={response.me} onUpdate={request} />}
+                        path='/kids-dashboard/upload'
+                        render={() => <CCSForm week={response.me.cohort.week} onUpdate={request} />}
                     />
                     <Route
                         path='/'

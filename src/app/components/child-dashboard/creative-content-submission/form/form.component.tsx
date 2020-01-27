@@ -1,44 +1,67 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 
-import { TextField, Button, Input, InputLabel, Typography } from '@material-ui/core';
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CircularProgress,
+    Fab,
+    Icon,
+    TextField,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 
 import { useAPI } from '../../../../hooks';
-import { Child } from '../../../../models';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
+    header: {
+        color: theme.palette.primary.contrastText,
+        backgroundColor: theme.palette.primary.main,
+    },
+    content: {
+        display: 'grid',
+        gridGap: theme.spacing(3),
+    },
     form: {
-        'display': 'flex',
-        'flexDirection': 'column',
-        'justifyContent': 'space-evenly',
-        'width': '100%',
-        'maxWidth': '80ch',
-        '& > *': {
-            margin: '0.5rem 0',
-        },
+        margin: theme.spacing(2),
     },
     preview: {
-        height: '100%',
-        width: '100%',
+        height: 400,
+        width: 400,
+    },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'fixed',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: -6,
+        left: -6,
+        zIndex: 1,
     },
 }));
 
 interface CCSFormProps {
     onUpdate?: () => void;
-    child: Child;
+    week: number;
 }
 
-const CCSForm: React.FC<CCSFormProps> = ({ child, onUpdate }) => {
+const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
 
     const history = useHistory();
-    const { request: getSubmission, response: getResponse } = useAPI(
-        `/submissions/${child.cohort.week}`
+    const { request: getSubmission, response: getResponse } = useAPI(`/submissions/${week}`);
+    const { request: postSubmission, response: postResponse, loading } = useAPI(
+        '/submissions',
+        'POST'
     );
-    const { request: postSubmission, response: postResponse } = useAPI('/submissions', 'POST');
     const { request: deleteSubmission, response: deleteResponse } = useAPI(
-        `/submissions/${child.cohort.week}`,
+        `/submissions/${week}`,
         'DELETE'
     );
     const { request: postProgress, response: progressResponse } = useAPI(
@@ -64,103 +87,114 @@ const CCSForm: React.FC<CCSFormProps> = ({ child, onUpdate }) => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (state.story) setState({ ...state, storyText: '' });
         postSubmission(state);
     };
 
-    const handleDelete = (e) => {
-        e.preventDefault();
+    const handleDelete = () => {
         deleteSubmission();
     };
 
     React.useEffect(() => {
-        getSubmission();
-    }, [getSubmission]);
+        if (week) getSubmission();
+    }, [getSubmission, week]);
 
     React.useEffect(() => {
-        if (getResponse && getResponse.submission) {
+        if (deleteResponse && getResponse?.submission) {
+            getResponse.submission = undefined;
+            setState({ story: '', storyText: '', illustration: '' });
+        }
+    }, [deleteResponse, getResponse]);
+
+    React.useEffect(() => {
+        if (getResponse?.submission) {
             const { story, storyText, illustration } = getResponse.submission;
             setState({ story, storyText, illustration });
         }
     }, [getResponse]);
 
     React.useEffect(() => {
-        if (postResponse) postProgress({ writing: true });
-        if (deleteResponse) postProgress({ writing: false });
+        if (postResponse?.submission) {
+            postProgress({ writing: true });
+            postResponse.submission = undefined;
+        }
+
+        if (deleteResponse?.submission) {
+            postProgress({ writing: false });
+            deleteResponse.submission = undefined;
+        }
     }, [postResponse, deleteResponse, postProgress]);
 
     React.useEffect(() => {
-        if (progressResponse && onUpdate) {
-            onUpdate();
-            history.push('/kids-dashboard');
-        }
+        if (progressResponse && onUpdate) onUpdate();
+        if (progressResponse?.progress?.writing) history.push('/kids-dashboard');
     }, [history, onUpdate, progressResponse]);
 
+    const submitted = !!getResponse?.submission;
+    const { story, storyText, illustration } = state;
     return (
         <>
-            <Typography variant='h4'>Creative Content Submission</Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
-                <Typography variant='h5'>Story Submission</Typography>
+                <Card>
+                    <CardHeader className={classes.header} title='Creative Content Submission' />
+                    <CardContent className={classes.content}>
+                        <TextField
+                            InputLabelProps={{ shrink: true }}
+                            label='Story Submission'
+                            id='story'
+                            type='file'
+                            inputProps={{ accept: 'image/*' }}
+                            onChange={handleFileChange('story')}
+                            disabled={submitted}
+                        />
 
-                <InputLabel htmlFor='story'>Image Submission</InputLabel>
-                <Input
-                    id='story'
-                    type='file'
-                    inputProps={{ accept: 'image/*' }}
-                    onChange={handleFileChange('story')}
-                    disabled={!!getResponse}
-                />
+                        {story && (
+                            <img
+                                className={classes.preview}
+                                src={story}
+                                alt='your story submission'
+                            />
+                        )}
 
-                {state.story && (
-                    <img
-                        className={classes.preview}
-                        src={state.story}
-                        alt='your story submission'
-                    />
-                )}
+                        <TextField
+                            label='Typed Submission'
+                            multiline
+                            rows='8'
+                            value={storyText}
+                            onChange={handleInputChange('storyText')}
+                            disabled={!!story || submitted}
+                        />
 
-                <TextField
-                    label='Typed Submission'
-                    multiline
-                    rows='8'
-                    value={state.storyText}
-                    onChange={handleInputChange('storyText')}
-                    disabled={!!state.story || !!getResponse}
-                />
+                        <TextField
+                            InputLabelProps={{ shrink: true }}
+                            label='Image Submission'
+                            type='file'
+                            inputProps={{ accept: 'image/*' }}
+                            onChange={handleFileChange('illustration')}
+                            disabled={submitted}
+                        />
 
-                <Typography variant='h5'>Illustration Submission</Typography>
+                        {illustration && (
+                            <img
+                                className={classes.preview}
+                                src={illustration}
+                                alt='Your illustration submission'
+                            />
+                        )}
+                    </CardContent>
+                </Card>
 
-                <InputLabel htmlFor='illustration'>Image Submission</InputLabel>
-                <Input
-                    id='illustration'
-                    type='file'
-                    inputProps={{ accept: 'image/*' }}
-                    onChange={handleFileChange('illustration')}
-                    disabled={!!getResponse}
-                />
-
-                {state.illustration && (
-                    <img
-                        className={classes.preview}
-                        src={state.illustration}
-                        alt='your illustration submission'
-                    />
-                )}
-
-                <Button type='submit' variant='contained' color='primary' disabled={!!getResponse}>
-                    Submit
-                </Button>
-                {getResponse && (
-                    <Button
-                        type='submit'
-                        variant='contained'
+                <div className={classes.wrapper}>
+                    <Fab
+                        type={submitted ? undefined : 'submit'}
                         color='primary'
-                        onClick={handleDelete}>
-                        Delete
-                    </Button>
-                )}
+                        onClick={submitted ? () => handleDelete() : undefined}>
+                        <Icon>{submitted ? 'refresh' : 'save'}</Icon>
+                    </Fab>
+                    {loading && <CircularProgress size={68} className={classes.buttonProgress} />}
+                </div>
             </form>
         </>
     );

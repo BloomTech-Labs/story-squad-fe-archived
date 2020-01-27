@@ -7,11 +7,18 @@ import { Button, Typography, Icon, CircularProgress } from '@material-ui/core';
 import { PaymentContext, creditCardsRefresh } from '../../../../state';
 import { StripeCard } from '../card/card.component';
 
+interface StyleProps {
+    cards: number | undefined;
+}
+
 const useStyles = makeStyles((theme) => ({
     list: {
         display: 'grid',
         gridGap: theme.spacing(1),
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        gridTemplateColumns: ({ cards }: StyleProps) => (!cards ? '1fr' : '1fr 1fr'),
+        [theme.breakpoints.down('md')]: {
+            gridTemplateColumns: () => '1fr',
+        },
     },
     loading: {
         display: 'flex',
@@ -35,16 +42,16 @@ interface CardListProps {
 }
 
 const CardList: React.FC<CardListProps> = ({ className }) => {
-    const classes = useStyles({});
     const paymentInfo = React.useContext(PaymentContext);
+    const classes = useStyles({ cards: paymentInfo.cards?.length });
 
-    console.log(paymentInfo.cards);
     if (!paymentInfo.cards)
         return (
             <section className={classes.loading}>
                 <CircularProgress size={56} />
             </section>
         );
+
     if (!paymentInfo.cards?.length)
         return (
             <section className={classes.empty}>

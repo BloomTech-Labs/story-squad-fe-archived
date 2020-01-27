@@ -25,7 +25,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
     },
-    toolbar: theme.mixins.toolbar,
+    toolbar: {
+        [theme.breakpoints.down('sm')]: theme.mixins.toolbar,
+    },
 }));
 
 const DashboardPage: React.FC = () => {
@@ -42,6 +44,7 @@ const DashboardPage: React.FC = () => {
                 <NavigationDrawer open={navOpen} onClose={closeNav} />
 
                 <main className={classes.main}>
+                    <div className={classes.toolbar} />
                     <Switch>
                         <Route path='/dashboard/subscribe/:id' component={SubscribePage} />
                         <Route path='/dashboard/child/create' component={CreateChildPage} />

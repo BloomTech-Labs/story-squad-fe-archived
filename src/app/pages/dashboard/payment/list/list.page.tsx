@@ -24,15 +24,6 @@ const useStyles = makeStyles((theme) => ({
     button: {
         borderRadius: theme.shape.borderRadius,
     },
-    empty: {
-        'display': 'flex',
-        'flexDirection': 'column',
-        'justifyContent': 'center',
-        'alignItems': 'center',
-        '& > .MuiIcon-fontSizeLarge': {
-            fontSize: '30vh',
-        },
-    },
 }));
 
 const CardListPage: React.FC = () => {

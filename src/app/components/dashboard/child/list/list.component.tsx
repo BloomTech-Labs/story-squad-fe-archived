@@ -8,6 +8,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Child } from '../../../../models';
 import { ChildCard } from '../card/card.component';
 
+interface StyleProps {
+    children: number | undefined;
+}
+
 const useStyles = makeStyles((theme) => ({
     loading: {
         display: 'flex',
@@ -24,9 +28,9 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
         display: 'grid',
         gridGap: theme.spacing(4),
-        gridTemplateColumns: '1fr',
-        [theme.breakpoints.up('lg')]: {
-            gridTemplateColumns: '1fr 1fr',
+        gridTemplateColumns: ({ children }: StyleProps) => (children === 0 ? '1fr' : '1fr 1fr'),
+        [theme.breakpoints.down('md')]: {
+            gridTemplateColumns: () => '1fr',
         },
     },
     empty: {
@@ -61,7 +65,7 @@ interface ChildListProps {
 }
 
 const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
-    const classes = useStyles({});
+    const classes = useStyles({ children: list.length });
 
     if (!list)
         return (

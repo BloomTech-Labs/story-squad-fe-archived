@@ -8,8 +8,8 @@ const EditProfilePage: React.FC = () => {
     const history = useHistory();
     const { id } = useParams();
 
-    const handleUpdate = () => {
-        childListRefresh();
+    const handleUpdate = async () => {
+        await childListRefresh();
         history.push('/dashboard');
     };
 

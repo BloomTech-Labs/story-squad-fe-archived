@@ -3,7 +3,7 @@ import React from 'react';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
 
-let childListRefresh: () => void;
+let childListRefresh: () => Promise<void>;
 
 const ChildListContext = React.createContext<Child[]>([]);
 const ChildListProvider: React.FC = ({ children }) => {

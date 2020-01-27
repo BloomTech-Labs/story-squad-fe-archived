@@ -4,7 +4,8 @@ import { AppBar, Button, CircularProgress, Toolbar, Typography } from '@material
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI } from '../../hooks';
-import { WelcomeCard, KidProgressCard } from '../../components';
+import { WelcomeCard, KidProgressCard, CCSForm } from '../../components';
+import { Switch, Route } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     loading: {
@@ -70,10 +71,21 @@ const ChildDashboard: React.FC = () => {
             <main className={classes.main}>
                 <div className={classes.toolbar} />
 
-                <div className={classes.content}>
-                    <WelcomeCard className={classes.welcome} child={response.me} />
-                    <KidProgressCard child={response.me} onUpdate={request} />
-                </div>
+                <Switch>
+                    <Route
+                        path='/kids-dashboard/write-your-story'
+                        render={() => <CCSForm child={response.me} onUpdate={request} />}
+                    />
+                    <Route
+                        path='/'
+                        render={() => (
+                            <div className={classes.content}>
+                                <WelcomeCard className={classes.welcome} child={response.me} />
+                                <KidProgressCard child={response.me} onUpdate={request} />
+                            </div>
+                        )}
+                    />
+                </Switch>
             </main>
         </div>
     );

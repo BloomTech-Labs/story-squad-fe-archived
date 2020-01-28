@@ -52,11 +52,6 @@ Story Squad is a paid service; parents are required to create the account for th
 -   Easy cross-platform development via progressive web app
 -   Simple routing
 
-#### Forked React Read PDF
-
--   Accurately displays PDFs as canvas elements
--   Added styling options via edits in fork
-
 #### Typescript
 
 -   VS Code Tooling (Autocomplete/Tooltips)
@@ -150,13 +145,13 @@ Clone and download the [back end](https://github.com/Lambda-School-Labs/story-sq
 Run the application locally
 
 ```
-yarn start
+yarn dev
 ```
 
 ## Other Scripts
 
     * build - creates a build of the application
-    * start - runs the development server
+    * dev - runs the development server
     * test - runs tests as defined in *.spec.ts files
     * lint - format and correct errors with prettier
 

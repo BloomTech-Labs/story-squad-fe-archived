@@ -29,8 +29,6 @@ const PDFDisplay: React.FC<PDFDisplayProps> = ({ document, page, scale }) => {
             const canvasContext = canvas.getContext('2d');
             if (!canvasContext) return;
 
-            console.log(viewport);
-
             canvas.height = viewport.height;
             canvas.width = viewport.width;
             pdfPage.render({ canvasContext, viewport });

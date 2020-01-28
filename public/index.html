@@ -17,17 +17,15 @@
         />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <title>Story Squad</title>
-
-        <script src="https://js.stripe.com/v3/"></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://js.stripe.com/v3/"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155742060-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag() {
+            function gtag(...args) {
                 dataLayer.push(arguments);
             }
-            gtag('js', new Date());
 
+            gtag('js', new Date());
             gtag('config', 'UA-155742060-1');
         </script>
     </head>

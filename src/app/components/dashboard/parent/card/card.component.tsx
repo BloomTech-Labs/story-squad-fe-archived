@@ -19,9 +19,8 @@ const useStyles = makeStyles((theme) => ({
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    console.log(e);
     e.preventDefault();
-    // Stash the event so it can be triggered later.
     deferredPrompt = e;
 });
 

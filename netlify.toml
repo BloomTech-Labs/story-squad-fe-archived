@@ -8,5 +8,7 @@
     GENERATE_SOURCEMAP="false"
 
 
-[context."polish".environment]
-    REACT_APP_ENDPOINT="https://core-polish-ggzspu1w8t31chhldk.herokuapp.com"
+[context."webpack".environment]
+    REACT_APP_ENDPOINT="https://core-webpack-31236dhik9frjxddz.herokuapp.com"
+
+

@@ -7,10 +7,6 @@ import { displayError } from '../../../state';
 import { useAPI } from '../../../hooks';
 import { numbersBetweenZero } from '../../../util';
 
-import * as pdfjsLib from 'pdfjs-dist';
-import * as pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry';
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-
 const useStyles = makeStyles((theme) => ({
     root: {
         'display': 'flex',
@@ -29,9 +25,15 @@ interface PDFDisplayProps {
 
 const PDFDisplay: React.FC<PDFDisplayProps> = ({ week }) => {
     const classes = useStyles();
+
     const [file, setFile] = React.useState<Buffer>();
     const [pages, setPages] = React.useState<number[]>();
     const { request, response, error } = useAPI(`/canon/${week}`);
+
+    const [pdfjs, setPdfjs] = React.useState<typeof import('pdfjs-dist')>();
+    React.useEffect(() => {
+        import('pdfjs-dist').then((m) => setPdfjs(m));
+    }, []);
 
     React.useEffect(() => {
         request();
@@ -43,10 +45,10 @@ const PDFDisplay: React.FC<PDFDisplayProps> = ({ week }) => {
     }, [response]);
 
     React.useEffect(() => {
-        if (!file) return;
-        const { promise } = pdfjsLib.getDocument({ data: file });
+        if (!file || !pdfjs) return;
+        const { promise } = pdfjs.getDocument({ data: file });
         promise.then(({ numPages }) => setPages(numbersBetweenZero(numPages)));
-    }, [file]);
+    }, [file, pdfjs]);
 
     React.useEffect(() => {
         if (typeof error?.message === 'string') displayError(error?.message);

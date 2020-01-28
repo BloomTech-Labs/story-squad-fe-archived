@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { PDFDisplay } from '../../components';
+import { PDFPages } from '../../components';
 
 const PdfDisplayPage: React.FC = () => {
     const { week } = useParams();
@@ -9,7 +9,7 @@ const PdfDisplayPage: React.FC = () => {
     if (!week) return <div></div>;
     return (
         <div>
-            <PDFDisplay week={week} />
+            <PDFPages week={week} />
         </div>
     );
 };

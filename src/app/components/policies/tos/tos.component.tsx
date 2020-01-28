@@ -1,10 +1,11 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Drawer, List, Typography, ListItem, ListItemText } from '@material-ui/core';
+
+import { Drawer, Link, List, ListItem, ListItemText, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
     },

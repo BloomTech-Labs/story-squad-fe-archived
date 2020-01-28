@@ -16,6 +16,31 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt = e;
+});
+
+async function install() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        console.log(deferredPrompt);
+        deferredPrompt.userChoice.then(function(choiceResult) {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('Your PWA has been installed');
+            } else {
+                console.log('User chose to not install your PWA');
+            }
+
+            deferredPrompt = null;
+        });
+    }
+}
+
 interface ParentCardProps {
     className?: string;
     user: Parent;
@@ -24,6 +49,7 @@ interface ParentCardProps {
 const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {
     const classes = useStyles({});
     const logout = () => window.dispatchEvent(new Event('logout'));
+    const install = () => window.dispatchEvent(new Event('install'));
 
     return (
         <Card className={`${className} ${classes.card}`}>

@@ -1,9 +1,11 @@
 [context.production.environment]
     REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"
+    GENERATE_SOURCEMAP="false"
 
 
 [context.deploy-preview.environment]
     REACT_APP_ENDPOINT="https://story-squad.herokuapp.com"
+    GENERATE_SOURCEMAP="false"
 
 
 [context."polish".environment]

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Card, CardHeader } from '@material-ui/core';
+import { Button, Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Parent } from '../../../../models';
@@ -36,9 +36,13 @@ const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {
                     </Button>
                 }
                 title='Welcome back!'
-                subheader="Let's see how each participant is doing this week."
+                subheader={
+                    <>
+                        <Typography>Let's see how each participant is doing this week.</Typography>
+                        <InstallButton />
+                    </>
+                }
             />
-            <CardHeader className={classes.card} action={<InstallButton />} />
         </Card>
     );
 };

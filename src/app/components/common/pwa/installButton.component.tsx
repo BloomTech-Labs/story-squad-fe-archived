@@ -1,11 +1,18 @@
 import React from 'react';
 
-import { Button, CardHeader } from '@material-ui/core';
-import { useAddToHomescreenPrompt } from '../../../hooks/pwa/usePWA.hook';
+import { Button, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+import { useAddToHomescreenPrompt } from '../../../hooks';
+
+const useStyles = makeStyles((theme) => ({
+    root: {},
+}));
 
 function InstallButton() {
+    const classes = useStyles({});
     const [prompt, promptToInstall] = useAddToHomescreenPrompt();
-    const [isVisible, setVisibleState] = React.useState(false);
+    const [isVisible, setVisibleState] = React.useState(true);
 
     const hide = () => setVisibleState(false);
 
@@ -21,10 +28,15 @@ function InstallButton() {
     }
 
     return (
-        <CardHeader subheader='Would You Like to Add Story Squad to Your Homescreen?'>
-            <Button onClick={promptToInstall}>Yes</Button>
-            <Button onClick={hide}>No</Button>
-        </CardHeader>
+        <div className={classes.root}>
+            <Typography variant='body1' color='textSecondary'>
+                Would you like to add Story Squad to your homescreen?
+            </Typography>
+            <Button color='secondary' onClick={promptToInstall}>
+                Install
+            </Button>
+            <Button onClick={hide}>No thanks</Button>
+        </div>
     );
 }
 

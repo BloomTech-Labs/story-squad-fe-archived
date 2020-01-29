@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Button, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { AdminNavigationDrawer, PdfCreate } from '../../components';
+import { AdminNavigationDrawer, PdfCreate, AddAccount } from '../../components';
 
 import { AdminHomePage } from './home/home.page';
 import { HelpPage } from './help/help.page';
@@ -63,6 +63,7 @@ const AdminDashboardPage: React.FC = () => {
                     <Route path='/admin/dashboard/cohort/:id/edit' component={EditCohortPage} />
                     <Route path='/admin/dashboard/cohort/create' component={EditCohortPage} />
                     <Route path='/admin/dashboard/cohort' component={ManageCohortPage} />
+                    <Route path='/admin/dashboard/add' component={AddAccount} />
                     <Route path='/admin/dashboard' component={AdminHomePage} />
                 </Switch>
             </main>

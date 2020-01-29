@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import {
     Button,
@@ -39,7 +39,7 @@ interface Admin {
 const AccountsList: React.FC<Props> = ({ className }) => {
     const classes = useStyles({});
     const { request, response } = useAPI<{ admin: Admin[] }>('/admin');
-
+    const history = useHistory();
     React.useEffect(() => {
         request();
     }, [request]);
@@ -59,7 +59,7 @@ const AccountsList: React.FC<Props> = ({ className }) => {
                     <Button
                         onClick={(e) => {
                             e.preventDefault();
-                            window.alert('Not Yet Implemented');
+                            history.push('/admin/dashboard/add');
                         }}>
                         Add Account
                     </Button>

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 
 import { TextField, Button, Input, InputLabel, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useForm, useAPI } from '../../../../hooks';
 
 const useStyles = makeStyles(() => ({
     form: {
@@ -19,19 +20,20 @@ const AddAccount: React.FC = () => {
     const classes = useStyles({});
 
     const history = useHistory();
-
-    const handleInputChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        setState({ ...state, [key]: e.target.value });
-    };
+    const { request, response } = useAPI('/admin/register', 'POST');
+    const { state, handleInputChange, handleSubmitBuilder } = useForm({ name: '', role: '' });
+    const { name, role } = state;
+    React.useEffect(() => {
+        if (response) history.push('/admin/dashboard');
+    }, [history, response]);
 
     return (
         <>
             <Typography variant='h4'>Add Account</Typography>
-            <form className={classes.form} onSubmit={handleSubmit}>
+            <form className={classes.form} onSubmit={handleSubmitBuilder(request)}>
                 <TextField
                     type='string'
                     label='username'
-                    inputProps={{ name }}
                     required
                     value={name}
                     onChange={handleInputChange('name')}
@@ -40,7 +42,6 @@ const AddAccount: React.FC = () => {
                 <TextField
                     type='string'
                     label='role'
-                    inputProps={{ role }}
                     required
                     value={role}
                     onChange={handleInputChange('role')}

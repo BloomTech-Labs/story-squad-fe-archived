@@ -4,7 +4,7 @@ import { Button, Card, CardHeader } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Parent } from '../../../../models';
-import { useAddToHomescreenPrompt } from '../../../common/pwa/pwa.component';
+import { InstallButton } from '../../../common/pwa/installButton.component';
 
 const useStyles = makeStyles((theme) => ({
     card: {},
@@ -17,59 +17,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-// let deferredPrompt;
-
-// window.addEventListener('beforeinstallprompt', (e) => {
-//     console.log(e);
-//     e.preventDefault();
-//     deferredPrompt = e;
-// });
-
-// async function install() {
-//     if (deferredPrompt) {
-//         deferredPrompt.prompt();
-//         console.log(deferredPrompt);
-//         deferredPrompt.userChoice.then(function(choiceResult) {
-//             if (choiceResult.outcome === 'accepted') {
-//                 console.log('Your PWA has been installed');
-//             } else {
-//                 console.log('User chose to not install your PWA');
-//             }
-
-//             deferredPrompt = null;
-//         });
-//     }
-// }
-
 interface ParentCardProps {
     className?: string;
     user: Parent;
-}
-
-function InstallButton() {
-    const [prompt, promptToInstall] = useAddToHomescreenPrompt();
-    const [isVisible, setVisibleState] = React.useState(false);
-
-    const hide = () => setVisibleState(false);
-
-    React.useEffect(() => {
-        console.log(prompt);
-        if (prompt) {
-            setVisibleState(true);
-        }
-    }, [prompt]);
-
-    if (!isVisible) {
-        return <div />;
-    }
-
-    return (
-        <div>
-            <Button onClick={hide}>Close</Button>
-            Would You Like To Add Story Squad To Your Homescreen?
-            <Button onClick={promptToInstall}>Add to homescreen</Button>
-        </div>
-    );
 }
 
 const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {

@@ -38,7 +38,6 @@ function InstallButton() {
         <CardHeader
             className={classes.cardHeader}
             subheader='Would You Like To Add Story Squad To Your Homescreen?'>
-            <br />
             <Button onClick={promptToInstall}>Yes</Button>
             <Button onClick={hide}>No</Button>
         </CardHeader>

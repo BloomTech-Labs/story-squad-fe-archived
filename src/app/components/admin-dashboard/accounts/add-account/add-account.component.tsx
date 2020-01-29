@@ -21,9 +21,10 @@ const AddAccount: React.FC = () => {
 
     const history = useHistory();
     const { request, response } = useAPI('/admin/register', 'POST');
-    const { state, handleInputChange, handleSubmitBuilder } = useForm({ name: '', role: '' });
-    const { name, role } = state;
+    const { state, handleInputChange, handleSubmitBuilder } = useForm({ email: '', role: '' });
+    const { email, role } = state;
     React.useEffect(() => {
+        console.log(response);
         if (response) history.push('/admin/dashboard');
     }, [history, response]);
 
@@ -35,8 +36,8 @@ const AddAccount: React.FC = () => {
                     type='string'
                     label='username'
                     required
-                    value={name}
-                    onChange={handleInputChange('name')}
+                    value={email}
+                    onChange={handleInputChange('email')}
                 />
 
                 <TextField

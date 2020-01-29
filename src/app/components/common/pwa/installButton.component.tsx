@@ -28,11 +28,11 @@ function InstallButton() {
         }
     }, [prompt]);
 
+    const classes = useStyles({});
+
     if (!isVisible) {
         return <div />;
     }
-
-    const classes = useStyles({});
 
     return (
         <CardHeader

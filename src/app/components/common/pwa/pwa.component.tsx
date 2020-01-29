@@ -1,37 +1,40 @@
-import React from 'react';
-import { Button, Card, CardHeader } from '@material-ui/core';
+import * as React from 'react';
 
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later.
-    deferredPrompt = e;
-});
-
-async function install() {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        console.log(deferredPrompt);
-        deferredPrompt.userChoice.then(function(choiceResult) {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('Your PWA has been installed');
-            } else {
-                console.log('User chose to not install your PWA');
-            }
-
-            deferredPrompt = null;
-
-            return (
-                <CardHeader
-                    action={
-                        <Button aria-label='install' onClick={() => install()}>
-                            install
-                        </Button>
-                    }
-                />
-            );
-        });
-    }
+interface BeforeInstallPromptEvent extends Event {
+    readonly platforms: string[];
+    readonly userChoice: Promise<{
+        outcome: 'accepted' | 'dismissed';
+        platform: string;
+    }>;
+    prompt(): Promise<void>;
 }
+
+function useAddToHomescreenPrompt(): [BeforeInstallPromptEvent | null, () => void] {
+    const [prompt, setState] = React.useState<BeforeInstallPromptEvent | null>(null);
+
+    const promptToInstall = () => {
+        if (prompt) {
+            return prompt.prompt();
+        }
+        return Promise.reject(
+            new Error('Tried installing before browser sent "beforeinstallprompt" event')
+        );
+    };
+
+    React.useEffect(() => {
+        const ready = (e: BeforeInstallPromptEvent) => {
+            e.preventDefault();
+            setState(e);
+        };
+
+        window.addEventListener('beforeinstallprompt', ready as any);
+
+        return () => {
+            window.removeEventListener('beforeinstallprompt', ready as any);
+        };
+    }, []);
+
+    return [prompt, promptToInstall];
+}
+
+export { useAddToHomescreenPrompt };

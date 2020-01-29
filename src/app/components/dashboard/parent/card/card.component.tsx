@@ -38,7 +38,7 @@ const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {
                 title='Welcome back!'
                 subheader="Let's see how each participant is doing this week."
             />
-            <CardHeader className={classes.cardHeader} action={<InstallButton />} />
+            <CardHeader className={classes.card} action={<InstallButton />} />
         </Card>
     );
 };

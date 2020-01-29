@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from '@material-ui/core';
+import { Button, CardHeader } from '@material-ui/core';
 import { useAddToHomescreenPrompt } from '../../../hooks/pwa/usePWA.hook';
 
 function InstallButton() {
@@ -21,12 +21,10 @@ function InstallButton() {
     }
 
     return (
-        <div>
-            Would You Like To Add Story Squad To Your Homescreen?
-            <br />
+        <CardHeader subheader='Would You Like To Add Story Squad To Your Homescreen?'>
             <Button onClick={promptToInstall}>Yes</Button>
             <Button onClick={hide}>No</Button>
-        </div>
+        </CardHeader>
     );
 }
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAddToHomescreenPrompt } from '../../../hooks';
+import { PWAContext } from '../../../state';
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -11,24 +11,26 @@ const useStyles = makeStyles((theme) => ({
 
 const InstallButton: React.FC = () => {
     const classes = useStyles({});
-    const [prompt, promptToInstall] = useAddToHomescreenPrompt();
+    const promptEvent = React.useContext(PWAContext);
     const [isVisible, setVisibleState] = React.useState(false);
 
     const hide = () => setVisibleState(false);
 
     React.useEffect(() => {
-        if (prompt) {
+        if (promptEvent) {
             setVisibleState(true);
-            prompt.userChoice?.then((platform?, outcome?) => {
+            promptEvent.userChoice?.then((platform?, outcome?) => {
                 setVisibleState(false);
             });
         }
-    }, [prompt]);
+    }, [promptEvent]);
 
-    if (!isVisible) {
-        return <div />;
-    }
+    const promptToInstall = () => {
+        if (promptEvent?.prompt) return promptEvent.prompt();
+        throw new Error('Tried installing before browser sent "beforeinstallprompt" event');
+    };
 
+    if (!isVisible) return <div />;
     return (
         <div className={classes.root}>
             <Typography variant='body1' color='textSecondary'>

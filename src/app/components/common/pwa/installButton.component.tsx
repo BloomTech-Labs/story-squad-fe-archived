@@ -9,10 +9,10 @@ const useStyles = makeStyles((theme) => ({
     root: {},
 }));
 
-function InstallButton() {
+const InstallButton: React.FC = () => {
     const classes = useStyles({});
     const [prompt, promptToInstall] = useAddToHomescreenPrompt();
-    const [isVisible, setVisibleState] = React.useState(true);
+    const [isVisible, setVisibleState] = React.useState(false);
 
     const hide = () => setVisibleState(false);
 
@@ -38,6 +38,6 @@ function InstallButton() {
             <Button onClick={hide}>No thanks</Button>
         </div>
     );
-}
+};
 
 export { InstallButton };

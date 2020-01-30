@@ -67,6 +67,10 @@ Story Squad is a paid service; parents are required to create the account for th
 -   Includes stripe input building blocks
 -   Manages Stripe prop injection
 
+#### React-PDF
+
+-   Displays PDF pages as canvases with a text layer
+
 #### Front end deployed to `Netlify`
 
 ### [Back end](https://github.com/Lambda-School-Labs/story-squad-be) built using

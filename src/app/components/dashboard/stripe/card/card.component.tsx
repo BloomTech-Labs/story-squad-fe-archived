@@ -13,9 +13,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { CreditCard } from '../../../../models';
 import { useAPI } from '../../../../hooks';
-import { create } from 'react-test-renderer';
 
 interface StripeCardProps {
+    className?: string;
     card: CreditCard;
     onDelete?: () => void;
     onUpdate?: () => void;
@@ -33,7 +33,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, onUpdate, defaultCard }) => {
+const StripeCard: React.FC<StripeCardProps> = ({
+    className,
+    card,
+    onDelete,
+    onUpdate,
+    defaultCard,
+}) => {
     const { request: updateRequest, response: updateResponse } = useAPI(
         `/payment/default/${card.id}`,
         'PUT'
@@ -56,7 +62,7 @@ const StripeCard: React.FC<StripeCardProps> = ({ card, onDelete, onUpdate, defau
     }, [onUpdate, updateResponse]);
 
     return (
-        <Card className={classes.card}>
+        <Card className={`${className} ${classes.card}`}>
             <CardHeader
                 title={card.brand}
                 subheader={card.last4}

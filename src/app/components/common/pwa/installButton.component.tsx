@@ -17,9 +17,11 @@ const InstallButton: React.FC = () => {
     const hide = () => setVisibleState(false);
 
     React.useEffect(() => {
-        console.log(prompt);
         if (prompt) {
             setVisibleState(true);
+            prompt.userChoice?.then((platform?, outcome?) => {
+                setVisibleState(false);
+            });
         }
     }, [prompt]);
 

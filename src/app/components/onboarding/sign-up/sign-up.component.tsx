@@ -66,13 +66,14 @@ const SignUp: React.FC = () => {
         termsOfService: false,
     });
 
-    const handleSubmit = handleSubmitBuilder(request);
+    const handleSubmit = handleSubmitBuilder((data) => {
+        if (state.comparePassword !== state.password) return;
+        request(data);
+    });
 
     React.useEffect(() => {
-        if (response) {
-            localStorage.setItem('jwt', response);
-            history.push('/dashboard');
-        }
+        if (response) localStorage.setItem('jwt', response);
+        if (response) history.push('/dashboard');
     }, [history, response]);
 
     const { email, password, comparePassword, termsOfService } = state;

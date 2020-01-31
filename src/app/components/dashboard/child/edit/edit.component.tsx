@@ -71,32 +71,21 @@ interface ChildEdit {
 const ChildEdit: React.FC<ChildEdit> = ({ id, onUpdate }) => {
     const classes = useStyles();
 
-    const { request: fetch, response: fetchResponse, loading } = useAPI(`/children/list/${id}`);
-    const { request: update, response: updateResponse } = useAPI(`/children/list/${id}`, 'PUT');
-    const { request: remove, response: removeResponse } = useAPI(`/children/list/${id}`, 'DELETE');
-
-    const { state: child, setState: setChild, handleInputChange: handleChildChange } = useForm({
-        username: '',
-        grade: 0,
+    const { request: fetch, response: fetchResponse, loading } = useAPI(`/children/${id}`);
+    const { request: update, response: updateResponse } = useAPI(`/children/${id}`, {
+        method: 'PUT',
+    });
+    const { request: remove, response: removeResponse } = useAPI(`/children/${id}`, {
+        method: 'DELETE',
     });
 
-    const {
-        state: preferences,
-        setState: setPreferences,
-        handleBoolChange: handlePreferenceChange,
-    } = useForm({
+    const { state, setState, handleSubmitBuilder, handleInputChange, handleBoolChange } = useForm({
+        username: '',
+        grade: 0,
         dyslexia: false,
     });
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        update({
-            ...child,
-            preferences: {
-                ...preferences,
-            },
-        });
-    };
+    const handleSubmit = handleSubmitBuilder(update);
 
     React.useEffect(() => {
         fetch();
@@ -104,10 +93,9 @@ const ChildEdit: React.FC<ChildEdit> = ({ id, onUpdate }) => {
 
     React.useEffect(() => {
         if (!fetchResponse) return;
-        const { id, subscription, ...child } = fetchResponse.child;
-        setChild({ ...child });
-        setPreferences({ ...child.preferences });
-    }, [fetchResponse, setChild, setPreferences]);
+        const { id, subscription, cohort, ...child } = fetchResponse;
+        setState({ ...child });
+    }, [fetchResponse, setState]);
 
     React.useEffect(() => {
         if (updateResponse && onUpdate) onUpdate();
@@ -124,8 +112,7 @@ const ChildEdit: React.FC<ChildEdit> = ({ id, onUpdate }) => {
             </section>
         );
 
-    const { username, grade } = child;
-    const { dyslexia } = preferences;
+    const { username, grade, dyslexia } = state;
     return (
         <form onSubmit={handleSubmit}>
             <Card>
@@ -148,7 +135,7 @@ const ChildEdit: React.FC<ChildEdit> = ({ id, onUpdate }) => {
                         label='Grade'
                         required
                         value={grade}
-                        onChange={handleChildChange('grade')}
+                        onChange={handleInputChange('grade')}
                     />
                     <Typography variant='overline'>Preferences</Typography>
                     <section className={classes.preferences}>
@@ -158,7 +145,7 @@ const ChildEdit: React.FC<ChildEdit> = ({ id, onUpdate }) => {
                             control={
                                 <Switch
                                     checked={dyslexia}
-                                    onChange={handlePreferenceChange('dyslexia')}
+                                    onChange={handleBoolChange('dyslexia')}
                                 />
                             }
                         />

@@ -5,7 +5,6 @@ import { Button, TableRow, TableCell } from '@material-ui/core';
 
 import { Cohort } from '../../../../models';
 import { useAPI } from '../../../../hooks';
-import { displayError } from '../../../../state';
 
 interface CohortListItemProps {
     cohort: Cohort;
@@ -13,18 +12,13 @@ interface CohortListItemProps {
 }
 
 const CohortListItem: React.FC<CohortListItemProps> = ({ cohort, onUpdate }) => {
-    const { request: remove, response: removeResponse, error } = useAPI(
-        `/cohort/list/${cohort.id}`,
-        'DELETE'
-    );
+    const { request: remove, response: removeResponse } = useAPI(`/cohorts/${cohort.id}`, {
+        method: 'DELETE',
+    });
 
     React.useEffect(() => {
-        if (removeResponse?.message && onUpdate) onUpdate();
+        if (removeResponse && onUpdate) onUpdate();
     }, [removeResponse, onUpdate]);
-
-    React.useEffect(() => {
-        if (typeof error?.message === 'string') displayError(error?.message);
-    }, [error]);
 
     return (
         <TableRow key={cohort.id}>

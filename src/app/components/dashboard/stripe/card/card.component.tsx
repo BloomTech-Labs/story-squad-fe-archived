@@ -40,26 +40,26 @@ const StripeCard: React.FC<StripeCardProps> = ({
     onUpdate,
     defaultCard,
 }) => {
-    const { request: updateRequest, response: updateResponse } = useAPI(
-        `/payment/default/${card.id}`,
-        'PUT'
-    );
+    const {
+        request: updateRequest,
+        response: updateResponse,
+        reset,
+    } = useAPI(`/payment/cards/${card.id}/default`, { method: 'PUT' });
     const { request: deleteRequest, response: deleteResponse } = useAPI(
         `/payment/cards/${card.id}`,
-        'DELETE'
+        { method: 'DELETE' }
     );
 
     const classes = useStyles({});
 
     React.useEffect(() => {
-        if (deleteResponse?.message && onDelete) onDelete();
-        if (deleteResponse?.message) deleteResponse.message = undefined;
-    }, [onDelete, deleteResponse]);
+        if (updateResponse && onUpdate) onUpdate();
+        if (updateResponse) reset();
+    }, [onUpdate, reset, updateResponse]);
 
     React.useEffect(() => {
-        if (updateResponse?.message && onUpdate) onUpdate();
-        if (updateResponse?.message) updateResponse.message = undefined;
-    }, [onUpdate, updateResponse]);
+        if (deleteResponse && onDelete) onDelete();
+    }, [onDelete, deleteResponse]);
 
     return (
         <Card className={`${className} ${classes.card}`}>

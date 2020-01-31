@@ -6,7 +6,6 @@ import { Button, TextField, CircularProgress, Typography } from '@material-ui/co
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
-import { displayError } from '../../../state';
 import { useAPI, useForm } from '../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +39,7 @@ const SignIn: React.FC = () => {
 
     // TODO: Setup Loading and Error States
     // eslint-disable-next-line
-    const { response, request, loading, error } = useAPI('/auth/login', 'POST');
+    const { response, request, loading, error } = useAPI('/auth/login', { method: 'POST' });
     const history = useHistory();
     const { state, handleInputChange: handleStringChange, handleSubmitBuilder } = useForm<
         SignInState
@@ -52,15 +51,11 @@ const SignIn: React.FC = () => {
     const handleSubmit = handleSubmitBuilder(request);
 
     React.useEffect(() => {
-        if (response?.token) {
-            localStorage.setItem('jwt', response.token);
+        if (response) {
+            localStorage.setItem('jwt', response);
             history.push('/dashboard');
         }
     }, [history, response]);
-
-    React.useEffect(() => {
-        if (typeof error?.message === 'string') displayError(error?.message);
-    }, [error]);
 
     const { email, password } = state;
     return (

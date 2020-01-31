@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { PDFDisplay } from '../display/display.component';
 
-import { displayError } from '../../../state';
 import { useAPI } from '../../../hooks';
 import { numbersBetweenZero } from '../../../util';
 
@@ -24,10 +23,12 @@ interface PDFPageProps {
 
 const PDFPages: React.FC<PDFPageProps> = ({ week }) => {
     const classes = useStyles();
+
     const [file, setFile] = React.useState<Buffer>();
     const [document, setDocument] = React.useState<PDFDocumentProxy>();
     const [pages, setPages] = React.useState<number[]>();
-    const { request, response, error } = useAPI(`/canon/${week}`);
+    const { request, response } = useAPI(`/canon/${week}`);
+    const { request: updateProgress } = useAPI('/children/progress', { method: 'POST' });
 
     const [pdfjs, setPdfjs] = React.useState<typeof import('pdfjs-dist')>();
     React.useEffect(() => {
@@ -36,11 +37,12 @@ const PDFPages: React.FC<PDFPageProps> = ({ week }) => {
 
     React.useEffect(() => {
         request();
-    }, [request]);
+        updateProgress({ reading: true });
+    }, [request, updateProgress]);
 
     React.useEffect(() => {
-        if (!response?.canon) return;
-        setFile(Buffer.from(response.canon.base64, 'base64'));
+        if (!response) return;
+        setFile(Buffer.from(response, 'base64'));
     }, [response]);
 
     React.useEffect(() => {
@@ -55,10 +57,6 @@ const PDFPages: React.FC<PDFPageProps> = ({ week }) => {
         const { numPages } = document;
         setPages(numbersBetweenZero(numPages));
     }, [document]);
-
-    React.useEffect(() => {
-        if (typeof error?.message === 'string') displayError(error?.message);
-    }, [error]);
 
     if (!file) return <div>Downloading...</div>;
     if (!pages || !document) return <div>Loading...</div>;

@@ -37,16 +37,13 @@ interface Canon {
 
 const PdfList: React.FC<PdfListProps> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ canon: Canon[] }>('/canon');
+    const { request, response } = useAPI<Canon[]>('/canon');
 
     React.useEffect(() => {
         request();
     }, [request]);
 
-    if (!response?.canon) return <h4 className={classes.loading}>Loading...</h4>;
-
-    const { canon } = response;
-
+    if (!response) return <h4 className={classes.loading}>Loading...</h4>;
     return (
         <div className={className}>
             <div className={classes.header}>
@@ -68,7 +65,7 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {canon.map((pdf) => (
+                    {response.map((pdf) => (
                         <TableRow key={pdf.week}>
                             <TableCell>{pdf.week}</TableCell>
                             <TableCell>

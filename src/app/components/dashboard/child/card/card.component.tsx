@@ -76,14 +76,16 @@ interface ChildCardProps {
 const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
-    const signIn = useAPI(`/children/${child.id}/login`, 'POST');
+    const { request, response, loading } = useAPI(`/children/login/${child.id}`, {
+        method: 'POST',
+    });
 
     React.useEffect(() => {
-        if (!signIn.response?.token) return;
-        localStorage.setItem('jwt', signIn.response.token);
+        if (!response) return;
+        localStorage.setItem('jwt', response);
         window.dispatchEvent(new Event('switch-accounts'));
         history.push(`/kids-dashboard`);
-    }, [child.id, history, signIn.response]);
+    }, [child.id, history, response]);
 
     return (
         <Card className={classes.card}>
@@ -112,11 +114,8 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
             </CardContent>
             <CardActions className={classes.actions}>
                 <div className={classes.wrapper}>
-                    {child.subscription === true ? (
-                        <Button
-                            fullWidth
-                            disabled={signIn.loading}
-                            onClick={() => signIn.request()}>
+                    {child.subscription ? (
+                        <Button fullWidth disabled={loading} onClick={() => request()}>
                             View Account
                         </Button>
                     ) : (
@@ -125,9 +124,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                         </Link>
                     )}
 
-                    {signIn.loading && (
-                        <CircularProgress size={24} className={classes.buttonProgress} />
-                    )}
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                 </div>
             </CardActions>
         </Card>

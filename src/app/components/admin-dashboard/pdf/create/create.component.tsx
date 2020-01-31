@@ -21,7 +21,7 @@ const PdfCreate: React.FC = () => {
     const classes = useStyles({});
 
     const history = useHistory();
-    const { request, response } = useAPI('/canon', 'POST');
+    const { request, response } = useAPI('/canon', { method: 'POST' });
     const [state, setState] = React.useState({ week: '', base64: '', altbase64: '' });
 
     const { week } = state;

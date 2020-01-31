@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Card, CardHeader, Divider, Button, Typography, LinearProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { Child } from '../../../models';
+import { Child, Cohort } from '../../../models';
 import { useAPI } from '../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
@@ -49,26 +49,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface KidProgressProps {
-    onUpdate?: () => void;
     child: Child;
 }
 
-const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
+const KidProgressCard: React.FC<KidProgressProps> = ({ child }) => {
     const classes = useStyles({});
-    const { request: updateProgress, response } = useAPI('/children/progress', 'POST');
+    const { response: cohort } = useAPI<Cohort>('/children/cohort');
 
-    React.useEffect(() => {
-        if (response?.progress && onUpdate) onUpdate();
-        if (response?.progress) response.progress = undefined;
-    }, [onUpdate, response]);
+    if (!cohort) return <></>;
 
-    const { cohort, progress, username } = child;
-    const { dueDates: dueDateStrings } = cohort;
-    const dueDates = Object.fromEntries(
+    const { progress, username } = child;
+    const { dueDates } = cohort;
+    const currentProgress = progress.find((progress) => progress.week === cohort.week);
+    const dueDateStrings = dueDates.find((dueDate) => dueDate.week === cohort.week);
+
+    if (!dueDateStrings || !currentProgress) return <></>;
+    const dates = Object.fromEntries(
         Object.entries(dueDateStrings).map(([key, date]) => [key, moment(date)])
     );
     const today = moment(new Date());
-
     return (
         <Card className={classes.card}>
             <CardHeader
@@ -82,7 +81,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                             className={classes.progress}
                             variant='determinate'
                             color='secondary'
-                            value={progress.reading ? 100 : 1}
+                            value={currentProgress.reading ? 100 : 1}
                         />
                     </div>
                 }
@@ -107,18 +106,16 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                 <>
                     <Typography className={classes.gridItem}>Read the story</Typography>
                     <Typography className={classes.gridItem}>
-                        {dueDates.reading.from(today)}
+                        {dates.reading.from(today)}
                     </Typography>
                     <Typography className={classes.gridItem}>
-                        {progress.reading
+                        {currentProgress.reading
                             ? 'Complete'
-                            : today.diff(dueDates.reading) > 0
+                            : today.diff(dates.reading) > 0
                             ? 'Due'
                             : 'Upcoming'}
                     </Typography>
-                    <Link
-                        to={`/story/${cohort.week}`}
-                        onClick={() => updateProgress({ reading: true })}>
+                    <Link to={`/story/${cohort.week}`}>
                         <Button className={classes.gridItem}>Read</Button>
                     </Link>
                 </>
@@ -126,18 +123,18 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                 <>
                     <Typography className={classes.gridItem}>Write your story</Typography>
                     <Typography className={classes.gridItem}>
-                        {dueDates.writing.from(today)}
+                        {dates.submission.from(today)}
                     </Typography>
                     <Typography className={classes.gridItem}>
-                        {progress.writing
+                        {currentProgress.submission
                             ? 'Complete'
-                            : today.diff(dueDates.writing) > 0
+                            : today.diff(dates.submission) > 0
                             ? 'Due'
                             : 'Upcoming'}
                     </Typography>
                     <Link to={`/kids-dashboard/upload`}>
                         <Button className={classes.gridItem}>
-                            {progress.writing ? 'View' : 'Complete'}
+                            {currentProgress.submission ? 'View' : 'Complete'}
                         </Button>
                     </Link>
                 </>

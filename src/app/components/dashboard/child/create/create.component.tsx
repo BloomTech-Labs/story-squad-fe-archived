@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
 import { Child } from '../../../../models';
-import { childListRefresh, displayError } from '../../../../state';
+import { childListRefresh } from '../../../../state';
 import { useAPI, useForm } from '../../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,19 +47,14 @@ interface ChildCreateProps {
 const ChildCreate: React.FC<ChildCreateProps> = ({ onCreate }) => {
     const classes = useStyles({});
 
-    const { request, response, loading, error } = useAPI('/children/list', 'POST');
+    const { request, response, loading, error } = useAPI('/children', { method: 'POST' });
     const { state, handleInputChange, handleSubmitBuilder } = useForm({ username: '', grade: 3 });
     const handleChange = handleSubmitBuilder(request);
 
     React.useEffect(() => {
         if (response) childListRefresh();
-        if (response && onCreate) onCreate(response.child);
+        if (response && onCreate) onCreate(response);
     }, [response, onCreate]);
-
-    React.useEffect(() => {
-        if (typeof error?.message === 'string') displayError(error?.message);
-        if (!!error?.errors?.length) displayError(error?.errors[0]);
-    }, [error]);
 
     const { username, grade } = state;
     return (

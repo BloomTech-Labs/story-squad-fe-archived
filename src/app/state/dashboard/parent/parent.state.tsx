@@ -11,7 +11,7 @@ const ParentProvider: React.FC = ({ children }) => {
         request();
     }, [request]);
 
-    return <ParentContext.Provider value={response?.me}>{children}</ParentContext.Provider>;
+    return <ParentContext.Provider value={response}>{children}</ParentContext.Provider>;
 };
 
 export { ParentContext, ParentProvider };

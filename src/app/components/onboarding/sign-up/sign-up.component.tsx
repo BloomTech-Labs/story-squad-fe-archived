@@ -6,7 +6,6 @@ import { Button, Checkbox, CircularProgress, TextField, Typography } from '@mate
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
-import { displayError } from '../../../state';
 import { useAPI, useForm } from '../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
@@ -51,13 +50,12 @@ interface SignUpState {
     password: string;
     comparePassword: string;
     termsOfService: boolean;
-    privacyPolicy: boolean;
 }
 
 const SignUp: React.FC = () => {
     const classes = useStyles({});
 
-    const { response, loading, error, request } = useAPI('/auth/register', 'POST');
+    const { response, loading, error, request } = useAPI('/auth/register', { method: 'POST' });
     const history = useHistory();
     const { state, handleInputChange, handleBoolChange, handleSubmitBuilder } = useForm<
         SignUpState
@@ -66,24 +64,18 @@ const SignUp: React.FC = () => {
         password: '',
         comparePassword: '',
         termsOfService: false,
-        privacyPolicy: false,
     });
 
     const handleSubmit = handleSubmitBuilder(request);
 
     React.useEffect(() => {
-        if (response?.token) {
-            localStorage.setItem('jwt', response.token);
+        if (response) {
+            localStorage.setItem('jwt', response);
             history.push('/dashboard');
         }
     }, [history, response]);
 
-    React.useEffect(() => {
-        if (error?.errors) displayError(error?.errors[0]);
-        if (typeof error?.message === 'string') displayError(error?.message);
-    }, [error]);
-
-    const { email, password, comparePassword, termsOfService, privacyPolicy } = state;
+    const { email, password, comparePassword, termsOfService } = state;
     return (
         <>
             <Typography variant='h3' gutterBottom>

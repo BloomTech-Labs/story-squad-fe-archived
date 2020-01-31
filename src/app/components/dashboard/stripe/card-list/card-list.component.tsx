@@ -41,16 +41,16 @@ interface CardListProps {
 
 const CardList: React.FC<CardListProps> = ({ className }) => {
     const paymentInfo = React.useContext(PaymentContext);
-    const classes = useStyles({ cards: paymentInfo.cards?.length });
+    const classes = useStyles({ cards: paymentInfo.sources?.length });
 
-    if (!paymentInfo.cards)
+    if (!paymentInfo.sources)
         return (
             <section className={classes.loading}>
                 <CircularProgress size={56} />
             </section>
         );
 
-    if (!paymentInfo.cards?.length)
+    if (!paymentInfo.sources?.length)
         return (
             <section className={classes.empty}>
                 <Icon color='disabled' fontSize='large'>
@@ -67,15 +67,15 @@ const CardList: React.FC<CardListProps> = ({ className }) => {
         <div>
             <Flipper
                 className={`${className} ${classes.list}`}
-                flipKey={paymentInfo.cards.map((card) => card.id).join('')}>
-                {paymentInfo.cards.map((card) => (
+                flipKey={paymentInfo.sources.map((card) => card.id).join('')}>
+                {paymentInfo.sources.map((card) => (
                     <Flipped key={card.id} flipId={card.id}>
                         <div>
                             <StripeCard
                                 card={card}
                                 onDelete={creditCardsRefresh}
                                 onUpdate={creditCardsRefresh}
-                                defaultCard={paymentInfo.customer?.default_source === card.id}
+                                defaultCard={paymentInfo?.default_source === card.id}
                             />
                         </div>
                     </Flipped>

@@ -17,7 +17,6 @@ interface PDFDisplayProps {
 
 const PDFDisplay: React.FC<PDFDisplayProps> = ({ document, page, scale }) => {
     const classes = useStyles();
-
     const canvasRef = React.createRef<HTMLCanvasElement>();
 
     React.useEffect(() => {

@@ -38,16 +38,13 @@ interface Admin {
 
 const AccountsList: React.FC<Props> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ admin: Admin[] }>('/admin');
+    const { request, response } = useAPI<Admin[]>('/admin');
 
     React.useEffect(() => {
         request();
     }, [request]);
 
-    if (!response?.admin) return <h4 className={classes.loading}>Loading...</h4>;
-
-    const { admin } = response;
-
+    if (!response) return <h4 className={classes.loading}>Loading...</h4>;
     return (
         <div className={className}>
             <div className={classes.header}>
@@ -74,7 +71,7 @@ const AccountsList: React.FC<Props> = ({ className }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {admin.map((account) => (
+                    {response.map((account) => (
                         <TableRow key={account.id}>
                             <TableCell>{account.email}</TableCell>
                             <TableCell>{account.role}</TableCell>

@@ -50,7 +50,7 @@ const _CardForm: React.FC<CardFormProps & ReactStripeElements.InjectedStripeProp
     // Todo: Handle Card Response
     // eslint-disable-next-line
     const classes = useStyles({});
-    const { request, response, loading } = useAPI<Message>('/payment/cards', 'POST');
+    const { request, response, loading } = useAPI<Message>('/payment/cards', { method: 'POST' });
     const [validForm, setValidForm] = React.useState({
         numberValid: false,
         expiryValid: false,
@@ -58,7 +58,7 @@ const _CardForm: React.FC<CardFormProps & ReactStripeElements.InjectedStripeProp
     });
 
     React.useEffect(() => {
-        if (response?.message && onAdded) onAdded();
+        if (response && onAdded) onAdded();
     }, [onAdded, response]);
 
     const handleChanges = (key: keyof typeof validForm) => (valid: boolean) => {

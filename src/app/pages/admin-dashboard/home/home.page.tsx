@@ -29,20 +29,22 @@ interface Props {
 interface Admin {
     id: number;
     email: string;
-    role: 'admin' | 'moderator';
+    role: 'ADMIN' | 'MODERATOR';
     validpass: boolean;
 }
 
 const AdminHomePage: React.FC<Props> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ me: Admin }>('/admin/me');
+    const { request, response } = useAPI<Admin>('/admin/me');
 
     React.useEffect(() => {
         request();
     }, [request]);
 
-    if (!response?.me) return <div></div>;
-    if (response.me.role !== 'admin') return <Redirect to='/moderator/dashboard' />;
+    console.log(response);
+
+    if (!response) return <div></div>;
+    if (response.role !== 'ADMIN') return <Redirect to='/moderator/dashboard' />;
     return (
         <section className={`${className} ${classes.content}`}>
             <AccountsList />

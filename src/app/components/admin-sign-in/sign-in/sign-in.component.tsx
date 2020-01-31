@@ -34,7 +34,7 @@ const AdminSignIn: React.FC = () => {
 
     // TODO: Setup Loading and Error States
     // eslint-disable-next-line
-    const { response, loading, error, request } = useAPI('/admin/login', 'POST');
+    const { response, request, loading, error } = useAPI('/auth/login', { method: 'POST' });
     const history = useHistory();
     const { state, handleInputChange: handleStringChange, handleSubmitBuilder } = useForm<
         SignInState
@@ -46,10 +46,8 @@ const AdminSignIn: React.FC = () => {
     const handleSubmit = handleSubmitBuilder(request);
 
     React.useEffect(() => {
-        if (response?.token) {
-            localStorage.setItem('jwt', response.token);
-            history.push('/admin/dashboard');
-        }
+        if (response) localStorage.setItem('jwt', response);
+        if (response) history.push('/admin/dashboard');
     }, [history, response]);
 
     const { email, password } = state;

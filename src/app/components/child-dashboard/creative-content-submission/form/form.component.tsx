@@ -55,19 +55,22 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
 
     const history = useHistory();
-    const { request: getSubmission, response: getResponse } = useAPI(`/submissions/${week}`);
-    const { request: postSubmission, response: postResponse, loading } = useAPI(
-        '/submissions',
-        'POST'
-    );
-    const { request: deleteSubmission, response: deleteResponse } = useAPI(
+    const { request: getSubmission, response: getResponse, reset } = useAPI(
         `/submissions/${week}`,
-        'DELETE'
+        { errors: false }
     );
-    const { request: postProgress, response: progressResponse } = useAPI(
-        '/children/progress',
-        'POST'
+    const { request: postSubmission, response: postResponse, loading } = useAPI('/submissions', {
+        method: 'POST',
+    });
+    const { request: deleteSubmission, response: deleteResponse, reset: resetDelete } = useAPI(
+        `/submissions/${week}`,
+        {
+            method: 'DELETE',
+        }
     );
+    const { request: postProgress, response: progressResponse } = useAPI('/children/progress', {
+        method: 'POST',
+    });
     const [state, setState] = React.useState({ story: '', storyText: '', illustration: '' });
 
     const handleInputChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,37 +105,37 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
     }, [getSubmission, week]);
 
     React.useEffect(() => {
-        if (deleteResponse && getResponse?.submission) {
-            getResponse.submission = undefined;
+        if (deleteResponse && getResponse) {
+            reset();
             setState({ story: '', storyText: '', illustration: '' });
         }
-    }, [deleteResponse, getResponse]);
+    }, [deleteResponse, getResponse, reset]);
 
     React.useEffect(() => {
-        if (getResponse?.submission) {
-            const { story, storyText, illustration } = getResponse.submission;
+        if (getResponse) {
+            const { story, storyText, illustration } = getResponse;
             setState({ story, storyText, illustration });
         }
     }, [getResponse]);
 
     React.useEffect(() => {
-        if (postResponse?.submission) {
-            postProgress({ writing: true });
-            postResponse.submission = undefined;
+        if (postResponse) {
+            postProgress({ submission: true });
+            reset();
         }
 
-        if (deleteResponse?.submission) {
-            postProgress({ writing: false });
-            deleteResponse.submission = undefined;
+        if (deleteResponse) {
+            postProgress({ submission: false });
+            resetDelete();
         }
-    }, [postResponse, deleteResponse, postProgress]);
+    }, [postResponse, deleteResponse, postProgress, reset, resetDelete]);
 
     React.useEffect(() => {
         if (progressResponse && onUpdate) onUpdate();
-        if (progressResponse?.progress?.writing) history.push('/kids-dashboard');
+        if (progressResponse?.submission) history.push('/kids-dashboard');
     }, [history, onUpdate, progressResponse]);
 
-    const submitted = !!getResponse?.submission;
+    const submitted = !!getResponse;
     const { story, storyText, illustration } = state;
     return (
         <>

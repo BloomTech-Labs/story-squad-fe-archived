@@ -44,11 +44,7 @@ const ChildDashboard: React.FC = () => {
     const logout = () => window.dispatchEvent(new Event('logout'));
     const { request, response } = useAPI('/children/me');
 
-    React.useEffect(() => {
-        request();
-    }, [request]);
-
-    if (!response?.me)
+    if (!response)
         return (
             <section className={classes.loading}>
                 <CircularProgress size={56} />
@@ -74,14 +70,14 @@ const ChildDashboard: React.FC = () => {
                 <Switch>
                     <Route
                         path='/kids-dashboard/upload'
-                        render={() => <CCSForm week={response.me.cohort.week} onUpdate={request} />}
+                        render={() => <CCSForm week={response.cohort.week} onUpdate={request} />}
                     />
                     <Route
                         path='/'
                         render={() => (
                             <div className={classes.content}>
-                                <WelcomeCard className={classes.welcome} child={response.me} />
-                                <KidProgressCard child={response.me} onUpdate={request} />
+                                <WelcomeCard className={classes.welcome} child={response} />
+                                <KidProgressCard child={response} />
                             </div>
                         )}
                     />

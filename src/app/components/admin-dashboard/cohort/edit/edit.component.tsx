@@ -24,11 +24,10 @@ interface EditCohortProps {
 const EditCohort: React.FC<EditCohortProps> = ({ id, onUpdate }) => {
     const classes = useStyles({});
 
-    const { request: fetch, response: details } = useAPI(`/cohort/list/${id}`);
-    const { request: update, response: updated } = useAPI(
-        `/cohort/list${id ? `/${id}` : ''}`,
-        id ? 'PUT' : 'POST'
-    );
+    const { request: fetch, response: details } = useAPI(`/cohorts/${id}`, { errors: false });
+    const { request: update, response: updated, reset } = useAPI(`/cohorts${id ? `/${id}` : ''}`, {
+        method: id ? 'PUT' : 'POST',
+    });
 
     const { state, setState, handleInputChange, handleSubmitBuilder } = useForm({
         name: '',
@@ -41,13 +40,13 @@ const EditCohort: React.FC<EditCohortProps> = ({ id, onUpdate }) => {
     }, [id, fetch]);
 
     React.useEffect(() => {
-        if (details?.cohort) setState({ name: details.cohort.name });
+        if (details) setState({ name: details.name });
     }, [details, setState]);
 
     React.useEffect(() => {
-        if (updated?.cohort && onUpdate) onUpdate();
-        if (updated?.cohort) updated.cohort = undefined;
-    }, [updated, onUpdate]);
+        if (updated && onUpdate) onUpdate();
+        if (updated) reset();
+    }, [updated, onUpdate, reset]);
 
     const { name } = state;
     return (

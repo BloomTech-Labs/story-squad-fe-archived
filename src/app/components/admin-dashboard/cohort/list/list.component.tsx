@@ -32,13 +32,13 @@ interface ListCohortsProps {
 
 const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ cohorts: Cohort[] }>('/cohort/list');
+    const { request, response } = useAPI<Cohort[]>('/cohorts');
 
     React.useEffect(() => {
         request();
     }, [request]);
 
-    if (!response?.cohorts) return <h4 className={classes.loading}>Loading...</h4>;
+    if (!response) return <h4 className={classes.loading}>Loading...</h4>;
     return (
         <div className={className}>
             <div className={classes.header}>
@@ -53,7 +53,7 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {response.cohorts.map((cohort) => (
+                        {response.map((cohort) => (
                             <CohortListItem
                                 key={cohort.id}
                                 cohort={cohort}

@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { AxiosResponse, AxiosError } from 'axios';
 
 import requestFactory from '../../util/requestFactory';
+import { displayError } from '../../state';
 
 interface ErrorObject {
     [key: string]: string | string[];
@@ -17,6 +18,11 @@ interface APIHook<T> {
 
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
+interface Options {
+    errors?: boolean;
+    method?: Method;
+}
+
 /**
  * @description A hook setup to use API calls.
  * @template T The type of data expected to be returned.
@@ -28,10 +34,19 @@ type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
  * - `loading` a boolean which represents if a request is in a pending state.
  * - `request()` a function that makes the request, any arguments passed in will be passed into the axios call.
  */
-const useAPI = <T = any>(url: string, method: Method = 'GET'): APIHook<T> => {
+const useAPI = <T = any>(
+    url: string,
+    options: Options = { errors: true, method: 'GET' }
+): APIHook<T> => {
     const [response, setResponse] = useState<T>();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<ErrorObject>();
+
+    const reset = useCallback(() => {
+        setResponse(undefined);
+        setLoading(false);
+        setError(undefined);
+    }, []);
 
     const request = useCallback(
         async (...args) => {
@@ -41,7 +56,7 @@ const useAPI = <T = any>(url: string, method: Method = 'GET'): APIHook<T> => {
             let res: AxiosResponse<T>;
 
             try {
-                switch (method) {
+                switch (options.method) {
                     case 'PUT':
                         res = await axios.put<T>(url, ...args);
                         break;
@@ -57,22 +72,23 @@ const useAPI = <T = any>(url: string, method: Method = 'GET'): APIHook<T> => {
                         break;
                 }
 
+                setLoading(false);
                 setResponse(res.data);
             } catch (err) {
                 const error = err as AxiosError;
+                setLoading(false);
                 setError(error?.response?.data);
+                setResponse(undefined);
+                if (options.errors || options.errors === undefined)
+                    displayError(error?.response?.data.message || error.toString());
             }
-
-            setLoading(false);
         },
-        [method, url]
+        [options.errors, options.method, url]
     );
 
-    const reset = useCallback(() => {
-        setResponse(undefined);
-        setLoading(false);
-        setError(undefined);
-    }, []);
+    useEffect(() => {
+        if (options.method === 'GET' || options.method === undefined) request();
+    }, [options.method, request]);
 
     return { request, response, loading, error, reset };
 };

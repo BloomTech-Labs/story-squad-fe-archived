@@ -52,7 +52,7 @@ const PDFDisplay: React.FC<PDFDisplayProps> = ({ week }) => {
         setNumPages(pdf.numPages);
     };
 
-    if (!file) return <div className={classes.root}>Downloading...</div>;
+    if (!file) return <div className={classes.root}>Loading PDF...</div>;
     return (
         <Document file={{ data: file }} onLoadSuccess={onLoadSuccess} className={classes.root}>
             {pages?.map((page) => (
@@ -62,4 +62,4 @@ const PDFDisplay: React.FC<PDFDisplayProps> = ({ week }) => {
     );
 };
 
-export { PDFDisplay };
+export { PDFDisplay, PDFDisplay as default };

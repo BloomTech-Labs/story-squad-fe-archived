@@ -23,6 +23,16 @@ interface Options {
     method?: Method;
 }
 
+const userFriendlyMessage = (error: any) => {
+    if (error.message.map) {
+        return error.message.map((error) => Object.values(error.constraints)).flat()[0];
+    } else if (error.message) {
+        return error.message;
+    } else {
+        return error.toString();
+    }
+};
+
 /**
  * @description A hook setup to use API calls.
  * @template T The type of data expected to be returned.
@@ -80,7 +90,7 @@ const useAPI = <T = any>(
                 setError(error?.response?.data);
                 setResponse(undefined);
                 if (options.errors || options.errors === undefined)
-                    displayError(error?.response?.data.message || error.toString());
+                    displayError(userFriendlyMessage(error?.response?.data));
             }
         },
         [options.errors, options.method, url]

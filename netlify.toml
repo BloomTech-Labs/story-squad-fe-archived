@@ -12,3 +12,5 @@
     REACT_APP_ENDPOINT="https://core-webpack-31236dhik9frjxddz.herokuapp.com"
 
 
+[context."migrations-staging".environment]
+    REACT_APP_ENDPOINT="https://core-database-managemen-wxhyhn.herokuapp.com"

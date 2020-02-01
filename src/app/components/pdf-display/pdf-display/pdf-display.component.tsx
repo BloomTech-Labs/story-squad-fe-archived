@@ -1,20 +1,24 @@
-import React from 'react';
-import { Document, Page } from 'react-pdf';
+import React, { lazy, Suspense } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
 import { displayError } from '../../../state';
 import { useAPI } from '../../../hooks';
 
+const Document = lazy(() =>
+    import('react-pdf').then(({ Document }) => ({ default: Document, Page }))
+);
+const Page = lazy(() => import('react-pdf').then(({ Page }) => ({ default: Page })));
+
 const useStyles = makeStyles((theme) => ({
     root: {
-        'display': 'flex',
-        'flexDirection': 'column',
-        'justifyContent': 'flex-start',
-        'alignItems': 'center',
-        '& > canvas': {
-            maxWidth: '100%',
-        },
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    page: {
+        maxWidth: '100%',
     },
 }));
 
@@ -52,14 +56,18 @@ const PDFDisplay: React.FC<PDFDisplayProps> = ({ week }) => {
         setNumPages(pdf.numPages);
     };
 
-    if (!file) return <div className={classes.root}>Loading PDF...</div>;
+    const fallback = <div className={classes.root}>Loading PDF...</div>;
+
+    if (!file) return fallback;
     return (
-        <Document file={{ data: file }} onLoadSuccess={onLoadSuccess} className={classes.root}>
-            {pages?.map((page) => (
-                <Page pageIndex={page} key={page} scale={1.5} />
-            ))}
-        </Document>
+        <Suspense fallback={fallback}>
+            <Document file={{ data: file }} onLoadSuccess={onLoadSuccess} className={classes.root}>
+                {pages?.map((page) => (
+                    <Page pageIndex={page} key={page} scale={1.5} className={classes.page} />
+                ))}
+            </Document>
+        </Suspense>
     );
 };
 
-export { PDFDisplay, PDFDisplay as default };
+export { PDFDisplay };

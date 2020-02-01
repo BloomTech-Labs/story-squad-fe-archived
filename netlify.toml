@@ -8,7 +8,7 @@
     GENERATE_SOURCEMAP="false"
 
 
-[context."webpack".environment]
-    REACT_APP_ENDPOINT="https://core-webpack-31236dhik9frjxddz.herokuapp.com"
+[context."nestjs".environment]
+    REACT_APP_ENDPOINT="https://core-nestjs-czbjbbyn93dl9y5yh4.herokuapp.com"
 
 

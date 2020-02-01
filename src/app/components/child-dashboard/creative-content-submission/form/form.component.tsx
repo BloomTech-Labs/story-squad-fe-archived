@@ -15,7 +15,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
 import { useAPI } from '../../../../hooks';
-import { Interface } from 'readline';
 
 const useStyles = makeStyles((theme) => ({
     header: {

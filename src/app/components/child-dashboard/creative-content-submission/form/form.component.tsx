@@ -52,19 +52,19 @@ interface CCSFormProps {
     week: number;
 }
 
-const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
-    const initState = {
-        storyText: '',
-        illustration: '',
-        story: {
-            page1: '',
-            page2: '',
-            page3: '',
-            page4: '',
-            page5: '',
-        },
-    };
+const initState = {
+    storyText: '',
+    illustration: '',
+    story: {
+        page1: '',
+        page2: '',
+        page3: '',
+        page4: '',
+        page5: '',
+    },
+};
 
+const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
     const [state, setState] = React.useState(initState);
@@ -131,7 +131,7 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
             getResponse.submission = undefined;
             setState(initState);
         }
-    }, [deleteResponse, getResponse, initState]);
+    }, [deleteResponse, getResponse]);
 
     React.useEffect(() => {
         if (getResponse?.submission) {
@@ -143,7 +143,7 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
 
             setState(newState);
         }
-    }, [getResponse, initState]);
+    }, [getResponse]);
 
     React.useEffect(() => {
         if (postResponse?.submission) {

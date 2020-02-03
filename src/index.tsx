@@ -1,4 +1,6 @@
 import './index.scss';
+import './polyfill.ts';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 

@@ -52,20 +52,22 @@ interface CCSFormProps {
     week: number;
 }
 
-const initState = {
-    storyText: '',
-    illustration: '',
-    page1: '',
-    page2: '',
-    page3: '',
-    page4: '',
-    page5: '',
-};
-
 const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
-    const classes = useStyles({});
+    const initState = {
+        storyText: '',
+        illustration: '',
+        story: {
+            page1: '',
+            page2: '',
+            page3: '',
+            page4: '',
+            page5: '',
+        },
+    };
 
+    const classes = useStyles({});
     const history = useHistory();
+    const [state, setState] = React.useState(initState);
     const { request: getSubmission, response: getResponse } = useAPI(`/submissions/${week}`);
     const { request: postSubmission, response: postResponse, loading } = useAPI(
         '/submissions',
@@ -79,7 +81,6 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
         '/children/progress',
         'POST'
     );
-    const [state, setState] = React.useState(initState);
 
     const handleInputChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
         setState({ ...state, [key]: e.target.value });
@@ -98,9 +99,22 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
         }
     };
 
+    const handleStoryChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = (e) => {
+                const dataURL = e.target?.result?.toString();
+                setState({ ...state, story: { ...state.story, [key]: dataURL } });
+            };
+        } else {
+            setState({ ...state, story: { ...state.story, [key]: '' } });
+        }
+    };
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (state.page1) setState({ ...state, storyText: '' });
+        if (state.story.page1) setState({ ...state, storyText: '' });
         postSubmission(state);
     };
 
@@ -117,12 +131,11 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
             getResponse.submission = undefined;
             setState(initState);
         }
-    }, [deleteResponse, getResponse]);
+    }, [deleteResponse, getResponse, initState]);
 
     React.useEffect(() => {
         if (getResponse?.submission) {
             const { submission } = getResponse;
-            Object.assign(submission, submission.story);
 
             const newState = Object.fromEntries(
                 Object.entries(initState).map(([key, value]) => [key, submission[key] || value])
@@ -130,7 +143,7 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
 
             setState(newState);
         }
-    }, [getResponse]);
+    }, [getResponse, initState]);
 
     React.useEffect(() => {
         if (postResponse?.submission) {
@@ -150,151 +163,82 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
     }, [history, onUpdate, progressResponse]);
 
     React.useEffect(() => {
-        const { page1, page2, page3, page4, page5 } = state;
-        if (!page4 && page5) setState({ ...state, page5: '' });
-        if (!page3 && page4) setState({ ...state, page4: '' });
-        if (!page2 && page3) setState({ ...state, page3: '' });
-        if (!page1 && page2) setState({ ...state, page2: '' });
+        const { page1, page2, page3, page4, page5 } = state.story;
+        if (!page4 && page5) setState({ ...state, story: { ...state.story, page5: '' } });
+        if (!page3 && page4) setState({ ...state, story: { ...state.story, page4: '' } });
+        if (!page2 && page3) setState({ ...state, story: { ...state.story, page3: '' } });
+        if (!page1 && page2) setState({ ...state, story: { ...state.story, page2: '' } });
     }, [state]);
 
     const submitted = !!getResponse?.submission;
-    const { storyText, illustration, page1, page2, page3, page4, page5 } = state;
+    const { storyText, illustration, story } = state;
     return (
-        <>
-            <form className={classes.form} onSubmit={handleSubmit}>
-                <Card>
-                    <CardHeader className={classes.header} title='Creative Content Submission' />
-                    <CardContent className={classes.content}>
-                        <Typography variant='h6'>Story Submission</Typography>
-                        <TextField
-                            InputLabelProps={{ shrink: true }}
-                            label='Story Page 1'
-                            type='file'
-                            inputProps={{ accept: 'image/*' }}
-                            onChange={handleFileChange('page1')}
-                            disabled={submitted}
+        <form className={classes.form} onSubmit={handleSubmit}>
+            <Card>
+                <CardHeader className={classes.header} title='Creative Content Submission' />
+                <CardContent className={classes.content}>
+                    <Typography variant='h6'>Story Submission</Typography>
+                    {Object.keys(story).map((key: string, i: number, arr: string[]) => (
+                        <React.Fragment key={i}>
+                            {(i === 0 || story[arr[i - 1]]) && ( // if page1 or story[previous-page] is truthy, show file input
+                                <TextField
+                                    InputLabelProps={{ shrink: true }}
+                                    label={'Story' + key.replace(/page(\d)/, 'Page $1')} // transforms 'page1' to 'Page 1'
+                                    type='file'
+                                    inputProps={{ accept: 'image/*' }}
+                                    onChange={handleStoryChange(key)}
+                                    disabled={submitted}
+                                />
+                            )}
+                            {story[key] && ( // if story[this-page] is truthy, show image
+                                <img
+                                    className={classes.preview}
+                                    src={story[key]}
+                                    alt={`your story${key} submission`}
+                                />
+                            )}
+                        </React.Fragment>
+                    ))}
+
+                    <TextField
+                        label='Typed Submission'
+                        multiline
+                        rows='8'
+                        value={storyText}
+                        onChange={handleInputChange('storyText')}
+                        disabled={!!story.page1 || submitted}
+                    />
+
+                    <Typography variant='h6'>Illustration Submission</Typography>
+                    <TextField
+                        InputLabelProps={{ shrink: true }}
+                        label='Artwork or Comic'
+                        type='file'
+                        inputProps={{ accept: 'image/*' }}
+                        onChange={handleFileChange('illustration')}
+                        disabled={submitted}
+                    />
+
+                    {illustration && (
+                        <img
+                            className={classes.preview}
+                            src={illustration}
+                            alt='Your illustration submission'
                         />
+                    )}
+                </CardContent>
+            </Card>
 
-                        {page1 && (
-                            <>
-                                <img
-                                    className={classes.preview}
-                                    src={page1}
-                                    alt='your story submission'
-                                />
-                                <TextField
-                                    InputLabelProps={{ shrink: true }}
-                                    label='Story Page 2'
-                                    type='file'
-                                    inputProps={{ accept: 'image/*' }}
-                                    onChange={handleFileChange('page2')}
-                                    disabled={submitted}
-                                />
-                            </>
-                        )}
-
-                        {page2 && (
-                            <>
-                                <img
-                                    className={classes.preview}
-                                    src={page2}
-                                    alt='your story submission'
-                                />
-                                <TextField
-                                    InputLabelProps={{ shrink: true }}
-                                    label='Story Page 3'
-                                    type='file'
-                                    inputProps={{ accept: 'image/*' }}
-                                    onChange={handleFileChange('page3')}
-                                    disabled={submitted}
-                                />
-                            </>
-                        )}
-
-                        {page3 && (
-                            <>
-                                <img
-                                    className={classes.preview}
-                                    src={page3}
-                                    alt='your story submission'
-                                />
-                                <TextField
-                                    InputLabelProps={{ shrink: true }}
-                                    label='Story Page 4'
-                                    type='file'
-                                    inputProps={{ accept: 'image/*' }}
-                                    onChange={handleFileChange('page4')}
-                                    disabled={submitted}
-                                />
-                            </>
-                        )}
-
-                        {page4 && (
-                            <>
-                                <img
-                                    className={classes.preview}
-                                    src={page4}
-                                    alt='your story submission'
-                                />
-                                <TextField
-                                    InputLabelProps={{ shrink: true }}
-                                    label='Story Page 5'
-                                    type='file'
-                                    inputProps={{ accept: 'image/*' }}
-                                    onChange={handleFileChange('page5')}
-                                    disabled={submitted}
-                                />
-                            </>
-                        )}
-
-                        {page5 && (
-                            <img
-                                className={classes.preview}
-                                src={page5}
-                                alt='your story submission'
-                            />
-                        )}
-
-                        <TextField
-                            label='Typed Submission'
-                            multiline
-                            rows='8'
-                            value={storyText}
-                            onChange={handleInputChange('storyText')}
-                            disabled={!!page1 || submitted}
-                        />
-
-                        <Typography variant='h6'>Illustration Submission</Typography>
-                        <TextField
-                            InputLabelProps={{ shrink: true }}
-                            label='Artwork or Comic'
-                            type='file'
-                            inputProps={{ accept: 'image/*' }}
-                            onChange={handleFileChange('illustration')}
-                            disabled={submitted}
-                        />
-
-                        {illustration && (
-                            <img
-                                className={classes.preview}
-                                src={illustration}
-                                alt='Your illustration submission'
-                            />
-                        )}
-                    </CardContent>
-                </Card>
-
-                <div className={classes.wrapper}>
-                    <Fab
-                        type={submitted ? undefined : 'submit'}
-                        color='primary'
-                        onClick={submitted ? () => handleDelete() : undefined}>
-                        <Icon>{submitted ? 'refresh' : 'save'}</Icon>
-                    </Fab>
-                    {loading && <CircularProgress size={68} className={classes.buttonProgress} />}
-                </div>
-            </form>
-        </>
+            <div className={classes.wrapper}>
+                <Fab
+                    type={submitted ? undefined : 'submit'}
+                    color='primary'
+                    onClick={submitted ? () => handleDelete() : undefined}>
+                    <Icon>{submitted ? 'refresh' : 'save'}</Icon>
+                </Fab>
+                {loading && <CircularProgress size={68} className={classes.buttonProgress} />}
+            </div>
+        </form>
     );
 };
 

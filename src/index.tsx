@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 
 import { App } from './app/app.component';
 import * as serviceWorker from './serviceWorker';
+require('polyfill-object.fromentries');
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

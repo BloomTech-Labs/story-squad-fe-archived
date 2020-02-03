@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Flipper, Flipped } from 'react-flip-toolkit';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Typography, Icon, CircularProgress } from '@material-ui/core';
@@ -63,16 +64,23 @@ const CardList: React.FC<CardListProps> = ({ className }) => {
         );
 
     return (
-        <div className={`${className} ${classes.list}`}>
-            {paymentInfo.cards.map((card) => (
-                <StripeCard
-                    key={card.id}
-                    card={card}
-                    onDelete={creditCardsRefresh}
-                    onUpdate={creditCardsRefresh}
-                    defaultCard={paymentInfo.customer?.default_source === card.id}
-                />
-            ))}
+        <div>
+            <Flipper
+                className={`${className} ${classes.list}`}
+                flipKey={paymentInfo.cards.map((card) => card.id).join('')}>
+                {paymentInfo.cards.map((card) => (
+                    <Flipped key={card.id} flipId={card.id}>
+                        <div>
+                            <StripeCard
+                                card={card}
+                                onDelete={creditCardsRefresh}
+                                onUpdate={creditCardsRefresh}
+                                defaultCard={paymentInfo.customer?.default_source === card.id}
+                            />
+                        </div>
+                    </Flipped>
+                ))}
+            </Flipper>
         </div>
     );
 };

@@ -12,3 +12,5 @@
     REACT_APP_ENDPOINT="https://core-webpack-31236dhik9frjxddz.herokuapp.com"
 
 
+[context."multi-page-submissions".environment]
+    REACT_APP_ENDPOINT="https://core-multi-page-submiss-kkrxn7.herokuapp.com"

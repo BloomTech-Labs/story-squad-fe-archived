@@ -33,7 +33,7 @@ interface Admin {
     id: number;
     email: string;
     role: 'admin' | 'moderator';
-    validpass: boolean;
+    temptoken: string;
 }
 
 const AccountsList: React.FC<Props> = ({ className }) => {
@@ -71,6 +71,7 @@ const AccountsList: React.FC<Props> = ({ className }) => {
                     <TableRow>
                         <TableCell>Username/Email</TableCell>
                         <TableCell>Role</TableCell>
+                        <TableCell>First-Time Registration</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -78,6 +79,14 @@ const AccountsList: React.FC<Props> = ({ className }) => {
                         <TableRow key={account.id}>
                             <TableCell>{account.email}</TableCell>
                             <TableCell>{account.role}</TableCell>
+                            <TableCell>
+                                <Link
+                                    to={`/admin/register?token=${encodeURIComponent(
+                                        account.temptoken
+                                    )}`}>
+                                    link
+                                </Link>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

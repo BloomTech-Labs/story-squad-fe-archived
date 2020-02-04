@@ -80,12 +80,16 @@ const AccountsList: React.FC<Props> = ({ className }) => {
                             <TableCell>{account.email}</TableCell>
                             <TableCell>{account.role}</TableCell>
                             <TableCell>
-                                <Link
-                                    to={`/admin/register?token=${encodeURIComponent(
-                                        account.temptoken
-                                    )}`}>
-                                    link
-                                </Link>
+                                {account.temptoken ? (
+                                    <Link
+                                        to={`/admin/register?token=${encodeURIComponent(
+                                            account.temptoken
+                                        )}`}>
+                                        link
+                                    </Link>
+                                ) : (
+                                    'completed'
+                                )}
                             </TableCell>
                         </TableRow>
                     ))}

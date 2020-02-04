@@ -9,8 +9,8 @@ jest.mock('../../../../hooks', () => ({
         request: () => {},
         response: {
             admin: [
-                { id: 1, email: 'test', role: 'admin', validpass: true },
-                { id: 2, email: 'test2', role: 'admin', validpass: true },
+                { id: 1, email: 'test', role: 'admin', temptoken: null },
+                { id: 2, email: 'test2', role: 'admin', temptoken: null },
             ],
         },
     }),

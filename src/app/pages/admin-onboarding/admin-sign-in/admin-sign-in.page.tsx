@@ -1,5 +1,5 @@
 import React from 'react';
-import { AdminSignIn } from '../../components';
+import { AdminSignIn } from '../../../components';
 
 const AdminSignInPage: React.FC = () => <AdminSignIn />;
 

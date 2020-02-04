@@ -8,3 +8,6 @@
 
 [context."polish".environment]
     REACT_APP_ENDPOINT="https://core-polish-ggzspu1w8t31chhldk.herokuapp.com"
+
+[context."moderator".environment]
+    REACT_APP_ENDPOINT="https://core-moderator-l07ugg7dkpwb22w.herokuapp.com"

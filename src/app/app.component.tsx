@@ -14,6 +14,7 @@ import {
     PdfDisplayPage,
     AdminDashboardPage,
     AdminSignInPage,
+    AdminSignUpPage,
     ErrorPage,
 } from './pages';
 
@@ -49,6 +50,7 @@ const App: React.FC = () => {
                         />
                         <Route path='/privacy-policy' component={PrivacyPage} />
                         <Route path='/terms-of-service' component={ToSPage} />
+                        <Route path='/admin/register' component={AdminSignUpPage} />
                         <Route path='/admin' component={AdminSignInPage} />
                         <Route exact path={['/', '/signup']} component={SignUpPage} />
                         <Route path='/' component={ErrorPage} />

@@ -9,7 +9,7 @@
             "type": "chrome",
             "request": "launch",
             "port": 9986,
-            "preLaunchTask": "npm: start",
+            "preLaunchTask": "npm: dev",
             "runtimeArgs": [
                 "--profile-directory=Debug",
                 "--disable-infobars",

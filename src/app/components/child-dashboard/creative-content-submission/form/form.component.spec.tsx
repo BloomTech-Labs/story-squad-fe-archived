@@ -18,7 +18,7 @@ describe('CCSForm', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <Router>
-                <CCSForm child={child} onUpdate={() => {}} />
+                <CCSForm week={child.cohort.week} onUpdate={() => {}} />
             </Router>
         );
         expect(baseElement).toBeInTheDocument();

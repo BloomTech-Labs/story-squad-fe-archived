@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import { AdminSignUp } from './sign-up.component';
 
-describe('AdminSignIn', () => {
+describe('AdminSignUp', () => {
     it('renders without errors', () => {
         const { baseElement } = render(
             <Router>

@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useForm, useAPI } from '../../../../hooks';
+import { displayError } from '../../../../state';
 
 const useStyles = makeStyles(() => ({
     form: {
@@ -34,13 +35,17 @@ const AddAccount: React.FC = () => {
     const classes = useStyles({});
 
     const history = useHistory();
-    const { request, response } = useAPI('/admin/register', 'POST');
+    const { request, response, error } = useAPI('/admin', 'POST');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({ email: '', role: '' });
     const { email, role } = state;
+
     React.useEffect(() => {
-        console.log(response);
-        if (response) history.push('/admin/dashboard');
+        if (response?.id) history.push('/admin/dashboard');
     }, [history, response]);
+
+    React.useEffect(() => {
+        if (typeof error?.message === 'string') displayError(error?.message);
+    }, [error]);
 
     return (
         <>

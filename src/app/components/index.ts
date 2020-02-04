@@ -5,4 +5,4 @@ export * from './policies';
 export * from './pdf-display';
 export * from './child-dashboard';
 export * from './admin-dashboard';
-export * from './admin-sign-in';
+export * from './admin-onboarding';

@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import { AdminSignInPage } from './admin-sign-in.page';
 
-jest.mock('../../components', () => ({
+jest.mock('../../../components', () => ({
     AdminSignIn: () => <div></div>,
 }));
 

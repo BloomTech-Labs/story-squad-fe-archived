@@ -2,15 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-import {
-    Card,
-    CardHeader,
-    Divider,
-    Button,
-    Typography,
-    LinearProgress,
-    Checkbox,
-} from '@material-ui/core';
+import { Card, CardHeader, Button, Typography, LinearProgress, Checkbox } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../models';
@@ -71,7 +63,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
         if (response?.progress) response.progress = undefined;
     }, [onUpdate, response]);
 
-    const { cohort, progress, username } = child;
+    const { cohort, progress } = child;
     const { dueDates: dueDateStrings } = cohort;
     const dueDates = Object.fromEntries(
         Object.entries(dueDateStrings).map(([key, date]) => [key, moment(date)])
@@ -120,37 +112,6 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </Link>
                     <Checkbox className={classes.gridItem} checked={progress.writing} />
                 </>
-
-                {/* <>
-                    <Typography className={classes.gridItem}>
-                        Review partner's work and assign points
-                    </Typography>
-                    <Typography className={classes.gridItem}>{dueDates.teamReview}</Typography>
-                    <Typography className={classes.gridItem}>
-                        {progress.teamReview ? 'Complete' : 'Due'}
-                    </Typography>
-                    <Button className={classes.gridItem}>Invest points</Button>
-                </>
-
-                <>
-                    <Typography className={classes.gridItem}>Evaluate 3 stories</Typography>
-                    <Typography className={classes.gridItem}>{dueDates.randomReview}</Typography>
-                    <Typography className={classes.gridItem}>
-                        {progress.randomReview ? 'Complete' : 'Due'}
-                    </Typography>
-                    <Button className={classes.gridItem}>Evaluate</Button>
-                </>
-
-                <>
-                    <Typography className={classes.gridItem}>
-                        Get the results and review feedbacks
-                    </Typography>
-                    <Typography className={classes.gridItem}>{dueDates.results}</Typography>
-                    <Typography className={classes.gridItem}>
-                        {progress.results ? 'Complete' : 'Due'}
-                    </Typography>
-                    <Button className={classes.gridItem}>See Feedback</Button>
-                </> */}
             </section>
         </Card>
     );

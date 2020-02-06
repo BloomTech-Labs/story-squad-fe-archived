@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import { AdminHomePage } from './home.page';
 
-jest.mock('../../../hooks', () => ({
+jest.mock('../../../hooks/api/api.hook', () => ({
     useAPI: () => [
         {
             me: { id: 1, email: 'test', role: 'admin', validpass: true },

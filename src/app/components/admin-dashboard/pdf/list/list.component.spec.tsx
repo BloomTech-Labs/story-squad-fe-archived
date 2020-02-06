@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import { PdfList } from './list.component';
 
-jest.mock('../../../../hooks', () => ({
+jest.mock('../../../../hooks/api/api.hook', () => ({
     useAPI: () => [
         {
             canon: [

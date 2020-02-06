@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import { CCSList } from './list.component';
 
-jest.mock('../../../../hooks', () => ({
+jest.mock('../../../../hooks/api/api.hook', () => ({
     useAPI: (path, method = 'GET') => [null, false, () => {}],
 }));
 

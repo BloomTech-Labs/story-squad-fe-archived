@@ -98,7 +98,9 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     <Link
                         to={`/story/${cohort.week}`}
                         onClick={() => updateProgress({ reading: true })}>
-                        <Button className={classes.gridItem}>Read</Button>
+                        <Button className={classes.gridItem} variant='outlined'>
+                            Read
+                        </Button>
                     </Link>
                     <Checkbox className={classes.gridItem} checked={progress.reading} />
                 </>
@@ -108,7 +110,9 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                         Write your story
                     </Typography>
                     <Link to={`/kids-dashboard/upload`}>
-                        <Button className={classes.gridItem}>Write</Button>
+                        <Button className={classes.gridItem} variant='outlined'>
+                            Write
+                        </Button>
                     </Link>
                     <Checkbox className={classes.gridItem} checked={progress.writing} />
                 </>

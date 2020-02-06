@@ -17,10 +17,10 @@ interface FormHook<S> {
 
 /**
  * @description A hook used to simplify the process of building forms
- * @template S The state data for the forum
- * @param {S} initial The initial state of the forum
+ * @template S The state data interface for the form
+ * @param {S} initial The initial state of the form
  * @returns {FormHook<S>} The return of this hook has four parts in an object:
- * - `state` the current state of this forum
+ * - `state` the current state of this form
  * - `handleBoolChange()` a function intended to be used with a checkbox to update state on changes
  * - `handleStringChange()` a function intended to be used with a input box to update state on changes
  * - `handleFileChange()` a function intended to be used with a file input to update state on changes

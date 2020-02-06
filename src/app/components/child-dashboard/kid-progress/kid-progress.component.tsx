@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
@@ -10,8 +10,9 @@ import {
     LinearProgress,
     Checkbox,
     Divider,
+    useMediaQuery,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3),
         alignItems: 'center',
         justifyItems: 'center',
-        [theme.breakpoints.up(800)]: {
+        [theme.breakpoints.up('md')]: {
             gridTemplateColumns: '1fr 1fr 1fr 1fr',
         },
     },
@@ -68,25 +69,13 @@ interface KidProgressProps {
 const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const { request: updateProgress, response } = useAPI('/children/progress', 'POST');
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 800);
+    const theme = useTheme();
+    const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
     React.useEffect(() => {
         if (response?.progress && onUpdate) onUpdate();
         if (response?.progress) response.progress = undefined;
     }, [onUpdate, response]);
-
-    React.useEffect(() => {
-        const checkDesktop = () => {
-            const value = window.innerWidth >= 800;
-            if (isDesktop !== value) setIsDesktop(value);
-        };
-
-        window.addEventListener('resize', checkDesktop, { capture: true });
-
-        return () => {
-            window.removeEventListener('resize', checkDesktop);
-        };
-    }, [isDesktop]);
 
     const { cohort, progress, username } = child;
     const { dueDates: dueDateStrings } = cohort;

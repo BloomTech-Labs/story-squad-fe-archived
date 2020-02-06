@@ -1,12 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Button, TextField, CircularProgress, Typography } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
-import { displayError } from '../../../state';
 import { useAPI, useForm } from '../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +27,22 @@ const useStyles = makeStyles((theme) => ({
         marginTop: -12,
         marginLeft: -12,
     },
+    multiline: {
+        lineHeight: 1.3,
+    },
+    link: {
+        color: 'black',
+        textDecoration: 'underline',
+        paddingTop: '8px',
+    },
+    label: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    checkboxes: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
 }));
 
 interface SignInState {
@@ -40,7 +55,7 @@ const SignIn: React.FC = () => {
 
     // TODO: Setup Loading and Error States
     // eslint-disable-next-line
-    const { response, request, loading, error } = useAPI('/auth/login', 'POST');
+    const [response, loading, request] = useAPI('/auth/login', 'POST');
     const history = useHistory();
     const { state, handleInputChange: handleStringChange, handleSubmitBuilder } = useForm<
         SignInState
@@ -57,10 +72,6 @@ const SignIn: React.FC = () => {
             history.push('/dashboard');
         }
     }, [history, response]);
-
-    React.useEffect(() => {
-        if (typeof error?.message === 'string') displayError(error?.message);
-    }, [error]);
 
     const { email, password } = state;
     return (
@@ -92,6 +103,16 @@ const SignIn: React.FC = () => {
                         Sign In
                     </Button>
                     {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
+                <div className={classes.checkboxes}>
+                    <label className={classes.label}>
+                        <Typography className={classes.multiline}>
+                            Dont have an account?{` `}
+                            <Link className={classes.link} to='/signup'>
+                                Sign up now!
+                            </Link>
+                        </Typography>
+                    </label>
                 </div>
             </form>
         </>

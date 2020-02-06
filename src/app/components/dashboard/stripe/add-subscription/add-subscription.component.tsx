@@ -50,7 +50,7 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
     ReactStripeElements.InjectedStripeProps> = ({ stripe, onComplete, childID }) => {
     const classes = useStyles({});
     const history = useHistory();
-    const { request, response, loading, error } = useAPI('/payment/subscribe', 'POST');
+    const [response, loading, request] = useAPI('/payment/subscribe', 'POST');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
         childID,
         plan: '',
@@ -65,10 +65,6 @@ const _AddSubscription: React.FC<AddSubscriptionProps &
         childListRefresh();
         if (response) history.push('/dashboard');
     }, [history, response]);
-
-    React.useEffect(() => {
-        if (typeof error?.message === 'string') displayError(error?.message);
-    }, [error]);
 
     const { plan } = state;
     return (

@@ -47,19 +47,14 @@ interface ChildCreateProps {
 const ChildCreate: React.FC<ChildCreateProps> = ({ onCreate }) => {
     const classes = useStyles({});
 
-    const { request, response, loading, error } = useAPI('/children/list', 'POST');
+    const [response, loading, request] = useAPI('/children/list', 'POST');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({ username: '', grade: 3 });
     const handleChange = handleSubmitBuilder(request);
 
     React.useEffect(() => {
         if (response) childListRefresh();
         if (response && onCreate) onCreate(response.child);
-    }, [response, onCreate]);
-
-    React.useEffect(() => {
-        if (typeof error?.message === 'string') displayError(error?.message);
-        if (!!error?.errors?.length) displayError(error?.errors[0]);
-    }, [error]);
+    }, [onCreate, response]);
 
     const { username, grade } = state;
     return (

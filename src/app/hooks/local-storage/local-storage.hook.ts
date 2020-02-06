@@ -18,7 +18,7 @@ type LocalStorageHook<T> = {
  * - `updateValue()` refresh the current value from local storage
  * - `removeValue()` remove the current value including in local storage
  *
- * Note: This value will update automatically when other windows change the value, but manual updates must be done when changing within this applicaiton.
+ * Note: This value will update automatically when other windows change the value, but manual updates must be done when changing within this application.
  * @see https://stackoverflow.com/questions/35865481/storage-event-not-firing
  */
 const useLocalStorage = <T>(key: string, initialValue: T): LocalStorageHook<T> => {

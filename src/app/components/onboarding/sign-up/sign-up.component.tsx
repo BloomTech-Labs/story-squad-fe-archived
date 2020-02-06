@@ -57,7 +57,7 @@ interface SignUpState {
 const SignUp: React.FC = () => {
     const classes = useStyles({});
 
-    const { response, loading, error, request } = useAPI('/auth/register', 'POST');
+    const [response, loading, request] = useAPI('/auth/register', 'POST');
     const history = useHistory();
     const { state, handleInputChange, handleBoolChange, handleSubmitBuilder } = useForm<
         SignUpState
@@ -77,11 +77,6 @@ const SignUp: React.FC = () => {
             history.push('/dashboard');
         }
     }, [history, response]);
-
-    React.useEffect(() => {
-        if (error?.errors) displayError(error?.errors[0]);
-        if (typeof error?.message === 'string') displayError(error?.message);
-    }, [error]);
 
     const { email, password, comparePassword, termsOfService, privacyPolicy } = state;
     return (

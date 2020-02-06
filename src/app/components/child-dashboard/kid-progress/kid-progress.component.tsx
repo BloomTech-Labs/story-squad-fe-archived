@@ -69,7 +69,7 @@ interface KidProgressProps {
 
 const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
-    const { request: updateProgress, response } = useAPI('/children/progress', 'POST');
+    const [response, loading, request] = useAPI('/children/progress', 'POST');
 
     React.useEffect(() => {
         if (response?.progress && onUpdate) onUpdate();
@@ -108,9 +108,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     <Typography className={classes.gridItem} variant='h6'>
                         Read the story
                     </Typography>
-                    <Link
-                        to={`/story/${cohort.week}`}
-                        onClick={() => updateProgress({ reading: true })}>
+                    <Link to={`/story/${cohort.week}`} onClick={() => request({ reading: true })}>
                         <Button className={classes.gridItem} variant='outlined'>
                             Read
                         </Button>

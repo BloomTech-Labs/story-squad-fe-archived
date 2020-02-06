@@ -38,11 +38,8 @@ interface Admin {
 
 const AccountsList: React.FC<Props> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ admin: Admin[] }>('/admin');
+    const [response] = useAPI<{ admin: Admin[] }>('/admin');
     const history = useHistory();
-    React.useEffect(() => {
-        request();
-    }, [request]);
 
     if (!response?.admin) return <h4 className={classes.loading}>Loading...</h4>;
 

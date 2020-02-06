@@ -35,11 +35,7 @@ interface Admin {
 
 const AdminHomePage: React.FC<Props> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ me: Admin }>('/admin/me');
-
-    React.useEffect(() => {
-        request();
-    }, [request]);
+    const [response, loading, request] = useAPI<{ me: Admin }>('/admin/me');
 
     if (!response?.me) return <div></div>;
     if (response.me.role !== 'admin') return <Redirect to='/moderator/dashboard' />;

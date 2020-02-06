@@ -31,16 +31,11 @@ interface Props {
 
 const CCSList: React.FC<Props> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI('/submissions');
-
-    React.useEffect(() => {
-        request();
-    }, [request]);
+    const [response] = useAPI('/submissions');
 
     if (!response?.submissions) return <h4 className={classes.loading}>Loading...</h4>;
 
     const { submissions } = response;
-
     return (
         <div className={className}>
             <div className={classes.header}>

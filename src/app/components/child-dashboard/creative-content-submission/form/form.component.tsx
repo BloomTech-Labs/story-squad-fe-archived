@@ -14,7 +14,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
-import { useAPI } from '../../../../hooks';
+import { useAPI, useForm } from '../../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
     header: {
@@ -52,115 +52,74 @@ interface CCSFormProps {
     week: number;
 }
 
-const initState = {
-    storyText: '',
-    illustration: '',
-    story: {
-        page1: '',
-        page2: '',
-        page3: '',
-        page4: '',
-        page5: '',
-    },
-};
-
 const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
-    const [state, setState] = React.useState(initState);
-    const { request: getSubmission, response: getResponse } = useAPI(`/submissions/${week}`);
-    const { request: postSubmission, response: postResponse, loading } = useAPI(
-        '/submissions',
-        'POST'
-    );
-    const { request: deleteSubmission, response: deleteResponse } = useAPI(
-        `/submissions/${week}`,
-        'DELETE'
-    );
-    const { request: postProgress, response: progressResponse } = useAPI(
-        '/children/progress',
-        'POST'
-    );
+    const [currentSubmission] = useAPI(`/submissions/${week}`, 'GET', false);
+    const [submission, submitting, submit] = useAPI('/submissions', 'POST');
+    const [removed, removing, remove] = useAPI(`/submissions/${week}`, 'DELETE');
+    const [newProgress, progressing, progress] = useAPI('/children/progress', 'POST');
+    const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
+        storyText: '',
+        illustration: '',
+        story: {
+            page1: '',
+            page2: '',
+            page3: '',
+            page4: '',
+            page5: '',
+        },
+    });
 
-    const handleInputChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        setState({ ...state, [key]: e.target.value });
-    };
-
-    const handleFileChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            const reader = new FileReader();
-            reader.readAsDataURL(e.target.files[0]);
-            reader.onload = (e) => {
-                const dataURL = e.target?.result?.toString();
-                setState({ ...state, [key]: dataURL });
-            };
-        } else {
-            setState({ ...state, [key]: '' });
-        }
-    };
-
-    const handleStoryChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            const reader = new FileReader();
-            reader.readAsDataURL(e.target.files[0]);
-            reader.onload = (e) => {
-                const dataURL = e.target?.result?.toString();
-                setState({ ...state, story: { ...state.story, [key]: dataURL } });
-            };
-        } else {
-            setState({ ...state, story: { ...state.story, [key]: '' } });
-        }
-    };
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleSubmit = handleSubmitBuilder(() => {
         if (state.story.page1) setState({ ...state, storyText: '' });
-        postSubmission(state);
-    };
+        submit(state);
+    });
 
     const handleDelete = () => {
-        deleteSubmission();
+        remove();
     };
 
     React.useEffect(() => {
-        if (week) getSubmission();
-    }, [getSubmission, week]);
+        if (removed && currentSubmission?.submission) {
+            currentSubmission.submission = undefined;
+            setState({
+                storyText: '',
+                illustration: '',
+                story: {
+                    page1: '',
+                    page2: '',
+                    page3: '',
+                    page4: '',
+                    page5: '',
+                },
+            });
+        }
+    }, [removed, currentSubmission, setState]);
 
     React.useEffect(() => {
-        if (deleteResponse && getResponse?.submission) {
-            getResponse.submission = undefined;
-            setState(initState);
+        if (currentSubmission?.submission) {
+            const { submission } = currentSubmission;
+            setState(submission);
         }
-    }, [deleteResponse, getResponse]);
+    }, [currentSubmission, setState]);
 
     React.useEffect(() => {
-        if (getResponse?.submission) {
-            const { submission } = getResponse;
-
-            const newState = Object.fromEntries(
-                Object.entries(initState).map(([key, value]) => [key, submission[key] || value])
-            ) as any;
-
-            setState(newState);
+        if (submission?.submission) {
+            progress({ writing: true });
+            submission.submission = undefined;
         }
-    }, [getResponse]);
+
+        if (removed?.submission) {
+            progress({ writing: false });
+            removed.submission = undefined;
+        }
+    }, [submission, removed, progress]);
 
     React.useEffect(() => {
-        if (postResponse?.submission) {
-            postProgress({ writing: true });
-            postResponse.submission = undefined;
-        }
-
-        if (deleteResponse?.submission) {
-            postProgress({ writing: false });
-            deleteResponse.submission = undefined;
-        }
-    }, [postResponse, deleteResponse, postProgress]);
-
-    React.useEffect(() => {
-        if (progressResponse && onUpdate) onUpdate();
-        if (progressResponse?.progress?.writing) history.push('/kids-dashboard');
-    }, [history, onUpdate, progressResponse]);
+        if (newProgress && onUpdate) onUpdate();
+        if (newProgress?.progress?.writing) history.push('/kids-dashboard');
+    }, [history, onUpdate, newProgress]);
 
     React.useEffect(() => {
         const { page1, page2, page3, page4, page5 } = state.story;
@@ -168,9 +127,9 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
         if (!page3 && page4) setState({ ...state, story: { ...state.story, page4: '' } });
         if (!page2 && page3) setState({ ...state, story: { ...state.story, page3: '' } });
         if (!page1 && page2) setState({ ...state, story: { ...state.story, page2: '' } });
-    }, [state]);
+    }, [setState, state]);
 
-    const submitted = !!getResponse?.submission;
+    const submitted = !!currentSubmission?.submission;
     const { storyText, illustration, story } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
@@ -178,15 +137,15 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
                 <CardHeader className={classes.header} title='Creative Content Submission' />
                 <CardContent className={classes.content}>
                     <Typography variant='h6'>Story Submission</Typography>
-                    {Object.keys(story).map((key: string, i: number, arr: string[]) => (
+                    {Object.keys(story).map((key, i, arr) => (
                         <React.Fragment key={i}>
                             {(i === 0 || story[arr[i - 1]]) && ( // if page1 or story[previous-page] is truthy, show file input
                                 <TextField
                                     InputLabelProps={{ shrink: true }}
-                                    label={'Story' + key.replace(/page(\d)/, 'Page $1')} // transforms 'page1' to 'Page 1'
+                                    label={`Story  ${key.replace(/page(\d)/, 'Page $1')}`} // transforms 'page1' to 'Page 1'
                                     type='file'
                                     inputProps={{ accept: 'image/*' }}
-                                    onChange={handleStoryChange(key)}
+                                    onChange={handleFileChange('image', 'story', key)}
                                     disabled={submitted}
                                 />
                             )}
@@ -215,7 +174,7 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
                         label='Artwork or Comic'
                         type='file'
                         inputProps={{ accept: 'image/*' }}
-                        onChange={handleFileChange('illustration')}
+                        onChange={handleFileChange('image', 'illustration')}
                         disabled={submitted}
                     />
 
@@ -236,7 +195,7 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
                     onClick={submitted ? () => handleDelete() : undefined}>
                     <Icon>{submitted ? 'refresh' : 'save'}</Icon>
                 </Fab>
-                {loading && <CircularProgress size={68} className={classes.buttonProgress} />}
+                {submitting && <CircularProgress size={68} className={classes.buttonProgress} />}
             </div>
         </form>
     );

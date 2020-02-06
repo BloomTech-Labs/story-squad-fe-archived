@@ -4,11 +4,8 @@ import { render } from '@testing-library/react';
 
 import { CCSList } from './list.component';
 
-jest.mock('../../../../hooks', () => ({
-    useAPI: (path, method = 'GET') => ({
-        request: () => {},
-        response: null,
-    }),
+jest.mock('../../../../hooks/api/api.hook', () => ({
+    useAPI: (path, method = 'GET') => [null, false, () => {}],
 }));
 
 describe('CCSForm', () => {

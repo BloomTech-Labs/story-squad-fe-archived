@@ -32,11 +32,7 @@ interface ListCohortsProps {
 
 const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
     const classes = useStyles({});
-    const { request, response } = useAPI<{ cohorts: Cohort[] }>('/cohort/list');
-
-    React.useEffect(() => {
-        request();
-    }, [request]);
+    const [response, loading, request] = useAPI<{ cohorts: Cohort[] }>('/cohort/list');
 
     if (!response?.cohorts) return <h4 className={classes.loading}>Loading...</h4>;
     return (

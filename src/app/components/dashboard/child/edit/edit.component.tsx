@@ -71,9 +71,9 @@ interface ChildEdit {
 const ChildEdit: React.FC<ChildEdit> = ({ id, onUpdate }) => {
     const classes = useStyles();
 
-    const { request: fetch, response: fetchResponse, loading } = useAPI(`/children/list/${id}`);
-    const { request: update, response: updateResponse } = useAPI(`/children/list/${id}`, 'PUT');
-    const { request: remove, response: removeResponse } = useAPI(`/children/list/${id}`, 'DELETE');
+    const [fetched, fetching, fetch] = useAPI(`/children/list/${id}`);
+    const [updated, updating, update] = useAPI(`/children/list/${id}`, 'PUT');
+    const [removed, removing, remove] = useAPI(`/children/list/${id}`, 'DELETE');
 
     const { state: child, setState: setChild, handleInputChange: handleChildChange } = useForm({
         username: '',
@@ -103,21 +103,21 @@ const ChildEdit: React.FC<ChildEdit> = ({ id, onUpdate }) => {
     }, [fetch]);
 
     React.useEffect(() => {
-        if (!fetchResponse) return;
-        const { id, subscription, ...child } = fetchResponse.child;
+        if (!fetched) return;
+        const { id, subscription, ...child } = fetched.child;
         setChild({ ...child });
         setPreferences({ ...child.preferences });
-    }, [fetchResponse, setChild, setPreferences]);
+    }, [fetched, setChild, setPreferences]);
 
     React.useEffect(() => {
-        if (updateResponse && onUpdate) onUpdate();
-    }, [onUpdate, updateResponse]);
+        if (updated && onUpdate) onUpdate();
+    }, [onUpdate, updated]);
 
     React.useEffect(() => {
-        if (removeResponse && onUpdate) onUpdate();
-    }, [onUpdate, removeResponse]);
+        if (removed && onUpdate) onUpdate();
+    }, [onUpdate, removed]);
 
-    if (loading)
+    if (fetching)
         return (
             <section className={classes.loading}>
                 <CircularProgress size={56} />

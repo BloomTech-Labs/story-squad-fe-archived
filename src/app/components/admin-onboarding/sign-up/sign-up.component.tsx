@@ -35,9 +35,7 @@ const AdminSignUp: React.FC = () => {
     const token = new URLSearchParams(window.location.search).get('token');
     if (token) localStorage.setItem('jwt', token);
 
-    // TODO: Setup Loading and Error States
-    // eslint-disable-next-line
-    const { response, loading, error, request } = useAPI('/admin/register', 'PUT');
+    const [response, loading, request] = useAPI('/admin/register', 'PUT');
     const history = useHistory();
     const { state, handleInputChange: handleStringChange, handleSubmitBuilder } = useForm<
         SignUpState
@@ -47,10 +45,6 @@ const AdminSignUp: React.FC = () => {
     const [confirmPass, setConfirmPass] = useState('');
 
     const handleSubmit = handleSubmitBuilder(request);
-
-    React.useEffect(() => {
-        if (typeof error?.message === 'string') displayError(error?.message);
-    }, [error]);
 
     React.useEffect(() => {
         if (response?.token) {

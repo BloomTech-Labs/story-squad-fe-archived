@@ -15,12 +15,8 @@ const PaymentContext = React.createContext<PaymentContextState>({
     customer: undefined,
 });
 const PaymentProvider: React.FC = ({ children }) => {
-    const { request, response } = useAPI('/payment/cards');
+    const [response, loading, request] = useAPI('/payment/cards');
     creditCardsRefresh = request;
-
-    React.useEffect(() => {
-        request();
-    }, [request]);
 
     const state = { cards: response?.cards, customer: response?.customer };
     return <PaymentContext.Provider value={state}>{children}</PaymentContext.Provider>;

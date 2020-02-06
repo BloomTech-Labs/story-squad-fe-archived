@@ -6,10 +6,7 @@ import { CCSForm } from './form.component';
 import { Child } from '../../../../models';
 
 jest.mock('../../../../hooks', () => ({
-    useAPI: (path, method = 'GET') => ({
-        request: () => {},
-        response: null,
-    }),
+    useAPI: (path, method = 'GET') => [null, false, () => {}],
 }));
 
 const child = { cohort: { week: 1 } } as Child;

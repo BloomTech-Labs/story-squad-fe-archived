@@ -42,11 +42,7 @@ const useStyles = makeStyles((theme) => ({
 const ChildDashboard: React.FC = () => {
     const classes = useStyles();
     const logout = () => window.dispatchEvent(new Event('logout'));
-    const { request, response } = useAPI('/children/me');
-
-    React.useEffect(() => {
-        request();
-    }, [request]);
+    const [response, loading, request] = useAPI('/children/me');
 
     if (!response?.me)
         return (

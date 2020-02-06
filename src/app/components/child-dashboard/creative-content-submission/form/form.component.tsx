@@ -68,19 +68,17 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
     const [state, setState] = React.useState(initState);
-    const { request: getSubmission, response: getResponse } = useAPI(`/submissions/${week}`);
-    const { request: postSubmission, response: postResponse, loading } = useAPI(
-        '/submissions',
-        'POST'
+    const [getResponse, loadingSubmission, getSubmission] = useAPI(
+        `/submissions/${week}`,
+        'GET',
+        false
     );
-    const { request: deleteSubmission, response: deleteResponse } = useAPI(
+    const [postResponse, loadingSubmit, postSubmission] = useAPI('/submissions', 'POST');
+    const [deleteResponse, loadingDelete, deleteSubmission] = useAPI(
         `/submissions/${week}`,
         'DELETE'
     );
-    const { request: postProgress, response: progressResponse } = useAPI(
-        '/children/progress',
-        'POST'
-    );
+    const [progressResponse, loadingProgress, postProgress] = useAPI('/children/progress', 'POST');
 
     const handleInputChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
         setState({ ...state, [key]: e.target.value });
@@ -236,7 +234,7 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
                     onClick={submitted ? () => handleDelete() : undefined}>
                     <Icon>{submitted ? 'refresh' : 'save'}</Icon>
                 </Fab>
-                {loading && <CircularProgress size={68} className={classes.buttonProgress} />}
+                {loadingSubmit && <CircularProgress size={68} className={classes.buttonProgress} />}
             </div>
         </form>
     );

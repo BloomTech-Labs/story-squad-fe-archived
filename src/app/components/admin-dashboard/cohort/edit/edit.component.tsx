@@ -24,8 +24,8 @@ interface EditCohortProps {
 const EditCohort: React.FC<EditCohortProps> = ({ id, onUpdate }) => {
     const classes = useStyles({});
 
-    const { request: fetch, response: details } = useAPI(`/cohort/list/${id}`);
-    const { request: update, response: updated } = useAPI(
+    const [details] = useAPI(`/cohort/list/${id}`);
+    const [updated, loading, update] = useAPI(
         `/cohort/list${id ? `/${id}` : ''}`,
         id ? 'PUT' : 'POST'
     );
@@ -35,10 +35,6 @@ const EditCohort: React.FC<EditCohortProps> = ({ id, onUpdate }) => {
     });
 
     const handleSubmit = handleSubmitBuilder(update);
-
-    React.useEffect(() => {
-        if (id) fetch();
-    }, [id, fetch]);
 
     React.useEffect(() => {
         if (details?.cohort) setState({ name: details.cohort.name });

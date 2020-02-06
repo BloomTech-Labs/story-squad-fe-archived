@@ -5,15 +5,16 @@ import { render } from '@testing-library/react';
 import { PdfList } from './list.component';
 
 jest.mock('../../../../hooks', () => ({
-    useAPI: () => ({
-        request: () => {},
-        response: {
+    useAPI: () => [
+        {
             canon: [
                 { week: 1, base64: 'test' },
                 { week: 2, base64: 'test2' },
             ],
         },
-    }),
+        false,
+        () => {},
+    ],
 }));
 
 describe('PdfList', () => {

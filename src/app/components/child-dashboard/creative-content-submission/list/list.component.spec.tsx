@@ -5,10 +5,7 @@ import { render } from '@testing-library/react';
 import { CCSList } from './list.component';
 
 jest.mock('../../../../hooks', () => ({
-    useAPI: (path, method = 'GET') => ({
-        request: () => {},
-        response: null,
-    }),
+    useAPI: (path, method = 'GET') => [null, false, () => {}],
 }));
 
 describe('CCSForm', () => {

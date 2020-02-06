@@ -33,9 +33,7 @@ interface SignInState {
 const AdminSignIn: React.FC = () => {
     const classes = useStyles({});
 
-    // TODO: Setup Loading
-    // eslint-disable-next-line
-    const { response, loading, error, request } = useAPI('/admin/login', 'POST');
+    const [response, loading, request] = useAPI('/admin/login', 'POST');
     const history = useHistory();
     const { state, handleInputChange: handleStringChange, handleSubmitBuilder } = useForm<
         SignInState
@@ -45,10 +43,6 @@ const AdminSignIn: React.FC = () => {
     });
 
     const handleSubmit = handleSubmitBuilder(request);
-
-    React.useEffect(() => {
-        if (typeof error?.message === 'string') displayError(error?.message);
-    }, [error]);
 
     React.useEffect(() => {
         if (response?.token) {

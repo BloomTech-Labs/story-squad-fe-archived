@@ -68,7 +68,7 @@ interface KidProgressProps {
 const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const { request: updateProgress, response } = useAPI('/children/progress', 'POST');
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth > 800);
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 800);
 
     React.useEffect(() => {
         if (response?.progress && onUpdate) onUpdate();

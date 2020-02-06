@@ -52,8 +52,6 @@ interface CCSFormProps {
     week: number;
 }
 
-const initState = {};
-
 const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
@@ -72,10 +70,6 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
             page5: '',
         },
     });
-
-    React.useEffect(() => {
-        console.log(state);
-    }, [state]);
 
     const handleSubmit = handleSubmitBuilder(() => {
         if (state.story.page1) setState({ ...state, storyText: '' });
@@ -106,14 +100,9 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
     React.useEffect(() => {
         if (currentSubmission?.submission) {
             const { submission } = currentSubmission;
-
-            const newState = Object.fromEntries(
-                Object.entries(initState).map(([key, value]) => [key, submission[key] || value])
-            ) as typeof state;
-
-            setState(newState);
+            setState(submission);
         }
-    }, [currentSubmission, setState, state]);
+    }, [currentSubmission, setState]);
 
     React.useEffect(() => {
         if (submission?.submission) {
@@ -150,7 +139,6 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
                     <Typography variant='h6'>Story Submission</Typography>
                     {Object.keys(story).map((key, i, arr) => (
                         <React.Fragment key={i}>
-                            {console.log(i, story[arr[i - 1]])}
                             {(i === 0 || story[arr[i - 1]]) && ( // if page1 or story[previous-page] is truthy, show file input
                                 <TextField
                                     InputLabelProps={{ shrink: true }}

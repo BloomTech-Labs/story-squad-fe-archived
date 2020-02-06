@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Button, TextField, CircularProgress, Typography } from '@material-ui/core';
 
@@ -27,6 +27,22 @@ const useStyles = makeStyles((theme) => ({
         left: '50%',
         marginTop: -12,
         marginLeft: -12,
+    },
+    multiline: {
+        lineHeight: 1.3,
+    },
+    link: {
+        color: 'black',
+        textDecoration: 'underline',
+        paddingTop: '8px',
+    },
+    label: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    checkboxes: {
+        display: 'flex',
+        flexDirection: 'column',
     },
 }));
 
@@ -92,6 +108,16 @@ const SignIn: React.FC = () => {
                         Sign In
                     </Button>
                     {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
+                <div className={classes.checkboxes}>
+                    <label className={classes.label}>
+                        <Typography className={classes.multiline}>
+                            Dont have an account?{` `}
+                            <Link className={classes.link} to='/signup'>
+                                Sign up now!
+                            </Link>
+                        </Typography>
+                    </label>
                 </div>
             </form>
         </>

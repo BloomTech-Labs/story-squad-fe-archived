@@ -33,7 +33,7 @@ interface FormHook<S> {
  * const handleSubmit = handleSubmitBuilder(request);
  * ...
  * <form onSubmit={handleSubmit}>
- *   <input type="checkbox" onChange={handleBoolChange("enabled")} value={state.enabled}>
+ *   <input type="checkbox" onChange={handleBoolChange("enabled")} value={state.enabled} />
  * </form>
  * ```
  */

@@ -1,12 +1,17 @@
 import React from 'react';
 
-interface FormHook<T> {
-    state: T;
-    setState: React.Dispatch<React.SetStateAction<T>>;
-    handleBoolChange: (key: keyof T) => (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleInputChange: (key: keyof T) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+interface FormHook<S> {
+    state: S;
+    setState: React.Dispatch<React.SetStateAction<S>>;
+    handleBoolChange: (key: keyof S) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleInputChange: (key: keyof S) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleFileChange: (
+        type: 'image' | 'pdf',
+        key: keyof S,
+        subKey?: string
+    ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleSubmitBuilder: (
-        callback: (state: T) => void
+        callback: (state: S) => void
     ) => (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
@@ -18,6 +23,7 @@ interface FormHook<T> {
  * - `state` the current state of this forum
  * - `handleBoolChange()` a function intended to be used with a checkbox to update state on changes
  * - `handleStringChange()` a function intended to be used with a input box to update state on changes
+ * - `handleFileChange()` a function intended to be used with a file input to update state on changes
  * - `handleSubmitBuilder()` a function used to create handleSubmit
  *
  * @example
@@ -54,7 +60,31 @@ const useForm = <S extends { [key: string]: any }>(initial: S): FormHook<S> => {
         callback(state);
     };
 
-    return { state, setState, handleBoolChange, handleInputChange, handleSubmitBuilder };
+    const handleFileChange = (type: 'image' | 'pdf', key: keyof S, subKey?: string) => (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        if (e.target.files && e.target.files[0]) {
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = (e) => {
+                let dataURL = e.target?.result?.toString();
+                if (type === 'pdf') dataURL = dataURL?.replace(/^.*base64,/, '');
+                if (!subKey) setState({ ...state, [key]: dataURL });
+                if (subKey) setState({ ...state, [key]: { ...state[key], [subKey]: dataURL } });
+            };
+        } else {
+            setState({ ...state, [key]: '' });
+        }
+    };
+
+    return {
+        state,
+        setState,
+        handleBoolChange,
+        handleInputChange,
+        handleFileChange,
+        handleSubmitBuilder,
+    };
 };
 
 export { useForm };

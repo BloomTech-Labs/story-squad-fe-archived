@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { TextField, Button, Input, InputLabel, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useAPI } from '../../../../hooks';
+import { useAPI, useForm } from '../../../../hooks';
 
 const useStyles = makeStyles(() => ({
     form: {
@@ -22,29 +22,17 @@ const PdfCreate: React.FC = () => {
 
     const history = useHistory();
     const [response, loading, request] = useAPI('/canon', 'POST');
-    const [state, setState] = React.useState({ week: '', base64: '', altbase64: '' });
+    const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
+        week: '',
+        base64: '',
+        altbase64: '',
+    });
 
     const { week } = state;
 
-    const handleInputChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        setState({ ...state, [key]: e.target.value });
-    };
-
-    const handleFileChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            const reader = new FileReader();
-            reader.readAsDataURL(e.target.files[0]);
-            reader.onload = (e) => {
-                const base64 = e.target?.result?.toString().replace(/^.*base64,/, '');
-                setState({ ...state, [key]: base64 });
-            };
-        }
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = handleSubmitBuilder(() => {
         request({ ...state, week: Number(week) });
-    };
+    });
 
     React.useEffect(() => {
         if (response) history.push('/admin/dashboard');
@@ -69,7 +57,7 @@ const PdfCreate: React.FC = () => {
                     type='file'
                     inputProps={{ accept: '.pdf' }}
                     required
-                    onChange={handleFileChange('base64')}
+                    onChange={handleFileChange('pdf', 'base64')}
                 />
 
                 <InputLabel htmlFor='pdfAlt'>Dyslexic PDF</InputLabel>
@@ -78,7 +66,7 @@ const PdfCreate: React.FC = () => {
                     type='file'
                     inputProps={{ accept: '.pdf' }}
                     disabled
-                    onChange={handleFileChange('altbase64')}
+                    onChange={handleFileChange('pdf', 'altbase64')}
                 />
 
                 <Button type='submit' variant='contained' color='primary'>

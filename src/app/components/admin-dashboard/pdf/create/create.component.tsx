@@ -22,17 +22,13 @@ const PdfCreate: React.FC = () => {
 
     const history = useHistory();
     const [response, loading, request] = useAPI('/canon', 'POST');
-    const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
-        week: '',
+    const { state, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
+        week: 1,
         base64: '',
         altbase64: '',
     });
 
-    const { week } = state;
-
-    const handleSubmit = handleSubmitBuilder(() => {
-        request({ ...state, week: Number(week) });
-    });
+    const handleSubmit = handleSubmitBuilder(request);
 
     React.useEffect(() => {
         if (response) history.push('/admin/dashboard');
@@ -47,7 +43,7 @@ const PdfCreate: React.FC = () => {
                     label='Week'
                     inputProps={{ min: '1' }}
                     required
-                    value={week}
+                    value={state.week}
                     onChange={handleInputChange('week')}
                 />
 

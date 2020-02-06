@@ -1,8 +1,7 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Button, TextField, CircularProgress, Typography } from '@material-ui/core';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
@@ -114,11 +113,9 @@ const SignIn: React.FC = () => {
                     <label className={classes.label}>
                         <Typography className={classes.multiline}>
                             Dont have an account?{` `}
-                            <Router>
-                                <Link className={classes.link} to='/signup'>
-                                    Sign up now!
-                                </Link>
-                            </Router>
+                            <Link className={classes.link} to='/signup'>
+                                Sign up now!
+                            </Link>
                         </Typography>
                     </label>
                 </div>

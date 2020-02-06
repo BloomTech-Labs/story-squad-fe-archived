@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
-import { Grid, Paper, Tab, Tabs, useMediaQuery } from '@material-ui/core';
+import { Grid, Paper, Tab, Tabs, Typography, useMediaQuery } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import { SignIn, SignUp } from '../../components';
@@ -16,6 +16,13 @@ const useStyles = makeStyles((theme) => ({
         minHeight: '100vh',
         margin: 0,
         borderRadius: 0,
+    },
+    title: {
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexGrow: 1,
     },
     tabs: {
         paddingRight: theme.spacing(4),
@@ -65,6 +72,14 @@ const SignUpPage: React.FC = () => {
             direction='row'
             justify='flex-end'
             alignItems='stretch'>
+            {md && (
+                <Grid className={classes.title} item>
+                    <Typography variant='h1' component='h1' gutterBottom>
+                        Story Squad
+                    </Typography>
+                </Grid>
+            )}
+
             <Grid item xs={md ? undefined : 12}>
                 <Paper className={classes.sidebar} elevation={16}>
                     <Tabs

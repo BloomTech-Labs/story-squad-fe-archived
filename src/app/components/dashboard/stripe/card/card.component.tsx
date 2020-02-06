@@ -40,11 +40,11 @@ const StripeCard: React.FC<StripeCardProps> = ({
     onUpdate,
     defaultCard,
 }) => {
-    const { request: updateRequest, response: updateResponse } = useAPI(
+    const [updateResponse, updateLoading, updateRequest] = useAPI(
         `/payment/default/${card.id}`,
         'PUT'
     );
-    const { request: deleteRequest, response: deleteResponse } = useAPI(
+    const [deleteResponse, deleteLoading, deleteRequest] = useAPI(
         `/payment/cards/${card.id}`,
         'DELETE'
     );

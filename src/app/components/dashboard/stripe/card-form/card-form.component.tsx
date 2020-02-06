@@ -50,7 +50,7 @@ const _CardForm: React.FC<CardFormProps & ReactStripeElements.InjectedStripeProp
     // Todo: Handle Card Response
     // eslint-disable-next-line
     const classes = useStyles({});
-    const { request, response, loading } = useAPI<Message>('/payment/cards', 'POST');
+    const [response, loading, request] = useAPI<Message>('/payment/cards', 'POST');
     const [validForm, setValidForm] = React.useState({
         numberValid: false,
         expiryValid: false,

@@ -33,20 +33,12 @@ const PDFDisplay: React.FC<PDFDisplayProps> = ({ week }) => {
     const [file, setFile] = React.useState<Buffer>();
     const [numPages, setNumPages] = React.useState<number>();
     const [pages, setPages] = React.useState<number[]>();
-    const { request, response, error } = useAPI(`/canon/${week}`);
-
-    React.useEffect(() => {
-        request();
-    }, [request]);
+    const [response] = useAPI(`/canon/${week}`);
 
     React.useEffect(() => {
         if (!response?.canon) return;
         if (!file) setFile(Buffer.from(response.canon.base64, 'base64'));
     }, [file, response]);
-
-    React.useEffect(() => {
-        if (typeof error?.message === 'string') displayError(error?.message);
-    }, [error]);
 
     React.useEffect(() => {
         if (numPages) setPages(indexArray(numPages));

@@ -4,13 +4,14 @@ import { render } from '@testing-library/react';
 
 import { AdminHomePage } from './home.page';
 
-jest.mock('../../../hooks', () => ({
-    useAPI: () => ({
-        request: () => {},
-        response: {
+jest.mock('../../../hooks/api/api.hook', () => ({
+    useAPI: () => [
+        {
             me: { id: 1, email: 'test', role: 'admin', validpass: true },
         },
-    }),
+        false,
+        () => {},
+    ],
 }));
 
 jest.mock('../../../components', () => ({

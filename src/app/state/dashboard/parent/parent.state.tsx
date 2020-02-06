@@ -5,11 +5,7 @@ import { useAPI } from '../../../hooks';
 
 const ParentContext = React.createContext<Parent | undefined>(undefined);
 const ParentProvider: React.FC = ({ children }) => {
-    const { request, response } = useAPI('/parents/me');
-
-    React.useEffect(() => {
-        request();
-    }, [request]);
+    const [response] = useAPI('/parents/me');
 
     return <ParentContext.Provider value={response?.me}>{children}</ParentContext.Provider>;
 };

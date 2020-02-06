@@ -5,16 +5,15 @@ import { useAPI } from '../../../hooks';
 import { PDFDisplay } from './pdf-display.component';
 
 jest.mock('../../../hooks/api/api.hook');
-(useAPI as jest.Mock).mockReturnValue({
-    request: async () => {},
-    response: {
+(useAPI as jest.Mock).mockReturnValue([
+    {
         canon: {
             base64: 'some file',
         },
     },
-    loading: false,
-    error: undefined,
-});
+    false,
+    () => {},
+]);
 
 jest.mock('react-pdf', () => ({
     Document: () => <div></div>,

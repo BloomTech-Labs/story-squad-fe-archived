@@ -73,7 +73,8 @@ const useForm = <S extends { [key: string]: any }>(initial: S): FormHook<S> => {
                 if (subKey) setState({ ...state, [key]: { ...state[key], [subKey]: dataURL } });
             };
         } else {
-            setState({ ...state, [key]: '' });
+            if (!subKey) setState({ ...state, [key]: '' });
+            if (subKey) setState({ ...state, [key]: { ...state[key], [subKey]: '' } });
         }
     };
 

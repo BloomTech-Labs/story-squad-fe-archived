@@ -19,11 +19,11 @@ type APIHook<T> = [
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
 /**
- * @description A hook setup to use API calls.
+ * @description A hook setup to use API calls. Automatically makes `GET` request. By default displays errors.
  * @template T The type of data expected to be returned.
  * @param {string} url The URL to request the data from.
- * @param {Method} [method='GET'] The REST method to use for the request, options include "GET", "POST", "PUT" and "DELETE"
- * @returns {APIHook<T>} The return of this hook has 4 parts in an array:
+ * @param {Method} [method='GET'] The REST method to use for the request, options include `GET`, `POST`, `PUT` and `DELETE`
+ * @returns {APIHook<T>} The return of this hook has 5 parts in an array:
  * - `response` which is the most recently returned data.
  * - `loading` a boolean which represents if a request is in a pending state.
  * - `request()` a function that makes the request, any arguments passed in will be passed into the axios call.

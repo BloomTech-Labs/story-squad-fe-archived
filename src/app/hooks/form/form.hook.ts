@@ -28,11 +28,11 @@ interface FormHook<S> {
  *
  * @example
  * ```js
- * const {request} = useAPI("/some/data", "POST");
- * const {handleBoolChange, handleSubmitBuilder, state} = useForm({ enabled: true});
+ * const { request } = useAPI("/some/data", "POST");
+ * const { handleBoolChange, handleSubmitBuilder, state } = useForm({ enabled: true});
  * const handleSubmit = handleSubmitBuilder(request);
- *
- * return <form onSubmit={handleSubmit}>
+ * ...
+ * <form onSubmit={handleSubmit}>
  *   <input type="checkbox" onChange={handleBoolChange("enabled")} value={state.enabled}>
  * </form>
  * ```

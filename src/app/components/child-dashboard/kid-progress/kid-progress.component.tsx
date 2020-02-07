@@ -2,14 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-import { Card, CardHeader, Divider, Button, Typography, LinearProgress } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+    Card,
+    CardHeader,
+    Button,
+    Typography,
+    LinearProgress,
+    Checkbox,
+    Divider,
+    useMediaQuery,
+} from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
 
 const useStyles = makeStyles((theme) => ({
-    card: {},
+    card: {
+        alignSelf: 'center',
+        maxWidth: theme.breakpoints.values.md,
+        width: '100%',
+    },
     header: {
         display: 'flex',
         backgroundColor: theme.palette.primary.main,
@@ -18,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
     titleBar: {
         display: 'flex',
+        flexWrap: 'wrap',
         alignItems: 'center',
     },
     title: {
@@ -33,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },
     grid: {
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr 1fr',
+        gridTemplateColumns: '3fr 2fr 1fr',
         margin: theme.spacing(3),
         alignItems: 'center',
         justifyItems: 'center',
@@ -76,13 +90,15 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                 title={
                     <div className={classes.titleBar}>
                         <Typography variant='h6' className={classes.title}>
-                            {username}
+                            Complete by {dueDates.writing.from(today)}
                         </Typography>
                         <LinearProgress
                             className={classes.progress}
                             variant='determinate'
                             color='secondary'
-                            value={progress.reading ? 100 : 1}
+                            value={
+                                ((Number(progress.reading) + Number(progress.writing)) / 2) * 100
+                            }
                         />
                     </div>
                 }
@@ -90,86 +106,27 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
             <section className={classes.grid}>
                 <>
                     <Typography className={classes.gridItem} variant='h6'>
-                        Week 12 Missions
-                    </Typography>
-                    <Typography className={classes.gridItem} variant='h6'>
-                        Due
-                    </Typography>
-                    <Typography className={classes.gridItem} variant='h6'>
-                        Progress
-                    </Typography>
-                    <Typography className={classes.gridItem} variant='h6'>
-                        Complete
-                    </Typography>
-                </>
-                <Divider className={classes.divider} variant='fullWidth' />
-
-                <>
-                    <Typography className={classes.gridItem}>Read the story</Typography>
-                    <Typography className={classes.gridItem}>
-                        {dueDates.reading.from(today)}
-                    </Typography>
-                    <Typography className={classes.gridItem}>
-                        {progress.reading
-                            ? 'Complete'
-                            : today.diff(dueDates.reading) > 0
-                            ? 'Due'
-                            : 'Upcoming'}
+                        Read the story
                     </Typography>
                     <Link to={`/story/${cohort.week}`} onClick={() => request({ reading: true })}>
-                        <Button className={classes.gridItem}>Read</Button>
-                    </Link>
-                </>
-
-                <>
-                    <Typography className={classes.gridItem}>Write your story</Typography>
-                    <Typography className={classes.gridItem}>
-                        {dueDates.writing.from(today)}
-                    </Typography>
-                    <Typography className={classes.gridItem}>
-                        {progress.writing
-                            ? 'Complete'
-                            : today.diff(dueDates.writing) > 0
-                            ? 'Due'
-                            : 'Upcoming'}
-                    </Typography>
-                    <Link to={`/kids-dashboard/upload`}>
-                        <Button className={classes.gridItem}>
-                            {progress.writing ? 'View' : 'Complete'}
+                        <Button className={classes.gridItem} variant='outlined'>
+                            Read
                         </Button>
                     </Link>
-                </>
-
-                {/* <>
-                    <Typography className={classes.gridItem}>
-                        Review partner's work and assign points
-                    </Typography>
-                    <Typography className={classes.gridItem}>{dueDates.teamReview}</Typography>
-                    <Typography className={classes.gridItem}>
-                        {progress.teamReview ? 'Complete' : 'Due'}
-                    </Typography>
-                    <Button className={classes.gridItem}>Invest points</Button>
+                    <Checkbox className={classes.gridItem} checked={progress.reading} />
                 </>
 
                 <>
-                    <Typography className={classes.gridItem}>Evaluate 3 stories</Typography>
-                    <Typography className={classes.gridItem}>{dueDates.randomReview}</Typography>
-                    <Typography className={classes.gridItem}>
-                        {progress.randomReview ? 'Complete' : 'Due'}
+                    <Typography className={classes.gridItem} variant='h6'>
+                        Write your story
                     </Typography>
-                    <Button className={classes.gridItem}>Evaluate</Button>
+                    <Link to={`/kids-dashboard/upload`}>
+                        <Button className={classes.gridItem} variant='outlined'>
+                            Write
+                        </Button>
+                    </Link>
+                    <Checkbox className={classes.gridItem} checked={progress.writing} />
                 </>
-
-                <>
-                    <Typography className={classes.gridItem}>
-                        Get the results and review feedbacks
-                    </Typography>
-                    <Typography className={classes.gridItem}>{dueDates.results}</Typography>
-                    <Typography className={classes.gridItem}>
-                        {progress.results ? 'Complete' : 'Due'}
-                    </Typography>
-                    <Button className={classes.gridItem}>See Feedback</Button>
-                </> */}
             </section>
         </Card>
     );

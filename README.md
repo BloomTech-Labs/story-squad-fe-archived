@@ -18,6 +18,7 @@ You can find the deployed project at [Netlify](https://story-squad.netlify.com).
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](https://story-squad.netlify.com)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+<a href="https://codeclimate.com/github/Lambda-School-Labs/story-squad-fe/maintainability"><img src="https://api.codeclimate.com/v1/badges/e43969b52e59531084e2/maintainability" /></a>
 
 ## Project Overview
 

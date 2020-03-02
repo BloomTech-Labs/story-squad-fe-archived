@@ -8,3 +8,6 @@ export * from './Parent';
 export * from './Cohort';
 
 export * from './BeforeInstall';
+
+export * from './PointsAllocation';
+

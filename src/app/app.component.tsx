@@ -17,6 +17,7 @@ import {
     AdminSignUpPage,
     ErrorPage,
 } from './pages';
+import { PointDashboard } from './components/point-allocation-dashboard';
 
 const App: React.FC = () => {
     return (
@@ -52,7 +53,8 @@ const App: React.FC = () => {
                         <Route path='/terms-of-service' component={ToSPage} />
                         <Route path='/admin/register' component={AdminSignUpPage} />
                         <Route path='/admin' component={AdminSignInPage} />
-                        <Route exact path={['/', '/signup']} component={SignUpPage} />
+                        {/* <Route exact path={['/', '/signup']} component={SignUpPage} /> */}
+                        <Route exact path='/' component={PointDashboard} />
                         <Route path='/' component={ErrorPage} />
                     </Switch>
                 </Router>

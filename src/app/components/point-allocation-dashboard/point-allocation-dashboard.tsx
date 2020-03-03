@@ -1,59 +1,92 @@
 import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, AppBar, Toolbar, Typography, Container } from '@material-ui/core';
 import { Points } from '../../models';
+import { useForm } from '../../hooks';
 
 const useStyles = makeStyles({
-    pointBg: {
-        backgroundColor: '#0072bb',
-        height: '500px',
+    dashboardHeader: {
+        backgroundColor: '#004775',
+    },
+    centerText: {
+        justifyContent: 'space-around',
+        padding: '50px',
     },
 });
 
 const PointDashboard: React.FC = () => {
-    const [points, setPoints] = useState({
+    const { state, handleInputChange, handleSubmitBuilder } = useForm({
         story1Points: 10,
         story2Points: 10,
         pic1Points: 10,
         pic2Points: 10,
     });
-
     const [remainingPoints, setRemainingPoints] = useState(60);
 
     useEffect(() => {
         setRemainingPoints(
-            100 -
-                (points.story1Points + points.story2Points + points.pic1Points + points.pic2Points)
+            100 - (state.story1Points + state.story2Points + state.pic1Points + state.pic2Points)
         );
-    }, [points]);
+    }, [state]);
 
     const classes = useStyles({});
 
     return (
-        <div className={classes.pointBg}>
-            <div>Point</div>
-            <div>
-                <span>WhiteFox</span>
-                <span>CatLady</span>
-            </div>
-            <div>Point Remaining: {remainingPoints}</div>
-            <div>
+        <div>
+            <AppBar position='static' className={classes.dashboardHeader}>
+                <Toolbar className={classes.centerText}>
+                    <Typography variant='h2'>Point Share</Typography>
+                    <Typography variant='h3'>Point Remaining: {remainingPoints}</Typography>
+                </Toolbar>
+            </AppBar>
+            <Container maxWidth='md'>
                 <span>
-                    Story 1 <TextField type='number' />
+                    Story 1
+                    <TextField
+                        required
+                        autoFocus
+                        name='story1Points'
+                        onChange={handleInputChange('story1Points')}
+                        value={state.story1Points}
+                        type='number'
+                    />
                 </span>
                 <span>
-                    Story 2 <TextField type='number' />
+                    Story 2
+                    <TextField
+                        required
+                        autoFocus
+                        name='story2Points'
+                        onChange={handleInputChange('story2Points')}
+                        value={state.story2Points}
+                        type='number'
+                    />
                 </span>
-            </div>
-            <div>
+
                 <span>
-                    Pic 1 <TextField type='number' />
+                    Pic 1
+                    <TextField
+                        required
+                        autoFocus
+                        name='pic1Points'
+                        onChange={handleInputChange('pic1Points')}
+                        value={state.pic1Points}
+                        type='number'
+                    />
                 </span>
                 <span>
-                    Pic 2 <TextField type='number' />
+                    Pic 2
+                    <TextField
+                        required
+                        autoFocus
+                        name='pic2Points'
+                        onChange={handleInputChange('pic2Points')}
+                        value={state.pic2Points}
+                        type='number'
+                    />
                 </span>
-            </div>
+            </Container>
         </div>
     );
 };

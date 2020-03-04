@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     })
 );
-const PointDashboard: React.FC = () => {
+const PointDashboard: React.FC = (props) => {
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
         story1Points: 10,
         story2Points: 10,
@@ -106,6 +106,7 @@ const PointDashboard: React.FC = () => {
     const [remainingPoints, setRemainingPoints] = useState(60);
     const classes = useStyles({});
     const [open, setOpen] = React.useState(false);
+    const [error, setError] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -122,10 +123,11 @@ const PointDashboard: React.FC = () => {
     }, [state]);
 
     const handleSubmit = () => {
+        const error = '';
         if (remainingPoints === 0) {
             return console.log('Success!');
         } else {
-            return console.log('Points remaining must be at 0 to proceed.');
+            setError(true);
         }
     };
 
@@ -231,6 +233,8 @@ const PointDashboard: React.FC = () => {
                                     onChange={handleInputChange('story1Points')}
                                     value={state.story1Points}
                                     type='number'
+                                    InputProps={{ inputProps: { min: 10, max: 70 } }}
+                                    variant='outlined'
                                 />
                             </Grid>
                             <Grid
@@ -255,6 +259,8 @@ const PointDashboard: React.FC = () => {
                                     onChange={handleInputChange('pic1Points')}
                                     value={state.pic1Points}
                                     type='number'
+                                    variant='outlined'
+                                    InputProps={{ inputProps: { min: 10, max: 70 } }}
                                 />
                             </Grid>
                         </Grid>
@@ -329,6 +335,8 @@ const PointDashboard: React.FC = () => {
                                     onChange={handleInputChange('story2Points')}
                                     value={state.story2Points}
                                     type='number'
+                                    InputProps={{ inputProps: { min: 10, max: 70 } }}
+                                    variant='outlined'
                                 />
                             </Grid>
                             <Grid
@@ -353,6 +361,7 @@ const PointDashboard: React.FC = () => {
                                     onChange={handleInputChange('pic2Points')}
                                     value={state.pic2Points}
                                     type='number'
+                                    variant='outlined'
                                 />
                             </Grid>
                         </Grid>
@@ -368,6 +377,15 @@ const PointDashboard: React.FC = () => {
                         </Grid>
                     </Grid>
                 </Container>
+                <div style={{ color: 'red', textAlign: 'center', margin: '0, auto' }}>
+                    {error ? (
+                        <p style={{ color: 'red', textAlign: 'center', fontSize: '35px' }}>
+                            All 100 points must be allocated to proceed
+                        </p>
+                    ) : (
+                        ''
+                    )}
+                </div>
             </ValidatorForm>
             <Modal
                 aria-labelledby='transition-modal-title'

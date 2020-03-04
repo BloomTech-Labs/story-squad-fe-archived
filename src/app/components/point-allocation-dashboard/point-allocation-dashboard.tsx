@@ -495,7 +495,9 @@ const PointDashboard: React.FC = (props) => {
                 aria-describedby='alert-dialog-description'>
                 <DialogContent>
                     <DialogContentText id='alert-dialog-description' style={{ color: 'red' }}>
-                        Please allocate all 100 points
+                        Whoopsies! It seems you haven't allocated 100 points. Please allocate 100
+                        points between all four entries. After that, you can move on to the next
+                        step!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

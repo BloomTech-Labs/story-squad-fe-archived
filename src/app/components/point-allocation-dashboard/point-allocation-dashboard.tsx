@@ -20,9 +20,14 @@ import {
 } from '@material-ui/core';
 
 import { Points } from '../../models';
+import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import Gecko from './gecko.jpg';
+import Gecko from './img/gecko.jpg';
+import Draw1 from './img/draw1.gif';
+import Draw2 from './img/draw2.jpg';
+import Draw3 from './img/draw3.jpg';
+import Draw4 from './img/draw4.jpg';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -111,13 +116,29 @@ const PointDashboard: React.FC = (props) => {
     const classes = useStyles({});
     const [open, setOpen] = React.useState(false);
     const [error, setError] = useState(false);
+    const [draw2, setDraw2] = useState(false);
+    const [draw3, setDraw3] = useState(false);
+    const [draw4, setDraw4] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
     };
 
+    const handleDraw2 = () => {
+        setDraw2(true);
+    };
+    const handleDraw3 = () => {
+        setDraw3(true);
+    };
+    const handleDraw4 = () => {
+        setDraw4(true);
+    };
+
     const handleClose = () => {
         setOpen(false);
+        setDraw2(false);
+        setDraw3(false);
+        setDraw4(false);
     };
 
     const handleError = () => {
@@ -187,7 +208,7 @@ const PointDashboard: React.FC = (props) => {
                                 className={classes.gridMargin}>
                                 {/* Story 1 Preview */}
                                 <img
-                                    src={Gecko}
+                                    src={Draw1}
                                     className={classes.imagePreview}
                                     onClick={handleOpen}
                                 />
@@ -202,9 +223,9 @@ const PointDashboard: React.FC = (props) => {
                                 className={classes.gridMargin}>
                                 {/* Drawing 1 preview */}
                                 <img
-                                    src={Gecko}
+                                    src={Draw2}
                                     className={classes.imagePreview}
-                                    onClick={handleOpen}
+                                    onClick={handleDraw2}
                                 />
                             </Grid>
                         </Grid>
@@ -296,7 +317,11 @@ const PointDashboard: React.FC = (props) => {
                                 spacing={1}
                                 className={classes.gridMargin}>
                                 {/* Story 2 Preview */}
-                                <img src={Gecko} className={classes.imagePreview} />
+                                <img
+                                    src={Draw3}
+                                    className={classes.imagePreview}
+                                    onClick={handleDraw3}
+                                />
                             </Grid>
                             <Grid
                                 container
@@ -307,7 +332,11 @@ const PointDashboard: React.FC = (props) => {
                                 spacing={1}
                                 className={classes.gridMargin}>
                                 {/* Drawing 2 Preview */}
-                                <img src={Gecko} className={classes.imagePreview} />
+                                <img
+                                    src={Draw4}
+                                    className={classes.imagePreview}
+                                    onClick={handleDraw4}
+                                />
                             </Grid>
                         </Grid>
                         {/* Row 4 */}
@@ -375,9 +404,11 @@ const PointDashboard: React.FC = (props) => {
                         {/* Row 5 */}
                         <Grid container direction='row' justify='space-between' alignItems='center'>
                             {/* Back and next buttons  */}
-                            <Button className={classes.orangeButton} type='button'>
-                                Back
-                            </Button>
+                            <Link to={`/dashboard`}>
+                                <Button className={classes.orangeButton} type='button'>
+                                    Back
+                                </Button>
+                            </Link>
                             <Button className={classes.orangeButton} type='submit'>
                                 Next
                             </Button>
@@ -398,8 +429,62 @@ const PointDashboard: React.FC = (props) => {
                 }}>
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <h2 id='transition-modal-title'>Transition modal</h2>
-                        <p id='transition-modal-description'>react-transition-group animates me.</p>
+                        <img src={Draw1} />
+                        <h2 id='transition-modal-title'>Placeholder Image</h2>
+                    </div>
+                </Fade>
+            </Modal>
+            <Modal
+                aria-labelledby='transition-modal-title'
+                aria-describedby='transition-modal-description'
+                className={classes.modal}
+                open={draw2}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}>
+                <Fade in={draw2}>
+                    <div className={classes.paper}>
+                        <img src={Draw2} />
+                        <h2 id='transition-modal-title'>Placeholder Image</h2>
+                    </div>
+                </Fade>
+            </Modal>
+            <Modal
+                aria-labelledby='transition-modal-title'
+                aria-describedby='transition-modal-description'
+                className={classes.modal}
+                open={draw3}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}>
+                <Fade in={draw3}>
+                    <div className={classes.paper}>
+                        <img src={Draw3} />
+                        <h2 id='transition-modal-title'>Placeholder Image</h2>
+                    </div>
+                </Fade>
+            </Modal>
+            <Modal
+                aria-labelledby='transition-modal-title'
+                aria-describedby='transition-modal-description'
+                className={classes.modal}
+                open={draw4}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}>
+                <Fade in={draw4}>
+                    <div className={classes.paper}>
+                        <img src={Draw4} />
+                        <h2 id='transition-modal-title'>Placeholder Image</h2>
                     </div>
                 </Fade>
             </Modal>

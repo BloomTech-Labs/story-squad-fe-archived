@@ -111,6 +111,9 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                 <Typography variant='subtitle1'>2/5 lessons completed this week</Typography>
             </CardContent>
             <CardActions className={classes.actions}>
+                <Link to={`/team-points`}>
+                    <Button>My Team</Button>
+                </Link>
                 <div className={classes.wrapper}>
                     {child.subscription === true ? (
                         <Button fullWidth disabled={loading} onClick={() => request()}>

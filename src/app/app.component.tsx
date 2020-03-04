@@ -53,8 +53,8 @@ const App: React.FC = () => {
                         <Route path='/terms-of-service' component={ToSPage} />
                         <Route path='/admin/register' component={AdminSignUpPage} />
                         <Route path='/admin' component={AdminSignInPage} />
-                        {/* <Route exact path={['/', '/signup']} component={SignUpPage} /> */}
-                        <Route exact path='/' component={PointDashboard} />
+                        <Route exact path={['/', '/signup']} component={SignUpPage} />
+                        <Route path='/team-points' component={PointDashboard} />
                         <Route path='/' component={ErrorPage} />
                     </Switch>
                 </Router>

@@ -13,6 +13,10 @@ import {
     Modal,
     Fade,
     Backdrop,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
 } from '@material-ui/core';
 
 import { Points } from '../../models';
@@ -116,6 +120,10 @@ const PointDashboard: React.FC = (props) => {
         setOpen(false);
     };
 
+    const handleError = () => {
+        setError(false);
+    };
+
     useEffect(() => {
         setRemainingPoints(
             100 - (state.story1Points + state.story2Points + state.pic1Points + state.pic2Points)
@@ -123,7 +131,6 @@ const PointDashboard: React.FC = (props) => {
     }, [state]);
 
     const handleSubmit = () => {
-        const error = '';
         if (remainingPoints === 0) {
             return console.log('Success!');
         } else {
@@ -377,15 +384,6 @@ const PointDashboard: React.FC = (props) => {
                         </Grid>
                     </Grid>
                 </Container>
-                <div style={{ color: 'red', textAlign: 'center', margin: '0, auto' }}>
-                    {error ? (
-                        <p style={{ color: 'red', textAlign: 'center', fontSize: '35px' }}>
-                            All 100 points must be allocated to proceed
-                        </p>
-                    ) : (
-                        ''
-                    )}
-                </div>
             </ValidatorForm>
             <Modal
                 aria-labelledby='transition-modal-title'
@@ -405,6 +403,22 @@ const PointDashboard: React.FC = (props) => {
                     </div>
                 </Fade>
             </Modal>
+            <Dialog
+                open={error}
+                onClose={handleError}
+                aria-labelledby='alert-dialog-title'
+                aria-describedby='alert-dialog-description'>
+                <DialogContent>
+                    <DialogContentText id='alert-dialog-description' style={{ color: 'red' }}>
+                        Please allocate all 100 points
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleError} color='primary' autoFocus>
+                        OK
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 };

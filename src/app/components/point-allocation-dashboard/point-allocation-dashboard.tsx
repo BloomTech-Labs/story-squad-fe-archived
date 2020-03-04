@@ -122,11 +122,16 @@ const PointDashboard: React.FC = () => {
     }, [state]);
 
     const handleSubmit = () => {
-        return console.log('submitted');
+        if (remainingPoints === 0) {
+            return console.log('Success!');
+        } else {
+            return console.log('Points remaining must be at 0 to proceed.');
+        }
     };
 
     return (
         <div>
+            {/* Header code */}
             <AppBar position='static' className={classes.dashboardHeader}>
                 <Toolbar className={classes.centerText}>
                     <Typography className={classes.h2Styling} variant='h2'>
@@ -142,9 +147,12 @@ const PointDashboard: React.FC = () => {
                     </Typography>
                 </Toolbar>
             </AppBar>
+            {/* End header code  */}
+            {/* Container for avatars + inputs + buttons */}
             <ValidatorForm onSubmit={handleSubmit} onError={(errors) => console.log(errors)}>
                 <Container className={classes.containerStyling}>
                     <Grid container spacing={1}>
+                        {/* Row 1 */}
                         <Grid container direction='row' justify='center' alignItems='center'>
                             <Grid
                                 container
@@ -155,7 +163,9 @@ const PointDashboard: React.FC = () => {
                                 sm={4}
                                 spacing={1}
                                 className={classes.gridMargin}>
+                                {/* Avatar 1 */}
                                 <Avatar src='./gecko.jpg' className={classes.avatarStyling} />
+                                {/* Username 1 */}
                                 username 1
                             </Grid>
                             <Grid
@@ -166,6 +176,7 @@ const PointDashboard: React.FC = () => {
                                 sm={4}
                                 spacing={1}
                                 className={classes.gridMargin}>
+                                {/* Story 1 Preview */}
                                 <img
                                     src={Gecko}
                                     className={classes.imagePreview}
@@ -180,6 +191,7 @@ const PointDashboard: React.FC = () => {
                                 sm={4}
                                 spacing={1}
                                 className={classes.gridMargin}>
+                                {/* Drawing 1 preview */}
                                 <img
                                     src={Gecko}
                                     className={classes.imagePreview}
@@ -187,7 +199,9 @@ const PointDashboard: React.FC = () => {
                                 />
                             </Grid>
                         </Grid>
+                        {/* Row 2 */}
                         <Grid container direction='row' justify='center' alignItems='center'>
+                            {/* This Grid is empty to keep the grid spacing the same */}
                             <Grid
                                 container
                                 item
@@ -202,6 +216,7 @@ const PointDashboard: React.FC = () => {
                                 sm={4}
                                 spacing={1}
                                 className={classes.gridMargin}>
+                                {/* Story 1 input */}
                                 <TextValidator
                                     validators={['minNumber:10', 'maxNumber:70', 'required']}
                                     errorMessages={[
@@ -225,6 +240,7 @@ const PointDashboard: React.FC = () => {
                                 sm={4}
                                 spacing={1}
                                 className={classes.gridMargin}>
+                                {/* Drawing 1 input */}
                                 <TextValidator
                                     validators={['minNumber:10', 'maxNumber:70', 'required']}
                                     errorMessages={[
@@ -242,6 +258,7 @@ const PointDashboard: React.FC = () => {
                                 />
                             </Grid>
                         </Grid>
+                        {/* Row 3 */}
                         <Grid container direction='row' justify='center' alignItems='center'>
                             <Grid
                                 container
@@ -252,7 +269,9 @@ const PointDashboard: React.FC = () => {
                                 sm={4}
                                 spacing={1}
                                 className={classes.gridMargin}>
+                                {/* Avatar 2 */}
                                 <Avatar src='./gecko.jpg' className={classes.avatarStyling} />
+                                {/* Username 2 */}
                                 username 2
                             </Grid>
                             <Grid
@@ -263,6 +282,7 @@ const PointDashboard: React.FC = () => {
                                 sm={4}
                                 spacing={1}
                                 className={classes.gridMargin}>
+                                {/* Story 2 Preview */}
                                 <img src={Gecko} className={classes.imagePreview} />
                             </Grid>
                             <Grid
@@ -273,10 +293,13 @@ const PointDashboard: React.FC = () => {
                                 sm={4}
                                 spacing={1}
                                 className={classes.gridMargin}>
+                                {/* Drawing 2 Preview */}
                                 <img src={Gecko} className={classes.imagePreview} />
                             </Grid>
                         </Grid>
+                        {/* Row 4 */}
                         <Grid container direction='row' justify='center' alignItems='center'>
+                            {/* This Grid is empty to keep the grid spacing the same */}
                             <Grid
                                 container
                                 item
@@ -291,6 +314,7 @@ const PointDashboard: React.FC = () => {
                                 sm={4}
                                 spacing={1}
                                 className={classes.gridMargin}>
+                                {/* Story 2 Input */}
                                 <TextValidator
                                     validators={['minNumber:10', 'maxNumber:70', 'required']}
                                     errorMessages={[
@@ -314,6 +338,7 @@ const PointDashboard: React.FC = () => {
                                 sm={4}
                                 spacing={1}
                                 className={classes.gridMargin}>
+                                {/* Drawing 2 Input */}
                                 <TextValidator
                                     validators={['minNumber:10', 'maxNumber:70', 'required']}
                                     errorMessages={[
@@ -331,9 +356,15 @@ const PointDashboard: React.FC = () => {
                                 />
                             </Grid>
                         </Grid>
+                        {/* Row 5 */}
                         <Grid container direction='row' justify='space-between' alignItems='center'>
-                            <Button className={classes.orangeButton}>Back</Button>
-                            <Button className={classes.orangeButton}>Next</Button>
+                            {/* Back and next buttons  */}
+                            <Button className={classes.orangeButton} type='button'>
+                                Back
+                            </Button>
+                            <Button className={classes.orangeButton} type='submit'>
+                                Next
+                            </Button>
                         </Grid>
                     </Grid>
                 </Container>

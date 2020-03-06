@@ -23,7 +23,6 @@ import { Points } from '../../models';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import Gecko from './img/gecko.jpg';
 import Draw1 from './img/draw1.gif';
 import Draw2 from './img/draw2.jpg';
 import Draw3 from './img/draw3.jpg';

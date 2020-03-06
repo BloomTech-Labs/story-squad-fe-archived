@@ -60,6 +60,22 @@ const useStyles = makeStyles((theme) => ({
         gridColumnEnd: '5',
         width: '100%',
     },
+    orangeButton: {
+        'marginTop': '20px',
+        'backgroundColor': '#FF6B35',
+        'fontSize': '24px',
+        'fontWeight': 'bold',
+        'borderRadius': '50px',
+        'color': 'white',
+        'width': '200px',
+        'height': '50px',
+        'boxShadow': '0px 8px 0px #97300A',
+        'textTransform': 'capitalize',
+        'fontFamily': 'nunito',
+        '&:hover': {
+            backgroundColor: '#FF6B35',
+        },
+    },
 }));
 
 interface KidProgressProps {
@@ -123,6 +139,17 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     <Link to={`/kids-dashboard/upload`}>
                         <Button className={classes.gridItem} variant='outlined'>
                             Write
+                        </Button>
+                    </Link>
+                    <Checkbox className={classes.gridItem} checked={progress.writing} />
+                </>
+                <>
+                    <Typography className={classes.gridItem} variant='h6'>
+                        Give your team points
+                    </Typography>
+                    <Link to={`/kids-dashboard/points-dashboard`}>
+                        <Button className={classes.gridItem} variant='outlined'>
+                            Assign Team Points
                         </Button>
                     </Link>
                     <Checkbox className={classes.gridItem} checked={progress.writing} />

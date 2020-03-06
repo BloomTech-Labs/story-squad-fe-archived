@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from 'react';
-
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { Button } from '@material-ui/core';
 import { displayError } from '../../../state';
 import { useAPI } from '../../../hooks';
 
@@ -19,6 +19,27 @@ const useStyles = makeStyles((theme) => ({
     },
     page: {
         maxWidth: '100%',
+    },
+    orangeButton: {
+        'marginTop': '20px',
+        'backgroundColor': '#FF6B35',
+        'fontSize': '24px',
+        'fontWeight': 'bold',
+        'borderRadius': '50px',
+        'color': 'white',
+        'width': '200px',
+        'height': '50px',
+        'boxShadow': '0px 8px 0px #97300A',
+        'textTransform': 'capitalize',
+        'fontFamily': 'nunito',
+        '&:hover': {
+            backgroundColor: '#FF6B35',
+        },
+    },
+    btn: {
+        margin: '0 auto',
+        textAlign: 'center',
+        marginBottom: '30px',
     },
 }));
 
@@ -58,6 +79,13 @@ const PDFDisplay: React.FC<PDFDisplayProps> = ({ week }) => {
                     <Page pageIndex={page} key={page} scale={1.5} className={classes.page} />
                 ))}
             </Document>
+            <div className={classes.btn}>
+                <Link to={`/kids-dashboard`}>
+                    <Button className={classes.orangeButton} style={{ alignContent: 'center' }}>
+                        Back
+                    </Button>
+                </Link>
+            </div>
         </Suspense>
     );
 };

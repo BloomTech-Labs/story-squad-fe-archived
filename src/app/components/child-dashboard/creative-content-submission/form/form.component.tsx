@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-
+import { Link } from 'react-router-dom';
 import {
     Card,
     CardContent,
@@ -10,6 +10,7 @@ import {
     Icon,
     TextField,
     Typography,
+    Button,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
@@ -44,6 +45,22 @@ const useStyles = makeStyles((theme) => ({
         top: -6,
         left: -6,
         zIndex: 1,
+    },
+    orangeButton: {
+        'marginTop': '20px',
+        'backgroundColor': '#FF6B35',
+        'fontSize': '24px',
+        'fontWeight': 'bold',
+        'borderRadius': '50px',
+        'color': 'white',
+        'width': '200px',
+        'height': '50px',
+        'boxShadow': '0px 8px 0px #97300A',
+        'textTransform': 'capitalize',
+        'fontFamily': 'nunito',
+        '&:hover': {
+            backgroundColor: '#FF6B35',
+        },
     },
 }));
 
@@ -187,6 +204,11 @@ const CCSForm: React.FC<CCSFormProps> = ({ week, onUpdate }) => {
                     )}
                 </CardContent>
             </Card>
+            <Link to={`/kids-dashboard`}>
+                <Button className={classes.orangeButton} style={{ alignContent: 'center' }}>
+                    Back
+                </Button>
+            </Link>
 
             <div className={classes.wrapper}>
                 <Fab

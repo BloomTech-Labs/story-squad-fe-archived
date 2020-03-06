@@ -4,7 +4,7 @@ import { AppBar, Button, CircularProgress, Toolbar, Typography } from '@material
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI } from '../../hooks';
-import { WelcomeCard, KidProgressCard, CCSForm } from '../../components';
+import { WelcomeCard, KidProgressCard, CCSForm, PointDashboard } from '../../components';
 import { Switch, Route } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -71,6 +71,10 @@ const ChildDashboard: React.FC = () => {
                     <Route
                         path='/kids-dashboard/upload'
                         render={() => <CCSForm week={response.me.cohort.week} onUpdate={request} />}
+                    />
+                    <Route
+                        path='/kids-dashboard/points-dashboard'
+                        render={() => <PointDashboard child={response.me} />}
                     />
                     <Route
                         path='/'

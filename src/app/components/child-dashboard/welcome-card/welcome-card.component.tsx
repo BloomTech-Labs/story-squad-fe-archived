@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Avatar, Card, CardContent, Typography } from '@material-ui/core';
+import { Avatar, Card, CardContent, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../models';
@@ -24,6 +24,21 @@ interface WelcomeCardProps {
 
 const WelcomeCard: React.FC<WelcomeCardProps> = ({ className, child }) => {
     const classes = useStyles({});
+    const today = new Date();
+    const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    ];
 
     return (
         <Card className={`${className} ${classes.card}`}>
@@ -38,7 +53,7 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({ className, child }) => {
                 </section>
                 <section>
                     <Typography variant='h6' component='h3'>
-                        Tuesday, Jan 7, 2019
+                        {months[today.getMonth()]} {today.getDate()}, {today.getFullYear()}
                     </Typography>
                 </section>
             </CardContent>

@@ -18,7 +18,7 @@ import {
     DialogContent,
     DialogContentText,
 } from '@material-ui/core';
-
+import { Child } from '../../models';
 import { Points } from '../../models';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks';
@@ -105,7 +105,11 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     })
 );
-const PointDashboard: React.FC = (props) => {
+interface PointCardProps {
+    className?: string;
+    child: Child;
+}
+const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
         story1Points: 10,
         story2Points: 10,
@@ -196,7 +200,7 @@ const PointDashboard: React.FC = (props) => {
                                 {/* Avatar 1 */}
                                 <Avatar src='./gecko.jpg' className={classes.avatarStyling} />
                                 {/* Username 1 */}
-                                username 1
+                                {child.username}
                             </Grid>
                             <Grid
                                 container
@@ -211,6 +215,7 @@ const PointDashboard: React.FC = (props) => {
                                     src={Draw1}
                                     className={classes.imagePreview}
                                     onClick={handleOpen}
+                                    alt='childs drawing of family'
                                 />
                             </Grid>
                             <Grid
@@ -404,7 +409,7 @@ const PointDashboard: React.FC = (props) => {
                         {/* Row 5 */}
                         <Grid container direction='row' justify='space-between' alignItems='center'>
                             {/* Back and next buttons  */}
-                            <Link to={`/dashboard`}>
+                            <Link to={`/kids-dashboard`}>
                                 <Button className={classes.orangeButton} type='button'>
                                     Back
                                 </Button>

@@ -108,7 +108,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
             <CardContent>
                 <Typography variant='h5'>Week {child.cohort.week} Progress</Typography>
 
-                <Typography variant='subtitle1'>2/5 lessons completed this week</Typography>
+                <Typography variant='subtitle1'>2/5 tasks completed this week</Typography>
             </CardContent>
             <CardActions className={classes.actions}>
                 <div className={classes.wrapper}>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {
-    TextField,
     Button,
     AppBar,
     Toolbar,
@@ -19,15 +18,14 @@ import {
     DialogContentText,
 } from '@material-ui/core';
 import { Child } from '../../models';
-import { Points } from '../../models';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import Gecko from './img/gecko.jpg';
 import Draw1 from './img/draw1.gif';
 import Draw2 from './img/draw2.jpg';
 import Draw3 from './img/draw3.jpg';
 import Draw4 from './img/draw4.jpg';
+import ava1 from './img/dag.jpg';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -56,10 +54,13 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: '50px',
         },
         gridMargin: {
+            marginBottom: '40px',
+        },
+        avatarMargin: {
             marginBottom: '20px',
         },
         orangeButton: {
-            'marginTop': '20px',
+            'marginTop': '40px',
             'backgroundColor': '#FF6B35',
             'fontSize': '24px',
             'fontWeight': 'bold',
@@ -98,7 +99,9 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 'bold',
         },
         avatarStyling: {
-            marginBottom: '20px',
+            width: '250px',
+            height: '125px',
+            borderRadius: '14px',
         },
         red: {
             color: 'red',
@@ -143,9 +146,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
         setDraw2(false);
         setDraw3(false);
         setDraw4(false);
-    };
-
-    const handleError = () => {
         setError(false);
     };
 
@@ -172,9 +172,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                         Point Share
                     </Typography>
                     <Typography className={classes.h3Styling} variant='h3'>
-                        Points Remaining:
+                        Total Points Remaining:
                         {remainingPoints < 0 || remainingPoints > 100 ? (
-                            <div className={classes.red}>{remainingPoints}</div>
+                            <div className={classes.red}>Total must equal 100</div>
                         ) : (
                             <div>{remainingPoints}</div>
                         )}
@@ -196,9 +196,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 alignItems='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}>
+                                className={classes.avatarMargin}>
                                 {/* Avatar 1 */}
-                                <Avatar src='./gecko.jpg' className={classes.avatarStyling} />
+                                <Avatar src={ava1} className={classes.avatarStyling} />
                                 {/* Username 1 */}
                                 {child.username}
                             </Grid>
@@ -231,6 +231,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     src={Draw2}
                                     className={classes.imagePreview}
                                     onClick={handleDraw2}
+                                    alt='childs drawing of family'
                                 />
                             </Grid>
                         </Grid>
@@ -307,7 +308,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 alignItems='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}>
+                                className={classes.avatarMargin}>
                                 {/* Avatar 2 */}
                                 <Avatar src='./gecko.jpg' className={classes.avatarStyling} />
                                 {/* Username 2 */}
@@ -326,6 +327,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     src={Draw3}
                                     className={classes.imagePreview}
                                     onClick={handleDraw3}
+                                    alt='childs drawing of family'
                                 />
                             </Grid>
                             <Grid
@@ -341,6 +343,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     src={Draw4}
                                     className={classes.imagePreview}
                                     onClick={handleDraw4}
+                                    alt='childs drawing of random shapes'
                                 />
                             </Grid>
                         </Grid>
@@ -434,7 +437,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                 }}>
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <img src={Draw1} />
+                        <img src={Draw1} alt='childs drawing of family' />
                         <h2 id='transition-modal-title'>Placeholder Image</h2>
                     </div>
                 </Fade>
@@ -452,7 +455,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                 }}>
                 <Fade in={draw2}>
                     <div className={classes.paper}>
-                        <img src={Draw2} />
+                        <img src={Draw2} alt='childs drawing of family' />
                         <h2 id='transition-modal-title'>Placeholder Image</h2>
                     </div>
                 </Fade>
@@ -470,7 +473,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                 }}>
                 <Fade in={draw3}>
                     <div className={classes.paper}>
-                        <img src={Draw3} />
+                        <img src={Draw3} alt='childs drawing of family' />
                         <h2 id='transition-modal-title'>Placeholder Image</h2>
                     </div>
                 </Fade>
@@ -488,14 +491,14 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                 }}>
                 <Fade in={draw4}>
                     <div className={classes.paper}>
-                        <img src={Draw4} />
+                        <img src={Draw4} alt='childs drawing of random shapes' />
                         <h2 id='transition-modal-title'>Placeholder Image</h2>
                     </div>
                 </Fade>
             </Modal>
             <Dialog
                 open={error}
-                onClose={handleError}
+                onClose={handleClose}
                 aria-labelledby='alert-dialog-title'
                 aria-describedby='alert-dialog-description'>
                 <DialogContent>
@@ -506,7 +509,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleError} color='primary' autoFocus>
+                    <Button onClick={handleClose} color='primary' autoFocus>
                         OK
                     </Button>
                 </DialogActions>

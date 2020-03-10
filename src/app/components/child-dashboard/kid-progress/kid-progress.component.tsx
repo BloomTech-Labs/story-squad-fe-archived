@@ -16,6 +16,10 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
+import 'typeface-bangers';
+import picIcon from './icons/pic.png';
+import readIcon from './icons/read.png';
+import writeIcon from './icons/write.png';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -46,11 +50,8 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 30,
     },
     grid: {
-        display: 'grid',
-        gridTemplateColumns: '3fr 2fr 1fr',
-        margin: theme.spacing(3),
-        alignItems: 'center',
-        justifyItems: 'center',
+        display: 'flex',
+        border: '7px solid black',
     },
     gridItem: {
         margin: theme.spacing(1.5),
@@ -75,6 +76,62 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             backgroundColor: '#FF6B35',
         },
+    },
+    read: {
+        backgroundColor: '#B5D33D',
+        width: '40%',
+        border: '7px solid black',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '25px',
+    },
+    write: {
+        backgroundColor: '#EB7D5B',
+        width: '100%',
+        border: '7px solid black',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '25px',
+    },
+    draw: {
+        backgroundColor: '#FED23F',
+        width: '100%',
+        border: '7px solid black',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '25px',
+    },
+    linkFont: {
+        fontFamily: 'bangers',
+        fontSize: '96px',
+    },
+    writeDrawDiv: {
+        width: '60%',
+    },
+    drawIconDiv: {
+        width: '100px',
+        height: '88px',
+        backgroundImage: `url(${picIcon})`,
+    },
+    readIconDiv: {
+        width: '100px',
+        height: '78px',
+        backgroundImage: `url(${readIcon})`,
+    },
+    writeIconDiv: {
+        width: '100px',
+        height: '110px',
+        backgroundImage: `url(${writeIcon})`,
+    },
+    alignRight: {
+        alignSelf: 'flex-end',
+        justifyContent: 'flex-end',
     },
 }));
 
@@ -101,59 +158,30 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
 
     return (
         <Card className={classes.card}>
-            <CardHeader
-                className={classes.header}
-                title={
-                    <div className={classes.titleBar}>
-                        <Typography variant='h6' className={classes.title}>
-                            Complete by {dueDates.writing.from(today)}
-                        </Typography>
-                        <LinearProgress
-                            className={classes.progress}
-                            variant='determinate'
-                            color='secondary'
-                            value={
-                                ((Number(progress.reading) + Number(progress.writing)) / 2) * 100
-                            }
-                        />
-                    </div>
-                }
-            />
             <section className={classes.grid}>
-                <>
-                    <Typography className={classes.gridItem} variant='h6'>
-                        Read the story
-                    </Typography>
+                <div className={classes.read}>
+                    <Checkbox checked={progress.reading} className={classes.alignRight} />
+                    <div className={classes.readIconDiv}></div>
                     <Link to={`/story/${cohort.week}`} onClick={() => request({ reading: true })}>
-                        <Button className={classes.gridItem} variant='outlined'>
-                            Read
-                        </Button>
+                        <Typography className={classes.linkFont}>Read</Typography>
                     </Link>
-                    <Checkbox className={classes.gridItem} checked={progress.reading} />
-                </>
-
-                <>
-                    <Typography className={classes.gridItem} variant='h6'>
-                        Write your story
-                    </Typography>
-                    <Link to={`/kids-dashboard/upload`}>
-                        <Button className={classes.gridItem} variant='outlined'>
-                            Write
-                        </Button>
-                    </Link>
-                    <Checkbox className={classes.gridItem} checked={progress.writing} />
-                </>
-                <>
-                    <Typography className={classes.gridItem} variant='h6'>
-                        Give your team points
-                    </Typography>
-                    <Link to={`/kids-dashboard/points-dashboard`}>
-                        <Button className={classes.gridItem} variant='outlined'>
-                            Assign Team Points
-                        </Button>
-                    </Link>
-                    <Checkbox className={classes.gridItem} checked={progress.writing} />
-                </>
+                </div>
+                <div className={classes.writeDrawDiv}>
+                    <div className={classes.write}>
+                        <Checkbox checked={progress.writing} className={classes.alignRight} />
+                        <div className={classes.writeIconDiv}></div>
+                        <Link to={`/kids-dashboard/upload`}>
+                            <Typography className={classes.linkFont}>Write</Typography>
+                        </Link>
+                    </div>
+                    <div className={classes.draw}>
+                        <Checkbox checked={progress.writing} className={classes.alignRight} />
+                        <div className={classes.drawIconDiv}></div>
+                        <Link to={`/kids-dashboard/points-dashboard`}>
+                            <Typography className={classes.linkFont}>Draw</Typography>
+                        </Link>
+                    </div>
+                </div>
             </section>
         </Card>
     );

@@ -17,9 +17,14 @@ const useStyles = makeStyles((theme) => ({
         minHeight: '100vh',
     },
     headerFont: {
-        fontFamily: 'Bangers',
-        fontSize: '72px',
-        textShadow: '-4px 0 #292929, 0 4px #292929, 4px 0 #292929, 0 -4px #292929',
+        'fontFamily': 'Bangers',
+        'fontSize': '86px',
+        'fontWeight': 'bold',
+        '-webkit-text-stroke-width': '1px',
+        '-webkit-text-stroke-color': '#ff6d3a',
+    },
+    headerBorder: {
+        border: '4px solid #292929',
     },
     root: {
         display: 'flex',
@@ -44,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,
-        marginTop: '209px',
+        marginTop: '229px',
     },
     content: {
         display: 'flex',
@@ -78,8 +83,6 @@ const ChildDashboard: React.FC = () => {
                 </Toolbar>
             </AppBar>
             <main className={classes.main}>
-                <div className={classes.toolbar} />
-
                 <Switch>
                     <Route
                         path='/kids-dashboard/upload'

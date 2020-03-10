@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { Child } from '../../../../models';
 import { ChildCard } from '../card/card.component';
+import 'typeface-bangers';
+import 'typeface-nunito';
 
 const useStyles = makeStyles((theme) => ({
     loading: {
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
     header: {
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     list: {
@@ -38,9 +40,6 @@ const useStyles = makeStyles((theme) => ({
             fontSize: 320,
         },
     },
-    button: {
-        borderRadius: theme.shape.borderRadius,
-    },
     wrapper: {
         margin: theme.spacing(1),
         position: 'relative',
@@ -52,6 +51,23 @@ const useStyles = makeStyles((theme) => ({
         left: '50%',
         marginTop: -12,
         marginLeft: -12,
+    },
+    headerFont: {
+        'fontFamily': 'bangers',
+        'fontSize': '48px',
+        'color': '#0267C1',
+        '-webkit-text-stroke-width': '1px',
+        '-webkit-text-stroke-color': '#ff6d3a',
+    },
+    addChild: {
+        width: '340px',
+        height: '176px',
+        borderRadius: '15px',
+        backgroundColor: '#D0F2EC',
+        marginTop: '20px',
+        fontFamily: 'nunito',
+        fontSize: '36px',
+        textTransform: 'none',
     },
 }));
 
@@ -72,15 +88,7 @@ const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
     return (
         <div className={className}>
             <section className={classes.header}>
-                <Typography variant='overline' gutterBottom>
-                    Child Accounts
-                </Typography>
-
-                <Link to='/dashboard/child/create'>
-                    <Button variant='outlined' color='primary' className={classes.button}>
-                        Add Child
-                    </Button>
-                </Link>
+                <Typography className={classes.headerFont}>Story Squad</Typography>
             </section>
 
             {list.length === 0 && (
@@ -100,6 +108,15 @@ const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
                     <ChildCard key={child.id} child={child}></ChildCard>
                 ))}
             </section>
+            <Link to='/dashboard/child/create'>
+                <Button className={classes.addChild}>
+                    {' '}
+                    <Icon color='disabled' fontSize='large'>
+                        add
+                    </Icon>
+                    Add a Child
+                </Button>
+            </Link>
         </div>
     );
 };

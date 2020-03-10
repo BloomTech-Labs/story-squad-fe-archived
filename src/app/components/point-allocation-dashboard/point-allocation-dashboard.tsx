@@ -27,6 +27,7 @@ import Draw3 from './img/draw3.jpg';
 import Draw4 from './img/draw4.jpg';
 import ava1 from './img/dag.jpg';
 import ava2 from './img/dag2.jpg';
+import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -43,6 +44,10 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         root: {
             fontFamily: 'nunito',
+            display: 'flex',
+            flexDirection: 'column',
+            marginTop: '0px',
+            padding: '0px',
         },
         dashboardHeader: {
             fontFamily: 'nunito',
@@ -51,8 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
             height: '150px',
         },
         centerText: {
-            justifyContent: 'space-around',
-            padding: '50px',
+            justifyContent: 'space-evenly',
         },
         gridRow1: {
             width: '747px',
@@ -165,17 +169,17 @@ const useStyles = makeStyles((theme: Theme) =>
             borderRadius: '14px',
         },
         containerStyling: {
-            padding: '0 100px 100px 100px',
             fontFamily: 'nunito',
+            marginTop: '8px',
         },
         h2Styling: {
             fontSize: '48px',
-            fontFamily: 'nunito',
+            fontFamily: 'bangers',
             fontWeight: 'bold',
         },
         h3Styling: {
             fontSize: '36px',
-            fontFamily: 'nunito',
+            fontFamily: 'bangers',
             fontWeight: 'bold',
         },
         avatarStyling: {
@@ -186,6 +190,19 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         red: {
             color: 'red',
+        },
+        appBar: {
+            height: '229px',
+            width: '1208px',
+            margin: '0 auto',
+            backgroundColor: '#6CEAE6',
+            backgroundImage: `url(${cityscape})`,
+            backgroundRepeat: 'no-repeat',
+            border: '8px solid #000000',
+            backgroundSize: '101% 103%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
         },
     })
 );
@@ -248,21 +265,21 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
     return (
         <div>
             {/* Header code */}
-            <AppBar position='static' className={classes.dashboardHeader}>
-                <Toolbar className={classes.centerText}>
-                    <Typography className={classes.h2Styling} variant='h2'>
-                        Point Share
-                    </Typography>
-                    <Typography className={classes.h3Styling} variant='h3'>
-                        Total Points Remaining:
-                        {remainingPoints < 0 || remainingPoints > 100 ? (
-                            <div className={classes.red}>Total must equal 100</div>
-                        ) : (
-                            <div>{remainingPoints}</div>
-                        )}
-                    </Typography>
-                </Toolbar>
-            </AppBar>
+            <div className={classes.root}>
+                <AppBar position='static' className={classes.appBar}>
+                    <Toolbar className={classes.centerText}>
+                        <Typography className={classes.h2Styling}>Point Share</Typography>
+                        <Typography className={classes.h3Styling}>
+                            Total Points Remaining:
+                            {remainingPoints < 0 || remainingPoints > 100 ? (
+                                <div className={classes.red}>Total must equal 100</div>
+                            ) : (
+                                <div>{remainingPoints}</div>
+                            )}
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+            </div>
             {/* End header code  */}
             {/* Container for avatars + inputs + buttons */}
             <ValidatorForm onSubmit={handleSubmit} onError={(errors) => console.log(errors)}>
@@ -355,8 +372,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     InputProps={{ inputProps: { min: 10, max: 70 } }}
                                     style={{
                                         position: 'absolute',
-                                        top: '510px',
+                                        top: '442px',
                                         background: 'white',
+                                        width: '145px',
+                                        borderRadius: '5px',
                                     }}
                                     variant='outlined'
                                 />
@@ -387,8 +406,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     InputProps={{ inputProps: { min: 10, max: 70 } }}
                                     style={{
                                         position: 'absolute',
-                                        top: '510px',
+                                        top: '442px',
                                         background: 'white',
+                                        width: '145px',
+                                        borderRadius: '5px',
                                     }}
                                 />
                             </Grid>
@@ -481,8 +502,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     variant='outlined'
                                     style={{
                                         position: 'absolute',
-                                        top: '880px',
+                                        top: '800px',
                                         background: 'white',
+                                        width: '145px',
+                                        borderRadius: '5px',
                                     }}
                                 />
                             </Grid>
@@ -511,8 +534,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     variant='outlined'
                                     style={{
                                         position: 'absolute',
-                                        top: '880px',
+                                        top: '800px',
                                         background: 'white',
+                                        width: '145px',
+                                        borderRadius: '5px',
                                     }}
                                 />
                             </Grid>

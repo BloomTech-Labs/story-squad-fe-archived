@@ -26,6 +26,7 @@ import Draw2 from './img/draw2.jpg';
 import Draw3 from './img/draw3.jpg';
 import Draw4 from './img/draw4.jpg';
 import ava1 from './img/dag.jpg';
+import ava2 from './img/dag2.jpg';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -53,11 +54,90 @@ const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'space-around',
             padding: '50px',
         },
-        gridMargin: {
-            marginBottom: '40px',
+        gridRow1: {
+            width: '747px',
+            height: '274px',
+            backgroundColor: '#EB7D5B',
+            padding: '30px',
+            borderTop: '7px solid #000000',
+            borderLeft: '7px solid #000000',
+        },
+        gridRow2: {
+            width: '747px',
+            height: '274px',
+            backgroundColor: '#EB7D5B',
+            padding: '30px',
+            borderTop: '7px solid #000000',
+            borderRight: '7px solid #000000',
+        },
+        gridRow3: {
+            width: '747px',
+            height: '274px',
+            backgroundColor: '#FED23F',
+            padding: '30px',
+            borderTop: '7px solid #000000',
+            borderLeft: '7px solid #000000',
+        },
+        gridRow4: {
+            width: '747px',
+            height: '274px',
+            backgroundColor: '#FED23F',
+            padding: '30px',
+            borderTop: '7px solid #000000',
+            borderRight: '7px solid #000000',
+        },
+        gridInput1: {
+            backgroundColor: '#EB7D5B',
+            padding: '30px',
+            borderLeft: '7px solid #000000',
+        },
+        gridInput2: {
+            backgroundColor: '#EB7D5B',
+            padding: '30px ',
+            borderRight: '7px solid #000000',
+        },
+        gridInput3: {
+            backgroundColor: '#FED23F',
+            padding: '30px',
+            borderLeft: '7px solid #000000',
+            borderBottom: '7px solid #000000',
+        },
+        gridInput4: {
+            backgroundColor: '#FED23F',
+            padding: '30px ',
+            borderRight: '7px solid #000000',
+            borderBottom: '7px solid #000000',
         },
         avatarMargin: {
-            marginBottom: '20px',
+            fontFamily: 'nunito',
+            fontSize: '18px',
+            fontWeight: 'bold',
+            backgroundColor: '#B5D33D',
+            padding: '46px',
+            borderLeft: '7px solid #000000',
+            borderTop: '7px solid #000000',
+            borderRight: '7px solid #000000',
+        },
+        avatarMargin2: {
+            fontFamily: 'nunito',
+            fontSize: '18px',
+            fontWeight: 'bold',
+            backgroundColor: '#B5D33D',
+            padding: '65px 30px 25px 25px',
+            borderLeft: '7px solid #000000',
+            borderRight: '7px solid #000000',
+        },
+        avatarMargin3: {
+            backgroundColor: '#B5D33D',
+            padding: '55px 55px 60px 55px',
+            borderLeft: '7px solid #000000',
+            borderBottom: '7px solid #000000',
+            borderRight: '7px solid #000000',
+        },
+        avatarMargin4: {
+            backgroundColor: '#B5D33D',
+            padding: '55px',
+            borderLeft: '7px solid #000000',
         },
         orangeButton: {
             'marginTop': '40px',
@@ -99,8 +179,9 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 'bold',
         },
         avatarStyling: {
+            marginTop: '25px',
             width: '250px',
-            height: '125px',
+            height: '100px',
             borderRadius: '14px',
         },
         red: {
@@ -126,6 +207,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
     const [draw2, setDraw2] = useState(false);
     const [draw3, setDraw3] = useState(false);
     const [draw4, setDraw4] = useState(false);
+    console.log(child);
 
     const handleOpen = () => {
         setOpen(true);
@@ -200,7 +282,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 {/* Avatar 1 */}
                                 <Avatar src={ava1} className={classes.avatarStyling} />
                                 {/* Username 1 */}
-                                {child.username}
+                                <>
+                                    <br />
+                                    {child.username}
+                                </>
                             </Grid>
                             <Grid
                                 container
@@ -209,7 +294,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 alignItems='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}>
+                                className={classes.gridRow1}>
                                 {/* Story 1 Preview */}
                                 <img
                                     src={Draw1}
@@ -225,7 +310,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 alignItems='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}>
+                                className={classes.gridRow2}>
                                 {/* Drawing 1 preview */}
                                 <img
                                     src={Draw2}
@@ -244,14 +329,14 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 justify='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}></Grid>
+                                className={classes.avatarMargin4}></Grid>
                             <Grid
                                 container
                                 item
                                 justify='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}>
+                                className={classes.gridInput1}>
                                 {/* Story 1 input */}
                                 <TextValidator
                                     validators={['minNumber:10', 'maxNumber:70', 'required']}
@@ -268,6 +353,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     value={state.story1Points}
                                     type='number'
                                     InputProps={{ inputProps: { min: 10, max: 70 } }}
+                                    style={{ backgroundColor: 'white' }}
                                     variant='outlined'
                                 />
                             </Grid>
@@ -277,7 +363,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 justify='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}>
+                                className={classes.gridInput2}>
                                 {/* Drawing 1 input */}
                                 <TextValidator
                                     validators={['minNumber:10', 'maxNumber:70', 'required']}
@@ -295,6 +381,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     type='number'
                                     variant='outlined'
                                     InputProps={{ inputProps: { min: 10, max: 70 } }}
+                                    style={{ backgroundColor: 'white' }}
                                 />
                             </Grid>
                         </Grid>
@@ -308,11 +395,14 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 alignItems='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.avatarMargin}>
+                                className={classes.avatarMargin2}>
                                 {/* Avatar 2 */}
-                                <Avatar src='./gecko.jpg' className={classes.avatarStyling} />
+                                <Avatar src={ava2} className={classes.avatarStyling} />
                                 {/* Username 2 */}
-                                username 2
+                                <>
+                                    <br />
+                                    Teammate
+                                </>
                             </Grid>
                             <Grid
                                 container
@@ -321,7 +411,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 alignItems='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}>
+                                className={classes.gridRow3}>
                                 {/* Story 2 Preview */}
                                 <img
                                     src={Draw3}
@@ -337,7 +427,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 alignItems='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}>
+                                className={classes.gridRow4}>
                                 {/* Drawing 2 Preview */}
                                 <img
                                     src={Draw4}
@@ -356,14 +446,14 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 justify='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}></Grid>
+                                className={classes.avatarMargin3}></Grid>
                             <Grid
                                 container
                                 item
                                 justify='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}>
+                                className={classes.gridInput3}>
                                 {/* Story 2 Input */}
                                 <TextValidator
                                     validators={['minNumber:10', 'maxNumber:70', 'required']}
@@ -381,6 +471,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     type='number'
                                     InputProps={{ inputProps: { min: 10, max: 70 } }}
                                     variant='outlined'
+                                    style={{ backgroundColor: 'white' }}
                                 />
                             </Grid>
                             <Grid
@@ -389,7 +480,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 justify='center'
                                 sm={4}
                                 spacing={1}
-                                className={classes.gridMargin}>
+                                className={classes.gridInput4}>
                                 {/* Drawing 2 Input */}
                                 <TextValidator
                                     validators={['minNumber:10', 'maxNumber:70', 'required']}
@@ -406,6 +497,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     value={state.pic2Points}
                                     type='number'
                                     variant='outlined'
+                                    style={{ backgroundColor: 'white' }}
                                 />
                             </Grid>
                         </Grid>

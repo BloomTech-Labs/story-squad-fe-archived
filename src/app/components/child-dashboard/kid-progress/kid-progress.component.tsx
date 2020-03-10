@@ -156,6 +156,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
+        marginTop: '229px',
     },
     appBar: {
         height: '229px',

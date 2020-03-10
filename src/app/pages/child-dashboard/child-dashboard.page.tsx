@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useAPI } from '../../hooks';
 import { WelcomeCard, KidProgressCard, CCSForm, PointDashboard } from '../../components';
 import { Switch, Route } from 'react-router-dom';
-import cityscape from './icons/cityscape.png';
 import 'typeface-bangers';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,26 +29,10 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
     },
-    appBar: {
-        height: '229px',
-        backgroundColor: '#6CEAE6',
-        backgroundImage: `url(${cityscape})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
-        backgroundPosition: '50% 5%',
-        backgroundSize: '100% 40%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    spacer: {
-        flexGrow: 1,
-    },
     main: {
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,
-        marginTop: '229px',
     },
     content: {
         display: 'flex',

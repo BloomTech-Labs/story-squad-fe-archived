@@ -88,23 +88,23 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         gridInput1: {
             backgroundColor: '#EB7D5B',
-            padding: '30px',
+            padding: '50px ',
             borderLeft: '7px solid #000000',
         },
         gridInput2: {
             backgroundColor: '#EB7D5B',
-            padding: '30px ',
+            padding: '50px ',
             borderRight: '7px solid #000000',
         },
         gridInput3: {
             backgroundColor: '#FED23F',
-            padding: '30px',
+            padding: '50px ',
             borderLeft: '7px solid #000000',
             borderBottom: '7px solid #000000',
         },
         gridInput4: {
             backgroundColor: '#FED23F',
-            padding: '30px ',
+            padding: '50px ',
             borderRight: '7px solid #000000',
             borderBottom: '7px solid #000000',
         },
@@ -129,14 +129,14 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         avatarMargin3: {
             backgroundColor: '#B5D33D',
-            padding: '55px 55px 60px 55px',
+            padding: '55px 55px 45px 55px',
             borderLeft: '7px solid #000000',
             borderBottom: '7px solid #000000',
             borderRight: '7px solid #000000',
         },
         avatarMargin4: {
             backgroundColor: '#B5D33D',
-            padding: '55px',
+            padding: '50px',
             borderLeft: '7px solid #000000',
         },
         orangeButton: {
@@ -353,7 +353,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     value={state.story1Points}
                                     type='number'
                                     InputProps={{ inputProps: { min: 10, max: 70 } }}
-                                    style={{ backgroundColor: 'white' }}
+                                    style={{
+                                        position: 'absolute',
+                                        top: '510px',
+                                        background: 'white',
+                                    }}
                                     variant='outlined'
                                 />
                             </Grid>
@@ -381,7 +385,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     type='number'
                                     variant='outlined'
                                     InputProps={{ inputProps: { min: 10, max: 70 } }}
-                                    style={{ backgroundColor: 'white' }}
+                                    style={{
+                                        position: 'absolute',
+                                        top: '510px',
+                                        background: 'white',
+                                    }}
                                 />
                             </Grid>
                         </Grid>
@@ -471,7 +479,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     type='number'
                                     InputProps={{ inputProps: { min: 10, max: 70 } }}
                                     variant='outlined'
-                                    style={{ backgroundColor: 'white' }}
+                                    style={{
+                                        position: 'absolute',
+                                        top: '880px',
+                                        background: 'white',
+                                    }}
                                 />
                             </Grid>
                             <Grid
@@ -497,7 +509,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     value={state.pic2Points}
                                     type='number'
                                     variant='outlined'
-                                    style={{ backgroundColor: 'white' }}
+                                    style={{
+                                        position: 'absolute',
+                                        top: '880px',
+                                        background: 'white',
+                                    }}
                                 />
                             </Grid>
                         </Grid>

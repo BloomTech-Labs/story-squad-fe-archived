@@ -11334,6 +11334,11 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typeface-bangers@^0.0.72:
+  version "0.0.72"
+  resolved "https://registry.yarnpkg.com/typeface-bangers/-/typeface-bangers-0.0.72.tgz#162cbcb17bb16feba38abe65ff653fd56a31feae"
+  integrity sha512-nzGLKrQe4soTKapT7E0UyKoGyPvrwrrEXQwothBq9yJ+GbsEs6ivOthAbxh19hUx8cGIxmtO8hCeWhSn9Hr3Ag==
+
 typeface-nunito@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/typeface-nunito/-/typeface-nunito-1.1.3.tgz#b0a7d0c4db40d69b58bcc56668344861ca4df4ab"

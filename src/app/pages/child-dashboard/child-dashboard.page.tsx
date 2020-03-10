@@ -77,11 +77,6 @@ const ChildDashboard: React.FC = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position='fixed' className={classes.appBar}>
-                <Toolbar>
-                    <div className={classes.headerFont}>Mission</div>
-                </Toolbar>
-            </AppBar>
             <main className={classes.main}>
                 <Switch>
                     <Route

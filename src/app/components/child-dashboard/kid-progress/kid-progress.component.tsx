@@ -11,6 +11,9 @@ import {
     Checkbox,
     Divider,
     useMediaQuery,
+    Toolbar,
+    CircularProgress,
+    AppBar,
 } from '@material-ui/core';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 
@@ -20,6 +23,7 @@ import 'typeface-bangers';
 import picIcon from './icons/pic.png';
 import readIcon from './icons/read.png';
 import writeIcon from './icons/write.png';
+import cityscape from './icons/cityscape.png';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -133,6 +137,57 @@ const useStyles = makeStyles((theme) => ({
         alignSelf: 'flex-end',
         justifyContent: 'flex-end',
     },
+    loading: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+    },
+    headerFont: {
+        'fontFamily': 'Bangers',
+        'fontSize': '86px',
+        'fontWeight': 'bold',
+        '-webkit-text-stroke-width': '1px',
+        '-webkit-text-stroke-color': '#ff6d3a',
+    },
+    headerBorder: {
+        border: '4px solid #292929',
+    },
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    appBar: {
+        height: '229px',
+        backgroundColor: '#6CEAE6',
+        backgroundImage: `url(${cityscape})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+        backgroundPosition: '50% 5%',
+        backgroundSize: '100% 40%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    spacer: {
+        flexGrow: 1,
+    },
+    main: {
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1,
+        marginTop: '229px',
+    },
+    content: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        margin: theme.spacing(3),
+    },
+    welcome: {
+        marginBottom: theme.spacing(2),
+    },
+    toolbar: theme.mixins.toolbar,
 }));
 
 interface KidProgressProps {
@@ -157,33 +212,44 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const today = moment(new Date());
 
     return (
-        <Card className={classes.card}>
-            <section className={classes.grid}>
-                <div className={classes.read}>
-                    <Checkbox checked={progress.reading} className={classes.alignRight} />
-                    <div className={classes.readIconDiv}></div>
-                    <Link to={`/story/${cohort.week}`} onClick={() => request({ reading: true })}>
-                        <Typography className={classes.linkFont}>Read</Typography>
-                    </Link>
-                </div>
-                <div className={classes.writeDrawDiv}>
-                    <div className={classes.write}>
-                        <Checkbox checked={progress.writing} className={classes.alignRight} />
-                        <div className={classes.writeIconDiv}></div>
-                        <Link to={`/kids-dashboard/upload`}>
-                            <Typography className={classes.linkFont}>Write</Typography>
+        <>
+            <div className={classes.root}>
+                <AppBar position='fixed' className={classes.appBar}>
+                    <Toolbar>
+                        <div className={classes.headerFont}>Mission</div>
+                    </Toolbar>
+                </AppBar>
+            </div>
+            <Card className={classes.card}>
+                <section className={classes.grid}>
+                    <div className={classes.read}>
+                        <Checkbox checked={progress.reading} className={classes.alignRight} />
+                        <div className={classes.readIconDiv}></div>
+                        <Link
+                            to={`/story/${cohort.week}`}
+                            onClick={() => request({ reading: true })}>
+                            <Typography className={classes.linkFont}>Read</Typography>
                         </Link>
                     </div>
-                    <div className={classes.draw}>
-                        <Checkbox checked={progress.writing} className={classes.alignRight} />
-                        <div className={classes.drawIconDiv}></div>
-                        <Link to={`/kids-dashboard/points-dashboard`}>
-                            <Typography className={classes.linkFont}>Draw</Typography>
-                        </Link>
+                    <div className={classes.writeDrawDiv}>
+                        <div className={classes.write}>
+                            <Checkbox checked={progress.writing} className={classes.alignRight} />
+                            <div className={classes.writeIconDiv}></div>
+                            <Link to={`/kids-dashboard/upload`}>
+                                <Typography className={classes.linkFont}>Write</Typography>
+                            </Link>
+                        </div>
+                        <div className={classes.draw}>
+                            <Checkbox checked={progress.writing} className={classes.alignRight} />
+                            <div className={classes.drawIconDiv}></div>
+                            <Link to={`/kids-dashboard/points-dashboard`}>
+                                <Typography className={classes.linkFont}>Draw</Typography>
+                            </Link>
+                        </div>
                     </div>
-                </div>
-            </section>
-        </Card>
+                </section>
+            </Card>
+        </>
     );
 };
 export { KidProgressCard };

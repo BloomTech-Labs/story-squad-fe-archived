@@ -25,9 +25,10 @@ import Draw1 from './img/draw1.gif';
 import Draw2 from './img/draw2.jpg';
 import Draw3 from './img/draw3.jpg';
 import Draw4 from './img/draw4.jpg';
-import ava1 from './img/dag.jpg';
-import ava2 from './img/dag2.jpg';
+import ava1 from './img/cam.png';
+import ava2 from './img/other.png';
 import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
+import splode from './img/splode.png';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -117,7 +118,7 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: '18px',
             fontWeight: 'bold',
             backgroundColor: '#B5D33D',
-            padding: '46px',
+            padding: '6px',
             borderLeft: '7px solid #000000',
             borderTop: '7px solid #000000',
             borderRight: '7px solid #000000',
@@ -127,7 +128,7 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: '18px',
             fontWeight: 'bold',
             backgroundColor: '#B5D33D',
-            padding: '65px 30px 25px 25px',
+            padding: '10px',
             borderLeft: '7px solid #000000',
             borderRight: '7px solid #000000',
         },
@@ -145,6 +146,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         orangeButton: {
             'marginTop': '40px',
+            'marginBottom': '40px',
             'backgroundColor': '#FF6B35',
             'fontSize': '24px',
             'fontWeight': 'bold',
@@ -160,8 +162,12 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         pointInput: {
-            width: '250px',
-            fontFamily: 'nunito',
+            'width': '250px',
+            'fontFamily': 'Bangers',
+            'fontSize': '48px',
+            'fontWeight': 'bold',
+            '-webkit-text-stroke-width': '1px',
+            '-webkit-text-stroke-color': '#000000',
         },
         imagePreview: {
             width: '250px',
@@ -173,20 +179,26 @@ const useStyles = makeStyles((theme: Theme) =>
             marginTop: '8px',
         },
         h2Styling: {
-            fontSize: '48px',
-            fontFamily: 'bangers',
-            fontWeight: 'bold',
+            'fontFamily': 'Bangers',
+            'fontSize': '86px',
+            'fontWeight': 'bold',
+            '-webkit-text-stroke-width': '1px',
+            '-webkit-text-stroke-color': '#000000',
         },
         h3Styling: {
-            fontSize: '36px',
-            fontFamily: 'bangers',
-            fontWeight: 'bold',
+            'fontFamily': 'Bangers',
+            'fontSize': '48px',
+            'fontWeight': 'bold',
+            '-webkit-text-stroke-width': '1px',
+            '-webkit-text-stroke-color': '#000000',
         },
         avatarStyling: {
             marginTop: '25px',
-            width: '250px',
-            height: '100px',
-            borderRadius: '14px',
+            width: '215px',
+            height: '180px',
+            backgroundImage: `url(${splode})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '101% 103%',
         },
         red: {
             color: 'red',
@@ -202,7 +214,13 @@ const useStyles = makeStyles((theme: Theme) =>
             backgroundSize: '101% 103%',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center',
+        },
+        headerFont: {
+            'fontFamily': 'Bangers',
+            'fontSize': '48px',
+            'fontWeight': 'bold',
+            '-webkit-text-stroke-width': '1px',
+            '-webkit-text-stroke-color': '#ff6d3a',
         },
     })
 );
@@ -268,8 +286,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
             <div className={classes.root}>
                 <AppBar position='static' className={classes.appBar}>
                     <Toolbar className={classes.centerText}>
-                        <Typography className={classes.h2Styling}>Point Share</Typography>
-                        <Typography className={classes.h3Styling}>
+                        <Typography className={classes.h2Styling} variant='h2'>
+                            Point Share
+                        </Typography>
+                        <Typography className={classes.h3Styling} variant='h3'>
                             Total Points Remaining:
                             {remainingPoints < 0 || remainingPoints > 100 ? (
                                 <div className={classes.red}>Total must equal 100</div>
@@ -297,7 +317,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 spacing={1}
                                 className={classes.avatarMargin}>
                                 {/* Avatar 1 */}
-                                <Avatar src={ava1} className={classes.avatarStyling} />
+                                <img src={ava1} className={classes.avatarStyling} />
                                 {/* Username 1 */}
                                 <>
                                     <br />
@@ -426,7 +446,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 spacing={1}
                                 className={classes.avatarMargin2}>
                                 {/* Avatar 2 */}
-                                <Avatar src={ava2} className={classes.avatarStyling} />
+                                <img src={ava2} className={classes.avatarStyling} />
                                 {/* Username 2 */}
                                 <>
                                     <br />

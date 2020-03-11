@@ -8,6 +8,9 @@
         "test": "react-app-rewired test",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
     },
+    "engines": {
+        "node": "12.14.x"
+    },
     "dependencies": {
         "@material-ui/core": "4.8.3",
         "@material-ui/lab": "4.0.0-alpha.39",

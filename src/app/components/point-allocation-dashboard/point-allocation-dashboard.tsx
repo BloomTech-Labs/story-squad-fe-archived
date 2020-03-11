@@ -205,8 +205,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         appBar: {
             height: '229px',
-            width: '1208px',
-            margin: '0 auto',
+            width: '100%',
             backgroundColor: '#6CEAE6',
             backgroundImage: `url(${cityscape})`,
             backgroundRepeat: 'no-repeat',
@@ -282,29 +281,29 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
 
     return (
         <div>
-            {/* Header code */}
-            <div className={classes.root}>
-                <AppBar position='static' className={classes.appBar}>
-                    <Toolbar className={classes.centerText}>
-                        <Typography className={classes.h2Styling} variant='h2'>
-                            Point Share
-                        </Typography>
-                        <Typography className={classes.h3Styling} variant='h3'>
-                            Total Points Remaining:
-                            {remainingPoints < 0 || remainingPoints > 100 ? (
-                                <div className={classes.red}>Total must equal 100</div>
-                            ) : (
-                                <div>{remainingPoints}</div>
-                            )}
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-            </div>
-            {/* End header code  */}
             {/* Container for avatars + inputs + buttons */}
             <ValidatorForm onSubmit={handleSubmit} onError={(errors) => console.log(errors)}>
                 <Container className={classes.containerStyling}>
                     <Grid container spacing={1}>
+                        {/* Header code */}
+                        <Grid container direction='row' className={classes.appBar}>
+                            <Grid container item sm={12} spacing={1}>
+                                <Toolbar className={classes.centerText}>
+                                    <Typography className={classes.h2Styling} variant='h2'>
+                                        Point Share
+                                    </Typography>
+                                    <Typography className={classes.h3Styling} variant='h3'>
+                                        Total Points Remaining:
+                                        {remainingPoints < 0 || remainingPoints > 100 ? (
+                                            <div className={classes.red}>Total must equal 100</div>
+                                        ) : (
+                                            <div>{remainingPoints}</div>
+                                        )}
+                                    </Typography>
+                                </Toolbar>
+                            </Grid>
+                        </Grid>
+                        {/* End header code  */}
                         {/* Row 1 */}
                         <Grid container direction='row' justify='center' alignItems='center'>
                             <Grid

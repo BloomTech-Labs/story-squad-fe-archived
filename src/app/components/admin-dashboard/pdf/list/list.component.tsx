@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import requestFactory from '../../../../util/requestFactory';
 
 import {
     Button,
@@ -39,16 +39,27 @@ interface Canon {
 const PdfList: React.FC<PdfListProps> = ({ className }) => {
     const classes = useStyles({});
     const [canonResponse] = useAPI<{ canon: Canon[] }>('/canon');
-    const [matchResponse, matchLoading, matchRequest, matchError] = useAPI<any>('/matchmaking');
+    const [matchResponse, matchLoading, matchRequest, matchError] = useAPI<any>(`/matchmaking`);
+
+    const { matches } = matchResponse;
 
     if (!canonResponse?.canon) return <h4 className={classes.loading}>Loading...</h4>;
 
     const { canon } = canonResponse;
 
     //matchmaking 3.11.20
-
-    const handleMatchmake = (ev) => {
+    const baseURL = process.env.REACT_APP_ENDPOINT || 'http://localhost:4000';
+    const handleMatchmake = (week: number) => (ev) => {
         ev.preventDefault();
+
+        requestFactory()
+            .get(`${baseURL}/matchmaking`)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (
@@ -85,7 +96,7 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                                 {pdf.altbase64 ? 'TO DO: link to view pdf' : 'None'}
                             </TableCell>
                             <TableCell>
-                                <button onClick={handleMatchmake}>boop</button>
+                                <button onClick={() => handleMatchmake(pdf.week)}>boop</button>
                             </TableCell>
                         </TableRow>
                     ))}

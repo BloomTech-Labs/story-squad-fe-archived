@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'space-evenly',
         minHeight: 400,
+        marginTop: '-100px',
     },
     checkboxes: {
         display: 'flex',
@@ -43,6 +44,12 @@ const useStyles = makeStyles((theme) => ({
         left: '50%',
         marginTop: -12,
         marginLeft: -12,
+    },
+    signInBtn: {
+        backgroundColor: '#007AFF',
+        borderRadius: '14px',
+        fontFamily: 'nunito',
+        color: 'white',
     },
 }));
 
@@ -81,10 +88,6 @@ const SignUp: React.FC = () => {
     const { email, password, comparePassword, termsOfService, privacyPolicy } = state;
     return (
         <>
-            <Typography variant='h3' gutterBottom>
-                Sign Up
-            </Typography>
-            <Typography variant='subtitle2'>Start your child reading stories today!</Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
                 <TextField
                     fullWidth
@@ -132,8 +135,8 @@ const SignUp: React.FC = () => {
                         disabled={loading}
                         type='submit'
                         variant='contained'
-                        color='primary'
-                        size='large'>
+                        size='large'
+                        className={classes.signInBtn}>
                         Sign Up
                     </Button>
                     {loading && <CircularProgress size={24} className={classes.buttonProgress} />}

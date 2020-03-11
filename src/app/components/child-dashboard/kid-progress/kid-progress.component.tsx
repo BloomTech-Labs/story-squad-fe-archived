@@ -169,6 +169,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        border: '7px solid black',
     },
     spacer: {
         flexGrow: 1,
@@ -187,6 +188,10 @@ const useStyles = makeStyles((theme) => ({
     },
     welcome: {
         marginBottom: theme.spacing(2),
+    },
+    columnFlex: {
+        display: 'flex',
+        flexDirection: 'column',
     },
     toolbar: theme.mixins.toolbar,
 }));
@@ -214,38 +219,42 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
 
     return (
         <>
-            <div className={classes.root}>
-                <AppBar position='fixed' className={classes.appBar}>
-                    <Toolbar>
-                        <div className={classes.headerFont}>Mission</div>
-                    </Toolbar>
-                </AppBar>
-            </div>
             <Card className={classes.card}>
-                <section className={classes.grid}>
-                    <div className={classes.read}>
-                        <Checkbox checked={progress.reading} className={classes.alignRight} />
-                        <div className={classes.readIconDiv}></div>
-                        <Link
-                            to={`/story/${cohort.week}`}
-                            onClick={() => request({ reading: true })}>
-                            <Typography className={classes.linkFont}>Read</Typography>
-                        </Link>
+                <section className={classes.columnFlex}>
+                    <div className={classes.appBar}>
+                        <div className={classes.headerFont}>Mission</div>
                     </div>
-                    <div className={classes.writeDrawDiv}>
-                        <div className={classes.write}>
-                            <Checkbox checked={progress.writing} className={classes.alignRight} />
-                            <div className={classes.writeIconDiv}></div>
-                            <Link to={`/kids-dashboard/upload`}>
-                                <Typography className={classes.linkFont}>Write</Typography>
+                    <div className={classes.grid}>
+                        <div className={classes.read}>
+                            <Checkbox checked={progress.reading} className={classes.alignRight} />
+                            <div className={classes.readIconDiv}></div>
+                            <Link
+                                to={`/story/${cohort.week}`}
+                                onClick={() => request({ reading: true })}>
+                                <Typography className={classes.linkFont}>Read</Typography>
                             </Link>
                         </div>
-                        <div className={classes.draw}>
-                            <Checkbox checked={progress.writing} className={classes.alignRight} />
-                            <div className={classes.drawIconDiv}></div>
-                            <Link to={`/kids-dashboard/points-dashboard`}>
-                                <Typography className={classes.linkFont}>Draw</Typography>
-                            </Link>
+                        <div className={classes.writeDrawDiv}>
+                            <div className={classes.write}>
+                                <Checkbox
+                                    checked={progress.writing}
+                                    className={classes.alignRight}
+                                />
+                                <div className={classes.writeIconDiv}></div>
+                                <Link to={`/kids-dashboard/upload`}>
+                                    <Typography className={classes.linkFont}>Write</Typography>
+                                </Link>
+                            </div>
+                            <div className={classes.draw}>
+                                <Checkbox
+                                    checked={progress.writing}
+                                    className={classes.alignRight}
+                                />
+                                <div className={classes.drawIconDiv}></div>
+                                <Link to={`/kids-dashboard/points-dashboard`}>
+                                    <Typography className={classes.linkFont}>Draw</Typography>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </section>

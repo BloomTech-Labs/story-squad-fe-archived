@@ -5,10 +5,12 @@ import { Grid, Paper, Tab, Tabs, Typography, useMediaQuery } from '@material-ui/
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import { SignIn, SignUp } from '../../components';
+import cityscape from './cityscape.png';
+import 'typeface-nunito';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: `linear-gradient(-30deg, #64b5f6, #512da8)`,
+        background: `white`,
     },
     sidebar: {
         paddingTop: theme.spacing(6),
@@ -18,11 +20,27 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 0,
     },
     title: {
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexGrow: 1,
+        'fontFamily': 'bangers',
+        'fontSize': '72px',
+        'color': '#ffffff',
+        '-webkit-text-stroke-width': '3px',
+        '-webkit-text-stroke-color': '#292929',
+        'textAlign': 'center',
+        'width': '100%',
+        'height': '200px',
+        'backgroundColor': '#6CEAE6',
+        'backgroundImage': `url(${cityscape})`,
+    },
+    fontOverride: {
+        fontFamily: 'nunito',
+    },
+    introText: {
+        margin: '0 auto',
+        width: '60%',
+        color: '#292929',
+        fontSize: '24px',
+        fontFamily: 'nunito',
+        fontWeight: 'lighter',
     },
     tabs: {
         paddingRight: theme.spacing(4),
@@ -73,11 +91,27 @@ const SignUpPage: React.FC = () => {
             justify='flex-end'
             alignItems='stretch'>
             {md && (
-                <Grid className={classes.title} item>
-                    <Typography variant='h1' component='h1' gutterBottom>
+                <>
+                    <Grid className={classes.title} item>
                         Story Squad
-                    </Typography>
-                </Grid>
+                    </Grid>
+                    <div className={classes.introText}>
+                        <p>
+                            Story Squad is a game where imagination comes to play. It’s where
+                            generating ideas scores big.{' '}
+                        </p>
+                        <p>
+                            Story Squad springs storytellers into action by partnering them up to
+                            participate in interactive & immersive creative challenges.{' '}
+                        </p>
+                        <p>
+                            Become a master of your craft by submitting original drawings &
+                            handwritten stories, receiving and giving real feedback, sharing points
+                            in a squad-vs-squad matchup, and finally see if you won.{' '}
+                        </p>
+                        <p>Ready?</p>
+                    </div>
+                </>
             )}
 
             <Grid item xs={md ? undefined : 12}>
@@ -89,8 +123,8 @@ const SignUpPage: React.FC = () => {
                         indicatorColor='primary'
                         textColor='primary'
                         variant='fullWidth'>
-                        <Tab value='/' label='Sign In' />
-                        <Tab value='/signup' label='Sign Up' />
+                        <Tab value='/' className={classes.fontOverride} label='Sign In' />
+                        <Tab value='/signup' className={classes.fontOverride} label='Sign Up' />
                     </Tabs>
                     <div className={classes.onboarding}>
                         <Switch>

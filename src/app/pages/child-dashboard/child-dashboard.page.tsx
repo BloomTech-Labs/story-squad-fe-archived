@@ -4,7 +4,14 @@ import { AppBar, Button, CircularProgress, Toolbar, Typography } from '@material
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI } from '../../hooks';
-import { WelcomeCard, KidProgressCard, CCSForm, PointDashboard } from '../../components';
+import {
+    WelcomeCard,
+    KidProgressCard,
+    CCSForm,
+    PointDashboard,
+    DrawingForm,
+    StoryForm,
+} from '../../components';
 import { Switch, Route } from 'react-router-dom';
 import 'typeface-bangers';
 
@@ -64,7 +71,19 @@ const ChildDashboard: React.FC = () => {
                 <Switch>
                     <Route
                         path='/kids-dashboard/upload'
-                        render={() => <CCSForm week={response.me.cohort.week} onUpdate={request} />}
+                        render={() => (
+                            <StoryForm week={response.me.cohort.week} onUpdate={request} />
+                        )}
+                    />
+                    <Route
+                        path='/kids-dashboard/drawing-upload'
+                        render={() => (
+                            <DrawingForm week={response.me.cohort.week} onUpdate={request} />
+                        )}
+                    />
+                    <Route
+                        path='/kids-dashboard/points-dashboard'
+                        render={() => <PointDashboard child={response.me} />}
                     />
                     <Route
                         path='/kids-dashboard/points-dashboard'

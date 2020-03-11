@@ -91,17 +91,7 @@ const ChildList: React.FC<ChildListProps> = ({ className, list }) => {
                 <Typography className={classes.headerFont}>Story Squad</Typography>
             </section>
 
-            {list.length === 0 && (
-                <section className={classes.empty}>
-                    <Icon color='disabled' fontSize='large'>
-                        child_care
-                    </Icon>
-                    <Typography variant='subtitle1'>0 Child Accounts</Typography>
-                    <Link to='/dashboard/child/create'>
-                        <Button>Add Child</Button>
-                    </Link>
-                </section>
-            )}
+            {list.length === 0 && <section className={classes.empty}></section>}
 
             <section className={classes.list}>
                 {list.map((child) => (

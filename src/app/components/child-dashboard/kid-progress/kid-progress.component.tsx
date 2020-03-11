@@ -1,22 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-
-import {
-    Card,
-    CardHeader,
-    Button,
-    Typography,
-    LinearProgress,
-    Checkbox,
-    Divider,
-    useMediaQuery,
-    Toolbar,
-    CircularProgress,
-    AppBar,
-} from '@material-ui/core';
+import { Card, Button, Typography, Checkbox } from '@material-ui/core';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
 import 'typeface-bangers';
@@ -66,13 +52,14 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
     },
     orangeButton: {
+        'alignItems': 'right',
         'marginTop': '20px',
         'backgroundColor': '#FF6B35',
         'fontSize': '24px',
         'fontWeight': 'bold',
         'borderRadius': '50px',
         'color': 'white',
-        'width': '200px',
+        'width': '300px',
         'height': '50px',
         'boxShadow': '0px 8px 0px #97300A',
         'textTransform': 'capitalize',
@@ -191,6 +178,9 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
     },
+    button: {
+        margin: '0 auto',
+    },
     toolbar: theme.mixins.toolbar,
 }));
 
@@ -249,7 +239,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                     className={classes.alignRight}
                                 />
                                 <div className={classes.drawIconDiv}></div>
-                                <Link to={`/kids-dashboard/points-dashboard`}>
+                                <Link to={`/kids-dashboard/drawing-upload`}>
                                     <Typography className={classes.linkFont}>Draw</Typography>
                                 </Link>
                             </div>
@@ -257,6 +247,14 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
                 </section>
             </Card>
+            <div className={classes.button}>
+                <Link to={`/kids-dashboard/points-dashboard`}>
+                    <Button className={classes.orangeButton} type='button'>
+                        Assign Team points!
+                    </Button>
+                </Link>
+            </div>
+
         </>
     );
 };

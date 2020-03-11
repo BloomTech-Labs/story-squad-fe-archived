@@ -15,6 +15,12 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-evenly',
         minHeight: 300,
     },
+    welcomeText: {
+        fontSize: '36px',
+        color: 'rgba(60, 60, 67, 0.6)',
+        fontFamily: 'nunito',
+        marginTop: '-60px',
+    },
     wrapper: {
         margin: theme.spacing(1),
         position: 'relative',
@@ -42,6 +48,15 @@ const useStyles = makeStyles((theme) => ({
     checkboxes: {
         display: 'flex',
         flexDirection: 'column',
+    },
+    signInBtn: {
+        backgroundColor: '#007AFF',
+        borderRadius: '14px',
+        fontFamily: 'nunito',
+    },
+    fontOverride: {
+        fontFamily: 'nunito',
+        textTransform: 'none',
     },
 }));
 
@@ -76,13 +91,16 @@ const SignIn: React.FC = () => {
     const { email, password } = state;
     return (
         <>
-            <Typography variant='h3'>Welcome Back!</Typography>
+            <div className={classes.welcomeText}>
+                Welcome! <br /> Sign in to continue
+            </div>
             <form className={classes.form} onSubmit={handleSubmit}>
                 <TextField
                     fullWidth
                     type='email'
                     label='Email'
                     value={email}
+                    className={classes.fontOverride}
                     onChange={handleStringChange('email')}
                 />
                 <TextField
@@ -90,6 +108,7 @@ const SignIn: React.FC = () => {
                     type='password'
                     label='Password'
                     value={password}
+                    className={classes.fontOverride}
                     onChange={handleStringChange('password')}
                 />
                 <div className={classes.wrapper}>
@@ -99,7 +118,8 @@ const SignIn: React.FC = () => {
                         type='submit'
                         variant='contained'
                         color='primary'
-                        size='large'>
+                        size='large'
+                        className={classes.signInBtn}>
                         Sign In
                     </Button>
                     {loading && <CircularProgress size={24} className={classes.buttonProgress} />}

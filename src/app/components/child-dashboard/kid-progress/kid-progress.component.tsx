@@ -241,7 +241,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                     className={classes.alignRight}
                                 />
                                 <div className={classes.drawIconDiv}></div>
-                                <Link to={`/kids-dashboard/points-dashboard`}>
+                                <Link to={`/kids-dashboard/drawing-upload`}>
                                     <Typography className={classes.linkFont}>Draw</Typography>
                                 </Link>
                             </div>

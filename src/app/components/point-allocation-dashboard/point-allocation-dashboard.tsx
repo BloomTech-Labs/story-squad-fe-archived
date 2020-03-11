@@ -108,7 +108,7 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: '18px',
             fontWeight: 'bold',
             backgroundColor: '#B5D33D',
-            padding: '6px',
+            padding: '26px 6px 11px 6px',
             borderLeft: '14px solid #000000',
             borderTop: '7px solid #000000',
         },
@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: '18px',
             fontWeight: 'bold',
             backgroundColor: '#B5D33D',
-            padding: '10px 9px 9px 9px',
+            padding: '25px 9px 19px 9px',
             borderLeft: '14px solid #000000',
         },
         avatarMargin3: {
@@ -200,12 +200,25 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             justifyContent: 'center',
         },
-        headerFont: {
+        username1: {
+            'position': 'absolute',
+            'top': '420px',
             'fontFamily': 'Bangers',
+            'color': '#FFFFFF',
             'fontSize': '48px',
             'fontWeight': 'bold',
             '-webkit-text-stroke-width': '1px',
-            '-webkit-text-stroke-color': '#ff6d3a',
+            '-webkit-text-stroke-color': '#000000',
+        },
+        username2: {
+            'position': 'absolute',
+            'top': '798px',
+            'fontFamily': 'Bangers',
+            'color': '#FFFFFF',
+            'fontSize': '48px',
+            'fontWeight': 'bold',
+            '-webkit-text-stroke-width': '1px',
+            '-webkit-text-stroke-color': '#000000',
         },
     })
 );
@@ -303,7 +316,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 {/* Username 1 */}
                                 <>
                                     <br />
-                                    {child.username}
+                                    <p className={classes.username1}>{child.username}</p>
                                 </>
                             </Grid>
                             <Grid
@@ -426,9 +439,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 {/* Username 2 */}
                                 <>
                                     <br />
-                                    Teammate
+                                    <p className={classes.username2}>Teammate</p>
                                 </>
                             </Grid>
+
                             <Grid
                                 container
                                 item

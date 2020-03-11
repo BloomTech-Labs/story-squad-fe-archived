@@ -282,7 +282,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
             {/* Container for avatars + inputs + buttons */}
             <ValidatorForm onSubmit={handleSubmit} onError={(errors) => console.log(errors)}>
                 <Container className={classes.containerStyling}>
-                    <Grid container spacing={1}>
+                    <Grid container>
                         {/* Header code */}
                         <Grid container direction='row' className={classes.appBar}>
                             <Grid container item justify='space-around' alignItems='center'>
@@ -309,7 +309,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 direction='column'
                                 alignItems='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.avatarMargin}>
                                 {/* Avatar 1 */}
                                 <img src={ava1} className={classes.avatarStyling} />
@@ -325,7 +324,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 justify='center'
                                 alignItems='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.gridRow1}>
                                 {/* Story 1 Preview */}
                                 <img
@@ -341,7 +339,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 justify='center'
                                 alignItems='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.gridRow2}>
                                 {/* Drawing 1 preview */}
                                 <img
@@ -360,14 +357,12 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 item
                                 justify='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.avatarMargin4}></Grid>
                             <Grid
                                 container
                                 item
                                 justify='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.gridInput1}>
                                 {/* Story 1 input */}
                                 <TextValidator
@@ -400,7 +395,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 item
                                 justify='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.gridInput2}>
                                 {/* Drawing 1 input */}
                                 <TextValidator
@@ -438,7 +432,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 direction='column'
                                 alignItems='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.avatarMargin2}>
                                 {/* Avatar 2 */}
                                 <img src={ava2} className={classes.avatarStyling} />
@@ -454,7 +447,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 justify='center'
                                 alignItems='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.gridRow3}>
                                 {/* Story 2 Preview */}
                                 <img
@@ -470,7 +462,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 justify='center'
                                 alignItems='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.gridRow4}>
                                 {/* Drawing 2 Preview */}
                                 <img
@@ -489,14 +480,12 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 item
                                 justify='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.avatarMargin3}></Grid>
                             <Grid
                                 container
                                 item
                                 justify='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.gridInput3}>
                                 {/* Story 2 Input */}
                                 <TextValidator
@@ -529,7 +518,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 item
                                 justify='center'
                                 sm={4}
-                                // spacing={1}
                                 className={classes.gridInput4}>
                                 {/* Drawing 2 Input */}
                                 <TextValidator

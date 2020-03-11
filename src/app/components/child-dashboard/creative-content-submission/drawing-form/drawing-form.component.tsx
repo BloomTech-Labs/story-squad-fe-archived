@@ -83,7 +83,9 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        border: '7px solid black',
+
+        borderBottom: '7px solid #000000',
+        borderTop: '7px solid #000000',
     },
     headerFont: {
         'fontFamily': 'Bangers',
@@ -185,7 +187,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     const { illustration } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
-            <Card>
+            <Card className={classes.card}>
                 <div className={classes.appBar}>
                     <div className={classes.headerFont}>Ready, Set... DRAW!</div>
                 </div>

@@ -83,7 +83,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        border: '7px solid black',
+        borderBottom: '7px solid #000000',
+        borderTop: '7px solid #000000',
     },
     headerFont: {
         'fontFamily': 'Bangers',
@@ -243,7 +244,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-                {submitting && <CircularProgress size={68} className={classes.buttonProgress} />}
+                {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
             </div>
         </form>
     );

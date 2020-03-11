@@ -254,7 +254,6 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </Button>
                 </Link>
             </div>
-
         </>
     );
 };

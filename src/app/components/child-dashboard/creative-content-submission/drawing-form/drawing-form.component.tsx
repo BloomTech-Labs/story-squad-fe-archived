@@ -83,7 +83,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-
         borderBottom: '7px solid #000000',
         borderTop: '7px solid #000000',
     },

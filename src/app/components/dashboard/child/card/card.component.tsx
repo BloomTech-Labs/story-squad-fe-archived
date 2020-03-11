@@ -15,9 +15,18 @@ import { green } from '@material-ui/core/colors';
 
 import { Child } from '../../../../models';
 import { useAPI } from '../../../../hooks';
+import avatar from './avatars/Hero19.png';
 
 const useStyles = makeStyles((theme) => ({
-    card: {},
+    card: {
+        width: '340px',
+        borderRadius: '15px',
+        backgroundColor: '#D0F2EC',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     statusIcons: {
         display: 'flex',
         justifyContent: 'space-around',
@@ -66,6 +75,27 @@ const useStyles = makeStyles((theme) => ({
         marginTop: -24,
         marginLeft: -12,
     },
+    avatarDiv: {
+        height: '150px',
+        width: '100px',
+        backgroundImage: `url(${avatar})`,
+        backgroundSize: 'cover',
+        display: 'inline-block',
+    },
+    childProgBtn: {
+        fontSize: '30px',
+        fontFamily: 'bangers',
+        color: 'white',
+        backgroundColor: '#007AFF',
+        borderRadius: '14px',
+        padding: '0 20px',
+    },
+    usernameDiv: {
+        fontFamily: 'nunito',
+        fontSize: '36px',
+        display: 'inline-block',
+        marginLeft: '10px',
+    },
 }));
 
 interface ChildCardProps {
@@ -87,34 +117,19 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
 
     return (
         <Card className={classes.card}>
-            <CardHeader
-                className={classes.header}
-                title={
-                    <section className={classes.titleBar}>
-                        <div className={classes.progress}>
-                            <CircularProgress
-                                className={classes.progressBackground}
-                                color='inherit'
-                                variant='static'
-                                value={100}
-                            />
-                        </div>
-                        <Typography className={classes.title} variant='h5'>
-                            {child.username}
-                        </Typography>
-                    </section>
-                }
-            />
             <CardContent>
-                <Typography variant='h5'>Week {child.cohort.week} Progress</Typography>
-
-                <Typography variant='subtitle1'>2/5 lessons completed this week</Typography>
+                <div className={classes.avatarDiv}></div>{' '}
+                <div className={classes.usernameDiv}>{child.username}</div>
             </CardContent>
             <CardActions className={classes.actions}>
                 <div className={classes.wrapper}>
                     {child.subscription === true ? (
-                        <Button fullWidth disabled={loading} onClick={() => request()}>
-                            View Account
+                        <Button
+                            className={classes.childProgBtn}
+                            fullWidth
+                            disabled={loading}
+                            onClick={() => request()}>
+                            {child.username}'s Progress
                         </Button>
                     ) : (
                         <Link to={`/dashboard/subscribe/${child.id}`}>

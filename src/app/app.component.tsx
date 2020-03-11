@@ -17,6 +17,7 @@ import {
     AdminSignUpPage,
     ErrorPage,
 } from './pages';
+import { PointDashboard } from './components/point-allocation-dashboard';
 
 const App: React.FC = () => {
     return (

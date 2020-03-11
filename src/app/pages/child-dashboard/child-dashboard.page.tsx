@@ -4,8 +4,9 @@ import { AppBar, Button, CircularProgress, Toolbar, Typography } from '@material
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI } from '../../hooks';
-import { WelcomeCard, KidProgressCard, CCSForm } from '../../components';
+import { WelcomeCard, KidProgressCard, CCSForm, PointDashboard } from '../../components';
 import { Switch, Route } from 'react-router-dom';
+import 'typeface-bangers';
 
 const useStyles = makeStyles((theme) => ({
     loading: {
@@ -14,13 +15,19 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         minHeight: '100vh',
     },
+    headerFont: {
+        'fontFamily': 'Bangers',
+        'fontSize': '86px',
+        'fontWeight': 'bold',
+        '-webkit-text-stroke-width': '1px',
+        '-webkit-text-stroke-color': '#ff6d3a',
+    },
+    headerBorder: {
+        border: '4px solid #292929',
+    },
     root: {
         display: 'flex',
         flexDirection: 'column',
-    },
-    appBar: {},
-    spacer: {
-        flexGrow: 1,
     },
     main: {
         display: 'flex',
@@ -53,30 +60,20 @@ const ChildDashboard: React.FC = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position='fixed' className={classes.appBar}>
-                <Toolbar>
-                    <Typography variant='h6' noWrap>
-                        Kid's Dashboard
-                    </Typography>
-                    <div className={classes.spacer} />
-                    <Button onClick={logout} color='inherit'>
-                        Logout
-                    </Button>
-                </Toolbar>
-            </AppBar>
             <main className={classes.main}>
-                <div className={classes.toolbar} />
-
                 <Switch>
                     <Route
                         path='/kids-dashboard/upload'
                         render={() => <CCSForm week={response.me.cohort.week} onUpdate={request} />}
                     />
                     <Route
+                        path='/kids-dashboard/points-dashboard'
+                        render={() => <PointDashboard child={response.me} />}
+                    />
+                    <Route
                         path='/'
                         render={() => (
                             <div className={classes.content}>
-                                <WelcomeCard className={classes.welcome} child={response.me} />
                                 <KidProgressCard child={response.me} onUpdate={request} />
                             </div>
                         )}

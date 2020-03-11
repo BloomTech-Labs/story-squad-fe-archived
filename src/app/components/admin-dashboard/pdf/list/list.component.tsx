@@ -39,9 +39,6 @@ interface Canon {
 const PdfList: React.FC<PdfListProps> = ({ className }) => {
     const classes = useStyles({});
     const [canonResponse] = useAPI<{ canon: Canon[] }>('/canon');
-    const [matchResponse, matchLoading, matchRequest, matchError] = useAPI<any>(`/matchmaking`);
-
-    const { matches } = matchResponse;
 
     if (!canonResponse?.canon) return <h4 className={classes.loading}>Loading...</h4>;
 
@@ -49,9 +46,8 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
 
     //matchmaking 3.11.20
     const baseURL = process.env.REACT_APP_ENDPOINT || 'http://localhost:4000';
-    const handleMatchmake = (week: number) => (ev) => {
-        ev.preventDefault();
-
+    const handleMatchmake = (week: number) => {
+        console.log('sending matchmake');
         requestFactory()
             .get(`${baseURL}/matchmaking`)
             .then((res) => {

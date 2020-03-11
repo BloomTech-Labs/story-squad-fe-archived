@@ -86,6 +86,10 @@ const ChildDashboard: React.FC = () => {
                         render={() => <PointDashboard child={response.me} />}
                     />
                     <Route
+                        path='/kids-dashboard/points-dashboard'
+                        render={() => <PointDashboard child={response.me} />}
+                    />
+                    <Route
                         path='/'
                         render={() => (
                             <div className={classes.content}>

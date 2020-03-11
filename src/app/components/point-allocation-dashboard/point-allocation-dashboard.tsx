@@ -442,7 +442,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     <p className={classes.username2}>Teammate</p>
                                 </>
                             </Grid>
-
                             <Grid
                                 container
                                 item

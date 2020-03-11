@@ -1,10 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-
 import { Card, Button, Typography, Checkbox } from '@material-ui/core';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
 import 'typeface-bangers';
@@ -256,6 +254,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </Button>
                 </Link>
             </div>
+
         </>
     );
 };

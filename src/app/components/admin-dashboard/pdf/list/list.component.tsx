@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import {
     Button,
@@ -37,11 +38,18 @@ interface Canon {
 
 const PdfList: React.FC<PdfListProps> = ({ className }) => {
     const classes = useStyles({});
-    const [response] = useAPI<{ canon: Canon[] }>('/canon');
+    const [canonResponse] = useAPI<{ canon: Canon[] }>('/canon');
+    const [matchResponse, matchLoading, matchRequest, matchError] = useAPI<any>('/matchmaking');
 
-    if (!response?.canon) return <h4 className={classes.loading}>Loading...</h4>;
+    if (!canonResponse?.canon) return <h4 className={classes.loading}>Loading...</h4>;
 
-    const { canon } = response;
+    const { canon } = canonResponse;
+
+    //matchmaking 3.11.20
+
+    const handleMatchmake = (ev) => {
+        ev.preventDefault();
+    };
 
     return (
         <div className={className}>
@@ -72,6 +80,12 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                             </TableCell>
                             <TableCell>
                                 {pdf.altbase64 ? 'TO DO: link to view pdf' : 'None'}
+                            </TableCell>
+                            <TableCell>
+                                {pdf.altbase64 ? 'TO DO: link to view pdf' : 'None'}
+                            </TableCell>
+                            <TableCell>
+                                <button onClick={handleMatchmake}>boop</button>
                             </TableCell>
                         </TableRow>
                     ))}

@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
         borderRight: '7px solid #000000',
     },
     content: {
-        display: 'grid',
-        gridGap: theme.spacing(3),
+        display: 'flex',
+        flexDirection: 'column',
     },
     form: {
         margin: '0 auto',
@@ -191,12 +191,12 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                 <div className={classes.appBar}>
                     <div className={classes.headerFont}>Ready, Set... DRAW!</div>
                 </div>
-                <CardHeader
+                {/* <CardHeader
                     className={classes.header}
                     title='Draw your favorite part of the story!'
-                />
+                /> */}
                 <CardContent className={classes.content}>
-                    <Typography variant='h6'>Illustration Submission</Typography>
+                    <Typography variant='h6'>Draw your favorite part of the story!</Typography>
                     <TextField
                         InputLabelProps={{ shrink: true }}
                         label='Artwork or Comic'

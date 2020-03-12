@@ -49,7 +49,7 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
     const handleMatchmake = (week: number) => {
         console.log('sending matchmake');
         requestFactory()
-            .get(`${baseURL}/matchmaking`)
+            .get(`${baseURL}/matchmaking/${week}`)
             .then((res) => {
                 console.log(res);
             })
@@ -73,6 +73,7 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
             <Table>
                 <TableHead>
                     <TableRow>
+                        <TableCell></TableCell>
                         <TableCell>Week #</TableCell>
                         <TableCell>Default PDF</TableCell>
                         <TableCell>Dyslexic PDF</TableCell>
@@ -81,18 +82,15 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                 <TableBody>
                     {canon.map((pdf) => (
                         <TableRow key={pdf.week}>
+                            <TableCell>
+                                <Button onClick={() => handleMatchmake(pdf.week)}>boop</Button>
+                            </TableCell>
                             <TableCell>{pdf.week}</TableCell>
                             <TableCell>
                                 <Link to={`/story/${pdf.week}`}>View</Link>
                             </TableCell>
                             <TableCell>
                                 {pdf.altbase64 ? 'TO DO: link to view pdf' : 'None'}
-                            </TableCell>
-                            <TableCell>
-                                {pdf.altbase64 ? 'TO DO: link to view pdf' : 'None'}
-                            </TableCell>
-                            <TableCell>
-                                <button onClick={() => handleMatchmake(pdf.week)}>boop</button>
                             </TableCell>
                         </TableRow>
                     ))}

@@ -6,9 +6,9 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
 import 'typeface-bangers';
-import picIcon from './icons/pic.png';
-import readIcon from './icons/read.png';
-import writeIcon from './icons/write.png';
+import picIcon from './icons/Draw.png';
+import readIcon from './icons/Read.png';
+import writeIcon from './icons/Write.png';
 import cityscape from './icons/cityscape.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -68,6 +68,23 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#FF6B35',
         },
     },
+    logoutButton: {
+        'alignItems': 'right',
+        'marginTop': '20px',
+        'backgroundColor': '#FF6B35',
+        'fontSize': '24px',
+        'fontWeight': 'bold',
+        'borderRadius': '50px',
+        'color': 'white',
+        'width': '100px',
+        'height': '50px',
+        'boxShadow': '0px 8px 0px #97300A',
+        'textTransform': 'capitalize',
+        'fontFamily': 'nunito',
+        '&:hover': {
+            backgroundColor: '#FF6B35',
+        },
+    },
     read: {
         backgroundColor: '#B5D33D',
         width: '40%',
@@ -106,19 +123,22 @@ const useStyles = makeStyles((theme) => ({
         width: '60%',
     },
     drawIconDiv: {
-        width: '100px',
-        height: '88px',
+        width: '210px',
+        height: '210px',
         backgroundImage: `url(${picIcon})`,
+        backgroundRepeat: 'no-repeat',
     },
     readIconDiv: {
-        width: '100px',
-        height: '78px',
+        width: '180px',
+        height: '200px',
         backgroundImage: `url(${readIcon})`,
+        backgroundRepeat: 'no-repeat',
     },
     writeIconDiv: {
-        width: '100px',
-        height: '110px',
+        width: '210px',
+        height: '210px',
         backgroundImage: `url(${writeIcon})`,
+        backgroundRepeat: 'no-repeat',
     },
     alignRight: {
         alignSelf: 'flex-end',
@@ -192,6 +212,7 @@ interface KidProgressProps {
 const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const [response, loading, request] = useAPI('/children/progress', 'POST');
+    const logout = () => window.dispatchEvent(new Event('logout'));
 
     React.useEffect(() => {
         if (response?.progress && onUpdate) onUpdate();
@@ -211,15 +232,18 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                 <section className={classes.columnFlex}>
                     <div className={classes.appBar}>
                         <div className={classes.headerFont}>Mission</div>
+                        <Button onClick={logout} className={classes.logoutButton}>
+                            Logout
+                        </Button>
                     </div>
+
                     <div className={classes.grid}>
                         <div className={classes.read}>
                             <Checkbox checked={progress.reading} className={classes.alignRight} />
-                            <div className={classes.readIconDiv}></div>
                             <Link
                                 to={`/story/${cohort.week}`}
                                 onClick={() => request({ reading: true })}>
-                                <Typography className={classes.linkFont}>Read</Typography>
+                                <div className={classes.readIconDiv}></div>
                             </Link>
                         </div>
                         <div className={classes.writeDrawDiv}>
@@ -228,9 +252,9 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                     checked={progress.writing}
                                     className={classes.alignRight}
                                 />
-                                <div className={classes.writeIconDiv}></div>
+
                                 <Link to={`/kids-dashboard/upload`}>
-                                    <Typography className={classes.linkFont}>Write</Typography>
+                                    <div className={classes.writeIconDiv}></div>
                                 </Link>
                             </div>
                             <div className={classes.draw}>
@@ -238,9 +262,8 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                     checked={progress.writing}
                                     className={classes.alignRight}
                                 />
-                                <div className={classes.drawIconDiv}></div>
                                 <Link to={`/kids-dashboard/drawing-upload`}>
-                                    <Typography className={classes.linkFont}>Draw</Typography>
+                                    <div className={classes.drawIconDiv}></div>
                                 </Link>
                             </div>
                         </div>

@@ -190,12 +190,10 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                 <div className={classes.appBar}>
                     <div className={classes.headerFont}>Pencils Ready?</div>
                 </div>
-                <CardHeader
-                    className={classes.header}
-                    title='This will display the writing prompt for the week'
-                />
                 <CardContent className={classes.content}>
-                    <Typography variant='h6'>Story Submission</Typography>
+                    <Typography variant='h6'>
+                        This will display the writing prompt for the week
+                    </Typography>
                     {Object.keys(story).map((key, i, arr) => (
                         <React.Fragment key={i}>
                             {(i === 0 || story[arr[i - 1]]) && ( // if page1 or story[previous-page] is truthy, show file input

@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
         '-webkit-text-stroke-width': '1px',
         '-webkit-text-stroke-color': '#ff6d3a',
     },
+    normalWeight: {
+        fontWeight: 'normal',
+    },
 }));
 
 const HelpPage: React.FC = () => {
@@ -38,9 +41,9 @@ const HelpPage: React.FC = () => {
             <h1 className={classes.helpFont}>Help</h1>
             <div className={classes.flex}>
                 <div className={classes.centerDiv}>
-                    <h1>Contact Us</h1>
-                    <h2>Email Us: email@storysquad.com</h2>
-                    <h2>Call us: 800 555 5555</h2>
+                    <h1 className={classes.normalWeight}>Contact Us</h1>
+                    <h2 className={classes.normalWeight}>Email us: email@storysquad.com</h2>
+                    <h2 className={classes.normalWeight}>Call us: 800 555 5555</h2>
                 </div>
             </div>
         </>

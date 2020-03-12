@@ -135,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
         'fontSize': '86px',
         'fontWeight': 'bold',
         '-webkit-text-stroke-width': '1px',
-        '-webkit-text-stroke-color': '#000000',
+        '-webkit-text-stroke-color': '#292929',
         'color': '#ffffff',
     },
     headerBorder: {

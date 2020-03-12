@@ -124,17 +124,19 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                         child={child}
                     />
                 ))}
-                <ListItem button className={classes.menuItem}>
-                    <Icon className={classes.icon}>
-                        <img
-                            src={`${process.env.PUBLIC_URL}/assets/calendar.svg`}
-                            alt='calendar'
-                            width='100%'
-                            height='100%'
-                        />
-                    </Icon>
-                    <ListItemText primary='Help' />
-                </ListItem>
+                <NavLink to='/dashboard/help' activeClassName={classes.selected}>
+                    <ListItem button className={classes.menuItem}>
+                        <Icon className={classes.icon}>
+                            <img
+                                src={`${process.env.PUBLIC_URL}/assets/calendar.svg`}
+                                alt='calendar'
+                                width='100%'
+                                height='100%'
+                            />
+                        </Icon>
+                        <ListItemText primary='Help' />
+                    </ListItem>
+                </NavLink>
             </List>
         </Drawer>
     );

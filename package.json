@@ -6,7 +6,12 @@
         "dev": "react-app-rewired start",
         "build": "react-app-rewired build",
         "test": "react-app-rewired test",
-        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+        "start": "serve -s build",
+        "heroku-postbuild": "yarn run build"
+    },
+    "engines": {
+        "node": "12.14.x"
     },
     "dependencies": {
         "@material-ui/core": "4.8.3",

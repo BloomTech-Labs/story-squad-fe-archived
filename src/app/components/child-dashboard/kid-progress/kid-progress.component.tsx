@@ -10,6 +10,12 @@ import picIcon from './icons/Draw.png';
 import readIcon from './icons/Read.png';
 import writeIcon from './icons/Write.png';
 import cityscape from './icons/cityscape.png';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -57,11 +63,11 @@ const useStyles = makeStyles((theme) => ({
         'backgroundColor': '#FF6B35',
         'fontSize': '24px',
         'fontWeight': 'bold',
-        'borderRadius': '50px',
+        'borderRadius': '100px',
         'color': 'white',
-        'width': '300px',
-        'height': '50px',
-        'boxShadow': '0px 8px 0px #97300A',
+        'width': '200px',
+
+        'border': '3px solid #292929',
         'textTransform': 'capitalize',
         'fontFamily': 'nunito',
         '&:hover': {
@@ -69,16 +75,15 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     logoutButton: {
-        'alignItems': 'right',
-        'marginTop': '20px',
+        'marginLeft': '770px',
+        'marginBottom': '140px',
         'backgroundColor': '#FF6B35',
         'fontSize': '24px',
         'fontWeight': 'bold',
-        'borderRadius': '50px',
+        'borderRadius': '10px',
         'color': 'white',
         'width': '100px',
-        'height': '50px',
-        'boxShadow': '0px 8px 0px #97300A',
+        'border': '3px solid #292929',
         'textTransform': 'capitalize',
         'fontFamily': 'nunito',
         '&:hover': {
@@ -151,6 +156,7 @@ const useStyles = makeStyles((theme) => ({
         minHeight: '100vh',
     },
     headerFont: {
+        'position': 'absolute',
         'fontFamily': 'Bangers',
         'fontSize': '86px',
         'fontWeight': 'bold',
@@ -201,6 +207,12 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: '0 auto',
     },
+    btn: {
+        marginBottom: 'px',
+    },
+    paper: {
+        marginRight: theme.spacing(2),
+    },
     toolbar: theme.mixins.toolbar,
 }));
 
@@ -213,6 +225,36 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const [response, loading, request] = useAPI('/children/progress', 'POST');
     const logout = () => window.dispatchEvent(new Event('logout'));
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef<HTMLButtonElement>(null);
+
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
+
+    const handleClose = (event: React.MouseEvent<EventTarget>) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    function handleListKeyDown(event: React.KeyboardEvent) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpen(false);
+        }
+    }
+
+    const prevOpen = React.useRef(open);
+    React.useEffect(() => {
+        if (prevOpen.current === true && open === false) {
+            anchorRef.current!.focus();
+        }
+
+        prevOpen.current = open;
+    }, [open]);
 
     React.useEffect(() => {
         if (response?.progress && onUpdate) onUpdate();
@@ -229,12 +271,46 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     return (
         <>
             <Card className={classes.card}>
+                <Popper
+                    open={open}
+                    anchorEl={anchorRef.current}
+                    role={undefined}
+                    transition
+                    disablePortal>
+                    {({ TransitionProps, placement }) => (
+                        <Grow
+                            {...TransitionProps}
+                            style={{
+                                transformOrigin:
+                                    placement === 'bottom' ? 'center top' : 'center bottom',
+                            }}>
+                            <Paper>
+                                <ClickAwayListener onClickAway={handleClose}>
+                                    <MenuList
+                                        autoFocusItem={open}
+                                        id='menu-list-grow'
+                                        onKeyDown={handleListKeyDown}>
+                                        <MenuItem onClick={logout}>Logout</MenuItem>
+                                    </MenuList>
+                                </ClickAwayListener>
+                            </Paper>
+                        </Grow>
+                    )}
+                </Popper>
                 <section className={classes.columnFlex}>
                     <div className={classes.appBar}>
                         <div className={classes.headerFont}>Mission</div>
-                        <Button onClick={logout} className={classes.logoutButton}>
-                            Logout
-                        </Button>
+                        <div className={classes.btn}>
+                            {' '}
+                            <Button
+                                ref={anchorRef}
+                                aria-controls={open ? 'menu-list-grow' : undefined}
+                                aria-haspopup='true'
+                                className={classes.logoutButton}
+                                onClick={handleToggle}>
+                                Menu
+                            </Button>
+                        </div>
                     </div>
 
                     <div className={classes.grid}>
@@ -252,7 +328,6 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                     checked={progress.writing}
                                     className={classes.alignRight}
                                 />
-
                                 <Link to={`/kids-dashboard/upload`}>
                                     <div className={classes.writeIconDiv}></div>
                                 </Link>
@@ -265,18 +340,17 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 <Link to={`/kids-dashboard/drawing-upload`}>
                                     <div className={classes.drawIconDiv}></div>
                                 </Link>
+                                <Link to={`/kids-dashboard/points-dashboard`}>
+                                    <Button className={classes.orangeButton} type='button'>
+                                        Next Step!
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </section>
             </Card>
-            <div className={classes.button}>
-                <Link to={`/kids-dashboard/points-dashboard`}>
-                    <Button className={classes.orangeButton} type='button'>
-                        Assign Team points!
-                    </Button>
-                </Link>
-            </div>
+            <div className={classes.button}></div>
         </>
     );
 };

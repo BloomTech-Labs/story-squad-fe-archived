@@ -16,6 +16,7 @@ import {
     AdminSignInPage,
     AdminSignUpPage,
     ErrorPage,
+    HelpPage,
 } from './pages';
 import { PointDashboard } from './components/point-allocation-dashboard';
 
@@ -26,6 +27,7 @@ const App: React.FC = () => {
                 <CssBaseline />
                 <Router>
                     <Switch>
+                        <Route path='/dashboard/help' component={HelpPage} />
                         <PrivateRoute
                             redirect='/'
                             path='/dashboard'
@@ -48,11 +50,6 @@ const App: React.FC = () => {
                             redirect='/admin'
                             path='/admin/dashboard'
                             component={AdminDashboardPage}
-                        />
-                        <PrivateRoute
-                            redirect='/help'
-                            path='/admin/help'
-                            component={HelpPage}
                         />
                         <Route path='/privacy-policy' component={PrivacyPage} />
                         <Route path='/terms-of-service' component={ToSPage} />

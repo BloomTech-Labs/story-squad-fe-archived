@@ -1,9 +1,7 @@
 import React from 'react';
 
 const HelpPage: React.FC = () => {
-    const classes = useStyles();
-
-    return 'Help page';
+    return <div>Help page</div>;
 };
 
 export { HelpPage };

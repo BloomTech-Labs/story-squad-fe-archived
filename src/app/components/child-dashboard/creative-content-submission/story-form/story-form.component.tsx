@@ -98,6 +98,12 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
     },
+    promptText: {
+        fontFamily: 'nunito',
+        fontSize: '36px',
+        fontWeight: 'normal',
+        color: '#292929',
+    },
 }));
 
 interface StoryFormProps {
@@ -191,9 +197,9 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                     <div className={classes.headerFont}>Pencils Ready?</div>
                 </div>
                 <CardContent className={classes.content}>
-                    <Typography variant='h6'>
+                    <h2 className={classes.promptText}>
                         This will display the writing prompt for the week
-                    </Typography>
+                    </h2>
                     {Object.keys(story).map((key, i, arr) => (
                         <React.Fragment key={i}>
                             {(i === 0 || story[arr[i - 1]]) && ( // if page1 or story[previous-page] is truthy, show file input

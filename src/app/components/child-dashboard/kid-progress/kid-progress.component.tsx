@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { Card, Button, Typography, Checkbox } from '@material-ui/core';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { Card, Button, Checkbox } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
 import 'typeface-bangers';

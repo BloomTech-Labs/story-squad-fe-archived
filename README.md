@@ -28,6 +28,8 @@ You can find the deployed project at [Netlify](https://story-squad.netlify.com).
 
 [Ux Design by Lauren Chandler](https://www.figma.com/file/s0tJgdtWaFDnlG78xigIVv/Story-Squad-Lauren-Chandler?node-id=344%3A336)
 
+[UX Redesign by Ericka Thacker](https://www.figma.com/file/WaHXdLK2NASoFWYVMZLVNt/Story_Squad?node-id=57%3A8)
+
 Welcome to Story Squad! We are an interactive learning platform targeted at grade school children, and we help build reading comprehension as well as artistic, writing, and analytical/critical thinking skills through weekly competitions.
 
 Each week features a new chapter in an exciting novel, written and serialized specifically for Story Squad by author and educator Graig Peterson. Children are provided with prompts based on the chapter they've just read, and participants are then divided into teams of two. Students create art and fanfiction to match the prompt, before going head to head in a bracket-style tournament.
@@ -63,7 +65,7 @@ Story Squad is a paid service; parents are required to create the account for th
 -   Clean, modern components out of the box
 -   Easy to fine-tune per UX designs
 
-#### React Stipe Elements
+#### React Stripe Elements
 
 -   Includes stripe input building blocks
 -   Manages Stripe prop injection
@@ -146,11 +148,12 @@ yarn test
 ```
 
 Clone and download the [back end](https://github.com/Lambda-School-Labs/story-squad-be)
+Follow [back end setup guide](https://github.com/Lambda-School-Labs/story-squad-be/wiki/Setup-Guide)
 
 Run the application locally
 
 ```
-yarn dev
+pipenv run yarn dev
 ```
 
 ## Other Scripts

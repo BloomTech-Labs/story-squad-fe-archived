@@ -96,12 +96,14 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: '50px ',
             borderLeft: '14px solid #000000',
             borderBottom: '14px solid #000000',
+            marginBottom: '60px',
         },
         gridInput4: {
             backgroundColor: '#FED23F',
-            padding: '50px ',
+            padding: '20px ',
             borderRight: '14px solid #000000',
             borderBottom: '14px solid #000000',
+            marginBottom: '60px',
         },
         avatarMargin: {
             fontFamily: 'nunito',
@@ -122,9 +124,10 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         avatarMargin3: {
             backgroundColor: '#B5D33D',
-            padding: '55px 55px 45px 55px',
+            padding: '20px 20px 20px 20px',
             borderLeft: '14px solid #000000',
             borderBottom: '14px solid #000000',
+            marginBottom: '60px',
         },
         avatarMargin4: {
             backgroundColor: '#B5D33D',
@@ -132,16 +135,14 @@ const useStyles = makeStyles((theme: Theme) =>
             borderLeft: '14px solid #000000',
         },
         orangeButton: {
-            'marginTop': '40px',
-            'marginBottom': '40px',
             'backgroundColor': '#FF6B35',
             'fontSize': '24px',
             'fontWeight': 'bold',
-            'borderRadius': '50px',
+            'borderRadius': '10px',
             'color': 'white',
             'width': '200px',
-            'height': '50px',
-            'boxShadow': '0px 8px 0px #97300A',
+
+            'border': '3px solid #292929',
             'textTransform': 'capitalize',
             'fontFamily': 'nunito',
             '&:hover': {
@@ -177,6 +178,7 @@ const useStyles = makeStyles((theme: Theme) =>
             'fontWeight': 'bold',
             '-webkit-text-stroke-width': '1px',
             '-webkit-text-stroke-color': '#000000',
+            'marginTop': '60px',
         },
         avatarStyling: {
             marginTop: '25px',
@@ -190,7 +192,7 @@ const useStyles = makeStyles((theme: Theme) =>
             color: 'red',
         },
         appBar: {
-            height: '229px',
+            height: '200px',
             width: '100%',
             backgroundColor: '#6CEAE6',
             backgroundImage: `url(${cityscape})`,
@@ -202,7 +204,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         username1: {
             'position': 'absolute',
-            'top': '420px',
+            'top': '395px',
             'fontFamily': 'Bangers',
             'color': '#FFFFFF',
             'fontSize': '48px',
@@ -212,7 +214,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         username2: {
             'position': 'absolute',
-            'top': '798px',
+            'top': '768px',
             'fontFamily': 'Bangers',
             'color': '#FFFFFF',
             'fontSize': '48px',
@@ -290,7 +292,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 <Typography className={classes.h2Styling} variant='h2'>
                                     Point Share
                                 </Typography>
-                                <Typography className={classes.h3Styling} variant='h3'>
+                                <Typography className={classes.h3Styling}>
                                     Total Points Remaining:
                                     {remainingPoints < 0 || remainingPoints > 100 ? (
                                         <div className={classes.red}>Total must equal 100</div>
@@ -383,7 +385,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     InputProps={{ inputProps: { min: 10, max: 70 } }}
                                     style={{
                                         position: 'absolute',
-                                        top: '451px',
+                                        top: '431px',
                                         background: 'white',
                                         width: '145px',
                                         borderRadius: '5px',
@@ -416,7 +418,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     InputProps={{ inputProps: { min: 10, max: 70 } }}
                                     style={{
                                         position: 'absolute',
-                                        top: '451px',
+                                        top: '431px',
                                         background: 'white',
                                         width: '145px',
                                         borderRadius: '5px',
@@ -481,7 +483,14 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 item
                                 justify='center'
                                 sm={4}
-                                className={classes.avatarMargin3}></Grid>
+                                className={classes.avatarMargin3}>
+                                {' '}
+                                <Link to={`/kids-dashboard`}>
+                                    <Button className={classes.orangeButton} type='button'>
+                                        Back
+                                    </Button>
+                                </Link>
+                            </Grid>
                             <Grid
                                 container
                                 item
@@ -507,7 +516,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     variant='outlined'
                                     style={{
                                         position: 'absolute',
-                                        top: '833px',
+                                        top: '813px',
                                         background: 'white',
                                         width: '145px',
                                         borderRadius: '5px',
@@ -538,26 +547,18 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                     variant='outlined'
                                     style={{
                                         position: 'absolute',
-                                        top: '833px',
+                                        top: '813px',
                                         background: 'white',
                                         width: '145px',
                                         borderRadius: '5px',
                                     }}
                                 />
+                                <Button className={classes.orangeButton} type='submit'>
+                                    Next
+                                </Button>
                             </Grid>
                         </Grid>
                         {/* Row 5 */}
-                        <Grid container direction='row' justify='space-between' alignItems='center'>
-                            {/* Back and next buttons  */}
-                            <Link to={`/kids-dashboard`}>
-                                <Button className={classes.orangeButton} type='button'>
-                                    Back
-                                </Button>
-                            </Link>
-                            <Button className={classes.orangeButton} type='submit'>
-                                Next
-                            </Button>
-                        </Grid>
                     </Grid>
                 </Container>
             </ValidatorForm>

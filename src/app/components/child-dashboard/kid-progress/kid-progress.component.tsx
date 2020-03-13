@@ -63,10 +63,9 @@ const useStyles = makeStyles((theme) => ({
         'backgroundColor': '#FF6B35',
         'fontSize': '24px',
         'fontWeight': 'bold',
-        'borderRadius': '100px',
+        'borderRadius': '10px',
         'color': 'white',
         'width': '200px',
-
         'border': '3px solid #292929',
         'textTransform': 'capitalize',
         'fontFamily': 'nunito',

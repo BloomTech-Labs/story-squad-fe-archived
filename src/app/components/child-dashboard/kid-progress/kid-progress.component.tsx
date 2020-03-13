@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { Card, Button, Typography, Checkbox } from '@material-ui/core';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { Card, Button, Checkbox } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
 import 'typeface-bangers';
 import picIcon from './icons/Draw.png';
-import readIcon from './icons/Read.png';
-import writeIcon from './icons/Write.png';
+import readIcon from './icons/read.png';
+import writeIcon from './icons/write.png';
 import cityscape from './icons/cityscape.png';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';

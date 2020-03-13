@@ -119,6 +119,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
         storyText: '',
         illustration: '',
+        type: 'illustration',
         story: {
             page1: '',
             page2: '',
@@ -143,6 +144,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
             setState({
                 storyText: '',
                 illustration: '',
+                type: 'illustration',
                 story: {
                     page1: '',
                     page2: '',

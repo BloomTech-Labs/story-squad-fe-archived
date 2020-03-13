@@ -90,6 +90,18 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#FF6B35',
         },
     },
+    logoutMenu: {
+        'backgroundColor': '#FF6B35',
+        'fontSize': '24px',
+        'fontWeight': 'bold',
+        'color': 'white',
+        'width': '100px',
+        'textTransform': 'capitalize',
+        'fontFamily': 'nunito',
+        '&:hover': {
+            backgroundColor: '#FF6B35',
+        },
+    },
     read: {
         backgroundColor: '#B5D33D',
         width: '40%',
@@ -225,11 +237,11 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const [response, loading, request] = useAPI('/children/progress', 'POST');
     const logout = () => window.dispatchEvent(new Event('logout'));
-    const [open, setOpen] = React.useState(false);
+    const [menu, setMenu] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
 
     const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
+        setMenu((prevMenu) => !prevMenu);
     };
 
     const handleClose = (event: React.MouseEvent<EventTarget>) => {
@@ -237,24 +249,24 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
             return;
         }
 
-        setOpen(false);
+        setMenu(false);
     };
 
     function handleListKeyDown(event: React.KeyboardEvent) {
         if (event.key === 'Tab') {
             event.preventDefault();
-            setOpen(false);
+            setMenu(false);
         }
     }
 
-    const prevOpen = React.useRef(open);
+    const prevMenu = React.useRef(menu);
     React.useEffect(() => {
-        if (prevOpen.current === true && open === false) {
+        if (prevMenu.current === true && menu === false) {
             anchorRef.current!.focus();
         }
 
-        prevOpen.current = open;
-    }, [open]);
+        prevMenu.current = menu;
+    }, [menu]);
 
     React.useEffect(() => {
         if (response?.progress && onUpdate) onUpdate();
@@ -272,7 +284,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
         <>
             <Card className={classes.card}>
                 <Popper
-                    open={open}
+                    open={menu}
                     anchorEl={anchorRef.current}
                     role={undefined}
                     transition
@@ -287,9 +299,10 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
                                     <MenuList
-                                        autoFocusItem={open}
+                                        autoFocusItem={menu}
                                         id='menu-list-grow'
-                                        onKeyDown={handleListKeyDown}>
+                                        onKeyDown={handleListKeyDown}
+                                        className={classes.logoutMenu}>
                                         <MenuItem onClick={logout}>Logout</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
@@ -304,7 +317,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                             {' '}
                             <Button
                                 ref={anchorRef}
-                                aria-controls={open ? 'menu-list-grow' : undefined}
+                                aria-controls={menu ? 'menu-list-grow' : undefined}
                                 aria-haspopup='true'
                                 className={classes.logoutButton}
                                 onClick={handleToggle}>

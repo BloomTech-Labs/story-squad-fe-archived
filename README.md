@@ -153,7 +153,7 @@ Follow [back end setup guide](https://github.com/Lambda-School-Labs/story-squad-
 Run the application locally
 
 ```
-pipenv run yarn dev
+yarn dev
 ```
 
 ## Other Scripts

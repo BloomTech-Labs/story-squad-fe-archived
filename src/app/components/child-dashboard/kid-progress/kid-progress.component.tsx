@@ -112,8 +112,11 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         padding: '25px',
+    },
+    height50: {
+        height: '65%',
     },
     write: {
         backgroundColor: '#EB7D5B',
@@ -163,6 +166,12 @@ const useStyles = makeStyles((theme) => ({
     alignRight: {
         alignSelf: 'flex-end',
         justifyContent: 'flex-end',
+        transform: 'scale(3)',
+        padding: '10px',
+    },
+    alignRightTop: {
+        alignSelf: 'flex-end',
+        justifyContent: 'space-around',
         transform: 'scale(3)',
         padding: '10px',
     },
@@ -382,14 +391,16 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                         <div className={classes.read}>
                             <Checkbox
                                 checked={progress.reading}
-                                className={classes.alignRight}
+                                className={classes.alignRightTop}
                                 color='primary'
                             />
-                            <Link
-                                to={`/story/${cohort.week}`}
-                                onClick={() => request({ reading: true })}>
-                                <div className={classes.readIconDiv}></div>
-                            </Link>
+                            <div className={classes.height50}>
+                                <Link
+                                    to={`/story/${cohort.week}`}
+                                    onClick={() => request({ reading: true })}>
+                                    <div className={classes.readIconDiv}></div>
+                                </Link>
+                            </div>
                         </div>
                         <div className={classes.writeDrawDiv}>
                             <div className={classes.write}>

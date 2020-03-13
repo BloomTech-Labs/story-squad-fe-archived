@@ -147,7 +147,7 @@ Run test
 yarn test
 ```
 
-Clone and download the [back end](https://github.com/Lambda-School-Labs/story-squad-be)
+Clone and download the [back end](https://github.com/Lambda-School-Labs/story-squad-be)  
 Follow [back end setup guide](https://github.com/Lambda-School-Labs/story-squad-be/wiki/Setup-Guide)
 
 Run the application locally

@@ -28,7 +28,7 @@ You can find the deployed project at [Netlify](https://story-squad.netlify.com).
 
 [Ux Design by Lauren Chandler](https://www.figma.com/file/s0tJgdtWaFDnlG78xigIVv/Story-Squad-Lauren-Chandler?node-id=344%3A336)
 
-[UX Redesign by Ericka Thacker](https://www.figma.com/file/WaHXdLK2NASoFWYVMZLVNt/Story_Squad?node-id=57%3A8)
+[UX Redesign by Erica Thacker](https://www.figma.com/file/WaHXdLK2NASoFWYVMZLVNt/Story_Squad?node-id=57%3A8)
 
 Welcome to Story Squad! We are an interactive learning platform targeted at grade school children, and we help build reading comprehension as well as artistic, writing, and analytical/critical thinking skills through weekly competitions.
 

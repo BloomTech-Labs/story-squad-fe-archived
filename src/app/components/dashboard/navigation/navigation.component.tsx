@@ -141,8 +141,8 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                 <ListItem button className={classes.menuItem}>
                     <Icon className={classes.icon}>
                         <img
-                            src={`${process.env.PUBLIC_URL}/assets/calendar.svg`}
-                            alt='calendar'
+                            src={`${process.env.PUBLIC_URL}/assets/check.svg`}
+                            alt='check'
                             width='100%'
                             height='100%'
                         />

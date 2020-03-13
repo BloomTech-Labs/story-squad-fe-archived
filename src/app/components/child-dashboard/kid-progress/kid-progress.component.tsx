@@ -7,8 +7,8 @@ import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
 import 'typeface-bangers';
 import picIcon from './icons/Draw.png';
-import readIcon from './icons/Read.png';
-import writeIcon from './icons/Write.png';
+import readIcon from './icons/read.png';
+import writeIcon from './icons/write.png';
 import cityscape from './icons/cityscape.png';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -380,7 +380,11 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
 
                     <div className={classes.grid}>
                         <div className={classes.read}>
-                            <Checkbox checked={progress.reading} className={classes.alignRight} />
+                            <Checkbox
+                                checked={progress.reading}
+                                className={classes.alignRight}
+                                color='primary'
+                            />
                             <Link
                                 to={`/story/${cohort.week}`}
                                 onClick={() => request({ reading: true })}>
@@ -392,6 +396,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 <Checkbox
                                     checked={progress.writing}
                                     className={classes.alignRight}
+                                    color='primary'
                                 />
                                 <Link to={`/kids-dashboard/upload`}>
                                     <div className={classes.writeIconDiv}></div>
@@ -401,6 +406,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 <Checkbox
                                     checked={progress.drawing}
                                     className={classes.alignRight}
+                                    color='primary'
                                 />
                                 <Link to={`/kids-dashboard/drawing-upload`}>
                                     <div className={classes.drawIconDiv}></div>

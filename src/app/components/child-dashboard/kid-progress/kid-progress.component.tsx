@@ -97,6 +97,7 @@ const useStyles = makeStyles((theme) => ({
         'color': 'white',
         'width': '100px',
         'textTransform': 'capitalize',
+        'border': '2px solid #292929',
         'fontFamily': 'nunito',
         '&:hover': {
             backgroundColor: '#FF6B35',
@@ -160,6 +161,8 @@ const useStyles = makeStyles((theme) => ({
     alignRight: {
         alignSelf: 'flex-end',
         justifyContent: 'flex-end',
+        transform: 'scale(3)',
+        padding: '10px',
     },
     loading: {
         display: 'flex',
@@ -173,7 +176,8 @@ const useStyles = makeStyles((theme) => ({
         'fontSize': '86px',
         'fontWeight': 'bold',
         '-webkit-text-stroke-width': '1px',
-        '-webkit-text-stroke-color': '#ff6d3a',
+        '-webkit-text-stroke-color': '#292929',
+        'color': '#ffffff',
     },
     headerBorder: {
         border: '4px solid #292929',
@@ -278,7 +282,6 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const dueDates = Object.fromEntries(
         Object.entries(dueDateStrings).map(([key, date]) => [key, moment(date)])
     );
-    const today = moment(new Date());
 
     return (
         <>
@@ -363,7 +366,6 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
                 </section>
             </Card>
-            <div className={classes.button}></div>
         </>
     );
 };

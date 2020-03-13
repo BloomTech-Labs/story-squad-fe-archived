@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
         borderRight: '7px solid #000000',
     },
     content: {
-        display: 'grid',
-        gridGap: theme.spacing(3),
+        display: 'flex',
+        flexDirection: 'column',
     },
     form: {
         margin: '0 auto',
@@ -83,8 +83,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottom: '7px solid #000000',
-        borderTop: '7px solid #000000',
     },
     headerFont: {
         'fontFamily': 'Bangers',
@@ -97,6 +95,12 @@ const useStyles = makeStyles((theme) => ({
     buttons: {
         display: 'flex',
         justifyContent: 'space-between',
+    },
+    promptText: {
+        fontFamily: 'nunito',
+        fontSize: '36px',
+        fontWeight: 'normal',
+        color: '#292929',
     },
 }));
 
@@ -190,12 +194,8 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                 <div className={classes.appBar}>
                     <div className={classes.headerFont}>Ready, Set... DRAW!</div>
                 </div>
-                <CardHeader
-                    className={classes.header}
-                    title='Draw your favorite part of the story!'
-                />
                 <CardContent className={classes.content}>
-                    <Typography variant='h6'>Illustration Submission</Typography>
+                    <h2 className={classes.promptText}>Draw your favorite part of the story!</h2>
                     <TextField
                         InputLabelProps={{ shrink: true }}
                         label='Artwork or Comic'

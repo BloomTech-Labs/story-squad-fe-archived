@@ -55,7 +55,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ChildDashboard: React.FC = () => {
     const classes = useStyles();
-    const logout = () => window.dispatchEvent(new Event('logout'));
     const [response, loading, request] = useAPI('/children/me');
 
     if (!response?.me)

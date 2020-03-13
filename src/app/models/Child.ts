@@ -6,6 +6,7 @@ export interface Child {
     progress: {
         reading: boolean;
         writing: boolean;
+        drawing: string;
         submission: boolean;
         // teamReview: boolean;
         // randomReview: boolean;
@@ -17,6 +18,7 @@ export interface Child {
         dueDates: {
             reading: string;
             writing: string;
+            drawing: string;
             submission: string;
             // teamReview: string;
             // randomReview: string;

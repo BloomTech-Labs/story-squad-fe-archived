@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import requestFactory from '../../../../util/requestFactory';
 
 import {
     Button,
@@ -37,11 +38,25 @@ interface Canon {
 
 const PdfList: React.FC<PdfListProps> = ({ className }) => {
     const classes = useStyles({});
-    const [response] = useAPI<{ canon: Canon[] }>('/canon');
+    const [canonResponse] = useAPI<{ canon: Canon[] }>('/canon');
 
-    if (!response?.canon) return <h4 className={classes.loading}>Loading...</h4>;
+    if (!canonResponse?.canon) return <h4 className={classes.loading}>Loading...</h4>;
 
-    const { canon } = response;
+    const { canon } = canonResponse;
+
+    //matchmaking 3.11.20
+    const baseURL = process.env.REACT_APP_ENDPOINT || 'http://localhost:4000';
+    const handleMatchmake = (week: number) => {
+        console.log('sending matchmake');
+        requestFactory()
+            .get(`${baseURL}/matchmaking/${week}`)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     return (
         <div className={className}>
@@ -58,6 +73,7 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
             <Table>
                 <TableHead>
                     <TableRow>
+                        <TableCell></TableCell>
                         <TableCell>Week #</TableCell>
                         <TableCell>Default PDF</TableCell>
                         <TableCell>Dyslexic PDF</TableCell>
@@ -66,6 +82,9 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                 <TableBody>
                     {canon.map((pdf) => (
                         <TableRow key={pdf.week}>
+                            <TableCell>
+                                <Button onClick={() => handleMatchmake(pdf.week)}>boop</Button>
+                            </TableCell>
                             <TableCell>{pdf.week}</TableCell>
                             <TableCell>
                                 <Link to={`/story/${pdf.week}`}>View</Link>

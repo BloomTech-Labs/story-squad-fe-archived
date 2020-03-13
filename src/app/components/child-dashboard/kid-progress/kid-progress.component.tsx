@@ -179,8 +179,10 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
     },
-    button: {
-        margin: '0 auto',
+    buttonDiv: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-around',
     },
     toolbar: theme.mixins.toolbar,
 }));
@@ -248,7 +250,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
                 </section>
             </Card>
-            <div className={classes.button}>
+            <div className={classes.buttonDiv}>
                 <Link to={`/kids-dashboard/points-dashboard`}>
                     <Button className={classes.orangeButton} type='button'>
                         Assign Team points!

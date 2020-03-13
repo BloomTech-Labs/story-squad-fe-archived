@@ -163,19 +163,19 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
 
     React.useEffect(() => {
         if (submission?.submission) {
-            progress({ writing: true });
+            progress({ drawing: true });
             submission.submission = undefined;
         }
 
         if (removed?.submission) {
-            progress({ writing: false });
+            progress({ drawing: false });
             removed.submission = undefined;
         }
     }, [submission, removed, progress]);
 
     React.useEffect(() => {
         if (newProgress && onUpdate) onUpdate();
-        if (newProgress?.progress?.writing) history.push('/kids-dashboard');
+        if (newProgress?.progress?.drawing) history.push('/kids-dashboard');
     }, [history, onUpdate, newProgress]);
 
     React.useEffect(() => {
@@ -187,7 +187,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     }, [setState, state]);
 
     const submitted = !!currentSubmission?.submission;
-    const { illustration } = state;
+    const { storyText, illustration, story } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
             <Card className={classes.card}>

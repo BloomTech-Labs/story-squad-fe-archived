@@ -55,6 +55,7 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('md'));
     const list = React.useContext(ChildListContext);
+    const logout = () => window.dispatchEvent(new Event('logout'));
 
     return (
         <Drawer
@@ -137,6 +138,17 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) =>
                         <ListItemText primary='Help' />
                     </ListItem>
                 </NavLink>
+                <ListItem button className={classes.menuItem}>
+                    <Icon className={classes.icon}>
+                        <img
+                            src={`${process.env.PUBLIC_URL}/assets/check.svg`}
+                            alt='check'
+                            width='100%'
+                            height='100%'
+                        />
+                    </Icon>
+                    <ListItemText onClick={logout} primary='Logout' />
+                </ListItem>
             </List>
         </Drawer>
     );

@@ -55,7 +55,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ChildDashboard: React.FC = () => {
     const classes = useStyles();
-    const logout = () => window.dispatchEvent(new Event('logout'));
     const [response, loading, request] = useAPI('/children/me');
 
     if (!response?.me)
@@ -80,10 +79,6 @@ const ChildDashboard: React.FC = () => {
                         render={() => (
                             <DrawingForm week={response.me.cohort.week} onUpdate={request} />
                         )}
-                    />
-                    <Route
-                        path='/kids-dashboard/points-dashboard'
-                        render={() => <PointDashboard child={response.me} />}
                     />
                     <Route
                         path='/kids-dashboard/points-dashboard'

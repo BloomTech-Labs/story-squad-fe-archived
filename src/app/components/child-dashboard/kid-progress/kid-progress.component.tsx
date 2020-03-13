@@ -16,6 +16,9 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -178,6 +181,26 @@ const useStyles = makeStyles((theme) => ({
         '-webkit-text-stroke-color': '#292929',
         'color': '#ffffff',
     },
+    modalFont: {
+        'fontFamily': 'Bangers',
+        'fontSize': '46px',
+        'fontWeight': 'bold',
+        '-webkit-text-stroke-width': '1px',
+        '-webkit-text-stroke-color': '#292929',
+        'color': 'white',
+    },
+    modalBtn: {
+        'fontFamily': 'Bangers',
+        'fontSize': '46px',
+        'fontWeight': 'bold',
+        '-webkit-text-stroke-width': '1px',
+        '-webkit-text-stroke-color': '#292929',
+        'color': 'white',
+        'backgroundColor': '#FF6B35',
+        'width': '200px',
+        'textTransform': 'capitalize',
+        'border': '2px solid #292929',
+    },
     headerBorder: {
         border: '4px solid #292929',
     },
@@ -228,6 +251,18 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         marginRight: theme.spacing(2),
     },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalPaper: {
+        backgroundColor: '#6CEAE6',
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+
     toolbar: theme.mixins.toolbar,
 }));
 
@@ -242,9 +277,14 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const logout = () => window.dispatchEvent(new Event('logout'));
     const [menu, setMenu] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
+    const [open, setOpen] = React.useState(false);
 
     const handleToggle = () => {
         setMenu((prevMenu) => !prevMenu);
+    };
+
+    const modalClose = () => {
+        setOpen(false);
     };
 
     const handleClose = (event: React.MouseEvent<EventTarget>) => {
@@ -281,6 +321,14 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const dueDates = Object.fromEntries(
         Object.entries(dueDateStrings).map(([key, date]) => [key, moment(date)])
     );
+
+    React.useEffect(() => {
+        if (progress.reading === false) {
+            setOpen(true);
+        } else {
+            setOpen(false);
+        }
+    }, [progress.reading]);
 
     return (
         <>
@@ -349,7 +397,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                             </div>
                             <div className={classes.draw}>
                                 <Checkbox
-                                    checked={progress.writing}
+                                    checked={progress.drawing}
                                     className={classes.alignRight}
                                 />
                                 <Link to={`/kids-dashboard/drawing-upload`}>
@@ -357,7 +405,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 </Link>
                                 <Link to={`/kids-dashboard/points-dashboard`}>
                                     <Button className={classes.orangeButton} type='button'>
-                                        Next Step!
+                                        TEAM UP!
                                     </Button>
                                 </Link>
                             </div>
@@ -365,6 +413,33 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
                 </section>
             </Card>
+            <Modal
+                aria-labelledby='transition-modal-title'
+                aria-describedby='transition-modal-description'
+                className={classes.modal}
+                open={open}
+                onClose={modalClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}>
+                <Fade in={open}>
+                    <div className={classes.modalPaper}>
+                        <h2 id='transition-modal-title' className={classes.modalFont}>
+                            Welcome to Story Squad!
+                        </h2>
+                        <p id='transition-modal-description' className={classes.modalFont}>
+                            To begin your journey, click the 'READ' icon to start the story!
+                            <br />
+                            Are you ready to accept the challenge?
+                        </p>
+                        <Button onClick={modalClose} className={classes.modalBtn}>
+                            I accept!!
+                        </Button>
+                    </div>
+                </Fade>
+            </Modal>
         </>
     );
 };

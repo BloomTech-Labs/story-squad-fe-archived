@@ -6,7 +6,7 @@ export interface Child {
     progress: {
         reading: boolean;
         writing: boolean;
-        drawing: string;
+        drawing: boolean;
         submission: boolean;
         // teamReview: boolean;
         // randomReview: boolean;

@@ -433,8 +433,8 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                 </section>
             </Card>
             <Modal
-                aria-labelledby='transition-modal-title'
-                aria-describedby='transition-modal-description'
+                aria-labelledby='story squad welcome'
+                aria-describedby='instructions to begin the game'
                 className={classes.modal}
                 open={open}
                 onClose={modalClose}

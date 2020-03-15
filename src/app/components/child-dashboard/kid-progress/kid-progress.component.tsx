@@ -280,6 +280,7 @@ const useStyles = makeStyles((theme) => ({
 interface KidProgressProps {
     onUpdate?: () => void;
     child: Child;
+    progress: any;
 }
 
 const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
@@ -327,19 +328,20 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
         if (response?.progress) response.progress = undefined;
     }, [onUpdate, response]);
 
-    const { cohort, progress, username } = child;
+    const { progress, cohort, username } = child;
     const { dueDates: dueDateStrings } = cohort;
     const dueDates = Object.fromEntries(
         Object.entries(dueDateStrings).map(([key, date]) => [key, moment(date)])
     );
 
     React.useEffect(() => {
+        console.log(progress);
         if (progress.reading === false) {
             setOpen(true);
         } else {
             setOpen(false);
         }
-    }, [progress.reading]);
+    }, [progress, progress.reading]);
 
     return (
         <>

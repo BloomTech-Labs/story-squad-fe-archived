@@ -85,6 +85,7 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                 <TableHead>
                     <TableRow>
                         <TableCell></TableCell>
+                        <TableCell></TableCell>
                         <TableCell>Week #</TableCell>
                         <TableCell>Default PDF</TableCell>
                         <TableCell>Dyslexic PDF</TableCell>

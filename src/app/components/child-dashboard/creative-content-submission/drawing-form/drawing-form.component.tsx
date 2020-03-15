@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
         borderRight: '7px solid #000000',
     },
     content: {
-        display: 'grid',
-        gridGap: theme.spacing(3),
+        display: 'flex',
+        flexDirection: 'column',
     },
     form: {
         margin: '0 auto',
@@ -96,6 +96,12 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
     },
+    promptText: {
+        fontFamily: 'nunito',
+        fontSize: '36px',
+        fontWeight: 'normal',
+        color: '#292929',
+    },
 }));
 
 interface DrawingFormProps {
@@ -113,6 +119,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
         storyText: '',
         illustration: '',
+        type: 'illustration',
         story: {
             page1: '',
             page2: '',
@@ -137,6 +144,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
             setState({
                 storyText: '',
                 illustration: '',
+                type: 'illustration',
                 story: {
                     page1: '',
                     page2: '',
@@ -157,19 +165,19 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
 
     React.useEffect(() => {
         if (submission?.submission) {
-            progress({ writing: true });
+            progress({ drawing: true });
             submission.submission = undefined;
         }
 
         if (removed?.submission) {
-            progress({ writing: false });
+            progress({ drawing: false });
             removed.submission = undefined;
         }
     }, [submission, removed, progress]);
 
     React.useEffect(() => {
         if (newProgress && onUpdate) onUpdate();
-        if (newProgress?.progress?.writing) history.push('/kids-dashboard');
+        if (newProgress?.progress?.drawing) history.push('/kids-dashboard');
     }, [history, onUpdate, newProgress]);
 
     React.useEffect(() => {
@@ -181,19 +189,15 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     }, [setState, state]);
 
     const submitted = !!currentSubmission?.submission;
-    const { illustration } = state;
+    const { storyText, illustration, story } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
             <Card className={classes.card}>
                 <div className={classes.appBar}>
                     <div className={classes.headerFont}>Ready, Set... DRAW!</div>
                 </div>
-                <CardHeader
-                    className={classes.header}
-                    title='Draw your favorite part of the story!'
-                />
                 <CardContent className={classes.content}>
-                    <Typography variant='h6'>Illustration Submission</Typography>
+                    <h2 className={classes.promptText}>Draw your favorite part of the story!</h2>
                     <TextField
                         InputLabelProps={{ shrink: true }}
                         label='Artwork or Comic'

@@ -11,6 +11,14 @@ You can find the deployed project at [Netlify](https://story-squad.netlify.com).
 |                     [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/lauren-b-chandler/)                     | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/eric-banker/) | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/forrest-darabian-588061193/) | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/shruti-malik123/) | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/britt-moyers/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/wsedlacek/) |
 
 <br>
+
+|                                                     [Erica Thacker](https://dribbble.com/Erica_Thacker)                                                      |                                             [Tim Griffith](https://github.com/grifmang)                                              |                                                           [Mashima Button](https://github.com/zimashima)                                                           |                                                             [XuHui Zhu](https://github.com/itshui3)                                                              |                                                            [Joshua Gray](https://github.com/squashgray)                                                             |                                                           [Allie Robinson](https://github.com/allie-rae)                                                           |
+| :-------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://ca.slack-edge.com/T4JUEB3ME-UBMPEAA1M-d048b69b0216-512" width = "200" />](https://www.linkedin.com/in/erica-thacker-uiux/) |        [<img src="https://avatars1.githubusercontent.com/u/7358471?s=460&v=4" width = "200" />](https://github.com/grifmang)         | [<img src="https://avatars1.githubusercontent.com/u/52222646?s=460&u=75465debbfee5149ef97726fbd6592fe879f2e96&v=4" width = "200" />](https://github.com/zimashima) | [<img src="https://avatars3.githubusercontent.com/u/55858162?s=460&u=50b9d087c208616a7a97cd4aa9817c95b45ebead&v=4" width = "200" />](https://github.com/itshui3) | [<img src="https://avatars1.githubusercontent.com/u/11002657?s=460&u=9412476a17a7243148ca40ad9a1684ce6026a18c&v=4" width = "200" />](https://github.com/squashgray) | [<img src="https://avatars0.githubusercontent.com/u/48700332?s=460&u=b839505e4c55e4cc453d52361aaedd8f4a5b07c6&v=4" width = "200" />](https://github.com/allie-rae) |
+|               [<img src="./documenation/assets/icon-dribbble.png" width="15">](https://dribbble.com/Erica_Thacker)               |                         [<img src="https://github.com/favicon.ico" width="15">](https://github.com/grifmang)                         |                                       [<img src="https://github.com/favicon.ico" width="15">](https://github.com/zimashima)                                        |                                       [<img src="https://github.com/favicon.ico" width="15">](https://github.com/itshui3)                                        |                                       [<img src="https://github.com/favicon.ico" width="15">](https://github.com/squashgray)                                        |                                       [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/allie-rae)                                       |
+|       [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/erica-thacker-uiux/)       | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/tim-griffith-730a041a/) |                    [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/mashimabutton/)                    |                     [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/xuhuizhu/)                      |                    [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/joshuagraydev/)                     |                  [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/allie-robinson/)                   |
+
+
 <br>
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
@@ -27,6 +35,8 @@ You can find the deployed project at [Netlify](https://story-squad.netlify.com).
 [Product Canvas](https://www.notion.so/Story-Squad-a5bff36c779a44bd91fa97e9af27a944)
 
 [Ux Design by Lauren Chandler](https://www.figma.com/file/s0tJgdtWaFDnlG78xigIVv/Story-Squad-Lauren-Chandler?node-id=344%3A336)
+
+[UX Redesign by Erica Thacker](https://www.figma.com/file/WaHXdLK2NASoFWYVMZLVNt/Story_Squad?node-id=57%3A8)
 
 Welcome to Story Squad! We are an interactive learning platform targeted at grade school children, and we help build reading comprehension as well as artistic, writing, and analytical/critical thinking skills through weekly competitions.
 
@@ -63,7 +73,7 @@ Story Squad is a paid service; parents are required to create the account for th
 -   Clean, modern components out of the box
 -   Easy to fine-tune per UX designs
 
-#### React Stipe Elements
+#### React Stripe Elements
 
 -   Includes stripe input building blocks
 -   Manages Stripe prop injection
@@ -145,7 +155,8 @@ Run test
 yarn test
 ```
 
-Clone and download the [back end](https://github.com/Lambda-School-Labs/story-squad-be)
+Clone and download the [back end](https://github.com/Lambda-School-Labs/story-squad-be)  
+Follow [back end setup guide](https://github.com/Lambda-School-Labs/story-squad-be/wiki/Setup-Guide)
 
 Run the application locally
 

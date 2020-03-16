@@ -54,15 +54,14 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 1,
     },
     orangeButton: {
-        'marginTop': '20px',
         'backgroundColor': '#FF6B35',
         'fontSize': '24px',
         'fontWeight': 'bold',
-        'borderRadius': '50px',
+        'borderRadius': '10px',
         'color': 'white',
         'width': '200px',
-        'height': '50px',
-        'boxShadow': '0px 8px 0px #97300A',
+
+        'border': '3px solid #292929',
         'textTransform': 'capitalize',
         'fontFamily': 'nunito',
         '&:hover': {
@@ -121,6 +120,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
         storyText: '',
         illustration: '',
+        type: 'story',
         story: {
             page1: '',
             page2: '',
@@ -145,6 +145,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
             setState({
                 storyText: '',
                 illustration: '',
+                type: 'story',
                 story: {
                     page1: '',
                     page2: '',
@@ -189,7 +190,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     }, [setState, state]);
 
     const submitted = !!currentSubmission?.submission;
-    const { storyText, illustration, story } = state;
+    const { storyText, story } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
             <Card className={classes.card}>
@@ -248,7 +249,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-                {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
+                {submitting && <CircularProgress size={68} className={classes.buttonProgress} />}
             </div>
         </form>
     );

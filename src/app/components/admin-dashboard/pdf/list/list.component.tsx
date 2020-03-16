@@ -57,6 +57,17 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                 console.log(err);
             });
     };
+    const removeMatchmake = (week: number) => {
+        console.log('sending del matchmake');
+        requestFactory()
+            .delete(`${baseURL}/matchmaking/${week}`)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     return (
         <div className={className}>
@@ -74,6 +85,7 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                 <TableHead>
                     <TableRow>
                         <TableCell></TableCell>
+                        <TableCell></TableCell>
                         <TableCell>Week #</TableCell>
                         <TableCell>Default PDF</TableCell>
                         <TableCell>Dyslexic PDF</TableCell>
@@ -84,6 +96,9 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                         <TableRow key={pdf.week}>
                             <TableCell>
                                 <Button onClick={() => handleMatchmake(pdf.week)}>boop</Button>
+                            </TableCell>
+                            <TableCell>
+                                <Button onClick={() => removeMatchmake(pdf.week)}>bup</Button>
                             </TableCell>
                             <TableCell>{pdf.week}</TableCell>
                             <TableCell>

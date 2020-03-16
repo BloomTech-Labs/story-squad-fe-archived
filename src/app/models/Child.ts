@@ -7,10 +7,9 @@ export interface Child {
         reading: boolean;
         writing: boolean;
         drawing: boolean;
-        submission: boolean;
-        // teamReview: boolean;
-        // randomReview: boolean;
-        // results: boolean;
+        teamReview: boolean;
+        randomReview: boolean;
+        results: boolean;
     };
 
     cohort: {

@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        margin: theme.spacing(3),
     },
     welcome: {
         marginBottom: theme.spacing(2),
@@ -88,7 +87,11 @@ const ChildDashboard: React.FC = () => {
                         path='/'
                         render={() => (
                             <div className={classes.content}>
-                                <KidProgressCard child={response.me} onUpdate={request} />
+                                <KidProgressCard
+                                    child={response.me}
+                                    onUpdate={request}
+                                    progress={response.progress}
+                                />
                             </div>
                         )}
                     />

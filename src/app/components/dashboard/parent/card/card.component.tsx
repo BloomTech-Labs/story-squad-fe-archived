@@ -25,7 +25,7 @@ interface ParentCardProps {
 const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {
     const classes = useStyles({});
     const logout = () => window.dispatchEvent(new Event('logout'));
-
+    console.log('user', user);
     return (
         <Card className={`${className} ${classes.card}`}>
             <CardHeader
@@ -35,7 +35,7 @@ const ParentCard: React.FC<ParentCardProps> = ({ user, className }) => {
                         logout
                     </Button>
                 }
-                title='Welcome back!'
+                title='Welcome!'
                 subheader={
                     <>
                         <Typography>Let's see how each participant is doing this week.</Typography>

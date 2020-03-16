@@ -44,8 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
             fontFamily: 'nunito',
             display: 'flex',
             flexDirection: 'column',
-            marginTop: '0px',
-            padding: '0px',
+            maxHeight: '510%',
         },
         gridRow1: {
             height: '274px',
@@ -161,7 +160,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         containerStyling: {
             fontFamily: 'nunito',
-            marginTop: '8px',
         },
         h2Styling: {
             'fontFamily': 'Bangers',
@@ -314,7 +312,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 sm={4}
                                 className={classes.avatarMargin}>
                                 {/* Avatar 1 */}
-                                <img src={ava1} className={classes.avatarStyling} />
+                                <img
+                                    src={ava1}
+                                    className={classes.avatarStyling}
+                                    alt='child avatar'
+                                />
                                 {/* Username 1 */}
                                 <>
                                     <br />
@@ -437,7 +439,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 sm={4}
                                 className={classes.avatarMargin2}>
                                 {/* Avatar 2 */}
-                                <img src={ava2} className={classes.avatarStyling} />
+                                <img
+                                    src={ava2}
+                                    className={classes.avatarStyling}
+                                    alt='child avatar'
+                                />
                                 {/* Username 2 */}
                                 <>
                                     <br />

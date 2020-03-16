@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        margin: theme.spacing(3),
     },
     welcome: {
         marginBottom: theme.spacing(2),

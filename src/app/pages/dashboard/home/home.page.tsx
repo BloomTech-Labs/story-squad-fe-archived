@@ -47,7 +47,6 @@ const HomePage: React.FC<MainPageProps> = ({ className }) => {
         );
     return (
         <section className={`${className} ${classes.content}`}>
-            <ParentCard className={classes.header} user={me} />
             <ChildList className={classes.children} list={list} />
         </section>
     );

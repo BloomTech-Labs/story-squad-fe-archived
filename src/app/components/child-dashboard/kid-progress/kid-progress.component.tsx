@@ -1,7 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { Card, Button, Checkbox } from '@material-ui/core';
+import {
+    Card,
+    Button,
+    Checkbox,
+    Paper,
+    Popper,
+    MenuItem,
+    MenuList,
+    Fade,
+    Modal,
+    Backdrop,
+    Grow,
+    ClickAwayListener,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
@@ -10,15 +23,6 @@ import picIcon from './icons/Draw.png';
 import readIcon from './icons/read.png';
 import writeIcon from './icons/write.png';
 import cityscape from './icons/cityscape.png';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -36,17 +40,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'center',
-    },
-    title: {
-        marginRight: theme.spacing(2),
-    },
-    progress: {
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        maxWidth: 800,
-        flexGrow: 1,
-        height: theme.spacing(1),
-        borderRadius: 30,
     },
     grid: {
         display: 'flex',
@@ -77,8 +70,8 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     logoutButton: {
-        'marginLeft': '770px',
-        'marginBottom': '140px',
+        'marginLeft': '780px',
+        'marginBottom': '105px',
         'backgroundColor': '#FF6B35',
         'fontSize': '24px',
         'fontWeight': 'bold',
@@ -191,24 +184,19 @@ const useStyles = makeStyles((theme) => ({
         'color': '#ffffff',
     },
     modalFont: {
-        'fontFamily': 'Bangers',
-        'fontSize': '46px',
-        'fontWeight': 'bold',
-        '-webkit-text-stroke-width': '1px',
-        '-webkit-text-stroke-color': '#292929',
-        'color': 'white',
+        fontFamily: 'Bangers',
+        fontWeight: 'bold',
+        fontSize: '120%',
+        color: 'black',
     },
     modalBtn: {
-        'fontFamily': 'Bangers',
-        'fontSize': '46px',
-        'fontWeight': 'bold',
-        '-webkit-text-stroke-width': '1px',
-        '-webkit-text-stroke-color': '#292929',
-        'color': 'white',
-        'backgroundColor': '#FF6B35',
-        'width': '200px',
-        'textTransform': 'capitalize',
-        'border': '2px solid #292929',
+        fontFamily: 'Bangers',
+        fontWeight: 'bold',
+        color: 'black',
+        backgroundColor: '#FF6B35',
+
+        textTransform: 'capitalize',
+        border: '2px solid #292929',
     },
     headerBorder: {
         border: '4px solid #292929',
@@ -216,10 +204,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        marginTop: '229px',
     },
     appBar: {
-        height: '229px',
+        height: '206px',
         backgroundColor: '#6CEAE6',
         backgroundImage: `url(${cityscape})`,
         backgroundRepeat: 'no-repeat',
@@ -236,17 +223,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,
-        marginTop: '229px',
     },
-    content: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        margin: theme.spacing(3),
-    },
-    welcome: {
-        marginBottom: theme.spacing(2),
-    },
+
     columnFlex: {
         display: 'flex',
         flexDirection: 'column',
@@ -341,8 +319,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
         } else {
             setOpen(false);
         }
-    }, [progress, progress.reading]);
-
+    }, [progress.reading]);
     return (
         <>
             <Card className={classes.card}>

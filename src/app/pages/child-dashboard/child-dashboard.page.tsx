@@ -87,7 +87,11 @@ const ChildDashboard: React.FC = () => {
                         path='/'
                         render={() => (
                             <div className={classes.content}>
-                                <KidProgressCard child={response.me} onUpdate={request} />
+                                <KidProgressCard
+                                    child={response.me}
+                                    onUpdate={request}
+                                    progress={response.progress}
+                                />
                             </div>
                         )}
                     />

@@ -118,26 +118,30 @@ const useStyles = makeStyles((theme) => ({
     avatarDiv: {
         display: 'flex',
         width: '100%',
-        height: '90%',
+        height: '100%',
         backgroundImage: `url(${explode})`,
         backgroundRepeat: 'no-repeat',
         alignSelf: 'center',
+        alignItems: 'center',
         justifyContent: 'center',
         backgroundPosition: 'center',
+        flexDirection: 'column',
     },
     avatar1: {
         width: '100%',
-        transform: 'scale(0.5)',
+        transform: 'scale(0.6)',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundPosition: 'center',
+        marginBottom: '20%',
     },
     avatar2: {
         width: '100%',
-        transform: 'scale(0.5)',
+        transform: 'scale(0.55)',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundPosition: 'center',
+        marginBottom: '18%',
     },
     loading: {
         display: 'flex',
@@ -223,12 +227,14 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2, 4, 3),
     },
     username: {
-        'fontFamily': 'Bangers',
-        'color': '#FFFFFF',
-        'fontSize': '36px',
-        'fontWeight': 'bold',
-        '-webkit-text-stroke-width': '1px',
-        '-webkit-text-stroke-color': '#000000',
+        fontFamily: 'Bangers',
+        color: '#000000',
+        backgroundColor: 'white',
+        fontSize: '26px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2%',
+        borderRadius: '10px',
     },
     toolbar: theme.mixins.toolbar,
 }));
@@ -321,17 +327,25 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                     <div className={classes.grid}>
                         <div className={classes.writeDrawDiv}>
                             <div className={classes.draw}>
-                                <p className={classes.username}>{child.username}</p>
                                 <div className={classes.avatarDiv}>
-                                    <img src={avatar1} className={classes.avatar1}></img>
+                                    <p className={classes.username}>
+                                        Hi! My name is {child.username}!
+                                    </p>
+                                    <img
+                                        src={avatar1}
+                                        className={classes.avatar1}
+                                        alt='child avatar'></img>
                                 </div>
                             </div>
                         </div>
                         <div className={classes.writeDrawDiv}>
                             <div className={classes.teammate}>
-                                <p className={classes.username}>Teammate</p>
                                 <div className={classes.avatarDiv}>
-                                    <img src={avatar2} className={classes.avatar2}></img>
+                                    <p className={classes.username}>Hi! my name is Teammate!</p>
+                                    <img
+                                        src={avatar2}
+                                        className={classes.avatar2}
+                                        alt='child avatar'></img>
                                 </div>
                                 <Link to={`/kids-dashboard/points-dashboard`}>
                                     <Button className={classes.orangeButton} type='button'>

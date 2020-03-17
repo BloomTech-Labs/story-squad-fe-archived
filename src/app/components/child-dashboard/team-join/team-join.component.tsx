@@ -4,14 +4,10 @@ import moment from 'moment';
 import {
     Card,
     Button,
-    Checkbox,
     Paper,
     Popper,
     MenuItem,
     MenuList,
-    Fade,
-    Modal,
-    Backdrop,
     Grow,
     ClickAwayListener,
 } from '@material-ui/core';
@@ -19,11 +15,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
 import 'typeface-bangers';
-import picIcon from './icons/Draw.png';
-import readIcon from './icons/read.png';
-import writeIcon from './icons/write.png';
-import cityscape from './icons/cityscape.png';
-
+import cityscape from '../kid-progress/icons/cityscape.png';
+import avatar1 from '../../point-allocation-dashboard/img/cam.png';
+import avatar2 from '../../point-allocation-dashboard/img/other.png';
+import explode from '../../point-allocation-dashboard/img/expl.png';
 const useStyles = makeStyles((theme) => ({
     card: {
         alignSelf: 'center',
@@ -44,18 +39,14 @@ const useStyles = makeStyles((theme) => ({
     grid: {
         display: 'flex',
         border: '7px solid black',
+        height: '600px',
     },
     gridItem: {
         margin: theme.spacing(1.5),
     },
-    divider: {
-        gridColumnStart: '1',
-        gridColumnEnd: '5',
-        width: '100%',
-    },
     orangeButton: {
-        'alignItems': 'right',
-        'marginTop': '20px',
+        'position': 'absolute',
+        'top': '720px',
         'backgroundColor': '#FF6B35',
         'fontSize': '24px',
         'fontWeight': 'bold',
@@ -98,75 +89,55 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#FF6B35',
         },
     },
-    read: {
-        backgroundColor: '#B5D33D',
-        width: '40%',
-        border: '7px solid black',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '25px',
-    },
     height50: {
         height: '65%',
     },
-    write: {
-        backgroundColor: '#EB7D5B',
-        width: '100%',
-        border: '7px solid black',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '25px',
-    },
-    draw: {
+    teammate: {
         backgroundColor: '#FED23F',
         width: '100%',
+        height: '100%',
         border: '7px solid black',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '25px',
     },
-    linkFont: {
-        fontFamily: 'bangers',
-        fontSize: '96px',
+    draw: {
+        backgroundColor: '#B5D33D',
+        width: '100%',
+        height: '100%',
+        border: '7px solid black',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     writeDrawDiv: {
         width: '60%',
     },
-    drawIconDiv: {
-        width: '210px',
-        height: '210px',
-        backgroundImage: `url(${picIcon})`,
+    avatarDiv: {
+        display: 'flex',
+        width: '100%',
+        height: '90%',
+        backgroundImage: `url(${explode})`,
         backgroundRepeat: 'no-repeat',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        backgroundPosition: 'center',
     },
-    readIconDiv: {
-        width: '180px',
-        height: '200px',
-        backgroundImage: `url(${readIcon})`,
-        backgroundRepeat: 'no-repeat',
+    avatar1: {
+        width: '100%',
+        transform: 'scale(0.5)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundPosition: 'center',
     },
-    writeIconDiv: {
-        width: '210px',
-        height: '210px',
-        backgroundImage: `url(${writeIcon})`,
-        backgroundRepeat: 'no-repeat',
-    },
-    alignRight: {
-        alignSelf: 'flex-end',
-        justifyContent: 'flex-end',
-        transform: 'scale(3)',
-        padding: '10px',
-    },
-    alignRightTop: {
-        alignSelf: 'flex-end',
-        justifyContent: 'space-around',
-        transform: 'scale(3)',
-        padding: '10px',
+    avatar2: {
+        width: '100%',
+        transform: 'scale(0.5)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundPosition: 'center',
     },
     loading: {
         display: 'flex',
@@ -251,29 +222,30 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
-
+    username: {
+        'fontFamily': 'Bangers',
+        'color': '#FFFFFF',
+        'fontSize': '36px',
+        'fontWeight': 'bold',
+        '-webkit-text-stroke-width': '1px',
+        '-webkit-text-stroke-color': '#000000',
+    },
     toolbar: theme.mixins.toolbar,
 }));
 
-interface KidProgressProps {
+interface TeamJoinProps {
     onUpdate?: () => void;
     child: Child;
 }
 
-const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
+const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
-    const [response, loading, request] = useAPI('/children/progress', 'POST');
     const logout = () => window.dispatchEvent(new Event('logout'));
     const [menu, setMenu] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
-    const [open, setOpen] = React.useState(false);
 
     const handleToggle = () => {
         setMenu((prevMenu) => !prevMenu);
-    };
-
-    const modalClose = () => {
-        setOpen(false);
     };
 
     const handleClose = (event: React.MouseEvent<EventTarget>) => {
@@ -300,25 +272,6 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
         prevMenu.current = menu;
     }, [menu]);
 
-    React.useEffect(() => {
-        if (response?.progress && onUpdate) onUpdate();
-        if (response?.progress) response.progress = undefined;
-    }, [onUpdate, response]);
-
-    const { cohort, progress, username } = child;
-    const { dueDates: dueDateStrings } = cohort;
-    const dueDates = Object.fromEntries(
-        Object.entries(dueDateStrings).map(([key, date]) => [key, moment(date)])
-    );
-
-    React.useEffect(() => {
-        if (progress.reading === false) {
-            setOpen(true);
-        } else {
-            setOpen(false);
-        }
-    }, [progress.reading]);
-    console.log(response);
     return (
         <>
             <Card className={classes.card}>
@@ -351,7 +304,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                 </Popper>
                 <section className={classes.columnFlex}>
                     <div className={classes.appBar}>
-                        <div className={classes.headerFont}>Mission</div>
+                        <div className={classes.headerFont}>Join the Squad!</div>
                         <div className={classes.btn}>
                             {' '}
                             <Button
@@ -366,43 +319,23 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
 
                     <div className={classes.grid}>
-                        <div className={classes.read}>
-                            <Checkbox
-                                checked={progress.reading}
-                                className={classes.alignRightTop}
-                                color='primary'
-                            />
-                            <div className={classes.height50}>
-                                <Link
-                                    to={`/story/${cohort.week}`}
-                                    onClick={() => request({ reading: true })}>
-                                    <div className={classes.readIconDiv}></div>
-                                </Link>
+                        <div className={classes.writeDrawDiv}>
+                            <div className={classes.draw}>
+                                <p className={classes.username}>{child.username}</p>
+                                <div className={classes.avatarDiv}>
+                                    <img src={avatar1} className={classes.avatar1}></img>
+                                </div>
                             </div>
                         </div>
                         <div className={classes.writeDrawDiv}>
-                            <div className={classes.write}>
-                                <Checkbox
-                                    checked={progress.writing}
-                                    className={classes.alignRight}
-                                    color='primary'
-                                />
-                                <Link to={`/kids-dashboard/upload`}>
-                                    <div className={classes.writeIconDiv}></div>
-                                </Link>
-                            </div>
-                            <div className={classes.draw}>
-                                <Checkbox
-                                    checked={progress.drawing}
-                                    className={classes.alignRight}
-                                    color='primary'
-                                />
-                                <Link to={`/kids-dashboard/drawing-upload`}>
-                                    <div className={classes.drawIconDiv}></div>
-                                </Link>
-                                <Link to={`/kids-dashboard/team-join`}>
+                            <div className={classes.teammate}>
+                                <p className={classes.username}>Teammate</p>
+                                <div className={classes.avatarDiv}>
+                                    <img src={avatar2} className={classes.avatar2}></img>
+                                </div>
+                                <Link to={`/kids-dashboard/points-dashboard`}>
                                     <Button className={classes.orangeButton} type='button'>
-                                        TEAM UP!
+                                        Next
                                     </Button>
                                 </Link>
                             </div>
@@ -410,34 +343,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
                 </section>
             </Card>
-            <Modal
-                aria-labelledby='transition-modal-title'
-                aria-describedby='transition-modal-description'
-                className={classes.modal}
-                open={open}
-                onClose={modalClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}>
-                <Fade in={open}>
-                    <div className={classes.modalPaper}>
-                        <h2 id='transition-modal-title' className={classes.modalFont}>
-                            Welcome to Story Squad!
-                        </h2>
-                        <p id='transition-modal-description' className={classes.modalFont}>
-                            To begin your journey, click the 'READ' icon to start the story!
-                            <br />
-                            Are you ready to accept the challenge?
-                        </p>
-                        <Button onClick={modalClose} className={classes.modalBtn}>
-                            I accept!!
-                        </Button>
-                    </div>
-                </Fade>
-            </Modal>
         </>
     );
 };
-export { KidProgressCard };
+export { TeamJoin };

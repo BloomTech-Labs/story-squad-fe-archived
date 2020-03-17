@@ -11,6 +11,7 @@ import {
     PointDashboard,
     DrawingForm,
     StoryForm,
+    TeamJoin,
 } from '../../components';
 import { Switch, Route } from 'react-router-dom';
 import 'typeface-bangers';
@@ -82,6 +83,10 @@ const ChildDashboard: React.FC = () => {
                     <Route
                         path='/kids-dashboard/points-dashboard'
                         render={() => <PointDashboard child={response.me} />}
+                    />
+                    <Route
+                        path='/kids-dashboard/team-join'
+                        render={() => <TeamJoin child={response.me} />}
                     />
                     <Route
                         path='/'

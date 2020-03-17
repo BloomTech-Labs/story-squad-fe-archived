@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import { Child } from '../../models';
 import { Link } from 'react-router-dom';
-import { useForm } from '../../hooks';
+import { useForm, useAPI } from '../../hooks';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import Draw1 from './img/draw1.gif';
 import Draw2 from './img/draw2.jpg';
@@ -223,10 +223,10 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 interface PointCardProps {
-    className?: string;
     child: Child;
 }
-const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
+const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
+    const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
         story1Points: 10,
         story2Points: 10,
@@ -269,6 +269,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
             100 - (state.story1Points + state.story2Points + state.pic1Points + state.pic2Points)
         );
     }, [state]);
+
+    useEffect(() => {
+        return console.log(matchInfo);
+    }, [matchInfo]);
 
     const handleSubmit = () => {
         if (remainingPoints === 0) {

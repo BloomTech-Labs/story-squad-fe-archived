@@ -319,10 +319,11 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
         } else {
             setOpen(false);
         }
-    }, [progress.reading]);
+    }, [progress, progress.reading]);
     return (
         <>
             <Card className={classes.card}>
+                {/* Logout button */}
                 <Popper
                     open={menu}
                     anchorEl={anchorRef.current}
@@ -350,11 +351,14 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                         </Grow>
                     )}
                 </Popper>
+                {/* End of logout button */}
                 <section className={classes.columnFlex}>
+                    {/* Mission header */}
                     <div className={classes.appBar}>
                         <div className={classes.headerFont}>Mission</div>
                         <div className={classes.btn}>
                             {' '}
+                            {/* Menu button */}
                             <Button
                                 ref={anchorRef}
                                 aria-controls={menu ? 'menu-list-grow' : undefined}
@@ -363,11 +367,15 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 onClick={handleToggle}>
                                 Menu
                             </Button>
+                            {/* End of menu button */}
                         </div>
                     </div>
-
+                    {/* End of mission header  */}
+                    {/* Read / Write / Draw container */}
                     <div className={classes.grid}>
+                        {/* Read section  */}
                         <div className={classes.read}>
+                            {/* Read checkbox  */}
                             <Checkbox
                                 checked={progress.reading}
                                 className={classes.alignRightTop}
@@ -377,30 +385,38 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 <Link
                                     to={`/story/${cohort.week}`}
                                     onClick={() => request({ reading: true })}>
+                                    {/* Read icon  */}
                                     <div className={classes.readIconDiv}></div>
                                 </Link>
                             </div>
                         </div>
+                        {/* Write section  */}
                         <div className={classes.writeDrawDiv}>
                             <div className={classes.write}>
+                                {/* Write checkbox  */}
                                 <Checkbox
                                     checked={progress.writing}
                                     className={classes.alignRight}
                                     color='primary'
                                 />
                                 <Link to={`/kids-dashboard/upload`}>
+                                    {/* Write icon  */}
                                     <div className={classes.writeIconDiv}></div>
                                 </Link>
                             </div>
+                            {/* Draw section  */}
                             <div className={classes.draw}>
+                                {/* Draw checkbox  */}
                                 <Checkbox
                                     checked={progress.drawing}
                                     className={classes.alignRight}
                                     color='primary'
                                 />
                                 <Link to={`/kids-dashboard/drawing-upload`}>
+                                    {/* Draw icon  */}
                                     <div className={classes.drawIconDiv}></div>
                                 </Link>
+                                {/* Link + button to points allocation dashboard  */}
                                 <Link to={`/kids-dashboard/points-dashboard`}>
                                     <Button className={classes.orangeButton} type='button'>
                                         TEAM UP!
@@ -411,6 +427,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
                 </section>
             </Card>
+            {/* Conditional modal  */}
             <Modal
                 aria-labelledby='transition-modal-title'
                 aria-describedby='transition-modal-description'

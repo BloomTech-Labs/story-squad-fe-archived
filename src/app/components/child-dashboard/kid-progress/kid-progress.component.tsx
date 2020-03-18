@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         alignItems: 'center',
     },
-    grid: {
+    displayFlex: {
         display: 'flex',
         border: '7px solid black',
     },
@@ -372,7 +372,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
                     {/* End of mission header  */}
                     {/* Read / Write / Draw container */}
-                    <div className={classes.grid}>
+                    <div className={classes.displayFlex}>
                         {/* Read section  */}
                         <div className={classes.read}>
                             {/* Read checkbox  */}

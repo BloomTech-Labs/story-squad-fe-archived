@@ -150,6 +150,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                     page5: '',
                 },
             });
+            setSubmitted(false);
         }
     }, [removed, currentSubmission, setState, remove]);
 
@@ -157,6 +158,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         if (currentSubmission && Object.keys(currentSubmission?.story).length) {
             const { story } = currentSubmission;
             setState(story);
+            setSubmitted(true);
         }
     }, [currentSubmission, setState]);
 
@@ -182,7 +184,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
             });
             setSubmitted(false);
         }
-    }, [submission, removed, progress, setState, remove, setSubmitted]);
+    }, [submission, removed, progress, setState]);
 
     React.useEffect(() => {
         if (newProgress && onUpdate) onUpdate();

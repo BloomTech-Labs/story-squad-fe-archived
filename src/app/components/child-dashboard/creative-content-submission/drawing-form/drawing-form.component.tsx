@@ -112,21 +112,13 @@ interface DrawingFormProps {
 const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
-    const [currentSubmission] = useAPI(`/submissions/${week}`, 'GET', false);
-    const [submission, submitting, submit] = useAPI('/submissions', 'POST');
-    const [removed, removing, remove] = useAPI(`/submissions/${week}`, 'DELETE');
+    const [submitted, setSubmitted] = React.useState(false);
+    const [currentSubmission] = useAPI(`/illustrationRoutes/${week}`, 'GET', false);
+    const [submission, submitting, submit] = useAPI('/illustrationRoutes', 'POST');
+    const [removed, removing, remove] = useAPI(`/illustrationRoutes/${week}`, 'DELETE');
     const [newProgress, progressing, progress] = useAPI('/children/progress', 'POST');
     const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
-        storyText: '',
         illustration: '',
-        type: 'illustration',
-        story: {
-            page1: '',
-            page2: '',
-            page3: '',
-            page4: '',
-            page5: '',
-        },
     });
 
     const handleSubmit = handleSubmitBuilder(() => {
@@ -138,57 +130,52 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     };
 
     React.useEffect(() => {
-        if (removed && currentSubmission?.submission) {
-            currentSubmission.submission = undefined;
+        console.log('within removed effect', currentSubmission);
+        if (removed && currentSubmission && currentSubmission?.illustration) {
+            currentSubmission.illustration = undefined;
             setState({
-                storyText: '',
                 illustration: '',
-                type: 'illustration',
-                story: {
-                    page1: '',
-                    page2: '',
-                    page3: '',
-                    page4: '',
-                    page5: '',
-                },
             });
         }
     }, [removed, currentSubmission, setState]);
 
     React.useEffect(() => {
-        if (currentSubmission?.submission) {
-            const { submission } = currentSubmission;
-            setState(submission);
+        if (
+            currentSubmission &&
+            currentSubmission?.illustration &&
+            Object.keys(currentSubmission?.illustration).length
+        ) {
+            const { illustration } = currentSubmission;
+            setState(illustration);
+            setSubmitted(true);
         }
     }, [currentSubmission, setState]);
 
     React.useEffect(() => {
-        if (submission?.submission) {
+        if (
+            submission &&
+            submission?.illustration &&
+            Object.keys(submission?.illustration).length
+        ) {
             progress({ drawing: true });
-            submission.submission = undefined;
+            setSubmitted(true);
         }
 
-        if (removed?.submission) {
+        if (removed && Object.keys(removed).length) {
             progress({ drawing: false });
-            removed.submission = undefined;
+            setState({
+                illustration: '',
+            });
+            setSubmitted(false);
         }
-    }, [submission, removed, progress]);
+    }, [submission, removed, progress, setState]);
 
     React.useEffect(() => {
         if (newProgress && onUpdate) onUpdate();
         if (newProgress?.progress?.drawing) history.push('/kids-dashboard');
     }, [history, onUpdate, newProgress]);
 
-    React.useEffect(() => {
-        const { page1, page2, page3, page4, page5 } = state.story;
-        if (!page4 && page5) setState({ ...state, story: { ...state.story, page5: '' } });
-        if (!page3 && page4) setState({ ...state, story: { ...state.story, page4: '' } });
-        if (!page2 && page3) setState({ ...state, story: { ...state.story, page3: '' } });
-        if (!page1 && page2) setState({ ...state, story: { ...state.story, page2: '' } });
-    }, [setState, state]);
-
-    const submitted = !!currentSubmission?.submission;
-    const { storyText, illustration, story } = state;
+    const { illustration } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
             <Card className={classes.card}>

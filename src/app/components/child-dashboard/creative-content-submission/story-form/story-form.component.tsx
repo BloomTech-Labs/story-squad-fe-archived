@@ -112,6 +112,7 @@ interface StoryFormProps {
 const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
+    const [submitted, setSubmitted] = React.useState(true);
     const [currentSubmission] = useAPI(`/storyRoutes/${week}`, 'GET', false);
     const [submission, submitting, submit] = useAPI('/storyRoutes', 'POST');
     const [removed, removing, remove] = useAPI(`/storyRoutes/${week}`, 'DELETE');
@@ -164,6 +165,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         if (submission && Object.keys(submission?.stories).length) {
             progress({ writing: true });
             // submission.submission = undefined;
+            setSubmitted(true);
         }
 
         if (removed && Object.keys(removed).length) {
@@ -178,8 +180,9 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                     page5: '',
                 },
             });
+            setSubmitted(false);
         }
-    }, [submission, removed, progress, setState, remove]);
+    }, [submission, removed, progress, setState, remove, setSubmitted]);
 
     React.useEffect(() => {
         if (newProgress && onUpdate) onUpdate();
@@ -194,11 +197,22 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         if (!page1 && page2) setState({ ...state, story: { ...state.story, page2: '' } });
     }, [setState, state]);
 
-    let submitted;
+    // React.useEffect(() => {
+    //     console.log('any string');
+    //     if(removed) {
+    //         console.log(Object.keys(removed));
+    //     }
+    //     if(currentSubmission && currentSubmission?.story) {
+    //         console.log(Object.keys(currentSubmission?.story));
+    //     }
+    //     if (removed && Object.keys(removed).length) {
+    //         currentSubmission && Object.keys(currentSubmission?.story).length
+    //             ? setSubmitted(true)
+    //             : setSubmitted(false);
+    //     }
+    //     console.log('submitted', submitted);
+    // }, [currentSubmission, submitted, removed]);
 
-    currentSubmission && Object.keys(currentSubmission?.story).length
-        ? (submitted = true)
-        : (submitted = false);
     const { storyText, story } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>

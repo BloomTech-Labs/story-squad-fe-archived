@@ -138,12 +138,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
 
     React.useEffect(() => {
         if (removed && currentSubmission?.stories) {
-            console.log(
-                'stories',
-                currentSubmission.stories,
-                'story',
-                currentSubmission.stories.story
-            );
             currentSubmission.stories = undefined;
             setState({
                 storyText: '',
@@ -156,12 +150,10 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                 },
             });
         }
-    }, [removed, currentSubmission, setState]);
+    }, [removed, currentSubmission, setState, remove]);
 
     React.useEffect(() => {
-        console.log('string in front', currentSubmission);
         if (currentSubmission && Object.keys(currentSubmission?.story).length) {
-            console.log('poop', currentSubmission);
             const { story } = currentSubmission;
             setState(story);
         }
@@ -170,16 +162,24 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     React.useEffect(() => {
         console.log('masmiadshfuwgfy', submission);
         if (submission && Object.keys(submission?.stories).length) {
-            console.log('triggered?', submission.stories);
             progress({ writing: true });
             // submission.submission = undefined;
         }
 
-        if (removed?.stories) {
+        if (removed && Object.keys(removed).length) {
             progress({ writing: false });
-            removed.stories = undefined;
+            setState({
+                storyText: '',
+                story: {
+                    page1: '',
+                    page2: '',
+                    page3: '',
+                    page4: '',
+                    page5: '',
+                },
+            });
         }
-    }, [submission, removed, progress]);
+    }, [submission, removed, progress, setState, remove]);
 
     React.useEffect(() => {
         if (newProgress && onUpdate) onUpdate();

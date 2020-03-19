@@ -130,7 +130,6 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     });
 
     const handleSubmit = handleSubmitBuilder(() => {
-        if (state.story.page1) setState({ ...state, storyText: '' });
         submit(state);
     });
 

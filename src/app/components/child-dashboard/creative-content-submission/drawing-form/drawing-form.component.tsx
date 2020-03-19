@@ -11,6 +11,7 @@ import {
     TextField,
     Typography,
     Button,
+    LinearProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
@@ -230,8 +231,9 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-                {submitting && <CircularProgress size={68} className={classes.buttonProgress} />}
+                {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
             </div>
+            {submitting && <LinearProgress variant='query' color='secondary' />}
         </form>
     );
 };

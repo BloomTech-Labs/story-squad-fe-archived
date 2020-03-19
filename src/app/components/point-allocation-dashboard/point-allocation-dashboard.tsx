@@ -23,7 +23,7 @@ import Draw2 from './img/draw2.jpg';
 import Draw3 from './img/draw3.jpg';
 import Draw4 from './img/draw4.jpg';
 import ava1 from './img/cam.png';
-import ava2 from './img/other.png';
+import ava2 from './img/Hero13.png';
 import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
 import splode from './img/splode.png';
 

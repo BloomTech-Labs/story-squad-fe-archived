@@ -184,17 +184,17 @@ const useStyles = makeStyles((theme) => ({
         'color': '#ffffff',
     },
     modalFont: {
-        fontFamily: 'Bangers',
+        fontFamily: 'nunito',
         fontWeight: 'bold',
-        fontSize: '120%',
+        fontSize: '130%',
         color: 'black',
     },
     modalBtn: {
-        fontFamily: 'Bangers',
+        fontFamily: 'nunito',
         fontWeight: 'bold',
         color: 'black',
         backgroundColor: '#FF6B35',
-
+        fontSize: '110%',
         textTransform: 'capitalize',
         border: '2px solid #292929',
     },
@@ -427,9 +427,9 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                             Welcome to Story Squad!
                         </h2>
                         <p id='transition-modal-description' className={classes.modalFont}>
-                            To begin your journey, click the 'READ' icon to start the story!
+                            To begin your journey, click the 'READ' icon and start the story!
                             <br />
-                            Are you ready to accept the challenge?
+                            Are you ready to accept the mission?
                         </p>
                         <Button onClick={modalClose} className={classes.modalBtn}>
                             I accept!!

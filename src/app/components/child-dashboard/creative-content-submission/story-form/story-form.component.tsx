@@ -4,13 +4,12 @@ import { Link } from 'react-router-dom';
 import {
     Card,
     CardContent,
-    CardHeader,
     CircularProgress,
     Fab,
-    Icon,
     TextField,
     Typography,
     Button,
+    LinearProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
@@ -113,14 +112,12 @@ interface StoryFormProps {
 const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
-    const [currentSubmission] = useAPI(`/submissions/${week}`, 'GET', false);
-    const [submission, submitting, submit] = useAPI('/submissions', 'POST');
-    const [removed, removing, remove] = useAPI(`/submissions/${week}`, 'DELETE');
+    const [currentSubmission] = useAPI(`/storyRoutes/${week}`, 'GET', false);
+    const [submission, submitting, submit] = useAPI('/storyRoutes', 'POST');
+    const [removed, removing, remove] = useAPI(`/storyRoutes/${week}`, 'DELETE');
     const [newProgress, progressing, progress] = useAPI('/children/progress', 'POST');
     const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
         storyText: '',
-        illustration: '',
-        type: 'story',
         story: {
             page1: '',
             page2: '',
@@ -140,12 +137,16 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     };
 
     React.useEffect(() => {
-        if (removed && currentSubmission?.submission) {
-            currentSubmission.submission = undefined;
+        if (removed && currentSubmission?.stories) {
+            console.log(
+                'stories',
+                currentSubmission.stories,
+                'story',
+                currentSubmission.stories.story
+            );
+            currentSubmission.stories = undefined;
             setState({
                 storyText: '',
-                illustration: '',
-                type: 'story',
                 story: {
                     page1: '',
                     page2: '',
@@ -158,21 +159,25 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     }, [removed, currentSubmission, setState]);
 
     React.useEffect(() => {
-        if (currentSubmission?.submission) {
-            const { submission } = currentSubmission;
-            setState(submission);
+        console.log('string in front', currentSubmission);
+        if (currentSubmission && Object.keys(currentSubmission?.story).length) {
+            console.log('poop', currentSubmission);
+            const { story } = currentSubmission;
+            setState(story);
         }
     }, [currentSubmission, setState]);
 
     React.useEffect(() => {
-        if (submission?.submission) {
+        console.log('masmiadshfuwgfy', submission);
+        if (submission && Object.keys(submission?.stories).length) {
+            console.log('triggered?', submission.stories);
             progress({ writing: true });
-            submission.submission = undefined;
+            // submission.submission = undefined;
         }
 
-        if (removed?.submission) {
+        if (removed?.stories) {
             progress({ writing: false });
-            removed.submission = undefined;
+            removed.stories = undefined;
         }
     }, [submission, removed, progress]);
 
@@ -189,7 +194,11 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         if (!page1 && page2) setState({ ...state, story: { ...state.story, page2: '' } });
     }, [setState, state]);
 
-    const submitted = !!currentSubmission?.submission;
+    let submitted;
+
+    currentSubmission && Object.keys(currentSubmission?.story).length
+        ? (submitted = true)
+        : (submitted = false);
     const { storyText, story } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
@@ -249,8 +258,9 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-                {submitting && <CircularProgress size={68} className={classes.buttonProgress} />}
+                {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
             </div>
+            {submitting && <LinearProgress variant='query' color='secondary' />}
         </form>
     );
 };

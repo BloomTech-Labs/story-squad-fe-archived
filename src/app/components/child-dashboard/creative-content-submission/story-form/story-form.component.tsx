@@ -112,7 +112,7 @@ interface StoryFormProps {
 const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
-    const [submitted, setSubmitted] = React.useState(true);
+    const [submitted, setSubmitted] = React.useState(false);
     const [currentSubmission] = useAPI(`/storyRoutes/${week}`, 'GET', false);
     const [submission, submitting, submit] = useAPI('/storyRoutes', 'POST');
     const [removed, removing, remove] = useAPI(`/storyRoutes/${week}`, 'DELETE');

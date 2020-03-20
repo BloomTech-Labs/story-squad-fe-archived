@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 import { CssBaseline } from '@material-ui/core';
-
 import { AppProvider } from './state';
 import { PrivateRoute, ErrorHandler } from './components';
 import {
@@ -18,7 +16,6 @@ import {
     ErrorPage,
     HelpPage,
 } from './pages';
-import { ChildHome } from './components/child-dashboard/child-home/child-home.component';
 
 const App: React.FC = () => {
     return (
@@ -56,7 +53,6 @@ const App: React.FC = () => {
                         <Route path='/admin/register' component={AdminSignUpPage} />
                         <Route path='/admin' component={AdminSignInPage} />
                         <Route exact path={['/', '/signup']} component={SignUpPage} />
-                        {/* <Route exact path={'/'} component={ChildHome} /> */}
                         <Route path='/' component={ErrorPage} />
                     </Switch>
                 </Router>

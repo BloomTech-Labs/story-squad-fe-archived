@@ -11,7 +11,6 @@ import {
     LinearProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 import cityscape from '../../../../pages/child-dashboard/icons/cityscape.png';
 import { useAPI, useForm } from '../../../../hooks';
 
@@ -43,13 +42,6 @@ const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         bottom: theme.spacing(2),
         right: theme.spacing(2),
-    },
-    buttonProgress: {
-        color: green[500],
-        position: 'absolute',
-        top: -6,
-        left: -6,
-        zIndex: 1,
     },
     orangeButton: {
         'backgroundColor': '#FF6B35',
@@ -162,10 +154,8 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     }, [currentSubmission, setState]);
 
     React.useEffect(() => {
-        console.log('masmiadshfuwgfy', submission);
         if (submission && Object.keys(submission?.stories).length) {
             progress({ writing: true });
-            // submission.submission = undefined;
             setSubmitted(true);
         }
 

@@ -4,16 +4,13 @@ import { Link } from 'react-router-dom';
 import {
     Card,
     CardContent,
-    CardHeader,
     Fab,
-    Icon,
     TextField,
     Typography,
     Button,
     LinearProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 import cityscape from '../../../../pages/child-dashboard/icons/cityscape.png';
 import { useAPI, useForm } from '../../../../hooks';
 

@@ -44,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
     displayFlex: {
         display: 'flex',
         border: '7px solid black',
+        flexDirection: 'column',
+        [theme.breakpoints.only('sm')]: {
+            flexDirection: 'row',
+            width: '100%',
+        },
     },
     gridItem: {
         margin: theme.spacing(1.5),
@@ -99,6 +104,9 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     read: {
+        [theme.breakpoints.only('sm')]: {
+            width: '100%',
+        },
         backgroundColor: '#B5D33D',
         width: '40%',
         border: '7px solid black',
@@ -120,6 +128,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         padding: '25px',
+        [theme.breakpoints.only('sm')]: {
+            width: '100%',
+        },
     },
     draw: {
         backgroundColor: '#FED23F',
@@ -130,6 +141,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         padding: '25px',
+        [theme.breakpoints.only('sm')]: {
+            width: '100%',
+        },
     },
     linkFont: {
         fontFamily: 'bangers',
@@ -137,6 +151,9 @@ const useStyles = makeStyles((theme) => ({
     },
     writeDrawDiv: {
         width: '60%',
+        [theme.breakpoints.only('sm')]: {
+            width: '100%',
+        },
     },
     drawIconDiv: {
         width: '210px',
@@ -228,6 +245,9 @@ const useStyles = makeStyles((theme) => ({
     columnFlex: {
         display: 'flex',
         flexDirection: 'column',
+        [theme.breakpoints.only('sm')]: {
+            width: '100%',
+        },
     },
     buttonDiv: {
         width: '100%',
@@ -385,7 +405,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 <Link
                                     to={`/story/${cohort.week}`}
                                     onClick={() => request({ reading: true })}>
-                                    {/* Read icon  */}
+                                    {/* Read icon + "Read" */}
                                     <div className={classes.readIconDiv}></div>
                                 </Link>
                             </div>
@@ -400,7 +420,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                     color='primary'
                                 />
                                 <Link to={`/kids-dashboard/upload`}>
-                                    {/* Write icon  */}
+                                    {/* Write icon + "Write" */}
                                     <div className={classes.writeIconDiv}></div>
                                 </Link>
                             </div>
@@ -413,7 +433,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                     color='primary'
                                 />
                                 <Link to={`/kids-dashboard/drawing-upload`}>
-                                    {/* Draw icon  */}
+                                    {/* Draw icon + "Draw"  */}
                                     <div className={classes.drawIconDiv}></div>
                                 </Link>
                                 {/* Link + button to points allocation dashboard  */}

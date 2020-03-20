@@ -104,11 +104,11 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     read: {
+        backgroundColor: '#B5D33D',
+        width: '40%',
         [theme.breakpoints.only('sm')]: {
             width: '100%',
         },
-        backgroundColor: '#B5D33D',
-        width: '40%',
         border: '7px solid black',
         display: 'flex',
         flexDirection: 'column',

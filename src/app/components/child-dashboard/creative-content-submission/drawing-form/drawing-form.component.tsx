@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
         'borderRadius': '10px',
         'color': 'white',
         'width': '200px',
-
         'border': '3px solid #292929',
         'textTransform': 'capitalize',
         'fontFamily': 'nunito',
@@ -209,9 +208,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-                {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
             </div>
-
             <div>
                 {submitting && (
                     <>

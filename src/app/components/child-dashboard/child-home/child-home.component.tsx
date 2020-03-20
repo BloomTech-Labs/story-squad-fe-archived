@@ -369,15 +369,8 @@ const ChildHome: React.FC<ChildHomeProps> = ({ child, onUpdate }) => {
                     <div className={classes.modalPaper}>
                         <h2 id='transition-modal-title' className={classes.modalFont}>
                             Welcome to Story Squad!
-                        </h2>
-                        <p id='transition-modal-description' className={classes.modalFont}>
-                            To begin your journey, click the 'READ' icon to start the story!
-                            <br />
-                            Are you ready to accept the challenge?
-                        </p>
-                        <Button onClick={modalClose} className={classes.modalBtn}>
-                            I accept!!
-                        </Button>
+                        </h2>{' '}
+                        >
                     </div>
                 </Fade>
             </Modal>

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import {
     Card,
     CardContent,
-    CircularProgress,
     Fab,
     TextField,
     Typography,
@@ -36,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
         width: '50%',
     },
     preview: {
-        height: 400,
-        width: 400,
+        height: 200,
+        width: 200,
     },
     wrapper: {
         margin: theme.spacing(1),
@@ -199,22 +198,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         if (!page1 && page2) setState({ ...state, story: { ...state.story, page2: '' } });
     }, [setState, state]);
 
-    // React.useEffect(() => {
-    //     console.log('any string');
-    //     if(removed) {
-    //         console.log(Object.keys(removed));
-    //     }
-    //     if(currentSubmission && currentSubmission?.story) {
-    //         console.log(Object.keys(currentSubmission?.story));
-    //     }
-    //     if (removed && Object.keys(removed).length) {
-    //         currentSubmission && Object.keys(currentSubmission?.story).length
-    //             ? setSubmitted(true)
-    //             : setSubmitted(false);
-    //     }
-    //     console.log('submitted', submitted);
-    // }, [currentSubmission, submitted, removed]);
-
     const { storyText, story } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
@@ -274,9 +257,15 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-                {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
             </div>
-            {submitting && <LinearProgress variant='query' color='secondary' />}
+            <div>
+                {submitting && (
+                    <>
+                        <h2>Sending Progress...</h2>
+                        <LinearProgress variant='query' color='secondary' />
+                    </>
+                )}
+            </div>
         </form>
     );
 };

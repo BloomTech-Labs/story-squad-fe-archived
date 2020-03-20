@@ -91,10 +91,13 @@ const useStyles = makeStyles((theme) => ({
         padding: '0 20px',
     },
     usernameDiv: {
-        fontFamily: 'nunito',
-        fontSize: '36px',
-        display: 'inline-block',
-        marginLeft: '10px',
+        'fontSize': '36px',
+        'display': 'inline-block',
+        'marginLeft': '10px',
+        'fontFamily': 'bangers',
+        'color': '#0267C1',
+        '-webkit-text-stroke-width': '1px',
+        '-webkit-text-stroke-color': '#ff6d3a',
     },
 }));
 
@@ -129,7 +132,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
                             fullWidth
                             disabled={loading}
                             onClick={() => request()}>
-                            {child.username}'s Progress
+                            {child.username} Login
                         </Button>
                     ) : (
                         <Link to={`/dashboard/subscribe/${child.id}`}>

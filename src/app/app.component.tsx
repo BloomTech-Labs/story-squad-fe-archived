@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 import { CssBaseline } from '@material-ui/core';
-
 import { AppProvider } from './state';
 import { PrivateRoute, ErrorHandler } from './components';
 import {
@@ -18,7 +16,6 @@ import {
     ErrorPage,
     HelpPage,
 } from './pages';
-import { PointDashboard } from './components/point-allocation-dashboard';
 
 const App: React.FC = () => {
     return (

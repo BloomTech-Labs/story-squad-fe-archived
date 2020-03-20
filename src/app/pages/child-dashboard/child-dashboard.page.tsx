@@ -11,6 +11,7 @@ import {
     PointDashboard,
     DrawingForm,
     StoryForm,
+    TeamJoin,
 } from '../../components';
 import { Switch, Route } from 'react-router-dom';
 import 'typeface-bangers';
@@ -84,14 +85,14 @@ const ChildDashboard: React.FC = () => {
                         render={() => <PointDashboard child={response.me} />}
                     />
                     <Route
+                        path='/kids-dashboard/team-join'
+                        render={() => <TeamJoin child={response.me} />}
+                    />
+                    <Route
                         path='/'
                         render={() => (
                             <div className={classes.content}>
-                                <KidProgressCard
-                                    child={response.me}
-                                    onUpdate={request}
-                                    progress={response.progress}
-                                />
+                                <KidProgressCard child={response.me} onUpdate={request} />
                             </div>
                         )}
                     />

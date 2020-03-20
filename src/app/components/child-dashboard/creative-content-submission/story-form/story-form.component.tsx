@@ -4,16 +4,13 @@ import { Link } from 'react-router-dom';
 import {
     Card,
     CardContent,
-    CardHeader,
-    CircularProgress,
     Fab,
-    Icon,
     TextField,
     Typography,
     Button,
+    LinearProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 import cityscape from '../../../../pages/child-dashboard/icons/cityscape.png';
 import { useAPI, useForm } from '../../../../hooks';
 
@@ -37,21 +34,14 @@ const useStyles = makeStyles((theme) => ({
         width: '50%',
     },
     preview: {
-        height: 400,
-        width: 400,
+        height: 200,
+        width: 200,
     },
     wrapper: {
         margin: theme.spacing(1),
         position: 'fixed',
         bottom: theme.spacing(2),
         right: theme.spacing(2),
-    },
-    buttonProgress: {
-        color: green[500],
-        position: 'absolute',
-        top: -6,
-        left: -6,
-        zIndex: 1,
     },
     orangeButton: {
         'backgroundColor': '#FF6B35',
@@ -113,14 +103,13 @@ interface StoryFormProps {
 const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
-    const [currentSubmission] = useAPI(`/submissions/${week}`, 'GET', false);
-    const [submission, submitting, submit] = useAPI('/submissions', 'POST');
-    const [removed, removing, remove] = useAPI(`/submissions/${week}`, 'DELETE');
+    const [submitted, setSubmitted] = React.useState(false);
+    const [currentSubmission] = useAPI(`/storyRoutes/${week}`, 'GET', false);
+    const [submission, submitting, submit] = useAPI('/storyRoutes', 'POST');
+    const [removed, removing, remove] = useAPI(`/storyRoutes/${week}`, 'DELETE');
     const [newProgress, progressing, progress] = useAPI('/children/progress', 'POST');
     const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
         storyText: '',
-        illustration: '',
-        type: 'story',
         story: {
             page1: '',
             page2: '',
@@ -140,12 +129,10 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     };
 
     React.useEffect(() => {
-        if (removed && currentSubmission?.submission) {
-            currentSubmission.submission = undefined;
+        if (removed && currentSubmission?.stories) {
+            currentSubmission.stories = undefined;
             setState({
                 storyText: '',
-                illustration: '',
-                type: 'story',
                 story: {
                     page1: '',
                     page2: '',
@@ -154,27 +141,39 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                     page5: '',
                 },
             });
+            setSubmitted(false);
         }
-    }, [removed, currentSubmission, setState]);
+    }, [removed, currentSubmission, setState, remove]);
 
     React.useEffect(() => {
-        if (currentSubmission?.submission) {
-            const { submission } = currentSubmission;
-            setState(submission);
+        if (currentSubmission && Object.keys(currentSubmission?.story).length) {
+            const { story } = currentSubmission;
+            setState(story);
+            setSubmitted(true);
         }
     }, [currentSubmission, setState]);
 
     React.useEffect(() => {
-        if (submission?.submission) {
+        if (submission && Object.keys(submission?.stories).length) {
             progress({ writing: true });
-            submission.submission = undefined;
+            setSubmitted(true);
         }
 
-        if (removed?.submission) {
+        if (removed && Object.keys(removed).length) {
             progress({ writing: false });
-            removed.submission = undefined;
+            setState({
+                storyText: '',
+                story: {
+                    page1: '',
+                    page2: '',
+                    page3: '',
+                    page4: '',
+                    page5: '',
+                },
+            });
+            setSubmitted(false);
         }
-    }, [submission, removed, progress]);
+    }, [submission, removed, progress, setState]);
 
     React.useEffect(() => {
         if (newProgress && onUpdate) onUpdate();
@@ -189,7 +188,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         if (!page1 && page2) setState({ ...state, story: { ...state.story, page2: '' } });
     }, [setState, state]);
 
-    const submitted = !!currentSubmission?.submission;
     const { storyText, story } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
@@ -249,7 +247,14 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-                {submitting && <CircularProgress size={68} className={classes.buttonProgress} />}
+            </div>
+            <div>
+                {submitting && (
+                    <>
+                        <h2>Sending Progress...</h2>
+                        <LinearProgress variant='query' color='secondary' />
+                    </>
+                )}
             </div>
         </form>
     );

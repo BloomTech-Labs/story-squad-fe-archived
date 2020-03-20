@@ -4,16 +4,13 @@ import { Link } from 'react-router-dom';
 import {
     Card,
     CardContent,
-    CardHeader,
-    CircularProgress,
     Fab,
-    Icon,
     TextField,
     Typography,
     Button,
+    LinearProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 import cityscape from '../../../../pages/child-dashboard/icons/cityscape.png';
 import { useAPI, useForm } from '../../../../hooks';
 
@@ -37,21 +34,14 @@ const useStyles = makeStyles((theme) => ({
         width: '50%',
     },
     preview: {
-        height: 400,
-        width: 400,
+        height: 200,
+        width: 200,
     },
     wrapper: {
         margin: theme.spacing(1),
         position: 'fixed',
         bottom: theme.spacing(2),
         right: theme.spacing(2),
-    },
-    buttonProgress: {
-        color: green[500],
-        position: 'absolute',
-        top: -6,
-        left: -6,
-        zIndex: 1,
     },
     orangeButton: {
         'backgroundColor': '#FF6B35',
@@ -60,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
         'borderRadius': '10px',
         'color': 'white',
         'width': '200px',
-
         'border': '3px solid #292929',
         'textTransform': 'capitalize',
         'fontFamily': 'nunito',
@@ -111,25 +100,16 @@ interface DrawingFormProps {
 const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
-    const [currentSubmission] = useAPI(`/submissions/${week}`, 'GET', false);
-    const [submission, submitting, submit] = useAPI('/submissions', 'POST');
-    const [removed, removing, remove] = useAPI(`/submissions/${week}`, 'DELETE');
+    const [submitted, setSubmitted] = React.useState(false);
+    const [currentSubmission] = useAPI(`/illustrationRoutes/${week}`, 'GET', false);
+    const [submission, submitting, submit] = useAPI('/illustrationRoutes', 'POST');
+    const [removed, removing, remove] = useAPI(`/illustrationRoutes/${week}`, 'DELETE');
     const [newProgress, progressing, progress] = useAPI('/children/progress', 'POST');
     const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
-        storyText: '',
         illustration: '',
-        type: 'illustration',
-        story: {
-            page1: '',
-            page2: '',
-            page3: '',
-            page4: '',
-            page5: '',
-        },
     });
 
     const handleSubmit = handleSubmitBuilder(() => {
-        if (state.story.page1) setState({ ...state, storyText: '' });
         submit(state);
     });
 
@@ -138,62 +118,57 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     };
 
     React.useEffect(() => {
-        if (removed && currentSubmission?.submission) {
-            currentSubmission.submission = undefined;
+        if (removed && currentSubmission && currentSubmission?.illustration) {
+            currentSubmission.illustration = undefined;
             setState({
-                storyText: '',
                 illustration: '',
-                type: 'illustration',
-                story: {
-                    page1: '',
-                    page2: '',
-                    page3: '',
-                    page4: '',
-                    page5: '',
-                },
             });
         }
-    }, [removed, currentSubmission, setState]);
+    }, [removed, currentSubmission, setState, remove]);
 
     React.useEffect(() => {
-        if (currentSubmission?.submission) {
-            const { submission } = currentSubmission;
-            setState(submission);
+        if (
+            currentSubmission &&
+            currentSubmission?.illustration &&
+            Object.keys(currentSubmission?.illustration).length
+        ) {
+            const { illustration } = currentSubmission;
+            setState(illustration);
+            setSubmitted(true);
         }
     }, [currentSubmission, setState]);
 
     React.useEffect(() => {
-        if (submission?.submission) {
+        console.log('submission', submission);
+        if (
+            submission &&
+            submission?.illustrations &&
+            Object.keys(submission?.illustrations).length
+        ) {
             progress({ drawing: true });
-            submission.submission = undefined;
+            setSubmitted(true);
         }
 
-        if (removed?.submission) {
+        if (removed && Object.keys(removed).length) {
             progress({ drawing: false });
-            removed.submission = undefined;
+            setState({
+                illustration: '',
+            });
+            setSubmitted(false);
         }
-    }, [submission, removed, progress]);
+    }, [submission, removed, progress, setState, currentSubmission]);
 
     React.useEffect(() => {
         if (newProgress && onUpdate) onUpdate();
         if (newProgress?.progress?.drawing) history.push('/kids-dashboard');
     }, [history, onUpdate, newProgress]);
 
-    React.useEffect(() => {
-        const { page1, page2, page3, page4, page5 } = state.story;
-        if (!page4 && page5) setState({ ...state, story: { ...state.story, page5: '' } });
-        if (!page3 && page4) setState({ ...state, story: { ...state.story, page4: '' } });
-        if (!page2 && page3) setState({ ...state, story: { ...state.story, page3: '' } });
-        if (!page1 && page2) setState({ ...state, story: { ...state.story, page2: '' } });
-    }, [setState, state]);
-
-    const submitted = !!currentSubmission?.submission;
-    const { storyText, illustration, story } = state;
+    const { illustration } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
             <Card className={classes.card}>
                 <div className={classes.appBar}>
-                    <div className={classes.headerFont}>Ready, Set... DRAW!</div>
+                    <div className={classes.headerFont}>Ready, Set... DRAW! 1 and 7</div>
                 </div>
                 <CardContent className={classes.content}>
                     <h2 className={classes.promptText}>Draw your favorite part of the story!</h2>
@@ -230,7 +205,15 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-                {submitting && <CircularProgress size={68} className={classes.buttonProgress} />}
+            </div>
+            <div>
+                {submitting && (
+                    <>
+                        {' '}
+                        <h2>Sending Progress...</h2>
+                        <LinearProgress variant='query' color='secondary' />
+                    </>
+                )}
             </div>
         </form>
     );

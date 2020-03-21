@@ -239,7 +239,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     const [draw2, setDraw2] = useState(false);
     const [draw3, setDraw3] = useState(false);
     const [draw4, setDraw4] = useState(false);
-    console.log(child);
+    const [thisMatch, setThisMatch] = useState();
+    const [student, setStudent] = useState();
+    const [teammate, setTeammate] = useState();
 
     const handleOpen = () => {
         setOpen(true);
@@ -270,8 +272,16 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     }, [state]);
 
     useEffect(() => {
-        return console.log(matchInfo);
+        if (matchInfo) {
+            setThisMatch({ ...matchInfo.thisMatch });
+            setStudent({ ...matchInfo.thisMatch.team.student });
+            setTeammate({ ...matchInfo.thisMatch.team.teammate });
+            return console.log('inside', thisMatch);
+        }
     }, [matchInfo]);
+
+    console.log('did I make it out?', student);
+    console.log('DUDE, WE MADE IT!!', teammate);
 
     const handleSubmit = () => {
         if (remainingPoints === 0) {
@@ -293,14 +303,14 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                 <Typography className={classes.h2Styling} variant='h2'>
                                     Point Share
                                 </Typography>
-                                <Typography className={classes.h3Styling}>
+                                <div className={classes.h3Styling}>
                                     Total Points Remaining:
                                     {remainingPoints < 0 || remainingPoints > 100 ? (
                                         <div className={classes.red}>Total must equal 100</div>
                                     ) : (
                                         <div>{remainingPoints}</div>
                                     )}
-                                </Typography>
+                                </div>
                             </Grid>
                         </Grid>
                         {/* End header code  */}
@@ -323,7 +333,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                 {/* Username 1 */}
                                 <>
                                     <br />
-                                    <p className={classes.username1}>{child.username}</p>
+                                    <p className={classes.username1}>
+                                        {student === undefined ? 'Student' : student.username}
+                                    </p>
                                 </>
                             </Grid>
                             <Grid
@@ -450,7 +462,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                 {/* Username 2 */}
                                 <>
                                     <br />
-                                    <p className={classes.username2}>Teammate</p>
+                                    <p className={classes.username2}>
+                                        {teammate === undefined ? 'Teammate' : teammate.username}
+                                    </p>
                                 </>
                             </Grid>
                             <Grid

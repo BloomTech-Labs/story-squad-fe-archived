@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     displayFlex: {
         display: 'flex',
         border: '7px solid black',
-        flexDirection: 'column',
+        flexDirection: 'row',
         [theme.breakpoints.only('sm')]: {
             flexDirection: 'row',
             width: '100%',

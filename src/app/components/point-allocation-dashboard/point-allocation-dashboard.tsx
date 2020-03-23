@@ -226,7 +226,7 @@ interface PointCardProps {
     child: Child;
 }
 
-const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
+const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const [points] = useAPI(`/battlesRoutes/battles`, 'PUT');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({

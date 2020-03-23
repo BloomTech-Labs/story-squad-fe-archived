@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import { Child } from '../../models';
 import { Link } from 'react-router-dom';
-import { useForm } from '../../hooks';
+import { useForm, useAPI } from '../../hooks';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import Draw1 from './img/draw1.gif';
 import Draw2 from './img/draw2.jpg';
@@ -222,10 +222,10 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 interface PointCardProps {
-    className?: string;
     child: Child;
 }
-const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
+const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
+    const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
         story1Points: 10,
         story2Points: 10,
@@ -239,7 +239,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
     const [draw2, setDraw2] = useState(false);
     const [draw3, setDraw3] = useState(false);
     const [draw4, setDraw4] = useState(false);
-    console.log(child);
+    const [thisMatch, setThisMatch] = useState();
+    const [student, setStudent] = useState();
+    const [teammate, setTeammate] = useState();
 
     const handleOpen = () => {
         setOpen(true);
@@ -269,6 +271,18 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
         );
     }, [state]);
 
+    useEffect(() => {
+        if (matchInfo) {
+            setThisMatch({ ...matchInfo.thisMatch });
+            setStudent({ ...matchInfo.thisMatch.team.student });
+            setTeammate({ ...matchInfo.thisMatch.team.teammate });
+            return console.log('inside', thisMatch);
+        }
+    }, [matchInfo, thisMatch]);
+
+    console.log('did I make it out?', student);
+    console.log('DUDE, WE MADE IT!!', teammate);
+
     const handleSubmit = () => {
         if (remainingPoints === 0) {
             return console.log('Success!');
@@ -289,14 +303,14 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 <Typography className={classes.h2Styling} variant='h2'>
                                     Point Share
                                 </Typography>
-                                <Typography className={classes.h3Styling}>
+                                <div className={classes.h3Styling}>
                                     Total Points Remaining:
                                     {remainingPoints < 0 || remainingPoints > 100 ? (
                                         <div className={classes.red}>Total must equal 100</div>
                                     ) : (
                                         <div>{remainingPoints}</div>
                                     )}
-                                </Typography>
+                                </div>
                             </Grid>
                         </Grid>
                         {/* End header code  */}
@@ -319,7 +333,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 {/* Username 1 */}
                                 <>
                                     <br />
-                                    <p className={classes.username1}>{child.username}</p>
+                                    <p className={classes.username1}>
+                                        {student === undefined ? 'Student' : student.username}
+                                    </p>
                                 </>
                             </Grid>
                             <Grid
@@ -446,7 +462,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
                                 {/* Username 2 */}
                                 <>
                                     <br />
-                                    <p className={classes.username2}>Teammate</p>
+                                    <p className={classes.username2}>
+                                        {teammate === undefined ? 'Teammate' : teammate.username}
+                                    </p>
                                 </>
                             </Grid>
                             <Grid

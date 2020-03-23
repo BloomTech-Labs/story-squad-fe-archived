@@ -283,7 +283,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
         }
     }, [matchInfo]);
 
-
     const handleSubmit = () => {
         if (remainingPoints === 0) {
             return console.log('Success!');

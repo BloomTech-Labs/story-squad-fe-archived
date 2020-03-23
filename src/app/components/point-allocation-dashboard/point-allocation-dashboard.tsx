@@ -13,17 +13,18 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
+    CircularProgress,
 } from '@material-ui/core';
 import { Child } from '../../models';
 import { Link } from 'react-router-dom';
-import { useForm } from '../../hooks';
+import { useForm, useAPI } from '../../hooks';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import Draw1 from './img/draw1.gif';
 import Draw2 from './img/draw2.jpg';
 import Draw3 from './img/draw3.jpg';
 import Draw4 from './img/draw4.jpg';
 import ava1 from './img/cam.png';
-import ava2 from './img/other.png';
+import ava2 from './img/Hero13.png';
 import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
 import splode from './img/splode.png';
 
@@ -140,7 +141,6 @@ const useStyles = makeStyles((theme: Theme) =>
             'borderRadius': '10px',
             'color': 'white',
             'width': '200px',
-
             'border': '3px solid #292929',
             'textTransform': 'capitalize',
             'fontFamily': 'nunito',
@@ -223,10 +223,12 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 interface PointCardProps {
-    className?: string;
     child: Child;
 }
-const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
+
+const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
+    const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
+    const [points] = useAPI(`/battlesRoutes/battles`, 'PUT');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
         story1Points: 10,
         story2Points: 10,
@@ -240,7 +242,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
     const [draw2, setDraw2] = useState(false);
     const [draw3, setDraw3] = useState(false);
     const [draw4, setDraw4] = useState(false);
-    console.log(child);
+    const [thisMatch, setThisMatch] = useState();
+    const [student, setStudent] = useState();
+    const [teammate, setTeammate] = useState();
 
     const handleOpen = () => {
         setOpen(true);
@@ -270,6 +274,15 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
         );
     }, [state]);
 
+    useEffect(() => {
+        if (matchInfo) {
+            setThisMatch({ ...matchInfo.thisMatch });
+            setStudent({ ...matchInfo.thisMatch.team.student });
+            setTeammate({ ...matchInfo.thisMatch.team.teammate });
+            return console.log('inside', thisMatch);
+        }
+    }, [matchInfo]);
+
     const handleSubmit = () => {
         if (remainingPoints === 0) {
             return console.log('Success!');
@@ -281,383 +294,445 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
     return (
         <div>
             {/* Container for avatars + inputs + buttons */}
-            <ValidatorForm onSubmit={handleSubmit} onError={(errors) => console.log(errors)}>
-                <Container className={classes.containerStyling}>
-                    <Grid container>
-                        {/* Header code */}
-                        <Grid container direction='row' className={classes.appBar}>
-                            <Grid container item justify='space-around' alignItems='center'>
-                                <Typography className={classes.h2Styling} variant='h2'>
-                                    Point Share
-                                </Typography>
-                                <Typography className={classes.h3Styling}>
-                                    Total Points Remaining:
-                                    {remainingPoints < 0 || remainingPoints > 100 ? (
-                                        <div className={classes.red}>Total must equal 100</div>
-                                    ) : (
-                                        <div>{remainingPoints}</div>
-                                    )}
-                                </Typography>
+            {student === undefined || teammate === undefined ? (
+                <div>
+                    <CircularProgress />
+                </div>
+            ) : (
+                <>
+                    <ValidatorForm
+                        onSubmit={handleSubmit}
+                        onError={(errors) => console.log(errors)}>
+                        <Container className={classes.containerStyling}>
+                            <Grid container>
+                                {/* Header code */}
+                                <Grid container direction='row' className={classes.appBar}>
+                                    <Grid container item justify='space-around' alignItems='center'>
+                                        <Typography className={classes.h2Styling} variant='h2'>
+                                            Point Share
+                                        </Typography>
+                                        <Typography className={classes.h3Styling}>
+                                            Total Points Remaining:
+                                            {remainingPoints < 0 || remainingPoints > 100 ? (
+                                                <div className={classes.red}>
+                                                    Total must equal 100
+                                                </div>
+                                            ) : (
+                                                <div>{remainingPoints}</div>
+                                            )}
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                                {/* End header code  */}
+                                {/* Row 1 */}
+                                <Grid
+                                    container
+                                    direction='row'
+                                    justify='center'
+                                    alignItems='center'>
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        direction='column'
+                                        alignItems='center'
+                                        sm={4}
+                                        className={classes.avatarMargin}>
+                                        {/* Avatar 1 */}
+                                        <img
+                                            src={ava1}
+                                            className={classes.avatarStyling}
+                                            alt='child avatar'
+                                        />
+                                        {/* Username 1 */}
+                                        <>
+                                            <br />
+                                            <p className={classes.username1}>{student.username}</p>
+                                        </>
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        alignItems='center'
+                                        sm={4}
+                                        className={classes.gridRow1}>
+                                        {/* Story 1 Preview */}
+                                        <img
+                                            src={student.story.story.page1}
+                                            className={classes.imagePreview}
+                                            onClick={handleOpen}
+                                            alt={`${student.username}'s story`}
+                                        />
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        alignItems='center'
+                                        sm={4}
+                                        className={classes.gridRow2}>
+                                        {/* Drawing 1 preview */}
+                                        <img
+                                            src={student.illustration.illustration}
+                                            alt={`${student.username}'s drawing`}
+                                            className={classes.imagePreview}
+                                            onClick={handleDraw2}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                {/* Row 2 */}
+                                <Grid
+                                    container
+                                    direction='row'
+                                    justify='center'
+                                    alignItems='center'>
+                                    {/* This Grid is empty to keep the grid spacing the same */}
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        sm={4}
+                                        className={classes.avatarMargin4}></Grid>
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        sm={4}
+                                        className={classes.gridInput1}>
+                                        {/* Story 1 input */}
+                                        <TextValidator
+                                            validators={[
+                                                'minNumber:10',
+                                                'maxNumber:70',
+                                                'required',
+                                            ]}
+                                            errorMessages={[
+                                                'Oops! Each submission must be given at least 10 points.',
+                                                'Oops! A submission cannot be given more than 70 points.',
+                                                'This is required.',
+                                            ]}
+                                            className={classes.pointInput}
+                                            required
+                                            autoFocus
+                                            name='story1Points'
+                                            onChange={handleInputChange('story1Points')}
+                                            value={state.story1Points}
+                                            type='number'
+                                            InputProps={{ inputProps: { min: 10, max: 70 } }}
+                                            style={{
+                                                position: 'absolute',
+                                                top: '431px',
+                                                background: 'white',
+                                                width: '145px',
+                                                borderRadius: '5px',
+                                            }}
+                                            variant='outlined'
+                                        />
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        sm={4}
+                                        className={classes.gridInput2}>
+                                        {/* Drawing 1 input */}
+                                        <TextValidator
+                                            validators={[
+                                                'minNumber:10',
+                                                'maxNumber:70',
+                                                'required',
+                                            ]}
+                                            errorMessages={[
+                                                'Oops! Each submission must be given at least 10 points.',
+                                                'Oops! A submission cannot be given more than 70 points.',
+                                                'This is required.',
+                                            ]}
+                                            className={classes.pointInput}
+                                            required
+                                            autoFocus
+                                            name='pic1Points'
+                                            onChange={handleInputChange('pic1Points')}
+                                            value={state.pic1Points}
+                                            type='number'
+                                            variant='outlined'
+                                            InputProps={{ inputProps: { min: 10, max: 70 } }}
+                                            style={{
+                                                position: 'absolute',
+                                                top: '431px',
+                                                background: 'white',
+                                                width: '145px',
+                                                borderRadius: '5px',
+                                            }}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                {/* Row 3 */}
+                                <Grid
+                                    container
+                                    direction='row'
+                                    justify='center'
+                                    alignItems='center'>
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        direction='column'
+                                        alignItems='center'
+                                        sm={4}
+                                        className={classes.avatarMargin2}>
+                                        {/* Avatar 2 */}
+                                        <img
+                                            src={ava2}
+                                            className={classes.avatarStyling}
+                                            alt='child avatar'
+                                        />
+                                        {/* Username 2 */}
+                                        <>
+                                            <br />
+                                            <p className={classes.username2}>{teammate.username}</p>
+                                        </>
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        alignItems='center'
+                                        sm={4}
+                                        className={classes.gridRow3}>
+                                        {/* Story 2 Preview */}
+                                        <img
+                                            src={teammate.story.story.page1}
+                                            className={classes.imagePreview}
+                                            onClick={handleDraw3}
+                                            alt={`${teammate.username}'s story`}
+                                        />
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        alignItems='center'
+                                        sm={4}
+                                        className={classes.gridRow4}>
+                                        {/* Drawing 2 Preview */}
+                                        <img
+                                            src={teammate.illustration.illustration}
+                                            className={classes.imagePreview}
+                                            onClick={handleDraw4}
+                                            alt={`${teammate.username}'s illustration`}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                {/* Row 4 */}
+                                <Grid
+                                    container
+                                    direction='row'
+                                    justify='center'
+                                    alignItems='center'>
+                                    {/* This Grid is empty to keep the grid spacing the same */}
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        sm={4}
+                                        className={classes.avatarMargin3}>
+                                        {' '}
+                                        <Link to={`/kids-dashboard`}>
+                                            <Button className={classes.orangeButton} type='button'>
+                                                Back
+                                            </Button>
+                                        </Link>
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        sm={4}
+                                        className={classes.gridInput3}>
+                                        {/* Story 2 Input */}
+                                        <TextValidator
+                                            validators={[
+                                                'minNumber:10',
+                                                'maxNumber:70',
+                                                'required',
+                                            ]}
+                                            errorMessages={[
+                                                'Oops! Each submission must be given at least 10 points.',
+                                                'Oops! A submission cannot be given more than 70 points.',
+                                                'This is required.',
+                                            ]}
+                                            className={classes.pointInput}
+                                            required
+                                            autoFocus
+                                            name='story2Points'
+                                            onChange={handleInputChange('story2Points')}
+                                            value={state.story2Points}
+                                            type='number'
+                                            InputProps={{ inputProps: { min: 10, max: 70 } }}
+                                            variant='outlined'
+                                            style={{
+                                                position: 'absolute',
+                                                top: '813px',
+                                                background: 'white',
+                                                width: '145px',
+                                                borderRadius: '5px',
+                                            }}
+                                        />
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        item
+                                        justify='center'
+                                        sm={4}
+                                        className={classes.gridInput4}>
+                                        {/* Drawing 2 Input */}
+                                        <TextValidator
+                                            validators={[
+                                                'minNumber:10',
+                                                'maxNumber:70',
+                                                'required',
+                                            ]}
+                                            errorMessages={[
+                                                'Oops! Each submission must be given at least 10 points.',
+                                                'Oops! A submission cannot be given more than 70 points.',
+                                                'This is required.',
+                                            ]}
+                                            className={classes.pointInput}
+                                            required
+                                            autoFocus
+                                            name='pic2Points'
+                                            onChange={handleInputChange('pic2Points')}
+                                            value={state.pic2Points}
+                                            type='number'
+                                            variant='outlined'
+                                            style={{
+                                                position: 'absolute',
+                                                top: '813px',
+                                                background: 'white',
+                                                width: '145px',
+                                                borderRadius: '5px',
+                                            }}
+                                        />
+                                        <Button className={classes.orangeButton} type='submit'>
+                                            Next
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                                {/* Row 5 */}
                             </Grid>
-                        </Grid>
-                        {/* End header code  */}
-                        {/* Row 1 */}
-                        <Grid container direction='row' justify='center' alignItems='center'>
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                direction='column'
-                                alignItems='center'
-                                sm={4}
-                                className={classes.avatarMargin}>
-                                {/* Avatar 1 */}
+                        </Container>
+                    </ValidatorForm>
+                    <Modal
+                        aria-labelledby='transition-modal-title'
+                        aria-describedby='transition-modal-description'
+                        className={classes.modal}
+                        open={open}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}>
+                        <Fade in={open}>
+                            <div className={classes.paper}>
                                 <img
-                                    src={ava1}
-                                    className={classes.avatarStyling}
-                                    alt='child avatar'
+                                    src={student.story.story.page1}
+                                    alt={`${student.username}'s story`}
                                 />
-                                {/* Username 1 */}
-                                <>
-                                    <br />
-                                    <p className={classes.username1}>{child.username}</p>
-                                </>
-                            </Grid>
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                alignItems='center'
-                                sm={4}
-                                className={classes.gridRow1}>
-                                {/* Story 1 Preview */}
+                                <h2 id='transition-modal-title'>{student.username}'s Story</h2>
+                            </div>
+                        </Fade>
+                    </Modal>
+                    <Modal
+                        aria-labelledby='transition-modal-title'
+                        aria-describedby='transition-modal-description'
+                        className={classes.modal}
+                        open={draw2}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}>
+                        <Fade in={draw2}>
+                            <div className={classes.paper}>
                                 <img
-                                    src={Draw1}
-                                    className={classes.imagePreview}
-                                    onClick={handleOpen}
-                                    alt='childs drawing of family'
+                                    src={student.illustration.illustration}
+                                    alt={`${student.username}'s illustration`}
                                 />
-                            </Grid>
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                alignItems='center'
-                                sm={4}
-                                className={classes.gridRow2}>
-                                {/* Drawing 1 preview */}
+                                <h2 id='transition-modal-title'>
+                                    {student.username}'s Illustration
+                                </h2>
+                            </div>
+                        </Fade>
+                    </Modal>
+                    <Modal
+                        aria-labelledby='transition-modal-title'
+                        aria-describedby='transition-modal-description'
+                        className={classes.modal}
+                        open={draw3}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}>
+                        <Fade in={draw3}>
+                            <div className={classes.paper}>
                                 <img
-                                    src={Draw2}
-                                    className={classes.imagePreview}
-                                    onClick={handleDraw2}
-                                    alt='childs drawing of family'
+                                    src={teammate.story.story.page1}
+                                    alt={`${teammate.username}'s Story`}
                                 />
-                            </Grid>
-                        </Grid>
-                        {/* Row 2 */}
-                        <Grid container direction='row' justify='center' alignItems='center'>
-                            {/* This Grid is empty to keep the grid spacing the same */}
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                sm={4}
-                                className={classes.avatarMargin4}></Grid>
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                sm={4}
-                                className={classes.gridInput1}>
-                                {/* Story 1 input */}
-                                <TextValidator
-                                    validators={['minNumber:10', 'maxNumber:70', 'required']}
-                                    errorMessages={[
-                                        'Oops! Each submission must be given at least 10 points.',
-                                        'Oops! A submission cannot be given more than 70 points.',
-                                        'This is required.',
-                                    ]}
-                                    className={classes.pointInput}
-                                    required
-                                    autoFocus
-                                    name='story1Points'
-                                    onChange={handleInputChange('story1Points')}
-                                    value={state.story1Points}
-                                    type='number'
-                                    InputProps={{ inputProps: { min: 10, max: 70 } }}
-                                    style={{
-                                        position: 'absolute',
-                                        top: '431px',
-                                        background: 'white',
-                                        width: '145px',
-                                        borderRadius: '5px',
-                                    }}
-                                    variant='outlined'
-                                />
-                            </Grid>
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                sm={4}
-                                className={classes.gridInput2}>
-                                {/* Drawing 1 input */}
-                                <TextValidator
-                                    validators={['minNumber:10', 'maxNumber:70', 'required']}
-                                    errorMessages={[
-                                        'Oops! Each submission must be given at least 10 points.',
-                                        'Oops! A submission cannot be given more than 70 points.',
-                                        'This is required.',
-                                    ]}
-                                    className={classes.pointInput}
-                                    required
-                                    autoFocus
-                                    name='pic1Points'
-                                    onChange={handleInputChange('pic1Points')}
-                                    value={state.pic1Points}
-                                    type='number'
-                                    variant='outlined'
-                                    InputProps={{ inputProps: { min: 10, max: 70 } }}
-                                    style={{
-                                        position: 'absolute',
-                                        top: '431px',
-                                        background: 'white',
-                                        width: '145px',
-                                        borderRadius: '5px',
-                                    }}
-                                />
-                            </Grid>
-                        </Grid>
-                        {/* Row 3 */}
-                        <Grid container direction='row' justify='center' alignItems='center'>
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                direction='column'
-                                alignItems='center'
-                                sm={4}
-                                className={classes.avatarMargin2}>
-                                {/* Avatar 2 */}
+                                <h2 id='transition-modal-title'>{teammate.username}'s Story</h2>
+                            </div>
+                        </Fade>
+                    </Modal>
+                    <Modal
+                        aria-labelledby='transition-modal-title'
+                        aria-describedby='transition-modal-description'
+                        className={classes.modal}
+                        open={draw4}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}>
+                        <Fade in={draw4}>
+                            <div className={classes.paper}>
                                 <img
-                                    src={ava2}
-                                    className={classes.avatarStyling}
-                                    alt='child avatar'
+                                    src={teammate.illustration.illustration}
+                                    alt={`${teammate.username}'s Illustration`}
                                 />
-                                {/* Username 2 */}
-                                <>
-                                    <br />
-                                    <p className={classes.username2}>Teammate</p>
-                                </>
-                            </Grid>
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                alignItems='center'
-                                sm={4}
-                                className={classes.gridRow3}>
-                                {/* Story 2 Preview */}
-                                <img
-                                    src={Draw3}
-                                    className={classes.imagePreview}
-                                    onClick={handleDraw3}
-                                    alt='childs drawing of family'
-                                />
-                            </Grid>
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                alignItems='center'
-                                sm={4}
-                                className={classes.gridRow4}>
-                                {/* Drawing 2 Preview */}
-                                <img
-                                    src={Draw4}
-                                    className={classes.imagePreview}
-                                    onClick={handleDraw4}
-                                    alt='childs drawing of random shapes'
-                                />
-                            </Grid>
-                        </Grid>
-                        {/* Row 4 */}
-                        <Grid container direction='row' justify='center' alignItems='center'>
-                            {/* This Grid is empty to keep the grid spacing the same */}
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                sm={4}
-                                className={classes.avatarMargin3}>
-                                {' '}
-                                <Link to={`/kids-dashboard`}>
-                                    <Button className={classes.orangeButton} type='button'>
-                                        Back
-                                    </Button>
-                                </Link>
-                            </Grid>
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                sm={4}
-                                className={classes.gridInput3}>
-                                {/* Story 2 Input */}
-                                <TextValidator
-                                    validators={['minNumber:10', 'maxNumber:70', 'required']}
-                                    errorMessages={[
-                                        'Oops! Each submission must be given at least 10 points.',
-                                        'Oops! A submission cannot be given more than 70 points.',
-                                        'This is required.',
-                                    ]}
-                                    className={classes.pointInput}
-                                    required
-                                    autoFocus
-                                    name='story2Points'
-                                    onChange={handleInputChange('story2Points')}
-                                    value={state.story2Points}
-                                    type='number'
-                                    InputProps={{ inputProps: { min: 10, max: 70 } }}
-                                    variant='outlined'
-                                    style={{
-                                        position: 'absolute',
-                                        top: '813px',
-                                        background: 'white',
-                                        width: '145px',
-                                        borderRadius: '5px',
-                                    }}
-                                />
-                            </Grid>
-                            <Grid
-                                container
-                                item
-                                justify='center'
-                                sm={4}
-                                className={classes.gridInput4}>
-                                {/* Drawing 2 Input */}
-                                <TextValidator
-                                    validators={['minNumber:10', 'maxNumber:70', 'required']}
-                                    errorMessages={[
-                                        'Oops! Each submission must be given at least 10 points.',
-                                        'Oops! A submission cannot be given more than 70 points.',
-                                        'This is required.',
-                                    ]}
-                                    className={classes.pointInput}
-                                    required
-                                    autoFocus
-                                    name='pic2Points'
-                                    onChange={handleInputChange('pic2Points')}
-                                    value={state.pic2Points}
-                                    type='number'
-                                    variant='outlined'
-                                    style={{
-                                        position: 'absolute',
-                                        top: '813px',
-                                        background: 'white',
-                                        width: '145px',
-                                        borderRadius: '5px',
-                                    }}
-                                />
-                                <Button className={classes.orangeButton} type='submit'>
-                                    Next
-                                </Button>
-                            </Grid>
-                        </Grid>
-                        {/* Row 5 */}
-                    </Grid>
-                </Container>
-            </ValidatorForm>
-            <Modal
-                aria-labelledby='transition-modal-title'
-                aria-describedby='transition-modal-description'
-                className={classes.modal}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}>
-                <Fade in={open}>
-                    <div className={classes.paper}>
-                        <img src={Draw1} alt='childs drawing of family' />
-                        <h2 id='transition-modal-title'>Placeholder Image</h2>
-                    </div>
-                </Fade>
-            </Modal>
-            <Modal
-                aria-labelledby='transition-modal-title'
-                aria-describedby='transition-modal-description'
-                className={classes.modal}
-                open={draw2}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}>
-                <Fade in={draw2}>
-                    <div className={classes.paper}>
-                        <img src={Draw2} alt='childs drawing of family' />
-                        <h2 id='transition-modal-title'>Placeholder Image</h2>
-                    </div>
-                </Fade>
-            </Modal>
-            <Modal
-                aria-labelledby='transition-modal-title'
-                aria-describedby='transition-modal-description'
-                className={classes.modal}
-                open={draw3}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}>
-                <Fade in={draw3}>
-                    <div className={classes.paper}>
-                        <img src={Draw3} alt='childs drawing of family' />
-                        <h2 id='transition-modal-title'>Placeholder Image</h2>
-                    </div>
-                </Fade>
-            </Modal>
-            <Modal
-                aria-labelledby='transition-modal-title'
-                aria-describedby='transition-modal-description'
-                className={classes.modal}
-                open={draw4}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}>
-                <Fade in={draw4}>
-                    <div className={classes.paper}>
-                        <img src={Draw4} alt='childs drawing of random shapes' />
-                        <h2 id='transition-modal-title'>Placeholder Image</h2>
-                    </div>
-                </Fade>
-            </Modal>
-            <Dialog
-                open={error}
-                onClose={handleClose}
-                aria-labelledby='alert-dialog-title'
-                aria-describedby='alert-dialog-description'>
-                <DialogContent>
-                    <DialogContentText id='alert-dialog-description' style={{ color: 'red' }}>
-                        Whoopsies! It seems you haven't allocated 100 points. Please allocate 100
-                        points between all four entries. After that, you can move on to the next
-                        step!
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color='primary' autoFocus>
-                        OK
-                    </Button>
-                </DialogActions>
-            </Dialog>
+                                <h2 id='transition-modal-title'>
+                                    {teammate.username}'s Illustration
+                                </h2>
+                            </div>
+                        </Fade>
+                    </Modal>
+                    <Dialog
+                        open={error}
+                        onClose={handleClose}
+                        aria-labelledby='alert-dialog-title'
+                        aria-describedby='alert-dialog-description'>
+                        <DialogContent>
+                            <DialogContentText
+                                id='alert-dialog-description'
+                                style={{ color: 'red' }}>
+                                Whoopsies! It seems you haven't allocated 100 points. Please
+                                allocate 100 points between all four entries. After that, you can
+                                move on to the next step!
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleClose} color='primary' autoFocus>
+                                OK
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </>
+            )}
         </div>
     );
 };

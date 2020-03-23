@@ -278,7 +278,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setTeammate({ ...matchInfo.thisMatch.team.teammate });
             return console.log('inside', thisMatch);
         }
-    }, [matchInfo]);
+    }, [matchInfo, thisMatch]);
 
     console.log('did I make it out?', student);
     console.log('DUDE, WE MADE IT!!', teammate);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Card,
@@ -10,6 +10,7 @@ import {
     Grow,
     ClickAwayListener,
 } from '@material-ui/core';
+import { useAPI } from '../../../hooks';
 import { makeStyles } from '@material-ui/core/styles';
 import { Child } from '../../../models';
 import 'typeface-bangers';
@@ -242,6 +243,9 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
     const logout = () => window.dispatchEvent(new Event('logout'));
     const [menu, setMenu] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
+    const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
+    const [student, setStudent] = useState();
+    const [teammate, setTeammate] = useState();
 
     const handleToggle = () => {
         setMenu((prevMenu) => !prevMenu);
@@ -270,6 +274,13 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
 
         prevMenu.current = menu;
     }, [menu]);
+
+    useEffect(() => {
+        if (matchInfo) {
+            setStudent({ ...matchInfo.thisMatch.team.student });
+            setTeammate({ ...matchInfo.thisMatch.team.teammate });
+        }
+    }, [matchInfo]);
 
     return (
         <>
@@ -323,7 +334,8 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                             <div className={classes.draw}>
                                 <div className={classes.avatarDiv}>
                                     <p className={classes.username}>
-                                        Hi! My name is {child.username}!
+                                        Hi! My name is{' '}
+                                        {student === undefined ? 'Student' : student.username}!
                                     </p>
                                     <img
                                         src={avatar1}
@@ -335,7 +347,10 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                         <div className={classes.writeDrawDiv}>
                             <div className={classes.teammate}>
                                 <div className={classes.avatarDiv}>
-                                    <p className={classes.username}>Hi! my name is Teammate!</p>
+                                    <p className={classes.username}>
+                                        Hi! my name is{' '}
+                                        {teammate === undefined ? 'Teammate' : teammate.username}!
+                                    </p>
                                     <img
                                         src={avatar2}
                                         className={classes.avatar2}

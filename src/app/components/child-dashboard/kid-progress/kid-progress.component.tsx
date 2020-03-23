@@ -41,9 +41,14 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         alignItems: 'center',
     },
-    grid: {
+    displayFlex: {
         display: 'flex',
         border: '7px solid black',
+        flexDirection: 'row',
+        [theme.breakpoints.only('sm')]: {
+            flexDirection: 'row',
+            width: '100%',
+        },
     },
     gridItem: {
         margin: theme.spacing(1.5),
@@ -101,6 +106,9 @@ const useStyles = makeStyles((theme) => ({
     read: {
         backgroundColor: '#B5D33D',
         width: '40%',
+        [theme.breakpoints.only('sm')]: {
+            width: '100%',
+        },
         border: '7px solid black',
         display: 'flex',
         flexDirection: 'column',
@@ -120,6 +128,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         padding: '25px',
+        [theme.breakpoints.only('sm')]: {
+            width: '100%',
+        },
     },
     draw: {
         backgroundColor: '#FED23F',
@@ -130,6 +141,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         padding: '25px',
+        [theme.breakpoints.only('sm')]: {
+            width: '100%',
+        },
     },
     linkFont: {
         fontFamily: 'bangers',
@@ -137,6 +151,9 @@ const useStyles = makeStyles((theme) => ({
     },
     writeDrawDiv: {
         width: '60%',
+        [theme.breakpoints.only('sm')]: {
+            width: '100%',
+        },
     },
     drawIconDiv: {
         width: '210px',
@@ -228,6 +245,9 @@ const useStyles = makeStyles((theme) => ({
     columnFlex: {
         display: 'flex',
         flexDirection: 'column',
+        [theme.breakpoints.only('sm')]: {
+            width: '100%',
+        },
     },
     buttonDiv: {
         width: '100%',
@@ -322,6 +342,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     return (
         <>
             <Card className={classes.card}>
+                {/* Logout button */}
                 <Popper
                     open={menu}
                     anchorEl={anchorRef.current}
@@ -349,11 +370,14 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                         </Grow>
                     )}
                 </Popper>
+                {/* End of logout button */}
                 <section className={classes.columnFlex}>
+                    {/* Mission header */}
                     <div className={classes.appBar}>
                         <div className={classes.headerFont}>Mission</div>
                         <div className={classes.btn}>
                             {' '}
+                            {/* Menu button */}
                             <Button
                                 ref={anchorRef}
                                 aria-controls={menu ? 'menu-list-grow' : undefined}
@@ -362,11 +386,15 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 onClick={handleToggle}>
                                 Menu
                             </Button>
+                            {/* End of menu button */}
                         </div>
                     </div>
-
-                    <div className={classes.grid}>
+                    {/* End of mission header  */}
+                    {/* Read / Write / Draw container */}
+                    <div className={classes.displayFlex}>
+                        {/* Read section  */}
                         <div className={classes.read}>
+                            {/* Read checkbox  */}
                             <Checkbox
                                 checked={progress.reading}
                                 className={classes.alignRightTop}
@@ -376,28 +404,35 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 <Link
                                     to={`/story/${cohort.week}`}
                                     onClick={() => request({ reading: true })}>
+                                    {/* Read icon + "Read" */}
                                     <div className={classes.readIconDiv}></div>
                                 </Link>
                             </div>
                         </div>
+                        {/* Write section  */}
                         <div className={classes.writeDrawDiv}>
                             <div className={classes.write}>
+                                {/* Write checkbox  */}
                                 <Checkbox
                                     checked={progress.writing}
                                     className={classes.alignRight}
                                     color='primary'
                                 />
                                 <Link to={`/kids-dashboard/upload`}>
+                                    {/* Write icon + "Write" */}
                                     <div className={classes.writeIconDiv}></div>
                                 </Link>
                             </div>
+                            {/* Draw section  */}
                             <div className={classes.draw}>
+                                {/* Draw checkbox  */}
                                 <Checkbox
                                     checked={progress.drawing}
                                     className={classes.alignRight}
                                     color='primary'
                                 />
                                 <Link to={`/kids-dashboard/drawing-upload`}>
+                                    {/* Draw icon + "Draw"  */}
                                     <div className={classes.drawIconDiv}></div>
                                 </Link>
                                 <Link to={`/kids-dashboard/team-join`}>
@@ -410,6 +445,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
                 </section>
             </Card>
+            {/* Conditional modal  */}
             <Modal
                 aria-labelledby='transition-modal-title'
                 aria-describedby='transition-modal-description'

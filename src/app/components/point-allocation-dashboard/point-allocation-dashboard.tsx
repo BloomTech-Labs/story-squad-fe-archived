@@ -223,9 +223,9 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 interface PointCardProps {
-    className?: string;
     child: Child;
 }
+
 const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const [points] = useAPI(`/battlesRoutes/battles`, 'PUT');
@@ -282,6 +282,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ className, child }) => {
             return console.log('inside', thisMatch);
         }
     }, [matchInfo]);
+
 
     const handleSubmit = () => {
         if (remainingPoints === 0) {

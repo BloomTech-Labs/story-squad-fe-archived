@@ -16,10 +16,7 @@ import {
     ErrorPage,
     HelpPage,
 } from './pages';
-<<<<<<< HEAD
 import { ChildHome } from './components/child-dashboard/child-home/child-home.component';
-=======
->>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
 
 const App: React.FC = () => {
     return (

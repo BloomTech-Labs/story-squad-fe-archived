@@ -118,10 +118,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     };
 
     React.useEffect(() => {
-<<<<<<< HEAD
-        console.log('within removed effect', currentSubmission);
-=======
->>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
+        // console.log('within removed effect', currentSubmission);
         if (removed && currentSubmission && currentSubmission?.illustration) {
             currentSubmission.illustration = undefined;
             setState({
@@ -143,18 +140,11 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     }, [currentSubmission, setState]);
 
     React.useEffect(() => {
-<<<<<<< HEAD
+        // console.log('submission', submission);
         if (
             submission &&
             submission?.illustration &&
             Object.keys(submission?.illustration).length
-=======
-        console.log('submission', submission);
-        if (
-            submission &&
-            submission?.illustrations &&
-            Object.keys(submission?.illustrations).length
->>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
         ) {
             progress({ drawing: true });
             setSubmitted(true);
@@ -167,11 +157,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
             });
             setSubmitted(false);
         }
-<<<<<<< HEAD
-    }, [submission, removed, progress, setState]);
-=======
     }, [submission, removed, progress, setState, currentSubmission]);
->>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
 
     React.useEffect(() => {
         if (newProgress && onUpdate) onUpdate();
@@ -195,13 +181,12 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         onChange={handleFileChange('image', 'illustration')}
                         disabled={submitted}
                     />
-
                     {illustration && (
-                        <img
-                            className={classes.preview}
-                            src={illustration}
-                            alt='Your illustration submission'
-                        />
+                    <img
+                        className={classes.preview}
+                        src={illustration}
+                        alt='Your illustration submission'
+                    />
                     )}
                 </CardContent>
             </Card>
@@ -220,9 +205,9 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-<<<<<<< HEAD
+
                 {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
-=======
+
             </div>
             <div>
                 {submitting && (
@@ -232,7 +217,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         <LinearProgress variant='query' color='secondary' />
                     </>
                 )}
->>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
+
             </div>
             {submitting && <LinearProgress variant='query' color='secondary' />}
         </form>

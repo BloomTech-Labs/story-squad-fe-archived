@@ -82,6 +82,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
             setOpen(false);
         }
     }, [progress.reading]);
+    console.log(matchInfo);
     return (
         <>
             <Card className={classes.card}>

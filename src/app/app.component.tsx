@@ -16,6 +16,7 @@ import {
     ErrorPage,
     HelpPage,
 } from './pages';
+import { ChildHome } from './components/child-dashboard/child-home/child-home.component';
 
 const App: React.FC = () => {
     return (
@@ -53,6 +54,7 @@ const App: React.FC = () => {
                         <Route path='/admin/register' component={AdminSignUpPage} />
                         <Route path='/admin' component={AdminSignInPage} />
                         <Route exact path={['/', '/signup']} component={SignUpPage} />
+                        {/* <Route exact path={'/'} component={ChildHome} /> */}
                         <Route path='/' component={ErrorPage} />
                     </Switch>
                 </Router>

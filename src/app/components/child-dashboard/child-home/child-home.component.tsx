@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import {
     Card,
     Button,
+    Checkbox,
     Paper,
     Popper,
     MenuItem,
     MenuList,
+    Fade,
+    Modal,
+    Backdrop,
     Grow,
     ClickAwayListener,
 } from '@material-ui/core';
-
-import { useAPI } from '../../../hooks';
-
 import { makeStyles } from '@material-ui/core/styles';
+import MenuIcon from '@material-ui/icons/Menu';
 import { Child } from '../../../models';
 import 'typeface-bangers';
+import picIcon from '../kid-progress/icons/Draw.png';
+import readIcon from '../kid-progress/icons/read.png';
+import writeIcon from '../kid-progress/icons/write.png';
 import cityscape from '../kid-progress/icons/cityscape.png';
-import avatar1 from '../../point-allocation-dashboard/img/cam.png';
-import avatar2 from '../../point-allocation-dashboard/img/Hero13.png';
-import explode from '../../point-allocation-dashboard/img/expl.png';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -41,14 +44,18 @@ const useStyles = makeStyles((theme) => ({
     grid: {
         display: 'flex',
         border: '7px solid black',
-        height: '600px',
     },
     gridItem: {
         margin: theme.spacing(1.5),
     },
+    divider: {
+        gridColumnStart: '1',
+        gridColumnEnd: '5',
+        width: '100%',
+    },
     orangeButton: {
-        'position': 'absolute',
-        'top': '718px',
+        'alignItems': 'right',
+        'marginTop': '20px',
         'backgroundColor': '#FF6B35',
         'fontSize': '24px',
         'fontWeight': 'bold',
@@ -63,81 +70,85 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     logoutButton: {
-        'marginLeft': '780px',
-        'marginBottom': '105px',
-        'backgroundColor': '#FF6B35',
-        'fontSize': '24px',
-        'fontWeight': 'bold',
-        'borderRadius': '10px',
-        'color': 'white',
-        'width': '100px',
-        'border': '3px solid #292929',
-        'textTransform': 'capitalize',
-        'fontFamily': 'nunito',
-        '&:hover': {
-            backgroundColor: '#FF6B35',
-        },
+        alignSelf: 'flex-end',
+        justifyContent: 'space-around',
+        marginRight: '2%',
+        marginTop: '2%',
     },
     logoutMenu: {
-        'backgroundColor': '#FF6B35',
-        'fontSize': '24px',
-        'fontWeight': 'bold',
-        'color': 'white',
-        'width': '100px',
-        'textTransform': 'capitalize',
-        'border': '2px solid #292929',
-        'fontFamily': 'nunito',
-        '&:hover': {
-            backgroundColor: '#FF6B35',
-        },
+        backgroundColor: '#FF6B35',
+        color: 'black',
+        border: '2px solid #292929',
+    },
+    read: {
+        backgroundColor: '#B5D33D',
+        width: '40%',
+        border: '7px solid black',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '25px',
     },
     height50: {
         height: '65%',
     },
-    teammate: {
-        backgroundColor: '#FED23F',
+    write: {
+        backgroundColor: '#EB7D5B',
         width: '100%',
-        height: '100%',
         border: '7px solid black',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: '25px',
     },
     draw: {
-        backgroundColor: '#B5D33D',
+        backgroundColor: '#FED23F',
         width: '100%',
-        height: '100%',
         border: '7px solid black',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: '25px',
+    },
+    linkFont: {
+        fontFamily: 'bangers',
+        fontSize: '96px',
     },
     writeDrawDiv: {
         width: '60%',
     },
-    avatarDiv: {
-        display: 'flex',
-        width: '100%',
-        height: '100%',
-        backgroundImage: `url(${explode})`,
+    drawIconDiv: {
+        width: '210px',
+        height: '210px',
+        backgroundImage: `url(${picIcon})`,
         backgroundRepeat: 'no-repeat',
-        alignSelf: 'center',
-        alignItems: 'center',
-
-        backgroundPosition: 'center',
-        flexDirection: 'column',
     },
-    avatar1: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundPosition: 'center',
+    readIconDiv: {
+        width: '180px',
+        height: '200px',
+        backgroundImage: `url(${readIcon})`,
+        backgroundRepeat: 'no-repeat',
     },
-    avatar2: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundPosition: 'center',
+    writeIconDiv: {
+        width: '210px',
+        height: '210px',
+        backgroundImage: `url(${writeIcon})`,
+        backgroundRepeat: 'no-repeat',
+    },
+    alignRight: {
+        alignSelf: 'flex-end',
+        justifyContent: 'flex-end',
+        transform: 'scale(3)',
+        padding: '10px',
+    },
+    alignRightTop: {
+        alignSelf: 'flex-end',
+        justifyContent: 'space-around',
+        transform: 'scale(3)',
+        padding: '10px',
     },
     loading: {
         display: 'flex',
@@ -146,7 +157,6 @@ const useStyles = makeStyles((theme) => ({
         minHeight: '100vh',
     },
     headerFont: {
-        'position': 'absolute',
         'fontFamily': 'Bangers',
         'fontSize': '86px',
         'fontWeight': 'bold',
@@ -183,7 +193,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundRepeat: 'no-repeat',
         backgroundSize: '101% 103%',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+        flexDirection: 'column',
         alignItems: 'center',
         border: '7px solid black',
     },
@@ -206,7 +217,11 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-around',
     },
     btn: {
-        marginBottom: 'px',
+        display: 'flex',
+        alignSelf: 'flex-end',
+        justifyContent: 'flex-end',
+
+        padding: '10px',
     },
     paper: {
         marginRight: theme.spacing(2),
@@ -222,36 +237,28 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
-    username: {
-        fontFamily: 'Bangers',
-        color: '#000000',
-        backgroundColor: 'white',
-        fontSize: '26px',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '2%',
-        borderRadius: '10px',
-    },
+
     toolbar: theme.mixins.toolbar,
 }));
 
-interface TeamJoinProps {
+interface ChildHomeProps {
     onUpdate?: () => void;
     child: Child;
 }
 
-const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
+const ChildHome: React.FC<ChildHomeProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const logout = () => window.dispatchEvent(new Event('logout'));
     const [menu, setMenu] = React.useState(false);
-    const anchorRef = React.useRef<HTMLButtonElement>(null);
-
-    const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
-    const [student, setStudent] = useState();
-    const [teammate, setTeammate] = useState();
+    const anchorRef = React.useRef<SVGSVGElement>(null);
+    const [open, setOpen] = React.useState(false);
 
     const handleToggle = () => {
         setMenu((prevMenu) => !prevMenu);
+    };
+
+    const modalClose = () => {
+        setOpen(false);
     };
 
     const handleClose = (event: React.MouseEvent<EventTarget>) => {
@@ -277,13 +284,6 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
 
         prevMenu.current = menu;
     }, [menu]);
-
-    useEffect(() => {
-        if (matchInfo) {
-            setStudent({ ...matchInfo.thisMatch.team.student });
-            setTeammate({ ...matchInfo.thisMatch.team.teammate });
-        }
-    }, [matchInfo]);
 
     return (
         <>
@@ -315,56 +315,38 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                         </Grow>
                     )}
                 </Popper>
-                {/* title bar */}
                 <section className={classes.columnFlex}>
                     <div className={classes.appBar}>
-                        <div className={classes.headerFont}>Join the Squad!</div>
-                        <div className={classes.btn}>
-                            {' '}
-                            <Button
-                                ref={anchorRef}
-                                aria-controls={menu ? 'menu-list-grow' : undefined}
-                                aria-haspopup='true'
-                                className={classes.logoutButton}
-                                onClick={handleToggle}>
-                                Menu
-                            </Button>
-                        </div>
+                        <div className={classes.headerFont}>Mission</div>
+                        <MenuIcon
+                            fontSize='large'
+                            className={classes.logoutButton}
+                            ref={anchorRef}
+                            aria-controls={menu ? 'menu-list-grow' : undefined}
+                            aria-haspopup='true'
+                            onClick={handleToggle}
+                        />
                     </div>
 
                     <div className={classes.grid}>
-                        <div className={classes.writeDrawDiv}>
-                            <div className={classes.draw}>
-                                <div className={classes.avatarDiv}>
-                                    <p className={classes.username}>
-                                        Hi! My name is {child.username}! Hi! My name is{' '}
-                                        {student === undefined ? 'Student' : student.username}!
-                                    </p>
-                                    <img
-                                        src={avatar1}
-                                        className={classes.avatar1}
-                                        alt='child avatar'></img>
-                                </div>
+                        <div className={classes.read}>
+                            <div className={classes.height50}>
+                                <div className={classes.readIconDiv}></div>
                             </div>
                         </div>
                         <div className={classes.writeDrawDiv}>
-                            <div className={classes.teammate}>
-                                <div className={classes.avatarDiv}>
-                                    <p className={classes.username}>Hi! my name is Teammate!</p>
-
-                                    <p className={classes.username}>
-                                        Hi! my name is{' '}
-                                        {teammate === undefined ? 'Teammate' : teammate.username}!
-                                    </p>
-
-                                    <img
-                                        src={avatar2}
-                                        className={classes.avatar2}
-                                        alt='child avatar'></img>
-                                </div>
-                                <Link to={`/kids-dashboard/points-dashboard`}>
+                            <div className={classes.write}>
+                                <Link to={`/kids-dashboard/upload`}>
+                                    <div className={classes.writeIconDiv}></div>
+                                </Link>
+                            </div>
+                            <div className={classes.draw}>
+                                <Link to={`/kids-dashboard/drawing-upload`}>
+                                    <div className={classes.drawIconDiv}></div>
+                                </Link>
+                                <Link to={`/kids-dashboard/team-join`}>
                                     <Button className={classes.orangeButton} type='button'>
-                                        Next
+                                        TEAM UP!
                                     </Button>
                                 </Link>
                             </div>
@@ -372,7 +354,34 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                     </div>
                 </section>
             </Card>
+            <Modal
+                aria-labelledby='transition-modal-title'
+                aria-describedby='transition-modal-description'
+                className={classes.modal}
+                open={open}
+                onClose={modalClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}>
+                <Fade in={open}>
+                    <div className={classes.modalPaper}>
+                        <h2 id='transition-modal-title' className={classes.modalFont}>
+                            Welcome to Story Squad!
+                        </h2>
+                        <p id='transition-modal-description' className={classes.modalFont}>
+                            To begin your journey, click the 'READ' icon to start the story!
+                            <br />
+                            Are you ready to accept the challenge?
+                        </p>
+                        <Button onClick={modalClose} className={classes.modalBtn}>
+                            I accept!!
+                        </Button>
+                    </div>
+                </Fade>
+            </Modal>
         </>
     );
 };
-export { TeamJoin };
+export { ChildHome };

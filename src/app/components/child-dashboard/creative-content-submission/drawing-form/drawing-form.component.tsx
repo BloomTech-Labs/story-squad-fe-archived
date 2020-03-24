@@ -148,7 +148,6 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
             progress({ drawing: true });
             setSubmitted(true);
         }
-
         if (removed && Object.keys(removed).length) {
             progress({ drawing: false });
             setState({

@@ -139,7 +139,6 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     }, [currentSubmission, setState]);
 
     React.useEffect(() => {
-        console.log('submission', submission);
         if (
             submission &&
             submission?.illustrations &&
@@ -168,7 +167,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
         <form className={classes.form} onSubmit={handleSubmit}>
             <Card className={classes.card}>
                 <div className={classes.appBar}>
-                    <div className={classes.headerFont}>Ready, Set... DRAW! 1 and 7</div>
+                    <div className={classes.headerFont}>Ready, Set... DRAW!</div>
                 </div>
                 <CardContent className={classes.content}>
                     <h2 className={classes.promptText}>Draw your favorite part of the story!</h2>

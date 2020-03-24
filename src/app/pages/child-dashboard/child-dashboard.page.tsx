@@ -1,13 +1,11 @@
 import React from 'react';
 
-import { AppBar, Button, CircularProgress, Toolbar, Typography } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAPI } from '../../hooks';
 import {
-    WelcomeCard,
     KidProgressCard,
-    CCSForm,
     PointDashboard,
     DrawingForm,
     StoryForm,

@@ -7,3 +7,4 @@ export * from './child-dashboard';
 export * from './admin-dashboard';
 export * from './admin-onboarding';
 export * from './point-allocation-dashboard';
+export * from './child-home';

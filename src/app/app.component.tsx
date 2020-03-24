@@ -15,9 +15,8 @@ import {
     AdminSignUpPage,
     ErrorPage,
     HelpPage,
+    ChildHomePage,
 } from './pages';
-import { ChildHome } from './components/child-dashboard/child-home/child-home.component';
-
 const App: React.FC = () => {
     return (
         <main>
@@ -34,9 +33,9 @@ const App: React.FC = () => {
                         />
                         <PrivateRoute
                             redirect='/'
-                            path='/kids-dashboard'
+                            path='/child-home'
                             only='child'
-                            component={ChildDashboard}
+                            component={ChildHomePage}
                         />
                         <PrivateRoute
                             redirect='/'
@@ -54,7 +53,6 @@ const App: React.FC = () => {
                         <Route path='/admin/register' component={AdminSignUpPage} />
                         <Route path='/admin' component={AdminSignInPage} />
                         <Route exact path={['/', '/signup']} component={SignUpPage} />
-                        {/* <Route exact path={'/'} component={ChildHome} /> */}
                         <Route path='/' component={ErrorPage} />
                     </Switch>
                 </Router>

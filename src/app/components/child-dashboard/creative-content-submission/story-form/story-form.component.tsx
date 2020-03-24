@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import {
     Card,
     CardContent,
+<<<<<<< HEAD
     CircularProgress,
+=======
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
     Fab,
     TextField,
     Typography,
@@ -12,7 +15,6 @@ import {
     LinearProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 import cityscape from '../../../../pages/child-dashboard/icons/cityscape.png';
 import { useAPI, useForm } from '../../../../hooks';
 
@@ -36,21 +38,14 @@ const useStyles = makeStyles((theme) => ({
         width: '50%',
     },
     preview: {
-        height: 400,
-        width: 400,
+        height: 200,
+        width: 200,
     },
     wrapper: {
         margin: theme.spacing(1),
         position: 'fixed',
         bottom: theme.spacing(2),
         right: theme.spacing(2),
-    },
-    buttonProgress: {
-        color: green[500],
-        position: 'absolute',
-        top: -6,
-        left: -6,
-        zIndex: 1,
     },
     orangeButton: {
         'backgroundColor': '#FF6B35',
@@ -163,10 +158,15 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     }, [currentSubmission, setState]);
 
     React.useEffect(() => {
+<<<<<<< HEAD
         console.log('masmiadshfuwgfy', submission);
         if (submission && Object.keys(submission?.stories).length) {
             progress({ writing: true });
             // submission.submission = undefined;
+=======
+        if (submission && Object.keys(submission?.stories).length) {
+            progress({ writing: true });
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
             setSubmitted(true);
         }
 
@@ -199,6 +199,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         if (!page1 && page2) setState({ ...state, story: { ...state.story, page2: '' } });
     }, [setState, state]);
 
+<<<<<<< HEAD
     // React.useEffect(() => {
     //     console.log('any string');
     //     if(removed) {
@@ -215,6 +216,8 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     //     console.log('submitted', submitted);
     // }, [currentSubmission, submitted, removed]);
 
+=======
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
     const { storyText, story } = state;
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
@@ -274,7 +277,18 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
+<<<<<<< HEAD
                 {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
+=======
+            </div>
+            <div>
+                {submitting && (
+                    <>
+                        <h2>Sending Progress...</h2>
+                        <LinearProgress variant='query' color='secondary' />
+                    </>
+                )}
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
             </div>
             {submitting && <LinearProgress variant='query' color='secondary' />}
         </form>

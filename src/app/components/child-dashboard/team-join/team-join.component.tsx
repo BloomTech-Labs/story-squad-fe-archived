@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React from 'react';
+=======
+import React, { useEffect, useState } from 'react';
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
 import { Link } from 'react-router-dom';
 import {
     Card,
@@ -10,6 +14,10 @@ import {
     Grow,
     ClickAwayListener,
 } from '@material-ui/core';
+<<<<<<< HEAD
+=======
+import { useAPI } from '../../../hooks';
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
 import { makeStyles } from '@material-ui/core/styles';
 import { Child } from '../../../models';
 import 'typeface-bangers';
@@ -242,6 +250,12 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
     const logout = () => window.dispatchEvent(new Event('logout'));
     const [menu, setMenu] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
+<<<<<<< HEAD
+=======
+    const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
+    const [student, setStudent] = useState();
+    const [teammate, setTeammate] = useState();
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
 
     const handleToggle = () => {
         setMenu((prevMenu) => !prevMenu);
@@ -271,6 +285,16 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
         prevMenu.current = menu;
     }, [menu]);
 
+<<<<<<< HEAD
+=======
+    useEffect(() => {
+        if (matchInfo) {
+            setStudent({ ...matchInfo.thisMatch.team.student });
+            setTeammate({ ...matchInfo.thisMatch.team.teammate });
+        }
+    }, [matchInfo]);
+
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
     return (
         <>
             <Card className={classes.card}>
@@ -323,7 +347,12 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                             <div className={classes.draw}>
                                 <div className={classes.avatarDiv}>
                                     <p className={classes.username}>
+<<<<<<< HEAD
                                         Hi! My name is {child.username}!
+=======
+                                        Hi! My name is{' '}
+                                        {student === undefined ? 'Student' : student.username}!
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
                                     </p>
                                     <img
                                         src={avatar1}
@@ -335,7 +364,14 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                         <div className={classes.writeDrawDiv}>
                             <div className={classes.teammate}>
                                 <div className={classes.avatarDiv}>
+<<<<<<< HEAD
                                     <p className={classes.username}>Hi! my name is Teammate!</p>
+=======
+                                    <p className={classes.username}>
+                                        Hi! my name is{' '}
+                                        {teammate === undefined ? 'Teammate' : teammate.username}!
+                                    </p>
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
                                     <img
                                         src={avatar2}
                                         className={classes.avatar2}

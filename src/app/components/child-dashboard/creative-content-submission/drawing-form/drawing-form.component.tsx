@@ -4,17 +4,13 @@ import { Link } from 'react-router-dom';
 import {
     Card,
     CardContent,
-    CardHeader,
-    CircularProgress,
     Fab,
-    Icon,
     TextField,
     Typography,
     Button,
     LinearProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 import cityscape from '../../../../pages/child-dashboard/icons/cityscape.png';
 import { useAPI, useForm } from '../../../../hooks';
 
@@ -38,21 +34,14 @@ const useStyles = makeStyles((theme) => ({
         width: '50%',
     },
     preview: {
-        height: 400,
-        width: 400,
+        height: 200,
+        width: 200,
     },
     wrapper: {
         margin: theme.spacing(1),
         position: 'fixed',
         bottom: theme.spacing(2),
         right: theme.spacing(2),
-    },
-    buttonProgress: {
-        color: green[500],
-        position: 'absolute',
-        top: -6,
-        left: -6,
-        zIndex: 1,
     },
     orangeButton: {
         'backgroundColor': '#FF6B35',
@@ -61,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
         'borderRadius': '10px',
         'color': 'white',
         'width': '200px',
-
         'border': '3px solid #292929',
         'textTransform': 'capitalize',
         'fontFamily': 'nunito',
@@ -130,14 +118,17 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     };
 
     React.useEffect(() => {
+<<<<<<< HEAD
         console.log('within removed effect', currentSubmission);
+=======
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
         if (removed && currentSubmission && currentSubmission?.illustration) {
             currentSubmission.illustration = undefined;
             setState({
                 illustration: '',
             });
         }
-    }, [removed, currentSubmission, setState]);
+    }, [removed, currentSubmission, setState, remove]);
 
     React.useEffect(() => {
         if (
@@ -152,10 +143,18 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     }, [currentSubmission, setState]);
 
     React.useEffect(() => {
+<<<<<<< HEAD
         if (
             submission &&
             submission?.illustration &&
             Object.keys(submission?.illustration).length
+=======
+        console.log('submission', submission);
+        if (
+            submission &&
+            submission?.illustrations &&
+            Object.keys(submission?.illustrations).length
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
         ) {
             progress({ drawing: true });
             setSubmitted(true);
@@ -168,7 +167,11 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
             });
             setSubmitted(false);
         }
+<<<<<<< HEAD
     }, [submission, removed, progress, setState]);
+=======
+    }, [submission, removed, progress, setState, currentSubmission]);
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
 
     React.useEffect(() => {
         if (newProgress && onUpdate) onUpdate();
@@ -180,7 +183,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
         <form className={classes.form} onSubmit={handleSubmit}>
             <Card className={classes.card}>
                 <div className={classes.appBar}>
-                    <div className={classes.headerFont}>Ready, Set... DRAW!</div>
+                    <div className={classes.headerFont}>Ready, Set... DRAW! 1 and 7</div>
                 </div>
                 <CardContent className={classes.content}>
                     <h2 className={classes.promptText}>Draw your favorite part of the story!</h2>
@@ -217,7 +220,19 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
+<<<<<<< HEAD
                 {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
+=======
+            </div>
+            <div>
+                {submitting && (
+                    <>
+                        {' '}
+                        <h2>Sending Progress...</h2>
+                        <LinearProgress variant='query' color='secondary' />
+                    </>
+                )}
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
             </div>
             {submitting && <LinearProgress variant='query' color='secondary' />}
         </form>

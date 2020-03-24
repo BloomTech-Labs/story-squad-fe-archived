@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 import { CssBaseline } from '@material-ui/core';
-
 import { AppProvider } from './state';
 import { PrivateRoute, ErrorHandler } from './components';
 import {
@@ -18,7 +16,10 @@ import {
     ErrorPage,
     HelpPage,
 } from './pages';
+<<<<<<< HEAD
 import { ChildHome } from './components/child-dashboard/child-home/child-home.component';
+=======
+>>>>>>> 66891c9707555e7b957372881ad0851b3413bcd3
 
 const App: React.FC = () => {
     return (

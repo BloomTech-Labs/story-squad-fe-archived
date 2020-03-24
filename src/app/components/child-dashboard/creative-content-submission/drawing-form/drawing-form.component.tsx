@@ -182,11 +182,11 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         disabled={submitted}
                     />
                     {illustration && (
-                    <img
-                        className={classes.preview}
-                        src={illustration}
-                        alt='Your illustration submission'
-                    />
+                        <img
+                            src={illustration}
+                            className={classes.preview}
+                            alt='Your illustration submission'
+                        />
                     )}
                 </CardContent>
             </Card>
@@ -205,9 +205,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-
                 {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
-
             </div>
             <div>
                 {submitting && (
@@ -217,7 +215,6 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         <LinearProgress variant='query' color='secondary' />
                     </>
                 )}
-
             </div>
             {submitting && <LinearProgress variant='query' color='secondary' />}
         </form>

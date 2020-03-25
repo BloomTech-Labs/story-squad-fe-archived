@@ -51,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
         'borderRadius': '10px',
         'color': 'white',
         'width': '200px',
-
         'border': '3px solid #292929',
         'textTransform': 'capitalize',
         'fontFamily': 'nunito',

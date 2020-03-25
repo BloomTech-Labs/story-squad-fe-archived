@@ -81,7 +81,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setTeammate({ ...matchInfo.thisMatch.team.teammate });
             return console.log('inside', thisMatch);
         }
-    }, [matchInfo, thisMatch]);
+    }, [matchInfo]);
 
     const handleSubmit = () => {
         if (remainingPoints === 0 && child.progress.teamReview === false) {

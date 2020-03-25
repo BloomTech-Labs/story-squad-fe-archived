@@ -39,6 +39,12 @@ const App: React.FC = () => {
                         />
                         <PrivateRoute
                             redirect='/'
+                            path='/kids-mission'
+                            only='child'
+                            component={ChildDashboard}
+                        />
+                        <PrivateRoute
+                            redirect='/'
                             path='/story/:week'
                             only='child'
                             component={PdfDisplayPage}

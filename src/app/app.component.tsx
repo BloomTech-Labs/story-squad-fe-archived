@@ -16,6 +16,7 @@ import {
     ErrorPage,
     HelpPage,
     ChildHomePage,
+    VersusPage,
 } from './pages';
 const App: React.FC = () => {
     return (
@@ -53,6 +54,11 @@ const App: React.FC = () => {
                             redirect='/admin'
                             path='/admin/dashboard'
                             component={AdminDashboardPage}
+                        />
+                        <PrivateRoute
+                            redirect='/child-home'
+                            path='/matchup'
+                            component={VersusPage}
                         />
                         <Route path='/privacy-policy' component={PrivacyPage} />
                         <Route path='/terms-of-service' component={ToSPage} />

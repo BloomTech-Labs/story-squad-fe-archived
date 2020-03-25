@@ -1,3 +1,5 @@
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png'
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         card: {
@@ -81,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) =>
         bottomRow: {
             display: 'flex',
         },
-        mission: {
+        story1: {
             backgroundColor: '#B5D33D',
             width: '55%',
             height: '39vh',
@@ -99,7 +101,7 @@ const useStyles = makeStyles((theme: Theme) =>
         pictureHover: {
             cursor: 'pointer',
         },
-        avatarCreator: {
+        story2: {
             backgroundColor: '#EB7D5B',
             width: '45%',
             height: '39vh',
@@ -114,7 +116,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 width: '100%',
             },
         },
-        passport: {
+        picture1: {
             backgroundColor: '#FED23F',
             width: '45%',
             height: '39vh',
@@ -130,7 +132,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 width: '100%',
             },
         },
-        trophyRoom: {
+        picture2: {
             background: '#429CB5',
             width: '55%',
             height: '39vh',

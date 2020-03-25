@@ -37,7 +37,7 @@ import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
 interface PointCardProps {
     child: Child;
 }
-
+// TODO - import useStyles from versus-styles.tsx
 const Versus: React.FC<PointCardProps> = ({ child }) => {
     const classes = useStyles({});
 
@@ -54,25 +54,38 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                 </Grid>
             </Grid>
             <Grid className={classes.topRow}>
-                <Grid className={classes.mission}>
-                    <Link to={'/kids-mission'}>
-                        <img
-                            className={classes.pictureHover}
-                            src={AcceptMissionButton}
-                            alt='Accept your weekly mission!'
-                        />
-                    </Link>
+                <Grid className={classes.story1}>
+                    {/* <div className='left'>
+                        <div>
+                            <h2>user1</h2>
+                            <img>avatar</img>
+                        </div>
+                        <div className={classes.submission}>
+                            <img>PDF</img>
+                        </div>
+                    </div>
+                    <div className='right'>
+                        <div>
+                            <h2>user2</h2>
+                            <img>avatar2</img>
+                        </div>
+                        <div className={classes.submission}>
+                            <img>PDF</img>
+                        </div>
+                    </div> */}
                 </Grid>
-                <Grid className={classes.avatarCreator}>
-                    <img src={AvatarButton} alt='Create your Story Squad Avatar!' />
+                <Grid className={classes.story2}>
+
                 </Grid>
             </Grid>
             <Grid className={classes.bottomRow}>
-                <Grid className={classes.passport}>
-                    <img src={PassportButton} alt='???' />
+                <Grid className={classes.picture1}>
+                    <div>
+
+                    </div>
                 </Grid>
-                <Grid className={classes.trophyRoom}>
-                    <img src={TrophyRoomButton} alt='See who has the most victories and points!' />
+                <Grid className={classes.picture2}>
+
                 </Grid>
             </Grid>
         </Container>

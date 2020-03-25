@@ -19,5 +19,4 @@ export * from './error-page/error-page';
 
 export * from './help-page/help-page';
 export * from './child-home/child-home.page';
-
-
+export * from './versus/versus.page';

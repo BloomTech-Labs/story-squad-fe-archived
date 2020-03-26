@@ -28,6 +28,7 @@ module.exports = {
     settings: {
         react: {
             version: 'detect',
+            tabs: 'true'
         },
     },
 };

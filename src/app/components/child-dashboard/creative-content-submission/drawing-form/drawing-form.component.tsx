@@ -118,6 +118,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     };
 
     React.useEffect(() => {
+        // console.log('within removed effect', currentSubmission);
         if (removed && currentSubmission && currentSubmission?.illustration) {
             currentSubmission.illustration = undefined;
             setState({
@@ -141,13 +142,12 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     React.useEffect(() => {
         if (
             submission &&
-            submission?.illustrations &&
-            Object.keys(submission?.illustrations).length
+            submission?.illustration &&
+            Object.keys(submission?.illustration).length
         ) {
             progress({ drawing: true });
             setSubmitted(true);
         }
-
         if (removed && Object.keys(removed).length) {
             progress({ drawing: false });
             setState({
@@ -179,11 +179,10 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         onChange={handleFileChange('image', 'illustration')}
                         disabled={submitted}
                     />
-
                     {illustration && (
                         <img
-                            className={classes.preview}
                             src={illustration}
+                            className={classes.preview}
                             alt='Your illustration submission'
                         />
                     )}
@@ -204,6 +203,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
+                {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
             </div>
             <div>
                 {submitting && (
@@ -214,6 +214,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                     </>
                 )}
             </div>
+            {submitting && <LinearProgress variant='query' color='secondary' />}
         </form>
     );
 };

@@ -10,6 +10,7 @@ import {
     Grow,
     ClickAwayListener,
 } from '@material-ui/core';
+
 import { useAPI } from '../../../hooks';
 import { useStyles } from './styles';
 import { Child } from '../../../models';
@@ -26,6 +27,7 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
     const logout = () => window.dispatchEvent(new Event('logout'));
     const [menu, setMenu] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
+
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const [student, setStudent] = useState();
     const [teammate, setTeammate] = useState();
@@ -116,7 +118,7 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                             <div className={classes.draw}>
                                 <div className={classes.avatarDiv}>
                                     <p className={classes.username}>
-                                        Hi! My name is{' '}
+                                        Hi! My name is {child.username}! Hi! My name is{' '}
                                         {student === undefined ? 'Student' : student.username}!
                                     </p>
                                     <img
@@ -129,10 +131,13 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                         <div className={classes.writeDrawDiv}>
                             <div className={classes.teammate}>
                                 <div className={classes.avatarDiv}>
+                                    <p className={classes.username}>Hi! my name is Teammate!</p>
+
                                     <p className={classes.username}>
                                         Hi! my name is{' '}
                                         {teammate === undefined ? 'Teammate' : teammate.username}!
                                     </p>
+
                                     <img
                                         src={avatar2}
                                         className={classes.avatar2}

@@ -39,7 +39,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             '-webkit-text-stroke-color': '#000000',
         },
         appBar: {
-            height: '22vh',
+            height: '26vh',
             width: '100%',
             backgroundColor: '#6CEAE6',
             backgroundImage: `url(${cityscape})`,
@@ -88,7 +88,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         mission: {
             backgroundColor: '#B5D33D',
             width: '55%',
-            height: '39vh',
+            height: '37vh',
             border: '3.5px solid black',
             borderLeft: 'solid black 7px',
             boxSizing: 'border-box',
@@ -106,7 +106,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         avatarCreator: {
             backgroundColor: '#EB7D5B',
             width: '45%',
-            height: '39vh',
+            height: '37vh',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -121,7 +121,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         passport: {
             backgroundColor: '#FED23F',
             width: '45%',
-            height: '39vh',
+            height: '37vh',
             border: '3.5px solid black',
             borderLeft: '7px solid black',
             borderBottom: '7px solid black',
@@ -137,7 +137,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         trophyRoom: {
             background: '#429CB5',
             width: '55%',
-            height: '39vh',
+            height: '37vh',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

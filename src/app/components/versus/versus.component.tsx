@@ -50,8 +50,12 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                 <Grid container direction='row' className={classes.appBar}>
                     <Grid container item justify='space-around' alignItems='center'>
                         <Typography className={classes.h2Styling} variant='h2'>
-                            Story Squad
+                            The Match Up
                         </Typography>
+                        {/*team1 placeholder*/}
+                        <Typography>VS</Typography>
+                        {/*team2 placeholder*/}
+                        <Typography>201 Points Needed To Win!</Typography>
                     </Grid>
                 </Grid>
             </Grid>

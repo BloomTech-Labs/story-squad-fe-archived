@@ -1,47 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
-import {
-    Button,
-    Typography,
-    Container,
-    Grid,
-    Modal,
-    Fade,
-    Backdrop,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    CircularProgress,
-} from '@material-ui/core';
+import { Button, Typography, Container, Grid, CircularProgress } from '@material-ui/core';
 import { Child } from '../../models';
 import { Link } from 'react-router-dom';
 import { useForm, useAPI } from '../../hooks';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { ValidatorForm } from 'react-material-ui-form-validator';
 import ava1 from './img/cam.png';
 import ava2 from './img/Hero13.png';
-import { useStyles } from './styles';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Avatar, SubmissionDisplay, Header } from './index';
 
 interface PointCardProps {
     child: Child;
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        orangeButton: {
+            'backgroundColor': '#FF6B35',
+            'fontSize': '24px',
+            'fontWeight': 'bold',
+            'borderRadius': '10px',
+            'color': 'white',
+            'width': '200px',
+            'border': '3px solid #292929',
+            'textTransform': 'capitalize',
+            'fontFamily': 'nunito',
+            '&:hover': {
+                backgroundColor: '#FF6B35',
+            },
+        },
+        avatarMargin: {
+            backgroundColor: '#B5D33D',
+            borderRight: '14px solid',
+            borderLeft: '14px solid',
+            padding: '10px',
+        },
+        containerStyling: {
+            height: '274px',
+        },
+        sectionContainer: {
+            border: '7px solid #000',
+            backgroundColor: '#EB7D5B',
+        },
+        button: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItem: 'center',
+        },
+    })
+);
+
 const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const [points, updating, updatePoints] = useAPI(`/battlesRoutes/battles`, 'PUT');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
-        story1Points: 10,
-        story2Points: 10,
-        pic1Points: 10,
-        pic2Points: 10,
+        story1Points: 0,
+        story2Points: 0,
+        pic1Points: 0,
+        pic2Points: 0,
     });
-    const [remainingPoints, setRemainingPoints] = useState(60);
-    const classes = useStyles({});
+    const [remainingPoints, setRemainingPoints] = useState(100);
     const [error, setError] = useState(false);
     const [thisMatch, setThisMatch] = useState();
     const [student, setStudent] = useState();
     const [teammate, setTeammate] = useState();
+    const classes = useStyles({});
 
     useEffect(() => {
         setRemainingPoints(
@@ -90,57 +114,78 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                     <ValidatorForm
                         onSubmit={handleSubmit}
                         onError={(errors) => console.log(errors)}>
-                        <Container className={classes.containerStyling}>
-                            <Grid container>
+                        <Container maxWidth='lg'>
+                            <Grid container direction='column'>
                                 <Header remainingPoints={remainingPoints} />
-                                {/* End header code  */}
-                                {/* Row 1 */}
                                 <Grid
                                     container
-                                    direction='row'
-                                    justify='center'
-                                    alignItems='center'>
-                                    <Avatar username={student.username} avatar={ava1} />
-                                    <SubmissionDisplay
-                                        key='story1Points'
-                                        username={student.username}
-                                        submission={student.story.story.page1}
-                                        points={state.story1Points}
-                                        type='Story'
-                                        handleInputChange={handleInputChange('story1Points')}
-                                    />
-                                    <SubmissionDisplay
-                                        key='pic1Points'
-                                        username={student.username}
-                                        submission={student.illustration.illustration}
-                                        points={state.pic1Points}
-                                        type='Illustration'
-                                        handleInputChange={handleInputChange}
-                                    />
+                                    alignItems='center'
+                                    className={classes.sectionContainer}>
+                                    <Grid item sm={12} md={4} className={classes.avatarMargin}>
+                                        <Avatar username={student.username} avatar={ava1} />
+                                    </Grid>
+                                    <Grid item sm={12} md={4}>
+                                        <SubmissionDisplay
+                                            key='story1Points'
+                                            username={student.username}
+                                            submission={student.story.story.page1}
+                                            points={state.story1Points}
+                                            handleChange={handleInputChange('story1Points')}
+                                            type='Story'
+                                        />
+                                    </Grid>
+                                    <Grid item sm={12} md={4}>
+                                        <SubmissionDisplay
+                                            key='pic1Points'
+                                            username={student.username}
+                                            submission={student.illustration.illustration}
+                                            type='Illustration'
+                                            handleChange={handleInputChange('pic1Points')}
+                                            points={state.pic1Points}
+                                        />
+                                    </Grid>
                                 </Grid>
-                                {/* Row 3 */}
                                 <Grid
                                     container
-                                    direction='row'
-                                    justify='center'
-                                    alignItems='center'>
-                                    <Avatar username={teammate.username} avatar={ava2} />
-                                    <SubmissionDisplay
-                                        key='story2Points'
-                                        username={teammate.username}
-                                        submission={teammate.story.story.page1}
-                                        points={state.story2Points}
-                                        type='Story'
-                                        handleInputChange={handleInputChange}
-                                    />
-                                    <SubmissionDisplay
-                                        key='pic2Points'
-                                        username={teammate.username}
-                                        submission={teammate.illustration.illustration}
-                                        points={state.pic2Points}
-                                        type='Illustration'
-                                        handleInputChange={handleInputChange}
-                                    />
+                                    alignItems='center'
+                                    className={classes.sectionContainer}>
+                                    <Grid item sm={12} md={4} className={classes.avatarMargin}>
+                                        <Avatar username={teammate.username} avatar={ava2} />
+                                        <div className={classes.button}>
+                                            <Link to={`/kids-dashboard`}>
+                                                <Button
+                                                    className={classes.orangeButton}
+                                                    type='button'>
+                                                    Back
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                    </Grid>
+                                    <Grid item sm={12} md={4}>
+                                        <SubmissionDisplay
+                                            key='story2Points'
+                                            username={teammate.username}
+                                            submission={teammate.story.story.page1}
+                                            points={state.story2Points}
+                                            handleChange={handleInputChange('story2Points')}
+                                            type='Story'
+                                        />
+                                    </Grid>
+                                    <Grid item sm={12} md={4}>
+                                        <SubmissionDisplay
+                                            key='pic2Points'
+                                            username={teammate.username}
+                                            submission={teammate.illustration.illustration}
+                                            points={state.pic2Points}
+                                            handleChange={handleInputChange('pic2Points')}
+                                            type='Illustration'
+                                        />
+                                        <div className={classes.button}>
+                                            <Button className={classes.orangeButton} type='submit'>
+                                                Next
+                                            </Button>
+                                        </div>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Container>

@@ -40,9 +40,15 @@ const App: React.FC = () => {
                         />
                         <PrivateRoute
                             redirect='/'
-                            path='/kids-mission'
+                            path='/kids-dashboard'
                             only='child'
                             component={ChildDashboard}
+                        />
+                        <PrivateRoute
+                            redirect='/child-home'
+                            path='/matchup'
+                            only='child'
+                            component={VersusPage}
                         />
                         <PrivateRoute
                             redirect='/'
@@ -55,20 +61,11 @@ const App: React.FC = () => {
                             path='/admin/dashboard'
                             component={AdminDashboardPage}
                         />
-                        <PrivateRoute
-                            redirect='/child-home'
-                            path='/matchup'
-                            component={VersusPage}
-                        />
-                        <Route path='/privacy-policy' component={PrivacyPage} />
-                        <Route path='/terms-of-service' component={ToSPage} />
-                        <Route path='/admin/register' component={AdminSignUpPage} />
                         <Route path='/admin' component={AdminSignInPage} />
                         <Route exact path={['/', '/signup']} component={SignUpPage} />
                         <Route path='/' component={ErrorPage} />
                     </Switch>
                 </Router>
-                <ErrorHandler />
             </AppProvider>
         </main>
     );

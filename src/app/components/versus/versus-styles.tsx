@@ -4,7 +4,8 @@ import { url } from 'inspector';
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         vs: {
-            height: '150%'
+            height: '88%',
+            zIndex: 0,
         },
         card: {
             alignSelf: 'center',
@@ -83,7 +84,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         // stuff from kid progress
         topRow: {
             display: 'flex',
-            aligntItems: 'center'
+            aligntItems: 'center',
         },
         bottomRow: {
             display: 'flex',
@@ -95,12 +96,11 @@ export const useStyles = makeStyles((theme: Theme) =>
             border: '3.5px solid black',
             borderRight: '3.5px solid black',
             borderLeft: 'solid black 7px',
-            boxSizing: 'border-box',
             display: 'flex',
-            alignContent: 'center',
-            aligntItems: 'center',
-            justifyContent: 'center',
-            padding: '25px',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'start',
+            boxSizing: 'border-box',
             [theme.breakpoints.only('sm')]: {
                 width: '100%',
             },
@@ -116,7 +116,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'start',
             border: '3.5px solid black',
             borderLeft: '3.5px solid black',
             borderRight: 'solid black 7px',
@@ -135,8 +135,8 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
-            padding: '25px',
+            justifyContent: 'start',
+            boxSizing: 'border-box',
             [theme.breakpoints.only('sm')]: {
                 width: '100%',
             },
@@ -148,7 +148,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'start',
             border: '3.5px solid black',
             borderRight: '7px solid black',
             borderBottom: '7px solid black',

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+
 import {
     Button,
     Typography,
@@ -23,6 +24,7 @@ import {
     Grow,
     ClickAwayListener,
 } from '@material-ui/core';
+import { useStyles } from './versus-styles';
 import { Child } from '../../models';
 import { Link } from 'react-router-dom';
 import { useForm, useAPI } from '../../hooks';
@@ -33,6 +35,7 @@ import PassportButton from './img/Passport-button.png';
 import TrophyRoomButton from './img/Trophy-room-button.png';
 import Splode from './img/splode.png';
 import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
+import vsImg from './img/VS.png';
 
 interface PointCardProps {
     child: Child;
@@ -40,7 +43,6 @@ interface PointCardProps {
 // TODO - import useStyles from versus-styles.tsx
 const Versus: React.FC<PointCardProps> = ({ child }) => {
     const classes = useStyles({});
-
     return (
         <Container className={classes.containerStyling}>
             <Grid container>
@@ -55,37 +57,18 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
             </Grid>
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
-                    {/* <div className='left'>
-                        <div>
-                            <h2>user1</h2>
-                            <img>avatar</img>
-                        </div>
-                        <div className={classes.submission}>
-                            <img>PDF</img>
-                        </div>
-                    </div>
-                    <div className='right'>
-                        <div>
-                            <h2>user2</h2>
-                            <img>avatar2</img>
-                        </div>
-                        <div className={classes.submission}>
-                            <img>PDF</img>
-                        </div>
-                    </div> */}
+                    <img className={classes.vs} src={vsImg} alt='this is a lightning bolt thing' />
                 </Grid>
                 <Grid className={classes.story2}>
-
+                    <img className={classes.vs} src={vsImg} alt='this is a lightning bolt thing' />
                 </Grid>
             </Grid>
             <Grid className={classes.bottomRow}>
                 <Grid className={classes.picture1}>
-                    <div>
-
-                    </div>
+                    <img className={classes.vs} src={vsImg} alt='this is a lightning bolt thing' />
                 </Grid>
                 <Grid className={classes.picture2}>
-
+                    <img className={classes.vs} src={vsImg} alt='this is a lightning bolt thing' />
                 </Grid>
             </Grid>
         </Container>

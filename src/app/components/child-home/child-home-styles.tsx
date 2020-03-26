@@ -1,11 +1,8 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
 import { url } from 'inspector';
+
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        vs: {
-            height: '150%'
-        },
         card: {
             alignSelf: 'center',
             maxWidth: theme.breakpoints.values.md,
@@ -83,33 +80,29 @@ export const useStyles = makeStyles((theme: Theme) =>
         // stuff from kid progress
         topRow: {
             display: 'flex',
-            aligntItems: 'center'
         },
         bottomRow: {
             display: 'flex',
         },
-        story1: {
+        mission: {
             backgroundColor: '#B5D33D',
             width: '55%',
             height: '39vh',
             border: '3.5px solid black',
-            borderRight: '3.5px solid black',
             borderLeft: 'solid black 7px',
             boxSizing: 'border-box',
             display: 'flex',
-            alignContent: 'center',
-            aligntItems: 'center',
+            alignItems: 'center',
             justifyContent: 'center',
             padding: '25px',
             [theme.breakpoints.only('sm')]: {
                 width: '100%',
             },
-            background: 'url({ vsImg })',
         },
         pictureHover: {
             cursor: 'pointer',
         },
-        story2: {
+        avatarCreator: {
             backgroundColor: '#EB7D5B',
             width: '45%',
             height: '39vh',
@@ -118,14 +111,13 @@ export const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
             justifyContent: 'center',
             border: '3.5px solid black',
-            borderLeft: '3.5px solid black',
             borderRight: 'solid black 7px',
             boxSizing: 'border-box',
             [theme.breakpoints.only('sm')]: {
                 width: '100%',
             },
         },
-        picture1: {
+        passport: {
             backgroundColor: '#FED23F',
             width: '45%',
             height: '39vh',
@@ -141,7 +133,7 @@ export const useStyles = makeStyles((theme: Theme) =>
                 width: '100%',
             },
         },
-        picture2: {
+        trophyRoom: {
             background: '#429CB5',
             width: '55%',
             height: '39vh',

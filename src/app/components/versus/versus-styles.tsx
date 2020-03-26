@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         vs: {
             height: '88%',
             zIndex: 0,
+            position: 'absolute',
         },
         card: {
             alignSelf: 'center',
@@ -89,7 +90,39 @@ export const useStyles = makeStyles((theme: Theme) =>
         bottomRow: {
             display: 'flex',
         },
+        // The rows in which the content of the toprow and bottomrow are stored
+        nameRow: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            zIndex: 999999,
+            width: '80%',
+            height: '47%',
+        },
+        subRow: {
+            display: 'flex',
+            justifyContent: 'space-around',
+            zIndex: 999999,
+            width: '80%',
+            height: '47%',
+        },
+        //styling for the name and avatar within nameRow
+        leftPlayer: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+        },
+        rightPlayer: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+        },
+        totalScore: {
+            display: 'flex',
+            flexDirection: 'column-reverse',
+            justifyContent: 'start',
+        },
         story1: {
+            position: 'relative',
             backgroundColor: '#B5D33D',
             width: '55%',
             height: '39vh',
@@ -110,6 +143,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             cursor: 'pointer',
         },
         story2: {
+            position: 'relative',
             backgroundColor: '#EB7D5B',
             width: '45%',
             height: '39vh',
@@ -126,6 +160,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             },
         },
         picture1: {
+            position: 'relative',
             backgroundColor: '#FED23F',
             width: '45%',
             height: '39vh',
@@ -142,6 +177,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             },
         },
         picture2: {
+            position: 'relative',
             background: '#429CB5',
             width: '55%',
             height: '39vh',

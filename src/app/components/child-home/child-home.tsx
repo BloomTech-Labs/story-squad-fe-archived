@@ -32,7 +32,6 @@ import AcceptMissionButton from './img/Accept-mission-button.png';
 import AvatarButton from './img/Avatar-button.png';
 import PassportButton from './img/Passport-button.png';
 import TrophyRoomButton from './img/Trophy-room-button.png';
-import Splode from './img/splode.png';
 
 interface PointCardProps {
     child: Child;
@@ -129,7 +128,7 @@ const ChildHome: React.FC<PointCardProps> = ({ child }) => {
             </Grid>
             <Grid className={classes.topRow}>
                 <Grid className={classes.mission}>
-                    <Link to={'/kids-mission'}>
+                    <Link to={'/kids-dashboard'}>
                         <img
                             className={classes.pictureHover}
                             src={AcceptMissionButton}

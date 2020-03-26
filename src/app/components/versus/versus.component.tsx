@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 import {
     Button,
+    Avatar,
     Typography,
     Container,
     Grid,
@@ -27,14 +27,9 @@ import {
 import { useStyles } from './versus-styles';
 import { Child } from '../../models';
 import { Link } from 'react-router-dom';
-import { useForm, useAPI } from '../../hooks';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import AcceptMissionButton from './img/Accept-mission-button.png';
-import AvatarButton from './img/Avatar-button.png';
-import PassportButton from './img/Passport-button.png';
-import TrophyRoomButton from './img/Trophy-room-button.png';
-import Splode from './img/splode.png';
-import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
+
 import vsImg from './img/VS.png';
 
 interface PointCardProps {
@@ -61,6 +56,23 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
             </Grid>
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
+                    <div className={classes.nameRow}>
+                        <div className={classes.leftPlayer}>
+                            <Avatar></Avatar>
+                            <h2>Name1</h2>
+                        </div>
+                        <div className={classes.rightPlayer}>
+                            <Avatar></Avatar>
+                            <h2>Name1</h2>
+                        </div>
+                    </div>
+                    <div className={classes.subRow}>
+                        <Avatar></Avatar>
+                        <div className={classes.totalScore}>
+                            <p>Total</p>
+                        </div>
+                        <Avatar></Avatar>
+                    </div>
                     <img className={classes.vs} src={vsImg} alt='this is a lightning bolt thing' />
                 </Grid>
                 <Grid className={classes.story2}>

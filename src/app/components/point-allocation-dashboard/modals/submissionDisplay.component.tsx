@@ -45,8 +45,8 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 'bold',
         },
         imagePreview: {
-            width: '250px',
-            height: '125px',
+            width: '175px',
+            height: '175px',
             borderRadius: '14px',
         },
     })
@@ -75,7 +75,7 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
             <Grid
                 container
                 direction='column'
-                justify='center'
+                justify='space-evenly'
                 alignItems='center'
                 alignContent='center'>
                 <Grid item md>
@@ -98,6 +98,7 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                         required
                         autoFocus
                         name={key}
+                        value={points}
                         onChange={handleChange}
                         type='number'
                         InputProps={{ inputProps: { min: 10, max: 70 } }}

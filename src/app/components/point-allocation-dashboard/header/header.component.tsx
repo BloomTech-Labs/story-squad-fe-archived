@@ -10,17 +10,24 @@ const useStyles = makeStyles((theme: Theme) =>
             'color': '#FFFFFF',
             'fontSize': '86px',
             'fontWeight': 'bold',
+            'textAlign': 'center',
             '-webkit-text-stroke-width': '1px',
             '-webkit-text-stroke-color': '#000000',
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '42px',
+            },
         },
         h3Styling: {
             'fontFamily': 'Bangers',
             'color': '#FFFFFF',
             'fontSize': '48px',
             'fontWeight': 'bold',
+            'textAlign': 'center',
             '-webkit-text-stroke-width': '1px',
             '-webkit-text-stroke-color': '#000000',
-            'marginTop': '60px',
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '32px',
+            },
         },
         red: {
             color: 'red',
@@ -49,17 +56,21 @@ export const Header: React.FC<PointsProps> = ({ remainingPoints }) => {
         <>
             <Grid container direction='row' className={classes.appBar}>
                 <Grid container item justify='space-around' alignItems='center'>
-                    <Typography className={classes.h2Styling} variant='h2'>
-                        Point Share
-                    </Typography>
-                    <Typography className={classes.h3Styling}>
-                        Total Points Remaining:
-                        {remainingPoints < 0 || remainingPoints > 100 ? (
-                            <div className={classes.red}> Total must equal 100 </div>
-                        ) : (
-                            <div>{remainingPoints}</div>
-                        )}
-                    </Typography>
+                    <Grid item xs={12} md={6}>
+                        <Typography className={classes.h2Styling} variant='h2'>
+                            Point Share
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Typography className={classes.h3Styling}>
+                            Total Points Remaining:
+                            {remainingPoints < 0 || remainingPoints > 100 ? (
+                                <div className={classes.red}> Total must equal 100 </div>
+                            ) : (
+                                <div>{remainingPoints}</div>
+                            )}
+                        </Typography>
+                    </Grid>
                 </Grid>
             </Grid>
         </>

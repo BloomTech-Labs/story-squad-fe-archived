@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
             'fontWeight': 'bold',
             'borderRadius': '10px',
             'color': 'white',
-            'width': '200px',
             'border': '3px solid #292929',
             'textTransform': 'capitalize',
             'fontFamily': 'nunito',
@@ -32,21 +31,52 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         avatarMargin: {
             backgroundColor: '#B5D33D',
-            borderRight: '14px solid',
-            borderLeft: '14px solid',
-            padding: '10px',
+            borderRight: '7px solid',
+            borderLeft: '7px solid',
+            height: '380px',
         },
-        containerStyling: {
-            height: '274px',
-        },
-        sectionContainer: {
+        topContainer: {
+            paddingTop: '75px',
             border: '7px solid #000',
             backgroundColor: '#EB7D5B',
+            height: '380px',
+            [theme.breakpoints.down('sm')]: {
+                height: '700px',
+            },
+        },
+        bottomContainer: {
+            paddingTop: '75px',
+            border: '7px solid #000',
+            borderBottom: '0px',
+            backgroundColor: '#FED23F',
+            height: '380px',
+            [theme.breakpoints.down('sm')]: {
+                height: '700px',
+            },
         },
         button: {
             display: 'flex',
             justifyContent: 'center',
             alignItem: 'center',
+        },
+        backDiv: {
+            border: '7px solid #000',
+            borderTop: '0px',
+            backgroundColor: '#B5D33D',
+            padding: '20px',
+            [theme.breakpoints.down('sm')]: {
+                backgroundColor: '#FED23F',
+                borderRight: '0px',
+            },
+        },
+        nextDiv: {
+            border: '7px solid #000',
+            borderTop: '0px',
+            backgroundColor: '#FED23F',
+            padding: '20px',
+            [theme.breakpoints.down('sm')]: {
+                borderLeft: '0px',
+            },
         },
     })
 );
@@ -55,10 +85,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const [points, updating, updatePoints] = useAPI(`/battlesRoutes/battles`, 'PUT');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
-        story1Points: 0,
-        story2Points: 0,
-        pic1Points: 0,
-        pic2Points: 0,
+        story1Points: 10,
+        story2Points: 10,
+        pic1Points: 10,
+        pic2Points: 10,
     });
     const [remainingPoints, setRemainingPoints] = useState(100);
     const [error, setError] = useState(false);
@@ -117,40 +147,72 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                         <Container maxWidth='lg'>
                             <Grid container direction='column'>
                                 <Header remainingPoints={remainingPoints} />
-                                <Grid
-                                    container
-                                    alignItems='center'
-                                    className={classes.sectionContainer}>
-                                    <Grid item sm={12} md={4} className={classes.avatarMargin}>
+                                <Grid container alignItems='center'>
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={12}
+                                        md={4}
+                                        className={classes.avatarMargin}>
                                         <Avatar username={student.username} avatar={ava1} />
                                     </Grid>
-                                    <Grid item sm={12} md={4}>
-                                        <SubmissionDisplay
-                                            key='story1Points'
-                                            username={student.username}
-                                            submission={student.story.story.page1}
-                                            points={state.story1Points}
-                                            handleChange={handleInputChange('story1Points')}
-                                            type='Story'
-                                        />
-                                    </Grid>
-                                    <Grid item sm={12} md={4}>
-                                        <SubmissionDisplay
-                                            key='pic1Points'
-                                            username={student.username}
-                                            submission={student.illustration.illustration}
-                                            type='Illustration'
-                                            handleChange={handleInputChange('pic1Points')}
-                                            points={state.pic1Points}
-                                        />
+                                    <Grid container md={8} className={classes.topContainer}>
+                                        <Grid item xs={12} sm={12} md={6}>
+                                            <SubmissionDisplay
+                                                key='story1Points'
+                                                username={student.username}
+                                                submission={student.story.story.page1}
+                                                points={state.story1Points}
+                                                handleChange={handleInputChange('story1Points')}
+                                                type='Story'
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} sm={12} md={6}>
+                                            <SubmissionDisplay
+                                                key='pic1Points'
+                                                username={student.username}
+                                                submission={student.illustration.illustration}
+                                                type='Illustration'
+                                                handleChange={handleInputChange('pic1Points')}
+                                                points={state.pic1Points}
+                                            />
+                                        </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid
-                                    container
-                                    alignItems='center'
-                                    className={classes.sectionContainer}>
-                                    <Grid item sm={12} md={4} className={classes.avatarMargin}>
+                                <Grid container alignItems='center'>
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={12}
+                                        md={4}
+                                        className={classes.avatarMargin}>
                                         <Avatar username={teammate.username} avatar={ava2} />
+                                    </Grid>
+                                    <Grid container md={8} className={classes.bottomContainer}>
+                                        <Grid item xs={12} sm={12} md={6}>
+                                            <SubmissionDisplay
+                                                key='story2Points'
+                                                username={teammate.username}
+                                                submission={teammate.story.story.page1}
+                                                points={state.story2Points}
+                                                handleChange={handleInputChange('story2Points')}
+                                                type='Story'
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} sm={12} md={6}>
+                                            <SubmissionDisplay
+                                                key='pic2Points'
+                                                username={teammate.username}
+                                                submission={teammate.illustration.illustration}
+                                                points={state.pic2Points}
+                                                handleChange={handleInputChange('pic2Points')}
+                                                type='Illustration'
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid container>
+                                    <Grid item xs={4} className={classes.backDiv}>
                                         <div className={classes.button}>
                                             <Link to={`/kids-dashboard`}>
                                                 <Button
@@ -161,30 +223,17 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                             </Link>
                                         </div>
                                     </Grid>
-                                    <Grid item sm={12} md={4}>
-                                        <SubmissionDisplay
-                                            key='story2Points'
-                                            username={teammate.username}
-                                            submission={teammate.story.story.page1}
-                                            points={state.story2Points}
-                                            handleChange={handleInputChange('story2Points')}
-                                            type='Story'
-                                        />
-                                    </Grid>
-                                    <Grid item sm={12} md={4}>
-                                        <SubmissionDisplay
-                                            key='pic2Points'
-                                            username={teammate.username}
-                                            submission={teammate.illustration.illustration}
-                                            points={state.pic2Points}
-                                            handleChange={handleInputChange('pic2Points')}
-                                            type='Illustration'
-                                        />
-                                        <div className={classes.button}>
-                                            <Button className={classes.orangeButton} type='submit'>
-                                                Next
-                                            </Button>
-                                        </div>
+                                    <Grid container xs={8} className={classes.nextDiv}>
+                                        <Grid item xs={6} />
+                                        <Grid item xs={6}>
+                                            <div className={classes.button}>
+                                                <Button
+                                                    className={classes.orangeButton}
+                                                    type='submit'>
+                                                    Next
+                                                </Button>
+                                            </div>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>

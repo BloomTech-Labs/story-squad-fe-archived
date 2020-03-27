@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
             backgroundImage: `url(${splode})`,
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            backgroundSize: '80%',
+            backgroundSize: '70%',
         },
         avatarImg: {
             transform: 'scale(0.7)',

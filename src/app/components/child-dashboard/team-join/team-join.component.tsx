@@ -118,7 +118,7 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                             <div className={classes.draw}>
                                 <div className={classes.avatarDiv}>
                                     <p className={classes.username}>
-                                        Hi! My name is {child.username}! 
+                                        Hi! My name is {child.username}!
                                         {student === undefined ? 'Student' : student.username}!
                                     </p>
                                     <img

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import {
     Card,
     CardContent,
-    CircularProgress,
     Fab,
     TextField,
     Typography,
@@ -73,10 +72,8 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     }, [currentSubmission, setState]);
 
     React.useEffect(() => {
-        console.log('masmiadshfuwgfy', submission);
         if (submission && Object.keys(submission?.stories).length) {
             progress({ writing: true });
-            // submission.submission = undefined;
             if (submission && Object.keys(submission?.stories).length) {
                 progress({ writing: true });
 
@@ -111,22 +108,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         if (!page2 && page3) setState({ ...state, story: { ...state.story, page3: '' } });
         if (!page1 && page2) setState({ ...state, story: { ...state.story, page2: '' } });
     }, [setState, state]);
-
-    // React.useEffect(() => {
-    //     console.log('any string');
-    //     if(removed) {
-    //         console.log(Object.keys(removed));
-    //     }
-    //     if(currentSubmission && currentSubmission?.story) {
-    //         console.log(Object.keys(currentSubmission?.story));
-    //     }
-    //     if (removed && Object.keys(removed).length) {
-    //         currentSubmission && Object.keys(currentSubmission?.story).length
-    //             ? setSubmitted(true)
-    //             : setSubmitted(false);
-    //     }
-    //     console.log('submitted', submitted);
-    // }, [currentSubmission, submitted, removed]);
 
     const { storyText, story } = state;
     return (
@@ -187,8 +168,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-
-                {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
             </div>
             <div>
                 {submitting && (

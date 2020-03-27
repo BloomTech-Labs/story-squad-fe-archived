@@ -118,7 +118,6 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     };
 
     React.useEffect(() => {
-        // console.log('within removed effect', currentSubmission);
         if (removed && currentSubmission && currentSubmission?.illustration) {
             currentSubmission.illustration = undefined;
             setState({
@@ -203,7 +202,6 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>
                 </Fab>
-                {/* {submitting && <CircularProgress size={68} className={classes.buttonProgress} />} */}
             </div>
             <div>
                 {submitting && (

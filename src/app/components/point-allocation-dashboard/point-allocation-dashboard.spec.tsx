@@ -16,13 +16,15 @@ describe('PointDashboard', () => {
                 dueDates: {
                     reading: '',
                     writing: '',
-                    submission: '',
+                    drawing: '',
                 },
             },
             progress: {
                 reading: false,
                 writing: true,
-                submission: false,
+                reading: false,
+                teamReview: false,
+                randomReview: false,
             },
         };
         const { baseElement } = render(

@@ -74,22 +74,25 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     React.useEffect(() => {
         if (submission && Object.keys(submission?.stories).length) {
             progress({ writing: true });
-            setSubmitted(true);
-        }
+            if (submission && Object.keys(submission?.stories).length) {
+                progress({ writing: true });
 
-        if (removed && Object.keys(removed).length) {
-            progress({ writing: false });
-            setState({
-                storyText: '',
-                story: {
-                    page1: '',
-                    page2: '',
-                    page3: '',
-                    page4: '',
-                    page5: '',
-                },
-            });
-            setSubmitted(false);
+                setSubmitted(true);
+            }
+            if (removed && Object.keys(removed).length) {
+                progress({ writing: false });
+                setState({
+                    storyText: '',
+                    story: {
+                        page1: '',
+                        page2: '',
+                        page3: '',
+                        page4: '',
+                        page5: '',
+                    },
+                });
+                setSubmitted(false);
+            }
         }
     }, [submission, removed, progress, setState]);
 
@@ -174,6 +177,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                     </>
                 )}
             </div>
+            {submitting && <LinearProgress variant='query' color='secondary' />}
         </form>
     );
 };

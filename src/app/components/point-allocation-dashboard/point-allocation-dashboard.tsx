@@ -28,7 +28,7 @@ interface PointCardProps {
 
 const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
-    const [points] = useAPI(`/battlesRoutes/battles`, 'PUT');
+    const [points, updating, updatePoints] = useAPI(`/battlesRoutes/battles`, 'PUT');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
         story1Points: 10,
         story2Points: 10,
@@ -84,7 +84,17 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     }, [matchInfo, thisMatch]);
 
     const handleSubmit = () => {
-        if (remainingPoints === 0) {
+        if (remainingPoints === 0 && child.progress.teamReview === false) {
+            updatePoints({
+                story1id: student.story.id,
+                story1Points: state.story1Points,
+                story2id: teammate.story.id,
+                story2Points: state.story2Points,
+                pic1id: student.illustration.id,
+                pic1Points: state.pic1Points,
+                pic2id: teammate.illustration.id,
+                pic2Points: state.pic2Points,
+            });
             return console.log('Success!');
         } else {
             setError(true);
@@ -449,6 +459,29 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                         aria-describedby='transition-modal-description'
                         className={classes.modal}
                         open={draw2}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}>
+                        <Fade in={draw2}>
+                            <div className={classes.paper}>
+                                <img
+                                    src={student.illustration.illustration}
+                                    alt={`${student.username}'s illustration`}
+                                />
+                                <h2 id='transition-modal-title'>
+                                    {student.username}'s Illustration
+                                </h2>
+                            </div>
+                        </Fade>
+                    </Modal>
+                    <Modal
+                        aria-labelledby='transition-modal-title'
+                        aria-describedby='transition-modal-description'
+                        className={classes.modal}
+                        open={draw3}
                         onClose={handleClose}
                         closeAfterTransition
                         BackdropComponent={Backdrop}

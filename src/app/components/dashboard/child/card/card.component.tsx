@@ -115,7 +115,7 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onUpdate }) => {
         if (!response?.token) return;
         localStorage.setItem('jwt', response.token);
         window.dispatchEvent(new Event('switch-accounts'));
-        history.push(`/kids-dashboard`);
+        history.push(`/child-home`);
     }, [child.id, history, response]);
 
     return (

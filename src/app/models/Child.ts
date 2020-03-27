@@ -11,7 +11,6 @@ export interface Child {
         randomReview: boolean;
         // results: boolean;
     };
-
     cohort: {
         week: number;
         dueDates: {
@@ -24,4 +23,6 @@ export interface Child {
             // results: string;
         };
     };
+    stories: Object[];
+    illustrations: Object[];
 }

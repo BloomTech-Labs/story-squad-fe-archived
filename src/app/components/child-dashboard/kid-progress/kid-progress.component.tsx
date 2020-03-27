@@ -82,6 +82,15 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
             setOpen(false);
         }
     }, [progress.reading]);
+    React.useEffect(() => {
+        console.log('log of child obj within kidprogress', child);
+        if (child.illustrations.length) {
+            console.log('illustrations true');
+        }
+        if (child.stories.length) {
+            console.log('stories true');
+        }
+    }, []);
     return (
         <>
             <Card className={classes.card}>
@@ -147,7 +156,6 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 <Link
                                     to={`/story/${cohort.week}`}
                                     onClick={() => request({ reading: true })}>
-                                    {/* Read icon + "Read" */}
                                     <div className={classes.readIconDiv}></div>
                                 </Link>
                             </div>
@@ -157,7 +165,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                             <div className={classes.write}>
                                 {/* Write checkbox  */}
                                 <Checkbox
-                                    checked={progress.writing}
+                                    checked={!!child.stories.length}
                                     className={classes.alignRight}
                                     color='primary'
                                 />
@@ -170,7 +178,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                             <div className={classes.draw}>
                                 {/* Draw checkbox  */}
                                 <Checkbox
-                                    checked={progress.drawing}
+                                    checked={!!child.illustrations.length}
                                     className={classes.alignRight}
                                     color='primary'
                                 />

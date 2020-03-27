@@ -113,17 +113,19 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     }, [matchInfo]);
 
     const handleSubmit = () => {
+        const newPoints = {
+            stories: [
+                { id: student.story.id, points: state.story1Points },
+                { id: teammate.story.id, points: state.story2Points },
+            ],
+            illustrations: [
+                { id: student.illustration.id, points: state.pic1Points },
+                { id: teammate.illustration.id, points: state.pic2Points },
+            ],
+        };
+        console.log(newPoints);
         if (remainingPoints === 0 && child.progress.teamReview === false) {
-            updatePoints({
-                story1id: student.story.id,
-                story1Points: state.story1Points,
-                story2id: teammate.story.id,
-                story2Points: state.story2Points,
-                pic1id: student.illustration.id,
-                pic1Points: state.pic1Points,
-                pic2id: teammate.illustration.id,
-                pic2Points: state.pic2Points,
-            });
+            updatePoints(newPoints);
             return console.log('Success!');
         } else {
             setError(true);

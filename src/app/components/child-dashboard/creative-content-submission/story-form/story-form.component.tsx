@@ -79,7 +79,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
             });
             setSubmitted(false);
         }
-    }, [removed, remove]);
+    }, [removed, remove, setState]);
 
     useEffect(() => {
         if (onUpdate) onUpdate();
@@ -90,7 +90,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         ) {
             history.push('/kids-dashboard');
         }
-    }, [submitted, removed]);
+    }, [submitted, removed, history, onUpdate, uploadedStory]);
 
     useEffect(() => {
         // upon change of local state, update render

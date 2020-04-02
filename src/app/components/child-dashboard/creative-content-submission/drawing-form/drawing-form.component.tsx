@@ -72,6 +72,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     }, [uploadedDrawing, fetchedDrawing]);
 
     useEffect(() => {
+        //Rehashes FE submission state upon changes 4.1.20
         if (onUpdate) onUpdate();
         if (
             uploadedDrawing &&

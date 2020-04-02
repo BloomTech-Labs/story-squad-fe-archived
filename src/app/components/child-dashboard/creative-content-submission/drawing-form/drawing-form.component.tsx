@@ -62,17 +62,26 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
 
     useEffect(() => {
         //POST: checks if BE returned submission success as submission 4.1.20
-        if (uploadedDrawing && uploadedDrawing?.illustrations && uploadedDrawing?.illustrations.illustration) {
+        if (
+            uploadedDrawing &&
+            uploadedDrawing?.illustrations &&
+            uploadedDrawing?.illustrations.illustration
+        ) {
             setSubmitted(true);
         }
     }, [uploadedDrawing, fetchedDrawing]);
 
     useEffect(() => {
+        //Rehashes FE submission state upon changes 4.1.20
         if (onUpdate) onUpdate();
-        if (uploadedDrawing && uploadedDrawing?.illustrations && uploadedDrawing?.illustrations.illustration) {
+        if (
+            uploadedDrawing &&
+            uploadedDrawing?.illustrations &&
+            uploadedDrawing?.illustrations.illustration
+        ) {
             history.push('/kids-dashboard');
         }
-    }, [submitted]);
+    }, [submitted, removed]);
 
     const { illustration } = state;
     return (

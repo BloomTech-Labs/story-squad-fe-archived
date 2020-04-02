@@ -79,7 +79,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
             });
             setSubmitted(false);
         }
-    }, [removed, remove, setState]);
+    }, [removed, remove, setState, setSubmitted]);
 
     useEffect(() => {
         if (onUpdate) onUpdate();

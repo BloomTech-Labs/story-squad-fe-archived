@@ -21,8 +21,8 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
     const [submitted, setSubmitted] = React.useState(false);
-    const [currentSubmission] = useAPI(`/illustrationRoutes/${week}`, 'GET', false);
-    const [submission, submitting, submit] = useAPI('/illustrationRoutes', 'POST');
+    const [fetchedDrawing] = useAPI(`/illustrationRoutes/${week}`, 'GET', false);
+    const [uploadedDrawing, loadingDrawing, submitDrawing] = useAPI('/illustrationRoutes', 'POST');
     const [removed, removing, remove] = useAPI(`/illustrationRoutes/${week}`, 'DELETE');
     // const [newProgress, progressing, progress] = useAPI('/children/progress', 'POST');
     const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
@@ -30,7 +30,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     });
 
     const handleSubmit = handleSubmitBuilder(() => {
-        submit(state);
+        submitDrawing(state);
     });
 
     const handleDelete = () => {
@@ -40,15 +40,15 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     useEffect(() => {
         //initial mount render
         if (
-            currentSubmission &&
-            currentSubmission?.illustration &&
-            Object.keys(currentSubmission?.illustration).length
+            fetchedDrawing &&
+            fetchedDrawing?.illustration &&
+            Object.keys(fetchedDrawing?.illustration).length
         ) {
-            const { illustration } = currentSubmission;
+            const { illustration } = fetchedDrawing;
             setState(illustration);
             setSubmitted(true);
         }
-    }, [currentSubmission, setState]);
+    }, [fetchedDrawing, setState]);
 
     useEffect(() => {
         //checks if BE returned deleted as removed 4.1.20
@@ -62,14 +62,14 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
 
     useEffect(() => {
         //POST: checks if BE returned submission success as submission 4.1.20
-        if (submission && submission?.illustrations && submission?.illustrations.illustration) {
+        if (uploadedDrawing && uploadedDrawing?.illustrations && uploadedDrawing?.illustrations.illustration) {
             setSubmitted(true);
         }
-    }, [submission, setState, currentSubmission]);
+    }, [uploadedDrawing, fetchedDrawing]);
 
     useEffect(() => {
         if (onUpdate) onUpdate();
-        if (submission && submission?.illustrations && submission?.illustrations.illustration) {
+        if (uploadedDrawing && uploadedDrawing?.illustrations && uploadedDrawing?.illustrations.illustration) {
             history.push('/kids-dashboard');
         }
     }, [submitted]);
@@ -117,7 +117,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                 </Fab>
             </div>
             <div>
-                {submitting && (
+                {loadingDrawing && (
                     <>
                         {' '}
                         <h2>Sending Progress...</h2>
@@ -125,7 +125,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                     </>
                 )}
             </div>
-            {submitting && <LinearProgress variant='query' color='secondary' />}
+            {loadingDrawing && <LinearProgress variant='query' color='secondary' />}
         </form>
     );
 };

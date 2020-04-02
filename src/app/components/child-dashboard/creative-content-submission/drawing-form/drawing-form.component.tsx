@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import {
@@ -10,88 +10,8 @@ import {
     Button,
     LinearProgress,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import cityscape from '../../../../pages/child-dashboard/icons/cityscape.png';
 import { useAPI, useForm } from '../../../../hooks';
-
-const useStyles = makeStyles((theme) => ({
-    header: {
-        color: theme.palette.primary.contrastText,
-        backgroundColor: theme.palette.primary.main,
-        borderBottom: '7px solid #000000',
-    },
-    card: {
-        borderLeft: '7px solid #000000',
-        borderBottom: '7px solid #000000',
-        borderRight: '7px solid #000000',
-    },
-    content: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    form: {
-        margin: '0 auto',
-        width: '50%',
-    },
-    preview: {
-        height: 200,
-        width: 200,
-    },
-    wrapper: {
-        margin: theme.spacing(1),
-        position: 'fixed',
-        bottom: theme.spacing(2),
-        right: theme.spacing(2),
-    },
-    orangeButton: {
-        'backgroundColor': '#FF6B35',
-        'fontSize': '24px',
-        'fontWeight': 'bold',
-        'borderRadius': '10px',
-        'color': 'white',
-        'width': '200px',
-        'border': '3px solid #292929',
-        'textTransform': 'capitalize',
-        'fontFamily': 'nunito',
-        '&:hover': {
-            backgroundColor: '#FF6B35',
-        },
-    },
-    buttonText: {
-        fontSize: '24px',
-        fontWeight: 'bold',
-        fontFamily: 'nunito',
-    },
-    appBar: {
-        height: '229px',
-        backgroundColor: '#6CEAE6',
-        backgroundImage: `url(${cityscape})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '101% 103%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    headerFont: {
-        'fontFamily': 'Bangers',
-        'color': '#FFFFFF',
-        'fontSize': '86px',
-        'fontWeight': 'bold',
-        '-webkit-text-stroke-width': '1px',
-        '-webkit-text-stroke-color': '#000000',
-    },
-    buttons: {
-        display: 'flex',
-        justifyContent: 'space-between',
-    },
-    promptText: {
-        fontFamily: 'nunito',
-        fontSize: '36px',
-        fontWeight: 'normal',
-        color: '#292929',
-    },
-}));
-
+import { useStyles } from './styles';
 interface DrawingFormProps {
     onUpdate?: () => void;
     week: number;
@@ -101,65 +21,58 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
     const [submitted, setSubmitted] = React.useState(false);
-    const [currentSubmission] = useAPI(`/illustrationRoutes/${week}`, 'GET', false);
-    const [submission, submitting, submit] = useAPI('/illustrationRoutes', 'POST');
+    const [fetchedDrawing] = useAPI(`/illustrationRoutes/${week}`, 'GET', false);
+    const [uploadedDrawing, loadingDrawing, submitDrawing] = useAPI('/illustrationRoutes', 'POST');
     const [removed, removing, remove] = useAPI(`/illustrationRoutes/${week}`, 'DELETE');
-    const [newProgress, progressing, progress] = useAPI('/children/progress', 'POST');
+    // const [newProgress, progressing, progress] = useAPI('/children/progress', 'POST');
     const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
         illustration: '',
     });
 
     const handleSubmit = handleSubmitBuilder(() => {
-        submit(state);
+        submitDrawing(state);
     });
 
     const handleDelete = () => {
         remove();
     };
 
-    React.useEffect(() => {
-        if (removed && currentSubmission && currentSubmission?.illustration) {
-            currentSubmission.illustration = undefined;
-            setState({
-                illustration: '',
-            });
-        }
-    }, [removed, currentSubmission, setState, remove]);
-
-    React.useEffect(() => {
+    useEffect(() => {
+        //initial mount render
         if (
-            currentSubmission &&
-            currentSubmission?.illustration &&
-            Object.keys(currentSubmission?.illustration).length
+            fetchedDrawing &&
+            fetchedDrawing?.illustration &&
+            Object.keys(fetchedDrawing?.illustration).length
         ) {
-            const { illustration } = currentSubmission;
+            const { illustration } = fetchedDrawing;
             setState(illustration);
             setSubmitted(true);
         }
-    }, [currentSubmission, setState]);
+    }, [fetchedDrawing, setState]);
 
-    React.useEffect(() => {
-        if (
-            submission &&
-            submission?.illustration &&
-            Object.keys(submission?.illustration).length
-        ) {
-            progress({ drawing: true });
-            setSubmitted(true);
-        }
-        if (removed && Object.keys(removed).length) {
-            progress({ drawing: false });
+    useEffect(() => {
+        //checks if BE returned deleted as removed 4.1.20
+        if (removed) {
             setState({
                 illustration: '',
             });
             setSubmitted(false);
         }
-    }, [submission, removed, progress, setState, currentSubmission]);
+    }, [removed, remove]);
 
-    React.useEffect(() => {
-        if (newProgress && onUpdate) onUpdate();
-        if (newProgress?.progress?.drawing) history.push('/kids-dashboard');
-    }, [history, onUpdate, newProgress]);
+    useEffect(() => {
+        //POST: checks if BE returned submission success as submission 4.1.20
+        if (uploadedDrawing && uploadedDrawing?.illustrations && uploadedDrawing?.illustrations.illustration) {
+            setSubmitted(true);
+        }
+    }, [uploadedDrawing, fetchedDrawing]);
+
+    useEffect(() => {
+        if (onUpdate) onUpdate();
+        if (uploadedDrawing && uploadedDrawing?.illustrations && uploadedDrawing?.illustrations.illustration) {
+            history.push('/kids-dashboard');
+        }
+    }, [submitted]);
 
     const { illustration } = state;
     return (
@@ -204,7 +117,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                 </Fab>
             </div>
             <div>
-                {submitting && (
+                {loadingDrawing && (
                     <>
                         {' '}
                         <h2>Sending Progress...</h2>
@@ -212,7 +125,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                     </>
                 )}
             </div>
-            {submitting && <LinearProgress variant='query' color='secondary' />}
+            {loadingDrawing && <LinearProgress variant='query' color='secondary' />}
         </form>
     );
 };

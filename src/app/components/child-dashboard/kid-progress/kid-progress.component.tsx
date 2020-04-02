@@ -82,15 +82,6 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
             setOpen(false);
         }
     }, [progress.reading]);
-    React.useEffect(() => {
-        console.log('log of child obj within kidprogress', child);
-        if (child.illustrations.length) {
-            console.log('illustrations true');
-        }
-        if (child.stories.length) {
-            console.log('stories true');
-        }
-    }, []);
     return (
         <>
             <Card className={classes.card}>

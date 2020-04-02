@@ -58,7 +58,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
             });
             setSubmitted(false);
         }
-    }, [removed, remove]);
+    }, [removed, remove, setState]);
 
     useEffect(() => {
         //POST: checks if BE returned submission success as submission 4.1.20
@@ -81,7 +81,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
         ) {
             history.push('/kids-dashboard');
         }
-    }, [submitted, removed]);
+    }, [submitted, removed, uploadedDrawing, history, onUpdate]);
 
     const { illustration } = state;
     return (

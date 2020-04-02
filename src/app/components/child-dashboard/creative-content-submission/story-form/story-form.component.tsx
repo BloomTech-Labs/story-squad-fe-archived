@@ -66,8 +66,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
 
     useEffect(() => {
         //checks if BE returned deleted as removed 4.1.20
-        console.log(fetchedStory, 'fetchedStory');
-        if (removed && fetchedStory && !fetchedStory?.stories) {
+        if (removed) {
             setState({
                 storyText: '',
                 story: {
@@ -91,7 +90,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         ) {
             history.push('/kids-dashboard');
         }
-    }, [submitted]);
+    }, [submitted, removed]);
 
     useEffect(() => {
         // upon change of local state, update render

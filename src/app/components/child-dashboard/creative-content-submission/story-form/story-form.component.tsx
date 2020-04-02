@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import {
@@ -22,10 +22,9 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     const classes = useStyles({});
     const history = useHistory();
     const [submitted, setSubmitted] = React.useState(false);
-    const [currentSubmission] = useAPI(`/storyRoutes/${week}`, 'GET', false);
-    const [submission, submitting, submit] = useAPI('/storyRoutes', 'POST');
+    const [fetchedStory] = useAPI(`/storyRoutes/${week}`, 'GET', false);
+    const [uploadedStory, loadingStory, submitStory] = useAPI(`/storyRoutes`, 'POST');
     const [removed, removing, remove] = useAPI(`/storyRoutes/${week}`, 'DELETE');
-    const [newProgress, progressing, progress] = useAPI('/children/progress', 'POST');
     const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
         storyText: '',
         story: {
@@ -39,16 +38,36 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
 
     const handleSubmit = handleSubmitBuilder(() => {
         if (state.story.page1) setState({ ...state, storyText: '' });
-        submit(state);
+        submitStory(state);
     });
 
     const handleDelete = () => {
         remove();
     };
 
-    React.useEffect(() => {
-        if (removed && currentSubmission?.stories) {
-            currentSubmission.stories = undefined;
+    useEffect(() => {
+        //first render
+        if (fetchedStory && (Object.keys(fetchedStory?.story).length || fetchedStory?.storyText)) {
+            const { story } = fetchedStory;
+            setState(story);
+            setSubmitted(true);
+        }
+    }, [fetchedStory, setState]);
+
+    useEffect(() => {
+        if (
+            uploadedStory &&
+            uploadedStory?.stories &&
+            (Object.keys(uploadedStory?.stories).length || uploadedStory?.storyText)
+        ) {
+            setSubmitted(true);
+        }
+    }, [uploadedStory, setState]);
+
+    useEffect(() => {
+        //checks if BE returned deleted as removed 4.1.20
+        console.log(fetchedStory, 'fetchedStory');
+        if (removed && fetchedStory && !fetchedStory?.stories) {
             setState({
                 storyText: '',
                 story: {
@@ -61,47 +80,21 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
             });
             setSubmitted(false);
         }
-    }, [removed, currentSubmission, setState, remove]);
+    }, [removed, remove]);
 
-    React.useEffect(() => {
-        if (currentSubmission && Object.keys(currentSubmission?.story).length) {
-            const { story } = currentSubmission;
-            setState(story);
-            setSubmitted(true);
+    useEffect(() => {
+        if (onUpdate) onUpdate();
+        if (
+            uploadedStory &&
+            uploadedStory?.stories &&
+            (Object.keys(uploadedStory?.stories).length || uploadedStory?.storyText)
+        ) {
+            history.push('/kids-dashboard');
         }
-    }, [currentSubmission, setState]);
+    }, [submitted]);
 
-    React.useEffect(() => {
-        if (submission && Object.keys(submission?.stories).length) {
-            progress({ writing: true });
-            if (submission && Object.keys(submission?.stories).length) {
-                progress({ writing: true });
-
-                setSubmitted(true);
-            }
-            if (removed && Object.keys(removed).length) {
-                progress({ writing: false });
-                setState({
-                    storyText: '',
-                    story: {
-                        page1: '',
-                        page2: '',
-                        page3: '',
-                        page4: '',
-                        page5: '',
-                    },
-                });
-                setSubmitted(false);
-            }
-        }
-    }, [submission, removed, progress, setState]);
-
-    React.useEffect(() => {
-        if (newProgress && onUpdate) onUpdate();
-        if (newProgress?.progress?.writing) history.push('/kids-dashboard');
-    }, [history, onUpdate, newProgress]);
-
-    React.useEffect(() => {
+    useEffect(() => {
+        // upon change of local state, update render
         const { page1, page2, page3, page4, page5 } = state.story;
         if (!page4 && page5) setState({ ...state, story: { ...state.story, page5: '' } });
         if (!page3 && page4) setState({ ...state, story: { ...state.story, page4: '' } });
@@ -170,14 +163,14 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                 </Fab>
             </div>
             <div>
-                {submitting && (
+                {loadingStory && (
                     <>
                         <h2>Sending Progress...</h2>
                         <LinearProgress variant='query' color='secondary' />
                     </>
                 )}
             </div>
-            {submitting && <LinearProgress variant='query' color='secondary' />}
+            {loadingStory && <LinearProgress variant='query' color='secondary' />}
         </form>
     );
 };

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { CircularProgress } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { useStyles } from './styles';
 
 import { useAPI } from '../../hooks';
 import {
@@ -15,43 +15,6 @@ import {
 import { Switch, Route } from 'react-router-dom';
 import 'typeface-bangers';
 
-const useStyles = makeStyles((theme) => ({
-    loading: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-    },
-    headerFont: {
-        'fontFamily': 'Bangers',
-        'fontSize': '86px',
-        'fontWeight': 'bold',
-        '-webkit-text-stroke-width': '1px',
-        '-webkit-text-stroke-color': '#ff6d3a',
-    },
-    headerBorder: {
-        border: '4px solid #292929',
-    },
-    root: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    main: {
-        display: 'flex',
-        flexDirection: 'column',
-        flexGrow: 1,
-    },
-    content: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-    },
-    welcome: {
-        marginBottom: theme.spacing(2),
-    },
-    toolbar: theme.mixins.toolbar,
-}));
-
 const ChildDashboard: React.FC = () => {
     const classes = useStyles();
     const [response, loading, request] = useAPI('/children/me');
@@ -63,6 +26,10 @@ const ChildDashboard: React.FC = () => {
             </section>
         );
 
+    const handleRequest = () => {
+        request();
+    };
+
     return (
         <div className={classes.root}>
             <main className={classes.main}>
@@ -70,13 +37,13 @@ const ChildDashboard: React.FC = () => {
                     <Route
                         path='/kids-dashboard/upload'
                         render={() => (
-                            <StoryForm week={response.me.cohort.week} onUpdate={request} />
+                            <StoryForm week={response.me.cohort.week} onUpdate={handleRequest} />
                         )}
                     />
                     <Route
                         path='/kids-dashboard/drawing-upload'
                         render={() => (
-                            <DrawingForm week={response.me.cohort.week} onUpdate={request} />
+                            <DrawingForm week={response.me.cohort.week} onUpdate={handleRequest} />
                         )}
                     />
                     <Route
@@ -91,7 +58,7 @@ const ChildDashboard: React.FC = () => {
                         path='/'
                         render={() => (
                             <div className={classes.content}>
-                                <KidProgressCard child={response.me} onUpdate={request} />
+                                <KidProgressCard child={response.me} onUpdate={handleRequest} />
                             </div>
                         )}
                     />

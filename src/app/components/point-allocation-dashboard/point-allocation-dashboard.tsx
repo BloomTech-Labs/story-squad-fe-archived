@@ -71,8 +71,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     useEffect(() => {
         if (matchInfo) {
             const { student, teammate } = matchInfo.thisMatch.team;
-            const { studentUsername, studentStory, studentIllustration } = student;
-            const { teammateUsername, teammateStory, teammateIllustration } = teammate;
             setThisMatch({ ...matchInfo.thisMatch });
             setStudent({ ...student });
             setTeammate({ ...teammate });
@@ -172,7 +170,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                             <SubmissionDisplay
                                                 key='pic2Points'
                                                 username={teammate.username}
-                                                submission={teammate.illustration.illustration}
+                                                submission={
+                                                    teammate.illustration &&
+                                                    teammate.illustration.illustration
+                                                }
                                                 points={state.pic2Points}
                                                 handleChange={handleInputChange('pic2Points')}
                                                 type='Illustration'

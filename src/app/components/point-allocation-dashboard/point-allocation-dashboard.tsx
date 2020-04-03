@@ -26,8 +26,40 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     const [remainingPoints, setRemainingPoints] = useState(100);
     const [error, setError] = useState(false);
     const [thisMatch, setThisMatch] = useState();
-    const [student, setStudent] = useState();
-    const [teammate, setTeammate] = useState();
+    const [student, setStudent] = useState({
+        username: '',
+        story: {
+            id: 0,
+            story: {
+                page1: '',
+                page2: '',
+                page3: '',
+                page4: '',
+                page5: '',
+            },
+        },
+        illustration: {
+            id: 0,
+            illustration: '',
+        },
+    });
+    const [teammate, setTeammate] = useState({
+        username: '',
+        story: {
+            id: 0,
+            story: {
+                page1: '',
+                page2: '',
+                page3: '',
+                page4: '',
+                page5: '',
+            },
+        },
+        illustration: {
+            id: 0,
+            illustration: '',
+        },
+    });
     const classes = useStyles({});
 
     useEffect(() => {
@@ -38,9 +70,12 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
 
     useEffect(() => {
         if (matchInfo) {
+            const { student, teammate } = matchInfo.thisMatch.team;
+            const { studentUsername, studentStory, studentIllustration } = student;
+            const { teammateUsername, teammateStory, teammateIllustration } = teammate;
             setThisMatch({ ...matchInfo.thisMatch });
-            setStudent({ ...matchInfo.thisMatch.team.student });
-            setTeammate({ ...matchInfo.thisMatch.team.teammate });
+            setStudent({ ...student });
+            setTeammate({ ...teammate });
         }
     }, [matchInfo]);
 

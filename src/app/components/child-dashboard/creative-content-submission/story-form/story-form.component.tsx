@@ -90,6 +90,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         ) {
             history.push('/kids-dashboard');
         }
+        console.log('HHHHHHHHHHHHHHHHHH');
     }, [submitted, removed, history, onUpdate, uploadedStory]);
 
     useEffect(() => {

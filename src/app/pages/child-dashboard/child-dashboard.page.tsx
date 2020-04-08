@@ -29,7 +29,6 @@ const ChildDashboard: React.FC = () => {
     const handleRequest = () => {
         request();
     };
-
     return (
         <div className={classes.root}>
             <main className={classes.main}>

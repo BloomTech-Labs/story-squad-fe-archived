@@ -124,6 +124,10 @@ export const useStyles = makeStyles((theme: Theme) =>
             flexDirection: 'column',
             justifyContent: 'center',
         },
+        playerInfo: {
+            border: '2px solid blue',
+        },
+
         totalScore: {
             display: 'flex',
             flexDirection: 'column-reverse',

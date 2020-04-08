@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
-
 import {
     Button,
     Avatar,
@@ -70,27 +69,80 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                         </div>
                         <div className={classes.rightPlayer}>
                             <Avatar></Avatar>
-                            <h2>Name1</h2>
+                            <h2>Name2</h2>
                         </div>
                     </div>
                     <div className={classes.subRow}>
-                        <Avatar></Avatar>
+                        <Avatar>High story</Avatar>
                         <div className={classes.totalScore}>
                             <p>Total</p>
                         </div>
-                        <Avatar></Avatar>
+                        <Avatar>High story</Avatar>
                     </div>
                     <img className={classes.vs} src={vsImg} alt='this is a lightning bolt thing' />
                 </Grid>
                 <Grid className={classes.story2}>
+                    <div className={classes.nameRow}>
+                        <div className={classes.leftPlayer}>
+                            <Avatar></Avatar>
+                            <h2>Name3</h2>
+                        </div>
+                        <div className={classes.rightPlayer}>
+                            <div className={classes.playerInfo}>
+                                <Avatar></Avatar>
+                                <h2>Name4</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={classes.subRow}>
+                        <Avatar>Low story</Avatar>
+                        <div className={classes.totalScore}>
+                            <p>Total</p>
+                        </div>
+                        <Avatar>Low story</Avatar>
+                    </div>
                     <img className={classes.vs} src={vsImg} alt='this is a lightning bolt thing' />
                 </Grid>
             </Grid>
             <Grid className={classes.bottomRow}>
                 <Grid className={classes.picture1}>
+                    <div className={classes.nameRow}>
+                        <div className={classes.leftPlayer}>
+                            <Avatar></Avatar>
+                            <h2>Name1</h2>
+                        </div>
+                        <div className={classes.rightPlayer}>
+                            <Avatar></Avatar>
+                            <h2>Name4</h2>
+                        </div>
+                    </div>
+                    <div className={classes.subRow}>
+                        <Avatar>high pic</Avatar>
+                        <div className={classes.totalScore}>
+                            <p>Total</p>
+                        </div>
+                        <Avatar>high pic</Avatar>
+                    </div>
                     <img className={classes.vs} src={vsImg} alt='this is a lightning bolt thing' />
                 </Grid>
                 <Grid className={classes.picture2}>
+                    <div className={classes.nameRow}>
+                        <div className={classes.leftPlayer}>
+                            <Avatar></Avatar>
+                            <h2>Name3</h2>
+                        </div>
+                        <div className={classes.rightPlayer}>
+                            <Avatar></Avatar>
+                            <h2>Name2</h2>
+                        </div>
+                    </div>
+                    <div className={classes.subRow}>
+                        <Avatar>Low pic</Avatar>
+                        <div className={classes.totalScore}>
+                            <p>Total</p>
+                        </div>
+                        <Avatar>Low Pic</Avatar>
+                    </div>
                     <img className={classes.vs} src={vsImg} alt='this is a lightning bolt thing' />
                 </Grid>
             </Grid>

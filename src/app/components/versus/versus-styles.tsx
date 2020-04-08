@@ -116,22 +116,27 @@ export const useStyles = makeStyles((theme: Theme) =>
         //styling for the name and avatar within nameRow
         leftPlayer: {
             display: 'flex',
-            flexDirection: 'column',
+            // flexDirection: 'column',
             justifyContent: 'center',
+            marginTop: '3%',
         },
         rightPlayer: {
             display: 'flex',
-            flexDirection: 'column',
+            // flexDirection: 'column',
             justifyContent: 'center',
-        },
-        playerInfo: {
-            border: '2px solid blue',
+            marginTop: '3%',
         },
 
         totalScore: {
             display: 'flex',
-            flexDirection: 'column-reverse',
-            justifyContent: 'start',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            fontFamily: 'Nunito',
+            fontStyle: 'normal',
+            fontWeight: 'bold',
+            fontSize: '26px',
+            color: '#FFFFFF',
+            marginTop: '25%',
         },
         story1: {
             position: 'relative',
@@ -204,6 +209,37 @@ export const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.only('sm')]: {
                 width: '100%',
             },
+        },
+        // orangeButton: {
+        //     'backgroundColor': '#FF6B35',
+        //     'fontSize': '24px',
+        //     'height': '60px',
+        //     'width': '30%',
+        //     'fontWeight': 'bold',
+        //     'borderRadius': '10px',
+        //     'color': 'white',
+        //     'border': '3px solid #292929',
+        //     'textTransform': 'capitalize',
+        //     'fontFamily': 'nunito',
+        //     '&:hover': {
+        //         backgroundColor: '#FF6B35',
+        //     },
+        // },
+        button: {
+            display: 'flex',
+            flexDirection: 'column',
+            border: '3px solid #292929',
+            backgroundColor: '#FF6B35',
+            marginTop: '20%',
+            fontSize: '24px',
+            height: '60px',
+            width: '30%',
+            fontWeight: 'bold',
+            borderRadius: '10px',
+            color: 'white',
+        },
+        avatarStyle: {
+            height: '45px',
         },
     })
 );

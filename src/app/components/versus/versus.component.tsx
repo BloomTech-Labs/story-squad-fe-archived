@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
 import ava1 from '../point-allocation-dashboard/img/cam.png';
 import ava2 from '../point-allocation-dashboard/img/Hero13.png';
-import testSub from '../point-allocation-dashboard/img/draw2.jpg';
+import hs1 from './img/meStory.jpg';
+import hs2 from './img/pg1Story.jpg';
+import ls1 from './img/story4.jpg';
+import ls2 from './img/pg1Story3.jpg';
+import hp1 from './img/drawing1.jpg';
+import hp2 from './img/drawing2.jpg';
+import lp1 from './img/drawing3.jpg';
+import lp2 from './img/pic4.jpg';
 import {
     Button,
     Avatar,
@@ -39,6 +46,7 @@ interface PointCardProps {
 }
 const Versus: React.FC<PointCardProps> = ({ child }) => {
     const classes = useStyles({});
+    ////////state setup from point allocation copied//////
     // const [student, setStudent] = useState({
     //     username: '',
     //     story: {
@@ -154,7 +162,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     <div className={classes.subRow}>
                         {/* <div className={classes.button}>
                             <Link to={`/kids-dashboard/points-dashboard`}>
-                                <Button>Back</Button>
+                                <Button className={classes.orangeButton}>Back</Button>
                             </Link>
                         </div> */}
                         <Avatar>high pic</Avatar>
@@ -183,7 +191,10 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                         </div>
                         <Avatar>Low Pic</Avatar>
                         {/* <div className={classes.button}>
-                            <Button>Vote</Button>
+                            <Button className={classes.orangeButton} type='submit'>
+                                {' '}
+                                Vote
+                            </Button>
                         </div> */}
                     </div>
                     <img className={classes.vs} src={vsImg} alt='this is a lightning bolt thing' />

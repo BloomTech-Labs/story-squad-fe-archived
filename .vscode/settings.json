@@ -21,7 +21,9 @@
         "titleBar.inactiveForeground": "#e7e7e799",
         "statusBar.background": "#2c0c18",
         "statusBarItem.hoverBackground": "#54172e",
-        "statusBar.foreground": "#e7e7e7"
+        "statusBar.foreground": "#e7e7e7",
+        "statusBar.border": "#2c0c18",
+        "titleBar.border": "#2c0c18"
     },
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"

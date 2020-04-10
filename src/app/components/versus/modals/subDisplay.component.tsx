@@ -36,6 +36,10 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingTop: '32px',
             padding: '30px',
         },
+        gridInput: {
+            backgroundColor: '#EB7D5B',
+            padding: '53px ',
+        },
         imagePreview: {
             width: '150px',
             height: '90px',

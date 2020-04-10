@@ -133,9 +133,9 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                             The Match Up
                         </Typography>
                         {/* team1 placeholder*/}
-                        <div className={classes.appHead}>
+                        <div className={classes.teamName}>
                             <Typography className={classes.h4Styling}>Giants</Typography>
-                            <Typography className={classes.h3Styling}>VS</Typography>
+                            <Typography className={classes.h4Styling}>VS</Typography>
                             {/* team2 placeholder*/}
                             <Typography className={classes.h4Styling}>Cowboys</Typography>
                         </div>
@@ -150,10 +150,10 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
                             <Avatar className={classes.avatarMargin} src={ava1}></Avatar>
-                            <h3>{student.username}</h3>
+                            <div className={classes.playerName}>{student.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
-                            <h3>Name2</h3>
+                            <div className={classes.playerName}>Name2</div>
                             <Avatar src={ava2}></Avatar>
                         </div>
                     </div>
@@ -198,10 +198,10 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
                             <Avatar src={ava1}></Avatar>
-                            <h3>{teammate.username}</h3>
+                            <div className={classes.playerName}>{teammate.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
-                            <h3>Name4</h3>
+                            <div className={classes.playerName}>Name4</div>
                             <Avatar src={ava2}></Avatar>
                         </div>
                     </div>
@@ -248,10 +248,10 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
                             <Avatar src={ava1}></Avatar>
-                            <h3>{student.username}</h3>
+                            <div className={classes.playerName}>{student.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
-                            <h3>Name4</h3>
+                            <div className={classes.playerName}>Name4</div>
                             <Avatar src={ava2}></Avatar>
                         </div>
                     </div>
@@ -271,7 +271,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                                 />
                             </Grid>
                         </ValidatorForm>
-                        {/* <Grid item xs={2}>
+                        <Grid item xs={2}>
                             <div className={classes.button}>
                                 <Link to={`/kids-dashboard/points-dashboard`}>
                                     <Button className={classes.orangeButton} type='button'>
@@ -279,7 +279,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                                     </Button>
                                 </Link>
                             </div>
-                        </Grid> */}
+                        </Grid>
                         <div className={classes.totalScore}>
                             <p>Total</p> {/* High pic1 + high pic2 pts */}
                         </div>
@@ -305,10 +305,10 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
                             <Avatar src={ava1}></Avatar>
-                            <h3>{teammate.username}</h3>
+                            <div className={classes.playerName}>{teammate.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
-                            <h3>Name2</h3>
+                            <div className={classes.playerName}>Name2</div>
                             <Avatar src={ava2}></Avatar>
                         </div>
                     </div>
@@ -346,16 +346,16 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                                 />
                             </Grid>
                         </ValidatorForm>
-                        {/* <Grid item xs={2}>
-                            <div className={classes.button}>
-                                <Link to={`/kids-dashboard/nextpage`}>
-                                    <Button className={classes.orangeButton} type='submit'>
-                                        Vote
-                                    </Button>
-                                </Link>
-                            </div>
-                        </Grid> */}
                     </div>
+                    <Grid item xs={2}>
+                        <div className={classes.button}>
+                            <Link to={`/kids-dashboard/nextpage`}>
+                                <Button className={classes.orangeButton} type='submit'>
+                                    Vote
+                                </Button>
+                            </Link>
+                        </div>
+                    </Grid>
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
             </Grid>

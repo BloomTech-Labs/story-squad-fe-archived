@@ -53,14 +53,20 @@ export const useStyles = makeStyles((theme: Theme) =>
         h4Styling: {
             'fontFamily': 'Bangers',
             'color': '#FFFFFF',
-            'fontSize': '30px',
+            'fontSize': '48px',
+            'lineHeight': '51px',
             'fontWeight': 'bold',
             '-webkit-text-stroke-width': '1px',
             '-webkit-text-stroke-color': '#000000',
+            'marginLeft': '3%',
+            'marginRight': '4%',
+            'marginTop': '1%',
         },
-        appHead: {
+        teamName: {
             display: 'flex',
             flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            alignContent: 'center',
         },
         appBar: {
             height: '26vh',
@@ -116,7 +122,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             justifyContent: 'space-between',
             zIndex: 999999,
-            width: '80%',
+            width: '85%',
             height: '40%',
         },
         subRow: {
@@ -131,15 +137,16 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             // flexDirection: 'column',
             justifyContent: 'center',
+            alignItems: 'center',
             marginTop: '3%',
         },
         rightPlayer: {
             display: 'flex',
             // flexDirection: 'column',
             justifyContent: 'center',
+            alignItems: 'center',
             marginTop: '3%',
         },
-
         totalScore: {
             display: 'flex',
             flexDirection: 'column',
@@ -149,7 +156,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 'bold',
             fontSize: '26px',
             color: '#FFFFFF',
-            marginTop: '25%',
+            marginTop: '27%',
         },
         story1: {
             position: 'relative',
@@ -225,10 +232,10 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         orangeButton: {
             'backgroundColor': '#FF6B35',
-            'marginTop': '90%',
+            // 'marginTop': '90%',
             'fontSize': '24px',
             'height': '40px',
-            'width': '30%',
+            'width': '70px',
             'fontWeight': 'bold',
             'borderRadius': '10px',
             'color': 'white',
@@ -240,10 +247,19 @@ export const useStyles = makeStyles((theme: Theme) =>
             },
         },
         button: {
-            display: 'flex',
+            position: 'absolute',
         },
         avatarStyle: {
             height: '45px',
+            padding: '10px',
+        },
+        playerName: {
+            fontFamily: 'Bangers',
+            fontStyle: 'normal',
+            fontWeight: 'normal',
+            fontSize: '24px',
+            lineHeight: '26px',
+            color: '#292929',
         },
     })
 );

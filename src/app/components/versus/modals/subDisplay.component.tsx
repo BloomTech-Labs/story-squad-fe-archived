@@ -36,19 +36,10 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingTop: '32px',
             padding: '30px',
         },
-        gridInput: {
-            backgroundColor: '#EB7D5B',
-            padding: '53px ',
-        },
-        pointInput: {
-            fontFamily: 'Bangers',
-            fontSize: '48px',
-            fontWeight: 'bold',
-        },
         imagePreview: {
-            width: '175px',
-            height: '175px',
-            borderRadius: '14px',
+            width: '150px',
+            height: '90px',
+            borderRadius: '10px',
         },
     })
 );
@@ -85,30 +76,6 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                         className={classes.imagePreview}
                         onClick={handleOpen}
                         alt={`${username}'s ${type}`}
-                    />
-                </Grid>
-                <Grid item md>
-                    <TextValidator
-                        validators={['minNumber:10', 'maxNumber:70', 'required']}
-                        errorMessages={[
-                            'Oops! Each submission must be given at least 10 points.',
-                            'Oops! A submission cannot be given more than 70 points.',
-                            'This is required.',
-                        ]}
-                        className={classes.pointInput}
-                        required
-                        autoFocus
-                        name={key}
-                        value={points}
-                        onChange={handleChange}
-                        type='number'
-                        InputProps={{ inputProps: { min: 10, max: 70 } }}
-                        style={{
-                            background: 'white',
-                            width: '145px',
-                            borderRadius: '5px',
-                        }}
-                        variant='outlined'
                     />
                 </Grid>
                 <Dialog className={classes.modal} open={open} onClose={handleClose}>

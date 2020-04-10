@@ -51,7 +51,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             '-webkit-text-stroke-color': '#000000',
         },
         appBar: {
-            height: '26vh',
+            height: '25vh',
             width: '100%',
             backgroundColor: '#6CEAE6',
             backgroundImage: `url(${cityscape})`,
@@ -104,14 +104,14 @@ export const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'space-between',
             zIndex: 999999,
             width: '80%',
-            height: '47%',
+            height: '40%',
         },
         subRow: {
             display: 'flex',
             justifyContent: 'space-between',
             zIndex: 999999,
             width: '90%',
-            height: '47%',
+            height: '45%',
         },
         //styling for the name and avatar within nameRow
         leftPlayer: {
@@ -136,7 +136,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 'bold',
             fontSize: '26px',
             color: '#FFFFFF',
-            marginTop: '15%',
+            marginTop: '25%',
         },
         story1: {
             position: 'relative',
@@ -211,11 +211,8 @@ export const useStyles = makeStyles((theme: Theme) =>
             },
         },
         orangeButton: {
-            'display': 'flex',
-            'flexDirection': 'column',
-            'alignItems': 'flex-end',
             'backgroundColor': '#FF6B35',
-            'marginTop': '40%',
+            'marginTop': '90%',
             'fontSize': '24px',
             'height': '40px',
             'width': '30%',
@@ -231,22 +228,9 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         button: {
             display: 'flex',
-            marginTop: '15%',
         },
         avatarStyle: {
             height: '45px',
-        },
-        nextDiv: {
-            display: 'flex',
-            flexDirection: 'column',
-            flexWrap: 'nowrap',
-            justifyContent: 'flex-end',
-            alignItems: 'flex-end',
-            alignContent: 'flex-end',
-            border: '7px solid #000',
-            [theme.breakpoints.down('sm')]: {
-                borderLeft: '0px',
-            },
         },
     })
 );

@@ -82,6 +82,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
             setOpen(false);
         }
     }, [progress.reading]);
+    console.log(`MATCH INFO`, matchInfo);
     return (
         <>
             <Card className={classes.card}>
@@ -178,9 +179,9 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                     <div className={classes.drawIconDiv}></div>
                                 </Link>
                                 {progress.reading &&
-                                progress.drawing &&
-                                progress.writing &&
-                                matchInfo ? (
+                                !!child.stories.length &&
+                                !!child.illustrations.length &&
+                                !!matchInfo ? (
                                     <Link to={`/kids-dashboard/team-join`}>
                                         <Button className={classes.orangeButton} type='button'>
                                             TEAM UP!
@@ -189,15 +190,17 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 ) : (
                                     <Button
                                         disabled={
-                                            !progress.reading &&
-                                            !progress.drawing &&
-                                            !progress.writing &&
+                                            !progress.reading ||
+                                            !child.stories.length ||
+                                            !child.illustrations.length ||
                                             !matchInfo
                                         }
                                         className={classes.grayButton}
                                         type='button'>
-                                        {progress.reading && progress.drawing && progress.writing
-                                            ? 'Your team will be matched soon'
+                                        {progress.reading &&
+                                        child.stories.length &&
+                                        child.illustrations.length
+                                            ? 'Your team will be matched soon!'
                                             : 'Submissions needed to proceed!'}
                                     </Button>
                                 )}

@@ -80,7 +80,7 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
         ) {
             history.push('/kids-dashboard');
         }
-    }, [submitted, removed, uploadedDrawing, history, onUpdate]);
+    }, [submitted, removed, uploadedDrawing, history]);
 
     const { illustration } = state;
     return (

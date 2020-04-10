@@ -179,9 +179,9 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                     <div className={classes.drawIconDiv}></div>
                                 </Link>
                                 {progress.reading &&
-                                child.stories.length &&
-                                child.illustrations.length &&
-                                matchInfo ? (
+                                !!child.stories.length &&
+                                !!child.illustrations.length &&
+                                !!matchInfo ? (
                                     <Link to={`/kids-dashboard/team-join`}>
                                         <Button className={classes.orangeButton} type='button'>
                                             TEAM UP!

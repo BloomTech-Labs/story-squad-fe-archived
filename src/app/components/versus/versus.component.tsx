@@ -42,48 +42,59 @@ interface PointCardProps {
 }
 const Versus: React.FC<PointCardProps> = ({ child }) => {
     const classes = useStyles({});
-
-///TODO: ensure correct props are present on Point Card Props. student, teammate (opposition objects) to pass down pts, submissions, username, etc
-
+    const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
+    ///TODO: ensure correct props are present on Point Card Props. student, teammate (opposition objects) to pass down pts, submissions, username, etc
+    const [thisMatch, setThisMatch] = useState();
     ////////state setup from point allocation copied//////
-    // const [student, setStudent] = useState({
-    //     username: '',
-    //     story: {
-    //         id: 0,
-    //         story: {
-    //             page1: '',
-    //             page2: '',
-    //             page3: '',
-    //             page4: '',
-    //             page5: '',
-    //         },
-    //     },
-    //     illustration: {
-    //         id: 0,
-    //         illustration: '',
-    //     },
-    // });
-    // const [teammate, setTeammate] = useState({
-    //     username: '',
-    //     story: {
-    //         id: 0,
-    //         story: {
-    //             page1: '',
-    //             page2: '',
-    //             page3: '',
-    //             page4: '',
-    //             page5: '',
-    //         },
-    //     },
-    //     illustration: {
-    //         id: 0,
-    //         illustration: '',
-    //     },
-    // });
+    const [student, setStudent] = useState({
+        username: '',
+        story: {
+            id: 0,
+            story: {
+                page1: '',
+                page2: '',
+                page3: '',
+                page4: '',
+                page5: '',
+            },
+        },
+        illustration: {
+            id: 0,
+            illustration: '',
+        },
+    });
+    const [teammate, setTeammate] = useState({
+        username: '',
+        story: {
+            id: 0,
+            story: {
+                page1: '',
+                page2: '',
+                page3: '',
+                page4: '',
+                page5: '',
+            },
+        },
+        illustration: {
+            id: 0,
+            illustration: '',
+        },
+    });
     //student/teammate submissions state
+    useEffect(() => {
+        if (matchInfo) {
+            console.log('VESUS MATCH INFOOOOOOO', matchInfo);
+            const { student, teammate } = matchInfo.thisMatch.team;
+            const { studentUsername, studentStory, studentIllustration } = student;
+            const { teammateUsername, teammateStory, teammateIllustration } = teammate;
+            setThisMatch({ ...matchInfo.thisMatch });
+            setStudent({ ...student });
+            setTeammate({ ...teammate });
+        }
+    }, [matchInfo]);
 
     //modal
-    const { state, handleInputChange, handleSubmitBuilder } = useForm({
+    const { state } = useForm({
         story1Points: 10,
         story2Points: 10,
         pic1Points: 10,
@@ -101,7 +112,9 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
             ],
         };
         return console.log('submit on vs');
-        {/* TODO: onsubmit  need to be changed or not needed */}
+        {
+            /* TODO: onsubmit  need to be changed or not needed */
+        }
     };
 
     return (
@@ -132,7 +145,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
                             <Avatar className={classes.avatarMargin} src={ava1}></Avatar>
-                            <h3>Name1</h3>
+                            <h3>{student.username}</h3>
                         </div>
                         <div className={classes.rightPlayer}>
                             <h3>Name2</h3>
@@ -147,19 +160,18 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                             <Grid item xs={12} sm={12} md={6}>
                                 <SubmissionDisplay
                                     key='story1Points'
-                                    // username={student.username}
-                                    // submission={student.story.story.page1}
+                                    username={student.username}
+                                    submission={student.story.story.page1}
                                     // points={state.story1Points}
-                                    username={'name1'}
-                                    submission={story1}
+                                    // username={'name1'}
+                                    // submission={story1}
                                     points={10}
-                                    handleChange={handleInputChange('story1Points')}
                                     type='Story'
                                 />
                             </Grid>
                         </ValidatorForm>
                         <div className={classes.totalScore}>
-                            <p>Total</p> {/* High story1 + high story2 pts */} 
+                            <p>Total</p> {/* High story1 + high story2 pts */}
                         </div>
                         {/* High story2 */}
                         <ValidatorForm
@@ -168,13 +180,12 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                             <Grid item xs={12} sm={12} md={6}>
                                 <SubmissionDisplay
                                     key='story1Points'
-                                    // username={student.username}
-                                    // submission={student.story.story.page1}
+                                    username={student.username}
+                                    submission={student.story.story.page1}
                                     // points={state.story1Points}
-                                    username={'name3'}
-                                    submission={story2}
+                                    // username={'name3'}
+                                    // submission={story2}
                                     points={10}
-                                    handleChange={handleInputChange('story2Points')}
                                     type='Story'
                                 />
                             </Grid>
@@ -207,7 +218,6 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                                     username={'name3'}
                                     submission={story1}
                                     points={10}
-                                    handleChange={handleInputChange('story2Points')}
                                     type='Story'
                                 />
                             </Grid>
@@ -228,7 +238,6 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                                     username={'name4'}
                                     submission={story2}
                                     points={10}
-                                    handleChange={handleInputChange('story2Points')}
                                     type='Story'
                                 />
                             </Grid>
@@ -263,7 +272,6 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                                     username={'name1'}
                                     submission={pic1}
                                     points={10}
-                                    handleChange={handleInputChange('story2Points')}
                                     type='Story'
                                 />
                             </Grid>
@@ -293,7 +301,6 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                                     username={'name4'}
                                     submission={pic2}
                                     points={10}
-                                    handleChange={handleInputChange('story2Points')}
                                     type='Story'
                                 />
                             </Grid>
@@ -326,7 +333,6 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                                     username={'name3'}
                                     submission={pic1}
                                     points={10}
-                                    handleChange={handleInputChange('story2Points')}
                                     type='Story'
                                 />
                             </Grid>
@@ -347,7 +353,6 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                                     username={'name2'}
                                     submission={pic2}
                                     points={10}
-                                    handleChange={handleInputChange('story2Points')}
                                     type='Story'
                                 />
                             </Grid>

@@ -10,7 +10,7 @@ interface SubmissionDisplayProps {
     type: 'Story' | 'Illustration';
     key: 'story1Points' | 'pic1Points' | 'story2Points' | 'pic2Points';
     points: number;
-    handleChange: (e: any) => void;
+    // handleChange: (e: any) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -53,7 +53,6 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
     username,
     type,
     key,
-    handleChange,
     points,
 }) => {
     const [open, setOpen] = useState(false);

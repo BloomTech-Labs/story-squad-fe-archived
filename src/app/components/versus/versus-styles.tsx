@@ -50,8 +50,20 @@ export const useStyles = makeStyles((theme: Theme) =>
             '-webkit-text-stroke-width': '1px',
             '-webkit-text-stroke-color': '#000000',
         },
+        h4Styling: {
+            'fontFamily': 'Bangers',
+            'color': '#FFFFFF',
+            'fontSize': '30px',
+            'fontWeight': 'bold',
+            '-webkit-text-stroke-width': '1px',
+            '-webkit-text-stroke-color': '#000000',
+        },
+        appHead: {
+            display: 'flex',
+            flexDirection: 'row',
+        },
         appBar: {
-            height: '25vh',
+            height: '26vh',
             width: '100%',
             backgroundColor: '#6CEAE6',
             backgroundImage: `url(${cityscape})`,
@@ -59,6 +71,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             border: '7px solid #000000',
             backgroundSize: '101% 103%',
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'center',
         },
         logoutButton: {

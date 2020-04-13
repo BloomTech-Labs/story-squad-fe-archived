@@ -1,10 +1,17 @@
 //initial copy from 'submissionDisplay(point allocation)
 import React, { useState } from 'react';
-import { DialogTitle, Grid, Dialog } from '@material-ui/core';
+import { DialogTitle, Grid, Dialog, Slide } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { TextValidator } from 'react-material-ui-form-validator';
-
-interface SubmissionDisplayProps {
+import { TransitionProps } from '@material-ui/core/transitions';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
+const Transition = React.forwardRef(function Transition(
+    props: TransitionProps & { children?: React.ReactElement }
+) {
+    return <Slide direction='up' />;
+});
+interface SubDisplayProps {
     submission: string;
     username: string;
     type: 'Story' | 'Illustration';
@@ -23,12 +30,14 @@ const useStyles = makeStyles((theme: Theme) =>
         paper: {
             backgroundColor: theme.palette.background.paper,
             border: '2px solid #000',
+            width: 400,
+            position: 'absolute',
             boxShadow: theme.shadows[5],
         },
         root: {
             fontFamily: 'nunito',
-            display: 'flex',
-            flexDirection: 'column',
+            margin: 0,
+            padding: theme.spacing(2),
         },
         gridRow: {
             height: '274px',
@@ -48,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
+export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
     submission,
     username,
     type,
@@ -70,7 +79,7 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
             <Grid
                 container
                 direction='column'
-                justify='space-evenly'
+                justify='space-between'
                 alignItems='center'
                 alignContent='center'>
                 <Grid item md>
@@ -81,7 +90,14 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                         alt={`${username}'s ${type}`}
                     />
                 </Grid>
-                <Dialog className={classes.modal} open={open} onClose={handleClose}>
+                <Dialog fullScreen open={open}>
+                    <IconButton
+                        edge='start'
+                        color='inherit'
+                        onClick={handleClose}
+                        aria-label='close'>
+                        <CloseIcon />
+                    </IconButton>
                     <DialogTitle id='submission-title'>{`${username}'s ${type}`}</DialogTitle>
                     <div>
                         <img src={submission} alt={`${username}'s ${type}`} />

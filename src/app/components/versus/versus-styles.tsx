@@ -21,6 +21,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         containerStyling: {
             fontFamily: 'nunito',
             height: '100vh',
+            boxSizing: 'border-box',
         },
         paper: {
             backgroundColor: theme.palette.background.paper,
@@ -231,23 +232,23 @@ export const useStyles = makeStyles((theme: Theme) =>
             },
         },
         orangeButton: {
-            'backgroundColor': '#FF6B35',
-            'marginTop': '80%',
-            'fontSize': '24px',
-            'height': '40px',
-            'width': '70px',
-            'fontWeight': 'bold',
+            'background': '#FF6D3A',
+            'border': '3px solid #000000',
+            'boxSizing': 'border-box',
+            'width': '150px',
             'borderRadius': '10px',
-            'color': 'white',
-            'border': '3px solid #292929',
-            'textTransform': 'capitalize',
-            'fontFamily': 'nunito',
             '&:hover': {
                 backgroundColor: '#FF6B35',
             },
         },
-        button: {
+        backButton: {
+            border: '2px solid blue',
+            width: '50%',
             position: 'absolute',
+        },
+        voteButton: {
+            position: 'absolute',
+            marginLeft: '21%',
         },
         avatarStyle: {
             height: '45px',

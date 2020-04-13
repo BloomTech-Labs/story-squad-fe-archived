@@ -45,7 +45,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     ///TODO: ensure correct props are present on Point Card Props. student, teammate (opposition objects) to pass down pts, submissions, username, etc
     const [thisMatch, setThisMatch] = useState();
-    ////////state setup from point allocation copied//////
+    ////////state setup from point allocation//////
     const [student, setStudent] = useState({
         username: '',
         story: {
@@ -159,38 +159,30 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     </div>
                     <div className={classes.subRow}>
                         {/* High story1 */}
-                        <ValidatorForm
-                            onSubmit={handleSubmit}
-                            onError={(errors) => console.log(errors)}>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <SubmissionDisplay
-                                    key='story1Points'
-                                    username={student.username}
-                                    submission={student.story.story.page1}
-                                    // points={state.story1Points}
-                                    points={10}
-                                    type='Story'
-                                />
-                            </Grid>
-                        </ValidatorForm>
+                        <Grid item xs={12} sm={12} md={6}>
+                            <SubmissionDisplay
+                                key='story1Points'
+                                username={student.username}
+                                submission={student.story.story.page1}
+                                // points={state.story1Points}
+                                points={10}
+                                type='Story'
+                            />
+                        </Grid>
                         <div className={classes.totalScore}>
                             <p>Total</p> {/* High story1 + high story2 pts */}
                         </div>
                         {/* High story2 */}
-                        <ValidatorForm
-                            onSubmit={handleSubmit}
-                            onError={(errors) => console.log(errors)}>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <SubmissionDisplay
-                                    key='story1Points'
-                                    // points={state.story1Points}
-                                    username={'name2'}
-                                    submission={story2}
-                                    points={10}
-                                    type='Story'
-                                />
-                            </Grid>
-                        </ValidatorForm>
+                        <Grid item xs={12} sm={12} md={6}>
+                            <SubmissionDisplay
+                                key='story1Points'
+                                // points={state.story1Points}
+                                username={'name2'}
+                                submission={story2}
+                                points={10}
+                                type='Story'
+                            />
+                        </Grid>
                     </div>
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
@@ -207,38 +199,30 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     </div>
                     <div className={classes.subRow}>
                         {/* Low story1 */}
-                        <ValidatorForm
-                            onSubmit={handleSubmit}
-                            onError={(errors) => console.log(errors)}>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <SubmissionDisplay
-                                    key='story1Points'
-                                    username={teammate.username}
-                                    submission={teammate.story.story.page1}
-                                    // points={state.story1Points}
-                                    points={10}
-                                    type='Story'
-                                />
-                            </Grid>
-                        </ValidatorForm>
+                        <Grid item xs={12} sm={12} md={6}>
+                            <SubmissionDisplay
+                                key='story1Points'
+                                username={teammate.username}
+                                submission={teammate.story.story.page1}
+                                // points={state.story1Points}
+                                points={10}
+                                type='Story'
+                            />
+                        </Grid>
                         <div className={classes.totalScore}>
                             <p>Total</p> {/* low story1 + low story2 pts */}
                         </div>
                         {/* Low story2 */}
-                        <ValidatorForm
-                            onSubmit={handleSubmit}
-                            onError={(errors) => console.log(errors)}>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <SubmissionDisplay
-                                    key='story1Points'
-                                    // points={state.story1Points}
-                                    username={'name4'}
-                                    submission={story2}
-                                    points={10}
-                                    type='Story'
-                                />
-                            </Grid>
-                        </ValidatorForm>
+                        <Grid item xs={12} sm={12} md={6}>
+                            <SubmissionDisplay
+                                key='story1Points'
+                                // points={state.story1Points}
+                                username={'name4'}
+                                submission={story2}
+                                points={10}
+                                type='Story'
+                            />
+                        </Grid>
                     </div>
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
@@ -257,47 +241,39 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     </div>
                     <div className={classes.subRow}>
                         {/* high pic1 */}
-                        <ValidatorForm
-                            onSubmit={handleSubmit}
-                            onError={(errors) => console.log(errors)}>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <SubmissionDisplay
-                                    key='pic1Points'
-                                    username={student.username}
-                                    submission={student.illustration.illustration}
-                                    // points={state.story1Points}
-                                    points={10}
-                                    type='Illustration'
-                                />
-                            </Grid>
-                        </ValidatorForm>
-                        <Grid item xs={2}>
-                            <div className={classes.button}>
+                        <Grid item xs={12} sm={12} md={6}>
+                            <SubmissionDisplay
+                                key='pic1Points'
+                                username={student.username}
+                                submission={student.illustration.illustration}
+                                // points={state.story1Points}
+                                points={10}
+                                type='Illustration'
+                            />
+                        </Grid>
+                        {/* <Grid item xs={2}>
+                            <div className={classes.backButton}>
                                 <Link to={`/kids-dashboard/points-dashboard`}>
                                     <Button className={classes.orangeButton} type='button'>
                                         Back
                                     </Button>
                                 </Link>
                             </div>
-                        </Grid>
+                        </Grid> */}
                         <div className={classes.totalScore}>
                             <p>Total</p> {/* High pic1 + high pic2 pts */}
                         </div>
                         {/* high pic2 */}
-                        <ValidatorForm
-                            onSubmit={handleSubmit}
-                            onError={(errors) => console.log(errors)}>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <SubmissionDisplay
-                                    key='pic1Points'
-                                    // points={state.story1Points}
-                                    username={'name4'}
-                                    submission={pic2}
-                                    points={10}
-                                    type='Illustration'
-                                />
-                            </Grid>
-                        </ValidatorForm>
+                        <Grid item xs={12} sm={12} md={6}>
+                            <SubmissionDisplay
+                                key='pic1Points'
+                                // points={state.story1Points}
+                                username={'name4'}
+                                submission={pic2}
+                                points={10}
+                                type='Illustration'
+                            />
+                        </Grid>
                     </div>
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
@@ -314,41 +290,33 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     </div>
                     <div className={classes.subRow}>
                         {/* Low pic1 */}
-                        <ValidatorForm
-                            onSubmit={handleSubmit}
-                            onError={(errors) => console.log(errors)}>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <SubmissionDisplay
-                                    key='pic1Points'
-                                    username={teammate.username}
-                                    submission={teammate.illustration.illustration}
-                                    // points={state.story1Points}
-                                    points={10}
-                                    type='Illustration'
-                                />
-                            </Grid>
-                        </ValidatorForm>
+                        <Grid item xs={12} sm={12} md={6}>
+                            <SubmissionDisplay
+                                key='pic1Points'
+                                username={teammate.username}
+                                submission={teammate.illustration.illustration}
+                                // points={state.story1Points}
+                                points={10}
+                                type='Illustration'
+                            />
+                        </Grid>
                         <div className={classes.totalScore}>
                             <p>Total</p> {/* low pic1 + low pic2 pts */}
                         </div>
                         {/* Low Pic2 */}
-                        <ValidatorForm
-                            onSubmit={handleSubmit}
-                            onError={(errors) => console.log(errors)}>
-                            <Grid item xs={12} sm={12} md={6}>
-                                <SubmissionDisplay
-                                    key='pic1Points'
-                                    // points={state.story1Points}
-                                    username={'name2'}
-                                    submission={pic2}
-                                    points={10}
-                                    type='Illustration'
-                                />
-                            </Grid>
-                        </ValidatorForm>
+                        <Grid item xs={12} sm={12} md={6}>
+                            <SubmissionDisplay
+                                key='pic1Points'
+                                // points={state.story1Points}
+                                username={'name2'}
+                                submission={pic2}
+                                points={10}
+                                type='Illustration'
+                            />
+                        </Grid>
                     </div>
                     <Grid item xs={2}>
-                        <div className={classes.button}>
+                        <div className={classes.voteButton}>
                             <Link to={`/kids-dashboard/nextpage`}>
                                 <Button className={classes.orangeButton} type='submit'>
                                     Vote

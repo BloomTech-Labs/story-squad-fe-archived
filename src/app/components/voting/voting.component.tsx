@@ -25,5 +25,5 @@ import {
     ClickAwayListener,
 } from '@material-ui/core';
 import { useStyles } from './voting-styles';
-import { Child } from '../../models';
+import { Child, Cohort } from '../../models';
 

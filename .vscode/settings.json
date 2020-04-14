@@ -7,11 +7,6 @@
     "editor.tabSize": 4,
     "eslint.enable": false,
     "git.autofetch": true,
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#54172D",
-        "titleBar.activeBackground": "#76203E",
-        "titleBar.activeForeground": "#FEFBFC"
-    },
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },

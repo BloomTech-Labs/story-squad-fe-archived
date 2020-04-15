@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
 import { Button, Typography, Container, Grid, CircularProgress } from '@material-ui/core';
 import { Child } from '../../models';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useForm, useAPI } from '../../hooks';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import ava1 from './img/cam.png';
@@ -15,6 +15,7 @@ interface PointCardProps {
 }
 
 const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
+    const history = useHistory();
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const [points, updating, updatePoints] = useAPI(`/battlesRoutes/battles`, 'PUT');
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
@@ -93,7 +94,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
         console.log('submitting pts', newPoints);
         if (remainingPoints === 0 && child.progress.teamReview === false) {
             updatePoints(newPoints);
+            history.push('/matchup');
             return console.log('Success!');
+        } else if (child.progress.teamReview === true) {
+            history.push('/matchup');
+            return console.log('Already submitted points!');
         } else {
             setError(true);
         }
@@ -196,13 +201,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                         <Grid item xs={6} />
                                         <Grid item xs={6}>
                                             <div className={classes.button}>
-                                                <Link to={`/matchup`}>
-                                                    <Button
-                                                        className={classes.orangeButton}
-                                                        type='submit'>
-                                                        Next
-                                                    </Button>
-                                                </Link>
+                                                <Button
+                                                    className={classes.orangeButton}
+                                                    type='submit'>
+                                                    Next
+                                                </Button>
                                             </div>
                                         </Grid>
                                     </Grid>

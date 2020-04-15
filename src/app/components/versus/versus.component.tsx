@@ -55,8 +55,8 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             console.log(`STATE SET`, battle.storyHigh);
             return battle;
         }
-    }, [battle]);
-    console.log(`battle`, battle.storyHigh);
+    }, [battle, state]);
+    // console.log(`battle`, battle.storyHigh);
 
     return (
         <Container className={classes.containerStyling}>
@@ -112,7 +112,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                             />
                         </Grid>
                         <div className={classes.totalScore}>
-                            <p>{battle.storyHigh[2].total}</p>
+                            <p>{battle}</p>
                         </div>
                         {/* High story2 */}
                         <Grid item xs={12} sm={12} md={6}>

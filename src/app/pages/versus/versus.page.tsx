@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
 const VersusPage: React.FC = () => {
     const classes = useStyles();
     const [response, loading, request] = useAPI('/children/me');
+    const handleRequest = () => {
+        request();
+    };
 
     if (!response?.me)
         return (
@@ -61,8 +64,10 @@ const VersusPage: React.FC = () => {
             <main className={classes.main}>
                 <Switch>
                     <Route
-                        path='/matchup' // TODO - create a new path for the child-home component
+                        path='/matchup'
                         component={Versus}
+                        child={response.me}
+                        onUpdate={handleRequest}
                     />
                 </Switch>
             </main>

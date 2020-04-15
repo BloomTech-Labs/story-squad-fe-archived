@@ -32,96 +32,34 @@ import {
 import { useStyles } from './versus-styles';
 import { Child } from '../../models';
 import { Link } from 'react-router-dom';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import vsImg from './img/VS.png';
 import { SubmissionDisplay } from './modals/subDisplay.component';
-import { useForm, useAPI } from '../../hooks';
+import { useAPI } from '../../hooks';
 
-interface PointCardProps {
-    child: Child;
+interface VersusProps {
+    thisBattle?: 0;
 }
-const Versus: React.FC<PointCardProps> = ({ child }) => {
+const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const classes = useStyles({});
-    const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
-    ///TODO: ensure correct props are present on Point Card Props. student, teammate (opposition objects) to pass down pts, submissions, username, etc
-    const [thisMatch, setThisMatch] = useState();
-    ////////state setup from point allocation//////
-    const [student, setStudent] = useState({
-        username: '',
-        story: {
-            id: 0,
-            story: {
-                page1: '',
-                page2: '',
-                page3: '',
-                page4: '',
-                page5: '',
-            },
-        },
-        illustration: {
-            id: 0,
-            illustration: '',
-        },
-    });
-    const [teammate, setTeammate] = useState({
-        avatar: '',
-        username: '',
-        story: {
-            id: 0,
-            story: {
-                page1: '',
-                page2: '',
-                page3: '',
-                page4: '',
-                page5: '',
-            },
-        },
-        illustration: {
-            id: 0,
-            illustration: '',
-        },
-    });
-    //student/teammate submissions state
+    const [battle] = useAPI(`/versusRoutes/versus`, 'GET', false);
+    const [state, setState] = useState();
+
     useEffect(() => {
-        if (matchInfo) {
-            console.log('VESUS MATCH INFOOOOOOO', matchInfo);
-            const { student, teammate } = matchInfo.thisMatch.team;
-            const { studentUsername, studentStory, studentIllustration } = student;
-            const { teammateUsername, teammateStory, teammateIllustration } = teammate;
-            setThisMatch({ ...matchInfo.thisMatch });
-            setStudent({ ...student });
-            setTeammate({ ...teammate });
+        if (!battle || battle === undefined) {
+            console.log(`BATTLE UNDEFINED`);
+            setState({ ...battle });
+            console.log(`BATTLE UNDEFINED`, state);
+        } else {
+            // const { storyHigh, storyLow, illustrationHigh, illustrationLow } = battle;
+            // return { storyHigh, storyLow, illustrationHigh, illustrationLow };
+            console.log(`STATE SET`, battle.storyHigh);
+            return battle;
         }
-    }, [matchInfo]);
-
-    //modal
-    const { state } = useForm({
-        story1Points: 10,
-        story2Points: 10,
-        pic1Points: 10,
-        pic2Points: 10,
-    });
-    const handleSubmit = () => {
-        const newPoints = {
-            stories: [
-                { id: 1, points: state.story1Points },
-                { id: 2, points: state.story2Points },
-            ],
-            illustrations: [
-                { id: 1, points: state.pic1Points },
-                { id: 2, points: state.pic2Points },
-            ],
-        };
-        return console.log('submit on vs');
-        {
-            /* TODO: onsubmit  need to be changed or not needed */
-        }
-    };
-
+    }, [battle]);
+    // console.log(`storyHigh`, state.storyHigh);
     return (
         <Container className={classes.containerStyling}>
             <Grid container>
-                {/* Header code */}
                 <Grid container direction='row' className={classes.appBar}>
                     <Grid
                         container
@@ -145,12 +83,13 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     </Grid>
                 </Grid>
             </Grid>
+            {/* )} */}
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
                             <Avatar className={classes.avatarMargin} src={ava1}></Avatar>
-                            <div className={classes.playerName}>{student.username}</div>
+                            <div className={classes.playerName}>PLACEHOLDER</div>
                         </div>
                         <div className={classes.rightPlayer}>
                             <div className={classes.playerName}>Name2</div>
@@ -162,15 +101,14 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='story1Points'
-                                username={student.username}
-                                submission={student.story.story.page1}
-                                // points={state.story1Points}
-                                points={10}
+                                username='{PLACEHOLDER}'
+                                submission='PLACEHOLDER'
                                 type='Story'
+                                points={0}
                             />
                         </Grid>
                         <div className={classes.totalScore}>
-                            <p>Total</p> {/* High story1 + high story2 pts */}
+                            <p>asdsd</p>
                         </div>
                         {/* High story2 */}
                         <Grid item xs={12} sm={12} md={6}>
@@ -179,7 +117,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                                 // points={state.story1Points}
                                 username={'name2'}
                                 submission={story2}
-                                points={10}
+                                points={0}
                                 type='Story'
                             />
                         </Grid>
@@ -190,7 +128,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
                             <Avatar src={ava1}></Avatar>
-                            <div className={classes.playerName}>{teammate.username}</div>
+                            <div className={classes.playerName}>PLACEHOLDER</div>
                         </div>
                         <div className={classes.rightPlayer}>
                             <div className={classes.playerName}>Name4</div>
@@ -201,11 +139,10 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                         {/* Low story1 */}
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
-                                key='story1Points'
-                                username={teammate.username}
-                                submission={teammate.story.story.page1}
-                                // points={state.story1Points}
-                                points={10}
+                                key='story2Points'
+                                username={'PLACEHOLDER'}
+                                submission={'PLACEHOLDER'}
+                                points={0}
                                 type='Story'
                             />
                         </Grid>
@@ -216,10 +153,9 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='story1Points'
-                                // points={state.story1Points}
+                                points={0}
                                 username={'name4'}
-                                submission={story2}
-                                points={10}
+                                submission={'PLACEHOLDER'}
                                 type='Story'
                             />
                         </Grid>
@@ -232,7 +168,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
                             <Avatar src={ava1}></Avatar>
-                            <div className={classes.playerName}>{student.username}</div>
+                            <div className={classes.playerName}>PLACEHOLDER</div>
                         </div>
                         <div className={classes.rightPlayer}>
                             <div className={classes.playerName}>Name4</div>
@@ -244,16 +180,15 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='pic1Points'
-                                username={student.username}
-                                submission={student.illustration.illustration}
-                                // points={state.story1Points}
-                                points={10}
+                                username={'PLACEHOLDER'}
+                                submission={'PLACEHOLDER'}
+                                points={0}
                                 type='Illustration'
                             />
                         </Grid>
                         {/* <Grid item xs={2}>
                             <div className={classes.backButton}>
-                                <Link to={`/kids-dashboard/points-dashboard`}>
+                                <Link to={`/child-home`}>
                                     <Button className={classes.orangeButton} type='button'>
                                         Back
                                     </Button>
@@ -269,9 +204,9 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                                 key='pic1Points'
                                 // points={state.story1Points}
                                 username={'name4'}
-                                submission={pic2}
-                                points={10}
+                                submission={'PLACEHOLDER'}
                                 type='Illustration'
+                                points={0}
                             />
                         </Grid>
                     </div>
@@ -281,7 +216,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
                             <Avatar src={ava1}></Avatar>
-                            <div className={classes.playerName}>{teammate.username}</div>
+                            <div className={classes.playerName}>{'placeholder'}</div>
                         </div>
                         <div className={classes.rightPlayer}>
                             <div className={classes.playerName}>Name2</div>
@@ -293,10 +228,9 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='pic1Points'
-                                username={teammate.username}
-                                submission={teammate.illustration.illustration}
-                                // points={state.story1Points}
-                                points={10}
+                                username={'USER NAME PLACEHOLDER'}
+                                submission={'SUBMISSION PLACEHOLDER'}
+                                points={0}
                                 type='Illustration'
                             />
                         </Grid>
@@ -307,10 +241,9 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='pic1Points'
-                                // points={state.story1Points}
+                                points={0}
                                 username={'name2'}
-                                submission={pic2}
-                                points={10}
+                                submission={'PLACEHOLDER'}
                                 type='Illustration'
                             />
                         </Grid>
@@ -327,6 +260,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
             </Grid>
+            {/* )} */}
         </Container>
     );
 };

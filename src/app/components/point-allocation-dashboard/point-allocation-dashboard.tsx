@@ -109,7 +109,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     return (
         <div>
             {/* Container for avatars + inputs + buttons */}
-            {student === undefined || teammate === undefined ? (
+            {child.progress.teamReview === true ? (
+                history.push('/matchup')
+            ) : student === undefined || teammate === undefined ? (
                 <div>
                     <CircularProgress />
                 </div>

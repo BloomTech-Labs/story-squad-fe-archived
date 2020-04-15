@@ -56,34 +56,38 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             return battle;
         }
     }, [battle]);
-    // console.log(`storyHigh`, state.storyHigh);
+    console.log(`battle`, battle.storyHigh);
+
     return (
         <Container className={classes.containerStyling}>
-            <Grid container>
-                <Grid container direction='row' className={classes.appBar}>
-                    <Grid
-                        container
-                        item
-                        direction='column'
-                        justify='space-around'
-                        alignItems='center'>
-                        <Typography className={classes.h2Styling} variant='h2'>
-                            The Match Up
-                        </Typography>
-                        {/* team1 placeholder*/}
-                        <div className={classes.teamName}>
-                            <Typography className={classes.h4Styling}>Giants</Typography>
-                            <Typography className={classes.h4Styling}>VS</Typography>
-                            {/* team2 placeholder*/}
-                            <Typography className={classes.h4Styling}>Cowboys</Typography>
-                        </div>
-                        <Typography className={classes.h3Styling}>
-                            201 Points Needed To Win!
-                        </Typography>
+            {!battle || battle === undefined ? (
+                <div>aadaasd</div>
+            ) : (
+                <Grid container>
+                    <Grid container direction='row' className={classes.appBar}>
+                        <Grid
+                            container
+                            item
+                            direction='column'
+                            justify='space-around'
+                            alignItems='center'>
+                            <Typography className={classes.h2Styling} variant='h2'>
+                                The Match Up
+                            </Typography>
+                            {/* team1 placeholder*/}
+                            <div className={classes.teamName}>
+                                <Typography className={classes.h4Styling}>Giants</Typography>
+                                <Typography className={classes.h4Styling}>VS</Typography>
+                                {/* team2 placeholder*/}
+                                <Typography className={classes.h4Styling}>Cowboys</Typography>
+                            </div>
+                            <Typography className={classes.h3Styling}>
+                                201 Points Needed To Win!
+                            </Typography>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-            {/* )} */}
+            )}
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
                     <div className={classes.nameRow}>
@@ -108,7 +112,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                             />
                         </Grid>
                         <div className={classes.totalScore}>
-                            <p>asdsd</p>
+                            <p>{battle.storyHigh[2].total}</p>
                         </div>
                         {/* High story2 */}
                         <Grid item xs={12} sm={12} md={6}>
@@ -260,7 +264,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
             </Grid>
-            {/* )} */}
+            )}
         </Container>
     );
 };

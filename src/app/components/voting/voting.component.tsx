@@ -29,6 +29,7 @@ import { blue, red, green } from '@material-ui/core/colors';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
 
+// import Story2 from './img/leowriting.jpg';
 const ColoredRadio = withStyles({
     root: {
         '&$checked': {
@@ -69,7 +70,10 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
             </Grid>
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
-                    Side 1<div className={classes.leftPlayer}></div>
+                    Side 1
+                    <div className={classes.playerSelection}>
+                        {/* <img src={story1} alt='story' /> */}
+                    </div>
                     <ColoredRadio
                         checked={selectedValue === 'a'}
                         onChange={handleChange}
@@ -79,7 +83,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                     />
                 </Grid>
                 <Grid className={classes.story2}>
-                    Side 2
+                    Side 2<div className={classes.playerSelection}></div>
                     <ColoredRadio
                         checked={selectedValue === 'b'}
                         onChange={handleChange}

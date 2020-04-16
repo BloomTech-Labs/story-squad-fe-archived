@@ -115,7 +115,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             height: '47%',
         },
         //styling for the name and avatar within nameRow
-        leftPlayer: {
+        playerSelection: {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',

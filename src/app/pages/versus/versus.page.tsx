@@ -49,7 +49,11 @@ const useStyles = makeStyles((theme) => ({
 const VersusPage: React.FC = () => {
     const classes = useStyles();
     const [response, loading, request] = useAPI('/children/me');
-    if (!response)
+    const handleRequest = () => {
+        request();
+    };
+
+    if (!response?.me)
         return (
             <section className={classes.loading}>
                 <CircularProgress size={56} />
@@ -62,7 +66,12 @@ const VersusPage: React.FC = () => {
         <div className={classes.root}>
             <main className={classes.main}>
                 <Switch>
-                    <Route path='/matchup' component={Versus} />} />
+                    <Route
+                        path='/matchup'
+                        component={Versus}
+                        child={response.me}
+                        onUpdate={handleRequest}
+                    />
                 </Switch>
             </main>
         </div>

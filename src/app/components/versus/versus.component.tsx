@@ -32,15 +32,14 @@ import {
 import { useStyles } from './versus-styles';
 import { Child } from '../../models';
 import { Link } from 'react-router-dom';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import vsImg from './img/VS.png';
 import { SubmissionDisplay } from './modals/subDisplay.component';
-import { useForm, useAPI } from '../../hooks';
+import { useAPI } from '../../hooks';
 
-interface PointCardProps {
-    child: Child;
+interface VersusProps {
+    thisBattle?: 0;
 }
-const Versus: React.FC<PointCardProps> = ({ child }) => {
+const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const classes = useStyles({});
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
@@ -126,34 +125,9 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
         }
     }, [response]);
 
-    //modal
-    const { state } = useForm({
-        story1Points: 10,
-        story2Points: 10,
-        pic1Points: 10,
-        pic2Points: 10,
-    });
-    const handleSubmit = () => {
-        const newPoints = {
-            stories: [
-                { id: 1, points: state.story1Points },
-                { id: 2, points: state.story2Points },
-            ],
-            illustrations: [
-                { id: 1, points: state.pic1Points },
-                { id: 2, points: state.pic2Points },
-            ],
-        };
-        return console.log('submit on vs');
-        {
-            /* TODO: onsubmit  need to be changed or not needed */
-        }
-    };
-
     return (
         <Container className={classes.containerStyling}>
             <Grid container>
-                {/* Header code */}
                 <Grid container direction='row' className={classes.appBar}>
                     <Grid
                         container
@@ -291,7 +265,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                         </Grid>
                         {/* <Grid item xs={2}>
                             <div className={classes.backButton}>
-                                <Link to={`/kids-dashboard/points-dashboard`}>
+                                <Link to={`/child-home`}>
                                     <Button className={classes.orangeButton} type='button'>
                                         Back
                                     </Button>
@@ -367,6 +341,7 @@ const Versus: React.FC<PointCardProps> = ({ child }) => {
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
             </Grid>
+            )}
         </Container>
     );
 };

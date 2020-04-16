@@ -7,6 +7,7 @@ import { useAPI } from '../../hooks';
 import { Versus } from '../../components';
 import { Switch, Route } from 'react-router-dom';
 import 'typeface-bangers';
+import { StringifyOptions } from 'querystring';
 
 const useStyles = makeStyles((theme) => ({
     loading: {
@@ -48,22 +49,20 @@ const useStyles = makeStyles((theme) => ({
 const VersusPage: React.FC = () => {
     const classes = useStyles();
     const [response, loading, request] = useAPI('/children/me');
-
-    if (!response?.me)
+    if (!response)
         return (
             <section className={classes.loading}>
                 <CircularProgress size={56} />
             </section>
         );
 
+    console.log('versus response', response);
+
     return (
         <div className={classes.root}>
             <main className={classes.main}>
                 <Switch>
-                    <Route
-                        path='/matchup' // TODO - create a new path for the child-home component
-                        component={Versus}
-                    />
+                    <Route path='/matchup' component={Versus} />} />
                 </Switch>
             </main>
         </div>

@@ -4,10 +4,6 @@ import ava1 from './img/ava1.png';
 import ava2 from './img/ava2.png';
 import ava3 from './img/ava3.png';
 import ava4 from './img/ava4.png';
-import story1 from './img/drawing3.jpg';
-import story2 from './img/drawing1.jpg';
-import pic1 from './img/drawing3.jpg';
-import pic2 from './img/drawing1.jpg';
 import {
     Button,
     Avatar,
@@ -43,7 +39,6 @@ interface VersusProps {
 }
 const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const classes = useStyles({});
-    const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
     ///TODO: ensure correct props are present on Point Card Props. student, teammate (opposition objects) to pass down pts, submissions, username, etc
     const [thisMatch, setThisMatch] = useState({
@@ -330,8 +325,8 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
                 {/*Buttons */}
-                <div className={classes.btnContainer}>
-                    <div className={classes.btnDiv}>
+                <Grid className={classes.btnContainer}>
+                    <Grid className={classes.btnDiv}>
                         <Link to={`/kids-dashboard/team-join`}>
                             <Button className={classes.orangeButton} type='button'>
                                 Back
@@ -342,8 +337,8 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 Vote
                             </Button>
                         </Link>
-                    </div>
-                </div>
+                    </Grid>
+                </Grid>
             </Grid>
         </Container>
     );

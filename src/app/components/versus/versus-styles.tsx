@@ -62,12 +62,16 @@ export const useStyles = makeStyles((theme: Theme) =>
             'marginLeft': '3%',
             'marginRight': '4%',
             'marginTop': '1%',
+            // 'border': '1px solid red',
+            'display': 'flex',
         },
         teamName: {
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-evenly',
             alignContent: 'center',
+            // border: '1px solid blue',
+            width: '80%',
         },
         appBar: {
             height: '26vh',
@@ -148,7 +152,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
             marginTop: '3%',
         },
-        totalScore: {
+        totalScoreBig: {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -158,6 +162,19 @@ export const useStyles = makeStyles((theme: Theme) =>
             fontSize: '26px',
             color: '#FFFFFF',
             marginTop: '27%',
+            marginRight: '5%',
+        },
+        totalScoreSmall: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            fontFamily: 'Nunito',
+            fontStyle: 'normal',
+            fontWeight: 'bold',
+            fontSize: '26px',
+            color: '#FFFFFF',
+            marginTop: '33%',
+            marginRight: '5%',
         },
         story1: {
             position: 'relative',
@@ -236,7 +253,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             justifyContent: 'center',
             width: '63.5%',
-            // border: '1px solid blue',
             position: 'absolute',
             height: '37vh',
         },
@@ -244,7 +260,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             justifyContent: 'space-between',
             width: '90%',
-            // border: '1px solid red',
             marginTop: '24%',
         },
         orangeButton: {

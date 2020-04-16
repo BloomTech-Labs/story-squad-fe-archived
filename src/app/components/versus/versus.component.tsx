@@ -182,7 +182,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 type='Story'
                             />
                         </Grid>
-                        <div className={classes.totalScore}>
+                        <div className={classes.totalScoreBig}>
                             <p>{student.storyTotal}</p> {/* High story1 + high story2 pts */}
                         </div>
                         {/* High story2 */}
@@ -224,7 +224,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 type='Story'
                             />
                         </Grid>
-                        <div className={classes.totalScore}>
+                        <div className={classes.totalScoreSmall}>
                             <p>{teammate.storyTotal}</p> {/* low story1 + low story2 pts */}
                         </div>
                         {/* Low story2 */}
@@ -268,7 +268,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 type='Illustration'
                             />
                         </Grid>
-                        <div className={classes.totalScore}>
+                        <div className={classes.totalScoreSmall}>
                             <p>{student.illustrationTotal}</p> {/* High pic1 + high pic2 pts */}
                         </div>
                         {/* high pic2 */}
@@ -310,7 +310,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 type='Illustration'
                             />
                         </Grid>
-                        <div className={classes.totalScore}>
+                        <div className={classes.totalScoreBig}>
                             <p>{teammate.illustrationTotal}</p> {/* low pic1 + low pic2 pts */}
                         </div>
                         {/* Low Pic2 */}

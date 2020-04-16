@@ -41,63 +41,128 @@ interface VersusProps {
 }
 const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const classes = useStyles({});
-    const [battle] = useAPI(`/versusRoutes/versus`, 'GET', false);
-    const [state, setState] = useState();
-
+    const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
+    const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
+    ///TODO: ensure correct props are present on Point Card Props. student, teammate (opposition objects) to pass down pts, submissions, username, etc
+    const [thisMatch, setThisMatch] = useState({
+        storyHigh: [],
+        storyLow: [],
+        illustrationHigh: [],
+        illutrationLow: [],
+        battleInfo: null,
+    });
+    ////////state setup from point allocation//////
+    const [student, setStudent] = useState({
+        username: '',
+        avatar: '',
+        story: {
+            page1: '',
+            page2: '',
+            page3: '',
+        },
+        storyPoints: 0,
+        illustration: '',
+        storyOpponent: {
+            username: '',
+            story: {
+                page1: '',
+                page2: '',
+                page3: '',
+            },
+            storyPoints: 0,
+        },
+        illustrationOpponent: {
+            avatar: '',
+            username: '',
+            illustration: '',
+            illustrationPoints: 0,
+        },
+        illustrationPoints: 0,
+        storyTotal: 0,
+        illustrationTotal: 0,
+    });
+    console.log('response.battleInfo', response?.battleInfo);
+    const [teammate, setTeammate] = useState({
+        avatar: '',
+        username: '',
+        story: {
+            page1: '',
+            page2: '',
+            page3: '',
+        },
+        storyPoints: 0,
+        illustration: '',
+        storyOpponent: {
+            username: '',
+            avatar: '',
+            story: {
+                page1: '',
+                page2: '',
+                page3: '',
+            },
+            storyPoints: 0,
+        },
+        illustrationOpponent: {
+            avatar: '',
+            username: '',
+            illustration: '',
+            illustrationPoints: 0,
+        },
+        illustrationPoints: 0,
+        storyTotal: 0,
+        illustrationTotal: 0,
+    });
+    //student/teammate submissions state
     useEffect(() => {
-        if (!battle || battle === undefined) {
-            console.log(`BATTLE UNDEFINED`);
-            setState({ ...battle });
-            console.log(`BATTLE UNDEFINED`, state);
-        } else {
-            // const { storyHigh, storyLow, illustrationHigh, illustrationLow } = battle;
-            // return { storyHigh, storyLow, illustrationHigh, illustrationLow };
-            console.log(`STATE SET`, battle.storyHigh);
-            return battle;
+        if (response?.battleInfo) {
+            console.log('VESUS MATCH INFOOOOOOO', response?.battleInfo);
+            const { student, teammate } = response?.battleInfo;
+            // const { username, story, illustration } = student;
+            // const { teammateUsername, teammateStory, teammateIllustration } = teammate;
+            setThisMatch({ ...response });
+            setStudent({ ...student });
+            setTeammate({ ...teammate });
         }
-    }, [battle, state]);
-    // console.log(`battle`, battle.storyHigh);
+    }, [response]);
 
     return (
         <Container className={classes.containerStyling}>
-            {!battle || battle === undefined ? (
-                <div>aadaasd</div>
-            ) : (
-                <Grid container>
-                    <Grid container direction='row' className={classes.appBar}>
-                        <Grid
-                            container
-                            item
-                            direction='column'
-                            justify='space-around'
-                            alignItems='center'>
-                            <Typography className={classes.h2Styling} variant='h2'>
-                                The Match Up
-                            </Typography>
-                            {/* team1 placeholder*/}
-                            <div className={classes.teamName}>
-                                <Typography className={classes.h4Styling}>Giants</Typography>
-                                <Typography className={classes.h4Styling}>VS</Typography>
-                                {/* team2 placeholder*/}
-                                <Typography className={classes.h4Styling}>Cowboys</Typography>
-                            </div>
-                            <Typography className={classes.h3Styling}>
-                                201 Points Needed To Win!
-                            </Typography>
-                        </Grid>
+            <Grid container>
+                <Grid container direction='row' className={classes.appBar}>
+                    <Grid
+                        container
+                        item
+                        direction='column'
+                        justify='space-around'
+                        alignItems='center'>
+                        <Typography className={classes.h2Styling} variant='h2'>
+                            The Match Up
+                        </Typography>
+                        {/* team1 placeholder*/}
+                        <div className={classes.teamName}>
+                            <Typography className={classes.h4Styling}>Giants</Typography>
+                            <Typography className={classes.h4Styling}>VS</Typography>
+                            {/* team2 placeholder*/}
+                            <Typography className={classes.h4Styling}>Cowboys</Typography>
+                        </div>
+                        <Typography className={classes.h3Styling}>
+                            201 Points Needed To Win!
+                        </Typography>
                     </Grid>
                 </Grid>
-            )}
+            </Grid>
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarMargin} src={ava1}></Avatar>
-                            <div className={classes.playerName}>PLACEHOLDER</div>
+                            <Avatar className={classes.avatarMargin} src={student.avatar}></Avatar>
+                            <div className={classes.playerName}>{student.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>Name2</div>
-                            <Avatar src={ava2}></Avatar>
+                            <div className={classes.playerName}>
+                                {student.storyOpponent.username}
+                            </div>
+                            <Avatar src={student.storyOpponent.username}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>
@@ -105,23 +170,24 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='story1Points'
-                                username='{PLACEHOLDER}'
-                                submission='PLACEHOLDER'
+                                username={student.username}
+                                submission={student.story.page1}
+                                // points={state.story1Points}
+                                points={student.storyPoints}
                                 type='Story'
-                                points={0}
                             />
                         </Grid>
                         <div className={classes.totalScore}>
-                            <p>{battle}</p>
+                            <p>{student.storyTotal}</p> {/* High story1 + high story2 pts */}
                         </div>
                         {/* High story2 */}
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='story1Points'
                                 // points={state.story1Points}
-                                username={'name2'}
-                                submission={story2}
-                                points={0}
+                                username={student.storyOpponent.username}
+                                submission={student.storyOpponent.story.page1}
+                                points={student.storyOpponent.storyPoints}
                                 type='Story'
                             />
                         </Grid>
@@ -131,35 +197,39 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <Grid className={classes.story2}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
-                            <Avatar src={ava1}></Avatar>
-                            <div className={classes.playerName}>PLACEHOLDER</div>
+                            <Avatar src={teammate.avatar}></Avatar>
+                            <div className={classes.playerName}>{teammate.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>Name4</div>
-                            <Avatar src={ava2}></Avatar>
+                            <div className={classes.playerName}>
+                                {teammate.storyOpponent.username}
+                            </div>
+                            <Avatar src={teammate.storyOpponent.avatar}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>
                         {/* Low story1 */}
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
-                                key='story2Points'
-                                username={'PLACEHOLDER'}
-                                submission={'PLACEHOLDER'}
-                                points={0}
+                                key='story1Points'
+                                username={teammate.username}
+                                submission={teammate.story.page1}
+                                // points={state.story1Points}
+                                points={teammate.storyPoints}
                                 type='Story'
                             />
                         </Grid>
                         <div className={classes.totalScore}>
-                            <p>Total</p> {/* low story1 + low story2 pts */}
+                            <p>{teammate.storyTotal}</p> {/* low story1 + low story2 pts */}
                         </div>
                         {/* Low story2 */}
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='story1Points'
-                                points={0}
-                                username={'name4'}
-                                submission={'PLACEHOLDER'}
+                                // points={state.story1Points}
+                                username={teammate.storyOpponent.username}
+                                submission={teammate.storyOpponent.story.page1}
+                                points={teammate.storyOpponent.storyPoints}
                                 type='Story'
                             />
                         </Grid>
@@ -171,12 +241,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <Grid className={classes.picture1}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
-                            <Avatar src={ava1}></Avatar>
-                            <div className={classes.playerName}>PLACEHOLDER</div>
+                            <Avatar src={student.avatar}></Avatar>
+                            <div className={classes.playerName}>{student.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>Name4</div>
-                            <Avatar src={ava2}></Avatar>
+                            <div className={classes.playerName}>
+                                {student.illustrationOpponent.username}
+                            </div>
+                            <Avatar src={student.illustrationOpponent.avatar}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>
@@ -184,9 +256,10 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='pic1Points'
-                                username={'PLACEHOLDER'}
-                                submission={'PLACEHOLDER'}
-                                points={0}
+                                username={student.username}
+                                submission={student.illustration}
+                                // points={state.story1Points}
+                                points={student.illustrationPoints}
                                 type='Illustration'
                             />
                         </Grid>
@@ -200,17 +273,17 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                             </div>
                         </Grid> */}
                         <div className={classes.totalScore}>
-                            <p>Total</p> {/* High pic1 + high pic2 pts */}
+                            <p>{student.illustrationTotal}</p> {/* High pic1 + high pic2 pts */}
                         </div>
                         {/* high pic2 */}
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='pic1Points'
                                 // points={state.story1Points}
-                                username={'name4'}
-                                submission={'PLACEHOLDER'}
+                                username={student.illustrationOpponent.username}
+                                submission={student.illustrationOpponent.illustration}
+                                points={student.illustrationOpponent.illustrationPoints}
                                 type='Illustration'
-                                points={0}
                             />
                         </Grid>
                     </div>
@@ -219,12 +292,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <Grid className={classes.picture2}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
-                            <Avatar src={ava1}></Avatar>
-                            <div className={classes.playerName}>{'placeholder'}</div>
+                            <Avatar src={teammate.avatar}></Avatar>
+                            <div className={classes.playerName}>{teammate.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>Name2</div>
-                            <Avatar src={ava2}></Avatar>
+                            <div className={classes.playerName}>
+                                {teammate.illustrationOpponent.username}
+                            </div>
+                            <Avatar src={teammate.illustrationOpponent.avatar}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>
@@ -232,22 +307,24 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='pic1Points'
-                                username={'USER NAME PLACEHOLDER'}
-                                submission={'SUBMISSION PLACEHOLDER'}
-                                points={0}
+                                username={teammate.username}
+                                submission={teammate.illustration}
+                                // points={state.story1Points}
+                                points={teammate.illustrationPoints}
                                 type='Illustration'
                             />
                         </Grid>
                         <div className={classes.totalScore}>
-                            <p>Total</p> {/* low pic1 + low pic2 pts */}
+                            <p>{teammate.illustrationTotal}</p> {/* low pic1 + low pic2 pts */}
                         </div>
                         {/* Low Pic2 */}
                         <Grid item xs={12} sm={12} md={6}>
                             <SubmissionDisplay
                                 key='pic1Points'
-                                points={0}
-                                username={'name2'}
-                                submission={'PLACEHOLDER'}
+                                // points={state.story1Points}
+                                username={teammate.illustrationOpponent.username}
+                                submission={teammate.illustrationOpponent.illustration}
+                                points={teammate.illustrationOpponent.illustrationPoints}
                                 type='Illustration'
                             />
                         </Grid>

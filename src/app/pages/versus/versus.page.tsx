@@ -7,6 +7,7 @@ import { useAPI } from '../../hooks';
 import { Versus } from '../../components';
 import { Switch, Route } from 'react-router-dom';
 import 'typeface-bangers';
+import { StringifyOptions } from 'querystring';
 
 const useStyles = makeStyles((theme) => ({
     loading: {
@@ -58,6 +59,8 @@ const VersusPage: React.FC = () => {
                 <CircularProgress size={56} />
             </section>
         );
+
+    console.log('versus response', response);
 
     return (
         <div className={classes.root}>

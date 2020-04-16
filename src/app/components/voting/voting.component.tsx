@@ -46,38 +46,16 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         justify='space-around'
                         alignItems='center'>
                         <Typography className={classes.h2Styling} variant='h2'>
-                            Voting
+                            Vote For Your Favorite Story
                         </Typography>
-                        <Typography className={classes.h3Styling}>Choose Your Favorite</Typography>
+                        {/* <Typography className={classes.h3Styling}>Choose Your Favorite</Typography> */}
                     </Grid>
                 </Grid>
             </Grid>
             <Grid className={classes.topRow}>
-                <Grid className={classes.story1}>
-                    <div className={classes.nameRow}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar></Avatar>
-                            <h2>Name1</h2>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <Avatar></Avatar>
-                            <h2>Name1</h2>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* <Avatar></Avatar> */}
-                        <div className={classes.totalScore}>
-                            <p>Total</p>
-                        </div>
-                        {/* <Avatar></Avatar> */}
-                    </div>
-                </Grid>
-                <Grid className={classes.story2}>Test</Grid>
+                <Grid className={classes.story1}>side 1</Grid>
+                <Grid className={classes.story2}>side 2</Grid>
             </Grid>
-            {/* <Grid className={classes.bottomRow}>
-                <Grid className={classes.picture1}></Grid>
-                <Grid className={classes.picture2}></Grid>
-            </Grid> */}
         </Container>
     );
 };

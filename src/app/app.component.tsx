@@ -17,6 +17,7 @@ import {
     HelpPage,
     ChildHomePage,
     VersusPage,
+    VotingPage,
 } from './pages';
 const App: React.FC = () => {
     return (
@@ -50,6 +51,12 @@ const App: React.FC = () => {
                             only='child'
                             component={VersusPage}
                         />
+                        {/* <PrivateRoute
+                            redirect='/child-home'
+                            path='/voting'
+                            only='child'
+                            component={VotingPage}
+                        /> */}
                         <PrivateRoute
                             redirect='/'
                             path='/story/:week'
@@ -61,6 +68,7 @@ const App: React.FC = () => {
                             path='/admin/dashboard'
                             component={AdminDashboardPage}
                         />
+                        <Route path='/voting' component={VotingPage} />
                         <Route path='/admin' component={AdminSignInPage} />
                         <Route exact path={['/', '/signup']} component={SignUpPage} />
                         <Route path='/' component={ErrorPage} />

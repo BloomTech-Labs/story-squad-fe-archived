@@ -24,6 +24,15 @@ import {
     Grow,
     ClickAwayListener,
 } from '@material-ui/core';
-import { useStyles } from './voting-styles';
+// import { useStyles } from './voting-styles';
 import { Child, Cohort } from '../../models';
 
+interface VotingCardProps {
+    child: Child;
+}
+
+const Voting: React.FC<VotingCardProps> = ({ child }) => {
+    return <h1>Hello World</h1>;
+};
+
+export { Voting };

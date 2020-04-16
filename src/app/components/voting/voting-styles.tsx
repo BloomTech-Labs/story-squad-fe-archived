@@ -1,9 +1,3 @@
-// import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-
-// export const useStyles = makeStyles((theme: Theme) =>
-//     createStyles({})
-// )
-
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
 import { url } from 'inspector';

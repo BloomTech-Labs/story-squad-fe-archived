@@ -24,14 +24,30 @@ import {
     Grow,
     ClickAwayListener,
 } from '@material-ui/core';
-// import { useStyles } from './voting-styles';
+import { withStyles } from '@material-ui/core/styles';
+import { blue } from '@material-ui/core/colors';
+import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
+
+const ColoredRadio = withStyles({
+    root: {
+        '&$checked': {
+            color: blue[600],
+        },
+    },
+    checked: {},
+})((props: RadioProps) => <Radio color='default' {...props} />);
 
 interface VotingCardProps {
     child: Child;
 }
 
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
+    const [selectedValue, setSelectedValue] = React.useState('a');
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedValue(event.target.value);
+    };
     // return <h1>Hello World</h1>;
     const classes = useStyles({});
     return (
@@ -48,12 +64,20 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         <Typography className={classes.h2Styling} variant='h2'>
                             Vote For Your Favorite Story
                         </Typography>
-                        {/* <Typography className={classes.h3Styling}>Choose Your Favorite</Typography> */}
                     </Grid>
                 </Grid>
             </Grid>
             <Grid className={classes.topRow}>
-                <Grid className={classes.story1}>side 1</Grid>
+                <Grid className={classes.story1}>
+                    Side 1
+                    <ColoredRadio
+                        checked={selectedValue === 'a'}
+                        onChange={handleChange}
+                        value='a'
+                        name='radio-button-demo'
+                        inputProps={{ 'aria-label': 'A' }}
+                    />
+                </Grid>
                 <Grid className={classes.story2}>side 2</Grid>
             </Grid>
         </Container>

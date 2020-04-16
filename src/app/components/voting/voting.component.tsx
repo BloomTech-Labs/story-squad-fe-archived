@@ -25,14 +25,14 @@ import {
     ClickAwayListener,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { blue } from '@material-ui/core/colors';
+import { blue, red, green } from '@material-ui/core/colors';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
 
 const ColoredRadio = withStyles({
     root: {
         '&$checked': {
-            color: blue[600],
+            color: green[600],
         },
     },
     checked: {},
@@ -69,16 +69,25 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
             </Grid>
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
-                    Side 1
+                    Side 1<div className={classes.leftPlayer}></div>
                     <ColoredRadio
                         checked={selectedValue === 'a'}
                         onChange={handleChange}
                         value='a'
-                        name='radio-button-demo'
+                        name='storyA'
                         inputProps={{ 'aria-label': 'A' }}
                     />
                 </Grid>
-                <Grid className={classes.story2}>side 2</Grid>
+                <Grid className={classes.story2}>
+                    Side 2
+                    <ColoredRadio
+                        checked={selectedValue === 'b'}
+                        onChange={handleChange}
+                        value='b'
+                        name='storyB'
+                        inputProps={{ 'aria-label': 'B' }}
+                    />
+                </Grid>
             </Grid>
         </Container>
     );

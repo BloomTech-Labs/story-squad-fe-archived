@@ -119,6 +119,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
+            margin: '15%',
         },
         rightPlayer: {
             display: 'flex',

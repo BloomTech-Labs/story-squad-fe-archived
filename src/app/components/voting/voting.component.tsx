@@ -52,6 +52,32 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                     </Grid>
                 </Grid>
             </Grid>
+            <Grid className={classes.topRow}>
+                <Grid className={classes.story1}>
+                    <div className={classes.nameRow}>
+                        <div className={classes.leftPlayer}>
+                            <Avatar></Avatar>
+                            <h2>Name1</h2>
+                        </div>
+                        <div className={classes.rightPlayer}>
+                            <Avatar></Avatar>
+                            <h2>Name1</h2>
+                        </div>
+                    </div>
+                    <div className={classes.subRow}>
+                        <Avatar></Avatar>
+                        <div className={classes.totalScore}>
+                            <p>Total</p>
+                        </div>
+                        <Avatar></Avatar>
+                    </div>
+                </Grid>
+                <Grid className={classes.story2}></Grid>
+            </Grid>
+            {/* <Grid className={classes.bottomRow}>
+                <Grid className={classes.picture1}></Grid>
+                <Grid className={classes.picture2}></Grid>
+            </Grid> */}
         </Container>
     );
 };

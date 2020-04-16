@@ -341,7 +341,6 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
             </Grid>
-            )}
         </Container>
     );
 };

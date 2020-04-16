@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
-import ava1 from '../point-allocation-dashboard/img/cam.png';
-import ava2 from '../point-allocation-dashboard/img/Hero13.png';
-import story1 from './img/drawing3.jpg';
-import story2 from './img/drawing1.jpg';
-import pic1 from './img/drawing3.jpg';
-import pic2 from './img/drawing1.jpg';
+import ava1 from './img/ava1.png';
+import ava2 from './img/ava2.png';
+import ava3 from './img/ava3.png';
+import ava4 from './img/ava4.png';
 import {
     Button,
     Avatar,
@@ -41,7 +39,6 @@ interface VersusProps {
 }
 const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const classes = useStyles({});
-    const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
     ///TODO: ensure correct props are present on Point Card Props. student, teammate (opposition objects) to pass down pts, submissions, username, etc
     const [thisMatch, setThisMatch] = useState({
@@ -160,14 +157,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <Grid className={classes.story1}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={student.avatar}></Avatar>
+                            <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
                             <div className={classes.playerName}>{student.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
                             <div className={classes.playerName}>
                                 {student.storyOpponent.username}
                             </div>
-                            <Avatar src={student.storyOpponent.username}></Avatar>
+                            <Avatar src={ava3}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>
@@ -202,14 +199,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <Grid className={classes.story2}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={teammate.avatar}></Avatar>
+                            <Avatar className={classes.avatarStyle} src={ava2}></Avatar>
                             <div className={classes.playerName}>{teammate.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
                             <div className={classes.playerName}>
                                 {teammate.storyOpponent.username}
                             </div>
-                            <Avatar src={teammate.storyOpponent.avatar}></Avatar>
+                            <Avatar src={ava4}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>
@@ -246,14 +243,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <Grid className={classes.picture1}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={student.avatar}></Avatar>
+                            <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
                             <div className={classes.playerName}>{student.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
                             <div className={classes.playerName}>
                                 {student.illustrationOpponent.username}
                             </div>
-                            <Avatar src={student.illustrationOpponent.avatar}></Avatar>
+                            <Avatar src={ava3}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>
@@ -288,14 +285,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <Grid className={classes.picture2}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
-                            <Avatar src={teammate.avatar}></Avatar>
+                            <Avatar src={ava2}></Avatar>
                             <div className={classes.playerName}>{teammate.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
                             <div className={classes.playerName}>
                                 {teammate.illustrationOpponent.username}
                             </div>
-                            <Avatar src={teammate.illustrationOpponent.avatar}></Avatar>
+                            <Avatar src={ava4}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>
@@ -328,8 +325,8 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
                 {/*Buttons */}
-                <div className={classes.btnContainer}>
-                    <div className={classes.btnDiv}>
+                <Grid className={classes.btnContainer}>
+                    <Grid className={classes.btnDiv}>
                         <Link to={`/kids-dashboard/team-join`}>
                             <Button className={classes.orangeButton} type='button'>
                                 Back
@@ -340,8 +337,8 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 Vote
                             </Button>
                         </Link>
-                    </div>
-                </div>
+                    </Grid>
+                </Grid>
             </Grid>
         </Container>
     );

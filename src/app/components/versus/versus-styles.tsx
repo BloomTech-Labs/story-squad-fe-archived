@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         vs: {
             height: '88%',
-            zIndex: 0,
+            zIndex: 10,
             position: 'absolute',
         },
         card: {
@@ -122,15 +122,15 @@ export const useStyles = makeStyles((theme: Theme) =>
         nameRow: {
             display: 'flex',
             justifyContent: 'space-between',
-            zIndex: 999999,
+            zIndex: 9,
             width: '85%',
             height: '40%',
         },
         subRow: {
             display: 'flex',
             justifyContent: 'space-between',
-            zIndex: 999999,
-            width: '90%',
+            zIndex: 9,
+            width: '105%',
             height: '45%',
         },
         //styling for the name and avatar within nameRow
@@ -231,6 +231,22 @@ export const useStyles = makeStyles((theme: Theme) =>
                 width: '100%',
             },
         },
+        btnContainer: {
+            zIndex: 999999,
+            display: 'flex',
+            justifyContent: 'center',
+            width: '63.5%',
+            // border: '1px solid blue',
+            position: 'absolute',
+            height: '37vh',
+        },
+        btnDiv: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '90%',
+            // border: '1px solid red',
+            marginTop: '24%',
+        },
         orangeButton: {
             'background': '#FF6D3A',
             'border': '3px solid #000000',
@@ -241,18 +257,10 @@ export const useStyles = makeStyles((theme: Theme) =>
                 backgroundColor: '#FF6B35',
             },
         },
-        backButton: {
-            border: '2px solid blue',
-            width: '50%',
-            position: 'absolute',
-        },
-        voteButton: {
-            position: 'absolute',
-            marginLeft: '21%',
-        },
         avatarStyle: {
             height: '45px',
             padding: '10px',
+            margin: '10%',
         },
         playerName: {
             fontFamily: 'Bangers',

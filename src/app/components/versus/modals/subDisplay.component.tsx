@@ -39,16 +39,6 @@ const useStyles = makeStyles((theme: Theme) =>
             margin: 0,
             padding: theme.spacing(2),
         },
-        gridRow: {
-            height: '274px',
-            backgroundColor: '#EB7D5B',
-            paddingTop: '32px',
-            padding: '30px',
-        },
-        gridInput: {
-            backgroundColor: '#EB7D5B',
-            padding: '53px ',
-        },
         imagePreview: {
             width: '150px',
             height: '90px',

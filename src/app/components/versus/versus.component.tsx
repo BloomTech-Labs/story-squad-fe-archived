@@ -124,7 +124,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             setTeammate({ ...teammate });
         }
     }, [response]);
-
+    console.log(`response`, response?.battleInfo);
     return (
         <Container className={classes.containerStyling}>
             <Grid container>
@@ -140,10 +140,15 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                         </Typography>
                         {/* team1 placeholder*/}
                         <div className={classes.teamName}>
-                            <Typography className={classes.h4Styling}>Giants</Typography>
+                            <Typography
+                                className={
+                                    classes.h4Styling
+                                }>{`${student.username} & ${teammate.username}!`}</Typography>
                             <Typography className={classes.h4Styling}>VS</Typography>
                             {/* team2 placeholder*/}
-                            <Typography className={classes.h4Styling}>Cowboys</Typography>
+                            <Typography className={classes.h4Styling}>
+                                {`${student.storyOpponent.username} & ${teammate.storyOpponent.username}!`}
+                            </Typography>
                         </div>
                         <Typography className={classes.h3Styling}>
                             201 Points Needed To Win!
@@ -155,7 +160,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <Grid className={classes.story1}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarMargin} src={student.avatar}></Avatar>
+                            <Avatar className={classes.avatarStyle} src={student.avatar}></Avatar>
                             <div className={classes.playerName}>{student.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
@@ -177,7 +182,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 type='Story'
                             />
                         </Grid>
-                        <div className={classes.totalScore}>
+                        <div className={classes.totalScoreBig}>
                             <p>{student.storyTotal}</p> {/* High story1 + high story2 pts */}
                         </div>
                         {/* High story2 */}
@@ -197,7 +202,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <Grid className={classes.story2}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
-                            <Avatar src={teammate.avatar}></Avatar>
+                            <Avatar className={classes.avatarStyle} src={teammate.avatar}></Avatar>
                             <div className={classes.playerName}>{teammate.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
@@ -219,7 +224,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 type='Story'
                             />
                         </Grid>
-                        <div className={classes.totalScore}>
+                        <div className={classes.totalScoreSmall}>
                             <p>{teammate.storyTotal}</p> {/* low story1 + low story2 pts */}
                         </div>
                         {/* Low story2 */}
@@ -241,7 +246,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <Grid className={classes.picture1}>
                     <div className={classes.nameRow}>
                         <div className={classes.leftPlayer}>
-                            <Avatar src={student.avatar}></Avatar>
+                            <Avatar className={classes.avatarStyle} src={student.avatar}></Avatar>
                             <div className={classes.playerName}>{student.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
@@ -263,16 +268,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 type='Illustration'
                             />
                         </Grid>
-                        {/* <Grid item xs={2}>
-                            <div className={classes.backButton}>
-                                <Link to={`/child-home`}>
-                                    <Button className={classes.orangeButton} type='button'>
-                                        Back
-                                    </Button>
-                                </Link>
-                            </div>
-                        </Grid> */}
-                        <div className={classes.totalScore}>
+                        <div className={classes.totalScoreSmall}>
                             <p>{student.illustrationTotal}</p> {/* High pic1 + high pic2 pts */}
                         </div>
                         {/* high pic2 */}
@@ -314,7 +310,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 type='Illustration'
                             />
                         </Grid>
-                        <div className={classes.totalScore}>
+                        <div className={classes.totalScoreBig}>
                             <p>{teammate.illustrationTotal}</p> {/* low pic1 + low pic2 pts */}
                         </div>
                         {/* Low Pic2 */}
@@ -329,17 +325,23 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                             />
                         </Grid>
                     </div>
-                    <Grid item xs={2}>
-                        <div className={classes.voteButton}>
-                            <Link to={`/kids-dashboard/nextpage`}>
-                                <Button className={classes.orangeButton} type='submit'>
-                                    Vote
-                                </Button>
-                            </Link>
-                        </div>
-                    </Grid>
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
+                {/*Buttons */}
+                <div className={classes.btnContainer}>
+                    <div className={classes.btnDiv}>
+                        <Link to={`/kids-dashboard/team-join`}>
+                            <Button className={classes.orangeButton} type='button'>
+                                Back
+                            </Button>
+                        </Link>
+                        <Link to={`/kids-dashboard/nextpage`}>
+                            <Button className={classes.orangeButton} type='submit'>
+                                Vote
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
             </Grid>
         </Container>
     );

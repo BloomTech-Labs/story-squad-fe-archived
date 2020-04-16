@@ -65,14 +65,14 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         </div>
                     </div>
                     <div className={classes.subRow}>
-                        <Avatar></Avatar>
+                        {/* <Avatar></Avatar> */}
                         <div className={classes.totalScore}>
                             <p>Total</p>
                         </div>
-                        <Avatar></Avatar>
+                        {/* <Avatar></Avatar> */}
                     </div>
                 </Grid>
-                <Grid className={classes.story2}></Grid>
+                <Grid className={classes.story2}>Test</Grid>
             </Grid>
             {/* <Grid className={classes.bottomRow}>
                 <Grid className={classes.picture1}></Grid>

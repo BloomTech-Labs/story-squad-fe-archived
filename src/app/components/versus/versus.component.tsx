@@ -155,7 +155,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             </Grid>
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
-                    <div className={classes.nameRow}>
+                    <div className={`${classes.nameRow} ${classes.nameRowBig}`}>
                         <div className={classes.leftPlayer}>
                             <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
                             <div className={classes.playerName}>{student.username}</div>
@@ -164,7 +164,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                             <div className={classes.playerName}>
                                 {student.storyOpponent.username}
                             </div>
-                            <Avatar src={ava3}></Avatar>
+                            <Avatar className={classes.avatarStyle} src={ava3}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>
@@ -197,7 +197,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
                 <Grid className={classes.story2}>
-                    <div className={classes.nameRow}>
+                    <div className={`${classes.nameRow} ${classes.nameRowSmall}`}>
                         <div className={classes.leftPlayer}>
                             <Avatar className={classes.avatarStyle} src={ava2}></Avatar>
                             <div className={classes.playerName}>{teammate.username}</div>
@@ -206,7 +206,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                             <div className={classes.playerName}>
                                 {teammate.storyOpponent.username}
                             </div>
-                            <Avatar src={ava4}></Avatar>
+                            <Avatar className={classes.avatarStyle} src={ava4}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>
@@ -241,7 +241,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             </Grid>
             <Grid className={classes.bottomRow}>
                 <Grid className={classes.picture1}>
-                    <div className={classes.nameRow}>
+                    <div className={`${classes.nameRow} ${classes.nameRowSmall}`}>
                         <div className={classes.leftPlayer}>
                             <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
                             <div className={classes.playerName}>{student.username}</div>
@@ -250,7 +250,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                             <div className={classes.playerName}>
                                 {student.illustrationOpponent.username}
                             </div>
-                            <Avatar src={ava3}></Avatar>
+                            <Avatar className={classes.avatarStyle} src={ava3}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>
@@ -283,16 +283,16 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
                 <Grid className={classes.picture2}>
-                    <div className={classes.nameRow}>
+                    <div className={`${classes.nameRow} ${classes.nameRowBig}`}>
                         <div className={classes.leftPlayer}>
-                            <Avatar src={ava2}></Avatar>
+                            <Avatar className={classes.avatarStyle} src={ava2}></Avatar>
                             <div className={classes.playerName}>{teammate.username}</div>
                         </div>
                         <div className={classes.rightPlayer}>
                             <div className={classes.playerName}>
                                 {teammate.illustrationOpponent.username}
                             </div>
-                            <Avatar src={ava4}></Avatar>
+                            <Avatar className={classes.avatarStyle} src={ava4}></Avatar>
                         </div>
                     </div>
                     <div className={classes.subRow}>

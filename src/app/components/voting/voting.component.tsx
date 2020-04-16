@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
-
+import { useStyles } from './voting-styles';
 import {
     Button,
     Avatar,
@@ -32,7 +32,28 @@ interface VotingCardProps {
 }
 
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
-    return <h1>Hello World</h1>;
+    // return <h1>Hello World</h1>;
+    const classes = useStyles({});
+    return (
+        <Container className={classes.containerStyling}>
+            <Grid container>
+                {/* Header code */}
+                <Grid container direction='row' className={classes.appBar}>
+                    <Grid
+                        container
+                        item
+                        direction='column'
+                        justify='space-around'
+                        alignItems='center'>
+                        <Typography className={classes.h2Styling} variant='h2'>
+                            Voting
+                        </Typography>
+                        <Typography className={classes.h3Styling}>Choose Your Favorite</Typography>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Container>
+    );
 };
 
 export { Voting };

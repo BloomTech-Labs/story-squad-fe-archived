@@ -127,15 +127,25 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             justifyContent: 'space-between',
             zIndex: 9,
-            width: '85%',
+            width: '100%',
             height: '40%',
+            // border: '1px solid blue',
+        },
+        nameRowBig: {
+            // border: '1px solid red',
+            padding: '0 10% 0 10%',
+        },
+        nameRowSmall: {
+            // border: '1px solid blue',
+            padding: '0 7% 0 7%',
         },
         subRow: {
             display: 'flex',
             justifyContent: 'space-between',
             zIndex: 9,
-            width: '105%',
+            width: '100%',
             height: '45%',
+            // border: '1px solid red',
         },
         //styling for the name and avatar within nameRow
         leftPlayer: {
@@ -152,7 +162,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'center',
             alignItems: 'center',
             marginTop: '3%',
-            // border: '1px solid blue',
+            // border: '1px solid red',
         },
         totalScoreBig: {
             display: 'flex',
@@ -295,8 +305,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             lineHeight: '26px',
             color: '#292929',
             // border: '1px solid blue',
-            paddingRight: '25%',
-            paddingLeft: '10%',
         },
     })
 );

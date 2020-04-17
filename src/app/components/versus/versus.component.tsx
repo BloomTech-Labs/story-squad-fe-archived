@@ -33,7 +33,7 @@ import { Link } from 'react-router-dom';
 import vsImg from './img/VS.png';
 import { SubmissionDisplay } from './modals/subDisplay.component';
 import { useAPI } from '../../hooks';
-
+import { VersusHeader } from './versus-subcomponents/versusHeader';
 interface VersusProps {
     thisBattle?: 0;
 }
@@ -114,16 +114,17 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         if (response?.battleInfo) {
             console.log('VESUS MATCH INFOOOOOOO', response?.battleInfo);
             const { student, teammate } = response?.battleInfo;
-            // const { username, story, illustration } = student;
-            // const { teammateUsername, teammateStory, teammateIllustration } = teammate;
             setThisMatch({ ...response });
             setStudent({ ...student });
             setTeammate({ ...teammate });
         }
     }, [response]);
     console.log(`response`, response?.battleInfo);
+
+    const homeTeamNames = `${student.username} & ${teammate.username}!`;
     return (
         <Container className={classes.containerStyling}>
+            <VersusHeader homeTeam={homeTeamNames} />
             <Grid container>
                 <Grid container direction='row' className={classes.appBar}>
                     <Grid

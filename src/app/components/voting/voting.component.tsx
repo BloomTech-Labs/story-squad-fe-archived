@@ -97,6 +97,16 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             inputProps={{ 'aria-label': 'B' }}
                         />
                     </div>
+                    <Grid container xs={8} className={classes.submitDiv}>
+                        <Grid item xs={6} />
+                        <Grid item xs={6}>
+                            <div className={classes.button}>
+                                <Button className={classes.orangeButton} type='submit'>
+                                    Submit
+                                </Button>
+                            </div>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Container>

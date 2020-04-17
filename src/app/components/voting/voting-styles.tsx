@@ -62,6 +62,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             justifyContent: 'center',
         },
+        //Submit button
         orangeButton: {
             'backgroundColor': '#FF6B35',
             'fontSize': '24px',
@@ -73,6 +74,20 @@ export const useStyles = makeStyles((theme: Theme) =>
             'fontFamily': 'nunito',
             '&:hover': {
                 backgroundColor: '#FF6B35',
+            },
+        },
+        button: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItem: 'center',
+        },
+        submitDiv: {
+            // border: '7px solid #000',
+            borderTop: '0px',
+            // backgroundColor: '#FED23F',
+            padding: '20px',
+            [theme.breakpoints.down('sm')]: {
+                borderLeft: '0px',
             },
         },
         logoutButton: {

@@ -29,7 +29,8 @@ import { blue, red, green } from '@material-ui/core/colors';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
 
-// import Story2 from './img/leowriting.jpg';
+import story1 from './img/leowriting.jpg';
+import story2 from './img/chancewriting.jpg';
 const ColoredRadio = withStyles({
     root: {
         '&$checked': {
@@ -72,25 +73,30 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                 <Grid className={classes.story1}>
                     Side 1
                     <div className={classes.playerSelection}>
-                        {/* <img src={story1} alt='story' /> */}
+                        <img className={classes.storyPic} src={story1} alt='story' />
+                        <ColoredRadio
+                            className={classes.radioBox}
+                            checked={selectedValue === 'a'}
+                            onChange={handleChange}
+                            value='a'
+                            name='storyA'
+                            inputProps={{ 'aria-label': 'A' }}
+                        />
                     </div>
-                    <ColoredRadio
-                        checked={selectedValue === 'a'}
-                        onChange={handleChange}
-                        value='a'
-                        name='storyA'
-                        inputProps={{ 'aria-label': 'A' }}
-                    />
                 </Grid>
                 <Grid className={classes.story2}>
-                    Side 2<div className={classes.playerSelection}></div>
-                    <ColoredRadio
-                        checked={selectedValue === 'b'}
-                        onChange={handleChange}
-                        value='b'
-                        name='storyB'
-                        inputProps={{ 'aria-label': 'B' }}
-                    />
+                    Side 2
+                    <div className={classes.playerSelection}>
+                        <img className={classes.storyPic} src={story2} alt='story' />
+                        <ColoredRadio
+                            className={classes.radioBox}
+                            checked={selectedValue === 'b'}
+                            onChange={handleChange}
+                            value='b'
+                            name='storyB'
+                            inputProps={{ 'aria-label': 'B' }}
+                        />
+                    </div>
                 </Grid>
             </Grid>
         </Container>

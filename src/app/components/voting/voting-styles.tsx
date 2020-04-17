@@ -62,6 +62,19 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             justifyContent: 'center',
         },
+        orangeButton: {
+            'backgroundColor': '#FF6B35',
+            'fontSize': '24px',
+            'fontWeight': 'bold',
+            'borderRadius': '10px',
+            'color': 'white',
+            'border': '3px solid #292929',
+            'textTransform': 'capitalize',
+            'fontFamily': 'nunito',
+            '&:hover': {
+                backgroundColor: '#FF6B35',
+            },
+        },
         logoutButton: {
             'marginLeft': '780px',
             'marginBottom': '105px',
@@ -167,6 +180,18 @@ export const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.only('sm')]: {
                 width: '100%',
             },
+        },
+        storyPic: {
+            width: '70%',
+            height: '35vh',
+            margin: '0 auto',
+            borderRadius: '5%',
+            border: '4px solid white',
+        },
+        radioBox: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
         },
     })
 );

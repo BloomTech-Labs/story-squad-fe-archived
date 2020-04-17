@@ -126,6 +126,11 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                                         className={classes.avatar1}
                                         alt='child avatar'></img>
                                 </div>
+                                <Link to={`/child-home`}>
+                                    <Button className={classes.backButton} type='button'>
+                                        Back
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                         <div className={classes.writeDrawDiv}>
@@ -142,7 +147,7 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                                         alt='child avatar'></img>
                                 </div>
                                 <Link to={`/kids-dashboard/points-dashboard`}>
-                                    <Button className={classes.orangeButton} type='button'>
+                                    <Button className={classes.nextButton} type='button'>
                                         Next
                                     </Button>
                                 </Link>

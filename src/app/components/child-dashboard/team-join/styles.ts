@@ -27,9 +27,26 @@ export const useStyles = makeStyles((theme) => ({
     gridItem: {
         margin: theme.spacing(1.5),
     },
-    orangeButton: {
+    nextButton: {
         'position': 'absolute',
-        'top': '718px',
+        'top': '76%',
+        'backgroundColor': '#FF6B35',
+        'fontSize': '24px',
+        'fontWeight': 'bold',
+        'borderRadius': '10px',
+        'color': 'white',
+        'width': '200px',
+        'border': '3px solid #292929',
+        'textTransform': 'capitalize',
+        'fontFamily': 'nunito',
+        '&:hover': {
+            backgroundColor: '#FF6B35',
+        },
+    },
+    backButton: {
+        'position': 'absolute',
+        'top': '76%',
+        'left': '27%',
         'backgroundColor': '#FF6B35',
         'fontSize': '24px',
         'fontWeight': 'bold',

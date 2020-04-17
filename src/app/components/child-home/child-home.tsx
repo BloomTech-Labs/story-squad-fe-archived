@@ -39,38 +39,29 @@ interface PointCardProps {
 
 const ChildHome: React.FC<PointCardProps> = ({ child }) => {
     const classes = useStyles({});
-    // const logout = () => window.dispatchEvent(new Event('logout'));
-    // const [menu, setMenu] = React.useState(false);
-    // const anchorRef = React.useRef<HTMLButtonElement>(null);
+    const logout = () => window.dispatchEvent(new Event('logout'));
+    const [menu, setMenu] = React.useState(false);
+    const anchorRef = React.useRef<HTMLButtonElement>(null);
+    const [open, setOpen] = React.useState(false);
 
-    // const handleToggle = () => {
-    //     setMenu((prevMenu) => !prevMenu);
-    // };
-    // const modalClose = () => {
-    //     setOpen(false);
-    // };
-    // const handleClose = (event: React.MouseEvent<EventTarget>) => {
-    //     if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
-    //         return;
-    //     }
-    //     setMenu(false);
-    // };
+    const handleToggle = () => {
+        setMenu((prevMenu) => !prevMenu);
+    };
+    const handleClose = (event: React.MouseEvent<EventTarget>) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+            return;
+        }
 
-    // function handleListKeyDown(event: React.KeyboardEvent) {
-    //     if (event.key === 'Tab') {
-    //         event.preventDefault();
-    //         setMenu(false);
-    //     }
-    // }
+        setMenu(false);
+    };
 
-    // const prevMenu = React.useRef(menu);
-    // React.useEffect(() => {
-    //     if (prevMenu.current === true && menu === false) {
-    //         anchorRef.current!.focus();
-    //     }
+    function handleListKeyDown(event: React.KeyboardEvent) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setMenu(false);
+        }
+    }
 
-    //     prevMenu.current = menu;
-    // }, [menu]);
     return (
         <Container className={classes.containerStyling}>
             <Grid container>
@@ -80,7 +71,8 @@ const ChildHome: React.FC<PointCardProps> = ({ child }) => {
                         <Typography className={classes.h2Styling} variant='h2'>
                             Story Squad
                         </Typography>
-                        {/* <Popper
+                        {/* Logout button */}
+                        <Popper
                             open={menu}
                             anchorEl={anchorRef.current}
                             role={undefined}
@@ -107,22 +99,24 @@ const ChildHome: React.FC<PointCardProps> = ({ child }) => {
                                 </Grow>
                             )}
                         </Popper>
-                        <div className={classes.appBar}>
-                            <div className={classes.headerFont}>Mission</div>
-                            <div className={classes.btn}>
-                                {' '}
-                                {/* Menu button */}
-                        {/* <Button
-                            ref={anchorRef}
-                            aria-controls={menu ? 'menu-list-grow' : undefined}
-                            aria-haspopup='true'
-                            className={classes.logoutButton}
-                            onClick={handleToggle}>
-                            Menu
-                                </Button>
-                        {/* End of menu button */}
-                        {/* </div>
-                        </div>  */}
+                        {/* End of logout button */}
+                        {/* <div className={classes.appBar}> */}
+                        {/* <div className={classes.headerFont}>Mission</div> */}
+                        <div className={classes.childHomeMenuBtn}>
+                            {' '}
+                            {/* Menu button */}
+                            <Button
+                                ref={anchorRef}
+                                aria-controls={menu ? 'menu-list-grow' : undefined}
+                                aria-haspopup='true'
+                                className={classes.logoutButton}
+                                onClick={handleToggle}>
+                                Menu
+                            </Button>
+                            {/* End of menu button */}
+                        </div>
+                        {/* </div> */}
+                        {/* End of mission header  */}
                     </Grid>
                 </Grid>
             </Grid>

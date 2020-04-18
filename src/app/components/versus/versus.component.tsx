@@ -103,7 +103,11 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const awayTeamNames = `${student.storyOpponent.username} & ${teammate.storyOpponent.username}`;
     return (
         <Container className={classes.containerStyling}>
-            <VersusHeader homeTeam={homeTeamNames} awayTeam={awayTeamNames} />
+            <VersusHeader
+                homeTeam={`${student.username} & ${teammate.username}!`}
+                awayTeam={`${student.storyOpponent.username} & ${teammate.storyOpponent.username}`}
+            />
+            {/* <VersusRound /> */}
             <Grid className={classes.topRow}>
                 {/* STORY 1 AND STORY 2 */}
                 <Grid className={classes.story2}>

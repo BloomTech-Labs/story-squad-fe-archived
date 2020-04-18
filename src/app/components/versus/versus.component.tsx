@@ -30,52 +30,45 @@ const Versus: React.FC = () => {
     // student.player.story | teammate.player.story
     // student.storyOpponent | student.illustrationOpponent
     const [student, setStudent] = useState({
-        player: {
-            username: '',
-            avatar: ava1,
-            story: {
-                page1: '',
-                page2: '',
-                page3: '',
-                storyPoints: 0,
-            },
-            illustration: {
-                illustration: '',
-                illustrationPoints: 0,
-            },
+        username: '',
+        avatar: '',
+        story: {
+            page1: '',
+            page2: '',
+            page3: '',
         },
+        storyPoints: 0,
+        illustration: '',
         storyOpponent: {
             username: '',
             story: {
                 page1: '',
                 page2: '',
                 page3: '',
-                storyPoints: 0,
             },
+            storyPoints: 0,
         },
         illustrationOpponent: {
-            avatar: ava3,
+            avatar: '',
             username: '',
             illustration: '',
             illustrationPoints: 0,
         },
+        illustrationPoints: 0,
+        storyTotal: 0,
+        illustrationTotal: 0,
     });
     console.log('response.battleInfo', response?.battleInfo);
     const [teammate, setTeammate] = useState({
-        player: {
-            avatar: ava2,
-            username: '',
-            story: {
-                page1: '',
-                page2: '',
-                page3: '',
-                storyPoints: 0,
-            },
-            illustration: {
-                illustration: '',
-                illustrationPoints: 0,
-            },
+        avatar: '',
+        username: '',
+        story: {
+            page1: '',
+            page2: '',
+            page3: '',
         },
+        storyPoints: 0,
+        illustration: '',
         storyOpponent: {
             username: '',
             avatar: '',
@@ -83,15 +76,18 @@ const Versus: React.FC = () => {
                 page1: '',
                 page2: '',
                 page3: '',
-                storyPoints: 0,
             },
+            storyPoints: 0,
         },
         illustrationOpponent: {
-            avatar: ava4,
+            avatar: '',
             username: '',
             illustration: '',
             illustrationPoints: 0,
         },
+        illustrationPoints: 0,
+        storyTotal: 0,
+        illustrationTotal: 0,
     });
     //student/teammate submissions state
     useEffect(() => {
@@ -108,18 +104,10 @@ const Versus: React.FC = () => {
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader
-                homeTeam={`${student.player.username} & ${teammate.player.username}!`}
+                homeTeam={`${student.username} & ${teammate.username}!`}
                 awayTeam={`${student.storyOpponent.username} & ${teammate.storyOpponent.username}`}
             />
-            <VersusRound
-                homeName={student.player.username}
-                // homeAva={student.player.avatar}
-                homePlayer={student.player.story}
-                // awayName={student.player.username}
-                // awayAva={player.avatar}
-                awayPlayer={student.storyOpponent}
-            />
-
+            <VersusRound />
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
                     <div className={`${classes.nameRow} ${classes.nameRowBig}`}>

@@ -91,7 +91,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                 { id: teammate.illustration.id, points: state.pic2Points },
             ],
         };
-        console.log('submitting pts', newPoints);
         if (remainingPoints === 0 && child.progress.teamReview === false) {
             updatePoints(newPoints);
             history.push('/matchup');
@@ -103,8 +102,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setError(true);
         }
     };
-
-    console.log('updated state', state);
 
     return (
         <div>

@@ -4,7 +4,7 @@ import ava1 from './img/ava1.png';
 import ava2 from './img/ava2.png';
 import ava3 from './img/ava3.png';
 import ava4 from './img/ava4.png';
-import { Button, Avatar, Typography, Container, Grid } from '@material-ui/core';
+import { Button, Avatar, Container, Grid } from '@material-ui/core';
 import { useStyles } from './versus-styles';
 import { Child } from '../../models';
 import { Link } from 'react-router-dom';

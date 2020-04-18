@@ -4,29 +4,7 @@ import ava1 from './img/ava1.png';
 import ava2 from './img/ava2.png';
 import ava3 from './img/ava3.png';
 import ava4 from './img/ava4.png';
-import {
-    Button,
-    Avatar,
-    Typography,
-    Container,
-    Grid,
-    Modal,
-    Fade,
-    Backdrop,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    CircularProgress,
-    Card,
-    Checkbox,
-    Paper,
-    Popper,
-    MenuItem,
-    MenuList,
-    Grow,
-    ClickAwayListener,
-} from '@material-ui/core';
+import { Button, Avatar, Container, Grid, Modal, CircularProgress } from '@material-ui/core';
 import { useStyles } from './versus-styles';
 import { Child } from '../../models';
 import { Link } from 'react-router-dom';
@@ -34,10 +12,9 @@ import vsImg from './img/VS.png';
 import { SubmissionDisplay } from './modals/subDisplay.component';
 import { useAPI } from '../../hooks';
 import { VersusHeader } from './versusSubComponents/versusHeader';
-interface VersusProps {
-    thisBattle?: 0;
-}
-const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
+import { VersusRound } from './versusSubComponents/versusRound';
+
+const Versus: React.FC = () => {
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
     ///TODO: ensure correct props are present on Point Card Props. student, teammate (opposition objects) to pass down pts, submissions, username, etc
@@ -49,46 +26,56 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         battleInfo: null,
     });
     ////////state setup from point allocation//////
+
+    // student.player.story | teammate.player.story
+    // student.storyOpponent | student.illustrationOpponent
     const [student, setStudent] = useState({
-        username: '',
-        avatar: '',
-        story: {
-            page1: '',
-            page2: '',
-            page3: '',
+        player: {
+            username: '',
+            avatar: ava1,
+            story: {
+                page1: '',
+                page2: '',
+                page3: '',
+                storyPoints: 0,
+            },
+            illustration: {
+                illustration: '',
+                illustrationPoints: 0,
+            },
         },
-        storyPoints: 0,
-        illustration: '',
         storyOpponent: {
             username: '',
             story: {
                 page1: '',
                 page2: '',
                 page3: '',
+                storyPoints: 0,
             },
-            storyPoints: 0,
         },
         illustrationOpponent: {
-            avatar: '',
+            avatar: ava3,
             username: '',
             illustration: '',
             illustrationPoints: 0,
         },
-        illustrationPoints: 0,
-        storyTotal: 0,
-        illustrationTotal: 0,
     });
     console.log('response.battleInfo', response?.battleInfo);
     const [teammate, setTeammate] = useState({
-        avatar: '',
-        username: '',
-        story: {
-            page1: '',
-            page2: '',
-            page3: '',
+        player: {
+            avatar: ava2,
+            username: '',
+            story: {
+                page1: '',
+                page2: '',
+                page3: '',
+                storyPoints: 0,
+            },
+            illustration: {
+                illustration: '',
+                illustrationPoints: 0,
+            },
         },
-        storyPoints: 0,
-        illustration: '',
         storyOpponent: {
             username: '',
             avatar: '',
@@ -96,18 +83,15 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 page1: '',
                 page2: '',
                 page3: '',
+                storyPoints: 0,
             },
-            storyPoints: 0,
         },
         illustrationOpponent: {
-            avatar: '',
+            avatar: ava4,
             username: '',
             illustration: '',
             illustrationPoints: 0,
         },
-        illustrationPoints: 0,
-        storyTotal: 0,
-        illustrationTotal: 0,
     });
     //student/teammate submissions state
     useEffect(() => {
@@ -121,11 +105,21 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     }, [response]);
     console.log(`response`, response?.battleInfo);
 
-    const homeTeamNames = `${student.username} & ${teammate.username}!`;
-    const awayTeamNames = `${student.storyOpponent.username} & ${teammate.storyOpponent.username}`;
     return (
         <Container className={classes.containerStyling}>
-            <VersusHeader homeTeam={homeTeamNames} awayTeam={awayTeamNames} />
+            <VersusHeader
+                homeTeam={`${student.player.username} & ${teammate.player.username}!`}
+                awayTeam={`${student.storyOpponent.username} & ${teammate.storyOpponent.username}`}
+            />
+            <VersusRound
+                homeName={student.player.username}
+                // homeAva={student.player.avatar}
+                homePlayer={student.player.story}
+                // awayName={student.player.username}
+                // awayAva={player.avatar}
+                awayPlayer={student.storyOpponent}
+            />
+
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
                     <div className={`${classes.nameRow} ${classes.nameRowBig}`}>

@@ -33,7 +33,7 @@ import { Link } from 'react-router-dom';
 import vsImg from './img/VS.png';
 import { SubmissionDisplay } from './modals/subDisplay.component';
 import { useAPI } from '../../hooks';
-
+import { VersusHeader } from './versusSubComponents/versusHeader';
 interface VersusProps {
     thisBattle?: 0;
 }
@@ -114,45 +114,18 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         if (response?.battleInfo) {
             console.log('VESUS MATCH INFOOOOOOO', response?.battleInfo);
             const { student, teammate } = response?.battleInfo;
-            // const { username, story, illustration } = student;
-            // const { teammateUsername, teammateStory, teammateIllustration } = teammate;
             setThisMatch({ ...response });
             setStudent({ ...student });
             setTeammate({ ...teammate });
         }
     }, [response]);
     console.log(`response`, response?.battleInfo);
+
+    const homeTeamNames = `${student.username} & ${teammate.username}!`;
+    const awayTeamNames = `${student.storyOpponent.username} & ${teammate.storyOpponent.username}`;
     return (
         <Container className={classes.containerStyling}>
-            <Grid container>
-                <Grid container direction='row' className={classes.appBar}>
-                    <Grid
-                        container
-                        item
-                        direction='column'
-                        justify='space-around'
-                        alignItems='center'>
-                        <Typography className={classes.h2Styling} variant='h2'>
-                            The Match Up
-                        </Typography>
-                        {/* team1 placeholder*/}
-                        <div className={classes.teamName}>
-                            <Typography
-                                className={
-                                    classes.h4Styling
-                                }>{`${student.username} & ${teammate.username}!`}</Typography>
-                            <Typography className={classes.h4Styling}>VS</Typography>
-                            {/* team2 placeholder*/}
-                            <Typography className={classes.h4Styling}>
-                                {`${student.storyOpponent.username} & ${teammate.storyOpponent.username}!`}
-                            </Typography>
-                        </div>
-                        <Typography className={classes.h3Styling}>
-                            201 Points Needed To Win!
-                        </Typography>
-                    </Grid>
-                </Grid>
-            </Grid>
+            <VersusHeader homeTeam={homeTeamNames} awayTeam={awayTeamNames} />
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
                     <div className={`${classes.nameRow} ${classes.nameRowBig}`}>

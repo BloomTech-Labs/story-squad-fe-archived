@@ -91,6 +91,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                 { id: teammate.illustration.id, points: state.pic2Points },
             ],
         };
+        console.log('submitting pts', newPoints);
         if (remainingPoints === 0 && child.progress.teamReview === false) {
             updatePoints(newPoints);
             history.push('/matchup');
@@ -102,6 +103,8 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setError(true);
         }
     };
+
+    console.log('updated state', state);
 
     return (
         <div>
@@ -200,11 +203,13 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                         <Grid item xs={6} />
                                         <Grid item xs={6}>
                                             <div className={classes.button}>
-                                                <Button
-                                                    className={classes.orangeButton}
-                                                    type='submit'>
-                                                    Next
-                                                </Button>
+                                                <Link to={`/matchup`}>
+                                                    <Button
+                                                        className={classes.orangeButton}
+                                                        type='submit'>
+                                                        Next
+                                                    </Button>
+                                                </Link>
                                             </div>
                                         </Grid>
                                     </Grid>

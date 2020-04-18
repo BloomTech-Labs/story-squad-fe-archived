@@ -50,8 +50,8 @@ export const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'center',
         },
         logoutButton: {
-            'marginLeft': '780px',
-            'marginBottom': '105px',
+            'marginLeft': '95%',
+            'marginBottom': '100%',
             'backgroundColor': '#FF6B35',
             'fontSize': '24px',
             'fontWeight': 'bold',
@@ -61,6 +61,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             'border': '3px solid #292929',
             'textTransform': 'capitalize',
             'fontFamily': 'nunito',
+            // 'border': '1px solid green',
             '&:hover': {
                 backgroundColor: '#FF6B35',
             },
@@ -78,6 +79,8 @@ export const useStyles = makeStyles((theme: Theme) =>
                 backgroundColor: '#FF6B35',
             },
         },
+        // Menu Button
+        childHomeMenuBtn: {},
         // stuff from kid progress
         topRow: {
             display: 'flex',

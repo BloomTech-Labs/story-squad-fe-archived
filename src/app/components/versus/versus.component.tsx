@@ -31,7 +31,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     ////////state setup from point allocation//////
     const [student, setStudent] = useState({
         username: '',
-        avatar: '',
+        avatar: ava1,
         story: {
             page1: '',
             page2: '',
@@ -41,7 +41,11 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         illustration: '',
         storyOpponent: {
             username: '',
+<<<<<<< HEAD
             avatar: '',
+=======
+            avatar: ava3,
+>>>>>>> 77d6c427fc89f5d3440688e32e7c4e559bdbb1b5
             story: {
                 page1: '',
                 page2: '',
@@ -50,7 +54,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             storyPoints: 0,
         },
         illustrationOpponent: {
-            avatar: '',
+            avatar: ava4,
             username: '',
             illustration: '',
             illustrationPoints: 0,
@@ -61,7 +65,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     });
     console.log('response.battleInfo', response?.battleInfo);
     const [teammate, setTeammate] = useState({
-        avatar: '',
+        avatar: ava2,
         username: '',
         story: {
             page1: '',
@@ -72,7 +76,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         illustration: '',
         storyOpponent: {
             username: '',
-            avatar: '',
+            avatar: ava4,
             story: {
                 page1: '',
                 page2: '',
@@ -81,7 +85,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             storyPoints: 0,
         },
         illustrationOpponent: {
-            avatar: '',
+            avatar: ava3,
             username: '',
             illustration: '',
             illustrationPoints: 0,
@@ -108,150 +112,72 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 homeTeam={`${student.username} & ${teammate.username}!`}
                 awayTeam={`${student.storyOpponent.username} & ${teammate.storyOpponent.username}!`}
             />
-
             <Grid className={classes.topRow}>
-                {' '}
                 <VersusRound
+                    roundStyle={classes.story1}
+                    nameRowStyle={classes.nameRowBig}
                     homeName={student.username}
                     homeAvatar={student.avatar}
-                    submission={student.story}
+                    homeSubmission={student.story}
                     homePoints={student.storyPoints}
                     awayName={student.storyOpponent.username}
                     awayAvatar={student.storyOpponent.avatar}
                     awaySubmission={student.storyOpponent.story}
                     awayPoints={student.storyOpponent.storyPoints}
                 />
-                {/* STORY 1 AND STORY 2 */}
-                <Grid className={classes.story2}>
-                    <div className={`${classes.nameRow} ${classes.nameRowSmall}`}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={ava2}></Avatar>
-                            <div className={classes.playerName}>{teammate.username}</div>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>
-                                {teammate.storyOpponent.username}
-                            </div>
-                            <Avatar className={classes.avatarStyle} src={ava4}></Avatar>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* Low story1 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='story1Points'
-                                username={teammate.username}
-                                submission={teammate.story.page1}
-                                // points={state.story1Points}
-                                points={teammate.storyPoints}
-                                type='Story'
-                            />
-                        </Grid>
-                        <div className={classes.totalScoreSmall}>
-                            <p>{teammate.storyTotal}</p> {/* low story1 + low story2 pts */}
-                        </div>
-                        {/* Low story2 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='story1Points'
-                                // points={state.story1Points}
-                                username={teammate.storyOpponent.username}
-                                submission={teammate.storyOpponent.story.page1}
-                                points={teammate.storyOpponent.storyPoints}
-                                type='Story'
-                            />
-                        </Grid>
-                    </div>
-                    <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-                </Grid>
+                <VersusRound
+                    roundStyle={classes.story2}
+                    nameRowStyle={classes.nameRowSmall}
+                    homeName={teammate.username}
+                    homeAvatar={teammate.avatar}
+                    homeSubmission={teammate.story}
+                    homePoints={teammate.storyPoints}
+                    awayName={teammate.storyOpponent.username}
+                    awayAvatar={teammate.storyOpponent.avatar}
+                    awaySubmission={teammate.storyOpponent.story}
+                    awayPoints={teammate.storyOpponent.storyPoints}
+                />
             </Grid>
             <Grid className={classes.bottomRow}>
-                <Grid className={classes.picture1}>
-                    <div className={`${classes.nameRow} ${classes.nameRowSmall}`}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
-                            <div className={classes.playerName}>{student.username}</div>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>
-                                {student.illustrationOpponent.username}
-                            </div>
-                            <Avatar className={classes.avatarStyle} src={ava3}></Avatar>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* high pic1 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='pic1Points'
-                                username={student.username}
-                                submission={student.illustration}
-                                // points={state.story1Points}
-                                points={student.illustrationPoints}
-                                type='Illustration'
-                            />
-                        </Grid>
-                        <div className={classes.totalScoreSmall}>
-                            <p>{student.illustrationTotal}</p> {/* High pic1 + high pic2 pts */}
-                        </div>
-                        {/* high pic2 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='pic1Points'
-                                // points={state.story1Points}
-                                username={student.illustrationOpponent.username}
-                                submission={student.illustrationOpponent.illustration}
-                                points={student.illustrationOpponent.illustrationPoints}
-                                type='Illustration'
-                            />
-                        </Grid>
-                    </div>
-                    <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
+                <VersusRound
+                    roundStyle={classes.picture1}
+                    nameRowStyle={classes.nameRowSmall}
+                    homeName={student.username}
+                    homeAvatar={student.avatar}
+                    homeSubmission={student.illustration}
+                    homePoints={student.illustrationPoints}
+                    awayName={student.illustrationOpponent.username}
+                    awayAvatar={student.illustrationOpponent.avatar}
+                    awaySubmission={student.illustrationOpponent.illustration}
+                    awayPoints={student.illustrationOpponent.illustrationPoints}
+                />
+                <VersusRound
+                    roundStyle={classes.picture2}
+                    nameRowStyle={classes.nameRowBig}
+                    homeName={teammate.username}
+                    homeAvatar={teammate.avatar}
+                    homeSubmission={teammate.illustration}
+                    homePoints={teammate.illustrationPoints}
+                    awayName={teammate.illustrationOpponent.username}
+                    awayAvatar={teammate.illustrationOpponent.avatar}
+                    awaySubmission={teammate.illustrationOpponent.illustration}
+                    awayPoints={teammate.illustrationOpponent.illustrationPoints}
+                />
+            </Grid>
+            {/*Buttons */}
+            <Grid className={classes.btnContainer}>
+                <Grid className={classes.btnDiv}>
+                    <Link to={`/kids-dashboard/team-join`}>
+                        <Button className={classes.orangeButton} type='button'>
+                            Back
+                        </Button>
+                    </Link>
+                    <Link to={`/kids-dashboard/nextpage`}>
+                        <Button className={classes.orangeButton} type='submit'>
+                            Vote
+                        </Button>
+                    </Link>
                 </Grid>
-                <Grid className={classes.picture2}>
-                    <div className={`${classes.nameRow} ${classes.nameRowBig}`}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={ava2}></Avatar>
-                            <div className={classes.playerName}>{teammate.username}</div>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>
-                                {teammate.illustrationOpponent.username}
-                            </div>
-                            <Avatar className={classes.avatarStyle} src={ava4}></Avatar>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* Low pic1 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='pic1Points'
-                                username={teammate.username}
-                                submission={teammate.illustration}
-                                // points={state.story1Points}
-                                points={teammate.illustrationPoints}
-                                type='Illustration'
-                            />
-                        </Grid>
-                        <div className={classes.totalScoreBig}>
-                            <p>{teammate.illustrationTotal}</p> {/* low pic1 + low pic2 pts */}
-                        </div>
-                        {/* Low Pic2 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='pic1Points'
-                                // points={state.story1Points}
-                                username={teammate.illustrationOpponent.username}
-                                submission={teammate.illustrationOpponent.illustration}
-                                points={teammate.illustrationOpponent.illustrationPoints}
-                                type='Illustration'
-                            />
-                        </Grid>
-                    </div>
-                    <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-                </Grid>
-                {/*Buttons */}
-                <VersusButton />
             </Grid>
         </Container>
     );

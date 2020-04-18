@@ -129,7 +129,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             zIndex: 9,
             width: '100%',
             height: '40%',
-            // border: '1px solid blue',
+            border: '3px solid blue',
         },
         nameRowBig: {
             // border: '1px solid red',

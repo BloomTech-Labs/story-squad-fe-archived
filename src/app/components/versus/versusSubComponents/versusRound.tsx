@@ -1,49 +1,45 @@
 import React from 'react';
-import {
-    Button,
-    Avatar,
-    Typography,
-    Container,
-    Grid,
-    Modal,
-    Fade,
-    Backdrop,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    CircularProgress,
-    Card,
-    Checkbox,
-    Paper,
-    Popper,
-    MenuItem,
-    MenuList,
-    Grow,
-    ClickAwayListener,
-} from '@material-ui/core';
+import { Button, Avatar, Typography, Container, Grid, Modal } from '@material-ui/core';
 import { useStyles } from '../versus-styles';
 
+import ava1 from '../img/ava1.png';
+import ava2 from '../img/ava2.png';
+import ava3 from '../img/ava3.png';
+import ava4 from '../img/ava4.png';
+import vsImg from '../img/VS.png';
+
 interface RoundProps {
-    homePlayer: {};
     homeName: string;
-    awayPlayer: {};
+    homeAvatar: {};
+    submission: {};
+    homePoints: number;
+    awayName: string;
+    awayAvatar: string;
+    awaySubmission: {};
+    awayPoints: number;
 }
 
-const VersusRound: React.FC<RoundProps> = ({ homePlayer, awayPlayer }) => {
+const VersusRound: React.FC<RoundProps> = ({
+    homeName,
+    homeAvatar,
+    submission,
+    homePoints,
+    awayName,
+    awayAvatar,
+    awaySubmission,
+    awayPoints,
+}) => {
     const classes = useStyles();
     return (
         <Grid className={classes.story1}>
             <div className={`${classes.nameRow} ${classes.nameRowBig}`}>
                 <div className={classes.leftPlayer}>
-                    <Avatar
-                        className={classes.avatarStyle}
-                        src={homeplayer.player.avatar | awayPlayer.player.avatar}></Avatar>
-                    <div className={classes.playerName}>{student.username}</div>
+                    <Avatar className={classes.avatarStyle} src='homeAvatar'></Avatar>
+                    <div className={classes.playerName}>{homeName}</div>
                 </div>
                 <div className={classes.rightPlayer}>
-                    <div className={classes.playerName}>{student.storyOpponent.username}</div>
-                    <Avatar className={classes.avatarStyle} src={ava}></Avatar>
+                    <div className={classes.playerName}>{awayName}</div>
+                    <Avatar className={classes.avatarStyle} src='awayAvatar'></Avatar>
                 </div>
             </div>
             <div className={classes.subRow}>
@@ -59,7 +55,7 @@ const VersusRound: React.FC<RoundProps> = ({ homePlayer, awayPlayer }) => {
                     /> */}
                 </Grid>
                 <div className={classes.totalScoreBig}>
-                    <p>{student.storyTotal}</p> {/* High story1 + high story2 pts */}
+                    <p>{homePoints}</p> {/* High story1 + high story2 pts */}
                 </div>
                 {/* High story2 */}
                 <Grid item xs={12} sm={12} md={6}>

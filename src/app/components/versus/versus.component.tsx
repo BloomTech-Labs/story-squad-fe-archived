@@ -12,6 +12,8 @@ import vsImg from './img/VS.png';
 import { SubmissionDisplay } from './modals/subDisplay.component';
 import { useAPI } from '../../hooks';
 import { VersusHeader } from './versusSubComponents/versusHeader';
+import { VersusRound } from './versusSubComponents/versusRound';
+import { VersusButton } from './versusSubComponents/versusButton';
 interface VersusProps {
     thisBattle?: 0;
 }
@@ -39,6 +41,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         illustration: '',
         storyOpponent: {
             username: '',
+            avatar: '',
             story: {
                 page1: '',
                 page2: '',
@@ -99,16 +102,25 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     }, [response]);
     console.log(`response`, response?.battleInfo);
 
-    const homeTeamNames = `${student.username} & ${teammate.username}!`;
-    const awayTeamNames = `${student.storyOpponent.username} & ${teammate.storyOpponent.username}`;
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader
                 homeTeam={`${student.username} & ${teammate.username}!`}
-                awayTeam={`${student.storyOpponent.username} & ${teammate.storyOpponent.username}`}
+                awayTeam={`${student.storyOpponent.username} & ${teammate.storyOpponent.username}!`}
             />
-            {/* <VersusRound /> */}
+
             <Grid className={classes.topRow}>
+                {' '}
+                <VersusRound
+                    homeName={student.username}
+                    homeAvatar={student.avatar}
+                    submission={student.story}
+                    homePoints={student.storyPoints}
+                    awayName={student.storyOpponent.username}
+                    awayAvatar={student.storyOpponent.avatar}
+                    awaySubmission={student.storyOpponent.story}
+                    awayPoints={student.storyOpponent.storyPoints}
+                />
                 {/* STORY 1 AND STORY 2 */}
                 <Grid className={classes.story2}>
                     <div className={`${classes.nameRow} ${classes.nameRowSmall}`}>
@@ -239,20 +251,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
                 {/*Buttons */}
-                <Grid className={classes.btnContainer}>
-                    <Grid className={classes.btnDiv}>
-                        <Link to={`/kids-dashboard/team-join`}>
-                            <Button className={classes.orangeButton} type='button'>
-                                Back
-                            </Button>
-                        </Link>
-                        <Link to={`/kids-dashboard/nextpage`}>
-                            <Button className={classes.orangeButton} type='submit'>
-                                Vote
-                            </Button>
-                        </Link>
-                    </Grid>
-                </Grid>
+                <VersusButton />
             </Grid>
         </Container>
     );

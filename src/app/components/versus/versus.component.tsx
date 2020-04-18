@@ -4,31 +4,23 @@ import ava1 from './img/ava1.png';
 import ava2 from './img/ava2.png';
 import ava3 from './img/ava3.png';
 import ava4 from './img/ava4.png';
-import { Button, Avatar, Container, Grid } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 import { useStyles } from './versus-styles';
-import { Child } from '../../models';
-import { Link } from 'react-router-dom';
-import vsImg from './img/VS.png';
-import { SubmissionDisplay } from './modals/subDisplay.component';
 import { useAPI } from '../../hooks';
-import { VersusHeader } from './versusSubComponents/versusHeader';
-import { VersusRound } from './versusSubComponents/versusRound';
-import { VersusButton } from './versusSubComponents/versusButton';
+import { VersusHeader, VersusRound, VersusButton } from './versusSubComponents';
 interface VersusProps {
     thisBattle?: 0;
 }
 const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
-    ///TODO: ensure correct props are present on Point Card Props. student, teammate (opposition objects) to pass down pts, submissions, username, etc
     const [thisMatch, setThisMatch] = useState({
         storyHigh: [],
         storyLow: [],
         illustrationHigh: [],
         illutrationLow: [],
-        battleInfo: null,
+        battleInfo: {},
     });
-    ////////state setup from point allocation//////
     const [student, setStudent] = useState({
         username: '',
         avatar: ava1,
@@ -41,11 +33,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         illustration: '',
         storyOpponent: {
             username: '',
-<<<<<<< HEAD
-            avatar: '',
-=======
             avatar: ava3,
->>>>>>> 77d6c427fc89f5d3440688e32e7c4e559bdbb1b5
             story: {
                 page1: '',
                 page2: '',
@@ -54,7 +42,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             storyPoints: 0,
         },
         illustrationOpponent: {
-            avatar: ava4,
+            avatar: ava3,
             username: '',
             illustration: '',
             illustrationPoints: 0,
@@ -85,7 +73,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             storyPoints: 0,
         },
         illustrationOpponent: {
-            avatar: ava3,
+            avatar: ava4,
             username: '',
             illustration: '',
             illustrationPoints: 0,
@@ -98,10 +86,20 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     useEffect(() => {
         if (response?.battleInfo) {
             console.log('VESUS MATCH INFOOOOOOO', response?.battleInfo);
-            const { student, teammate } = response?.battleInfo;
             setThisMatch({ ...response });
-            setStudent({ ...student });
-            setTeammate({ ...teammate });
+            const { student, teammate } = response?.battleInfo;
+            setStudent({
+                ...student,
+                student: { ...student, avatar: ava1 },
+                illustrationOpponent: { ...student.illustrationOpponent, avatar: ava3 },
+                storyOpponent: { ...student.storyOpponent, avatar: ava3 },
+            });
+            setTeammate({
+                ...teammate,
+                teammate: { ...teammate, avatar: ava2 },
+                illustrationOpponent: { ...teammate.illustrationOpponent, avatar: ava4 },
+                storyOpponent: { ...teammate.storyOpponent, avatar: ava4 },
+            });
         }
     }, [response]);
     console.log(`response`, response?.battleInfo);
@@ -163,21 +161,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     awaySubmission={teammate.illustrationOpponent.illustration}
                     awayPoints={teammate.illustrationOpponent.illustrationPoints}
                 />
-            </Grid>
-            {/*Buttons */}
-            <Grid className={classes.btnContainer}>
-                <Grid className={classes.btnDiv}>
-                    <Link to={`/kids-dashboard/team-join`}>
-                        <Button className={classes.orangeButton} type='button'>
-                            Back
-                        </Button>
-                    </Link>
-                    <Link to={`/kids-dashboard/nextpage`}>
-                        <Button className={classes.orangeButton} type='submit'>
-                            Vote
-                        </Button>
-                    </Link>
-                </Grid>
+                <VersusButton />
             </Grid>
         </Container>
     );

@@ -1,46 +1,18 @@
 import React from 'react';
-import {
-    Button,
-    Avatar,
-    Typography,
-    Container,
-    Grid,
-    Modal,
-    Fade,
-    Backdrop,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    CircularProgress,
-    Card,
-    Checkbox,
-    Paper,
-    Popper,
-    MenuItem,
-    MenuList,
-    Grow,
-    ClickAwayListener,
-} from '@material-ui/core';
+import { Avatar, Grid } from '@material-ui/core';
 import { SubmissionDisplay } from '../modals/subDisplay.component';
-import vsImg from '../img/VS.png';
 import { useStyles } from '../versus-styles';
-
-import ava1 from '../img/ava1.png';
-import ava2 from '../img/ava2.png';
-import ava3 from '../img/ava3.png';
-import ava4 from '../img/ava4.png';
 import vsImg from '../img/VS.png';
 
 interface RoundProps {
     roundStyle: {};
     nameRowStyle: {};
     homeName: string;
-    homeAvatar: {};
+    homeAvatar: string;
     homeSubmission: {};
     homePoints: number;
     awayName: string;
-    awayAvatar: {};
+    awayAvatar: string;
     awaySubmission: {};
     awayPoints: number;
 }
@@ -62,12 +34,12 @@ const VersusRound: React.FC<RoundProps> = ({
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>
                 <div className={classes.leftPlayer}>
-                    <Avatar className={classes.avatarStyle} src={'homeAvatar'}></Avatar>
+                    <Avatar className={classes.avatarStyle} src={homeAvatar}></Avatar>
                     <div className={classes.playerName}>{homeName}</div>
                 </div>
                 <div className={classes.rightPlayer}>
                     <div className={classes.playerName}>{awayName}</div>
-                    <Avatar className={classes.avatarStyle} src={'awayAvatar'}></Avatar>
+                    <Avatar className={classes.avatarStyle} src={awayAvatar}></Avatar>
                 </div>
             </div>
             <div className={classes.subRow}>
@@ -81,10 +53,15 @@ const VersusRound: React.FC<RoundProps> = ({
                         type='Story'
                     />
                 </Grid>
-                <div className={classes.totalScoreBig}>
-                    <p>{homePoints + awayPoints}</p> {/* High story1 + high story2 pts */}
-                </div>
-                {/* High story2 */}
+                {nameRowStyle === classes.nameRowBig ? (
+                    <div className={classes.totalScoreBig}>
+                        <p>{homePoints + awayPoints}</p>
+                    </div>
+                ) : (
+                    <div className={classes.totalScoreSmall}>
+                        <p>{homePoints + awayPoints}</p>
+                    </div>
+                )}
                 <Grid item xs={12} sm={12} md={6}>
                     <SubmissionDisplay
                         key='story1Points'

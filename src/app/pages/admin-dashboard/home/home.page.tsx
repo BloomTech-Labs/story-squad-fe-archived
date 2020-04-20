@@ -1,26 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-
-import { makeStyles } from '@material-ui/core/styles';
-
 import { useAPI } from '../../../hooks';
 import { PdfList, AccountsList } from '../../../components';
-
-const useStyles = makeStyles((theme) => ({
-    content: {
-        display: 'grid',
-        gridTemplate: `
-            "accounts story" auto`,
-        gridTemplateColumns: '1fr 1fr',
-        gridGap: theme.spacing(10),
-    },
-    accounts: {
-        gridArea: 'accounts',
-    },
-    story: {
-        gridArea: 'story',
-    },
-}));
+import { useStyles } from './home-page-styles';
 
 interface Props {
     className?: string;

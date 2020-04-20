@@ -9,11 +9,11 @@ interface RoundProps {
     nameRowStyle: {};
     homeName: string;
     homeAvatar: string;
-    homeSubmission: string | {};
+    homeSubmission: any;
     homePoints: number;
     awayName: string;
     awayAvatar: string;
-    awaySubmission: string | {};
+    awaySubmission: any;
     awayPoints: number;
 }
 
@@ -30,6 +30,8 @@ const VersusRound: React.FC<RoundProps> = ({
     awayPoints,
 }) => {
     const classes = useStyles();
+    const submissionCheck = (submission) =>
+        typeof submission === 'string' ? submission : Object.values(submission)[0];
     return (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>
@@ -46,11 +48,8 @@ const VersusRound: React.FC<RoundProps> = ({
                 {/* High story1 */}
                 <Grid item xs={12} sm={12} md={6}>
                     <SubmissionDisplay
-                        key='story1Points'
                         username={homeName}
-                        type={typeof homeSubmission === 'string' ? 'Illustration' : 'Story'}
-                        submission={homeSubmission = 'string' | homeSubmission = {}}
-                        points={homePoints}
+                        submission={submissionCheck(homeSubmission)}
                     />
                 </Grid>
                 {nameRowStyle === classes.nameRowBig ? (
@@ -64,11 +63,8 @@ const VersusRound: React.FC<RoundProps> = ({
                 )}
                 <Grid item xs={12} sm={12} md={6}>
                     <SubmissionDisplay
-                        key='story1Points'
                         username={awayName}
-                        type={typeof awaySubmission === 'string' ? 'Illustration' : 'Story'}
-                        submission={awaySubmission}
-                        points={awayPoints}
+                        submission={submissionCheck(awaySubmission)}
                     />
                 </Grid>
             </div>

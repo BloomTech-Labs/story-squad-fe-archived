@@ -203,13 +203,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                         <Grid item xs={6} />
                                         <Grid item xs={6}>
                                             <div className={classes.button}>
-                                                <Link to={`/matchup`}>
-                                                    <Button
-                                                        className={classes.orangeButton}
-                                                        type='submit'>
-                                                        Next
-                                                    </Button>
-                                                </Link>
+                                                <Button
+                                                    className={classes.orangeButton}
+                                                    type='submit'>
+                                                    Next
+                                                </Button>
                                             </div>
                                         </Grid>
                                     </Grid>

@@ -28,7 +28,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { blue, red, green } from '@material-ui/core/colors';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
-
 import story1 from './img/leowriting.jpg';
 import story2 from './img/chancewriting.jpg';
 const ColoredRadio = withStyles({
@@ -44,14 +43,46 @@ interface VotingCardProps {
     child: Child;
 }
 
+// function rand() {
+//     return Math.round(Math.random() * 20) - 10;
+// }
+
+// function getModalStyle() {
+//     const top = 50 + rand();
+//     const left = 50 + rand();
+
+//     return {
+//         top: `${top}%`,
+//         left: `${left}%`,
+//         transform: `translate(-${top}%, -${left}%)`,
+//     };
+// }
+
+// const [modalStyle] = React.useState(getModalStyle);
+// const [open, setOpen] = React.useState(false);
+
+// const handleOpen = () => {
+//     setOpen(true);
+// };
+
+// const handleClose = () => {
+//     setOpen(false);
+// };
+
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
     const [selectedValue, setSelectedValue] = React.useState('a');
-
+    const classes = useStyles({});
+    // const body = (
+    // <div style={modalStyle} className={classes.imgModal}>
+    //     <h2 id="simple-modal-title">Text in a modal</h2>
+    //     <p id="simple-modal-description">
+    //     Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+    //     </p>
+    // </div>
+    // );
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedValue(event.target.value);
     };
-    // return <h1>Hello World</h1>;
-    const classes = useStyles({});
     return (
         <Container className={classes.containerStyling}>
             <Grid container>
@@ -109,6 +140,19 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                     </Grid>
                 </Grid>
             </Grid>
+            {/* <div>
+                <button type="button" onClick={handleOpen}>
+                    Open Modal
+                </button>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                >
+                    {body}
+                </Modal>
+            </div> */}
         </Container>
     );
 };

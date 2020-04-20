@@ -1,21 +1,8 @@
 import React from 'react';
-
 import { Button, Card, CardHeader, CardContent, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
 import { Parent } from '../../../../models';
 import { InstallButton } from '../../../common/pwa/installButton.component';
-
-const useStyles = makeStyles((theme) => ({
-    card: {},
-    cardHeader: {
-        '& .MuiCardHeader-action': {
-            [theme.breakpoints.down('sm')]: {
-                display: 'none',
-            },
-        },
-    },
-}));
+import { useStyles } from './card-component-styles';
 
 interface ParentCardProps {
     className?: string;

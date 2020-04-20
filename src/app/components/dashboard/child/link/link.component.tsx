@@ -1,8 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
 import { Icon, ListItem, ListItemText } from '@material-ui/core';
-
 import { Child } from '../../../../models';
 
 interface ChildLinkProps {

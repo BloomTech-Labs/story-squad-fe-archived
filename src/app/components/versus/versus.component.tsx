@@ -7,11 +7,7 @@ import ava4 from './img/ava4.png';
 import { Container, Grid } from '@material-ui/core';
 import { useStyles } from './versus-styles';
 import { useAPI } from '../../hooks';
-<<<<<<< HEAD
-import { VersusHeader } from './versusSubComponents/versusHeader';
-=======
 import { VersusHeader, VersusRound, VersusButton } from './versusSubComponents';
->>>>>>> 29e5f235ed8276fcde1aeada47020949acf71f0b
 interface VersusProps {
     thisBattle?: 0;
 }
@@ -90,10 +86,6 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     useEffect(() => {
         if (response?.battleInfo) {
             console.log('VESUS MATCH INFOOOOOOO', response?.battleInfo);
-<<<<<<< HEAD
-            const { student, teammate } = response?.battleInfo;
-=======
->>>>>>> 29e5f235ed8276fcde1aeada47020949acf71f0b
             setThisMatch({ ...response });
             const { student, teammate } = response?.battleInfo;
             setStudent({
@@ -112,20 +104,12 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     }, [response]);
     console.log(`response`, response?.battleInfo);
 
-<<<<<<< HEAD
-    const homeTeamNames = `${student.username} & ${teammate.username}!`;
-    const awayTeamNames = `${student.storyOpponent.username} & ${teammate.storyOpponent.username}`;
-    return (
-        <Container className={classes.containerStyling}>
-            <VersusHeader homeTeam={homeTeamNames} awayTeam={awayTeamNames} />
-=======
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader
                 homeTeam={`${student.username} & ${teammate.username}!`}
                 awayTeam={`${student.storyOpponent.username} & ${teammate.storyOpponent.username}!`}
             />
->>>>>>> 29e5f235ed8276fcde1aeada47020949acf71f0b
             <Grid className={classes.topRow}>
                 <VersusRound
                     roundStyle={classes.story1}

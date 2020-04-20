@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, username }) => {
     const [open, setOpen] = useState(false);
+    const [pages, setPage] = useState(false);
     const classes = useStyles({});
     const handleOpen = () => {
         setOpen(true);
@@ -52,36 +53,100 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
     const handleClose = () => {
         setOpen(false);
     };
+    const openPage = () => {
+        setPage(true);
+    };
+    const closePage = () => {
+        setPage(false);
+    };
     return (
         <>
-            <Grid
-                container
-                direction='column'
-                justify='space-between'
-                alignItems='center'
-                alignContent='center'>
-                <Grid item md>
-                    <img
-                        src={submission}
-                        className={classes.imagePreview}
-                        onClick={handleOpen}
-                        alt={`${username}'s`}
-                    />
+            {typeof submission === 'string' ? (
+                <Grid
+                    container
+                    direction='column'
+                    justify='space-between'
+                    alignItems='center'
+                    alignContent='center'>
+                    <Grid item md>
+                        <img
+                            src={submission}
+                            className={classes.imagePreview}
+                            onClick={handleOpen}
+                            alt={`${username}'s`}
+                        />
+                    </Grid>
+                    <Dialog fullScreen open={open}>
+                        <IconButton
+                            edge='start'
+                            color='inherit'
+                            onClick={handleClose}
+                            aria-label='close'>
+                            <CloseIcon />
+                        </IconButton>
+                        <DialogTitle id='submission-title'>{`${username}'s`}</DialogTitle>
+                        <div>
+                            <img src={submission} alt={`${username}'s`} />
+                        </div>
+                    </Dialog>
                 </Grid>
-                <Dialog fullScreen open={open}>
-                    <IconButton
-                        edge='start'
-                        color='inherit'
-                        onClick={handleClose}
-                        aria-label='close'>
-                        <CloseIcon />
-                    </IconButton>
-                    <DialogTitle id='submission-title'>{`${username}'s`}</DialogTitle>
-                    <div>
-                        <img src={submission} alt={`${username}'s`} />
-                    </div>
-                </Dialog>
-            </Grid>
+            ) : (
+                <Grid
+                    container
+                    direction='column'
+                    justify='space-between'
+                    alignItems='center'
+                    alignContent='center'>
+                    <Grid item md>
+                        <img
+                            src={submission[0]}
+                            className={classes.imagePreview}
+                            onClick={handleOpen}
+                            alt={`${username}'s`}
+                        />
+                    </Grid>
+                    <Dialog fullScreen open={open}>
+                        <IconButton
+                            edge='start'
+                            color='inherit'
+                            onClick={handleClose}
+                            aria-label='close'>
+                            <CloseIcon />
+                        </IconButton>
+                        <DialogTitle id='submission-title'>{`${username}'s`}</DialogTitle>
+                        {submission.map(
+                            (page, key) =>
+                                page && (
+                                    <Grid
+                                        container
+                                        justify='space-between'
+                                        alignItems='center'
+                                        alignContent='center'>
+                                        <Grid item md key={key}>
+                                            <img
+                                                src={page}
+                                                className={classes.imagePreview}
+                                                onClick={openPage}
+                                            />
+                                        </Grid>
+                                        <Dialog fullScreen open={pages}>
+                                            <IconButton
+                                                edge='start'
+                                                color='inherit'
+                                                onClick={closePage}
+                                                aria-label='close'>
+                                                <CloseIcon />
+                                            </IconButton>
+                                            <div>
+                                                <img src={page} alt={`${username}'s`} />
+                                            </div>
+                                        </Dialog>
+                                    </Grid>
+                                )
+                        )}
+                    </Dialog>
+                </Grid>
+            )}
         </>
     );
 };

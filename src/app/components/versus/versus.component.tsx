@@ -90,13 +90,13 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             const { student, teammate } = response?.battleInfo;
             setStudent({
                 ...student,
-                student: { ...student, avatar: ava1 },
+                avatar: ava1,
                 illustrationOpponent: { ...student.illustrationOpponent, avatar: ava3 },
                 storyOpponent: { ...student.storyOpponent, avatar: ava3 },
             });
             setTeammate({
                 ...teammate,
-                teammate: { ...teammate, avatar: ava2 },
+                avatar: ava2,
                 illustrationOpponent: { ...teammate.illustrationOpponent, avatar: ava4 },
                 storyOpponent: { ...teammate.storyOpponent, avatar: ava4 },
             });

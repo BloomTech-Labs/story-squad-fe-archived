@@ -29,6 +29,8 @@ const ChildHome: React.FC<ChildHomeProps> = ({ child }) => {
     const logout = () => window.dispatchEvent(new Event('logout'));
     const [menu, setMenu] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
+    const [open, setOpen] = React.useState(false);
+
     const handleToggle = () => {
         setMenu((prevMenu) => !prevMenu);
     };
@@ -39,6 +41,7 @@ const ChildHome: React.FC<ChildHomeProps> = ({ child }) => {
 
         setMenu(false);
     };
+
     function handleListKeyDown(event: React.KeyboardEvent) {
         if (event.key === 'Tab') {
             event.preventDefault();
@@ -83,6 +86,8 @@ const ChildHome: React.FC<ChildHomeProps> = ({ child }) => {
                             )}
                         </Popper>
                         {/* End of logout button */}
+                        {/* <div className={classes.appBar}> */}
+                        {/* <div className={classes.headerFont}>Mission</div> */}
                         <div className={classes.childHomeMenuBtn}>
                             {' '}
                             {/* Menu button */}
@@ -96,6 +101,7 @@ const ChildHome: React.FC<ChildHomeProps> = ({ child }) => {
                             </Button>
                             {/* End of menu button */}
                         </div>
+                        {/* </div> */}
                         {/* End of mission header  */}
                     </Grid>
                 </Grid>

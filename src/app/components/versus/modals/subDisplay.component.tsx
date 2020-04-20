@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, username }) => {
     const [open, setOpen] = useState(false);
+    const [pages, setPage] = useState(false);
     const classes = useStyles({});
     const handleOpen = () => {
         setOpen(true);
@@ -51,6 +52,12 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
 
     const handleClose = () => {
         setOpen(false);
+    };
+    const openPage = () => {
+        setPage(true);
+    };
+    const closePage = () => {
+        setPage(false);
     };
     return (
         <>
@@ -110,12 +117,30 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
                         {submission.map(
                             (page, key) =>
                                 page && (
-                                    <Grid item md key={key}>
-                                        <img
-                                            src={page}
-                                            className={classes.imagePreview}
-                                            onClick={handleOpen}
-                                        />
+                                    <Grid
+                                        container
+                                        justify='space-between'
+                                        alignItems='center'
+                                        alignContent='center'>
+                                        <Grid item md key={key}>
+                                            <img
+                                                src={page}
+                                                className={classes.imagePreview}
+                                                onClick={openPage}
+                                            />
+                                        </Grid>
+                                        <Dialog fullScreen open={pages}>
+                                            <IconButton
+                                                edge='start'
+                                                color='inherit'
+                                                onClick={closePage}
+                                                aria-label='close'>
+                                                <CloseIcon />
+                                            </IconButton>
+                                            <div>
+                                                <img src={page} alt={`${username}'s`} />
+                                            </div>
+                                        </Dialog>
                                     </Grid>
                                 )
                         )}

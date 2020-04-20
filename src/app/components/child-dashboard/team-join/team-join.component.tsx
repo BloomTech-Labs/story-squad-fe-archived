@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 
 import { useAPI } from '../../../hooks';
-import { useStyles } from './styles';
+import { useStyles } from './team-join-styles';
 import { Child } from '../../../models';
 import avatar1 from '../../point-allocation-dashboard/img/cam.png';
 import avatar2 from '../../point-allocation-dashboard/img/Hero13.png';

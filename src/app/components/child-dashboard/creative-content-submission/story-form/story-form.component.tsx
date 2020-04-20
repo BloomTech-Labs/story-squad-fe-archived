@@ -11,7 +11,7 @@ import {
     LinearProgress,
 } from '@material-ui/core';
 import { useAPI, useForm } from '../../../../hooks';
-import { useStyles } from './styles';
+import { useStyles } from './story-form-styles';
 
 interface StoryFormProps {
     onUpdate?: () => void;

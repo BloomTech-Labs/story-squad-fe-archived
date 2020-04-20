@@ -1,29 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
 import { Button, TextField, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
 import { useAPI } from '../../../hooks/api/api.hook';
 import { useForm } from '../../../hooks/form/form.hook';
-import { displayError } from '../../../state';
-
-const useStyles = makeStyles(() => ({
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        height: '35vh',
-    },
-    container: {
-        width: '100%',
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-}));
+import { useStyles } from './sign-in-styles';
 
 interface SignInState {
     email: string;

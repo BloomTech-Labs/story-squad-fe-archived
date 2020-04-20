@@ -61,7 +61,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             'border': '3px solid #292929',
             'textTransform': 'capitalize',
             'fontFamily': 'nunito',
-            // 'border': '1px solid green',
             '&:hover': {
                 backgroundColor: '#FF6B35',
             },
@@ -79,9 +78,7 @@ export const useStyles = makeStyles((theme: Theme) =>
                 backgroundColor: '#FF6B35',
             },
         },
-        // Menu Button
         childHomeMenuBtn: {},
-        // stuff from kid progress
         topRow: {
             display: 'flex',
         },

@@ -15,7 +15,7 @@ import {
     Grow,
     ClickAwayListener,
 } from '@material-ui/core';
-import { useStyles } from './styles';
+import { useStyles } from './kid-progress-styles';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
 
@@ -114,7 +114,6 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                         </Grow>
                     )}
                 </Popper>
-                {/* End of logout button */}
                 <section className={classes.columnFlex}>
                     {/* Mission header */}
                     <div className={classes.appBar}>
@@ -130,15 +129,12 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 onClick={handleToggle}>
                                 Menu
                             </Button>
-                            {/* End of menu button */}
                         </div>
                     </div>
                     {/* End of mission header  */}
                     {/* Read / Write / Draw container */}
                     <div className={classes.displayFlex}>
-                        {/* Read section  */}
                         <div className={classes.read}>
-                            {/* Read checkbox  */}
                             <Checkbox
                                 checked={progress.reading}
                                 className={classes.alignRightTop}
@@ -152,30 +148,24 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                                 </Link>
                             </div>
                         </div>
-                        {/* Write section  */}
                         <div className={classes.writeDrawDiv}>
                             <div className={classes.write}>
-                                {/* Write checkbox  */}
                                 <Checkbox
                                     checked={!!child.stories.length}
                                     className={classes.alignRight}
                                     color='primary'
                                 />
                                 <Link to={`/kids-dashboard/upload`}>
-                                    {/* Write icon + "Write" */}
                                     <div className={classes.writeIconDiv}></div>
                                 </Link>
                             </div>
-                            {/* Draw section  */}
                             <div className={classes.draw}>
-                                {/* Draw checkbox  */}
                                 <Checkbox
                                     checked={!!child.illustrations.length}
                                     className={classes.alignRight}
                                     color='primary'
                                 />
                                 <Link to={`/kids-dashboard/drawing-upload`}>
-                                    {/* Draw icon + "Draw"  */}
                                     <div className={classes.drawIconDiv}></div>
                                 </Link>
                                 {progress.reading &&

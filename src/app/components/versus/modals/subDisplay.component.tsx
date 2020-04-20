@@ -12,7 +12,7 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction='up' />;
 });
 interface SubDisplayProps {
-    submission: string;
+    submission: string | {};
     username: string;
     type: 'Story' | 'Illustration';
     key: 'story1Points' | 'pic1Points' | 'story2Points' | 'pic2Points';

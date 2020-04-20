@@ -9,11 +9,11 @@ interface RoundProps {
     nameRowStyle: {};
     homeName: string;
     homeAvatar: string;
-    homeSubmission: {};
+    homeSubmission: string | {};
     homePoints: number;
     awayName: string;
     awayAvatar: string;
-    awaySubmission: {};
+    awaySubmission: string | {};
     awayPoints: number;
 }
 
@@ -48,9 +48,9 @@ const VersusRound: React.FC<RoundProps> = ({
                     <SubmissionDisplay
                         key='story1Points'
                         username={homeName}
-                        submission={'homeSubmission'}
+                        type={typeof homeSubmission === 'string' ? 'Illustration' : 'Story'}
+                        submission={homeSubmission = 'string' | homeSubmission = {}}
                         points={homePoints}
-                        type='Story'
                     />
                 </Grid>
                 {nameRowStyle === classes.nameRowBig ? (
@@ -66,9 +66,9 @@ const VersusRound: React.FC<RoundProps> = ({
                     <SubmissionDisplay
                         key='story1Points'
                         username={awayName}
-                        submission={'awaySubmission'}
+                        type={typeof awaySubmission === 'string' ? 'Illustration' : 'Story'}
+                        submission={awaySubmission}
                         points={awayPoints}
-                        type='Story'
                     />
                 </Grid>
             </div>

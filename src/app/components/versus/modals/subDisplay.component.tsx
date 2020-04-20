@@ -12,12 +12,8 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction='up' />;
 });
 interface SubDisplayProps {
-    submission: string | {};
+    submission: any;
     username: string;
-    type: 'Story' | 'Illustration';
-    key: 'story1Points' | 'pic1Points' | 'story2Points' | 'pic2Points';
-    points: number;
-    // handleChange: (e: any) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,14 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     })
 );
-
-export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
-    submission,
-    username,
-    type,
-    key,
-    points,
-}) => {
+export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, username }) => {
     const [open, setOpen] = useState(false);
     const classes = useStyles({});
     const handleOpen = () => {
@@ -63,7 +52,6 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
     const handleClose = () => {
         setOpen(false);
     };
-
     return (
         <>
             <Grid
@@ -77,7 +65,7 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
                         src={submission}
                         className={classes.imagePreview}
                         onClick={handleOpen}
-                        alt={`${username}'s ${type}`}
+                        alt={`${username}'s`}
                     />
                 </Grid>
                 <Dialog fullScreen open={open}>
@@ -88,9 +76,9 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
                         aria-label='close'>
                         <CloseIcon />
                     </IconButton>
-                    <DialogTitle id='submission-title'>{`${username}'s ${type}`}</DialogTitle>
+                    <DialogTitle id='submission-title'>{`${username}'s`}</DialogTitle>
                     <div>
-                        <img src={submission} alt={`${username}'s ${type}`} />
+                        <img src={submission} alt={`${username}'s`} />
                     </div>
                 </Dialog>
             </Grid>

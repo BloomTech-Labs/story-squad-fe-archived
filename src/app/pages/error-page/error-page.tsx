@@ -1,37 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
 import { Button, Slide, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        backgroundColor: theme.palette.background.default,
-        padding: theme.spacing(3),
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-
-        [theme.breakpoints.up('md')]: {
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-        },
-    },
-    content: {
-        margin: theme.spacing(3),
-    },
-    image: {},
-    button: {
-        margin: theme.spacing(2),
-        display: 'flex',
-        justifyContent: 'center',
-    },
-}));
-
+import { useStyles } from './error-page-styles';
 const ErrorPage = () => {
     const history = useHistory();
-    const classes = useStyles();
+    const classes = useStyles({});
 
     return (
         <main className={classes.root}>

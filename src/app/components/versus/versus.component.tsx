@@ -23,14 +23,13 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     });
     const [student, setStudent] = useState({
         username: '',
-        avatar: ava1,
+        avatar: '',
         story: {
             page1: '',
             page2: '',
             page3: '',
         },
         storyPoints: 0,
-        illustration: '',
         storyOpponent: {
             username: '',
             avatar: ava3,
@@ -41,13 +40,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             },
             storyPoints: 0,
         },
+        illustration: '',
+        illustrationPoints: 0,
         illustrationOpponent: {
             avatar: ava3,
             username: '',
             illustration: '',
             illustrationPoints: 0,
         },
-        illustrationPoints: 0,
         storyTotal: 0,
         illustrationTotal: 0,
     });
@@ -72,13 +72,13 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             },
             storyPoints: 0,
         },
+        illustrationPoints: 0,
         illustrationOpponent: {
             avatar: ava4,
             username: '',
             illustration: '',
             illustrationPoints: 0,
         },
-        illustrationPoints: 0,
         storyTotal: 0,
         illustrationTotal: 0,
     });
@@ -86,13 +86,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     useEffect(() => {
         if (response?.battleInfo) {
             console.log('VESUS MATCH INFOOOOOOO', response?.battleInfo);
-            setThisMatch({ ...response });
             const { student, teammate } = response?.battleInfo;
+            setThisMatch({ ...response });
             setStudent({
                 ...student,
                 avatar: ava1,
                 illustrationOpponent: { ...student.illustrationOpponent, avatar: ava3 },
                 storyOpponent: { ...student.storyOpponent, avatar: ava3 },
+                student: { ...student, avatar: ava1 },
             });
             setTeammate({
                 ...teammate,

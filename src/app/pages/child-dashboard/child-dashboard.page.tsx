@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { CircularProgress } from '@material-ui/core';
-import { useStyles } from './styles';
+import { useStyles } from './child-dashboard-styles';
 
 import { useAPI } from '../../hooks';
 import {

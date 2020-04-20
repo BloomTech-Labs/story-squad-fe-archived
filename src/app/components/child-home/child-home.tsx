@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { useStyles } from './child-home-styles';
 import {
     Button,
     Typography,
     Container,
     Grid,
-    Modal,
-    Fade,
-    Backdrop,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    CircularProgress,
-    Card,
-    Checkbox,
     Paper,
     Popper,
     MenuItem,
@@ -26,24 +15,20 @@ import {
 } from '@material-ui/core';
 import { Child } from '../../models';
 import { Link } from 'react-router-dom';
-import { useForm, useAPI } from '../../hooks';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import AcceptMissionButton from './img/Accept-mission-button.png';
 import AvatarButton from './img/Avatar-button.png';
 import PassportButton from './img/Passport-button.png';
 import TrophyRoomButton from './img/Trophy-room-button.png';
 
-interface PointCardProps {
+interface ChildHomeProps {
     child: Child;
 }
 
-const ChildHome: React.FC<PointCardProps> = ({ child }) => {
+const ChildHome: React.FC<ChildHomeProps> = ({ child }) => {
     const classes = useStyles({});
     const logout = () => window.dispatchEvent(new Event('logout'));
     const [menu, setMenu] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
-    const [open, setOpen] = React.useState(false);
-
     const handleToggle = () => {
         setMenu((prevMenu) => !prevMenu);
     };
@@ -54,14 +39,12 @@ const ChildHome: React.FC<PointCardProps> = ({ child }) => {
 
         setMenu(false);
     };
-
     function handleListKeyDown(event: React.KeyboardEvent) {
         if (event.key === 'Tab') {
             event.preventDefault();
             setMenu(false);
         }
     }
-
     return (
         <Container className={classes.containerStyling}>
             <Grid container>
@@ -100,8 +83,6 @@ const ChildHome: React.FC<PointCardProps> = ({ child }) => {
                             )}
                         </Popper>
                         {/* End of logout button */}
-                        {/* <div className={classes.appBar}> */}
-                        {/* <div className={classes.headerFont}>Mission</div> */}
                         <div className={classes.childHomeMenuBtn}>
                             {' '}
                             {/* Menu button */}
@@ -115,7 +96,6 @@ const ChildHome: React.FC<PointCardProps> = ({ child }) => {
                             </Button>
                             {/* End of menu button */}
                         </div>
-                        {/* </div> */}
                         {/* End of mission header  */}
                     </Grid>
                 </Grid>

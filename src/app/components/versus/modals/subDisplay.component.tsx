@@ -54,34 +54,74 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
     };
     return (
         <>
-            <Grid
-                container
-                direction='column'
-                justify='space-between'
-                alignItems='center'
-                alignContent='center'>
-                <Grid item md>
-                    <img
-                        src={submission}
-                        className={classes.imagePreview}
-                        onClick={handleOpen}
-                        alt={`${username}'s`}
-                    />
+            {typeof submission === 'string' ? (
+                <Grid
+                    container
+                    direction='column'
+                    justify='space-between'
+                    alignItems='center'
+                    alignContent='center'>
+                    <Grid item md>
+                        <img
+                            src={submission}
+                            className={classes.imagePreview}
+                            onClick={handleOpen}
+                            alt={`${username}'s`}
+                        />
+                    </Grid>
+                    <Dialog fullScreen open={open}>
+                        <IconButton
+                            edge='start'
+                            color='inherit'
+                            onClick={handleClose}
+                            aria-label='close'>
+                            <CloseIcon />
+                        </IconButton>
+                        <DialogTitle id='submission-title'>{`${username}'s`}</DialogTitle>
+                        <div>
+                            <img src={submission} alt={`${username}'s`} />
+                        </div>
+                    </Dialog>
                 </Grid>
-                <Dialog fullScreen open={open}>
-                    <IconButton
-                        edge='start'
-                        color='inherit'
-                        onClick={handleClose}
-                        aria-label='close'>
-                        <CloseIcon />
-                    </IconButton>
-                    <DialogTitle id='submission-title'>{`${username}'s`}</DialogTitle>
-                    <div>
-                        <img src={submission} alt={`${username}'s`} />
-                    </div>
-                </Dialog>
-            </Grid>
+            ) : (
+                <Grid
+                    container
+                    direction='column'
+                    justify='space-between'
+                    alignItems='center'
+                    alignContent='center'>
+                    <Grid item md>
+                        <img
+                            src={submission[0]}
+                            className={classes.imagePreview}
+                            onClick={handleOpen}
+                            alt={`${username}'s`}
+                        />
+                    </Grid>
+                    <Dialog fullScreen open={open}>
+                        <IconButton
+                            edge='start'
+                            color='inherit'
+                            onClick={handleClose}
+                            aria-label='close'>
+                            <CloseIcon />
+                        </IconButton>
+                        <DialogTitle id='submission-title'>{`${username}'s`}</DialogTitle>
+                        {submission.map(
+                            (page, key) =>
+                                page && (
+                                    <Grid item md key={key}>
+                                        <img
+                                            src={page}
+                                            className={classes.imagePreview}
+                                            onClick={handleOpen}
+                                        />
+                                    </Grid>
+                                )
+                        )}
+                    </Dialog>
+                </Grid>
+            )}
         </>
     );
 };

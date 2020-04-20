@@ -305,7 +305,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 Back
                             </Button>
                         </Link>
-                        <Link to={`/kids-dashboard/nextpage`}>
+                        <Link to={`/voting`}>
                             <Button className={classes.orangeButton} type='submit'>
                                 Vote
                             </Button>

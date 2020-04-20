@@ -83,6 +83,8 @@ const useStyles = makeStyles((theme) => ({
 
 const VotingPage: React.FC = () => {
     const classes = useStyles();
+    const [response, loading, request] = useAPI('/voting');
+
     return (
         <div className={classes.root}>
             <main className={classes.main}>

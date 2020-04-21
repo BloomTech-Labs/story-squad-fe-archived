@@ -91,14 +91,14 @@ const ChildHome: React.FC<ChildHomeProps> = ({ child }) => {
                         <div className={classes.childHomeMenuBtn}>
                             {' '}
                             {/* Menu button */}
-                            <Button
+                            {/* <Button
                                 ref={anchorRef}
                                 aria-controls={menu ? 'menu-list-grow' : undefined}
                                 aria-haspopup='true'
                                 className={classes.logoutButton}
                                 onClick={handleToggle}>
                                 Menu
-                            </Button>
+                            </Button> */}
                             {/* End of menu button */}
                         </div>
                         {/* </div> */}

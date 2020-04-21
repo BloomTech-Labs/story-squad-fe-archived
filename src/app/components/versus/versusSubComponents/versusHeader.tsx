@@ -1,4 +1,5 @@
 import React from 'react';
+import { MenuButton } from '../../reusable-components';
 import {
     Button,
     Avatar,
@@ -31,21 +32,22 @@ interface HeaderProps {
 const VersusHeader: React.FC<HeaderProps> = ({ homeTeam, awayTeam }) => {
     const classes = useStyles();
     return (
-        <Grid container>
-            <Grid container direction='row' className={classes.appBar}>
-                <Grid container item direction='column' justify='space-around' alignItems='center'>
+        <Grid container direction='row' className={classes.appBar}>
+            <Grid className={classes.headerMenuDiv} container item>
+                <div className={classes.upperTitleDiv}>
                     <Typography className={classes.h2Styling} variant='h2'>
                         The Match Up
                     </Typography>
-                    {/* team1 placeholder*/}
-                    <div className={classes.teamName}>
-                        <Typography className={classes.h4Styling}>{homeTeam}</Typography>
-                        <Typography className={classes.h4Styling}>VS</Typography>
-                        {/* team2 placeholder*/}
-                        <Typography className={classes.h4Styling}>{awayTeam}</Typography>
-                    </div>
-                    <Typography className={classes.h3Styling}>201 Points Needed To Win!</Typography>
-                </Grid>
+                </div>
+                <div className={classes.upperHeaderButtonDiv}>
+                    <MenuButton />
+                </div>
+                <div className={classes.teamName}>
+                    <Typography className={classes.h4Styling}>{homeTeam}</Typography>
+                    <Typography className={classes.h4Styling}>VS</Typography>
+                    <Typography className={classes.h4Styling}>{awayTeam}</Typography>
+                </div>
+                <Typography className={classes.h3Styling}>201 Points Needed To Win!</Typography>
             </Grid>
         </Grid>
     );

@@ -1,19 +1,7 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { url } from 'inspector';
-import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
 
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        card: {
-            alignSelf: 'center',
-            maxWidth: theme.breakpoints.values.md,
-            width: '100%',
-        },
-        modal: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
         containerStyling: {
             fontFamily: 'nunito',
             height: '100vh',
@@ -37,17 +25,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             'fontWeight': 'bold',
             '-webkit-text-stroke-width': '1px',
             '-webkit-text-stroke-color': '#000000',
-        },
-        appBar: {
-            height: '26vh',
-            width: '100%',
-            backgroundColor: '#6CEAE6',
-            backgroundImage: `url(${cityscape})`,
-            backgroundRepeat: 'no-repeat',
-            border: '7px solid #000000',
-            backgroundSize: '101% 103%',
-            display: 'flex',
-            justifyContent: 'center',
         },
         logoutMenu: {
             'backgroundColor': '#FF6B35',

@@ -291,5 +291,21 @@ export const useStyles = makeStyles((theme: Theme) =>
             lineHeight: '26px',
             color: '#292929',
         },
+        headerMenuDiv: {
+            display: 'flex',
+            flexFlow: 'wrap no-wrap',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+        },
+        upperTitleDiv: {
+            display: 'flex',
+            justifyContent: 'flex-end',
+            width: '57.5%',
+        },
+        upperHeaderButtonDiv: {
+            display: 'flex',
+            justifyContent: 'flex-end',
+            width: '20%',
+        },
     })
 );

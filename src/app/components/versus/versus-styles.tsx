@@ -13,11 +13,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             maxWidth: theme.breakpoints.values.md,
             width: '100%',
         },
-        modal: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
         containerStyling: {
             fontFamily: 'nunito',
             height: '100vh',

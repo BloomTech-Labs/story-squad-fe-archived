@@ -1,4 +1,4 @@
-const tosContent = [
+const tosArray = [
     'Story Squad Terms of Service',
 
     'Acceptance of Use',
@@ -74,4 +74,4 @@ const tosMappedContent = (arr) => {
     }
 };
 
-export default tosMappedContent(tosContent);
+export default tosMappedContent(tosArray);

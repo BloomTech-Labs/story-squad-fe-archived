@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Link, List, ListItem, ListItemText, Typography } from '@material-ui/core';
+import { Drawer, List, ListItem, ListItemText } from '@material-ui/core';
 
 import useStyles from './tos.styles';
 

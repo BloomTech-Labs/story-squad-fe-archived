@@ -28,8 +28,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { blue, red, green } from '@material-ui/core/colors';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
-
-// import Story2 from './img/leowriting.jpg';
+import story1 from './img/leowriting.jpg';
+import story2 from './img/chancewriting.jpg';
+import { VotingModal } from './modal/modal-image';
 const ColoredRadio = withStyles({
     root: {
         '&$checked': {
@@ -45,12 +46,10 @@ interface VotingCardProps {
 
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
     const [selectedValue, setSelectedValue] = React.useState('a');
-
+    const classes = useStyles({});
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedValue(event.target.value);
     };
-    // return <h1>Hello World</h1>;
-    const classes = useStyles({});
     return (
         <Container className={classes.containerStyling}>
             <Grid container>
@@ -70,27 +69,40 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
             </Grid>
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
-                    Side 1
                     <div className={classes.playerSelection}>
-                        {/* <img src={story1} alt='story' /> */}
+                        <img className={classes.storyPic} src={story1} alt='story' />
+                        <ColoredRadio
+                            className={classes.radioBox}
+                            checked={selectedValue === 'a'}
+                            onChange={handleChange}
+                            value='a'
+                            name='storyA'
+                            inputProps={{ 'aria-label': 'A' }}
+                        />
                     </div>
-                    <ColoredRadio
-                        checked={selectedValue === 'a'}
-                        onChange={handleChange}
-                        value='a'
-                        name='storyA'
-                        inputProps={{ 'aria-label': 'A' }}
-                    />
                 </Grid>
                 <Grid className={classes.story2}>
-                    Side 2<div className={classes.playerSelection}></div>
-                    <ColoredRadio
-                        checked={selectedValue === 'b'}
-                        onChange={handleChange}
-                        value='b'
-                        name='storyB'
-                        inputProps={{ 'aria-label': 'B' }}
-                    />
+                    <div className={classes.playerSelection}>
+                        <img className={classes.storyPic} src={story2} alt='story' />
+                        <ColoredRadio
+                            className={classes.radioBox}
+                            checked={selectedValue === 'b'}
+                            onChange={handleChange}
+                            value='b'
+                            name='storyB'
+                            inputProps={{ 'aria-label': 'B' }}
+                        />
+                    </div>
+                    <Grid container xs={8} className={classes.submitDiv}>
+                        <Grid item xs={6} />
+                        <Grid item xs={6}>
+                            <div className={classes.button}>
+                                <Button className={classes.orangeButton} type='submit'>
+                                    Submit
+                                </Button>
+                            </div>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Container>

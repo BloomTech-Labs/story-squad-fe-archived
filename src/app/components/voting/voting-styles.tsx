@@ -62,6 +62,34 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             justifyContent: 'center',
         },
+        //Submit button
+        orangeButton: {
+            'backgroundColor': '#FF6B35',
+            'fontSize': '24px',
+            'fontWeight': 'bold',
+            'borderRadius': '10px',
+            'color': 'white',
+            'border': '3px solid #292929',
+            'textTransform': 'capitalize',
+            'fontFamily': 'nunito',
+            '&:hover': {
+                backgroundColor: '#FF6B35',
+            },
+        },
+        button: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItem: 'center',
+        },
+        submitDiv: {
+            // border: '7px solid #000',
+            borderTop: '0px',
+            // backgroundColor: '#FED23F',
+            padding: '20px',
+            [theme.breakpoints.down('sm')]: {
+                borderLeft: '0px',
+            },
+        },
         logoutButton: {
             'marginLeft': '780px',
             'marginBottom': '105px',
@@ -167,6 +195,26 @@ export const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.only('sm')]: {
                 width: '100%',
             },
+        },
+        storyPic: {
+            width: '70%',
+            height: '35vh',
+            margin: '0 auto',
+            borderRadius: '5%',
+            border: '4px solid white',
+        },
+        radioBox: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+        },
+        imgModal: {
+            position: 'absolute',
+            width: 400,
+            backgroundColor: theme.palette.background.paper,
+            border: '2px solid #000',
+            boxShadow: theme.shadows[5],
+            padding: theme.spacing(2, 4, 3),
         },
     })
 );

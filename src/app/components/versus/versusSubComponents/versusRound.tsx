@@ -31,7 +31,8 @@ const VersusRound: React.FC<RoundProps> = ({
 }) => {
     const classes = useStyles();
     const submissionCheck = (submission) =>
-        typeof submission === 'string' ? submission : Object.values(submission)[0];
+        typeof submission === 'string' ? submission : Object.values(submission);
+
     return (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>

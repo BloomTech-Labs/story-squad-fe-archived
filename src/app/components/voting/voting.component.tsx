@@ -30,6 +30,7 @@ import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
 import story1 from './img/leowriting.jpg';
 import story2 from './img/chancewriting.jpg';
+import { useForm } from '../../hooks';
 import { VotingModal } from './modal/modal-image';
 const ColoredRadio = withStyles({
     root: {
@@ -42,9 +43,17 @@ const ColoredRadio = withStyles({
 
 interface VotingCardProps {
     child: Child;
+    handleChange: any;
 }
 
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
+    const { state, handleInputChange, handleSubmitBuilder } = useForm({
+        story1Points: 'something',
+        story2Points: 'something',
+        pic1Points: 'something',
+        pic2Points: 'something',
+    });
+    const [dummyData, setDummyData] = useState({ dummy: 'data' });
     const [selectedValue, setSelectedValue] = React.useState('a');
     const classes = useStyles({});
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +79,13 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
                     <div className={classes.playerSelection}>
-                        <img className={classes.storyPic} src={story1} alt='story' />
+                        <VotingModal
+                            key='pic1Points'
+                            username={dummyData.dummy}
+                            submission={story2}
+                            type='Illustration'
+                            points={state.pic1Points}
+                        />
                         <ColoredRadio
                             className={classes.radioBox}
                             checked={selectedValue === 'a'}
@@ -83,7 +98,13 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                 </Grid>
                 <Grid className={classes.story2}>
                     <div className={classes.playerSelection}>
-                        <img className={classes.storyPic} src={story2} alt='story' />
+                        <VotingModal
+                            key='pic1Points'
+                            username={dummyData.dummy}
+                            submission={story2}
+                            type='Illustration'
+                            points={state.pic1Points}
+                        />
                         <ColoredRadio
                             className={classes.radioBox}
                             checked={selectedValue === 'b'}

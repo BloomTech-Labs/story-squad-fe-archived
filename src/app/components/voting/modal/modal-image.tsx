@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { DialogTitle, Grid, Dialog } from '@material-ui/core';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { DialogTitle, Grid, Dialog, useMediaQuery } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/styles';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 import story2 from '../img/chancewriting.jpg';
 
 interface VotingModalProps {
-    submission: string;
-    username: string;
-    type: 'Story' | 'Illustration';
-    key: 'story1Points' | 'pic1Points' | 'story2Points' | 'pic2Points';
-    points: number;
-    handleChange: (e: any) => void;
+    submission;
+    username;
+    type;
+    key;
+    points;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,10 +58,11 @@ export const VotingModal: React.FC<VotingModalProps> = ({
     username,
     type,
     key,
-    handleChange,
     points,
 }) => {
     const [open, setOpen] = useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
     const classes = useStyles({});
     const handleOpen = () => {
         setOpen(true);
@@ -72,10 +74,34 @@ export const VotingModal: React.FC<VotingModalProps> = ({
 
     return (
         <>
-            <Dialog className={classes.modal} open={open} onClose={handleClose}>
-                <DialogTitle id='submission-title'></DialogTitle>
-                <img src={story2} alt='submission image' />
-            </Dialog>
+            <Grid
+                container
+                direction='column'
+                justify='space-between'
+                alignItems='center'
+                alignContent='center'>
+                <Grid item md>
+                    <img
+                        src={submission}
+                        className={classes.imagePreview}
+                        onClick={handleOpen}
+                        alt={`${username}'s ${type}`}
+                    />
+                </Grid>
+                <Dialog fullScreen={fullScreen} open={open}>
+                    <IconButton
+                        edge='start'
+                        color='inherit'
+                        onClick={handleClose}
+                        aria-label='close'>
+                        <CloseIcon />
+                    </IconButton>
+                    <DialogTitle id='submission-title'>{`${username}'s ${type}`}</DialogTitle>
+                    <div>
+                        <img src={submission} alt={`${username}'s ${type}`} />
+                    </div>
+                </Dialog>
+            </Grid>
         </>
     );
 };

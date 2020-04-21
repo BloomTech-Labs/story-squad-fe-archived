@@ -86,8 +86,6 @@ const ChildHome: React.FC<ChildHomeProps> = ({ child }) => {
                             )}
                         </Popper>
                         {/* End of logout button */}
-                        {/* <div className={classes.appBar}> */}
-                        {/* <div className={classes.headerFont}>Mission</div> */}
                         <div className={classes.childHomeMenuBtn}>
                             {' '}
                             {/* Menu button */}
@@ -99,9 +97,7 @@ const ChildHome: React.FC<ChildHomeProps> = ({ child }) => {
                                 onClick={handleToggle}>
                                 Menu
                             </Button>
-                            {/* End of menu button */}
                         </div>
-                        {/* </div> */}
                         {/* End of mission header  */}
                     </Grid>
                 </Grid>

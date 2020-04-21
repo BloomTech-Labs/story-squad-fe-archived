@@ -9,7 +9,7 @@ import {
     useMediaQuery,
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
-import { useStyles } from './heading-component-styles'; 
+import { useStyles } from './heading-component-styles';
 
 interface HeadingProps {
     onMenuClick?: () => void;

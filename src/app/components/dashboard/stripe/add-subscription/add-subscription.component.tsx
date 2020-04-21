@@ -17,7 +17,6 @@ import { childListRefresh } from '../../../../state';
 import { useAPI, useForm } from '../../../../hooks';
 import { useStyles } from './add-sub-styles';
 
-
 interface AddSubscriptionProps {
     onComplete?: () => void;
     childID: number;

@@ -1,12 +1,6 @@
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import {
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    CircularProgress,
-} from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CircularProgress } from '@material-ui/core';
 import { useStyles } from './card-component-styles';
 import { Child } from '../../../../models';
 import { useAPI } from '../../../../hooks';

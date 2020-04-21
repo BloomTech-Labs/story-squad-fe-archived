@@ -20,8 +20,6 @@ interface StripeCardProps {
     defaultCard: boolean;
 }
 
-
-
 const StripeCard: React.FC<StripeCardProps> = ({
     className,
     card,

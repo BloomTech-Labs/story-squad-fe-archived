@@ -7,7 +7,26 @@
     "editor.tabSize": 4,
     "eslint.enable": false,
     "git.autofetch": true,
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#54172e",
+        "activityBar.activeBackground": "#54172e",
+        "activityBar.activeBorder": "#457d22",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#457d22",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "titleBar.activeBackground": "#2c0c18",
+        "titleBar.inactiveBackground": "#2c0c1899",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveForeground": "#e7e7e799",
+        "statusBar.background": "#2c0c18",
+        "statusBarItem.hoverBackground": "#54172e",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBar.border": "#2c0c18",
+        "titleBar.border": "#2c0c18"
+    },
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "peacock.color": "#2c0c18",
 }

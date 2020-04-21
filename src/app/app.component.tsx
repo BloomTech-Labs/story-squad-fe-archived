@@ -19,6 +19,7 @@ import {
     VersusPage,
     VotingPage,
 } from './pages';
+import { Emoji } from './components/voting/emoji/Emoji';
 const App: React.FC = () => {
     return (
         <main>
@@ -68,6 +69,7 @@ const App: React.FC = () => {
                             path='/admin/dashboard'
                             component={AdminDashboardPage}
                         />
+                        <Route path='/emoji' component={Emoji} />
                         <Route path='/voting' component={VotingPage} />
                         <Route path='/admin' component={AdminSignInPage} />
                         <Route exact path={['/', '/signup']} component={SignUpPage} />

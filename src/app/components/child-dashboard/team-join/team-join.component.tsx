@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Card,
+    Container,
     Button,
     Paper,
     Popper,
@@ -14,6 +15,7 @@ import {
 import { useAPI } from '../../../hooks';
 import { useStyles } from './styles';
 import { Child } from '../../../models';
+import { KidHeader } from '../../reusable-components/';
 import avatar1 from '../../point-allocation-dashboard/img/cam.png';
 import avatar2 from '../../point-allocation-dashboard/img/Hero13.png';
 
@@ -67,7 +69,8 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
         }
     }, [matchInfo]);
     return (
-        <>
+        <Container>
+            <KidHeader />
             <Card className={classes.card}>
                 <Popper
                     open={menu}
@@ -156,7 +159,7 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                     </div>
                 </section>
             </Card>
-        </>
+        </Container>
     );
 };
 export { TeamJoin };

@@ -13,11 +13,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             maxWidth: theme.breakpoints.values.md,
             width: '100%',
         },
-        modal: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
         containerStyling: {
             fontFamily: 'nunito',
             height: '100vh',
@@ -290,6 +285,22 @@ export const useStyles = makeStyles((theme: Theme) =>
             fontSize: '24px',
             lineHeight: '26px',
             color: '#292929',
+        },
+        headerMenuDiv: {
+            display: 'flex',
+            flexFlow: 'wrap no-wrap',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+        },
+        upperTitleDiv: {
+            display: 'flex',
+            justifyContent: 'flex-end',
+            width: '57.5%',
+        },
+        upperHeaderButtonDiv: {
+            display: 'flex',
+            justifyContent: 'flex-end',
+            width: '20%',
         },
     })
 );

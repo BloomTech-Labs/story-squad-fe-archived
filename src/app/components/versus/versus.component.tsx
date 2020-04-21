@@ -108,6 +108,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader
+                title={'The MatchUp'}
                 homeTeam={`${student.username} & ${teammate.username}!`}
                 awayTeam={`${student.storyOpponent.username} & ${teammate.storyOpponent.username}!`}
             />

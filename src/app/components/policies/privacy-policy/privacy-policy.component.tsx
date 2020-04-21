@@ -129,7 +129,7 @@ const PrivacyPolicy: React.FC = () => {
                         className={classes.link}
                         href='https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/childrens-online-privacy-protection-rule'
                         color='inherit'>
-                        website
+                        website.
                     </Link>
                 </Typography>
                 <Typography variant='h4' component='h4' gutterBottom id='policy-scope'>

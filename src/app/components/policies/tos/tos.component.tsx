@@ -99,6 +99,7 @@ const ToS: React.FC = () => {
                 <div className={classes.toolbar} />
                 <Typography variant='h2' component='h2' gutterBottom>
                     Story Squad Terms of Service
+                    {/* {tosContent[0].mainHeader} */}
                 </Typography>
                 <br /> <br />
                 <Typography variant='h4' component='h4' gutterBottom id='acceptance-of-use'>

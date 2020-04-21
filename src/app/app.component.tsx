@@ -19,7 +19,7 @@ import {
     VersusPage,
     VotingPage,
 } from './pages';
-import { Emoji } from './components/voting/emoji/Emoji';
+import { Emoji } from './components/voting/emoji/Emoji.component';
 const App: React.FC = () => {
     return (
         <main>

@@ -20,6 +20,16 @@ You can find the deployed project at [Netlify](https://story-squad.netlify.com).
 
 <br>
 
+
+
+|                        Jasmine Terry                         |                         Kai Haskell                          |                          Nic Young                           |                          Young Won                           |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <img src="https://avatars2.githubusercontent.com/u/56845783?s=460&u=7cf453b05e1939260823a6500b8c39cafccead5d&v=4" width = "100" /> | <img src="https://avatars3.githubusercontent.com/u/31229627?s=460&u=707a05e5318a99e57e34ccf9923eac2675dc669d&v=4" width = "100" /> | <img src="https://avatars1.githubusercontent.com/u/54819898?s=460&v=4" width = "100" /> | <img src="https://avatars1.githubusercontent.com/u/54904636?s=460&u=218ffb5333216b219b6d69a4d1f36fdacaa48c9b&v=4" width = "100" /> |
+| [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/jasmineterry92/) | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/kai-haskell-471035158/) | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](nic.kendall.dev@protonmail.com) | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">]() |
+| [<img src="https://github.com/favicon.ico" width="15">](https://github.com/jTCode2408) | [<img src="https://github.com/favicon.ico" width="15">](https://github.com/KaiHaskell) | [<img src="https://github.com/favicon.ico" width="15">](https://github.com/NWKendall) | [<img src="https://github.com/favicon.ico" width="15">](https://github.com/youngw417) |
+
+<br>
+
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)

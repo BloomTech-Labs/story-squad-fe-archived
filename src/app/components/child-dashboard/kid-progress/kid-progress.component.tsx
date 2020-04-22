@@ -1,24 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import {
-    Card,
-    Button,
-    Checkbox,
-    Paper,
-    Popper,
-    MenuItem,
-    MenuList,
-    Fade,
-    Modal,
-    Backdrop,
-    Grow,
-    ClickAwayListener,
-} from '@material-ui/core';
-import { useStyles } from './kid-progress-styles';
+import { Card, Button, Checkbox, Fade, Modal, Backdrop } from '@material-ui/core';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
-
+import { KidHeader } from '../../reusable-components';
+import { useStyles } from './kid-progress-styles';
 interface KidProgressProps {
     onUpdate?: () => void;
     child: Child;
@@ -28,41 +15,11 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const [response, loading, request] = useAPI('/children/progress', 'POST');
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
-    const logout = () => window.dispatchEvent(new Event('logout'));
-    const [menu, setMenu] = React.useState(false);
-    const anchorRef = React.useRef<HTMLButtonElement>(null);
     const [open, setOpen] = React.useState(false);
-
-    const handleToggle = () => {
-        setMenu((prevMenu) => !prevMenu);
-    };
 
     const modalClose = () => {
         setOpen(false);
     };
-
-    const handleClose = (event: React.MouseEvent<EventTarget>) => {
-        if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
-            return;
-        }
-
-        setMenu(false);
-    };
-
-    function handleListKeyDown(event: React.KeyboardEvent) {
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            setMenu(false);
-        }
-    }
-
-    const prevMenu = React.useRef(menu);
-    React.useEffect(() => {
-        if (prevMenu.current === true && menu === false && anchorRef.current !== null) {
-            anchorRef.current.focus();
-        }
-        prevMenu.current = menu;
-    }, [menu]);
 
     React.useEffect(() => {
         if (response?.progress && onUpdate) onUpdate();
@@ -87,51 +44,9 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
         <>
             <Card className={classes.card}>
                 {/* Logout button */}
-                <Popper
-                    open={menu}
-                    anchorEl={anchorRef.current}
-                    role={undefined}
-                    transition
-                    disablePortal>
-                    {({ TransitionProps, placement }) => (
-                        <Grow
-                            {...TransitionProps}
-                            style={{
-                                transformOrigin:
-                                    placement === 'bottom' ? 'center top' : 'center bottom',
-                            }}>
-                            <Paper>
-                                <ClickAwayListener onClickAway={handleClose}>
-                                    <MenuList
-                                        autoFocusItem={menu}
-                                        id='menu-list-grow'
-                                        onKeyDown={handleListKeyDown}
-                                        className={classes.logoutMenu}>
-                                        <MenuItem onClick={logout}>Logout</MenuItem>
-                                    </MenuList>
-                                </ClickAwayListener>
-                            </Paper>
-                        </Grow>
-                    )}
-                </Popper>
                 <section className={classes.columnFlex}>
                     {/* Mission header */}
-                    <div className={classes.appBar}>
-                        <div className={classes.headerFont}>Mission</div>
-                        <div className={classes.btn}>
-                            {' '}
-                            {/* Menu button */}
-                            <Button
-                                ref={anchorRef}
-                                aria-controls={menu ? 'menu-list-grow' : undefined}
-                                aria-haspopup='true'
-                                className={classes.logoutButton}
-                                onClick={handleToggle}>
-                                Menu
-                            </Button>
-                        </div>
-                    </div>
-                    {/* End of mission header  */}
+                    <KidHeader title={'Mission'} />
                     {/* Read / Write / Draw container */}
                     <div className={classes.displayFlex}>
                         <div className={classes.read}>

@@ -11,6 +11,11 @@ import {
     ClickAwayListener,
 } from '@material-ui/core';
 import { useStyles } from './menu-button-styles';
+import { Parent } from '../../../models';
+
+// interface MenuProps {
+//     parent: Parent;
+// }
 
 const MenuButton: React.FC = () => {
     // imported into the KidHeader component
@@ -19,8 +24,8 @@ const MenuButton: React.FC = () => {
     const logout = () => window.dispatchEvent(new Event('logout'));
     const [menu, setMenu] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
+    const prevMenu = React.useRef(menu);
     // need to add switch account function for menu item!
-
     const handleToggle = () => {
         setMenu((prevMenu) => !prevMenu);
     };
@@ -43,7 +48,7 @@ const MenuButton: React.FC = () => {
                 ref={anchorRef}
                 aria-controls={menu ? 'menu-list-grow' : undefined}
                 aria-haspopup='true'
-                className={classes.dropDown}
+                className={classes.menuBtnStyles}
                 onClick={handleToggle}>
                 Menu
             </Button>
@@ -67,10 +72,12 @@ const MenuButton: React.FC = () => {
                                     id='menu-list-grow'
                                     onKeyDown={handleListKeyDown}
                                     className={classes.dropDown}>
-                                    <MenuItem onClick={() => history.push('/child-home')}>
+                                    <MenuItem onClick={() => history.push('/dashboard')}>
                                         Home
                                     </MenuItem>
-                                    <MenuItem>Switch</MenuItem>
+                                    <MenuItem onClick={() => history.push('/dashboard')}>
+                                        Switch
+                                    </MenuItem>
                                     <MenuItem onClick={logout}>Logout</MenuItem>
                                 </MenuList>
                             </ClickAwayListener>

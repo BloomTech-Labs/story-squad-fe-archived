@@ -48,8 +48,6 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             illustration: '',
             illustrationPoints: 0,
         },
-        storyTotal: 0,
-        illustrationTotal: 0,
     });
     console.log('response.battleInfo', response?.battleInfo);
     const [teammate, setTeammate] = useState({
@@ -79,8 +77,6 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             illustration: '',
             illustrationPoints: 0,
         },
-        storyTotal: 0,
-        illustrationTotal: 0,
     });
     //student/teammate submissions state
     useEffect(() => {

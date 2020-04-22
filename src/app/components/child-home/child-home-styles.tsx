@@ -5,7 +5,8 @@ import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         containerStyling: {
-            fontFamily: 'nunito',
+            alignSelf: 'center',
+            width: '100%',
             height: '100vh',
         },
         topRow: {

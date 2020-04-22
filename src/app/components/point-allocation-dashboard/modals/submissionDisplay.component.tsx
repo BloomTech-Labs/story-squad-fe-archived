@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { DialogTitle, Grid, Dialog } from '@material-ui/core';
 import { TextValidator } from 'react-material-ui-form-validator';
 import { useStyles } from './submissionDisplay-styles';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 
 interface SubmissionDisplayProps {
     submission: string;
@@ -70,10 +72,23 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                         variant='outlined'
                     />
                 </Grid>
-                <Dialog className={classes.modal} open={open} onClose={handleClose}>
-                    <DialogTitle id='submission-title'>{`${username}'s ${type}`}</DialogTitle>
-                    <div>
-                        <img src={submission} alt={`${username}'s ${type}`} />
+                <Dialog fullScreen open={open}>
+                    <IconButton
+                        edge='start'
+                        color='inherit'
+                        onClick={handleClose}
+                        aria-label='close'>
+                        <CloseIcon />
+                    </IconButton>
+                    <DialogTitle id='submission-title' className={classes.submissionHeader}>
+                        {`${username}'s ${type}`}
+                    </DialogTitle>
+                    <div className={classes.viewPageDiv}>
+                        <img
+                            className={classes.submissionImg}
+                            src={submission}
+                            alt={`${username}'s ${type}`}
+                        />
                     </div>
                 </Dialog>
             </Grid>

@@ -10,6 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     containerStyle: {
         alignSelf: 'center',
         width: '100%',
+        height: '100vh',
     },
     columnFlex: {
         display: 'flex',

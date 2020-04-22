@@ -24,24 +24,24 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         headerMenuDiv: {
             display: 'flex',
-            height: '26vh',
-            flexFlow: 'wrap no-wrap',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-        },
-        upperTitleDiv: {
-            display: 'flex',
+            flexDirection: 'column',
             height: '26vh',
             justifyContent: 'flex-end',
             alignItems: 'center',
-            width: '65%',
         },
         upperHeaderButtonDiv: {
             display: 'flex',
-            height: '18vh',
+            height: '23vh',
+            alignItems: 'flex-start',
+            width: '10%',
+        },
+        upperTitleDiv: {
+            display: 'flex',
+            height: '25vh',
             justifyContent: 'flex-end',
             alignItems: 'flex-start',
-            width: '20%',
+            width: '60%',
+            marginRight: '25%',
         },
     })
 );

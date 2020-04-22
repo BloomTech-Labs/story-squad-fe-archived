@@ -2,6 +2,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import explode from '../../point-allocation-dashboard/img/expl.png';
 import 'typeface-bangers';
 export const useStyles = makeStyles((theme) => ({
+    containerStyle: {
+        alignSelf: 'center',
+        width: '100%',
+        height: '100vh',
+    },
     grid: {
         display: 'flex',
         border: '7px solid black',

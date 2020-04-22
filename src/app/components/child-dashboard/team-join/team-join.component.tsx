@@ -17,7 +17,7 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
 
     return (
-        <Container>
+        <Container className={classes.containerStyling}>
             <KidHeader title={'Join The Squad!'} />
             {!matchInfo ? (
                 <div>

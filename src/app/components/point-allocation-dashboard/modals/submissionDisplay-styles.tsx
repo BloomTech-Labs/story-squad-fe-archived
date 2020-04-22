@@ -37,5 +37,15 @@ export const useStyles = makeStyles((theme: Theme) =>
             height: '175px',
             borderRadius: '14px',
         },
+        viewPageDiv: {
+            display: 'flex',
+            justifyContent: 'center',
+        },
+        submissionHeader: {
+            textAlign: 'center',
+        },
+        submissionImg: {
+            maxWidth: '80%',
+        },
     })
 );

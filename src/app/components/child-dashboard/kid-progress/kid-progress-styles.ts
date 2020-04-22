@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import picIcon from './icons/Draw.png';
 import readIcon from './icons/read.png';
 import writeIcon from './icons/write.png';
+import cityscape from './icons/cityscape.png';
 import 'typeface-bangers';
 
 export const useStyles = makeStyles((theme) => ({
@@ -19,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     contentContainer: {
         display: 'flex',
-        border: '7px solid black',
+        border: '3.5px solid black',
         flexDirection: 'row',
         [theme.breakpoints.only('sm')]: {
             flexDirection: 'row',

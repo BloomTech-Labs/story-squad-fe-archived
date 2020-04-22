@@ -24,18 +24,23 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         headerMenuDiv: {
             display: 'flex',
+            height: '26vh',
             flexFlow: 'wrap no-wrap',
-            justifyContent: 'space-around',
+            justifyContent: 'space-between',
             alignItems: 'center',
         },
         upperTitleDiv: {
             display: 'flex',
+            height: '26vh',
             justifyContent: 'flex-end',
-            width: '57.5%',
+            alignItems: 'center',
+            width: '65%',
         },
         upperHeaderButtonDiv: {
             display: 'flex',
+            height: '18vh',
             justifyContent: 'flex-end',
+            alignItems: 'flex-start',
             width: '20%',
         },
     })

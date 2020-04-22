@@ -68,7 +68,7 @@ const MenuButton: React.FC = () => {
                                     id='menu-list-grow'
                                     onKeyDown={handleListKeyDown}
                                     className={classes.logoutMenu}>
-                                    <MenuItem onClick={() => history.push('./child-home')}>
+                                    <MenuItem onClick={() => history.push('/child-home')}>
                                         Home
                                     </MenuItem>
                                     <MenuItem>Switch</MenuItem>

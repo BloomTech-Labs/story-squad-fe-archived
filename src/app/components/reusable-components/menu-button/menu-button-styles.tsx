@@ -16,10 +16,11 @@ export const useStyles = makeStyles((theme: Theme) =>
             'backgroundColor': '#FF6B35',
             'fontSize': '24px',
             'fontWeight': 'bold',
+            'borderRadius': '10px',
             'color': 'white',
             'width': '100px',
             'textTransform': 'capitalize',
-            'border': '2px solid #292929',
+            'border': '3px solid #292929',
             'fontFamily': 'nunito',
             '&:hover': {
                 backgroundColor: '#FF6B35',

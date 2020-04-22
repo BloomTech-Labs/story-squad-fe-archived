@@ -7,9 +7,8 @@ interface PlayerProps {
     username: string;
     ava: string;
     playerStyles: {};
-    buttonStyles: {};
 }
-const TeamPlayer: React.FC<PlayerProps> = ({ username, ava, playerStyles, buttonStyles }) => {
+const TeamPlayer: React.FC<PlayerProps> = ({ username, ava, playerStyles }) => {
     const classes = useStyles();
     const history = useHistory();
     return (
@@ -21,16 +20,16 @@ const TeamPlayer: React.FC<PlayerProps> = ({ username, ava, playerStyles, button
                 </p>
                 <img src={ava} className={classes.avatar} alt='child avatar' />
             </div>
-            {buttonStyles === classes.backButton ? (
+            {playerStyles === classes.player ? (
                 <Button
-                    className={`${buttonStyles}`}
+                    className={classes.navButton}
                     type='button'
                     onClick={() => history.push('/kids-dashboard')}>
                     Back
                 </Button>
             ) : (
                 <Button
-                    className={`${buttonStyles}`}
+                    className={classes.navButton}
                     type='button'
                     onClick={() => history.push('./points-dashboard')}>
                     Next

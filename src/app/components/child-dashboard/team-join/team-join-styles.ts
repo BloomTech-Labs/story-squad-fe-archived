@@ -1,6 +1,5 @@
-import explode from '../../point-allocation-dashboard/img/expl.png';
-import cityscape from '../kid-progress/icons/cityscape.png';
 import { makeStyles } from '@material-ui/core/styles';
+import explode from '../../point-allocation-dashboard/img/expl.png';
 import 'typeface-bangers';
 export const useStyles = makeStyles((theme) => ({
     grid: {
@@ -55,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
         padding: '2%',
         borderRadius: '10px',
     },
-    nextButton: {
+    navButton: {
         'backgroundColor': '#FF6B35',
         'fontSize': '24px',
         'fontWeight': 'bold',
@@ -65,25 +64,9 @@ export const useStyles = makeStyles((theme) => ({
         'border': '3px solid #292929',
         'textTransform': 'capitalize',
         'fontFamily': 'nunito',
+        'marginBottom': '5%',
         '&:hover': {
             backgroundColor: '#FF6B35',
         },
-    },
-    backButton: {
-        'backgroundColor': '#FF6B35',
-        'fontSize': '24px',
-        'fontWeight': 'bold',
-        'borderRadius': '10px',
-        'color': 'white',
-        'width': '200px',
-        'border': '3px solid #292929',
-        'textTransform': 'capitalize',
-        'fontFamily': 'nunito',
-        '&:hover': {
-            backgroundColor: '#FF6B35',
-        },
-    },
-    writeDrawDiv: {
-        width: '60%',
     },
 }));

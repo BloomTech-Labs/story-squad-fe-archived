@@ -29,13 +29,11 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                         username={matchInfo.thisMatch.team.student.username}
                         ava={avatar1}
                         playerStyles={classes.player}
-                        buttonStyles={classes.backButton}
                     />
                     <TeamPlayer
                         username={matchInfo.thisMatch.team.teammate.username}
                         ava={avatar2}
                         playerStyles={classes.teammate}
-                        buttonStyles={classes.nextButton}
                     />
                 </div>
             )}

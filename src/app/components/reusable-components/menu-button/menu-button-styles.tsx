@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             boxShadow: theme.shadows[5],
             padding: theme.spacing(2, 4, 3),
         },
-        logoutMenu: {
+        dropDown: {
             'backgroundColor': '#FF6B35',
             'fontSize': '24px',
             'fontWeight': 'bold',

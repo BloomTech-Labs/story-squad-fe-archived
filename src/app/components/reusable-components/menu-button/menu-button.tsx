@@ -19,7 +19,6 @@ const MenuButton: React.FC = () => {
     const logout = () => window.dispatchEvent(new Event('logout'));
     const [menu, setMenu] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
-    const [open, setOpen] = React.useState(false);
     // need to add switch account function for menu item!
 
     const handleToggle = () => {
@@ -44,7 +43,7 @@ const MenuButton: React.FC = () => {
                 ref={anchorRef}
                 aria-controls={menu ? 'menu-list-grow' : undefined}
                 aria-haspopup='true'
-                className={classes.logoutMenu}
+                className={classes.dropDown}
                 onClick={handleToggle}>
                 Menu
             </Button>
@@ -67,7 +66,7 @@ const MenuButton: React.FC = () => {
                                     autoFocusItem={menu}
                                     id='menu-list-grow'
                                     onKeyDown={handleListKeyDown}
-                                    className={classes.logoutMenu}>
+                                    className={classes.dropDown}>
                                     <MenuItem onClick={() => history.push('/child-home')}>
                                         Home
                                     </MenuItem>

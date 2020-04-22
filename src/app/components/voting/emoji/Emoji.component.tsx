@@ -1,6 +1,10 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
+// interface NewEmojiData {
+//     newEmoji?: () => void;
+// }
+
 const emojiSelection = [
     '😀',
     '😃',
@@ -119,15 +123,46 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Emoji: React.FC = () => {
     const classes = useStyles({});
+    const [newEmoji, setNewEmoji] = React.useState([]);
+
+    const handleChanges = (e) => {
+        setNewEmoji([...newEmoji, e.target.value]);
+        console.log('this is state', newEmoji);
+        console.log(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setNewEmoji([]);
+    };
+
     return (
-        <div className={classes.emojiContainer}>
-            {emojiSelection.map((emoji) => {
-                return (
-                    <div className={classes.emojiDiv} key={emoji}>
-                        {emoji}
-                    </div>
-                );
-            })}
+        <div>
+            <form onSubmit={handleSubmit}>
+                <div> {newEmoji} </div>
+                <div className={classes.emojiContainer}>
+                    {emojiSelection.map((emoji) => {
+                        return (
+                            <div className={classes.emojiDiv} key={emoji}>
+                                <button
+                                    value={emoji}
+                                    onClick={(e) => {
+                                        handleChanges(e);
+                                    }}>
+                                    {emoji}
+                                </button>
+                                {/* <p
+                                    onClick={(e) => {
+                                        handleChanges(e);
+                                    }}>
+                                    {emoji}
+                                </p> */}
+                            </div>
+                        );
+                    })}
+                </div>
+                <button type='submit'>Submit</button>
+            </form>
         </div>
     );
 };

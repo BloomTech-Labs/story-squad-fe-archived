@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { Card, Button, Checkbox, Fade, Modal, Backdrop } from '@material-ui/core';
+import { Container, Button, Checkbox, Fade, Modal, Backdrop } from '@material-ui/core';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
 import { KidHeader } from '../../reusable-components';
@@ -41,79 +41,77 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     }, [progress.reading]);
     console.log(`MATCH INFO`, matchInfo);
     return (
-        <>
-            <Card className={classes.card}>
-                {/* Logout button */}
-                <section className={classes.columnFlex}>
-                    {/* Mission header */}
-                    <KidHeader title={'Mission'} />
-                    {/* Read / Write / Draw container */}
-                    <div className={classes.displayFlex}>
-                        <div className={classes.read}>
-                            <Checkbox
-                                checked={progress.reading}
-                                className={classes.alignRightTop}
-                                color='primary'
-                            />
-                            <div className={classes.height50}>
-                                <Link
-                                    to={`/story/${cohort.week}`}
-                                    onClick={() => request({ reading: true })}>
-                                    <div className={classes.readIconDiv}></div>
-                                </Link>
-                            </div>
-                        </div>
-                        <div className={classes.writeDrawDiv}>
-                            <div className={classes.write}>
-                                <Checkbox
-                                    checked={!!child.stories.length}
-                                    className={classes.alignRight}
-                                    color='primary'
-                                />
-                                <Link to={`/kids-dashboard/upload`}>
-                                    <div className={classes.writeIconDiv}></div>
-                                </Link>
-                            </div>
-                            <div className={classes.draw}>
-                                <Checkbox
-                                    checked={!!child.illustrations.length}
-                                    className={classes.alignRight}
-                                    color='primary'
-                                />
-                                <Link to={`/kids-dashboard/drawing-upload`}>
-                                    <div className={classes.drawIconDiv}></div>
-                                </Link>
-                                {progress.reading &&
-                                !!child.stories.length &&
-                                !!child.illustrations.length &&
-                                !!matchInfo ? (
-                                    <Link to={`/kids-dashboard/team-join`}>
-                                        <Button className={classes.orangeButton} type='button'>
-                                            TEAM UP!
-                                        </Button>
-                                    </Link>
-                                ) : (
-                                    <Button
-                                        disabled={
-                                            !progress.reading ||
-                                            !child.stories.length ||
-                                            !child.illustrations.length ||
-                                            !matchInfo
-                                        }
-                                        className={classes.grayButton}
-                                        type='button'>
-                                        {progress.reading &&
-                                        child.stories.length &&
-                                        child.illustrations.length
-                                            ? 'Your team will be matched soon!'
-                                            : 'Submissions needed to proceed!'}
-                                    </Button>
-                                )}
-                            </div>
+        <Container className={classes.containerStyle}>
+            {/* Logout button */}
+            <section className={classes.columnFlex}>
+                {/* Mission header */}
+                <KidHeader title={'Mission'} />
+                {/* Read / Write / Draw container */}
+                <div className={classes.contentContainer}>
+                    <div className={classes.read}>
+                        <Checkbox
+                            checked={progress.reading}
+                            className={classes.readCheckBox}
+                            color='primary'
+                        />
+                        <div className={classes.readIconHeight}>
+                            <Link
+                                to={`/story/${cohort.week}`}
+                                onClick={() => request({ reading: true })}>
+                                <div className={classes.readIconDiv}></div>
+                            </Link>
                         </div>
                     </div>
-                </section>
-            </Card>
+                    <div className={classes.writeDrawDiv}>
+                        <div className={classes.write}>
+                            <Checkbox
+                                checked={!!child.stories.length}
+                                className={classes.writeCheckBox}
+                                color='primary'
+                            />
+                            <Link to={`/kids-dashboard/upload`}>
+                                <div className={classes.writeIconDiv}></div>
+                            </Link>
+                        </div>
+                        <div className={classes.draw}>
+                            <Checkbox
+                                checked={!!child.illustrations.length}
+                                className={classes.drawCheckBox}
+                                color='primary'
+                            />
+                            <Link to={`/kids-dashboard/drawing-upload`}>
+                                <div className={classes.drawIconDiv}></div>
+                            </Link>
+                            {progress.reading &&
+                            !!child.stories.length &&
+                            !!child.illustrations.length &&
+                            !!matchInfo ? (
+                                <Link to={`/kids-dashboard/team-join`}>
+                                    <Button className={classes.orangeButton} type='button'>
+                                        TEAM UP!
+                                    </Button>
+                                </Link>
+                            ) : (
+                                <Button
+                                    disabled={
+                                        !progress.reading ||
+                                        !child.stories.length ||
+                                        !child.illustrations.length ||
+                                        !matchInfo
+                                    }
+                                    className={classes.grayButton}
+                                    type='button'>
+                                    {progress.reading &&
+                                    child.stories.length &&
+                                    child.illustrations.length
+                                        ? 'Your team will be matched soon!'
+                                        : 'Submissions needed to proceed!'}
+                                </Button>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </section>
             {/* Conditional modal  */}
             <Modal
                 aria-labelledby='transition-modal-title'
@@ -142,7 +140,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
                 </Fade>
             </Modal>
-        </>
+        </Container>
     );
 };
 export { KidProgressCard };

@@ -51,7 +51,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
                         }
                     }
                 }
-                if (Component) return <Component {...props} />
+                if (Component) return <Component {...props} />;
                 if (Render) return Render(props);
             }}
         />

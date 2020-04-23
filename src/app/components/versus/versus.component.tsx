@@ -8,6 +8,7 @@ import { Container, Grid } from '@material-ui/core';
 import { useStyles } from './versus-styles';
 import { useAPI } from '../../hooks';
 import { VersusHeader, VersusRound, VersusButton } from './versusSubComponents';
+
 interface VersusProps {
     thisBattle?: 0;
 }

@@ -1,6 +1,16 @@
+version: '2'
+checks:
+    similar-code:
+        enabled: false
+    method-lines:
+        config:
+            threshold: 50
 exclude_patterns:
-- "tests/"
-- "spec/"
-- "**/*.spec.tsx"
-- "**/vendor/"
-- "**/node_modules/"
+    - 'tests/'
+    - 'spec/'
+    - '**/*.spec.tsx'
+    - '**/*.spec.ts'
+    - '**/*.spec.js'
+    - '**/vendor/'
+    - '**/node_modules/'
+    - 'src/database/'

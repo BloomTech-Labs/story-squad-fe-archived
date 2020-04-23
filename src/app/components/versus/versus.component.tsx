@@ -136,19 +136,6 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     awayPoints={teammate.storyOpponent.storyPoints}
                 />
             </Grid>
-            <Grid className={classes.story2}>
-                <VersusMatchup
-                    className={`${classes.nameRow} ${classes.nameRowSmall}`}
-                    key='story1Points'
-                    username={student.username}
-                    oppUsername={student.storyOpponent.username}
-                    submission={student.story.page1}
-                    points={student.storyPoints}
-                    type='Story'
-                    storyTotal={student.storyTotal}
-                />
-                <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-            </Grid>
             <Grid className={classes.bottomRow}>
                 <VersusRound
                     roundStyle={classes.picture1}

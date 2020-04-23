@@ -105,7 +105,8 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     };
 
     console.log('updated state', state);
-
+    const submissionCheck = (submission) =>
+        typeof submission === 'string' ? submission : Object.values(submission);
     return (
         <div>
             {/* Container for avatars + inputs + buttons */}
@@ -137,7 +138,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                             <SubmissionDisplay
                                                 key='story1Points'
                                                 username={student.username}
-                                                submission={student.story.story.page1}
+                                                submission={submissionCheck(student.story.story)}
                                                 points={state.story1Points}
                                                 handleChange={handleInputChange('story1Points')}
                                                 type='Story'
@@ -147,7 +148,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                             <SubmissionDisplay
                                                 key='pic1Points'
                                                 username={student.username}
-                                                submission={student.illustration.illustration}
+                                                submission={submissionCheck(
+                                                    student.illustration.illustration
+                                                )}
                                                 type='Illustration'
                                                 handleChange={handleInputChange('pic1Points')}
                                                 points={state.pic1Points}
@@ -169,7 +172,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                             <SubmissionDisplay
                                                 key='story2Points'
                                                 username={teammate.username}
-                                                submission={teammate.story.story.page1}
+                                                submission={submissionCheck(teammate.story.story)}
                                                 points={state.story2Points}
                                                 handleChange={handleInputChange('story2Points')}
                                                 type='Story'
@@ -179,7 +182,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                             <SubmissionDisplay
                                                 key='pic2Points'
                                                 username={teammate.username}
-                                                submission={teammate.illustration.illustration}
+                                                submission={submissionCheck(
+                                                    teammate.illustration.illustration
+                                                )}
                                                 points={state.pic2Points}
                                                 handleChange={handleInputChange('pic2Points')}
                                                 type='Illustration'

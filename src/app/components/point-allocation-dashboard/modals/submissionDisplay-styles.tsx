@@ -17,6 +17,12 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
         },
+        gridContainer: {
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            alignContent: 'center',
+        },
         gridRow: {
             height: '274px',
             backgroundColor: '#EB7D5B',
@@ -46,6 +52,21 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         submissionImg: {
             maxWidth: '80%',
+        },
+        //
+        storyPages: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignContent: 'center',
+            width: '100%',
+        },
+        thumbnail: {
+            alignItems: 'center',
+            alignContent: 'center',
+            width: '30%',
+            borderRadius: '10px',
         },
     })
 );

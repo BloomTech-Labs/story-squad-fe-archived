@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyles } from './styles';
-import Privacy from './privacy.policy';
+import Privacy from './privacy.main';
 import PrivacyDrawer from './privacy.drarwer';
 
 const PrivacyPolicy: React.FC = () => {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { DialogTitle, Grid, Dialog, Card } from '@material-ui/core';
+import { TextValidatorComp } from './textValidatorComp';
 import { TextValidator } from 'react-material-ui-form-validator';
 import { useStyles } from './submissionDisplay-styles';
 import CloseIcon from '@material-ui/icons/Close';
@@ -49,30 +50,7 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                             alt={`${username}'s ${type}`}
                         />
                     </Grid>
-                    <Grid item md>
-                        <TextValidator
-                            validators={['minNumber:10', 'maxNumber:70', 'required']}
-                            errorMessages={[
-                                'Oops! Each submission must be given at least 10 points.',
-                                'Oops! A submission cannot be given more than 70 points.',
-                                'This is required.',
-                            ]}
-                            className={classes.pointInput}
-                            required
-                            autoFocus
-                            name={key}
-                            value={points}
-                            onChange={handleChange}
-                            type='number'
-                            InputProps={{ inputProps: { min: 10, max: 70 } }}
-                            style={{
-                                background: 'white',
-                                width: '145px',
-                                borderRadius: '5px',
-                            }}
-                            variant='outlined'
-                        />
-                    </Grid>
+                    <TextValidatorComp key={key} points={points} handleChange={handleChange} />
                     <Dialog fullScreen open={open}>
                         <IconButton
                             edge='start'
@@ -104,30 +82,7 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                             alt={`${username}'s`}
                         />
                     </Grid>
-                    <Grid item md>
-                        <TextValidator
-                            validators={['minNumber:10', 'maxNumber:70', 'required']}
-                            errorMessages={[
-                                'Oops! Each submission must be given at least 10 points.',
-                                'Oops! A submission cannot be given more than 70 points.',
-                                'This is required.',
-                            ]}
-                            className={classes.pointInput}
-                            required
-                            autoFocus
-                            name={key}
-                            value={points}
-                            onChange={handleChange}
-                            type='number'
-                            InputProps={{ inputProps: { min: 10, max: 70 } }}
-                            style={{
-                                background: 'white',
-                                width: '145px',
-                                borderRadius: '5px',
-                            }}
-                            variant='outlined'
-                        />
-                    </Grid>
+                    <TextValidatorComp key={key} points={points} handleChange={handleChange} />
                     <Dialog fullScreen open={open}>
                         <IconButton
                             edge='start'
@@ -159,30 +114,7 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                             alt={`${username}'s Story Preview`}
                         />
                     </Grid>
-                    <Grid item md>
-                        <TextValidator
-                            validators={['minNumber:10', 'maxNumber:70', 'required']}
-                            errorMessages={[
-                                'Oops! Each submission must be given at least 10 points.',
-                                'Oops! A submission cannot be given more than 70 points.',
-                                'This is required.',
-                            ]}
-                            className={classes.pointInput}
-                            required
-                            autoFocus
-                            name={key}
-                            value={points}
-                            onChange={handleChange}
-                            type='number'
-                            InputProps={{ inputProps: { min: 10, max: 70 } }}
-                            style={{
-                                background: 'white',
-                                width: '145px',
-                                borderRadius: '5px',
-                            }}
-                            variant='outlined'
-                        />
-                    </Grid>
+                    <TextValidatorComp key={key} points={points} handleChange={handleChange} />
                     <Dialog fullScreen open={open}>
                         <IconButton
                             edge='start'

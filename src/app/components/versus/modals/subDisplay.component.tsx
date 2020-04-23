@@ -6,7 +6,6 @@ import { TextValidator } from 'react-material-ui-form-validator';
 import { TransitionProps } from '@material-ui/core/transitions';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
-import { ReactComponent as LockIcon } from '../img/lock-icon.svg';
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & { children?: React.ReactElement }
 ) {
@@ -156,44 +155,6 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
                     </Dialog>
                 </Grid>
             )}
-        </>
-    ) : (
-        <>
-            <Grid
-                container
-                direction='column'
-                justify='space-between'
-                alignItems='center'
-                alignContent='center'>
-                <Grid item md>
-                    <div
-                        style={{
-                            backgroundImage: `url(${submission})`,
-                            width: '180px',
-                            height: '120px',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            backgroundSize: 'center',
-                        }}>
-                        <LockIcon />
-                    </div>
-                </Grid>
-                <Dialog fullScreen open={open}>
-                    <IconButton
-                        edge='start'
-                        color='inherit'
-                        onClick={handleClose}
-                        aria-label='close'>
-                        <CloseIcon />
-                    </IconButton>
-                    <DialogTitle id='submission-title'>{`${username}'s ${type}`}</DialogTitle>
-                    <div>
-                        <img src={submission} alt={`${username}'s ${type}`} />
-                    </div>
-                </Dialog>
-            </Grid>
         </>
     );
 };

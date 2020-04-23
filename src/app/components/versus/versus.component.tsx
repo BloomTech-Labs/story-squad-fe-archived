@@ -36,9 +36,11 @@ import VersusMatchup from './versusSubComponents/versusMatchup.component';
 import { ReactComponent as LockedIcon } from './img/lock-icon.svg';
 import { useAPI } from '../../hooks';
 import { VersusHeader } from './versusSubComponents/versusHeader';
+
 interface VersusProps {
     thisBattle?: 0;
 }
+
 const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
@@ -126,351 +128,64 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const homeTeamNames = `${student.username} & ${teammate.username}!`;
     const awayTeamNames = `${student.storyOpponent.username} & ${teammate.storyOpponent.username}`;
 
-    return isLocked.oneVote ? (
+    return (
         <Container className={classes.containerStyling}>
             <VersusHeader homeTeam={homeTeamNames} awayTeam={awayTeamNames} />
-            <Grid className={classes.topRow}>
-                <Grid className={classes.story1}>
-                    <div className={`${classes.nameRow} ${classes.nameRowBig}`}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
-                            <div className={classes.playerName}>{student.username}</div>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>
-                                {student.storyOpponent.username}
-                            </div>
-                            <Avatar className={classes.avatarStyle} src={ava3}></Avatar>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* High story1 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='story1Points'
-                                username={student.username}
-                                submission={student.story.page1}
-                                // points={state.story1Points}
-                                points={student.storyPoints}
-                                type='Story'
-                            />
-                        </Grid>
-                        <div className={classes.totalScoreBig}>
-                            <p>{student.storyTotal}</p> {/* High story1 + high story2 pts */}
-                        </div>
-                        {/* High story2 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <VersusMatchup
-                                key='story1Points'
-                                // points={state.story1Points}
-                                username={student.storyOpponent.username}
-                                submission={student.storyOpponent.story.page1}
-                                points={student.storyOpponent.storyPoints}
-                                type='Story'
-                            />
-                            {/* <SubmissionDisplay
-                                key='story1Points'
-                                // points={state.story1Points}
-                                username={student.storyOpponent.username}
-                                submission={student.storyOpponent.story.page1}
-                                points={student.storyOpponent.storyPoints}
-                                type='Story'
-                            /> */}
-                        </Grid>
-                    </div>
-                    <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-                </Grid>
-                <Grid className={classes.story2}>
-                    <div className={`${classes.nameRow} ${classes.nameRowSmall}`}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={ava2}></Avatar>
-                            <div className={classes.playerName}>{teammate.username}</div>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>
-                                {teammate.storyOpponent.username}
-                            </div>
-                            <Avatar className={classes.avatarStyle} src={ava4}></Avatar>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* Low story1 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='story1Points'
-                                username={teammate.username}
-                                submission={teammate.story.page1}
-                                // points={state.story1Points}
-                                points={teammate.storyPoints}
-                                type='Story'
-                            />
-                        </Grid>
-                        <div className={classes.totalScoreSmall}>
-                            <p>{teammate.storyTotal}</p> {/* low story1 + low story2 pts */}
-                        </div>
-                        {/* Low story2 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            {/* <SubmissionDisplay
-                                key='story1Points'
-                                // points={state.story1Points}
-                                username={teammate.storyOpponent.username}
-                                submission={teammate.storyOpponent.story.page1}
-                                points={teammate.storyOpponent.storyPoints}
-                                type='Story'
-                            /> */}
-                        </Grid>
-                    </div>
-                    <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-                </Grid>
+            <Grid className={classes.story1}>
+                <VersusMatchup
+                    className={`${classes.nameRow} ${classes.nameRowBig}`}
+                    key='story1Points'
+                    username={student.username}
+                    oppUsername={student.storyOpponent.username}
+                    submission={student.story.page1}
+                    points={student.storyPoints}
+                    type='Story'
+                    storyTotal={student.storyTotal}
+                />
+                <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
+            </Grid>
+            <Grid className={classes.story2}>
+                <VersusMatchup
+                    className={`${classes.nameRow} ${classes.nameRowSmall}`}
+                    key='story1Points'
+                    username={student.username}
+                    oppUsername={student.storyOpponent.username}
+                    submission={student.story.page1}
+                    points={student.storyPoints}
+                    type='Story'
+                    storyTotal={student.storyTotal}
+                />
+                <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
             </Grid>
             <Grid className={classes.bottomRow}>
                 <Grid className={classes.picture1}>
-                    <div className={`${classes.nameRow} ${classes.nameRowSmall}`}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
-                            <div className={classes.playerName}>{student.username}</div>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>
-                                {student.illustrationOpponent.username}
-                            </div>
-                            <Avatar className={classes.avatarStyle} src={ava3}></Avatar>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* high pic1 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='pic1Points'
-                                username={student.username}
-                                submission={student.illustration}
-                                // points={state.story1Points}
-                                points={student.illustrationPoints}
-                                type='Illustration'
-                            />
-                        </Grid>
-                        <div className={classes.totalScoreSmall}>
-                            <p>{student.illustrationTotal}</p> {/* High pic1 + high pic2 pts */}
-                        </div>
-                        {/* high pic2 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            {/* <SubmissionDisplay
-                                key='pic1Points'
-                                // points={state.story1Points}
-                                username={student.illustrationOpponent.username}
-                                submission={student.illustrationOpponent.illustration}
-                                points={student.illustrationOpponent.illustrationPoints}
-                                type='Illustration'
-                            /> */}
-                        </Grid>
-                    </div>
+                    <VersusMatchup
+                        className={`${classes.nameRow} ${classes.nameRowBig}`}
+                        key='story1Points'
+                        username={student.username}
+                        oppUsername={student.storyOpponent.username}
+                        submission={student.story.page1}
+                        points={student.storyPoints}
+                        type='Story'
+                        storyTotal={student.storyTotal}
+                    />
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
+
                 <Grid className={classes.picture2}>
-                    <div className={`${classes.nameRow} ${classes.nameRowBig}`}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={ava2}></Avatar>
-                            <div className={classes.playerName}>{teammate.username}</div>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>
-                                {teammate.illustrationOpponent.username}
-                            </div>
-                            <Avatar className={classes.avatarStyle} src={ava4}></Avatar>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* Low pic1 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='pic1Points'
-                                username={teammate.username}
-                                submission={teammate.illustration}
-                                // points={state.story1Points}
-                                points={teammate.illustrationPoints}
-                                type='Illustration'
-                            />
-                        </Grid>
-                        <div className={classes.totalScoreBig}>
-                            <p>{teammate.illustrationTotal}</p> {/* low pic1 + low pic2 pts */}
-                        </div>
-                        {/* Low Pic2 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            {/* <SubmissionDisplay
-                                key='pic1Points'
-                                // points={state.story1Points}
-                                username={teammate.illustrationOpponent.username}
-                                submission={teammate.illustrationOpponent.illustration}
-                                points={teammate.illustrationOpponent.illustrationPoints}
-                                type='Illustration'
-                            /> */}
-                        </Grid>
-                    </div>
+                    <VersusMatchup
+                        className={`${classes.nameRow} ${classes.nameRowSmall}`}
+                        key='story1Points'
+                        username={student.username}
+                        oppUsername={student.storyOpponent.username}
+                        submission={student.story.page1}
+                        points={student.storyPoints}
+                        type='Story'
+                        storyTotal={student.storyTotal}
+                    />
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
                 </Grid>
-                {/*Buttons */}
-                <Grid className={classes.btnContainer}>
-                    <Grid className={classes.btnDiv}>
-                        <Link to={`/kids-dashboard/team-join`}>
-                            <Button className={classes.orangeButton} type='button'>
-                                Back
-                            </Button>
-                        </Link>
-                        <Link to={`/voting`}>
-                            <Button className={classes.orangeButton} type='submit'>
-                                Vote
-                            </Button>
-                        </Link>
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Container>
-    ) : (
-        <Container className={classes.containerStyling}>
-            <VersusHeader homeTeam={homeTeamNames} awayTeam={awayTeamNames} />
-            <Grid className={classes.topRow}>
-                <Grid className={classes.story1}>
-                    <div className={`${classes.nameRow} ${classes.nameRowBig}`}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
-                            <div className={classes.playerName}>{student.username}</div>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>
-                                {student.storyOpponent.username}
-                            </div>
-                            <Avatar className={classes.avatarStyle} src={ava3}></Avatar>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* High story1 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='story1Points'
-                                username={student.username}
-                                submission={student.story.page1}
-                                // points={state.story1Points}
-                                points={student.storyPoints}
-                                type='Story'
-                            />
-                        </Grid>
-                        <div className={classes.totalScoreBig}>
-                            <p>{student.storyTotal}</p> {/* High story1 + high story2 pts */}
-                        </div>
-                        {/* High story2 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <LockedIcon />
-                        </Grid>
-                    </div>
-                    <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-                </Grid>
-                <Grid className={classes.story2}>
-                    <div className={`${classes.nameRow} ${classes.nameRowSmall}`}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={ava2}></Avatar>
-                            <div className={classes.playerName}>{teammate.username}</div>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>
-                                {teammate.storyOpponent.username}
-                            </div>
-                            <Avatar className={classes.avatarStyle} src={ava4}></Avatar>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* Low story1 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='story1Points'
-                                username={teammate.username}
-                                submission={teammate.story.page1}
-                                // points={state.story1Points}
-                                points={teammate.storyPoints}
-                                type='Story'
-                            />
-                        </Grid>
-                        <div className={classes.totalScoreSmall}>
-                            <p>{teammate.storyTotal}</p> {/* low story1 + low story2 pts */}
-                        </div>
-                        {/* Low story2 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <LockedIcon />
-                        </Grid>
-                    </div>
-                    <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-                </Grid>
-            </Grid>
-            <Grid className={classes.bottomRow}>
-                <Grid className={classes.picture1}>
-                    <div className={`${classes.nameRow} ${classes.nameRowSmall}`}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
-                            <div className={classes.playerName}>{student.username}</div>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>
-                                {student.illustrationOpponent.username}
-                            </div>
-                            <Avatar className={classes.avatarStyle} src={ava3}></Avatar>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* high pic1 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='pic1Points'
-                                username={student.username}
-                                submission={student.illustration}
-                                // points={state.story1Points}
-                                points={student.illustrationPoints}
-                                type='Illustration'
-                            />
-                        </Grid>
-                        <div className={classes.totalScoreSmall}>
-                            <p>{student.illustrationTotal}</p> {/* High pic1 + high pic2 pts */}
-                        </div>
-                        {/* high pic2 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <LockedIcon />
-                        </Grid>
-                    </div>
-                    <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-                </Grid>
-                <Grid className={classes.picture2}>
-                    <div className={`${classes.nameRow} ${classes.nameRowBig}`}>
-                        <div className={classes.leftPlayer}>
-                            <Avatar className={classes.avatarStyle} src={ava2}></Avatar>
-                            <div className={classes.playerName}>{teammate.username}</div>
-                        </div>
-                        <div className={classes.rightPlayer}>
-                            <div className={classes.playerName}>
-                                {teammate.illustrationOpponent.username}
-                            </div>
-                            <Avatar className={classes.avatarStyle} src={ava4}></Avatar>
-                        </div>
-                    </div>
-                    <div className={classes.subRow}>
-                        {/* Low pic1 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
-                                key='pic1Points'
-                                username={teammate.username}
-                                submission={teammate.illustration}
-                                // points={state.story1Points}
-                                points={teammate.illustrationPoints}
-                                type='Illustration'
-                            />
-                        </Grid>
-                        <div className={classes.totalScoreBig}>
-                            <p>{teammate.illustrationTotal}</p> {/* low pic1 + low pic2 pts */}
-                        </div>
-                        {/* Low Pic2 */}
-                        <Grid item xs={12} sm={12} md={6}>
-                            <LockedIcon />
-                        </Grid>
-                    </div>
-                    <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-                </Grid>
+
                 {/*Buttons */}
                 <Grid className={classes.btnContainer}>
                     <Grid className={classes.btnDiv}>

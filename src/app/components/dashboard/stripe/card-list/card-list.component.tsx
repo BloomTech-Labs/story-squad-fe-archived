@@ -1,39 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Flipper, Flipped } from 'react-flip-toolkit';
-
-import { makeStyles } from '@material-ui/core/styles';
 import { Button, Typography, Icon, CircularProgress } from '@material-ui/core';
-
 import { PaymentContext, creditCardsRefresh } from '../../../../state';
 import { StripeCard } from '../card/card.component';
-
-const useStyles = makeStyles((theme) => ({
-    list: {
-        display: 'grid',
-        gridGap: theme.spacing(1),
-        gridTemplateColumns: '1fr',
-        [theme.breakpoints.up('lg')]: {
-            gridTemplateColumns: '1fr 1fr',
-        },
-    },
-    loading: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    empty: {
-        'overflow': 'hidden',
-        'maxWidth': '100%',
-        'display': 'flex',
-        'flexDirection': 'column',
-        'justifyContent': 'center',
-        'alignItems': 'center',
-        '& > .MuiIcon-fontSizeLarge': {
-            fontSize: 320,
-        },
-    },
-}));
+import { useStyles } from './card-list-styles';
 
 interface CardListProps {
     className?: string;

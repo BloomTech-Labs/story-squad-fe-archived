@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
     Card,
     CardContent,
@@ -9,10 +8,9 @@ import {
     Icon,
     Chip,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
 import { CreditCard } from '../../../../models';
 import { useAPI } from '../../../../hooks';
+import { useStyles } from './card-component-styling';
 
 interface StripeCardProps {
     className?: string;
@@ -21,17 +19,6 @@ interface StripeCardProps {
     onUpdate?: () => void;
     defaultCard: boolean;
 }
-
-const useStyles = makeStyles((theme) => ({
-    card: {},
-    cardContent: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-    },
-    chip: {
-        marginLeft: 12,
-    },
-}));
 
 const StripeCard: React.FC<StripeCardProps> = ({
     className,

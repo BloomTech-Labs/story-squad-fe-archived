@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import {
     Button,
     Typography,
@@ -11,19 +10,19 @@ import {
     TableCell,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-
+import { useStyles } from '../../../admin-dashboard/accounts/list/list-component-styles';
 import { useAPI } from '../../../../hooks';
 
-const useStyles = makeStyles(() => ({
-    header: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    loading: {
-        marginLeft: '1ch',
-    },
-}));
+// const useStyles = makeStyles(() => ({
+//     header: {
+//         display: 'flex',
+//         justifyContent: 'space-between',
+//         alignItems: 'center',
+//     },
+//     loading: {
+//         marginLeft: '1ch',
+//     },
+// }));
 
 interface Props {
     className?: string;

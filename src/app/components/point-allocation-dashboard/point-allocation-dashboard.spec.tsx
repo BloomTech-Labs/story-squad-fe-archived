@@ -22,14 +22,13 @@ describe('PointDashboard', () => {
             progress: {
                 reading: false,
                 writing: true,
-                reading: false,
                 teamReview: false,
                 randomReview: false,
             },
         };
         const { baseElement } = render(
             <BrowserRouter>
-                <PointDashboard child={child} />
+                <PointDashboard Child={child} />
             </BrowserRouter>
         );
         expect(baseElement).toBeInTheDocument();

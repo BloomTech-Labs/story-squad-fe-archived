@@ -108,10 +108,6 @@ const useStyles = makeStyles((theme: Theme) =>
                 outline: '1px solid slategrey',
                 borderRadius: '10px',
             },
-            // '&::-webkit-scrollbar-button': {
-            //     backgroundColor: 'rgba(0,0,0,.2)',
-            //     backgroundImage: `url('https://i.imgur.com/bj8uVqJ.jpg')`,
-            // },
         },
         emojiDiv: {
             width: '30px',
@@ -127,8 +123,6 @@ export const Emoji: React.FC = () => {
 
     const handleChanges = (e) => {
         setNewEmoji([...newEmoji, e.target.value]);
-        console.log('this is state', newEmoji);
-        console.log(e.target.value);
     };
 
     const handleSubmit = (e) => {
@@ -147,16 +141,14 @@ export const Emoji: React.FC = () => {
                                 <button
                                     value={emoji}
                                     onClick={(e) => {
+                                        e.preventDefault();
                                         handleChanges(e);
+                                    }}
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
                                     }}>
                                     {emoji}
                                 </button>
-                                {/* <p
-                                    onClick={(e) => {
-                                        handleChanges(e);
-                                    }}>
-                                    {emoji}
-                                </p> */}
                             </div>
                         );
                     })}

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { DialogTitle, Grid, Dialog } from '@material-ui/core';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { TextValidator } from 'react-material-ui-form-validator';
+import { useStyles } from './submissionDisplay-styles';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 
 interface SubmissionDisplayProps {
     submission: string;
@@ -11,46 +13,6 @@ interface SubmissionDisplayProps {
     points: number;
     handleChange: (e: any) => void;
 }
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        modal: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-        paper: {
-            backgroundColor: theme.palette.background.paper,
-            border: '2px solid #000',
-            boxShadow: theme.shadows[5],
-        },
-        root: {
-            fontFamily: 'nunito',
-            display: 'flex',
-            flexDirection: 'column',
-        },
-        gridRow: {
-            height: '274px',
-            backgroundColor: '#EB7D5B',
-            paddingTop: '32px',
-            padding: '30px',
-        },
-        gridInput: {
-            backgroundColor: '#EB7D5B',
-            padding: '53px ',
-        },
-        pointInput: {
-            fontFamily: 'Bangers',
-            fontSize: '48px',
-            fontWeight: 'bold',
-        },
-        imagePreview: {
-            width: '175px',
-            height: '175px',
-            borderRadius: '14px',
-        },
-    })
-);
 
 export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
     submission,
@@ -110,10 +72,23 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                         variant='outlined'
                     />
                 </Grid>
-                <Dialog className={classes.modal} open={open} onClose={handleClose}>
-                    <DialogTitle id='submission-title'>{`${username}'s ${type}`}</DialogTitle>
-                    <div>
-                        <img src={submission} alt={`${username}'s ${type}`} />
+                <Dialog fullScreen open={open}>
+                    <IconButton
+                        edge='start'
+                        color='inherit'
+                        onClick={handleClose}
+                        aria-label='close'>
+                        <CloseIcon />
+                    </IconButton>
+                    <DialogTitle id='submission-title' className={classes.submissionHeader}>
+                        {`${username}'s ${type}`}
+                    </DialogTitle>
+                    <div className={classes.viewPageDiv}>
+                        <img
+                            className={classes.submissionImg}
+                            src={submission}
+                            alt={`${username}'s ${type}`}
+                        />
                     </div>
                 </Dialog>
             </Grid>

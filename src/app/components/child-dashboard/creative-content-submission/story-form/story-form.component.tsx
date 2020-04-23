@@ -11,7 +11,7 @@ import {
     LinearProgress,
 } from '@material-ui/core';
 import { useAPI, useForm } from '../../../../hooks';
-import { useStyles } from './styles';
+import { useStyles } from './story-form-styles';
 
 interface StoryFormProps {
     onUpdate?: () => void;
@@ -90,7 +90,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
         ) {
             history.push('/kids-dashboard');
         }
-        console.log('eaeeeee');
     }, [submitted, removed, history, onUpdate, uploadedStory]);
 
     useEffect(() => {

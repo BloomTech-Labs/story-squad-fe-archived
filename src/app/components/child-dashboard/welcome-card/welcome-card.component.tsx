@@ -1,21 +1,7 @@
 import React from 'react';
-
-import { Avatar, Card, CardContent, Typography, Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
+import { Card, CardContent, Typography } from '@material-ui/core';
 import { Child } from '../../../models';
-
-const useStyles = makeStyles(() => ({
-    card: {},
-    cardContent: {
-        display: 'flex',
-        justifyContent: 'space-between',
-    },
-    avatar: {
-        width: 128,
-        height: 128,
-    },
-}));
+import { useStyles } from './welcome-card-styles';
 
 interface WelcomeCardProps {
     className?: string;

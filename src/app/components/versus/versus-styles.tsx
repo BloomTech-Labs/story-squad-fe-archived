@@ -1,6 +1,5 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
-import { url } from 'inspector';
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         vs: {
@@ -12,11 +11,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             alignSelf: 'center',
             maxWidth: theme.breakpoints.values.md,
             width: '100%',
-        },
-        modal: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
         },
         containerStyling: {
             fontFamily: 'nunito',
@@ -62,7 +56,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             'marginLeft': '3%',
             'marginRight': '4%',
             'marginTop': '1%',
-            // 'border': '1px solid red',
             'display': 'flex',
         },
         teamName: {
@@ -70,7 +63,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             flexDirection: 'row',
             justifyContent: 'space-evenly',
             alignContent: 'center',
-            // border: '1px solid blue',
             width: '80%',
         },
         appBar: {
@@ -114,7 +106,6 @@ export const useStyles = makeStyles((theme: Theme) =>
                 backgroundColor: '#FF6B35',
             },
         },
-        // stuff from kid progress
         topRow: {
             display: 'flex',
             aligntItems: 'center',
@@ -122,21 +113,18 @@ export const useStyles = makeStyles((theme: Theme) =>
         bottomRow: {
             display: 'flex',
         },
-        // The rows in which the content of the toprow and bottomrow are stored
         nameRow: {
             display: 'flex',
             justifyContent: 'space-between',
             zIndex: 9,
             width: '100%',
             height: '40%',
-            // border: '1px solid blue',
+            // border: '3px solid blue',
         },
         nameRowBig: {
-            // border: '1px solid red',
             padding: '0 10% 0 10%',
         },
         nameRowSmall: {
-            // border: '1px solid blue',
             padding: '0 7% 0 7%',
         },
         subRow: {
@@ -145,24 +133,18 @@ export const useStyles = makeStyles((theme: Theme) =>
             zIndex: 9,
             width: '100%',
             height: '45%',
-            // border: '1px solid red',
         },
-        //styling for the name and avatar within nameRow
         leftPlayer: {
             display: 'flex',
-            // flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             marginTop: '3%',
-            // border: '1px solid red',
         },
         rightPlayer: {
             display: 'flex',
-            // flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             marginTop: '3%',
-            // border: '1px solid red',
         },
         totalScoreBig: {
             display: 'flex',
@@ -267,14 +249,12 @@ export const useStyles = makeStyles((theme: Theme) =>
             width: '63.5%',
             position: 'absolute',
             height: '37vh',
-            // border: '2px orange dashed',
         },
         btnDiv: {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-end',
             width: '100%',
-            // border: '1px green solid',
             margin: '0% 2% 1% 2%',
         },
         orangeButton: {
@@ -304,7 +284,22 @@ export const useStyles = makeStyles((theme: Theme) =>
             fontSize: '24px',
             lineHeight: '26px',
             color: '#292929',
-            // border: '1px solid blue',
+        },
+        headerMenuDiv: {
+            display: 'flex',
+            flexFlow: 'wrap no-wrap',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+        },
+        upperTitleDiv: {
+            display: 'flex',
+            justifyContent: 'flex-end',
+            width: '57.5%',
+        },
+        upperHeaderButtonDiv: {
+            display: 'flex',
+            justifyContent: 'flex-end',
+            width: '20%',
         },
     })
 );

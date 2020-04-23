@@ -61,6 +61,8 @@ const App: React.FC = () => {
                             path='/admin/dashboard'
                             component={AdminDashboardPage}
                         />
+                        <Route path='/privacy-policy' component={PrivacyPage} />
+                        <Route path='/terms-of-service' component={ToSPage} />
                         <Route path='/admin' component={AdminSignInPage} />
                         <Route exact path={['/', '/signup']} component={SignUpPage} />
                         <Route path='/' component={ErrorPage} />

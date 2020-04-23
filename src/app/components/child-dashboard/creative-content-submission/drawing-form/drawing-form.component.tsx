@@ -11,7 +11,7 @@ import {
     LinearProgress,
 } from '@material-ui/core';
 import { useAPI, useForm } from '../../../../hooks';
-import { useStyles } from './styles';
+import { useStyles } from './drawing-form-styles';
 interface DrawingFormProps {
     onUpdate?: () => void;
     week: number;
@@ -24,7 +24,6 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     const [fetchedDrawing] = useAPI(`/illustrationRoutes/${week}`, 'GET', false);
     const [uploadedDrawing, loadingDrawing, submitDrawing] = useAPI('/illustrationRoutes', 'POST');
     const [removed, removing, remove] = useAPI(`/illustrationRoutes/${week}`, 'DELETE');
-    // const [newProgress, progressing, progress] = useAPI('/children/progress', 'POST');
     const { state, setState, handleInputChange, handleFileChange, handleSubmitBuilder } = useForm({
         illustration: '',
     });

@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
 import {
     Divider,
     Drawer,
@@ -11,28 +10,8 @@ import {
     Toolbar,
     Typography,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 
-const drawerWidth = 240;
-const useStyles = makeStyles((theme) => ({
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    drawerItem: {
-        color: 'black',
-    },
-    toolbar: {
-        display: 'flex',
-        justifyContent: 'center',
-    },
-    icon: {
-        marginRight: theme.spacing(1),
-    },
-}));
+import { useStyles } from './admin-navigation-styles';
 
 const AdminNavigationDrawer = () => {
     const classes = useStyles();

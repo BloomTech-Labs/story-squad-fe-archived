@@ -1,24 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import {
-    Card,
-    Button,
-    Checkbox,
-    Paper,
-    Popper,
-    MenuItem,
-    MenuList,
-    Fade,
-    Modal,
-    Backdrop,
-    Grow,
-    ClickAwayListener,
-} from '@material-ui/core';
-import { useStyles } from './styles';
+import { Container, Button, Checkbox, Fade, Modal, Backdrop } from '@material-ui/core';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
-
+import { KidHeader } from '../../reusable-components';
+import { useStyles } from './kid-progress-styles';
 interface KidProgressProps {
     onUpdate?: () => void;
     child: Child;
@@ -28,41 +15,11 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const [response, loading, request] = useAPI('/children/progress', 'POST');
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
-    const logout = () => window.dispatchEvent(new Event('logout'));
-    const [menu, setMenu] = React.useState(false);
-    const anchorRef = React.useRef<HTMLButtonElement>(null);
     const [open, setOpen] = React.useState(false);
-
-    const handleToggle = () => {
-        setMenu((prevMenu) => !prevMenu);
-    };
 
     const modalClose = () => {
         setOpen(false);
     };
-
-    const handleClose = (event: React.MouseEvent<EventTarget>) => {
-        if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
-            return;
-        }
-
-        setMenu(false);
-    };
-
-    function handleListKeyDown(event: React.KeyboardEvent) {
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            setMenu(false);
-        }
-    }
-
-    const prevMenu = React.useRef(menu);
-    React.useEffect(() => {
-        if (prevMenu.current === true && menu === false && anchorRef.current !== null) {
-            anchorRef.current.focus();
-        }
-        prevMenu.current = menu;
-    }, [menu]);
 
     React.useEffect(() => {
         if (response?.progress && onUpdate) onUpdate();
@@ -88,131 +45,77 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     console.log(`MATCH INFO`, matchInfo);
 >>>>>>> 73c7c4c07a1b79d27577517e3d53490b9a4fb30c
     return (
-        <>
-            <Card className={classes.card}>
-                {/* Logout button */}
-                <Popper
-                    open={menu}
-                    anchorEl={anchorRef.current}
-                    role={undefined}
-                    transition
-                    disablePortal>
-                    {({ TransitionProps, placement }) => (
-                        <Grow
-                            {...TransitionProps}
-                            style={{
-                                transformOrigin:
-                                    placement === 'bottom' ? 'center top' : 'center bottom',
-                            }}>
-                            <Paper>
-                                <ClickAwayListener onClickAway={handleClose}>
-                                    <MenuList
-                                        autoFocusItem={menu}
-                                        id='menu-list-grow'
-                                        onKeyDown={handleListKeyDown}
-                                        className={classes.logoutMenu}>
-                                        <MenuItem onClick={logout}>Logout</MenuItem>
-                                    </MenuList>
-                                </ClickAwayListener>
-                            </Paper>
-                        </Grow>
-                    )}
-                </Popper>
-                {/* End of logout button */}
-                <section className={classes.columnFlex}>
-                    {/* Mission header */}
-                    <div className={classes.appBar}>
-                        <div className={classes.headerFont}>Mission</div>
-                        <div className={classes.btn}>
-                            {' '}
-                            {/* Menu button */}
-                            <Button
-                                ref={anchorRef}
-                                aria-controls={menu ? 'menu-list-grow' : undefined}
-                                aria-haspopup='true'
-                                className={classes.logoutButton}
-                                onClick={handleToggle}>
-                                Menu
-                            </Button>
-                            {/* End of menu button */}
+        <Container className={classes.containerStyle}>
+            {/* Logout button */}
+            <section className={classes.columnFlex}>
+                {/* Mission header */}
+                <KidHeader title={'Mission'} />
+                {/* Read / Write / Draw container */}
+                <div className={classes.contentContainer}>
+                    <div className={classes.read}>
+                        <Checkbox
+                            checked={progress.reading}
+                            className={classes.readCheckBox}
+                            color='primary'
+                        />
+                        <div className={classes.readIconHeight}>
+                            <Link
+                                to={`/story/${cohort.week}`}
+                                onClick={() => request({ reading: true })}>
+                                <div className={classes.readIconDiv}></div>
+                            </Link>
                         </div>
                     </div>
-                    {/* End of mission header  */}
-                    {/* Read / Write / Draw container */}
-                    <div className={classes.displayFlex}>
-                        {/* Read section  */}
-                        <div className={classes.read}>
-                            {/* Read checkbox  */}
+                    <div className={classes.writeDrawDiv}>
+                        <div className={classes.write}>
                             <Checkbox
-                                checked={progress.reading}
-                                className={classes.alignRightTop}
+                                checked={!!child.stories.length}
+                                className={classes.writeCheckBox}
                                 color='primary'
                             />
-                            <div className={classes.height50}>
-                                <Link
-                                    to={`/story/${cohort.week}`}
-                                    onClick={() => request({ reading: true })}>
-                                    <div className={classes.readIconDiv}></div>
-                                </Link>
-                            </div>
+                            <Link to={`/kids-dashboard/upload`}>
+                                <div className={classes.writeIconDiv}></div>
+                            </Link>
                         </div>
-                        {/* Write section  */}
-                        <div className={classes.writeDrawDiv}>
-                            <div className={classes.write}>
-                                {/* Write checkbox  */}
-                                <Checkbox
-                                    checked={!!child.stories.length}
-                                    className={classes.alignRight}
-                                    color='primary'
-                                />
-                                <Link to={`/kids-dashboard/upload`}>
-                                    {/* Write icon + "Write" */}
-                                    <div className={classes.writeIconDiv}></div>
-                                </Link>
-                            </div>
-                            {/* Draw section  */}
-                            <div className={classes.draw}>
-                                {/* Draw checkbox  */}
-                                <Checkbox
-                                    checked={!!child.illustrations.length}
-                                    className={classes.alignRight}
-                                    color='primary'
-                                />
-                                <Link to={`/kids-dashboard/drawing-upload`}>
-                                    {/* Draw icon + "Draw"  */}
-                                    <div className={classes.drawIconDiv}></div>
-                                </Link>
-                                {progress.reading &&
-                                !!child.stories.length &&
-                                !!child.illustrations.length &&
-                                !!matchInfo ? (
-                                    <Link to={`/kids-dashboard/team-join`}>
-                                        <Button className={classes.orangeButton} type='button'>
-                                            TEAM UP!
-                                        </Button>
-                                    </Link>
-                                ) : (
-                                    <Button
-                                        disabled={
-                                            !progress.reading ||
-                                            !child.stories.length ||
-                                            !child.illustrations.length ||
-                                            !matchInfo
-                                        }
-                                        className={classes.grayButton}
-                                        type='button'>
-                                        {progress.reading &&
-                                        child.stories.length &&
-                                        child.illustrations.length
-                                            ? 'Your team will be matched soon!'
-                                            : 'Submissions needed to proceed!'}
+                        <div className={classes.draw}>
+                            <Checkbox
+                                checked={!!child.illustrations.length}
+                                className={classes.drawCheckBox}
+                                color='primary'
+                            />
+                            <Link to={`/kids-dashboard/drawing-upload`}>
+                                <div className={classes.drawIconDiv}></div>
+                            </Link>
+                            {progress.reading &&
+                            !!child.stories.length &&
+                            !!child.illustrations.length &&
+                            !!matchInfo ? (
+                                <Link to={`/kids-dashboard/team-join`}>
+                                    <Button className={classes.orangeButton} type='button'>
+                                        TEAM UP!
                                     </Button>
-                                )}
-                            </div>
+                                </Link>
+                            ) : (
+                                <Button
+                                    disabled={
+                                        !progress.reading ||
+                                        !child.stories.length ||
+                                        !child.illustrations.length ||
+                                        !matchInfo
+                                    }
+                                    className={classes.grayButton}
+                                    type='button'>
+                                    {progress.reading &&
+                                    child.stories.length &&
+                                    child.illustrations.length
+                                        ? 'Your team will be matched soon!'
+                                        : 'Submissions needed to proceed!'}
+                                </Button>
+                            )}
                         </div>
                     </div>
-                </section>
-            </Card>
+                </div>
+            </section>
             {/* Conditional modal  */}
             <Modal
                 aria-labelledby='transition-modal-title'
@@ -241,7 +144,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
                 </Fade>
             </Modal>
-        </>
+        </Container>
     );
 };
 export { KidProgressCard };

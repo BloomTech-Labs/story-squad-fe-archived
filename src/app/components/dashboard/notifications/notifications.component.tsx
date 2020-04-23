@@ -1,24 +1,6 @@
 import React from 'react';
-
 import { Card, CardContent, Typography, List, ListItem, ListItemText } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-    card: {
-        minWidth: 275,
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-}));
+import { useStyles } from './notifications-component-styles';
 
 interface NotificationsCardProps {
     className?: string;

@@ -1,24 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { Button, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import { CardList } from '../../../../components';
-
-const useStyles = makeStyles((theme) => ({
-    header: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'baseline',
-    },
-    list: {
-        marginTop: theme.spacing(2),
-    },
-    button: {
-        borderRadius: theme.shape.borderRadius,
-    },
-}));
-
+import { useStyles } from './list.page.styles';
 const CardListPage: React.FC = () => {
     const classes = useStyles({});
 

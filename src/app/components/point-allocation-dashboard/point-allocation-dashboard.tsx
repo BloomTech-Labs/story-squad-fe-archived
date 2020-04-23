@@ -7,7 +7,7 @@ import { useForm, useAPI } from '../../hooks';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import ava1 from './img/cam.png';
 import ava2 from './img/Hero13.png';
-import { useStyles } from './styles';
+import { useStyles } from './point-allocation-styles';
 import { Avatar, SubmissionDisplay, Header } from './index';
 
 interface PointCardProps {

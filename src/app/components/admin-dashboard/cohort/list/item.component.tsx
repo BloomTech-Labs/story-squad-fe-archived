@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { Button, TableRow, TableCell } from '@material-ui/core';
-
 import { Cohort } from '../../../../models';
 import { useAPI } from '../../../../hooks';
-import { displayError } from '../../../../state';
 
 interface CohortListItemProps {
     cohort: Cohort;

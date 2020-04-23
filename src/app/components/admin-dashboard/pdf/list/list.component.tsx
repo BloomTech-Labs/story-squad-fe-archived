@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import requestFactory from '../../../../util/requestFactory';
-
 import {
     Button,
     Typography,
@@ -11,20 +10,8 @@ import {
     TableRow,
     TableCell,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-
 import { useAPI } from '../../../../hooks';
-
-const useStyles = makeStyles(() => ({
-    header: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    loading: {
-        marginLeft: '1ch',
-    },
-}));
+import { useStyles } from './list.component.styles';
 
 interface PdfListProps {
     className?: string;

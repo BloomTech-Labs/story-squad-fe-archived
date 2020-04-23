@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
-import { Button, Typography, Container, Grid, CircularProgress } from '@material-ui/core';
+import { Button, Container, Grid, CircularProgress } from '@material-ui/core';
 import { Child } from '../../models';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm, useAPI } from '../../hooks';
@@ -203,13 +203,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                         <Grid item xs={6} />
                                         <Grid item xs={6}>
                                             <div className={classes.button}>
-                                                <Link to={`/matchup`}>
-                                                    <Button
-                                                        className={classes.orangeButton}
-                                                        type='submit'>
-                                                        Next
-                                                    </Button>
-                                                </Link>
+                                                <Button
+                                                    className={classes.orangeButton}
+                                                    type='submit'>
+                                                    Next
+                                                </Button>
                                             </div>
                                         </Grid>
                                     </Grid>

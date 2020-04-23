@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
     Card,
     CardContent,
@@ -9,36 +8,10 @@ import {
     TextField,
     CardHeader,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-
 import { Child } from '../../../../models';
 import { childListRefresh, displayError } from '../../../../state';
 import { useAPI, useForm } from '../../../../hooks';
-
-const useStyles = makeStyles((theme) => ({
-    header: {
-        color: theme.palette.primary.contrastText,
-        backgroundColor: theme.palette.primary.main,
-    },
-    content: {
-        display: 'grid',
-        gridGap: theme.spacing(3),
-    },
-    wrapper: {
-        margin: theme.spacing(1),
-        position: 'fixed',
-        bottom: theme.spacing(2),
-        right: theme.spacing(2),
-    },
-    buttonProgress: {
-        color: green[500],
-        position: 'absolute',
-        top: -6,
-        left: -6,
-        zIndex: 1,
-    },
-}));
+import { useStyles } from './create-component-styles';
 
 interface ChildCreateProps {
     onCreate: (child: Child) => void;

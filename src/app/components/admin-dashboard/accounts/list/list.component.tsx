@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-
 import {
     Button,
     Typography,
@@ -10,20 +9,8 @@ import {
     TableRow,
     TableCell,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-
 import { useAPI } from '../../../../hooks';
-
-const useStyles = makeStyles(() => ({
-    header: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    loading: {
-        marginLeft: '1ch',
-    },
-}));
+import { useStyles } from './list-component-styles';
 
 interface Props {
     className?: string;

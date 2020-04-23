@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
 import {
     Drawer,
     Icon,
@@ -11,39 +10,10 @@ import {
     Typography,
     useMediaQuery,
 } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-
+import { useTheme } from '@material-ui/core/styles';
 import { ChildListContext } from '../../../state';
 import { ChildLink } from '../child';
-
-const drawerWidth = 260;
-const useStyles = makeStyles((theme) => ({
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    toolbar: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
-        paddingLeft: theme.spacing(4),
-    },
-    menuItem: {
-        display: 'flex',
-        alignItems: 'center',
-        paddingLeft: theme.spacing(4),
-    },
-    icon: {
-        marginRight: theme.spacing(4),
-    },
-    selected: {
-        '& > .MuiListItem-root': {
-            borderRight: `solid black ${theme.spacing(0.4)}px`,
-        },
-    },
-}));
+import { useStyles } from './navigation-component-styles';
 
 interface NavigationDrawerProps {
     open?: boolean;
@@ -51,7 +21,7 @@ interface NavigationDrawerProps {
 }
 
 const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ open, onClose }) => {
-    const classes = useStyles();
+    const classes = useStyles({});
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('md'));
     const list = React.useContext(ChildListContext);

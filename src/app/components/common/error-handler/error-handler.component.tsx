@@ -1,9 +1,7 @@
 import React from 'react';
-
 import { Snackbar } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Alert } from '@material-ui/lab';
-
 import { ErrorContext, displayError } from '../../../state';
 
 const useStyles = makeStyles((theme: Theme) => ({

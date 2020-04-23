@@ -4,38 +4,10 @@ import ava1 from './img/ava1.png';
 import ava2 from './img/ava2.png';
 import ava3 from './img/ava3.png';
 import ava4 from './img/ava4.png';
-import {
-    Button,
-    Avatar,
-    Typography,
-    Container,
-    Grid,
-    Modal,
-    Fade,
-    Backdrop,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    CircularProgress,
-    Card,
-    Checkbox,
-    Paper,
-    Popper,
-    MenuItem,
-    MenuList,
-    Grow,
-    ClickAwayListener,
-} from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 import { useStyles } from './versus-styles';
-import { Child } from '../../models';
-import { Link } from 'react-router-dom';
-import vsImg from './img/VS.png';
-import { SubmissionDisplay } from './modals/subDisplay.component';
-import VersusMatchup from './versusSubComponents/versusMatchup.component';
-import { ReactComponent as LockedIcon } from './img/lock-icon.svg';
 import { useAPI } from '../../hooks';
-import { VersusHeader } from './versusSubComponents/versusHeader';
+import { VersusHeader, VersusRound, VersusButton } from './versusSubComponents';
 
 interface VersusProps {
     thisBattle?: 0;
@@ -44,15 +16,13 @@ interface VersusProps {
 const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
-    ///TODO: ensure correct props are present on Point Card Props. student, teammate (opposition objects) to pass down pts, submissions, username, etc
     const [thisMatch, setThisMatch] = useState({
         storyHigh: [],
         storyLow: [],
         illustrationHigh: [],
         illutrationLow: [],
-        battleInfo: null,
+        battleInfo: {},
     });
-    ////////state setup from point allocation//////
     const [student, setStudent] = useState({
         username: '',
         avatar: '',
@@ -62,9 +32,9 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             page3: '',
         },
         storyPoints: 0,
-        illustration: '',
         storyOpponent: {
             username: '',
+            avatar: ava3,
             story: {
                 page1: '',
                 page2: '',
@@ -72,19 +42,18 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             },
             storyPoints: 0,
         },
+        illustration: '',
+        illustrationPoints: 0,
         illustrationOpponent: {
-            avatar: '',
+            avatar: ava3,
             username: '',
             illustration: '',
             illustrationPoints: 0,
         },
-        illustrationPoints: 0,
-        storyTotal: 0,
-        illustrationTotal: 0,
     });
     console.log('response.battleInfo', response?.battleInfo);
     const [teammate, setTeammate] = useState({
-        avatar: '',
+        avatar: ava2,
         username: '',
         story: {
             page1: '',
@@ -95,7 +64,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         illustration: '',
         storyOpponent: {
             username: '',
-            avatar: '',
+            avatar: ava4,
             story: {
                 page1: '',
                 page2: '',
@@ -103,15 +72,13 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             },
             storyPoints: 0,
         },
+        illustrationPoints: 0,
         illustrationOpponent: {
-            avatar: '',
+            avatar: ava4,
             username: '',
             illustration: '',
             illustrationPoints: 0,
         },
-        illustrationPoints: 0,
-        storyTotal: 0,
-        illustrationTotal: 0,
     });
     //student/teammate submissions state
     useEffect(() => {
@@ -119,30 +86,55 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
             console.log('VESUS MATCH INFOOOOOOO', response?.battleInfo);
             const { student, teammate } = response?.battleInfo;
             setThisMatch({ ...response });
-            setStudent({ ...student });
-            setTeammate({ ...teammate });
+            setStudent({
+                ...student,
+                avatar: ava1,
+                illustrationOpponent: { ...student.illustrationOpponent, avatar: ava3 },
+                storyOpponent: { ...student.storyOpponent, avatar: ava3 },
+                student: { ...student, avatar: ava1 },
+            });
+            setTeammate({
+                ...teammate,
+                avatar: ava2,
+                illustrationOpponent: { ...teammate.illustrationOpponent, avatar: ava4 },
+                storyOpponent: { ...teammate.storyOpponent, avatar: ava4 },
+            });
         }
     }, [response]);
     console.log(`response`, response?.battleInfo);
-    const [isLocked, setLocked] = useState({ oneVote: true, twoVotes: false, threeVotes: false });
-    const homeTeamNames = `${student.username} & ${teammate.username}!`;
-    const awayTeamNames = `${student.storyOpponent.username} & ${teammate.storyOpponent.username}`;
 
     return (
         <Container className={classes.containerStyling}>
-            <VersusHeader homeTeam={homeTeamNames} awayTeam={awayTeamNames} />
-            <Grid className={classes.story1}>
-                <VersusMatchup
-                    className={`${classes.nameRow} ${classes.nameRowBig}`}
-                    key='story1Points'
-                    username={student.username}
-                    oppUsername={student.storyOpponent.username}
-                    submission={student.story.page1}
-                    points={student.storyPoints}
-                    type='Story'
-                    storyTotal={student.storyTotal}
+            <VersusHeader
+                title={'The MatchUp'}
+                homeTeam={`${student.username} & ${teammate.username}!`}
+                awayTeam={`${student.storyOpponent.username} & ${teammate.storyOpponent.username}!`}
+            />
+            <Grid className={classes.topRow}>
+                <VersusRound
+                    roundStyle={classes.story1}
+                    nameRowStyle={classes.nameRowBig}
+                    homeName={student.username}
+                    homeAvatar={student.avatar}
+                    homeSubmission={student.story}
+                    homePoints={student.storyPoints}
+                    awayName={student.storyOpponent.username}
+                    awayAvatar={student.storyOpponent.avatar}
+                    awaySubmission={student.storyOpponent.story}
+                    awayPoints={student.storyOpponent.storyPoints}
                 />
-                <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
+                <VersusRound
+                    roundStyle={classes.story2}
+                    nameRowStyle={classes.nameRowSmall}
+                    homeName={teammate.username}
+                    homeAvatar={teammate.avatar}
+                    homeSubmission={teammate.story}
+                    homePoints={teammate.storyPoints}
+                    awayName={teammate.storyOpponent.username}
+                    awayAvatar={teammate.storyOpponent.avatar}
+                    awaySubmission={teammate.storyOpponent.story}
+                    awayPoints={teammate.storyOpponent.storyPoints}
+                />
             </Grid>
             <Grid className={classes.story2}>
                 <VersusMatchup
@@ -158,49 +150,31 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
             </Grid>
             <Grid className={classes.bottomRow}>
-                <Grid className={classes.picture1}>
-                    <VersusMatchup
-                        className={`${classes.nameRow} ${classes.nameRowBig}`}
-                        key='story1Points'
-                        username={student.username}
-                        oppUsername={student.storyOpponent.username}
-                        submission={student.story.page1}
-                        points={student.storyPoints}
-                        type='Story'
-                        storyTotal={student.storyTotal}
-                    />
-                    <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-                </Grid>
-
-                <Grid className={classes.picture2}>
-                    <VersusMatchup
-                        className={`${classes.nameRow} ${classes.nameRowSmall}`}
-                        key='story1Points'
-                        username={student.username}
-                        oppUsername={student.storyOpponent.username}
-                        submission={student.story.page1}
-                        points={student.storyPoints}
-                        type='Story'
-                        storyTotal={student.storyTotal}
-                    />
-                    <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-                </Grid>
-
-                {/*Buttons */}
-                <Grid className={classes.btnContainer}>
-                    <Grid className={classes.btnDiv}>
-                        <Link to={`/kids-dashboard/team-join`}>
-                            <Button className={classes.orangeButton} type='button'>
-                                Back
-                            </Button>
-                        </Link>
-                        <Link to={`/voting`}>
-                            <Button className={classes.orangeButton} type='submit'>
-                                Vote
-                            </Button>
-                        </Link>
-                    </Grid>
-                </Grid>
+                <VersusRound
+                    roundStyle={classes.picture1}
+                    nameRowStyle={classes.nameRowSmall}
+                    homeName={student.username}
+                    homeAvatar={student.avatar}
+                    homeSubmission={student.illustration}
+                    homePoints={student.illustrationPoints}
+                    awayName={student.illustrationOpponent.username}
+                    awayAvatar={student.illustrationOpponent.avatar}
+                    awaySubmission={student.illustrationOpponent.illustration}
+                    awayPoints={student.illustrationOpponent.illustrationPoints}
+                />
+                <VersusRound
+                    roundStyle={classes.picture2}
+                    nameRowStyle={classes.nameRowBig}
+                    homeName={teammate.username}
+                    homeAvatar={teammate.avatar}
+                    homeSubmission={teammate.illustration}
+                    homePoints={teammate.illustrationPoints}
+                    awayName={teammate.illustrationOpponent.username}
+                    awayAvatar={teammate.illustrationOpponent.avatar}
+                    awaySubmission={teammate.illustrationOpponent.illustration}
+                    awayPoints={teammate.illustrationOpponent.illustrationPoints}
+                />
+                <VersusButton />
             </Grid>
         </Container>
     );

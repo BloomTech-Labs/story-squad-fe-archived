@@ -71,6 +71,8 @@ const App: React.FC = () => {
                         />
                         <Route path='/emoji' component={Emoji} />
                         <Route path='/voting' component={VotingPage} />
+                        <Route path='/terms-of-service' component={ToSPage} />
+                        <Route path='/privacy-policy' component={PrivacyPage} />
                         <Route path='/admin' component={AdminSignInPage} />
                         <Route exact path={['/', '/signup']} component={SignUpPage} />
                         <Route path='/' component={ErrorPage} />

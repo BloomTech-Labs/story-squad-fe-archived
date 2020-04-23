@@ -1,2 +1,0 @@
--   This component is the `MATCHUP` page that immediately follows the `Share Point` page
--   Versus Page lives in `pages` directory and references this component

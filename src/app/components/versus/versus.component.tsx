@@ -32,6 +32,7 @@ import { Child } from '../../models';
 import { Link } from 'react-router-dom';
 import vsImg from './img/VS.png';
 import { SubmissionDisplay } from './modals/subDisplay.component';
+import VersusMatchup from './versusSubComponents/versusMatchup.component';
 import { ReactComponent as LockedIcon } from './img/lock-icon.svg';
 import { useAPI } from '../../hooks';
 import { VersusHeader } from './versusSubComponents/versusHeader';
@@ -159,7 +160,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                         </div>
                         {/* High story2 */}
                         <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
+                            <VersusMatchup
                                 key='story1Points'
                                 // points={state.story1Points}
                                 username={student.storyOpponent.username}
@@ -167,6 +168,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                                 points={student.storyOpponent.storyPoints}
                                 type='Story'
                             />
+                            {/* <SubmissionDisplay
+                                key='story1Points'
+                                // points={state.story1Points}
+                                username={student.storyOpponent.username}
+                                submission={student.storyOpponent.story.page1}
+                                points={student.storyOpponent.storyPoints}
+                                type='Story'
+                            /> */}
                         </Grid>
                     </div>
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
@@ -201,14 +210,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                         </div>
                         {/* Low story2 */}
                         <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
+                            {/* <SubmissionDisplay
                                 key='story1Points'
                                 // points={state.story1Points}
                                 username={teammate.storyOpponent.username}
                                 submission={teammate.storyOpponent.story.page1}
                                 points={teammate.storyOpponent.storyPoints}
                                 type='Story'
-                            />
+                            /> */}
                         </Grid>
                     </div>
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
@@ -245,14 +254,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                         </div>
                         {/* high pic2 */}
                         <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
+                            {/* <SubmissionDisplay
                                 key='pic1Points'
                                 // points={state.story1Points}
                                 username={student.illustrationOpponent.username}
                                 submission={student.illustrationOpponent.illustration}
                                 points={student.illustrationOpponent.illustrationPoints}
                                 type='Illustration'
-                            />
+                            /> */}
                         </Grid>
                     </div>
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
@@ -287,14 +296,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                         </div>
                         {/* Low Pic2 */}
                         <Grid item xs={12} sm={12} md={6}>
-                            <SubmissionDisplay
+                            {/* <SubmissionDisplay
                                 key='pic1Points'
                                 // points={state.story1Points}
                                 username={teammate.illustrationOpponent.username}
                                 submission={teammate.illustrationOpponent.illustration}
                                 points={teammate.illustrationOpponent.illustrationPoints}
                                 type='Illustration'
-                            />
+                            /> */}
                         </Grid>
                     </div>
                     <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />

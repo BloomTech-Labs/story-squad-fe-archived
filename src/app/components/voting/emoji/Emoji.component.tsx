@@ -138,14 +138,10 @@ export const Emoji: React.FC = () => {
 
     const handleChanges = (e) => {
         setNewEmoji([...newEmoji, e.target.value]);
-        if (newEmoji.length >= 6) {
-            return newEmoji;
-        } 
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setNewEmoji([]);
         setNewEmoji([]);
     };
 
@@ -157,18 +153,24 @@ export const Emoji: React.FC = () => {
                     {emojiSelection.map((emoji) => {
                         return (
                             <div className={classes.emojiDiv} key={emoji}>
-                                <button
-                                    className={classes.emojiButton}
-                                    value={emoji}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleChanges(e);
-                                    }}
-                                    onSubmit={(e) => {
-                                        e.preventDefault();
-                                    }}>
-                                    {emoji}
-                                </button>
+                                {newEmoji.length < 6 ? (
+                                    <button
+                                        className={classes.emojiButton}
+                                        value={emoji}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleChanges(e);
+                                        }}
+                                        onSubmit={(e) => {
+                                            e.preventDefault();
+                                        }}>
+                                        {emoji}
+                                    </button>
+                                ) : (
+                                    <button className={classes.emojiButton} value={emoji}>
+                                        {emoji}
+                                    </button>
+                                )}
                             </div>
                         );
                     })}

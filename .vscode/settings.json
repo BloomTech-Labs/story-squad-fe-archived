@@ -5,6 +5,7 @@
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 4,
+    "editor.formatOnSave": true,
     "eslint.enable": false,
     "git.autofetch": true,
     "workbench.colorCustomizations": {
@@ -28,5 +29,5 @@
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "peacock.color": "#2c0c18",
+    "peacock.color": "#2c0c18"
 }

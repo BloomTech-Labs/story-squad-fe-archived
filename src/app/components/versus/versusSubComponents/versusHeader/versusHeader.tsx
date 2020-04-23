@@ -1,7 +1,7 @@
 import React from 'react';
-import { MenuButton } from '../../reusable-components';
+import { MenuButton } from '../../../reusable-components';
 import { Typography, Grid } from '@material-ui/core';
-import { useStyles } from '../versus-styles';
+import { useStyles } from './versus-header-styles';
 
 interface HeaderProps {
     title?: string;

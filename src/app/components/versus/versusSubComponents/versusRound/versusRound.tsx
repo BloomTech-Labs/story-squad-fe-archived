@@ -1,8 +1,8 @@
 import React from 'react';
 import { Avatar, Grid } from '@material-ui/core';
-import { SubmissionDisplay } from '../modals/subDisplay.component';
-import { useStyles } from '../versus-styles';
-import vsImg from '../img/VS.png';
+import { SubmissionDisplay } from '../../modals/subDisplay.component';
+import { useStyles } from '../../versus-styles';
+import vsImg from '../../img/VS.png';
 
 interface RoundProps {
     roundStyle: {};
@@ -32,7 +32,7 @@ const VersusRound: React.FC<RoundProps> = ({
     const classes = useStyles();
     const submissionCheck = (submission) =>
         typeof submission === 'string' ? submission : Object.values(submission);
-
+    console.log(`asdasd`, nameRowStyle);
     return (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>

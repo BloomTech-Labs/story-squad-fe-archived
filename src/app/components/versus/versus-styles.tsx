@@ -1,110 +1,10 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import cityscape from '../child-dashboard/kid-progress/icons/cityscape.png';
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        vs: {
-            height: '88%',
-            zIndex: 10,
-            position: 'absolute',
-        },
-        card: {
-            alignSelf: 'center',
-            maxWidth: theme.breakpoints.values.md,
-            width: '100%',
-        },
         containerStyling: {
             fontFamily: 'nunito',
             height: '100vh',
             boxSizing: 'border-box',
-        },
-        paper: {
-            backgroundColor: theme.palette.background.paper,
-            border: '2px solid #000',
-            boxShadow: theme.shadows[5],
-            padding: theme.spacing(2, 4, 3),
-        },
-        root: {
-            fontFamily: 'nunito',
-            display: 'flex',
-            flexDirection: 'column',
-            maxHeight: '510%',
-        },
-        h2Styling: {
-            'fontFamily': 'Bangers',
-            'color': '#FFFFFF',
-            'fontSize': '70px',
-            'fontWeight': 'bold',
-            '-webkit-text-stroke-width': '1px',
-            '-webkit-text-stroke-color': '#000000',
-        },
-        h3Styling: {
-            'fontFamily': 'Bangers',
-            'color': '#FFFFFF',
-            'fontSize': '35px',
-            'fontWeight': 'bold',
-            '-webkit-text-stroke-width': '1px',
-            '-webkit-text-stroke-color': '#000000',
-        },
-        h4Styling: {
-            'fontFamily': 'Bangers',
-            'color': '#FFFFFF',
-            'fontSize': '48px',
-            'lineHeight': '51px',
-            'fontWeight': 'bold',
-            '-webkit-text-stroke-width': '1px',
-            '-webkit-text-stroke-color': '#000000',
-            'marginLeft': '3%',
-            'marginRight': '4%',
-            'marginTop': '1%',
-            'display': 'flex',
-        },
-        teamName: {
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            alignContent: 'center',
-            width: '80%',
-        },
-        appBar: {
-            height: '26vh',
-            width: '100%',
-            backgroundColor: '#6CEAE6',
-            backgroundImage: `url(${cityscape})`,
-            backgroundRepeat: 'no-repeat',
-            border: '7px solid #000000',
-            backgroundSize: '101% 103%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-        },
-        logoutButton: {
-            'marginLeft': '780px',
-            'marginBottom': '105px',
-            'backgroundColor': '#FF6B35',
-            'fontSize': '24px',
-            'fontWeight': 'bold',
-            'borderRadius': '10px',
-            'color': 'white',
-            'width': '100px',
-            'border': '3px solid #292929',
-            'textTransform': 'capitalize',
-            'fontFamily': 'nunito',
-            '&:hover': {
-                backgroundColor: '#FF6B35',
-            },
-        },
-        logoutMenu: {
-            'backgroundColor': '#FF6B35',
-            'fontSize': '24px',
-            'fontWeight': 'bold',
-            'color': 'white',
-            'width': '100px',
-            'textTransform': 'capitalize',
-            'border': '2px solid #292929',
-            'fontFamily': 'nunito',
-            '&:hover': {
-                backgroundColor: '#FF6B35',
-            },
         },
         topRow: {
             display: 'flex',
@@ -126,25 +26,6 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         nameRowSmall: {
             padding: '0 7% 0 7%',
-        },
-        subRow: {
-            display: 'flex',
-            justifyContent: 'space-between',
-            zIndex: 9,
-            width: '100%',
-            height: '45%',
-        },
-        leftPlayer: {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '3%',
-        },
-        rightPlayer: {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '3%',
         },
         totalScoreBig: {
             display: 'flex',
@@ -187,9 +68,6 @@ export const useStyles = makeStyles((theme: Theme) =>
                 width: '100%',
             },
             background: 'url({ vsImg })',
-        },
-        pictureHover: {
-            cursor: 'pointer',
         },
         story2: {
             position: 'relative',
@@ -242,34 +120,19 @@ export const useStyles = makeStyles((theme: Theme) =>
                 width: '100%',
             },
         },
-        btnContainer: {
-            zIndex: 1,
+        // versusRound styles
+        // located here as conditional styling for totalScore divs wouldn't work if styles located n /// versusRound folder
+        leftPlayer: {
             display: 'flex',
             justifyContent: 'center',
-            width: '63.5%',
-            position: 'absolute',
-            height: '37vh',
+            alignItems: 'center',
+            marginTop: '3%',
         },
-        btnDiv: {
+        rightPlayer: {
             display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-            width: '100%',
-            margin: '0% 2% 1% 2%',
-        },
-        orangeButton: {
-            'backgroundColor': '#FF6B35',
-            'fontSize': '24px',
-            'fontWeight': 'bold',
-            'borderRadius': '10px',
-            'color': 'white',
-            'width': '200px',
-            'border': '3px solid #292929',
-            'textTransform': 'capitalize',
-            'fontFamily': 'nunito',
-            '&:hover': {
-                backgroundColor: '#FF6B35',
-            },
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '3%',
         },
         avatarStyle: {
             height: '63px',
@@ -285,21 +148,17 @@ export const useStyles = makeStyles((theme: Theme) =>
             lineHeight: '26px',
             color: '#292929',
         },
-        headerMenuDiv: {
-            display: 'flex',
-            flexFlow: 'wrap no-wrap',
-            justifyContent: 'space-around',
-            alignItems: 'center',
+        vs: {
+            height: '88%',
+            zIndex: 10,
+            position: 'absolute',
         },
-        upperTitleDiv: {
+        subRow: {
             display: 'flex',
-            justifyContent: 'flex-end',
-            width: '57.5%',
-        },
-        upperHeaderButtonDiv: {
-            display: 'flex',
-            justifyContent: 'flex-end',
-            width: '20%',
+            justifyContent: 'space-between',
+            zIndex: 9,
+            width: '100%',
+            height: '45%',
         },
     })
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Grid } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
-import { useStyles } from '../versus-styles';
+import { useHistory } from 'react-router-dom';
+import { useStyles } from './versus-button-styles';
 
 const VersusButton: React.FC = () => {
     const history = useHistory();

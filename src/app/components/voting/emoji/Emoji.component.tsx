@@ -1,10 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
-// interface NewEmojiData {
-//     newEmoji?: () => void;
-// }
-
 const emojiSelection = [
     '😀',
     '😃',
@@ -95,8 +91,13 @@ const useStyles = makeStyles((theme: Theme) =>
             'justifyContent': 'space-evenly',
             'flexWrap': 'wrap',
             'overflowY': 'auto',
-            'margin': '1%',
+            'overflowX': 'hidden',
+            'marginBottom': '1%',
+            'padding': '2%',
+            'paddingRight': '3%',
             'position': 'relative',
+            'background': 'rgba(255, 255, 255, 0.75)',
+            'borderRadius': '5px',
             '&::-webkit-scrollbar': {
                 width: '.25em',
             },
@@ -114,6 +115,20 @@ const useStyles = makeStyles((theme: Theme) =>
             height: '40px',
             fontSize: '20px',
         },
+        emojiButton: {
+            border: '0px',
+            background: 'none',
+        },
+        inputDiv: {
+            width: '299px',
+            height: '30px',
+            background: 'rgba(255, 255, 255, 0.75)',
+            borderRadius: '5px',
+            marginBottom: '3%',
+            padding: '.8%',
+            fontSize: '20px',
+            paddingLeft: '4%',
+        },
     })
 );
 
@@ -123,22 +138,27 @@ export const Emoji: React.FC = () => {
 
     const handleChanges = (e) => {
         setNewEmoji([...newEmoji, e.target.value]);
+        if (newEmoji.length >= 6) {
+            return newEmoji;
+        } 
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setNewEmoji([]);
         setNewEmoji([]);
     };
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <div> {newEmoji} </div>
+                <div className={classes.inputDiv}> {newEmoji} </div>
                 <div className={classes.emojiContainer}>
                     {emojiSelection.map((emoji) => {
                         return (
                             <div className={classes.emojiDiv} key={emoji}>
                                 <button
+                                    className={classes.emojiButton}
                                     value={emoji}
                                     onClick={(e) => {
                                         e.preventDefault();
@@ -153,7 +173,7 @@ export const Emoji: React.FC = () => {
                         );
                     })}
                 </div>
-                <button type='submit'>Submit</button>
+                {newEmoji.length >= 4 ? <button type='submit'>Submit</button> : null}
             </form>
         </div>
     );

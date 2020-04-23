@@ -78,8 +78,8 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         button: {
             display: 'flex',
-            justifyContent: 'center',
-            alignItem: 'center',
+            justifyContent: 'flex-end',
+            border: '1px solid red',
         },
         submitDiv: {
             // border: '7px solid #000',

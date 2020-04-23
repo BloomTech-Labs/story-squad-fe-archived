@@ -16,6 +16,7 @@ interface RoundProps {
     awayAvatar: string;
     awaySubmission: any;
     awayPoints: number;
+    locked: boolean;
 }
 
 const VersusRound: React.FC<RoundProps> = ({
@@ -29,13 +30,13 @@ const VersusRound: React.FC<RoundProps> = ({
     awayAvatar,
     awaySubmission,
     awayPoints,
+    locked,
 }) => {
     const classes = useStyles();
-    const [locked, setLocked] = useState(true);
     const submissionCheck = (submission) =>
         typeof submission === 'string' ? submission : Object.values(submission);
     console.log(`asdasd`, nameRowStyle);
-    return !locked ? (
+    return locked ? (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>
                 <div className={classes.leftPlayer}>
@@ -103,7 +104,11 @@ const VersusRound: React.FC<RoundProps> = ({
                     </div>
                 )}
                 <Grid item xs={12} sm={12} md={6}>
-                    <LockIcon />
+                    <SubmissionDisplay
+                        username={awayName}
+                        submission={submissionCheck(awaySubmission)}
+                    />
+                    <LockIcon style={{ position: 'absolute', top: '70px', right: '77px' }} />
                 </Grid>
             </div>
             <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />

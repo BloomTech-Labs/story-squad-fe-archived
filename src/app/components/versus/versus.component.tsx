@@ -103,6 +103,13 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     }, [response]);
     console.log(`response`, response?.battleInfo);
 
+    const [locked, setLocked] = useState({
+        oneVote: false,
+        twoVotes: false,
+        threeVotes: false,
+        final: false,
+    });
+
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader
@@ -122,6 +129,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     awayAvatar={student.storyOpponent.avatar}
                     awaySubmission={student.storyOpponent.story}
                     awayPoints={student.storyOpponent.storyPoints}
+                    locked={locked.final}
                 />
                 <VersusRound
                     roundStyle={classes.story2}
@@ -134,6 +142,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     awayAvatar={teammate.storyOpponent.avatar}
                     awaySubmission={teammate.storyOpponent.story}
                     awayPoints={teammate.storyOpponent.storyPoints}
+                    locked={locked.threeVotes}
                 />
             </Grid>
             <Grid className={classes.bottomRow}>
@@ -148,6 +157,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     awayAvatar={student.illustrationOpponent.avatar}
                     awaySubmission={student.illustrationOpponent.illustration}
                     awayPoints={student.illustrationOpponent.illustrationPoints}
+                    locked={locked.twoVotes}
                 />
                 <VersusRound
                     roundStyle={classes.picture2}
@@ -160,6 +170,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     awayAvatar={teammate.illustrationOpponent.avatar}
                     awaySubmission={teammate.illustrationOpponent.illustration}
                     awayPoints={teammate.illustrationOpponent.illustrationPoints}
+                    locked={locked.oneVote}
                 />
                 <VersusButton />
             </Grid>

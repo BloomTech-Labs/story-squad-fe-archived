@@ -118,6 +118,7 @@ const useStyles = makeStyles((theme: Theme) =>
         emojiButton: {
             border: '0px',
             background: 'none',
+            outline: 'none',
         },
         inputDiv: {
             width: '299px',
@@ -127,7 +128,10 @@ const useStyles = makeStyles((theme: Theme) =>
             marginBottom: '3%',
             padding: '.8%',
             fontSize: '20px',
-            paddingLeft: '4%',
+            paddingLeft: '7%',
+        },
+        emojiSpan: {
+            letterSpacing: '18px',
         },
     })
 );
@@ -137,40 +141,41 @@ export const Emoji: React.FC = () => {
     const [newEmoji, setNewEmoji] = React.useState([]);
 
     const handleChanges = (e) => {
-        setNewEmoji([...newEmoji, e.target.value]);
+        if (newEmoji.length < 6) {
+            setNewEmoji([...newEmoji, e.target.value]);
+        } else {
+            return null;
+        }
     };
-
+    console.log('this is state', newEmoji);
     const handleSubmit = (e) => {
         e.preventDefault();
         setNewEmoji([]);
+        console.log('this is the submission', newEmoji);
     };
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <div className={classes.inputDiv}> {newEmoji} </div>
+                <div className={classes.inputDiv}>
+                    <span className={classes.emojiSpan}>{newEmoji}</span>
+                </div>
                 <div className={classes.emojiContainer}>
                     {emojiSelection.map((emoji) => {
                         return (
                             <div className={classes.emojiDiv} key={emoji}>
-                                {newEmoji.length < 6 ? (
-                                    <button
-                                        className={classes.emojiButton}
-                                        value={emoji}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            handleChanges(e);
-                                        }}
-                                        onSubmit={(e) => {
-                                            e.preventDefault();
-                                        }}>
-                                        {emoji}
-                                    </button>
-                                ) : (
-                                    <button className={classes.emojiButton} value={emoji}>
-                                        {emoji}
-                                    </button>
-                                )}
+                                <button
+                                    className={classes.emojiButton}
+                                    value={emoji}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleChanges(e);
+                                    }}
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
+                                    }}>
+                                    {emoji}
+                                </button>
                             </div>
                         );
                     })}

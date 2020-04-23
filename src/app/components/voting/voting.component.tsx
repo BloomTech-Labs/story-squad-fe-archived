@@ -25,7 +25,6 @@ import {
     ClickAwayListener,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-// import { white } from '@material-ui/core/colors';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
 import story1 from './img/leowriting.jpg';
@@ -38,6 +37,9 @@ const ColoredRadio = withStyles({
     root: {
         '&$checked': {
             color: '#FFFFFF',
+        },
+        '&&:hover': {
+            backgroundColor: 'transparent',
         },
     },
     checked: {},
@@ -95,6 +97,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             value='a'
                             name='storyA'
                             inputProps={{ 'aria-label': 'A' }}
+                            disableRipple={true}
                         />
                         <Emoji />
                     </div>
@@ -115,18 +118,19 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             value='b'
                             name='storyB'
                             inputProps={{ 'aria-label': 'B' }}
+                            disableRipple={true}
                         />
                         <Emoji />
                         {/* <Grid container xs={8} className={classes.submitDiv}>
                             <Grid item xs={6} />
                             <Grid item xs={6}> */}
+                        {/* </Grid>
+                        </Grid> */}
                         <div className={classes.button}>
                             <Button className={classes.orangeButton} type='submit'>
                                 Submit
                             </Button>
                         </div>
-                        {/* </Grid>
-                        </Grid> */}
                     </div>
                 </Grid>
             </Grid>

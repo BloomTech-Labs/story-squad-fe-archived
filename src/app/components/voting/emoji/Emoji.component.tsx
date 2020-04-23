@@ -147,11 +147,11 @@ export const Emoji: React.FC = () => {
             return null;
         }
     };
-    console.log('this is state', newEmoji);
+    // console.log('this is state', newEmoji);
     const handleSubmit = (e) => {
         e.preventDefault();
         setNewEmoji([]);
-        console.log('this is the submission', newEmoji);
+        // console.log('this is the submission', newEmoji);
     };
 
     return (
@@ -180,7 +180,17 @@ export const Emoji: React.FC = () => {
                         );
                     })}
                 </div>
-                {newEmoji.length >= 4 ? <button type='submit'>Submit</button> : null}
+                <div>
+                    {newEmoji.length >= 4 ? <button type='submit'>Send</button> : null}
+                    {newEmoji.length > 0 ? (
+                        <button
+                            onClick={() => {
+                                setNewEmoji([]);
+                            }}>
+                            Clear
+                        </button>
+                    ) : null}
+                </div>
             </form>
         </div>
     );

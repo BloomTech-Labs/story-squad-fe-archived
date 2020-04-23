@@ -74,7 +74,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         direction='column'
                         justify='space-around'
                         alignItems='center'>
-                        <Typography className={classes.h2Styling} variant='h2'>
+                        <Typography className={classes.h3Styling} variant='h2'>
                             Vote For Your Favorite Story
                         </Typography>
                     </Grid>

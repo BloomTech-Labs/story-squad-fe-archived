@@ -104,9 +104,9 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     console.log(`response`, response?.battleInfo);
 
     const [locked, setLocked] = useState({
-        oneVote: false,
-        twoVotes: false,
-        threeVotes: false,
+        oneVote: true,
+        twoVotes: true,
+        threeVotes: true,
         final: false,
     });
 

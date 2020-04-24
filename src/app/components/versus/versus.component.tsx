@@ -104,10 +104,9 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     console.log(`response`, response?.battleInfo);
 
     const [locked, setLocked] = useState({
-        oneVote: true,
-        twoVotes: true,
-        threeVotes: true,
-        final: false,
+        oneVote: false,
+        twoVotes: false,
+        threeVotes: false,
     });
 
     return (
@@ -129,7 +128,7 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     awayAvatar={student.storyOpponent.avatar}
                     awaySubmission={student.storyOpponent.story}
                     awayPoints={student.storyOpponent.storyPoints}
-                    locked={locked.final}
+                    locked={false}
                 />
                 <VersusRound
                     roundStyle={classes.story2}

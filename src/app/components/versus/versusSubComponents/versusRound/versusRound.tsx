@@ -108,7 +108,14 @@ const VersusRound: React.FC<RoundProps> = ({
                         username={awayName}
                         submission={submissionCheck(awaySubmission)}
                     />
-                    <LockIcon style={{ position: 'absolute', top: '70px', right: '88 px' }} />
+                    <LockIcon
+                        style={{
+                            position: 'absolute',
+                            top: '60%',
+                            left: '77%',
+                            transform: 'translate(-50%, -50%)',
+                        }}
+                    />
                 </Grid>
             </div>
             <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />

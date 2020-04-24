@@ -11,7 +11,7 @@ import {
     LinearProgress,
 } from '@material-ui/core';
 import { useAPI, useForm } from '../../../../hooks';
-import { useStyles } from './story-form-styles';
+import { useStyles } from '../drawing-form/drawing-form-styles';
 
 interface StoryFormProps {
     onUpdate?: () => void;
@@ -105,10 +105,10 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
             <Card className={classes.card}>
-                <div className={classes.appBar}>
+                <div className={classes.appBarStoryForm}>
                     <div className={classes.headerFont}>Pencils Ready?</div>
                 </div>
-                <CardContent className={classes.content}>
+                <CardContent className={classes.contentStoryForm}>
                     <h2 className={classes.promptText}>
                         This will display the writing prompt for the week
                     </h2>

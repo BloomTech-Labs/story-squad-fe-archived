@@ -86,10 +86,10 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
             <Card className={classes.card}>
-                <div className={classes.appBar}>
+                <div className={classes.appBarDrawingForm}>
                     <div className={classes.headerFont}>Ready, Set... DRAW!</div>
                 </div>
-                <CardContent className={classes.content}>
+                <CardContent className={classes.contentDrawingForm}>
                     <h2 className={classes.promptText}>Draw your favorite part of the story!</h2>
                     <TextField
                         InputLabelProps={{ shrink: true }}

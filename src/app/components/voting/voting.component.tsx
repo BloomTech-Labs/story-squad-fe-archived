@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import 'typeface-nunito';
 import { useStyles } from './voting-styles';
 import {
@@ -63,6 +64,14 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedValue(event.target.value);
     };
+
+    const history = useHistory();
+
+    const emojiSubmit = (e) => {
+        e.preventDefault();
+        history.push(`/matchup`);
+    };
+
     return (
         <Container className={classes.containerStyling}>
             <Grid container>
@@ -127,7 +136,10 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         {/* </Grid>
                         </Grid> */}
                         <div className={classes.button}>
-                            <Button className={classes.orangeButton} type='submit'>
+                            <Button
+                                onClick={(e) => emojiSubmit(e)}
+                                className={classes.orangeButton}
+                                type='submit'>
                                 Submit
                             </Button>
                         </div>

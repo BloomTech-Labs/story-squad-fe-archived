@@ -1,29 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
 import { useStyles } from './voting-styles';
-import {
-    Button,
-    Avatar,
-    Typography,
-    Container,
-    Grid,
-    Modal,
-    Fade,
-    Backdrop,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    CircularProgress,
-    Card,
-    Checkbox,
-    Paper,
-    Popper,
-    MenuItem,
-    MenuList,
-    Grow,
-    ClickAwayListener,
-} from '@material-ui/core';
+import { Button, Typography, Container, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
@@ -32,6 +10,7 @@ import story2 from './img/chancewriting.jpg';
 import { useForm } from '../../hooks';
 import { VotingModal } from './modal/modal-image';
 import { Emoji } from './emoji/Emoji.component';
+import { Popup } from '../voting/popup-alert/Popup.alert';
 
 const ColoredRadio = withStyles({
     root: {
@@ -48,6 +27,8 @@ const ColoredRadio = withStyles({
 interface VotingCardProps {
     child: Child;
     handleChange: any;
+    open: boolean;
+    setOpen: any;
 }
 
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
@@ -59,10 +40,20 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
     });
     const [dummyData, setDummyData] = useState({ dummy: 'data' });
     const [selectedValue, setSelectedValue] = React.useState('a');
+    const [open, setOpen] = React.useState(false);
     const classes = useStyles({});
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedValue(event.target.value);
     };
+
+    const handleSubmit = () => {
+        // if less than 4
+        setOpen(true);
+        // else
+        // post endpoint
+        // history.push
+    };
+
     return (
         <Container className={classes.containerStyling}>
             <Grid container>
@@ -127,11 +118,12 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         {/* </Grid>
                         </Grid> */}
                         <div className={classes.button}>
-                            <Button className={classes.orangeButton} type='submit'>
+                            <Button className={classes.orangeButton} onClick={handleSubmit}>
                                 Submit
                             </Button>
                         </div>
                     </div>
+                    <Popup open={open} setOpen={setOpen} />
                 </Grid>
             </Grid>
         </Container>

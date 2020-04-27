@@ -11,9 +11,13 @@ export const useStyles = makeStyles((theme) => ({
         borderBottom: '7px solid #000000',
         borderRight: '7px solid #000000',
     },
-    content: {
+    contentDrawingForm: {
         display: 'flex',
         flexDirection: 'column',
+    },
+    contentStoryForm: {
+        display: 'grid',
+        gridGap: theme.spacing(3),
     },
     form: {
         margin: '0 auto',
@@ -48,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         fontFamily: 'nunito',
     },
-    appBar: {
+    appBarDrawingForm: {
         height: '229px',
         backgroundColor: '#6CEAE6',
         backgroundImage: `url(${cityscape})`,
@@ -57,6 +61,18 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    appBarStoryForm: {
+        height: '229px',
+        backgroundColor: '#6CEAE6',
+        backgroundImage: `url(${cityscape})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '101% 103%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottom: '7px solid #000000',
+        borderTop: '7px solid #000000',
     },
     headerFont: {
         'fontFamily': 'Bangers',

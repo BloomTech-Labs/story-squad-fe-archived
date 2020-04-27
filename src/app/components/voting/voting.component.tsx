@@ -25,17 +25,21 @@ import {
     ClickAwayListener,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { blue, red, green } from '@material-ui/core/colors';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
 import story1 from './img/leowriting.jpg';
 import story2 from './img/chancewriting.jpg';
 import { useForm } from '../../hooks';
 import { VotingModal } from './modal/modal-image';
+import { Emoji } from './emoji/Emoji.component';
+
 const ColoredRadio = withStyles({
     root: {
         '&$checked': {
-            color: green[600],
+            color: '#FFFFFF',
+        },
+        '&&:hover': {
+            backgroundColor: 'transparent',
         },
     },
     checked: {},
@@ -70,7 +74,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         direction='column'
                         justify='space-around'
                         alignItems='center'>
-                        <Typography className={classes.h2Styling} variant='h2'>
+                        <Typography className={classes.h3Styling} variant='h2'>
                             Vote For Your Favorite Story
                         </Typography>
                     </Grid>
@@ -93,7 +97,9 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             value='a'
                             name='storyA'
                             inputProps={{ 'aria-label': 'A' }}
+                            disableRipple={true}
                         />
+                        <Emoji />
                     </div>
                 </Grid>
                 <Grid className={classes.story2}>
@@ -112,18 +118,20 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             value='b'
                             name='storyB'
                             inputProps={{ 'aria-label': 'B' }}
+                            disableRipple={true}
                         />
+                        <Emoji />
+                        {/* <Grid container xs={8} className={classes.submitDiv}>
+                            <Grid item xs={6} />
+                            <Grid item xs={6}> */}
+                        {/* </Grid>
+                        </Grid> */}
+                        <div className={classes.button}>
+                            <Button className={classes.orangeButton} type='submit'>
+                                Submit
+                            </Button>
+                        </div>
                     </div>
-                    <Grid container xs={8} className={classes.submitDiv}>
-                        <Grid item xs={6} />
-                        <Grid item xs={6}>
-                            <div className={classes.button}>
-                                <Button className={classes.orangeButton} type='submit'>
-                                    Submit
-                                </Button>
-                            </div>
-                        </Grid>
-                    </Grid>
                 </Grid>
             </Grid>
         </Container>

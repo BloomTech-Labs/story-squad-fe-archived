@@ -91,8 +91,13 @@ const useStyles = makeStyles((theme: Theme) =>
             'justifyContent': 'space-evenly',
             'flexWrap': 'wrap',
             'overflowY': 'auto',
-            'margin': '1%',
+            'overflowX': 'hidden',
+            'marginBottom': '1%',
+            'padding': '2%',
+            'paddingRight': '3%',
             'position': 'relative',
+            'background': 'rgba(255, 255, 255, 0.75)',
+            'borderRadius': '5px',
             '&::-webkit-scrollbar': {
                 width: '.25em',
             },
@@ -104,30 +109,89 @@ const useStyles = makeStyles((theme: Theme) =>
                 outline: '1px solid slategrey',
                 borderRadius: '10px',
             },
-            // '&::-webkit-scrollbar-button': {
-            //     backgroundColor: 'rgba(0,0,0,.2)',
-            //     backgroundImage: `url('https://i.imgur.com/bj8uVqJ.jpg')`,
-            // },
         },
         emojiDiv: {
             width: '30px',
             height: '40px',
             fontSize: '20px',
         },
+        emojiButton: {
+            border: '0px',
+            background: 'none',
+            outline: 'none',
+        },
+        inputDiv: {
+            width: '299px',
+            height: '30px',
+            background: 'rgba(255, 255, 255, 0.75)',
+            borderRadius: '5px',
+            marginBottom: '3%',
+            padding: '.8%',
+            fontSize: '20px',
+            paddingLeft: '7%',
+        },
+        emojiSpan: {
+            letterSpacing: '18px',
+        },
     })
 );
 
 export const Emoji: React.FC = () => {
     const classes = useStyles({});
+    const [newEmoji, setNewEmoji] = React.useState([]);
+
+    const handleChanges = (e) => {
+        if (newEmoji.length < 6) {
+            setNewEmoji([...newEmoji, e.target.value]);
+        } else {
+            return null;
+        }
+    };
+    // console.log('this is state', newEmoji);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setNewEmoji([]);
+        // console.log('this is the submission', newEmoji);
+    };
+
     return (
-        <div className={classes.emojiContainer}>
-            {emojiSelection.map((emoji) => {
-                return (
-                    <div className={classes.emojiDiv} key={emoji}>
-                        {emoji}
-                    </div>
-                );
-            })}
+        <div>
+            <form onSubmit={handleSubmit}>
+                <div className={classes.inputDiv}>
+                    <span className={classes.emojiSpan}>{newEmoji}</span>
+                </div>
+                <div className={classes.emojiContainer}>
+                    {emojiSelection.map((emoji) => {
+                        return (
+                            <div className={classes.emojiDiv} key={emoji}>
+                                <button
+                                    className={classes.emojiButton}
+                                    value={emoji}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleChanges(e);
+                                    }}
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
+                                    }}>
+                                    {emoji}
+                                </button>
+                            </div>
+                        );
+                    })}
+                </div>
+                <div>
+                    {newEmoji.length >= 4 ? <button type='submit'>Send</button> : null}
+                    {newEmoji.length > 0 ? (
+                        <button
+                            onClick={() => {
+                                setNewEmoji([]);
+                            }}>
+                            Clear
+                        </button>
+                    ) : null}
+                </div>
+            </form>
         </div>
     );
 };

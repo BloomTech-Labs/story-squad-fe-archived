@@ -2,29 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import 'typeface-nunito';
 import { useStyles } from './voting-styles';
-import {
-    Button,
-    Avatar,
-    Typography,
-    Container,
-    Grid,
-    Modal,
-    Fade,
-    Backdrop,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    CircularProgress,
-    Card,
-    Checkbox,
-    Paper,
-    Popper,
-    MenuItem,
-    MenuList,
-    Grow,
-    ClickAwayListener,
-} from '@material-ui/core';
+import { Button, Typography, Container, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
@@ -33,6 +11,7 @@ import story2 from './img/chancewriting.jpg';
 import { useForm } from '../../hooks';
 import { VotingModal } from './modal/modal-image';
 import { Emoji } from './emoji/Emoji.component';
+import { Popup } from '../voting/popup-alert/Popup.alert';
 
 const ColoredRadio = withStyles({
     root: {
@@ -58,18 +37,37 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
         pic1Points: 'something',
         pic2Points: 'something',
     });
+
     const [dummyData, setDummyData] = useState({ dummy: 'data' });
     const [selectedValue, setSelectedValue] = React.useState('a');
+    const [open, setOpen] = React.useState(false);
+    const [newEmoji, setNewEmoji] = React.useState({
+        player1: [],
+        player2: [],
+    });
     const classes = useStyles({});
+
+    const emojiSelector1 = (arr) => {
+        setNewEmoji({ ...newEmoji, player1: arr });
+    };
+
+    const emojiSelector2 = (arr) => {
+        setNewEmoji({ ...newEmoji, player2: arr });
+    };
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedValue(event.target.value);
     };
 
-    const history = useHistory();
-
-    const emojiSubmit = (e) => {
-        e.preventDefault();
-        history.push(`/matchup`);
+    const handleSubmit = () => {
+        if (newEmoji.player1.length < 4 || newEmoji.player2.length < 4) {
+            setOpen(true);
+        } else {
+            console.log('hi');
+        }
+        // post endpoint
+        // clear newEmoji state
+        // history.push
     };
 
     return (
@@ -108,7 +106,11 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             inputProps={{ 'aria-label': 'A' }}
                             disableRipple={true}
                         />
-                        <Emoji />
+                        <Emoji
+                            emojiCondit={emojiSelector1}
+                            newEmoji={newEmoji.player1}
+                            setNewEmoji={setNewEmoji}
+                        />
                     </div>
                 </Grid>
                 <Grid className={classes.story2}>
@@ -129,21 +131,23 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             inputProps={{ 'aria-label': 'B' }}
                             disableRipple={true}
                         />
-                        <Emoji />
+                        <Emoji
+                            emojiCondit={emojiSelector2}
+                            newEmoji={newEmoji.player2}
+                            setNewEmoji={setNewEmoji}
+                        />
                         {/* <Grid container xs={8} className={classes.submitDiv}>
                             <Grid item xs={6} />
                             <Grid item xs={6}> */}
                         {/* </Grid>
                         </Grid> */}
                         <div className={classes.button}>
-                            <Button
-                                onClick={(e) => emojiSubmit(e)}
-                                className={classes.orangeButton}
-                                type='submit'>
+                            <Button className={classes.orangeButton} onClick={handleSubmit}>
                                 Submit
                             </Button>
                         </div>
                     </div>
+                    <Popup open={open} setOpen={setOpen} />
                 </Grid>
             </Grid>
         </Container>

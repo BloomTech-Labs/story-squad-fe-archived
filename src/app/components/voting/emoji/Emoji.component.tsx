@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 const emojiSelection = [
@@ -8,23 +8,14 @@ const emojiSelection = [
     '😁',
     '😆',
     '😅',
-    // 'rolling laugh',
     '😂',
     '🙂',
     '🙃',
     '😉',
     '😇',
-    // 'star eyes',
     '😋',
     '😜',
-    // 'crazy eyes',
     '😝',
-    // 'money tongue',
-    // 'covering mouth',
-    // 'shush',
-    // 'thinking',
-    // 'zipper mouth',
-    // 'raised eyebrow',
     '😐',
     '😑',
     '😶',
@@ -32,40 +23,20 @@ const emojiSelection = [
     '😒',
     '🙄',
     '😬',
-    // 'pinocchio',
-    // 'smug smile',
     '😞',
     '😪',
-    // 'drool',
     '😴',
     '😷',
-    // 'thermometer',
-    // 'bandage',
-    // 'green face',
-    // 'vomit',
-    // 'nose blowing',
-    // 'red hot face',
-    // 'cold blue face',
-    // 'whirly smile',
-    // 'crossed out eyes',
-    // 'mind blown',
-    // 'cowboy hat',
-    // 'party',
     '😎',
-    // 'nerdy glasses',
-    // 'monacle',
     '😕',
     '😟',
     '🙁',
-    // 'extra sad',
     '😮',
     '😯',
     '😲',
     '😳',
-    // 'puppy eyes',
     '😦',
     '😧',
-    // 'blue top frown',
     '😰',
     '😥',
     '😢',
@@ -73,11 +44,8 @@ const emojiSelection = [
     '😱',
     '😖',
     '😣',
-    // 'another sad',
-    // 'sweaty sad',
     '😩',
     '😫',
-    // 'yawn with hand',
     '😤',
 ];
 
@@ -136,29 +104,36 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export const Emoji: React.FC = () => {
+interface VotingStateProps {
+    newEmoji: any;
+    setNewEmoji: any;
+    emojiCondit: (arr: any) => void;
+}
+
+export const Emoji: React.FC<VotingStateProps> = ({ newEmoji, setNewEmoji, emojiCondit }) => {
     const classes = useStyles({});
-    const [newEmoji, setNewEmoji] = React.useState([]);
+
+    const [emojiInput, setEmojiInput] = React.useState([]);
 
     const handleChanges = (e) => {
-        if (newEmoji.length < 6) {
-            setNewEmoji([...newEmoji, e.target.value]);
+        if (emojiInput.length < 6) {
+            setEmojiInput([...emojiInput, e.target.value]);
         } else {
             return null;
         }
     };
-    // console.log('this is state', newEmoji);
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setNewEmoji([]);
-        // console.log('this is the submission', newEmoji);
+    // console.log('this is emoji state', emojiInput);
+
+    const saveState = () => {
+        setNewEmoji({ ...newEmoji, emojiInput });
     };
+    // console.log('this is object state', newEmoji);
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <div className={classes.inputDiv}>
-                    <span className={classes.emojiSpan}>{newEmoji}</span>
+                    <span className={classes.emojiSpan}>{emojiInput}</span>
                 </div>
                 <div className={classes.emojiContainer}>
                     {emojiSelection.map((emoji) => {
@@ -170,9 +145,7 @@ export const Emoji: React.FC = () => {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         handleChanges(e);
-                                    }}
-                                    onSubmit={(e) => {
-                                        e.preventDefault();
+                                        emojiCondit(emojiInput);
                                     }}>
                                     {emoji}
                                 </button>
@@ -181,11 +154,10 @@ export const Emoji: React.FC = () => {
                     })}
                 </div>
                 <div>
-                    {newEmoji.length >= 4 ? <button type='submit'>Send</button> : null}
-                    {newEmoji.length > 0 ? (
+                    {emojiInput.length > 0 ? (
                         <button
                             onClick={() => {
-                                setNewEmoji([]);
+                                setEmojiInput([]);
                             }}>
                             Clear
                         </button>

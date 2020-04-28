@@ -65,7 +65,12 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     console.log(matchups);
     console.log(matchdata);
 
-    if (matchdata.homeTeam === undefined) return <></>;
+    if (matchdata.homeTeam === undefined)
+        return (
+            <Container className={classes.containerStyling}>
+                <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} />
+            </Container>
+        );
 
     return (
         <Container className={classes.containerStyling}>

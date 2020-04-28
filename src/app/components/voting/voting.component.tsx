@@ -27,8 +27,6 @@ const ColoredRadio = withStyles({
 interface VotingCardProps {
     child: Child;
     handleChange: any;
-    open: boolean;
-    setOpen: any;
 }
 
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
@@ -38,19 +36,36 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
         pic1Points: 'something',
         pic2Points: 'something',
     });
+
     const [dummyData, setDummyData] = useState({ dummy: 'data' });
     const [selectedValue, setSelectedValue] = React.useState('a');
     const [open, setOpen] = React.useState(false);
+    const [newEmoji, setNewEmoji] = React.useState({
+        player1: [],
+        player2: [],
+    });
     const classes = useStyles({});
+
+    const emojiSelector1 = (arr) => {
+        setNewEmoji({ ...newEmoji, player1: arr });
+    };
+
+    const emojiSelector2 = (arr) => {
+        setNewEmoji({ ...newEmoji, player2: arr });
+    };
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedValue(event.target.value);
     };
 
     const handleSubmit = () => {
-        // if less than 4
-        setOpen(true);
-        // else
+        if (newEmoji.player1.length < 4 || newEmoji.player2.length < 4) {
+            setOpen(true);
+        } else {
+            console.log('hi');
+        }
         // post endpoint
+        // clear newEmoji state
         // history.push
     };
 
@@ -90,7 +105,11 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             inputProps={{ 'aria-label': 'A' }}
                             disableRipple={true}
                         />
-                        <Emoji />
+                        <Emoji
+                            emojiCondit={emojiSelector1}
+                            newEmoji={newEmoji.player1}
+                            setNewEmoji={setNewEmoji}
+                        />
                     </div>
                 </Grid>
                 <Grid className={classes.story2}>
@@ -111,7 +130,11 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             inputProps={{ 'aria-label': 'B' }}
                             disableRipple={true}
                         />
-                        <Emoji />
+                        <Emoji
+                            emojiCondit={emojiSelector2}
+                            newEmoji={newEmoji.player2}
+                            setNewEmoji={setNewEmoji}
+                        />
                         {/* <Grid container xs={8} className={classes.submitDiv}>
                             <Grid item xs={6} />
                             <Grid item xs={6}> */}

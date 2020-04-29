@@ -107,11 +107,18 @@ const useStyles = makeStyles((theme: Theme) =>
 interface VotingStateProps {
     newEmoji: any;
     setNewEmoji: any;
-    emojiCondit: (arr: any) => void;
+    emojiCondit: any;
+    //emojiCondit: (arr: any) => void;
 }
 
 export const Emoji: React.FC<VotingStateProps> = ({ newEmoji, setNewEmoji, emojiCondit }) => {
     const classes = useStyles({});
+
+    const delayState = () => {
+        setTimeout(() => {
+            emojiCondit(emojiInput);
+        }, 1000);
+    };
 
     const [emojiInput, setEmojiInput] = React.useState([]);
 
@@ -124,10 +131,11 @@ export const Emoji: React.FC<VotingStateProps> = ({ newEmoji, setNewEmoji, emoji
     };
     // console.log('this is emoji state', emojiInput);
 
-    const saveState = () => {
-        setNewEmoji({ ...newEmoji, emojiInput });
-    };
-    // console.log('this is object state', newEmoji);
+    useEffect(() => {
+        emojiCondit(emojiInput);
+        console.log('this is from the useEffect', newEmoji);
+        // eslint-disable-next-line
+    }, [emojiInput]);
 
     return (
         <div>
@@ -145,7 +153,6 @@ export const Emoji: React.FC<VotingStateProps> = ({ newEmoji, setNewEmoji, emoji
                                     onClick={(e) => {
                                         e.preventDefault();
                                         handleChanges(e);
-                                        emojiCondit(emojiInput);
                                     }}>
                                     {emoji}
                                 </button>

@@ -10,6 +10,8 @@
 
 # production
 /build
+Pipfile
+Pipfile.lock
 
 # misc
 .DS_Store

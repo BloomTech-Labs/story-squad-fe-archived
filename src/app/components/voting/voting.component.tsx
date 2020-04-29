@@ -63,12 +63,14 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
         if (newEmoji.player1.length < 4 || newEmoji.player2.length < 4) {
             setOpen(true);
         } else {
-            console.log('hi');
+            console.log('submitted successfully');
         }
         // post endpoint
         // clear newEmoji state
         // history.push
     };
+
+    console.log('this is the object', newEmoji);
 
     return (
         <Container className={classes.containerStyling}>

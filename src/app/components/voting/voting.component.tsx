@@ -11,6 +11,7 @@ import { useForm } from '../../hooks';
 import { VotingModal } from './modal/modal-image';
 import { Emoji } from './emoji/Emoji.component';
 import { Popup } from '../voting/popup-alert/Popup.alert';
+import { VotingHeader } from './votingHeader/voting-header';
 
 const ColoredRadio = withStyles({
     root: {
@@ -73,9 +74,10 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
 
     return (
         <Container className={classes.containerStyling}>
-            <Grid container>
+            <VotingHeader />
+            {/* <Grid container>
                 {/* Header code */}
-                <Grid container direction='row' className={classes.appBar}>
+            {/* <Grid container direction='row' className={classes.appBar}>
                     <Grid
                         container
                         item
@@ -87,7 +89,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         </Typography>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid> */}
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
                     <div className={classes.playerSelection}>

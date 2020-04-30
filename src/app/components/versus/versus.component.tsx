@@ -57,6 +57,11 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         },
     ]);
 
+    const [locked, setLocked] = useState({
+        oneVote: false,
+        twoVotes: false,
+        threeVotes: false,
+    });
     //student/teammate submissions state
     useEffect(() => {
         if (response) setMatchdata(response.matchdata);
@@ -72,12 +77,6 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                 <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} />
             </Container>
         );
-
-    const [locked, setLocked] = useState({
-        oneVote: false,
-        twoVotes: false,
-        threeVotes: false,
-    });
 
     return (
         <Container className={classes.containerStyling}>

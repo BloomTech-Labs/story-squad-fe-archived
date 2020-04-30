@@ -14,9 +14,7 @@ const VersusButton: React.FC = () => {
                     onClick={() => history.push(`/kids-dashboard/team-join`)}>
                     Back
                 </Button>
-                <Button
-                    className={classes.orangeButton}
-                    onClick={() => history.push(`/kids-dashboard/nextpage`)}>
+                <Button className={classes.orangeButton} onClick={() => history.push(`/voting`)}>
                     Vote
                 </Button>
             </Grid>

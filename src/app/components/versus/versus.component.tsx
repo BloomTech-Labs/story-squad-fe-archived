@@ -26,6 +26,7 @@ class TemporaryHolder {
 interface VersusProps {
     thisBattle?: 0;
 }
+
 const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
@@ -56,6 +57,11 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         },
     ]);
 
+    const [locked, setLocked] = useState({
+        oneVote: false,
+        twoVotes: false,
+        threeVotes: false,
+    });
     //student/teammate submissions state
     useEffect(() => {
         if (response) setMatchdata(response.matchdata);

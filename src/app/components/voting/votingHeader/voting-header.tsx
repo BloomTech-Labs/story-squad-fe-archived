@@ -12,7 +12,8 @@ const VotingHeader: React.FC<HeaderProps> = ({ title }) => {
     const classes = useStyles();
     return (
         <Grid container direction='row' className={classes.appBar}>
-            <Grid className={classes.headerMenuDiv} container item>
+            {/* <Grid className={classes.headerMenuDiv} container item> */}
+            <div className={classes.headerMenuDiv}>
                 <div className={classes.upperTitleDiv}>
                     <Typography className={classes.h4Styling} variant='h2'>
                         {/* {title} */}
@@ -22,13 +23,14 @@ const VotingHeader: React.FC<HeaderProps> = ({ title }) => {
                 <div className={classes.upperHeaderButtonDiv}>
                     <MenuButton />
                 </div>
-                {/* <div className={classes.teamName}>
+            </div>
+            {/* <div className={classes.teamName}>
                     <Typography className={classes.h4Styling}>{homeTeam}</Typography>
                     <Typography className={classes.h4Styling}>VS</Typography>
                     <Typography className={classes.h4Styling}>{awayTeam}</Typography> */}
-                {/* </div> */}
-                {/* <Typography className={classes.h3Styling}>201 Points Needed To Win!</Typography> */}
-            </Grid>
+            {/* </div> */}
+            {/* <Typography className={classes.h3Styling}>201 Points Needed To Win!</Typography> */}
+            {/* </Grid> */}
         </Grid>
     );
 };

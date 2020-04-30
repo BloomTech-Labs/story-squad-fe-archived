@@ -84,18 +84,22 @@ export const useStyles = makeStyles((theme: Theme) =>
         headerMenuDiv: {
             display: 'flex',
             flexFlow: 'wrap no-wrap',
-            justifyContent: 'space-around',
-            alignItems: 'center',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            marginLeft: '100px',
         },
         upperTitleDiv: {
             display: 'flex',
             justifyContent: 'flex-end',
             width: '57.5%',
+            marginLeft: '160px',
         },
         upperHeaderButtonDiv: {
             display: 'flex',
             justifyContent: 'flex-end',
             width: '20%',
+            marginBottom: '145px',
+            marginRight: '-40px',
         },
     })
 );

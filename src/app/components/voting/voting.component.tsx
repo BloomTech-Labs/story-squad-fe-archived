@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import 'typeface-nunito';
 import { useStyles } from './voting-styles';
 import { Button, Typography, Container, Grid } from '@material-ui/core';

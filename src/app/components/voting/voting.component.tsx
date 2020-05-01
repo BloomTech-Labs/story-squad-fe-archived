@@ -97,7 +97,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         <VotingModal
                             key='pic1Points'
                             username={dummyData.dummy}
-                            submission={story2}
+                            submission={story1}
                             type='Illustration'
                             points={state.pic1Points}
                         />

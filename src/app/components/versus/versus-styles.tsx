@@ -138,7 +138,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             height: '63px',
             width: '63px',
             padding: '10px',
-            margin: '10%',
+            // margin: '10%',
         },
         playerName: {
             fontFamily: 'Bangers',
@@ -147,6 +147,8 @@ export const useStyles = makeStyles((theme: Theme) =>
             fontSize: '24px',
             lineHeight: '26px',
             color: '#292929',
+            margin: '2%',
+            marginBottom: '0',
         },
         vs: {
             height: '88%',
@@ -159,6 +161,13 @@ export const useStyles = makeStyles((theme: Theme) =>
             zIndex: 9,
             width: '100%',
             height: '45%',
+        },
+        root: {
+            // '& > *': {
+            //     margin: theme.spacing(0),
+            // },
+            marginBottom: '26%',
+            marginRight: '-8%',
         },
     })
 );

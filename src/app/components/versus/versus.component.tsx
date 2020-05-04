@@ -30,6 +30,7 @@ interface VersusProps {
 const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
+    console.log('response', response);
 
     const [matchdata, setMatchdata] = useState({} as any);
 

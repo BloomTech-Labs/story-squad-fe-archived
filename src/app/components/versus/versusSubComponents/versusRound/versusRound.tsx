@@ -4,6 +4,7 @@ import { SubmissionDisplay } from '../../modals/subDisplay.component';
 import { useStyles } from '../../versus-styles';
 import ava1 from '../../img/ava1.png';
 import vsImg from '../../img/VS.png';
+import Badge from '@material-ui/core/Badge';
 
 interface RoundProps {
     roundStyle: {};
@@ -37,11 +38,35 @@ const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, 
             <div className={`${classes.nameRow} ${nameRowStyle}`}>
                 <div className={classes.leftPlayer}>
                     {/* if match data home team id = matchup child id then render badge */}
+                    {matchup[0].childId === matchdata.homeTeam[0].id ? (
+                        <Badge
+                            className={classes.root}
+                            color='error'
+                            badgeContent={1}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}>
+                            <></>
+                        </Badge>
+                    ) : null}
                     <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
                     <div className={classes.playerName}>{matchup[0].username}</div>
                 </div>
                 <div className={classes.rightPlayer}>
                     <div className={classes.playerName}>{matchup[1].username}</div>
+                    {/* {matchup[0].childId === matchdata.awayTeam[1].id ? (
+                        <Badge
+                            className={classes.root}
+                            color='error'
+                            badgeContent={1}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}>
+                            <></>
+                        </Badge>
+                    ) : null} */}
                     <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
                 </div>
             </div>

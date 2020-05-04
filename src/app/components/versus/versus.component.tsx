@@ -68,8 +68,8 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         if (response) setMatchups(response.matchups);
     }, [response]);
 
-    console.log(matchups);
-    console.log(matchdata);
+    // console.log('matchups', matchups);
+    // console.log('match data', matchdata);
 
     if (matchdata.homeTeam === undefined)
         return (
@@ -90,11 +90,13 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     roundStyle={classes.story1}
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[0]}
+                    matchdata={matchdata}
                 />
                 <VersusRound
                     roundStyle={classes.story2}
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[1]}
+                    matchdata={matchdata}
                 />
             </Grid>
             <Grid className={classes.bottomRow}>
@@ -102,11 +104,13 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     roundStyle={classes.picture1}
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[2]}
+                    matchdata={matchdata}
                 />
                 <VersusRound
                     roundStyle={classes.picture2}
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[3]}
+                    matchdata={matchdata}
                 />
                 <VersusButton />
             </Grid>

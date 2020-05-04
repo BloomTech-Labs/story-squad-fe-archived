@@ -9,9 +9,10 @@ interface RoundProps {
     roundStyle: {};
     nameRowStyle: {};
     matchup: any;
+    matchdata: any;
 }
 
-const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup }) => {
+const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, matchdata }) => {
     const classes = useStyles();
 
     if (matchup[0].story === undefined && matchup[0].illustration === undefined) return <></>;
@@ -26,13 +27,16 @@ const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup }
         b64passRight = matchup[1].illustration;
     }
 
-    console.log(b64passLeft);
-    console.log(b64passRight);
+    console.log('matchup vs round', matchup[0].childId);
+    console.log('match data vs round', matchdata.homeTeam[0].id);
+    // console.log(b64passLeft);
+    // console.log(b64passRight);
 
     return (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>
                 <div className={classes.leftPlayer}>
+                    {/* if match data home team id = matchup child id then render badge */}
                     <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
                     <div className={classes.playerName}>{matchup[0].username}</div>
                 </div>

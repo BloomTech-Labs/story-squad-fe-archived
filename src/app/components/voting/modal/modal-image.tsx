@@ -4,6 +4,7 @@ import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/sty
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import story2 from '../img/chancewriting.jpg';
+import Slide from '@material-ui/core/Slide';
 
 interface VotingModalProps {
     submission;
@@ -13,42 +14,38 @@ interface VotingModalProps {
     points;
 }
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction='up' ref={ref} {...props} />;
+});
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        modal: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-        paper: {
-            backgroundColor: theme.palette.background.paper,
-            border: '2px solid #000',
-            boxShadow: theme.shadows[5],
-        },
-        root: {
-            fontFamily: 'nunito',
-            display: 'flex',
-            flexDirection: 'column',
-        },
-        gridRow: {
-            height: '274px',
-            backgroundColor: '#EB7D5B',
-            paddingTop: '32px',
-            padding: '30px',
-        },
-        gridInput: {
-            backgroundColor: '#EB7D5B',
-            padding: '53px ',
-        },
-        pointInput: {
-            fontFamily: 'Bangers',
-            fontSize: '48px',
-            fontWeight: 'bold',
+        iconBox: {
+            width: '5vh',
+            height: '10vh',
+            margin: '0 auto',
         },
         imagePreview: {
             width: '175px',
             height: '175px',
             borderRadius: '14px',
+            cursor: 'pointer',
+        },
+        modalpop: {
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%',
+            flexDirection: 'column',
+            alignItems: 'center',
+        },
+        imgDiv: {
+            'minWidth': '70%',
+            '&& img': {
+                minWidth: '100%',
+            },
+        },
+        subTitle: {
+            textTransform: 'capitalize',
         },
     })
 );
@@ -88,17 +85,28 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                         alt={`${username}'s ${type}`}
                     />
                 </Grid>
-                <Dialog fullScreen={fullScreen} open={open}>
-                    <IconButton
-                        edge='start'
-                        color='inherit'
-                        onClick={handleClose}
-                        aria-label='close'>
-                        <CloseIcon />
-                    </IconButton>
-                    <DialogTitle id='submission-title'>{`${username}'s ${type}`}</DialogTitle>
-                    <div>
-                        <img src={submission} alt={`${username}'s ${type}`} />
+                <Dialog
+                    fullScreen
+                    open={open}
+                    // TransitionComponent={Transition}
+                >
+                    <div className={classes.modalpop}>
+                        <div className={classes.iconBox}>
+                            <IconButton
+                                edge='start'
+                                color='inherit'
+                                onClick={handleClose}
+                                aria-label='close'
+                                disableRipple={true}>
+                                <CloseIcon className={classes.closeButton} />
+                            </IconButton>
+                        </div>
+                        <DialogTitle className={classes.subTitle} id='submission-title'>
+                            {`${username}'s ${type}`}
+                        </DialogTitle>
+                        <div className={classes.imgDiv}>
+                            <img src={submission} alt={`${username}'s ${type}`} />
+                        </div>
                     </div>
                 </Dialog>
             </Grid>

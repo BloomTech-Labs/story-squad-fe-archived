@@ -70,9 +70,6 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
         if (response) setMatchups(response.matchups);
     }, [response]);
 
-    // console.log('matchups', matchups);
-    // console.log('match data', matchdata);
-
     if (matchdata.homeTeam === undefined)
         return (
             <Container className={classes.containerStyling}>
@@ -92,14 +89,12 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     roundStyle={classes.story1}
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[0]}
-                    matchdata={matchdata}
                     child={child}
                 />
                 <VersusRound
                     roundStyle={classes.story2}
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[1]}
-                    matchdata={matchdata}
                     child={child}
                 />
             </Grid>
@@ -108,14 +103,12 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     roundStyle={classes.picture1}
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[2]}
-                    matchdata={matchdata}
                     child={child}
                 />
                 <VersusRound
                     roundStyle={classes.picture2}
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[3]}
-                    matchdata={matchdata}
                     child={child}
                 />
                 <VersusButton />

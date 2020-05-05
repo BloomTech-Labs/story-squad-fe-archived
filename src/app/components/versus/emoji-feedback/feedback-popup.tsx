@@ -58,15 +58,15 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-// interface VersusProps {
-//     open: boolean;
-//     setOpen: any;
-// }
+interface VersusProps {
+    open: boolean;
+    setOpen: any;
+}
 
 // { open, setOpen } in props
 // <VersusProps>
-export const FeedbackPopup: React.FC = () => {
-    const [open, setOpen] = React.useState(false);
+export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen }) => {
+    // const [open, setOpen] = React.useState(false);
     const classes = useStyles({});
 
     const handleClickOpen = () => {
@@ -79,9 +79,9 @@ export const FeedbackPopup: React.FC = () => {
 
     return (
         <div>
-            <Button variant='outlined' color='primary' onClick={handleClickOpen}>
+            {/* <Button variant='outlined' color='primary' onClick={handleClickOpen}>
                 Open alert dialog
-            </Button>
+            </Button> */}
             <Dialog
                 open={open}
                 onClose={handleClose}

@@ -4,10 +4,13 @@ import { useStyles } from './header-styles';
 
 interface PointsProps {
     remainingPoints: number;
+    teamReviewTime: Date;
 }
 
-export const Header: React.FC<PointsProps> = ({ remainingPoints }) => {
+export const Header: React.FC<PointsProps> = ({ remainingPoints, teamReviewTime }) => {
     const classes = useStyles({});
+    const TimeTill = new Date(teamReviewTime.getTime() - new Date().getTime());
+
     return (
         <>
             <Grid container direction='row' className={classes.appBar}>
@@ -15,6 +18,9 @@ export const Header: React.FC<PointsProps> = ({ remainingPoints }) => {
                     <Grid item xs={12} md={6}>
                         <Typography className={classes.h2Styling} variant='h2'>
                             Point Share
+                        </Typography>
+                        <Typography className={classes.h3Styling} variant='h3'>
+                            {`${TimeTill.getHours()} Hours left`}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={6}>

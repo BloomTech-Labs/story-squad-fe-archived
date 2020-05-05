@@ -19,8 +19,7 @@ import {
     VersusPage,
     VotingPage,
 } from './pages';
-import { Emoji } from './components/voting/emoji/Emoji.component';
-import { FeedbackPopup } from './components/versus/emoji-feedback/feedback-popup';
+
 const App: React.FC = () => {
     return (
         <main>
@@ -70,8 +69,6 @@ const App: React.FC = () => {
                             path='/admin/dashboard'
                             component={AdminDashboardPage}
                         />
-                        <Route path='/emoji' component={Emoji} />
-                        <Route path='/feedback' component={FeedbackPopup} />
                         <Route path='/voting' component={VotingPage} />
                         <Route path='/privacy-policy' component={PrivacyPage} />
                         <Route path='/terms-of-service' component={ToSPage} />

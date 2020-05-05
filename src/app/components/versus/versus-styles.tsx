@@ -168,6 +168,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             // },
             marginBottom: '26%',
             marginRight: '-8%',
+            cursor: 'pointer',
         },
     })
 );

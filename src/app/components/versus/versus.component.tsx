@@ -24,10 +24,11 @@ class TemporaryHolder {
 }
 
 interface VersusProps {
-    thisBattle?: 0;
+    child: string;
 }
 
-const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
+const Versus: React.FC<VersusProps> = ({ child }) => {
+    console.log(child);
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
     console.log('response', response);
@@ -92,12 +93,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[0]}
                     matchdata={matchdata}
+                    child={child}
                 />
                 <VersusRound
                     roundStyle={classes.story2}
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[1]}
                     matchdata={matchdata}
+                    child={child}
                 />
             </Grid>
             <Grid className={classes.bottomRow}>
@@ -106,12 +109,14 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[2]}
                     matchdata={matchdata}
+                    child={child}
                 />
                 <VersusRound
                     roundStyle={classes.picture2}
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[3]}
                     matchdata={matchdata}
+                    child={child}
                 />
                 <VersusButton />
             </Grid>

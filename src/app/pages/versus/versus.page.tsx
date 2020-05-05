@@ -22,12 +22,9 @@ const VersusPage: React.FC = () => {
         <div className={classes.root}>
             <main className={classes.main}>
                 <Switch>
-                    <Route
-                        path='/matchup'
-                        component={Versus}
-                        child={response.me}
-                        onUpdate={handleRequest}
-                    />
+                    <Route path='/matchup'>
+                        <Versus child={response.me} />
+                    </Route>
                 </Switch>
             </main>
         </div>

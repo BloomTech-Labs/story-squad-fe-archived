@@ -10,10 +10,17 @@ interface RoundProps {
     roundStyle: {};
     nameRowStyle: {};
     matchup: any;
-    matchdata: any;
+    matchdata?: any;
+    child: any;
 }
 
-const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, matchdata }) => {
+const VersusRound: React.FC<RoundProps> = ({
+    roundStyle,
+    nameRowStyle,
+    matchup,
+    matchdata,
+    child,
+}) => {
     const classes = useStyles();
 
     if (matchup[0].story === undefined && matchup[0].illustration === undefined) return <></>;
@@ -28,17 +35,18 @@ const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, 
         b64passRight = matchup[1].illustration;
     }
 
-    console.log('matchup vs round', matchup[0].childId);
-    console.log('match data vs round', matchdata.homeTeam[0].id);
+    console.log('matchup vs round', matchup);
+    console.log('match data vs round', matchdata);
     // console.log(b64passLeft);
     // console.log(b64passRight);
+    console.log(child.id);
 
     return (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>
                 <div className={classes.leftPlayer}>
                     {/* if match data home team id = matchup child id then render badge */}
-                    {matchup[0].childId === matchdata.homeTeam[0].id ? (
+                    {matchup[0].childId === child.id ? (
                         <Badge
                             className={classes.root}
                             color='error'
@@ -55,7 +63,7 @@ const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, 
                 </div>
                 <div className={classes.rightPlayer}>
                     <div className={classes.playerName}>{matchup[1].username}</div>
-                    {/* {matchup[0].childId === matchdata.awayTeam[1].id ? (
+                    {/* {matchup[0].childId === matchdata.homeTeam[1].id ? (
                         <Badge
                             className={classes.root}
                             color='error'

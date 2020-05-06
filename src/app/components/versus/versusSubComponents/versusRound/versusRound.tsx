@@ -4,15 +4,19 @@ import { SubmissionDisplay } from '../../modals/subDisplay.component';
 import { useStyles } from '../../versus-styles';
 import ava1 from '../../img/ava1.png';
 import vsImg from '../../img/VS.png';
+import Badge from '@material-ui/core/Badge';
+import { FeedbackPopup } from '../../emoji-feedback/feedback-popup';
 
 interface RoundProps {
     roundStyle: {};
     nameRowStyle: {};
     matchup: any;
+    child: any;
 }
 
-const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup }) => {
+const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, child }) => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
 
     if (matchup[0].story === undefined && matchup[0].illustration === undefined) return <></>;
 
@@ -26,13 +30,26 @@ const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup }
         b64passRight = matchup[1].illustration;
     }
 
-    console.log(b64passLeft);
-    console.log(b64passRight);
-
     return (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>
                 <div className={classes.leftPlayer}>
+                    <FeedbackPopup open={open} setOpen={setOpen} />
+                    {matchup[0].childId === child.id ? (
+                        <Badge
+                            onClick={() => {
+                                setOpen(true);
+                            }}
+                            className={classes.root}
+                            color='error'
+                            badgeContent={1}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}>
+                            <></>
+                        </Badge>
+                    ) : null}
                     <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
                     <div className={classes.playerName}>{matchup[0].username}</div>
                 </div>

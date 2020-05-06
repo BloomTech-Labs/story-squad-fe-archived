@@ -47,13 +47,15 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
                         />
                     </Grid>
                     <Dialog fullScreen open={open}>
-                        <IconButton
-                            edge='start'
-                            color='inherit'
-                            onClick={handleClose}
-                            aria-label='close'>
-                            <CloseIcon />
-                        </IconButton>
+                        <div className={classes.iconBox}>
+                            <IconButton
+                                edge='start'
+                                color='inherit'
+                                onClick={handleClose}
+                                aria-label='close'>
+                                <CloseIcon />
+                            </IconButton>
+                        </div>
                         <DialogTitle id='submission-title' className={classes.submissionHeader}>
                             {`${username}'s Drawing!`}
                         </DialogTitle>
@@ -78,13 +80,15 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
                         />
                     </Grid>
                     <Dialog fullScreen open={open}>
-                        <IconButton
-                            edge='start'
-                            color='inherit'
-                            onClick={handleClose}
-                            aria-label='close'>
-                            <CloseIcon />
-                        </IconButton>
+                        <div className={classes.iconBox}>
+                            <IconButton
+                                edge='start'
+                                color='inherit'
+                                onClick={handleClose}
+                                aria-label='close'>
+                                <CloseIcon />
+                            </IconButton>
+                        </div>
                         <DialogTitle id='submission-title' className={classes.submissionHeader}>
                             {`${username}'s Drawing!`}
                         </DialogTitle>
@@ -109,13 +113,15 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
                         />
                     </Grid>
                     <Dialog fullScreen open={open}>
-                        <IconButton
-                            edge='start'
-                            color='inherit'
-                            onClick={handleClose}
-                            aria-label='close'>
-                            <CloseIcon />
-                        </IconButton>
+                        <div className={classes.iconBox}>
+                            <IconButton
+                                edge='start'
+                                color='inherit'
+                                onClick={handleClose}
+                                aria-label='close'>
+                                <CloseIcon />
+                            </IconButton>
+                        </div>
                         <DialogTitle className={classes.submissionHeader} id='submission-title'>
                             {`${username}'s Story!`}
                         </DialogTitle>
@@ -134,13 +140,15 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
                                             />
                                         </Card>
                                         <Dialog fullScreen open={pages}>
-                                            <IconButton
-                                                edge='start'
-                                                color='inherit'
-                                                onClick={closePage}
-                                                aria-label='close'>
-                                                <CloseIcon />
-                                            </IconButton>
+                                            <div className={classes.iconBox}>
+                                                <IconButton
+                                                    edge='start'
+                                                    color='inherit'
+                                                    onClick={closePage}
+                                                    aria-label='close'>
+                                                    <CloseIcon />
+                                                </IconButton>
+                                            </div>
                                             <div className={classes.viewPageDiv}>
                                                 <img
                                                     src={page}

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
 
 const emojiSelection = [
     '😀',
@@ -87,6 +88,7 @@ const useStyles = makeStyles((theme: Theme) =>
             border: '0px',
             background: 'none',
             outline: 'none',
+            cursor: 'pointer',
         },
         inputDiv: {
             width: '299px',
@@ -101,6 +103,20 @@ const useStyles = makeStyles((theme: Theme) =>
         emojiSpan: {
             letterSpacing: '18px',
         },
+        clearCont: {
+            display: 'flex',
+            justifyContent: 'flex-end',
+        },
+        clear: {
+            fontFamily: 'nunito',
+            height: '35px',
+            borderRadius: '5%',
+            cursor: 'pointer',
+            textTransform: 'capitalize',
+            fontSize: '1rem',
+            border: '2px solid black',
+            fontWeight: 'bold',
+        },
     })
 );
 
@@ -113,13 +129,6 @@ interface VotingStateProps {
 
 export const Emoji: React.FC<VotingStateProps> = ({ newEmoji, setNewEmoji, emojiCondit }) => {
     const classes = useStyles({});
-
-    const delayState = () => {
-        setTimeout(() => {
-            emojiCondit(emojiInput);
-        }, 1000);
-    };
-
     const [emojiInput, setEmojiInput] = React.useState([]);
 
     const handleChanges = (e) => {
@@ -160,14 +169,18 @@ export const Emoji: React.FC<VotingStateProps> = ({ newEmoji, setNewEmoji, emoji
                         );
                     })}
                 </div>
-                <div>
+                <div className={classes.clearCont}>
                     {emojiInput.length > 0 ? (
-                        <button
+                        <Button
+                            size='small'
+                            variant='contained'
+                            disableElevation
+                            className={classes.clear}
                             onClick={() => {
                                 setEmojiInput([]);
                             }}>
                             Clear
-                        </button>
+                        </Button>
                     ) : null}
                 </div>
             </form>

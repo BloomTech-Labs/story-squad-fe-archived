@@ -24,12 +24,14 @@ class TemporaryHolder {
 }
 
 interface VersusProps {
-    thisBattle?: 0;
+    child: string;
 }
 
-const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
+const Versus: React.FC<VersusProps> = ({ child }) => {
+    console.log(child);
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
+    console.log('response', response);
 
     const [matchdata, setMatchdata] = useState({} as any);
 
@@ -68,9 +70,6 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
         if (response) setMatchups(response.matchups);
     }, [response]);
 
-    console.log(matchups);
-    console.log(matchdata);
-
     if (matchdata.homeTeam === undefined)
         return (
             <Container className={classes.containerStyling}>
@@ -90,11 +89,13 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     roundStyle={classes.story1}
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[0]}
+                    child={child}
                 />
                 <VersusRound
                     roundStyle={classes.story2}
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[1]}
+                    child={child}
                 />
             </Grid>
             <Grid className={classes.bottomRow}>
@@ -102,11 +103,13 @@ const Versus: React.FC<VersusProps> = ({ thisBattle }) => {
                     roundStyle={classes.picture1}
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[2]}
+                    child={child}
                 />
                 <VersusRound
                     roundStyle={classes.picture2}
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[3]}
+                    child={child}
                 />
                 <VersusButton />
             </Grid>

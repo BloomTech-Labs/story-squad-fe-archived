@@ -76,28 +76,13 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
     return (
         <Container className={classes.containerStyling}>
             <VotingHeader />
-            {/* <Grid container>
-                {/* Header code */}
-            {/* <Grid container direction='row' className={classes.appBar}>
-                    <Grid
-                        container
-                        item
-                        direction='column'
-                        justify='space-around'
-                        alignItems='center'>
-                        <Typography className={classes.h3Styling} variant='h2'>
-                            Vote For Your Favorite Story
-                        </Typography>
-                    </Grid>
-                </Grid>
-            </Grid> */}
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
                     <div className={classes.playerSelection}>
                         <VotingModal
                             key='pic1Points'
                             username={dummyData.dummy}
-                            submission={story2}
+                            submission={story1}
                             type='Illustration'
                             points={state.pic1Points}
                         />

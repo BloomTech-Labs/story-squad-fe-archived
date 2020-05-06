@@ -27,6 +27,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     const [remainingPoints, setRemainingPoints] = useState(100);
     const [error, setError] = useState(false);
     const [thisMatch, setThisMatch] = useState();
+    const [teamReviewTime, setTeamReviewTime] = useState(new Date());
     const [student, setStudent] = useState({
         username: '',
         story: {
@@ -77,9 +78,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setThisMatch({ ...matchInfo.thisMatch });
             setStudent({ ...student });
             setTeammate({ ...teammate });
+            setTeamReviewTime(new Date(matchInfo.thisMatch.teamReviewEndDate));
+            console.log(new Date(matchInfo.thisMatch.teamReviewEndDate));
         }
     }, [matchInfo]);
-
+    console.log(new Date(teamReviewTime.getTime() - new Date().getTime()));
     const handleSubmit = () => {
         const newPoints = {
             stories: [
@@ -123,7 +126,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                         onError={(errors) => console.log(errors)}>
                         <Container maxWidth='lg'>
                             <Grid container direction='column'>
-                                <Header remainingPoints={remainingPoints} />
+                                <Header
+                                    remainingPoints={remainingPoints}
+                                    teamReviewTime={teamReviewTime}
+                                />
                                 <Grid container alignItems='center'>
                                     <Grid
                                         item
@@ -211,7 +217,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                                 <Button
                                                     className={classes.orangeButton}
                                                     type='submit'>
-                                                    Next
+                                                    Match Up!
                                                 </Button>
                                             </div>
                                         </Grid>

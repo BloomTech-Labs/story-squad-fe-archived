@@ -23,6 +23,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             width: '150px',
             height: '90px',
             borderRadius: '10px',
+            cursor: 'pointer',
         },
         gridContainer: {
             flexDirection: 'column',
@@ -41,6 +42,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         submissionHeader: {
             textAlign: 'center',
+            textTransform: 'capitalize',
         },
         thumbnail: {
             alignItems: 'center',
@@ -49,11 +51,19 @@ export const useStyles = makeStyles((theme: Theme) =>
             borderRadius: '10px',
         },
         viewPageDiv: {
-            display: 'flex',
-            justifyContent: 'center',
+            'display': 'flex',
+            'justifyContent': 'center',
+            '&& img': {
+                minWidth: '70%',
+            },
         },
         submissionImg: {
             maxWidth: '80%',
+        },
+        iconBox: {
+            width: '5vh',
+            height: '10vh',
+            margin: '0 auto',
         },
     })
 );

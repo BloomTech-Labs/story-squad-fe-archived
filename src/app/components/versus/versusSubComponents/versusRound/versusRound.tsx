@@ -17,19 +17,19 @@ interface RoundProps {
 const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, child }) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-
+    // console.log({ matchup }, { child });
     if (matchup[0].story === undefined && matchup[0].illustration === undefined) return <></>;
 
-    let b64passLeft = '';
-    let b64passRight = '';
+    let b64passLeft = [];
+    let b64passRight = [];
     if (matchup[0].story !== undefined) {
-        b64passLeft = matchup[0].story.page1;
-        b64passRight = matchup[1].story.page1;
+        b64passLeft = Object.values(matchup[0].story);
+        b64passRight = Object.values(matchup[1].story);
     } else {
-        b64passLeft = matchup[0].illustration;
-        b64passRight = matchup[1].illustration;
+        b64passLeft = [matchup[0].illustration];
+        b64passRight = [matchup[1].illustration];
     }
-
+    console.log(b64passLeft, b64passRight);
     return (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>

@@ -44,6 +44,11 @@ export const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'center',
             alignItem: 'center',
         },
+        disabledBtn: {
+            pointerEvents: 'none',
+            backgroundColor: 'slateGrey',
+            color: 'white',
+        },
         backDiv: {
             border: '7px solid #000',
             borderTop: '0px',

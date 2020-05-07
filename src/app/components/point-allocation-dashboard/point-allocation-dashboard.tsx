@@ -14,6 +14,24 @@ interface PointCardProps {
     child: Child;
 }
 
+interface Teammember {
+    username: string;
+    story: {
+        id: number;
+        story: {
+            page1: string;
+            page2?: string;
+            page3?: string;
+            page4?: string;
+            page5?: string;
+        };
+    };
+    illustration: {
+        id: number;
+        illustration: string;
+    };
+}
+
 const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     const history = useHistory();
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
@@ -32,40 +50,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     const [thisMatch, setThisMatch] = useState();
     const [teamReviewTime, setTeamReviewTime] = useState(new Date());
     const [disabledForm, setDisabled] = useState(child.progress.teamReview);
-    const [student, setStudent] = useState({
-        username: '',
-        story: {
-            id: 0,
-            story: {
-                page1: '',
-                page2: '',
-                page3: '',
-                page4: '',
-                page5: '',
-            },
-        },
-        illustration: {
-            id: 0,
-            illustration: '',
-        },
-    });
-    const [teammate, setTeammate] = useState({
-        username: '',
-        story: {
-            id: 0,
-            story: {
-                page1: '',
-                page2: '',
-                page3: '',
-                page4: '',
-                page5: '',
-            },
-        },
-        illustration: {
-            id: 0,
-            illustration: '',
-        },
-    });
+    const [student, setStudent] = useState<Teammember | undefined>(undefined);
+    const [teammate, setTeammate] = useState<Teammember | undefined>(undefined);
+
+    console.log(student, teammate);
     const classes = useStyles({});
 
     useEffect(() => {
@@ -121,8 +109,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             {/* Container for avatars + inputs + buttons */}
             {matchInfo?.thisMatch.gotoMatchmaking === true ? (
                 history.push('/matchup')
-            ) : student === undefined || teammate === undefined ? (
+            ) : !student || !teammate ? (
                 <div>
+                    {console.log('loading')}
                     <CircularProgress />
                 </div>
             ) : (
@@ -136,9 +125,8 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                     remainingPoints={remainingPoints}
                                     teamReviewTime={teamReviewTime}
                                 />
-                                <fieldset
-                                    disabled={child.progress.teamReview === true ? true : false}>
-                                    {/* <fieldset disabled={disabledForm}> */}
+
+                                <fieldset disabled={disabledForm}>
                                     <Grid container alignItems='center'>
                                         <Grid
                                             item
@@ -159,6 +147,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                                     points={state.story1Points}
                                                     handleChange={handleInputChange('story1Points')}
                                                     type='Story'
+                                                    disabledForm={disabledForm}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} sm={12} md={6}>
@@ -171,6 +160,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                                     type='Illustration'
                                                     handleChange={handleInputChange('pic1Points')}
                                                     points={state.pic1Points}
+                                                    disabledForm={disabledForm}
                                                 />
                                             </Grid>
                                         </Grid>
@@ -195,6 +185,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                                     points={state.story2Points}
                                                     handleChange={handleInputChange('story2Points')}
                                                     type='Story'
+                                                    disabledForm={disabledForm}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} sm={12} md={6}>
@@ -207,32 +198,34 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                                     points={state.pic2Points}
                                                     handleChange={handleInputChange('pic2Points')}
                                                     type='Illustration'
+                                                    disabledForm={disabledForm}
                                                 />
                                             </Grid>
                                         </Grid>
-                                    </Grid>
-                                    <Grid container>
-                                        <Grid item xs={4} className={classes.backDiv}>
-                                            <div className={classes.button}>
-                                                <Link to={`/kids-dashboard`}>
-                                                    <Button
-                                                        className={classes.orangeButton}
-                                                        type='button'>
-                                                        Back
-                                                    </Button>
-                                                </Link>
-                                            </div>
-                                        </Grid>
-                                        <Grid container xs={8} className={classes.nextDiv}>
-                                            <Grid item xs={6} />
-                                            <Grid item xs={6}>
+                                        <Grid container>
+                                            <Grid item xs={4} className={classes.backDiv}>
                                                 <div className={classes.button}>
-                                                    <Button
-                                                        className={classes.orangeButton}
-                                                        type='submit'>
-                                                        Match Up!
-                                                    </Button>
+                                                    <Link to={`/kids-dashboard`}>
+                                                        <Button
+                                                            className={classes.orangeButton}
+                                                            type='button'>
+                                                            Back
+                                                        </Button>
+                                                    </Link>
                                                 </div>
+                                            </Grid>
+                                            <Grid container xs={8} className={classes.nextDiv}>
+                                                <Grid item xs={6} />
+                                                <Grid item xs={6}>
+                                                    <div className={classes.button}>
+                                                        <Button
+                                                            disabled={disabledForm}
+                                                            className={classes.orangeButton}
+                                                            type='submit'>
+                                                            Match Up!
+                                                        </Button>
+                                                    </div>
+                                                </Grid>
                                             </Grid>
                                         </Grid>
                                     </Grid>

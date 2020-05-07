@@ -95,6 +95,9 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             justifyContent: 'flex-end',
             width: '20%',
+            marginBottom: '30px',
+            marginRight: '-105px',
+            marginLeft: '160px',
         },
     })
 );

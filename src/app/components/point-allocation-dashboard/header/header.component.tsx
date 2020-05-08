@@ -5,9 +5,14 @@ import { useStyles } from './header-styles';
 interface PointsProps {
     remainingPoints: number;
     teamReviewTime: Date;
+    disabledForm: boolean;
 }
 
-export const Header: React.FC<PointsProps> = ({ remainingPoints, teamReviewTime }) => {
+export const Header: React.FC<PointsProps> = ({
+    remainingPoints,
+    teamReviewTime,
+    disabledForm,
+}) => {
     const classes = useStyles({});
     const TimeTill = new Date(teamReviewTime.getTime() - new Date().getTime());
 
@@ -24,14 +29,16 @@ export const Header: React.FC<PointsProps> = ({ remainingPoints, teamReviewTime 
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <Typography className={classes.h3Styling}>
-                            Total Points Remaining:
-                            {remainingPoints < 0 || remainingPoints > 100 ? (
-                                <div className={classes.red}> Total must equal 100 </div>
-                            ) : (
-                                <div>{remainingPoints}</div>
-                            )}
-                        </Typography>
+                        {disabledForm === false ? (
+                            <Typography className={classes.h3Styling}>
+                                Total Points Remaining:
+                                {remainingPoints < 0 || remainingPoints > 100 ? (
+                                    <div className={classes.red}> Total must equal 100 </div>
+                                ) : (
+                                    <div>{remainingPoints}</div>
+                                )}
+                            </Typography>
+                        ) : null}
                     </Grid>
                 </Grid>
             </Grid>

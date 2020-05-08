@@ -124,6 +124,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                 <Header
                                     remainingPoints={remainingPoints}
                                     teamReviewTime={teamReviewTime}
+                                    disabledForm={disabledForm}
                                 />
 
                                 <fieldset disabled={disabledForm}>
@@ -215,17 +216,22 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                                 </div>
                                             </Grid>
                                             <Grid container xs={8} className={classes.nextDiv}>
-                                                <Grid item xs={6} />
-                                                <Grid item xs={6}>
-                                                    <div className={classes.button}>
-                                                        <Button
-                                                            disabled={disabledForm}
-                                                            className={classes.orangeButton}
-                                                            type='submit'>
-                                                            Match Up!
-                                                        </Button>
-                                                    </div>
-                                                </Grid>
+                                                {/* <Grid item xs={6} />
+                                                <Grid item xs={6}> */}
+                                                <div className={classes.button}>
+                                                    {disabledForm ? (
+                                                        <p className={classes.waiting}>
+                                                            Waiting for matchup to begin...
+                                                        </p>
+                                                    ) : null}
+                                                    <Button
+                                                        disabled={disabledForm}
+                                                        className={classes.orangeButton}
+                                                        type='submit'>
+                                                        Match Up!
+                                                    </Button>
+                                                </div>
+                                                {/* </Grid> */}
                                             </Grid>
                                         </Grid>
                                     </Grid>

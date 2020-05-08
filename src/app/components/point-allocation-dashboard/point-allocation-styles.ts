@@ -41,8 +41,10 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         button: {
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'space-evenly',
             alignItem: 'center',
+            width: '100%',
+            alignItems: 'center',
         },
         disabledBtn: {
             pointerEvents: 'none',
@@ -67,6 +69,12 @@ export const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.down('sm')]: {
                 borderLeft: '0px',
             },
+        },
+        waiting: {
+            'fontSize': '2.8em',
+            'color': 'tomato',
+            'fontFamily': 'Bangers',
+            '-webkit-text-stroke': '1.6px black',
         },
     })
 );

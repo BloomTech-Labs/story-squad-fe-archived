@@ -17,7 +17,7 @@ interface RoundProps {
 const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, child }) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    // console.log({ matchup }, { child });
+
     if (matchup[0].story === undefined && matchup[0].illustration === undefined) return <></>;
 
     let b64passLeft = [];
@@ -29,7 +29,7 @@ const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, 
         b64passLeft = [matchup[0].illustration];
         b64passRight = [matchup[1].illustration];
     }
-    console.log(b64passLeft, b64passRight);
+
     return (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>

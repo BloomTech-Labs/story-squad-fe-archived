@@ -124,107 +124,88 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                     <ValidatorForm
                         onSubmit={handleSubmit}
                         onError={(errors) => console.log(errors)}>
-                        <Container maxWidth='lg'>
-                            <Grid container direction='column'>
-                                <Header
-                                    remainingPoints={remainingPoints}
-                                    teamReviewTime={teamReviewTime}
-                                />
-                                <Grid container alignItems='center'>
-                                    <Grid
-                                        item
-                                        xs={12}
-                                        sm={12}
-                                        md={4}
-                                        className={classes.avatarMargin}>
-                                        <Avatar username={student.username} avatar={ava1} />
-                                    </Grid>
-                                    <Grid container md={8} className={classes.topContainer}>
-                                        <Grid item xs={12} sm={12} md={6}>
-                                            <SubmissionDisplay
-                                                key='story1Points'
-                                                username={student.username}
-                                                submission={submissionCheck(student.story.story)}
-                                                points={state.story1Points}
-                                                handleChange={handleInputChange('story1Points')}
-                                                type='Story'
-                                            />
-                                        </Grid>
-                                        <Grid item xs={12} sm={12} md={6}>
-                                            <SubmissionDisplay
-                                                key='pic1Points'
-                                                username={student.username}
-                                                submission={submissionCheck(
-                                                    student.illustration.illustration
-                                                )}
-                                                type='Illustration'
-                                                handleChange={handleInputChange('pic1Points')}
-                                                points={state.pic1Points}
-                                            />
-                                        </Grid>
-                                    </Grid>
+                        {/* <Container maxWidth='lg'>
+                            <Grid container direction='column'> */}
+                        <Header remainingPoints={remainingPoints} teamReviewTime={teamReviewTime} />
+                        {/* <Grid container alignItems='center'> */}
+                        {/* <Grid item xs={12} sm={12} md={4} className={classes.avatarMargin}> */}
+                        <Avatar username={student.username} avatar={ava1} />
+                        {/* </Grid> */}
+                        {/* <Grid container md={8} className={classes.topContainer}>
+                                <Grid item xs={12} sm={12} md={6}> */}
+                        <SubmissionDisplay
+                            key='story1Points'
+                            username={student.username}
+                            submission={submissionCheck(student.story.story)}
+                            points={state.story1Points}
+                            handleChange={handleInputChange('story1Points')}
+                            type='Story'
+                        />
+                        {/* </Grid>
+                                <Grid item xs={12} sm={12} md={6}> */}
+                        <SubmissionDisplay
+                            key='pic1Points'
+                            username={student.username}
+                            submission={submissionCheck(student.illustration.illustration)}
+                            type='Illustration'
+                            handleChange={handleInputChange('pic1Points')}
+                            points={state.pic1Points}
+                        />
+                        {/* </Grid> */}
+                        {/* </Grid>
+                        </Grid> */}
+                        <Grid container alignItems='center'>
+                            <Grid item xs={12} sm={12} md={4} className={classes.avatarMargin}>
+                                <Avatar username={teammate.username} avatar={ava2} />
+                            </Grid>
+                            <Grid container md={8} className={classes.bottomContainer}>
+                                <Grid item xs={12} sm={12} md={6}>
+                                    <SubmissionDisplay
+                                        key='story2Points'
+                                        username={teammate.username}
+                                        submission={submissionCheck(teammate.story.story)}
+                                        points={state.story2Points}
+                                        handleChange={handleInputChange('story2Points')}
+                                        type='Story'
+                                    />
                                 </Grid>
-                                <Grid container alignItems='center'>
-                                    <Grid
-                                        item
-                                        xs={12}
-                                        sm={12}
-                                        md={4}
-                                        className={classes.avatarMargin}>
-                                        <Avatar username={teammate.username} avatar={ava2} />
-                                    </Grid>
-                                    <Grid container md={8} className={classes.bottomContainer}>
-                                        <Grid item xs={12} sm={12} md={6}>
-                                            <SubmissionDisplay
-                                                key='story2Points'
-                                                username={teammate.username}
-                                                submission={submissionCheck(teammate.story.story)}
-                                                points={state.story2Points}
-                                                handleChange={handleInputChange('story2Points')}
-                                                type='Story'
-                                            />
-                                        </Grid>
-                                        <Grid item xs={12} sm={12} md={6}>
-                                            <SubmissionDisplay
-                                                key='pic2Points'
-                                                username={teammate.username}
-                                                submission={submissionCheck(
-                                                    teammate.illustration.illustration
-                                                )}
-                                                points={state.pic2Points}
-                                                handleChange={handleInputChange('pic2Points')}
-                                                type='Illustration'
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <Grid container>
-                                    <Grid item xs={4} className={classes.backDiv}>
-                                        <div className={classes.button}>
-                                            <Link to={`/kids-dashboard`}>
-                                                <Button
-                                                    className={classes.orangeButton}
-                                                    type='button'>
-                                                    Back
-                                                </Button>
-                                            </Link>
-                                        </div>
-                                    </Grid>
-                                    <Grid container xs={8} className={classes.nextDiv}>
-                                        <Grid item xs={6} />
-                                        <Grid item xs={6}>
-                                            <div className={classes.button}>
-                                                <Button
-                                                    className={classes.orangeButton}
-                                                    type='submit'>
-                                                    Match Up!
-                                                </Button>
-                                            </div>
-                                        </Grid>
-                                    </Grid>
+                                <Grid item xs={12} sm={12} md={6}>
+                                    <SubmissionDisplay
+                                        key='pic2Points'
+                                        username={teammate.username}
+                                        submission={submissionCheck(
+                                            teammate.illustration.illustration
+                                        )}
+                                        points={state.pic2Points}
+                                        handleChange={handleInputChange('pic2Points')}
+                                        type='Illustration'
+                                    />
                                 </Grid>
                             </Grid>
-                        </Container>
+                        </Grid>
+                        <Grid container>
+                            <Grid item xs={4} className={classes.backDiv}>
+                                <div className={classes.button}>
+                                    <Link to={`/kids-dashboard`}>
+                                        <Button className={classes.orangeButton} type='button'>
+                                            Back
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </Grid>
+                            <Grid container xs={8} className={classes.nextDiv}>
+                                <Grid item xs={6} />
+                                <Grid item xs={6}>
+                                    <div className={classes.button}>
+                                        <Button className={classes.orangeButton} type='submit'>
+                                            Match Up!
+                                        </Button>
+                                    </div>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        {/* </Grid>
+                        </Container> */}
                     </ValidatorForm>
                 </>
             )}

@@ -9,9 +9,28 @@ import ava1 from './img/cam.png';
 import ava2 from './img/Hero13.png';
 import { useStyles } from './point-allocation-styles';
 import { Avatar, SubmissionDisplay, Header } from './index';
+import './PointAllocation.css';
 
 interface PointCardProps {
     child: Child;
+}
+
+interface Teammember {
+    username: string;
+    story: {
+        id: number;
+        story: {
+            page1: string;
+            page2?: string;
+            page3?: string;
+            page4?: string;
+            page5?: string;
+        };
+    };
+    illustration: {
+        id: number;
+        illustration: string;
+    };
 }
 
 const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
@@ -24,47 +43,22 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
         pic1Points: 10,
         pic2Points: 10,
     });
+    console.log({ state });
+    console.log('child', child);
+
     const [remainingPoints, setRemainingPoints] = useState(100);
     const [error, setError] = useState(false);
     const [thisMatch, setThisMatch] = useState();
     const [teamReviewTime, setTeamReviewTime] = useState(new Date());
-    const [student, setStudent] = useState({
-        username: '',
-        story: {
-            id: 0,
-            story: {
-                page1: '',
-                page2: '',
-                page3: '',
-                page4: '',
-                page5: '',
-            },
-        },
-        illustration: {
-            id: 0,
-            illustration: '',
-        },
-    });
-    const [teammate, setTeammate] = useState({
-        username: '',
-        story: {
-            id: 0,
-            story: {
-                page1: '',
-                page2: '',
-                page3: '',
-                page4: '',
-                page5: '',
-            },
-        },
-        illustration: {
-            id: 0,
-            illustration: '',
-        },
-    });
+    const [disabledForm, setDisabled] = useState(child.progress.teamReview);
+    const [student, setStudent] = useState<Teammember | undefined>(undefined);
+    const [teammate, setTeammate] = useState<Teammember | undefined>(undefined);
+
+    console.log(student, teammate);
     const classes = useStyles({});
 
     useEffect(() => {
+        console.log('changing points');
         setRemainingPoints(
             100 - (state.story1Points + state.story2Points + state.pic1Points + state.pic2Points)
         );
@@ -73,16 +67,18 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     useEffect(() => {
         if (matchInfo) {
             const { student, teammate } = matchInfo.thisMatch.team;
-            const { studentUsername, studentStory, studentIllustration } = student;
-            const { teammateUsername, teammateStory, teammateIllustration } = teammate;
+            // const { studentUsername, studentStory, studentIllustration } = student;
+            // const { teammateUsername, teammateStory, teammateIllustration } = teammate;
             setThisMatch({ ...matchInfo.thisMatch });
             setStudent({ ...student });
             setTeammate({ ...teammate });
             setTeamReviewTime(new Date(matchInfo.thisMatch.teamReviewEndDate));
-            console.log(new Date(matchInfo.thisMatch.teamReviewEndDate));
+
+            // console.log(new Date(matchInfo.thisMatch.teamReviewEndDate));
+            console.log("logan's", matchInfo.thisMatch);
         }
-    }, [matchInfo]);
-    console.log(new Date(teamReviewTime.getTime() - new Date().getTime()));
+    }, [child.progress.teamReview, matchInfo]);
+    // console.log(new Date(teamReviewTime.getTime() - new Date().getTime()));
     const handleSubmit = () => {
         const newPoints = {
             stories: [
@@ -97,7 +93,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
         console.log('submitting pts', newPoints);
         if (remainingPoints === 0 && child.progress.teamReview === false) {
             updatePoints(newPoints);
-            history.push('/matchup');
+            setDisabled(true);
             return console.log('Success!');
         } else if (child.progress.teamReview === true) {
             history.push('/matchup');
@@ -111,78 +107,70 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     const submissionCheck = (submission) =>
         typeof submission === 'string' ? submission : Object.values(submission);
     return (
-        <div>
+        <div className={classes.root}>
             {/* Container for avatars + inputs + buttons */}
-            {child.progress.teamReview === true ? (
+            {matchInfo?.thisMatch.gotoMatchmaking === true ? (
                 history.push('/matchup')
-            ) : student === undefined || teammate === undefined ? (
+            ) : !student || !teammate ? (
                 <div>
+                    {console.log('loading')}
                     <CircularProgress />
                 </div>
             ) : (
                 <>
+                    <Header remainingPoints={remainingPoints} teamReviewTime={teamReviewTime} />
                     <ValidatorForm
                         onSubmit={handleSubmit}
                         onError={(errors) => console.log(errors)}>
-                        {/* <Container maxWidth='lg'>
-                            <Grid container direction='column'> */}
-                        <Header remainingPoints={remainingPoints} teamReviewTime={teamReviewTime} />
-                        {/* <Grid container alignItems='center'> */}
-                        {/* <Grid item xs={12} sm={12} md={4} className={classes.avatarMargin}> */}
-                        <Avatar username={student.username} avatar={ava1} />
-                        {/* </Grid> */}
-                        {/* <Grid container md={8} className={classes.topContainer}>
-                                <Grid item xs={12} sm={12} md={6}> */}
-                        <SubmissionDisplay
-                            key='story1Points'
-                            username={student.username}
-                            submission={submissionCheck(student.story.story)}
-                            points={state.story1Points}
-                            handleChange={handleInputChange('story1Points')}
-                            type='Story'
-                        />
-                        {/* </Grid>
-                                <Grid item xs={12} sm={12} md={6}> */}
-                        <SubmissionDisplay
-                            key='pic1Points'
-                            username={student.username}
-                            submission={submissionCheck(student.illustration.illustration)}
-                            type='Illustration'
-                            handleChange={handleInputChange('pic1Points')}
-                            points={state.pic1Points}
-                        />
-                        {/* </Grid> */}
-                        {/* </Grid>
-                        </Grid> */}
-                        <Grid container alignItems='center'>
-                            <Grid item xs={12} sm={12} md={4} className={classes.avatarMargin}>
-                                <Avatar username={teammate.username} avatar={ava2} />
-                            </Grid>
-                            <Grid container md={8} className={classes.bottomContainer}>
-                                <Grid item xs={12} sm={12} md={6}>
-                                    <SubmissionDisplay
-                                        key='story2Points'
-                                        username={teammate.username}
-                                        submission={submissionCheck(teammate.story.story)}
-                                        points={state.story2Points}
-                                        handleChange={handleInputChange('story2Points')}
-                                        type='Story'
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={12} md={6}>
-                                    <SubmissionDisplay
-                                        key='pic2Points'
-                                        username={teammate.username}
-                                        submission={submissionCheck(
-                                            teammate.illustration.illustration
-                                        )}
-                                        points={state.pic2Points}
-                                        handleChange={handleInputChange('pic2Points')}
-                                        type='Illustration'
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Grid>
+                        <div className={`col-hero`}>
+                            <Avatar username={student.username} avatar={ava1} />
+                        </div>
+                        <div className={`col-input`}>
+                            <SubmissionDisplay
+                                key='story1Points'
+                                username={student.username}
+                                submission={submissionCheck(student.story.story)}
+                                points={state.story1Points}
+                                handleChange={handleInputChange('story1Points')}
+                                type='Story'
+                                disabledForm={disabledForm}
+                            />
+                            <SubmissionDisplay
+                                key='pic1Points'
+                                username={student.username}
+                                submission={submissionCheck(student.illustration.illustration)}
+                                type='Illustration'
+                                handleChange={handleInputChange('pic1Points')}
+                                points={state.pic1Points}
+                                disabledForm={disabledForm}
+                            />
+                        </div>
+
+                        <div className='col-hero'>
+                            <Avatar username={teammate.username} avatar={ava2} />
+                        </div>
+
+                        <div className='col-input'>
+                            <SubmissionDisplay
+                                key='story2Points'
+                                username={teammate.username}
+                                submission={submissionCheck(teammate.story.story)}
+                                points={state.story2Points}
+                                handleChange={handleInputChange('story2Points')}
+                                type='Story'
+                                disabledForm={disabledForm}
+                            />
+                            <SubmissionDisplay
+                                key='pic2Points'
+                                username={teammate.username}
+                                submission={submissionCheck(teammate.illustration.illustration)}
+                                points={state.pic2Points}
+                                handleChange={handleInputChange('pic2Points')}
+                                type='Illustration'
+                                disabledForm={disabledForm}
+                            />
+                        </div>
+
                         <Grid container>
                             <Grid item xs={4} className={classes.backDiv}>
                                 <div className={classes.button}>
@@ -197,15 +185,16 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                 <Grid item xs={6} />
                                 <Grid item xs={6}>
                                     <div className={classes.button}>
-                                        <Button className={classes.orangeButton} type='submit'>
+                                        <Button
+                                            disabled={disabledForm}
+                                            className={classes.orangeButton}
+                                            type='submit'>
                                             Match Up!
                                         </Button>
                                     </div>
                                 </Grid>
                             </Grid>
                         </Grid>
-                        {/* </Grid>
-                        </Container> */}
                     </ValidatorForm>
                 </>
             )}

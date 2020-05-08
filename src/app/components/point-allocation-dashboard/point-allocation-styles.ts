@@ -1,6 +1,8 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
+        root: {},
         orangeButton: {
             'backgroundColor': '#FF6B35',
             'fontSize': '24px',
@@ -14,12 +16,12 @@ export const useStyles = makeStyles((theme: Theme) =>
                 backgroundColor: '#FF6B35',
             },
         },
-        avatarMargin: {
-            backgroundColor: '#B5D33D',
-            borderRight: '7px solid',
-            borderLeft: '7px solid',
-            height: '380px',
-        },
+        // avatarMargin: {
+        //     // backgroundColor: '#B5D33D',
+        //     borderRight: '7px solid',
+        //     borderLeft: '7px solid',
+        //     height: '380px',
+        // },
         topContainer: {
             paddingTop: '75px',
             border: '7px solid #000',

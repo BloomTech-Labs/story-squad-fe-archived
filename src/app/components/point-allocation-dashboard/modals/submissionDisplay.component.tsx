@@ -13,6 +13,7 @@ interface SubmissionDisplayProps {
     key: 'story1Points' | 'pic1Points' | 'story2Points' | 'pic2Points';
     points: number;
     handleChange: (e: any) => void;
+    disabledForm: any;
 }
 
 export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
@@ -22,6 +23,7 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
     key,
     handleChange,
     points,
+    disabledForm,
 }) => {
     const [open, setOpen] = useState(false);
     const [pages, setPage] = useState(false);
@@ -50,7 +52,12 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                             alt={`${username}'s ${type}`}
                         />
                     </Grid>
-                    <TextValidatorComp key={key} points={points} handleChange={handleChange} />
+                    <TextValidatorComp
+                        key={key}
+                        points={points}
+                        handleChange={handleChange}
+                        disabledForm={disabledForm}
+                    />
                     <Dialog fullScreen open={open}>
                         <IconButton
                             edge='start'
@@ -82,7 +89,12 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                             alt={`${username}'s`}
                         />
                     </Grid>
-                    <TextValidatorComp key={key} points={points} handleChange={handleChange} />
+                    <TextValidatorComp
+                        key={key}
+                        points={points}
+                        handleChange={handleChange}
+                        disabledForm={disabledForm}
+                    />
                     <Dialog fullScreen open={open}>
                         <IconButton
                             edge='start'
@@ -114,7 +126,12 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                             alt={`${username}'s Story Preview`}
                         />
                     </Grid>
-                    <TextValidatorComp key={key} points={points} handleChange={handleChange} />
+                    <TextValidatorComp
+                        key={key}
+                        points={points}
+                        handleChange={handleChange}
+                        disabledForm={disabledForm}
+                    />
                     <Dialog fullScreen open={open}>
                         <IconButton
                             edge='start'

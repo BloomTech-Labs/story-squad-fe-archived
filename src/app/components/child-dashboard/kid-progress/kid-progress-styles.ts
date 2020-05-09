@@ -88,6 +88,7 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-end',
         transform: 'scale(3)',
         padding: '10px',
+        pointerEvents: 'none',
     },
     // draw styles
     draw: {

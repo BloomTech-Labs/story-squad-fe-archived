@@ -45,15 +45,15 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     });
     console.log({ state });
     console.log('child', child);
-
     const [remainingPoints, setRemainingPoints] = useState(100);
     const [error, setError] = useState(false);
     const [thisMatch, setThisMatch] = useState();
     const [teamReviewTime, setTeamReviewTime] = useState(new Date());
-    const [disabledForm, setDisabled] = useState(child.progress.teamReview);
+    const [disabledForm, setDisabled] = useState(false);
     const [student, setStudent] = useState<Teammember | undefined>(undefined);
     const [teammate, setTeammate] = useState<Teammember | undefined>(undefined);
-
+    // const [testModal, testOpened, setTestOpened] = useModal({ submission: '', username: '' });
+    console.log(student);
     console.log(student, teammate);
     const classes = useStyles({});
 
@@ -96,7 +96,8 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setDisabled(true);
             return console.log('Success!');
         } else if (child.progress.teamReview === true) {
-            history.push('/matchup');
+            // history.push('/matchup');
+
             return console.log('Already submitted points!');
         } else {
             setError(true);
@@ -105,7 +106,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
 
     console.log('updated state', state);
     const submissionCheck = (submission) =>
-        typeof submission === 'string' ? submission : Object.values(submission);
+        typeof submission === 'string' ? [submission] : Object.values(submission);
     return (
         <div className={classes.root}>
             {/* Container for avatars + inputs + buttons */}
@@ -127,17 +128,18 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                         </div>
                         <div className={`col-input`}>
                             <SubmissionDisplay
+                                child={student}
                                 key='story1Points'
-                                username={student.username}
                                 submission={submissionCheck(student.story.story)}
                                 points={state.story1Points}
                                 handleChange={handleInputChange('story1Points')}
                                 type='Story'
                                 disabledForm={disabledForm}
                             />
+
                             <SubmissionDisplay
                                 key='pic1Points'
-                                username={student.username}
+                                child={student}
                                 submission={submissionCheck(student.illustration.illustration)}
                                 type='Illustration'
                                 handleChange={handleInputChange('pic1Points')}
@@ -152,8 +154,8 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
 
                         <div className='col-input'>
                             <SubmissionDisplay
+                                child={student}
                                 key='story2Points'
-                                username={teammate.username}
                                 submission={submissionCheck(teammate.story.story)}
                                 points={state.story2Points}
                                 handleChange={handleInputChange('story2Points')}
@@ -161,8 +163,8 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                 disabledForm={disabledForm}
                             />
                             <SubmissionDisplay
+                                child={student}
                                 key='pic2Points'
-                                username={teammate.username}
                                 submission={submissionCheck(teammate.illustration.illustration)}
                                 points={state.pic2Points}
                                 handleChange={handleInputChange('pic2Points')}
@@ -182,17 +184,14 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                 </div>
                             </Grid>
                             <Grid container xs={8} className={classes.nextDiv}>
-                                <Grid item xs={6} />
-                                <Grid item xs={6}>
-                                    <div className={classes.button}>
-                                        <Button
-                                            disabled={disabledForm}
-                                            className={classes.orangeButton}
-                                            type='submit'>
-                                            Match Up!
-                                        </Button>
-                                    </div>
-                                </Grid>
+                                <div className={classes.button}>
+                                    <Button
+                                        disabled={disabledForm}
+                                        className={classes.orangeButton}
+                                        type='submit'>
+                                        Match Up!
+                                    </Button>
+                                </div>
                             </Grid>
                         </Grid>
                     </ValidatorForm>

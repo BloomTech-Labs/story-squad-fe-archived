@@ -61,8 +61,8 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
 
     const [locked, setLocked] = useState({
         oneVote: false,
-        twoVotes: false,
-        threeVotes: false,
+        twoVotes: true,
+        threeVotes: true,
     });
     //student/teammate submissions state
     useEffect(() => {
@@ -90,12 +90,14 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[0]}
                     child={child}
+                    locked={true}
                 />
                 <VersusRound
                     roundStyle={classes.story2}
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[1]}
                     child={child}
+                    locked={locked.threeVotes}
                 />
             </Grid>
             <Grid className={classes.bottomRow}>
@@ -104,12 +106,14 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[2]}
                     child={child}
+                    locked={locked.twoVotes}
                 />
                 <VersusRound
                     roundStyle={classes.picture2}
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[3]}
                     child={child}
+                    locked={locked.oneVote}
                 />
                 <VersusButton />
             </Grid>

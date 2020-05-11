@@ -165,5 +165,17 @@ export const useStyles = makeStyles((theme: Theme) =>
             marginRight: '-8%',
             cursor: 'pointer',
         },
+        imagePreview: {
+            width: '150px',
+            height: '90px',
+            borderRadius: '10px',
+            cursor: 'pointer',
+        },
+        lock: {
+            position: 'absolute',
+            top: '58%',
+            left: '78%',
+            transform: 'translate(-50%, -50%)',
+        },
     })
 );

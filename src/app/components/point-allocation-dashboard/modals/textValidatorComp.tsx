@@ -18,28 +18,31 @@ export const TextValidatorComp: React.FC<ValidatorProps> = ({
     const classes = useStyles();
     return (
         <Grid item md>
-            <TextValidator
-                validators={['minNumber:10', 'maxNumber:70', 'required']}
-                errorMessages={[
-                    'Oops! Each submission must be given at least 10 points.',
-                    'Oops! A submission cannot be given more than 70 points.',
-                    'This is required.',
-                ]}
-                required
-                autoFocus
-                name={key}
-                value={points}
-                onChange={handleChange}
-                type='number'
-                InputProps={{
-                    inputProps: {
-                        min: 10,
-                        max: 70,
-                        className: disabledForm ? classes.disabledInput : classes.pointInput,
-                    },
-                }}
-                variant='outlined'
-            />
+            {disabledForm ? null : (
+                <TextValidator
+                    validators={['minNumber:10', 'maxNumber:70', 'required']}
+                    errorMessages={[
+                        'Oops! Each submission must be given at least 10 points.',
+                        'Oops! A submission cannot be given more than 70 points.',
+                        'This is required.',
+                    ]}
+                    required
+                    autoFocus
+                    name={key}
+                    value={points}
+                    onChange={handleChange}
+                    type='number'
+                    InputProps={{
+                        inputProps: {
+                            min: 10,
+                            max: 70,
+                            // className: disabledForm ? classes.disabledInput : classes.pointInput,
+                            className: classes.pointInput,
+                        },
+                    }}
+                    variant='outlined'
+                />
+            )}
         </Grid>
     );
 };

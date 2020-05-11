@@ -205,15 +205,15 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                                         </Grid>
                                         <Grid container>
                                             <Grid item xs={4} className={classes.backDiv}>
-                                                <div className={classes.button}>
-                                                    <Link to={`/kids-dashboard`}>
+                                                <Link to={`/kids-dashboard`}>
+                                                    <div className={classes.button}>
                                                         <Button
                                                             className={classes.orangeButton}
                                                             type='button'>
                                                             Back
                                                         </Button>
-                                                    </Link>
-                                                </div>
+                                                    </div>
+                                                </Link>
                                             </Grid>
                                             <Grid container xs={8} className={classes.nextDiv}>
                                                 {/* <Grid item xs={6} />

@@ -39,8 +39,16 @@ export const Header: React.FC<PointsProps> = ({
                                     <div>{remainingPoints}</div>
                                 )}
                             </Typography>
-                        ) : null}
-                        <MenuButton />
+                        ) : (
+                            <div className={classes.pointsWaiting}>
+                                <Typography className={classes.h3Styling}>
+                                    All Points Allocated!
+                                </Typography>
+                            </div>
+                        )}
+                        <div className={classes.menuBtn}>
+                            <MenuButton />
+                        </div>
                     </Grid>
                 </Grid>
             </Grid>

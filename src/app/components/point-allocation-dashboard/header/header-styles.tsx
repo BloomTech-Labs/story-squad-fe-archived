@@ -41,5 +41,9 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             justifyContent: 'center',
         },
+        remaining: {
+            display: 'flex',
+            justifyContent: 'space-between',
+        },
     })
 );

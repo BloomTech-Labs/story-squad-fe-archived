@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { useStyles } from './header-styles';
+import { MenuButton } from '../../reusable-components/menu-button/menu-button';
 
 interface PointsProps {
     remainingPoints: number;
@@ -28,7 +29,7 @@ export const Header: React.FC<PointsProps> = ({
                             {`${TimeTill.getHours()} Hours left`}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={6} className={classes.remaining}>
                         {disabledForm === false ? (
                             <Typography className={classes.h3Styling}>
                                 Total Points Remaining:
@@ -39,6 +40,7 @@ export const Header: React.FC<PointsProps> = ({
                                 )}
                             </Typography>
                         ) : null}
+                        <MenuButton />
                     </Grid>
                 </Grid>
             </Grid>

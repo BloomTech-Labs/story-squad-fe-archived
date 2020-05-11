@@ -28,13 +28,13 @@ interface VersusProps {
 }
 
 const Versus: React.FC<VersusProps> = ({ child }) => {
-    console.log(child);
+    // console.log(child);
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
-    console.log('response', response);
+    // console.log('response', response);
 
     const [matchdata, setMatchdata] = useState({} as any);
-
+    const [temp, setTemp] = useState([]);
     const tempHolding = new TemporaryHolder();
     const [matchups, setMatchups] = useState([
         {

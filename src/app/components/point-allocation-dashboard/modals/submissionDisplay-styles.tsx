@@ -1,5 +1,5 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-
+import 'typeface-bangers';
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         modal: {
@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             boxShadow: theme.shadows[5],
         },
         root: {
-            fontFamily: 'nunito',
+            // fontFamily: 'nunito',
             display: 'flex',
             flexDirection: 'column',
         },
@@ -34,9 +34,23 @@ export const useStyles = makeStyles((theme: Theme) =>
             padding: '53px ',
         },
         pointInput: {
+            textAlign: 'center',
             fontFamily: 'Bangers',
-            fontSize: '48px',
+            fontSize: '1.8em',
             fontWeight: 'bold',
+            backgroundColor: 'white',
+            width: '145px',
+            borderRadius: '5px',
+        },
+        disabledInput: {
+            textAlign: 'center',
+            fontFamily: 'Bangers',
+            fontSize: '1.8em',
+            width: '145px',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            backgroundColor: 'rgba(192,192,192,.7)',
+            color: 'transparent',
         },
         imagePreview: {
             width: '175px',

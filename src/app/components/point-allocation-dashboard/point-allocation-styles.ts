@@ -41,8 +41,15 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         button: {
             display: 'flex',
-            justifyContent: 'center',
-            alignItem: 'center',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            width: '100%',
+            marginRight: '5%',
+        },
+        disabledBtn: {
+            pointerEvents: 'none',
+            backgroundColor: 'slateGrey',
+            color: 'white',
         },
         backDiv: {
             border: '7px solid #000',
@@ -53,6 +60,9 @@ export const useStyles = makeStyles((theme: Theme) =>
                 backgroundColor: '#FED23F',
                 borderRight: '0px',
             },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
         },
         nextDiv: {
             border: '7px solid #000',
@@ -62,6 +72,13 @@ export const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.down('sm')]: {
                 borderLeft: '0px',
             },
+        },
+        waiting: {
+            'fontSize': '2.8em',
+            'color': 'tomato',
+            'fontFamily': 'Bangers',
+            '-webkit-text-stroke': '1.6px black',
+            'marginRight': '7%',
         },
     })
 );

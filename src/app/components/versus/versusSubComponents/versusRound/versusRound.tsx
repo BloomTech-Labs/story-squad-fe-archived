@@ -87,12 +87,15 @@ const VersusRound: React.FC<RoundProps> = ({
                             submission={b64passRight}
                         />
                     ) : (
-                        <Grid item md>
-                            <SubmissionDisplay
-                                username={matchup[1].username}
-                                submission={b64passRight}
-                            />
-                            <Lock className={classes.lock} />
+                        <Grid container className={classes.gridContainer}>
+                            <Grid item md>
+                                <img
+                                    src={b64passRight[0]}
+                                    className={classes.imagePreview}
+                                    alt='locked submission'
+                                />
+                                <Lock className={classes.lock} />
+                            </Grid>
                         </Grid>
                     )}
                 </Grid>

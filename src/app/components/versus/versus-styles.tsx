@@ -166,10 +166,17 @@ export const useStyles = makeStyles((theme: Theme) =>
             cursor: 'pointer',
         },
         imagePreview: {
+            marginLeft: '8%',
             width: '150px',
             height: '90px',
             borderRadius: '10px',
             cursor: 'pointer',
+        },
+        gridContainer: {
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            alignContent: 'center',
         },
         lock: {
             position: 'absolute',

@@ -140,6 +140,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     </div>
                 </Fade>
             </Modal>
+            //{' '}
         </Container>
     );
 };

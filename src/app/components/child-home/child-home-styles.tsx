@@ -24,14 +24,16 @@ export const useStyles = makeStyles((theme: Theme) =>
             boxSizing: 'border-box',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            padding: '25px',
+            // justifyContent: 'center',
+            // padding: '25px',
             [theme.breakpoints.only('sm')]: {
                 width: '100%',
             },
         },
         pictureHover: {
-            cursor: 'pointer',
+            // background: 'red',
+            maxWidth: '100%',
+            width: 'calc(100%-10vw)',
         },
         avatarCreator: {
             backgroundColor: '#EB7D5B',

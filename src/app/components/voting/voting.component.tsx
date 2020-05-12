@@ -13,6 +13,7 @@ import { VotingModal } from './modal/modal-image';
 import { Emoji } from './emoji/Emoji.component';
 import { Popup } from '../voting/popup-alert/Popup.alert';
 import { VotingHeader } from './votingHeader/voting-header';
+import { useAPI } from '../../hooks';
 
 const ColoredRadio = withStyles({
     root: {
@@ -32,6 +33,8 @@ interface VotingCardProps {
 }
 
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
+    const [response] = useAPI(`/votingRoutes/voting`, 'GET', false);
+    // console.log('response', response);
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
         story1Points: 'something',
         story2Points: 'something',
@@ -71,7 +74,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
         // history.push
     };
 
-    console.log('this is the object', newEmoji);
+    // console.log('this is the object', newEmoji);
 
     return (
         <Container className={classes.containerStyling}>
@@ -82,9 +85,14 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         <VotingModal
                             key='pic1Points'
                             username={dummyData.dummy}
-                            submission={story1}
+                            submission={
+                                response?.child1.story
+                                    ? response?.child1.story.page1
+                                    : response?.child1.illustration
+                            }
                             type='Illustration'
                             points={state.pic1Points}
+                            response={response}
                         />
                         <ColoredRadio
                             className={classes.radioBox}
@@ -107,9 +115,14 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         <VotingModal
                             key='pic1Points'
                             username={dummyData.dummy}
-                            submission={story2}
+                            submission={
+                                response?.child2.story
+                                    ? response?.child2.story.page1
+                                    : response?.child2.illustration
+                            }
                             type='Illustration'
                             points={state.pic1Points}
+                            response={response}
                         />
                         <ColoredRadio
                             className={classes.radioBox}
@@ -125,11 +138,6 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             newEmoji={newEmoji.player2}
                             setNewEmoji={setNewEmoji}
                         />
-                        {/* <Grid container xs={8} className={classes.submitDiv}>
-                            <Grid item xs={6} />
-                            <Grid item xs={6}> */}
-                        {/* </Grid>
-                        </Grid> */}
                         <div className={classes.button}>
                             <Button className={classes.orangeButton} onClick={handleSubmit}>
                                 Submit

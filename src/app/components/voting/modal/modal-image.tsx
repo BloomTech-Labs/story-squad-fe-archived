@@ -12,6 +12,7 @@ interface VotingModalProps {
     type;
     key;
     points;
+    response;
 }
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -56,6 +57,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
     type,
     key,
     points,
+    response,
 }) => {
     const [open, setOpen] = useState(false);
     const theme = useTheme();
@@ -68,7 +70,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
     const handleClose = () => {
         setOpen(false);
     };
-
+    console.log('response in modal', response);
     return (
         <>
             <Grid

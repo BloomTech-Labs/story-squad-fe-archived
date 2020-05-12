@@ -58,7 +58,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
             points: 0,
         },
     ]);
-
+    console.log({ child });
     const [locked, setLocked] = useState({
         oneVote: false,
         twoVotes: false,

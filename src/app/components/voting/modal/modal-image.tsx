@@ -3,15 +3,15 @@ import { DialogTitle, Grid, Dialog, useMediaQuery } from '@material-ui/core';
 import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
-import story2 from '../img/chancewriting.jpg';
+// import story2 from '../img/chancewriting.jpg';
 import Slide from '@material-ui/core/Slide';
 
 interface VotingModalProps {
     submission;
-    username;
+    // username;
     type;
     key;
-    points;
+    // points;
     response;
 }
 
@@ -53,10 +53,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const VotingModal: React.FC<VotingModalProps> = ({
     submission,
-    username,
+    // username,
     type,
     key,
-    points,
+    // points,
     response,
 }) => {
     const [open, setOpen] = useState(false);
@@ -70,7 +70,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
     const handleClose = () => {
         setOpen(false);
     };
-    console.log('response in modal', response);
+    // console.log('response in modal', response);
     return (
         <>
             <Grid
@@ -84,7 +84,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                         src={submission}
                         className={classes.imagePreview}
                         onClick={handleOpen}
-                        alt={`${username}'s ${type}`}
+                        alt={'user submission'}
                     />
                 </Grid>
                 <Dialog
@@ -103,11 +103,11 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                                 <CloseIcon className={classes.closeButton} />
                             </IconButton>
                         </div>
-                        <DialogTitle className={classes.subTitle} id='submission-title'>
+                        {/* <DialogTitle className={classes.subTitle} id='submission-title'>
                             {`${username}'s ${type}`}
-                        </DialogTitle>
+                        </DialogTitle> */}
                         <div className={classes.imgDiv}>
-                            <img src={submission} alt={`${username}'s ${type}`} />
+                            <img src={submission} alt={'user submission'} />
                         </div>
                     </div>
                 </Dialog>

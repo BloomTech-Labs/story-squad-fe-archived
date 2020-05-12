@@ -6,8 +6,8 @@ import { Button, Typography, Container, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
-import story1 from './img/leowriting.jpg';
-import story2 from './img/chancewriting.jpg';
+// import story1 from './img/leowriting.jpg';
+// import story2 from './img/chancewriting.jpg';
 import { useForm } from '../../hooks';
 import { VotingModal } from './modal/modal-image';
 import { Emoji } from './emoji/Emoji.component';
@@ -34,16 +34,17 @@ interface VotingCardProps {
 
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
     const [response] = useAPI(`/votingRoutes/voting`, 'GET', false);
-    // console.log('response', response);
-    const { state, handleInputChange, handleSubmitBuilder } = useForm({
-        story1Points: 'something',
-        story2Points: 'something',
-        pic1Points: 'something',
-        pic2Points: 'something',
-    });
+    const [postResponse, loading, request] = useAPI(`/votingRoutes/voting`, 'POST');
+    console.log('response', response);
+    // const { state, handleInputChange, handleSubmitBuilder } = useForm({
+    //     story1Points: 'something',
+    //     story2Points: 'something',
+    //     pic1Points: 'something',
+    //     pic2Points: 'something',
+    // });
 
     const [dummyData, setDummyData] = useState({ dummy: 'data' });
-    const [selectedValue, setSelectedValue] = React.useState('a');
+    const [selectedValue, setSelectedValue] = React.useState<number>();
     const [open, setOpen] = React.useState(false);
     const [newEmoji, setNewEmoji] = React.useState({
         player1: [],
@@ -60,21 +61,23 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedValue(event.target.value);
+        setSelectedValue(Number(event.target.value));
     };
 
     const handleSubmit = () => {
+        const vote = { matchupID: response?.matchupID, childID: selectedValue };
+        console.log('vote data', vote);
         if (newEmoji.player1.length < 4 || newEmoji.player2.length < 4) {
             setOpen(true);
         } else {
             console.log('submitted successfully');
+            request(vote);
         }
-        // post endpoint
-        // clear newEmoji state
         // history.push
     };
 
     // console.log('this is the object', newEmoji);
+    // console.log('selected value', selectedValue);
 
     return (
         <Container className={classes.containerStyling}>
@@ -82,23 +85,24 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
             <Grid className={classes.topRow}>
                 <Grid className={classes.story1}>
                     <div className={classes.playerSelection}>
+                        <p>{'ID:' + response?.child1.id}</p>
                         <VotingModal
                             key='pic1Points'
-                            username={dummyData.dummy}
+                            // username={dummyData.dummy}
                             submission={
                                 response?.child1.story
                                     ? response?.child1.story.page1
                                     : response?.child1.illustration
                             }
                             type='Illustration'
-                            points={state.pic1Points}
+                            // points={state.pic1Points}
                             response={response}
                         />
                         <ColoredRadio
                             className={classes.radioBox}
-                            checked={selectedValue === 'a'}
+                            checked={selectedValue == response?.child1.id}
                             onChange={handleChange}
-                            value='a'
+                            value={response?.child1.id}
                             name='storyA'
                             inputProps={{ 'aria-label': 'A' }}
                             disableRipple={true}
@@ -112,23 +116,24 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                 </Grid>
                 <Grid className={classes.story2}>
                     <div className={classes.playerSelection}>
+                        <p>{'ID:' + response?.child2.id}</p>
                         <VotingModal
                             key='pic1Points'
-                            username={dummyData.dummy}
+                            // username={dummyData.dummy}
                             submission={
                                 response?.child2.story
                                     ? response?.child2.story.page1
                                     : response?.child2.illustration
                             }
                             type='Illustration'
-                            points={state.pic1Points}
+                            // points={state.pic1Points}
                             response={response}
                         />
                         <ColoredRadio
                             className={classes.radioBox}
-                            checked={selectedValue === 'b'}
+                            checked={selectedValue == response?.child2.id}
                             onChange={handleChange}
-                            value='b'
+                            value={response?.child2.id}
                             name='storyB'
                             inputProps={{ 'aria-label': 'B' }}
                             disableRipple={true}
@@ -139,7 +144,10 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             setNewEmoji={setNewEmoji}
                         />
                         <div className={classes.button}>
-                            <Button className={classes.orangeButton} onClick={handleSubmit}>
+                            <Button
+                                className={classes.orangeButton}
+                                onClick={handleSubmit}
+                                disabled={selectedValue ? false : true}>
                                 Submit
                             </Button>
                         </div>

@@ -29,8 +29,6 @@ interface VotingCardProps {
     child: Child;
     handleChange: any;
 }
-const leo = [story1, story2, story1];
-const chance = [story1, story2, story1, story2, story2];
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
     const history = useHistory();
     const [response] = useAPI(`/votingRoutes/voting`, 'GET', false);

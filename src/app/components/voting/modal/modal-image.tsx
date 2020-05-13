@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { DialogTitle, Grid, Dialog, useMediaQuery } from '@material-ui/core';
 import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
+import { TransitionProps } from '@material-ui/core/transitions';
 import IconButton from '@material-ui/core/IconButton';
 // import story2 from '../img/chancewriting.jpg';
 import Slide from '@material-ui/core/Slide';
@@ -15,37 +16,45 @@ interface VotingModalProps {
     response;
 }
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition = React.forwardRef(function Transition(
+    props: TransitionProps,
+    ref: React.Ref<unknown>
+) {
     return <Slide direction='up' ref={ref} {...props} />;
 });
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        iconBox: {
+        'iconBox': {
             width: '5vh',
             height: '10vh',
             margin: '0 auto',
         },
-        imagePreview: {
+        'imagePreview': {
             width: '175px',
             height: '175px',
             borderRadius: '14px',
             cursor: 'pointer',
         },
-        modalpop: {
+        'modalpop': {
+            border: '7px solid black',
             display: 'flex',
             justifyContent: 'center',
             width: '100%',
             flexDirection: 'column',
             alignItems: 'center',
         },
-        imgDiv: {
+        'modalpop>': {
+            backgroundColor: 'red',
+            padding: '100px',
+        },
+        'imgDiv': {
             'minWidth': '70%',
             '&& img': {
                 minWidth: '100%',
             },
         },
-        subTitle: {
+        'subTitle': {
             textTransform: 'capitalize',
         },
     })
@@ -81,7 +90,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                 alignContent='center'>
                 <Grid item md>
                     <img
-                        src={submission}
+                        src={submission[0]}
                         className={classes.imagePreview}
                         onClick={handleOpen}
                         alt={'user submission'}
@@ -90,6 +99,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                 <Dialog
                     fullScreen
                     open={open}
+                    TransitionComponent={Transition}
                     // TransitionComponent={Transition}
                 >
                     <div className={classes.modalpop}>
@@ -103,12 +113,11 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                                 <CloseIcon className={classes.closeButton} />
                             </IconButton>
                         </div>
-                        {/* <DialogTitle className={classes.subTitle} id='submission-title'>
-                            {`${username}'s ${type}`}
-                        </DialogTitle> */}
-                        <div className={classes.imgDiv}>
-                            <img src={submission} alt={'user submission'} />
-                        </div>
+                        {submission.map((page, index) => (
+                            <div key={key} className={classes.imgDiv}>
+                                <img src={page} alt={`page ${index} of a ${type}`} />
+                            </div>
+                        ))}
                     </div>
                 </Dialog>
             </Grid>

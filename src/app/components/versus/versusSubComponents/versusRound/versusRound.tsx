@@ -42,7 +42,7 @@ const VersusRound: React.FC<RoundProps> = ({
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>
                 <div className={classes.leftPlayer}>
-                    <FeedbackPopup open={open} setOpen={setOpen} />
+                    <FeedbackPopup open={open} setOpen={setOpen} submission={b64passLeft} />
                     {matchup[0].childId === child.id ? (
                         <Badge
                             onClick={() => {

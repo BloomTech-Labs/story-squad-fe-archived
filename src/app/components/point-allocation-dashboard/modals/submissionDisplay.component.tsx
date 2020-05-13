@@ -29,7 +29,6 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
 }) => {
     const { username } = child;
     const [open, setOpen] = useState(false);
-    const [pages, setPage] = useState(false);
     const classes = useStyles({});
     const handleOpen = () => {
         setOpen(true);
@@ -37,76 +36,44 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
     const handleClose = () => {
         setOpen(false);
     };
-    const openPage = () => {
-        setPage(true);
-    };
-    const closePage = () => {
-        setPage(false);
-    };
+
     console.log(child);
     return (
-        <>
-            <Grid container className={classes.gridContainer}>
-                <Grid item md>
-                    <img
-                        src={submission[0]}
-                        className={classes.imagePreview}
-                        onClick={handleOpen}
-                        alt={`${username}'s Story Preview`}
-                    />
-                </Grid>
-                <TextValidatorComp
-                    key={key}
-                    points={points}
-                    handleChange={handleChange}
-                    disabledForm={disabledForm}
+        <Grid container className={classes.gridContainer}>
+            <Grid item md>
+                <img
+                    src={submission[0]}
+                    className={classes.imagePreview}
+                    onClick={handleOpen}
+                    alt={`${username}'s Story Preview`}
                 />
-                <Dialog fullScreen open={open}>
-                    <IconButton
-                        edge='start'
-                        color='inherit'
-                        onClick={handleClose}
-                        aria-label='close'>
-                        <CloseIcon />
-                    </IconButton>
-                    <DialogTitle className={classes.submissionHeader} id='submission-title'>
-                        {`${username}'s Story!`}
-                    </DialogTitle>
-                    {submission.map(
-                        (page, key) =>
-                            page && (
-                                <Grid className={classes.gridContainer}>
-                                    <Card key={key} className={classes.storyPages}>
-                                        <DialogTitle id='submission-title'>
-                                            {`Page ${key + 1}`}
-                                        </DialogTitle>
-                                        <img
-                                            src={page}
-                                            className={classes.thumbnail}
-                                            onClick={openPage}
-                                        />
-                                    </Card>
-                                    <Dialog fullScreen open={pages}>
-                                        <IconButton
-                                            edge='start'
-                                            color='inherit'
-                                            onClick={closePage}
-                                            aria-label='close'>
-                                            <CloseIcon />
-                                        </IconButton>
-                                        <div className={classes.viewPageDiv}>
-                                            <img
-                                                src={page}
-                                                className={classes.submissionImg}
-                                                alt={`${username}'s story submission, page ${key}`}
-                                            />
-                                        </div>
-                                    </Dialog>
-                                </Grid>
-                            )
-                    )}
-                </Dialog>
             </Grid>
-        </>
+            <TextValidatorComp
+                key={key}
+                points={points}
+                handleChange={handleChange}
+                disabledForm={disabledForm}
+            />
+            <Dialog fullScreen open={open}>
+                <IconButton edge='start' color='inherit' onClick={handleClose} aria-label='close'>
+                    <CloseIcon />
+                </IconButton>
+                <DialogTitle className={classes.submissionHeader} id='submission-title'>
+                    {`${username}'s Story!`}
+                </DialogTitle>
+                page && (
+                <Grid className={classes.gridContainer}>
+                    {submission.map((page, key) => (
+                        <div className={classes.viewPageDiv}>
+                            <img
+                                src={page}
+                                className={classes.submissionImg}
+                                alt={`${username}'s story submission, page ${key}`}
+                            />
+                        </div>
+                    ))}
+                </Grid>
+            </Dialog>
+        </Grid>
     );
 };

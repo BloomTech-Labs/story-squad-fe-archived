@@ -26,6 +26,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.down('sm')]: {
                 fontSize: '32px',
             },
+            'lineHeight': '3.5rem',
         },
         red: {
             color: 'red',
@@ -39,7 +40,18 @@ export const useStyles = makeStyles((theme: Theme) =>
             border: '7px solid #000000',
             backgroundSize: '101% 103%',
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'space-evenly',
+        },
+        remaining: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '2%',
+        },
+        menuBtn: {
+            marginRight: '3%',
+        },
+        pointsWaiting: {
+            marginBottom: '11%',
         },
     })
 );

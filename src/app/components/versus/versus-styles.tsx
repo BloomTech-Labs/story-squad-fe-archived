@@ -19,7 +19,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             zIndex: 9,
             width: '100%',
             height: '40%',
-            // border: '3px solid blue',
         },
         nameRowBig: {
             padding: '0 10% 0 10%',
@@ -138,7 +137,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             height: '63px',
             width: '63px',
             padding: '10px',
-            // margin: '10%',
         },
         playerName: {
             fontFamily: 'Bangers',
@@ -163,12 +161,28 @@ export const useStyles = makeStyles((theme: Theme) =>
             height: '45%',
         },
         root: {
-            // '& > *': {
-            //     margin: theme.spacing(0),
-            // },
             marginBottom: '26%',
             marginRight: '-8%',
             cursor: 'pointer',
+        },
+        imagePreview: {
+            marginLeft: '8%',
+            width: '150px',
+            height: '90px',
+            borderRadius: '10px',
+            cursor: 'pointer',
+        },
+        gridContainer: {
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            alignContent: 'center',
+        },
+        lock: {
+            position: 'absolute',
+            top: '58%',
+            left: '78%',
+            transform: 'translate(-50%, -50%)',
         },
     })
 );

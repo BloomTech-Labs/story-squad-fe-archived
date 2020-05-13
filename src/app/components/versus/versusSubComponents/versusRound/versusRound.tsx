@@ -2,6 +2,7 @@ import React from 'react';
 import { Avatar, Grid } from '@material-ui/core';
 import { SubmissionDisplay } from '../../modals/subDisplay.component';
 import { useStyles } from '../../versus-styles';
+import { ReactComponent as Lock } from '../../img/lock-icon.svg';
 import ava1 from '../../img/ava1.png';
 import vsImg from '../../img/VS.png';
 import Badge from '@material-ui/core/Badge';
@@ -12,12 +13,19 @@ interface RoundProps {
     nameRowStyle: {};
     matchup: any;
     child: any;
+    locked: boolean;
 }
 
-const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, child }) => {
+const VersusRound: React.FC<RoundProps> = ({
+    roundStyle,
+    nameRowStyle,
+    matchup,
+    child,
+    locked,
+}) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-
+    // console.log({ matchup }, { child });
     if (matchup[0].story === undefined && matchup[0].illustration === undefined) return <></>;
 
     let b64passLeft = [];
@@ -29,7 +37,7 @@ const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, 
         b64passLeft = [matchup[0].illustration];
         b64passRight = [matchup[1].illustration];
     }
-
+    console.log(b64passLeft, b64passRight);
     return (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>
@@ -73,7 +81,23 @@ const VersusRound: React.FC<RoundProps> = ({ roundStyle, nameRowStyle, matchup, 
                     </div>
                 )}
                 <Grid item xs={12} sm={12} md={6}>
-                    <SubmissionDisplay username={matchup[1].username} submission={b64passRight} />
+                    {!locked ? (
+                        <SubmissionDisplay
+                            username={matchup[1].username}
+                            submission={b64passRight}
+                        />
+                    ) : (
+                        <Grid container className={classes.gridContainer}>
+                            <Grid item md>
+                                <img
+                                    src={b64passRight[0]}
+                                    className={classes.imagePreview}
+                                    alt='locked submission'
+                                />
+                                <Lock className={classes.lock} />
+                            </Grid>
+                        </Grid>
+                    )}
                 </Grid>
             </div>
             <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />

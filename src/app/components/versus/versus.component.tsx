@@ -28,11 +28,11 @@ interface VersusProps {
 }
 
 const Versus: React.FC<VersusProps> = ({ child }) => {
-    console.log(child);
+    // console.log(child);
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
     console.log('response', response);
-
+    const [votesCasted, setVotesCasted] = useState(0);
     const [matchdata, setMatchdata] = useState({} as any);
     const [temp, setTemp] = useState([]);
     const tempHolding = new TemporaryHolder();
@@ -60,15 +60,25 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
     ]);
 
     const [locked, setLocked] = useState({
-        oneVote: false,
-        twoVotes: false,
-        threeVotes: false,
+        '1Votes': true,
+        '2Votes': true,
+        '3Votes': true,
     });
     //student/teammate submissions state
     useEffect(() => {
+        // setVotesCasted(1);
+        if (response) setVotesCasted(response.matchdata.votes);
         if (response) setMatchdata(response.matchdata);
         if (response) setMatchups(response.matchups);
     }, [response]);
+
+    useEffect(() => {
+        if (votesCasted === 1) setLocked({ ...locked, '1Votes': false });
+        if (votesCasted === 2) setLocked({ ...locked, '1Votes': false, '2Votes': false });
+        if (votesCasted === 3)
+            setLocked({ ...locked, '1Votes': false, '2Votes': false, '3Votes': false });
+        // eslint-disable-next-line
+    }, [votesCasted]);
 
     if (matchdata.homeTeam === undefined)
         return (
@@ -90,12 +100,14 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[0]}
                     child={child}
+                    locked={true}
                 />
                 <VersusRound
                     roundStyle={classes.story2}
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[1]}
                     child={child}
+                    locked={locked['3Votes']}
                 />
             </Grid>
             <Grid className={classes.bottomRow}>
@@ -104,12 +116,14 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     nameRowStyle={classes.nameRowSmall}
                     matchup={matchups[2]}
                     child={child}
+                    locked={locked['2Votes']}
                 />
                 <VersusRound
                     roundStyle={classes.picture2}
                     nameRowStyle={classes.nameRowBig}
                     matchup={matchups[3]}
                     child={child}
+                    locked={locked['1Votes']}
                 />
                 <VersusButton />
             </Grid>

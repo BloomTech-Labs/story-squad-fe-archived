@@ -1,6 +1,6 @@
 //initial copy from 'submissionDisplay(point allocation)
 import React, { useState } from 'react';
-import { DialogTitle, Grid, Dialog, Card } from '@material-ui/core';
+import { DialogTitle, Grid, Dialog, Card, Icon } from '@material-ui/core';
 import { useStyles } from './subDisplay-styles';
 import { TransitionProps } from '@material-ui/core/transitions';
 import CloseIcon from '@material-ui/icons/Close';

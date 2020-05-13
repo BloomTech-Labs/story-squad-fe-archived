@@ -43,17 +43,16 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
         pic1Points: 10,
         pic2Points: 10,
     });
-    console.log({ state });
-    console.log('child', child);
+
     const [remainingPoints, setRemainingPoints] = useState(100);
     const [error, setError] = useState(false);
     const [thisMatch, setThisMatch] = useState();
     const [teamReviewTime, setTeamReviewTime] = useState(new Date());
-    const [disabledForm, setDisabled] = useState(false);
+
+    const [disabledForm, setDisabled] = useState(child.progress.teamReview);
     const [student, setStudent] = useState<Teammember | undefined>(undefined);
     const [teammate, setTeammate] = useState<Teammember | undefined>(undefined);
-    // const [testModal, testOpened, setTestOpened] = useModal({ submission: '', username: '' });
-    console.log(student);
+
     console.log(student, teammate);
     const classes = useStyles({});
 
@@ -67,8 +66,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     useEffect(() => {
         if (matchInfo) {
             const { student, teammate } = matchInfo.thisMatch.team;
-            // const { studentUsername, studentStory, studentIllustration } = student;
-            // const { teammateUsername, teammateStory, teammateIllustration } = teammate;
             setThisMatch({ ...matchInfo.thisMatch });
             setStudent({ ...student });
             setTeammate({ ...teammate });
@@ -119,7 +116,11 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                 </div>
             ) : (
                 <>
-                    <Header remainingPoints={remainingPoints} teamReviewTime={teamReviewTime} />
+                    <Header
+                        remainingPoints={remainingPoints}
+                        teamReviewTime={teamReviewTime}
+                        disabledForm={disabledForm}
+                    />
                     <ValidatorForm
                         onSubmit={handleSubmit}
                         onError={(errors) => console.log(errors)}>

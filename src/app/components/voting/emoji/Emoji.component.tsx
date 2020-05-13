@@ -142,7 +142,7 @@ export const Emoji: React.FC<VotingStateProps> = ({ newEmoji, setNewEmoji, emoji
 
     useEffect(() => {
         emojiCondit(emojiInput);
-        console.log('this is from the useEffect', newEmoji);
+        // console.log('this is from the useEffect', newEmoji);
         // eslint-disable-next-line
     }, [emojiInput]);
 

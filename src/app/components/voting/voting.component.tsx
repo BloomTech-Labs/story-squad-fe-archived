@@ -6,13 +6,12 @@ import { Button, Typography, Container, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
 import { Child, Cohort } from '../../models';
-import story1 from './img/leowriting.jpg';
-import story2 from './img/chancewriting.jpg';
 import { useForm } from '../../hooks';
 import { VotingModal } from './modal/modal-image';
 import { Emoji } from './emoji/Emoji.component';
 import { Popup } from '../voting/popup-alert/Popup.alert';
 import { VotingHeader } from './votingHeader/voting-header';
+import { useAPI } from '../../hooks';
 
 const ColoredRadio = withStyles({
     root: {
@@ -30,18 +29,13 @@ interface VotingCardProps {
     child: Child;
     handleChange: any;
 }
-const leo = [story1, story2, story1];
-const chance = [story1, story2, story1, story2, story2];
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
-    const { state, handleInputChange, handleSubmitBuilder } = useForm({
-        story1Points: 'something',
-        story2Points: 'something',
-        pic1Points: 'something',
-        pic2Points: 'something',
-    });
-
+    const history = useHistory();
+    const [response] = useAPI(`/votingRoutes/voting`, 'GET', false);
+    const [postResponse, loading, request] = useAPI(`/votingRoutes/voting`, 'POST');
+    console.log('response', response);
     const [dummyData, setDummyData] = useState({ dummy: 'data' });
-    const [selectedValue, setSelectedValue] = React.useState('a');
+    const [selectedValue, setSelectedValue] = React.useState<number>();
     const [open, setOpen] = React.useState(false);
     const [newEmoji, setNewEmoji] = React.useState({
         player1: [],
@@ -58,21 +52,24 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedValue(event.target.value);
+        setSelectedValue(Number(event.target.value));
     };
 
     const handleSubmit = () => {
+        const emojiObj = {};
+        emojiObj[response?.child1.childId] = newEmoji.player1;
+        emojiObj[response?.child2.childId] = newEmoji.player2;
+        const vote = { matchupID: response?.matchupID, childID: selectedValue, emojiObj };
+        console.log('vote data', vote);
         if (newEmoji.player1.length < 4 || newEmoji.player2.length < 4) {
             setOpen(true);
         } else {
             console.log('submitted successfully');
+            request(vote);
+            history.push('/matchup');
         }
-        // post endpoint
-        // clear newEmoji state
         // history.push
     };
-
-    console.log('this is the object', newEmoji);
 
     return (
         <Container className={classes.containerStyling}>
@@ -82,16 +79,19 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                     <div className={classes.playerSelection}>
                         <VotingModal
                             key='pic1Points'
-                            username={dummyData.dummy}
-                            submission={leo}
+                            submission={
+                                response?.child1.story
+                                    ? response?.child1.story.page1
+                                    : response?.child1.illustration
+                            }
                             type='Illustration'
-                            points={state.pic1Points}
+                            response={response}
                         />
                         <ColoredRadio
                             className={classes.radioBox}
-                            checked={selectedValue === 'a'}
+                            checked={selectedValue == response?.child1.childId}
                             onChange={handleChange}
-                            value='a'
+                            value={response?.child1.childId}
                             name='storyA'
                             inputProps={{ 'aria-label': 'A' }}
                             disableRipple={true}
@@ -107,16 +107,19 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                     <div className={classes.playerSelection}>
                         <VotingModal
                             key='pic1Points'
-                            username={dummyData.dummy}
-                            submission={chance}
+                            submission={
+                                response?.child2.story
+                                    ? response?.child2.story.page1
+                                    : response?.child2.illustration
+                            }
                             type='Illustration'
-                            points={state.pic1Points}
+                            response={response}
                         />
                         <ColoredRadio
                             className={classes.radioBox}
-                            checked={selectedValue === 'b'}
+                            checked={selectedValue == response?.child2.childId}
                             onChange={handleChange}
-                            value='b'
+                            value={response?.child2.childId}
                             name='storyB'
                             inputProps={{ 'aria-label': 'B' }}
                             disableRipple={true}
@@ -126,13 +129,11 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                             newEmoji={newEmoji.player2}
                             setNewEmoji={setNewEmoji}
                         />
-                        {/* <Grid container xs={8} className={classes.submitDiv}>
-                            <Grid item xs={6} />
-                            <Grid item xs={6}> */}
-                        {/* </Grid>
-                        </Grid> */}
                         <div className={classes.button}>
-                            <Button className={classes.orangeButton} onClick={handleSubmit}>
+                            <Button
+                                className={classes.orangeButton}
+                                onClick={handleSubmit}
+                                disabled={selectedValue ? false : true}>
                                 Submit
                             </Button>
                         </div>

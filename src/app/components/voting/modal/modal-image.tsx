@@ -4,15 +4,16 @@ import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/sty
 import CloseIcon from '@material-ui/icons/Close';
 import { TransitionProps } from '@material-ui/core/transitions';
 import IconButton from '@material-ui/core/IconButton';
-import story2 from '../img/chancewriting.jpg';
+// import story2 from '../img/chancewriting.jpg';
 import Slide from '@material-ui/core/Slide';
 
 interface VotingModalProps {
     submission;
-    username;
+    // username;
     type;
     key;
-    points;
+    // points;
+    response;
 }
 
 const Transition = React.forwardRef(function Transition(
@@ -61,10 +62,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const VotingModal: React.FC<VotingModalProps> = ({
     submission,
-    username,
+    // username,
     type,
     key,
-    points,
+    // points,
+    response,
 }) => {
     const [open, setOpen] = useState(false);
     const theme = useTheme();
@@ -77,7 +79,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
     const handleClose = () => {
         setOpen(false);
     };
-
+    // console.log('response in modal', response);
     return (
         <>
             <Grid
@@ -91,7 +93,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                         src={submission[0]}
                         className={classes.imagePreview}
                         onClick={handleOpen}
-                        alt={`${username}'s ${type}`}
+                        alt={'user submission'}
                     />
                 </Grid>
                 <Dialog

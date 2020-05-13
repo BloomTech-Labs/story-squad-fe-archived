@@ -59,13 +59,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface VersusProps {
+    submission: any;
     open: boolean;
     setOpen: any;
 }
 
 // { open, setOpen } in props
 // <VersusProps>
-export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen }) => {
+export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen, submission }) => {
     // const [open, setOpen] = React.useState(false);
     const classes = useStyles({});
 
@@ -93,7 +94,7 @@ export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen }) => {
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText className={classes.mainContainer}>
-                            <img src={story1} className={classes.storyPic} />
+                            <img src={submission[0]} className={classes.storyPic} />
                             <div className={classes.inputDiv}>
                                 <span className={classes.emojiSpan}>😞😪😴😷😎😕</span>
                             </div>

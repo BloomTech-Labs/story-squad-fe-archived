@@ -30,7 +30,8 @@ interface VotingCardProps {
     child: Child;
     handleChange: any;
 }
-
+const leo = [story1, story2, story1];
+const chance = [story1, story2, story1, story2, story2];
 const Voting: React.FC<VotingCardProps> = ({ child }) => {
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
         story1Points: 'something',
@@ -82,7 +83,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         <VotingModal
                             key='pic1Points'
                             username={dummyData.dummy}
-                            submission={story1}
+                            submission={leo}
                             type='Illustration'
                             points={state.pic1Points}
                         />
@@ -107,7 +108,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                         <VotingModal
                             key='pic1Points'
                             username={dummyData.dummy}
-                            submission={story2}
+                            submission={chance}
                             type='Illustration'
                             points={state.pic1Points}
                         />

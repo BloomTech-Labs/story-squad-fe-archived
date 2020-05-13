@@ -103,7 +103,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
 
     console.log('updated state', state);
     const submissionCheck = (submission) =>
-        typeof submission === 'string' ? submission : Object.values(submission);
+        typeof submission === 'string' ? [submission] : Object.values(submission);
     return (
         <div>
             {/* Container for avatars + inputs + buttons */}

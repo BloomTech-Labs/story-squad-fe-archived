@@ -18,11 +18,10 @@ import './styles.css';
 const ChildHome: React.FC = () => {
     const classes = useStyles({});
     return (
-        <Container className={classes.containerStyling}>
-            {/* Header code */}
+        // <Container className={classes.containerStyling}>
+
+        <div className='page'>
             <KidHeader />
-            {/* <Grid className={classes.topRow}> */}
-            {/* <Grid className={classes.mission}> */}
             <main className='mission-main'>
                 <Link className='col-big' to={'/kids-dashboard'}>
                     <div className='img-div '>
@@ -38,12 +37,9 @@ const ChildHome: React.FC = () => {
                         />
                     </div>
                 </Link>
-                {/* </Grid> */}
-
                 <div className='img-div col-small'>
                     <img src={Avatar} alt='Create your Story Squad Avatar!' />
                 </div>
-
                 <div className='img-div col-small'>
                     <img src={Passport} alt='???' />
                 </div>
@@ -51,7 +47,8 @@ const ChildHome: React.FC = () => {
                     <img src={Trophy} alt='See who has the most victories and points!' />
                 </div>
             </main>
-        </Container>
+            {/* // </Container> */}
+        </div>
     );
 };
 

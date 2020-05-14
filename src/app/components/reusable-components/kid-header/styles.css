@@ -1,5 +1,5 @@
 .header {
-    border: solid 3px #292929;
+    border: var(--mediumBorder);
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -10,9 +10,6 @@
 }
 .title__header {
     display: flex;
-}
-.title__header__text {
-    padding: 0;
 }
 
 .header__image {
@@ -32,7 +29,7 @@
     color: #ffffff;
     /* letter-spacing: 0.08em; */
     font-weight: bold;
-    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
     fill: white;
 }

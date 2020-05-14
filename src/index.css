@@ -1,8 +1,9 @@
 /* // @import '../node_modules/modern-normalize/modern-normalize.css'; */
 :root {
+    --mediumBorder: 7px solid #262626;
     --accent-font: Bangers;
     --base-text: 1em;
-    --font-step: 1.33;
+    --font-step: 1.25;
     --p: calc(var(--base-text) * var(--font-step));
     --h5: calc(var(--p) * var(--font-step));
     --h4: calc(var(--h5) * var(--font-step));
@@ -41,4 +42,9 @@ body {
 a {
     text-decoration: none;
     color: inherit;
+}
+@media only screen and (min-width: 1000px) {
+    :root {
+        --base-text: 1.2em;
+    }
 }

@@ -1,0 +1,35 @@
+.kid__progress .main {
+    display: grid;
+    grid-template-areas:
+        'read'
+        'write'
+        'draw'
+        'buttonbar';
+}
+.kid__progress .main > div {
+    border: var(--mediumBorder);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.read {
+    grid-area: read;
+    background-color: red;
+}
+.write {
+    grid-area: write;
+}
+.draw {
+    grid-area: draw;
+}
+.buttonbar {
+    grid-area: buttonbar;
+}
+@media only screen and (min-width: 1000px) {
+    .kid__progress .main {
+        grid-template-columns: 1fr repeat(2 minmax(50%, 500px)) 1fr;
+        grid-template-areas:
+            'read write'
+            'read draw';
+    }
+}

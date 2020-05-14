@@ -86,7 +86,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                 <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} />
             </Container>
         );
-
+    debugger;
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader

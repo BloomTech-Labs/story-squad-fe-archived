@@ -18,14 +18,18 @@ const VersusButton: React.FC<LockedState> = ({ locked }) => {
                     onClick={() => history.push(`/kids-dashboard/team-join`)}>
                     Back
                 </Button>
-                {locked ? (
+                {locked === true ? (
                     <Button
                         className={classes.orangeButton}
                         onClick={() => history.push(`/voting`)}>
                         Vote
                     </Button>
                 ) : (
-                    <Button className={classes.orangeButton}>Next</Button>
+                    <Button
+                        className={classes.orangeButton}
+                        onClick={() => history.push(`/waiting-page`)}>
+                        Next
+                    </Button>
                 )}
             </Grid>
         </Grid>

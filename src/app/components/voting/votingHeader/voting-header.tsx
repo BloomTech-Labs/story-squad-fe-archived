@@ -7,30 +7,22 @@ interface HeaderProps {
     title?: string;
     homeTeam?: string;
     awayTeam?: string;
+    submissionType: string;
 }
-const VotingHeader: React.FC<HeaderProps> = ({ title }) => {
+const VotingHeader: React.FC<HeaderProps> = ({ submissionType }) => {
     const classes = useStyles();
     return (
         <Grid container direction='row' className={classes.appBar}>
-            {/* <Grid className={classes.headerMenuDiv} container item> */}
             <div className={classes.headerMenuDiv}>
                 <div className={classes.upperTitleDiv}>
                     <Typography className={classes.h4Styling} variant='h2'>
-                        {/* {title} */}
-                        Vote for your favorite Story
+                        Vote for your favorite {submissionType}
                     </Typography>
                 </div>
                 <div className={classes.upperHeaderButtonDiv}>
                     <MenuButton />
                 </div>
             </div>
-            {/* <div className={classes.teamName}>
-                    <Typography className={classes.h4Styling}>{homeTeam}</Typography>
-                    <Typography className={classes.h4Styling}>VS</Typography>
-                    <Typography className={classes.h4Styling}>{awayTeam}</Typography> */}
-            {/* </div> */}
-            {/* <Typography className={classes.h3Styling}>201 Points Needed To Win!</Typography> */}
-            {/* </Grid> */}
         </Grid>
     );
 };

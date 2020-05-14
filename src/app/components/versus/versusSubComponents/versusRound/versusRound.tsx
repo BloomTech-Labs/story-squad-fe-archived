@@ -90,6 +90,7 @@ const VersusRound: React.FC<RoundProps> = ({
                         <Grid container className={classes.gridContainer}>
                             <Grid item md>
                                 <img
+                                    style={{ cursor: 'auto' }}
                                     src={b64passRight[0]}
                                     className={classes.imagePreview}
                                     alt='locked submission'

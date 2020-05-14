@@ -10,3 +10,4 @@ export * from './point-allocation-dashboard';
 export * from './child-home';
 export * from './versus';
 export * from './voting';
+export * from './waiting-page';

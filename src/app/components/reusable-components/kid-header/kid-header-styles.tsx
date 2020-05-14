@@ -1,17 +1,17 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import cityscape from '../../child-dashboard/kid-progress/icons/cityscape.png';
+// import cityscape from '../../child-dashboard/kid-progress/icons/cityscape.svg;
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         appBar: {
             height: '26vh',
             width: '100%',
             backgroundColor: '#6CEAE6',
-            backgroundImage: `url(${cityscape})`,
+            // backgroundImage: `url(${cityscape})`,
             backgroundRepeat: 'no-repeat',
-            border: '7px solid #000000',
-            backgroundSize: '101% 103%',
+            border: '7px solid #292929',
+            // backgroundSize: '101% 103%',
             display: 'flex',
-            flexDirection: 'column',
+
             justifyContent: 'center',
         },
         h2Styling: {
@@ -42,6 +42,13 @@ export const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'flex-start',
             width: '60%',
             marginRight: '25%',
+        },
+        imgContainer: {
+            'width': '100%',
+            'overflow': 'hidden',
+            '&& img': {
+                width: '100%',
+            },
         },
     })
 );

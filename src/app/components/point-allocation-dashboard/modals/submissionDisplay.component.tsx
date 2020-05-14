@@ -64,7 +64,7 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                 page && (
                 <Grid className={classes.gridContainer}>
                     {submission.map((page, key) => (
-                        <div className={classes.viewPageDiv}>
+                        <div className={classes.viewPageDiv} key={key}>
                             <img
                                 src={page}
                                 className={classes.submissionImg}

@@ -7,55 +7,49 @@ import { Link } from 'react-router-dom';
 import AcceptMissionButton from './img/Accept-mission-button.png';
 import AcceptBubble from './img/Rectangle 86.svg';
 import AcceptText from './img/acceptText.svg';
+import Trophy from './img/TrophyRoom.svg';
 import AcceptSVG from './img/Group 164.svg';
-import AvatarButton from './img/Avatar-button.png';
-import PassportButton from './img/Passport-button.png';
+import Avatar from './img/Avatar.svg';
+import Passport from './img/Passport.svg';
 import TrophyRoomButton from './img/Trophy-room-button.png';
 import { KidHeader } from '../reusable-components';
 import './styles.css';
-interface 
-const ChildHome: React.FC<ChildHomeProps> = () => {
+
+const ChildHome: React.FC = () => {
     const classes = useStyles({});
     return (
         <Container className={classes.containerStyling}>
             {/* Header code */}
-            <KidHeader title={'Story Squad'} />
+            <KidHeader />
             {/* <Grid className={classes.topRow}> */}
             {/* <Grid className={classes.mission}> */}
             <main className='mission-main'>
-                <div className='img-div col-big'>
-                    <Link to={'/kids-dashboard'}>
-                    <img
-                        className={classes.pictureHover}
-                        src={AcceptBubble}
-                        alt='Accept your weekly mission!'
-                    />
-                    <img
-                        className={classes.pictureHover}
-                        src={AcceptText}
-                        alt='Accept your weekly mission!'
-                    />
-                    {/* </Link> */}
-                </div>
-                {/* </Grid> */}
-                <Grid className={classes.avatarCreator}>
-                    <div className='col-mission'>
-                        <img src={AvatarButton} alt='Create your Story Squad Avatar!' />
+                <Link className='col-big' to={'/kids-dashboard'}>
+                    <div className='img-div '>
+                        <img
+                            className={classes.pictureHover}
+                            src={AcceptBubble}
+                            alt='Accept your weekly mission!'
+                        />
+                        <img
+                            className={classes.pictureHover}
+                            src={AcceptText}
+                            alt='Accept your weekly mission!'
+                        />
                     </div>
-                </Grid>
+                </Link>
                 {/* </Grid> */}
 
-                <Grid className={classes.bottomRow}>
-                    <Grid className={classes.passport}>
-                        <img src={PassportButton} alt='???' />
-                    </Grid>
-                    <Grid className={classes.trophyRoom}>
-                        <img
-                            src={TrophyRoomButton}
-                            alt='See who has the most victories and points!'
-                        />
-                    </Grid>
-                </Grid>
+                <div className='img-div col-small'>
+                    <img src={Avatar} alt='Create your Story Squad Avatar!' />
+                </div>
+
+                <div className='img-div col-small'>
+                    <img src={Passport} alt='???' />
+                </div>
+                <div className='img-div col-big'>
+                    <img src={Trophy} alt='See who has the most victories and points!' />
+                </div>
             </main>
         </Container>
     );

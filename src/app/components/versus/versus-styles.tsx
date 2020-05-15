@@ -1,4 +1,5 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import key from './img/Key.png';
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         containerStyling: {
@@ -183,6 +184,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             top: '58%',
             left: '78%',
             transform: 'translate(-50%, -50%)',
+            cursor: `URL(${key}) 2 26, default`,
         },
     })
 );

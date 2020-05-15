@@ -37,7 +37,7 @@ const VersusRound: React.FC<RoundProps> = ({
         b64passLeft = [matchup[0].illustration];
         b64passRight = [matchup[1].illustration];
     }
-    console.log(b64passLeft, b64passRight);
+    // console.log(b64passLeft, b64passRight);
     return (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>

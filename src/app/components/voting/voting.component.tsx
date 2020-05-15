@@ -33,7 +33,6 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
     const history = useHistory();
     const [response] = useAPI(`/votingRoutes/voting`, 'GET', false);
     const [postResponse, loading, request] = useAPI(`/votingRoutes/voting`, 'POST');
-    console.log('response', response);
     const [dummyData, setDummyData] = useState({ dummy: 'data' });
     const [selectedValue, setSelectedValue] = React.useState<number>();
     const [open, setOpen] = React.useState(false);
@@ -73,7 +72,6 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
 
     const submissionCheck = (submission) =>
         typeof submission === 'string' ? [submission] : Object.values(submission);
-
     return (
         <Container className={classes.containerStyling}>
             {response && (

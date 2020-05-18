@@ -36,6 +36,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
     const [dummyData, setDummyData] = useState({ dummy: 'data' });
     const [selectedValue, setSelectedValue] = React.useState<number>();
     const [open, setOpen] = React.useState(false);
+    const [openInst, setInst] = React.useState(false);
     const [newEmoji, setNewEmoji] = React.useState({
         player1: [],
         player2: [],
@@ -59,7 +60,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
         emojiObj[response?.child1.childId] = newEmoji.player1;
         emojiObj[response?.child2.childId] = newEmoji.player2;
         const vote = { matchupID: response?.matchupID, childID: selectedValue, emojiObj };
-        console.log('vote data', vote);
+        // console.log('vote data', vote);
         if (newEmoji.player1.length < 4 || newEmoji.player2.length < 4) {
             setOpen(true);
         } else {
@@ -69,12 +70,29 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
         }
     };
 
+    const openHelp = () => {
+        setInst(true);
+    };
+
+    useEffect(() => {
+        setInst(true);
+    }, []);
+
     const submissionCheck = (submission) =>
         typeof submission === 'string' ? [submission] : Object.values(submission);
     return (
         <Container className={classes.containerStyling}>
             {response && (
                 <>
+                    <Popup
+                        open={openInst}
+                        setOpen={setInst}
+                        dialogTxt={
+                            'Other players’ fates are in your hands! Help decide the winner by voting for the story and picture you think should win. Then leave an emoji comment for each author!'
+                        }
+                        btnTxt={'OK'}
+                    />
+                    {/* <Button onClick={openHelp}>Help?</Button> */}
                     <VotingHeader
                         submissionType={response?.child1.story ? 'Story' : 'Illustration'}
                     />
@@ -137,12 +155,17 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                                     <Button
                                         className={classes.orangeButton}
                                         onClick={handleSubmit}
-                                        disabled={selectedValue ? false : true}>
+                                        disabled={!selectedValue}>
                                         Submit
                                     </Button>
                                 </div>
                             </div>
-                            <Popup open={open} setOpen={setOpen} />
+                            <Popup
+                                open={open}
+                                setOpen={setOpen}
+                                dialogTxt={'Oops! Please select 4-6 emojis for each player'}
+                                btnTxt={'Go Back'}
+                            />
                         </Grid>
                     </Grid>
                 </>

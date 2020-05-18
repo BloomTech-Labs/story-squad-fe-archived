@@ -18,6 +18,7 @@ import {
     ChildHomePage,
     VersusPage,
     VotingPage,
+    waitingPage,
 } from './pages';
 
 const App: React.FC = () => {
@@ -69,7 +70,8 @@ const App: React.FC = () => {
                             path='/admin/dashboard'
                             component={AdminDashboardPage}
                         />
-                        <Route path='/voting' component={VotingPage} />
+                        <Route path='/waiting-page' component={waitingPage} /> {/* make private */}
+                        <Route path='/voting' component={VotingPage} /> {/* make private */}
                         <Route path='/privacy-policy' component={PrivacyPage} />
                         <Route path='/terms-of-service' component={ToSPage} />
                         <Route path='/admin' component={AdminSignInPage} />

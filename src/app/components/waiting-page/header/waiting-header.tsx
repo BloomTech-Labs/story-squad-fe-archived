@@ -1,29 +1,26 @@
 import React from 'react';
 import { MenuButton } from '../../reusable-components/menu-button/menu-button';
 import { Typography, Grid } from '@material-ui/core';
-import { useStyles } from './voting-header-styles';
+import { useStyles } from '../waiting-page-styles';
 
 interface HeaderProps {
     title?: string;
-    homeTeam?: string;
-    awayTeam?: string;
-    submissionType: string;
 }
-const VotingHeader: React.FC<HeaderProps> = ({ submissionType }) => {
+const WaitingHeader: React.FC<HeaderProps> = ({ title }) => {
     const classes = useStyles();
     return (
         <Grid container direction='row' className={classes.appBar}>
-            <div className={classes.headerMenuDiv}>
+            <Grid className={classes.headerMenuDiv} container item>
                 <div className={classes.upperTitleDiv}>
-                    <Typography className={classes.h4Styling} variant='h2'>
-                        Vote for your favorite {submissionType}
+                    <Typography className={classes.h2Styling} variant='h2'>
+                        STORY SQUAD
                     </Typography>
                 </div>
                 <div className={classes.upperHeaderButtonDiv}>
                     <MenuButton />
                 </div>
-            </div>
+            </Grid>
         </Grid>
     );
 };
-export { VotingHeader };
+export { WaitingHeader };

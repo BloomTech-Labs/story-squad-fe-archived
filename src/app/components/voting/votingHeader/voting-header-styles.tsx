@@ -90,8 +90,8 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         upperTitleDiv: {
             display: 'flex',
-            justifyContent: 'flex-end',
-            width: '57.5%',
+            justifyContent: 'center',
+            width: '70%',
             marginLeft: '160px',
         },
         upperHeaderButtonDiv: {

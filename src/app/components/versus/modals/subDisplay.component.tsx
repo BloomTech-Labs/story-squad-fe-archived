@@ -27,7 +27,7 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
     const handleClose = () => {
         setOpen(false);
     };
-
+    console.log('submission from modal', submission);
     return (
         <Grid container className={classes.gridContainer}>
             <Grid item md>

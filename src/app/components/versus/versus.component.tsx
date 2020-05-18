@@ -87,6 +87,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
             </Container>
         );
 
+    console.log('locked', locked['3Votes']);
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader
@@ -125,7 +126,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     child={child}
                     locked={locked['1Votes']}
                 />
-                <VersusButton />
+                <VersusButton locked={locked['3Votes']} />
             </Grid>
         </Container>
     );

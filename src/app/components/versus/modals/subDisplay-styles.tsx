@@ -54,7 +54,8 @@ export const useStyles = makeStyles((theme: Theme) =>
             'display': 'flex',
             'justifyContent': 'center',
             '&& img': {
-                minWidth: '70%',
+                maxWidth: '70%',
+                width: '70%',
             },
         },
         submissionImg: {

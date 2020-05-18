@@ -49,9 +49,15 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: '100px',
         },
         'imgDiv': {
-            'minWidth': '70%',
+            'margin': '0 auto',
+            'width': '70%',
+            'boxSizing': 'border-box',
             '&& img': {
-                minWidth: '100%',
+                maxWidth: '100%',
+                width: '100%',
+                maxHeight: '100%',
+                objectFit: 'contain',
+                margin: '0 auto',
             },
         },
         'subTitle': {
@@ -79,7 +85,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
     const handleClose = () => {
         setOpen(false);
     };
-    // console.log('response in modal', response);
+
     return (
         <>
             <Grid
@@ -113,11 +119,13 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                                 <CloseIcon className={classes.closeButton} />
                             </IconButton>
                         </div>
-                        {submission.map((page, index) => (
-                            <div key={key} className={classes.imgDiv}>
-                                <img src={page} alt={`page ${index} of a ${type}`} />
-                            </div>
-                        ))}
+                        {submission.map((page, index) =>
+                            page[0] ? (
+                                <div key={key} className={classes.imgDiv}>
+                                    <img src={page} alt={`Page ${index} of ${type}`} />
+                                </div>
+                            ) : null
+                        )}
                     </div>
                 </Dialog>
             </Grid>

@@ -67,7 +67,6 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
             request(vote);
             history.push('/matchup');
         }
-        // history.push
     };
 
     const submissionCheck = (submission) =>

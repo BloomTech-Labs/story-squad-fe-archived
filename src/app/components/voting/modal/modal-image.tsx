@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
             'margin': '0 auto',
             'width': '70%',
             'boxSizing': 'border-box',
+            // 'backgroundColor': 'red',
             '&& img': {
                 maxWidth: '100%',
                 width: '100%',
@@ -119,12 +120,16 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                                 <CloseIcon className={classes.closeButton} />
                             </IconButton>
                         </div>
-                        {submission.map((page, index) =>
-                            page[0] ? (
+                        {submission[1] !== '' && submission[1] !== null ? (
+                            submission.map((page, index) => (
                                 <div key={key} className={classes.imgDiv}>
                                     <img src={page} alt={`Page ${index} of ${type}`} />
                                 </div>
-                            ) : null
+                            ))
+                        ) : (
+                            <div key={key} className={classes.imgDiv}>
+                                <img src={submission[0]} alt={`story submission`} />
+                            </div>
                         )}
                     </div>
                 </Dialog>

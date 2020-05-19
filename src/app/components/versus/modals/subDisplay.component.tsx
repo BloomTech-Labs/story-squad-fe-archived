@@ -62,6 +62,15 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
                             )
                     )}
                 </Grid>
+                <div className={classes.iconBox}>
+                    <IconButton
+                        edge='start'
+                        // color='inherit'
+                        onClick={handleClose}
+                        aria-label='close'>
+                        <CloseIcon />
+                    </IconButton>
+                </div>
             </Dialog>
         </Grid>
     );

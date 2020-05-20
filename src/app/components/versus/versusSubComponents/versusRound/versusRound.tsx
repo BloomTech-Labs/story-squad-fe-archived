@@ -26,6 +26,23 @@ const VersusRound: React.FC<RoundProps> = ({
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     // console.log({ matchup }, { child });
+    let emojiArr = [];
+
+    if (matchup[0].emojis && matchup[0].emojis.length > 0) {
+        const allEmojis = matchup[0].emojis;
+        const emojiId = allEmojis.map(function(o) {
+            return o.id;
+        });
+        const latestFeedback = Math.max(...emojiId);
+
+        const displayedEmojis = allEmojis.filter((emoji) => emoji.id === latestFeedback)[0];
+
+        console.log(latestFeedback);
+        console.log(displayedEmojis);
+        if (displayedEmojis) emojiArr = displayedEmojis.emoji.replace(/[.{.}."]/g, '').split(',');
+        // allEmojis.filter((emoji) => (emoji.id))
+    }
+
     if (matchup[0].story === undefined && matchup[0].illustration === undefined) return <></>;
 
     let b64passLeft = [];
@@ -37,12 +54,19 @@ const VersusRound: React.FC<RoundProps> = ({
         b64passLeft = [matchup[0].illustration];
         b64passRight = [matchup[1].illustration];
     }
+    console.log(matchup[0].emojis);
+    console.log(emojiArr);
 
     return (
         <Grid className={`${roundStyle}`}>
             <div className={`${classes.nameRow} ${nameRowStyle}`}>
                 <div className={classes.leftPlayer}>
-                    <FeedbackPopup open={open} setOpen={setOpen} submission={b64passLeft} />
+                    <FeedbackPopup
+                        emojis={emojiArr}
+                        open={open}
+                        setOpen={setOpen}
+                        submission={b64passLeft}
+                    />
                     {matchup[0].childId === child.id ? (
                         <Badge
                             onClick={() => {
@@ -50,7 +74,7 @@ const VersusRound: React.FC<RoundProps> = ({
                             }}
                             className={classes.root}
                             color='error'
-                            badgeContent={1}
+                            badgeContent={matchup[0].emojis.length}
                             anchorOrigin={{
                                 vertical: 'top',
                                 horizontal: 'left',

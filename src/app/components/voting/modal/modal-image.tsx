@@ -132,6 +132,16 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                                 </div>
                             ) : null
                         )}
+                        <div className={classes.iconBox}>
+                            <IconButton
+                                edge='start'
+                                color='inherit'
+                                onClick={handleClose}
+                                aria-label='close'
+                                disableRipple={true}>
+                                <CloseIcon className={classes.closeButton} />
+                            </IconButton>
+                        </div>
                     </div>
                 </Dialog>
             </Grid>

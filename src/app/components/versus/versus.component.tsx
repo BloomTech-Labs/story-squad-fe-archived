@@ -88,6 +88,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
         );
 
     console.log('locked', locked['3Votes']);
+    console.log(matchups);
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader

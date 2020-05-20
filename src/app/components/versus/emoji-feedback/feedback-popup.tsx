@@ -62,11 +62,12 @@ interface VersusProps {
     submission: any;
     open: boolean;
     setOpen: any;
+    emojis: any;
 }
 
 // { open, setOpen } in props
 // <VersusProps>
-export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen, submission }) => {
+export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen, submission, emojis }) => {
     // const [open, setOpen] = React.useState(false);
     const classes = useStyles({});
 
@@ -96,7 +97,7 @@ export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen, submission
                         <DialogContentText className={classes.mainContainer}>
                             <img src={submission[0]} className={classes.storyPic} />
                             <div className={classes.inputDiv}>
-                                <span className={classes.emojiSpan}>😞😪😴😷😎😕</span>
+                                <span className={classes.emojiSpan}>{emojis}</span>
                             </div>
                         </DialogContentText>
                     </DialogContent>

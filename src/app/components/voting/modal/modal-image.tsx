@@ -114,7 +114,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                                 <CloseIcon className={classes.closeButton} />
                             </IconButton>
                         </div>
-                        {submission[1] !== '' && submission[1] !== null ? (
+                        {/* {submission[1] !== '' && submission[1] !== null ? (
                             submission.map((page, index) => (
                                 <div key={key} className={classes.imgDiv}>
                                     <img src={page} alt={`Page ${index} of ${type}`} />
@@ -124,6 +124,13 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                             <div key={key} className={classes.imgDiv}>
                                 <img src={submission[0]} alt={`story submission`} />
                             </div>
+                        )} */}
+                        {submission.map((page, index) =>
+                            page && page.length > 0 ? (
+                                <div key={key} className={classes.imgDiv}>
+                                    <img src={page} alt={`Page ${index} of ${type}`} />
+                                </div>
+                            ) : null
                         )}
                     </div>
                 </Dialog>

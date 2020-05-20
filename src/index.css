@@ -1,5 +1,9 @@
 /* // @import '../node_modules/modern-normalize/modern-normalize.css'; */
 :root {
+    --green: #b5d33e;
+    --red: #eb7d5b;
+    --gold: #fed23e;
+    --blue: #409bb5;
     --mediumBorder: 7px solid #262626;
     --accent-font: Bangers;
     --base-text: 1em;

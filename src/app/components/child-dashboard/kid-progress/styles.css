@@ -3,33 +3,74 @@
     grid-template-areas:
         'read'
         'write'
-        'draw'
-        'buttonbar';
+        'draw';
+
+    height: 93vh;
 }
+
 .kid__progress .main > div {
     border: var(--mediumBorder);
-    display: grid;
+
+    display: flex;
+    height: 60vh;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+.kid__progress .main div span {
+    transform: scale(1.3, 1.3);
+    max-height: 80px;
+    position: absolute;
+    right: 10%;
+    top: 10%;
+}
+.kid__progress .main div div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.kid__progress .main div img {
+    max-height: 100%;
 }
 .read {
     grid-area: read;
-    background-color: red;
+    background-color: var(--green);
 }
+
 .write {
     grid-area: write;
+    background-color: var(--red);
 }
 .draw {
     grid-area: draw;
+    background-color: var(--gold);
 }
-.buttonbar {
-    grid-area: buttonbar;
-}
+
 @media only screen and (min-width: 1000px) {
     .kid__progress .main {
-        grid-template-columns: 1fr repeat(2 minmax(50%, 500px)) 1fr;
+        grid-template-columns: repeat(2, minmax(50%, 800px));
         grid-template-areas:
             'read write'
             'read draw';
     }
+
+    .kid__progress .main > div {
+        height: auto;
+    }
+}
+.modal__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.modal__card {
+    background: white;
+    color: blue;
 }

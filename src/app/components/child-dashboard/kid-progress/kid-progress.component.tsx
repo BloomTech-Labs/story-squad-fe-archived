@@ -1,28 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { Container, Button, Checkbox, Fade, Modal, Backdrop } from '@material-ui/core';
+import { Container, Checkbox, Fade, Backdrop } from '@material-ui/core';
+// import Modal from '../../reusable-components/modal/Modal';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
+import Read from './icons/read.svg';
+import Write from './icons/write.svg';
+import Draw from './icons/draw.svg';
 import { KidHeader } from '../../reusable-components';
-import { useStyles } from './kid-progress-styles';
+import Button from '../../reusable-components/button/Button';
+import styled from 'styled-components';
+// import { useStyles } from './kid-progress-styles';
+
 import './styles.css';
 interface KidProgressProps {
     onUpdate?: () => void;
     child: Child;
 }
 
+const StyledTestDiv = styled.div`
+    --primary-color: red;
+    --bg-color: blue;
+    --font-size: 4em;
+    --btn-padding: 10px 15px;
+    width: 40%;
+    button {
+        border-radius: 50px;
+    }
+`;
+
+const Modal = ({ children }) => {
+    return (
+        <div className='modal__overlay'>
+            <div className='modal__card'>
+                <Button className='modal__close' onClick={() => console.log('clicked')}>
+                    X
+                </Button>
+                {children}
+            </div>
+        </div>
+    );
+};
+
 const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
-    const classes = useStyles({});
     const [response, loading, request] = useAPI('/children/progress', 'POST');
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
-    const [open, setOpen] = React.useState(false);
-
+    const [open, setOpen] = useState(false);
+    const [completedSubmissions, setCompletedSubmissions] = useState(false);
     const modalClose = () => {
         setOpen(false);
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (response?.progress && onUpdate) onUpdate();
         if (response?.progress) response.progress = undefined;
     }, [onUpdate, response]);
@@ -33,13 +63,18 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
         Object.entries(dueDateStrings).map(([key, date]) => [key, moment(date)])
     );
     /* if progress.reading is false the inital modal with continue to open on render */
-    React.useEffect(() => {
+    useEffect(() => {
         if (progress.reading === false) {
             setOpen(true);
         } else {
             setOpen(false);
         }
     }, [progress.reading]);
+    useEffect(() => {
+        if (progress.reading && child.stories.length && child.illustrations.length) {
+            setCompletedSubmissions(true);
+        }
+    }, [child.illustrations.length, child.stories.length, progress.reading]);
     console.log(`MATCH INFO`, matchInfo);
     return (
         // <Container className={classes.containerStyle}>
@@ -49,73 +84,67 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
 
                 <div className='main'>
                     <div className='read'>
-                        <Checkbox
-                            checked={progress.reading}
-                            className={classes.readCheckBox}
-                            color='primary'
-                        />
-                        <div className={classes.readIconHeight}>
+                        <div>
                             <Link
                                 to={`/story/${cohort.week}`}
                                 onClick={() => request({ reading: true })}>
-                                <div className={classes.readIconDiv}></div>
+                                <div>
+                                    <img src={Read} alt='' />
+                                </div>
                             </Link>
                         </div>
+                        <div className='checkbox_container'>
+                            <Checkbox checked={progress.reading} color='primary' />
+                        </div>
                     </div>
-
                     <div className='write'>
                         <Checkbox
                             checked={!!child.stories.length}
-                            className={classes.writeCheckBox}
+                            // className={classes.writeCheckBox}
                             color='primary'
                         />
                         <Link to={`/kids-dashboard/upload`}>
-                            <div className={classes.writeIconDiv}></div>
+                            <div></div>
                         </Link>
                     </div>
                     <div className='draw'>
+                        
                         <Checkbox
                             checked={!!child.illustrations.length}
-                            className={classes.drawCheckBox}
+                            // className={classes.drawCheckBox}
                             color='primary'
                         />
                         <Link to={`/kids-dashboard/drawing-upload`}>
-                            <div className={classes.drawIconDiv}></div>
+                            <div></div>
                         </Link>
-                        {progress.reading &&
-                        !!child.stories.length &&
-                        !!child.illustrations.length &&
-                        !!matchInfo ? (
-                            <Link to={`/kids-dashboard/team-join`}>
-                                <Button className={classes.orangeButton} type='button'>
-                                    TEAM UP!
-                                </Button>
-                            </Link>
-                        ) : (
-                            <Button
-                                disabled={
-                                    !progress.reading ||
-                                    !child.stories.length ||
-                                    !child.illustrations.length ||
-                                    !matchInfo
-                                }
-                                className={classes.grayButton}
-                                type='button'>
-                                {progress.reading &&
-                                child.stories.length &&
-                                child.illustrations.length
-                                    ? 'Your team will be matched soon!'
-                                    : 'Submissions needed to proceed!'}
-                            </Button>
-                        )}
                     </div>
+                    <div>
+                        <Button disabled={completedSubmissions && matchInfo} type='button'>
+                            {completedSubmissions
+                                ? 'Team Up'
+                                : !matchInfo
+                                ? 'Submissions needed to proceed!'
+                                : 'Your team will be matched soon!'}
+                        </Button>
+                    </div>
+                    )}
                 </div>
             </section>
+            {open && (
+                <Modal>
+                    <h1>Welcome to Emoji town</h1>
+                    <Link to={`/story/${cohort.week}`} onClick={() => request({ reading: true })}>
+                        <div>
+                            <img src={Read} alt='' />
+                        </div>
+                    </Link>
+                </Modal>
+            )}
             {/* Conditional modal  */}
-            <Modal
+            {/* <Modal
                 aria-labelledby='transition-modal-title'
                 aria-describedby='transition-modal-description'
-                className={classes.modal}
+                // className={classes.modal}
                 open={open}
                 onClose={modalClose}
                 closeAfterTransition
@@ -124,22 +153,17 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     timeout: 500,
                 }}>
                 <Fade in={open}>
-                    <div className={classes.modalPaper}>
-                        <h2 id='transition-modal-title' className={classes.modalFont}>
-                            Welcome to Story Squad!
-                        </h2>
-                        <p id='transition-modal-description' className={classes.modalFont}>
+                    <div>
+                        <h2 id='transition-modal-title'>Welcome to Story Squad!</h2>
+                        <p id='transition-modal-description'>
                             To begin your journey, click the 'READ' icon and start the story!
                             <br />
                             Are you ready to accept the mission?
                         </p>
-                        <Button onClick={modalClose} className={classes.modalBtn}>
-                            I accept!!
-                        </Button>
+                        <Button onClick={modalClose}>I accept!!</Button>
                     </div>
                 </Fade>
-            </Modal>
-            //{' '}
+            </Modal> */}
         </>
         // </Container>
     );

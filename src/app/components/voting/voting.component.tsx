@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import 'typeface-nunito';
 import { useStyles } from './voting-styles';
@@ -74,9 +74,18 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
         setInst(true);
     };
 
-    useEffect(() => {
-        setInst(true);
-    }, []);
+    // const [visited, setVisited] = React.useState(false);
+
+    // window.localStorage.setItem('visited', '1');
+    // const component1stRendered = useRef(true);
+    // console.log('comp render', component1stRendered);
+
+    // useEffect(() => {
+    //     if (component1stRendered.current === true) {
+    //         setInst(true);
+    //         component1stRendered.current = false;
+    //     }
+    // }, []);
 
     const submissionCheck = (submission) =>
         typeof submission === 'string' ? [submission] : Object.values(submission);

@@ -52,7 +52,6 @@ const useStyles = makeStyles((theme: Theme) =>
             'margin': '0 auto',
             'width': '70%',
             'boxSizing': 'border-box',
-            // 'backgroundColor': 'red',
             '&& img': {
                 maxWidth: '100%',
                 width: '100%',
@@ -103,12 +102,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                         alt={'user submission'}
                     />
                 </Grid>
-                <Dialog
-                    fullScreen
-                    open={open}
-                    TransitionComponent={Transition}
-                    // TransitionComponent={Transition}
-                >
+                <Dialog fullScreen open={open} TransitionComponent={Transition}>
                     <div className={classes.modalpop}>
                         <div className={classes.iconBox}>
                             <IconButton

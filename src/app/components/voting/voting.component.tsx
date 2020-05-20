@@ -70,22 +70,15 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
         }
     };
 
-    const openHelp = () => {
-        setInst(true);
+    const justBoolin = (bigBOOL) => {
+        setInst(bigBOOL);
+        if (!bigBOOL) window.localStorage.setItem('visited', '1');
     };
 
-    // const [visited, setVisited] = React.useState(false);
-
-    // window.localStorage.setItem('visited', '1');
-    // const component1stRendered = useRef(true);
-    // console.log('comp render', component1stRendered);
-
-    // useEffect(() => {
-    //     if (component1stRendered.current === true) {
-    //         setInst(true);
-    //         component1stRendered.current = false;
-    //     }
-    // }, []);
+    useEffect(() => {
+        const check = window.localStorage.getItem('visited') !== '1';
+        if (check) setInst(true);
+    }, []);
 
     const submissionCheck = (submission) =>
         typeof submission === 'string' ? [submission] : Object.values(submission);
@@ -95,15 +88,15 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                 <>
                     <Popup
                         open={openInst}
-                        setOpen={setInst}
+                        setOpen={justBoolin}
                         dialogTxt={
                             'Other players’ fates are in your hands! Help decide the winner by voting for the story and picture you think should win. Then leave an emoji comment for each author!'
                         }
                         btnTxt={'OK'}
                     />
-                    {/* <Button onClick={openHelp}>Help?</Button> */}
                     <VotingHeader
                         submissionType={response?.child1.story ? 'Story' : 'Illustration'}
+                        setInst={setInst}
                     />
                     <Grid className={classes.topRow}>
                         <Grid className={classes.story1}>

@@ -69,18 +69,6 @@ const ModeratorDashboardPage: React.FC<CohortListItemProps> = ({ cohort, onUpdat
             <Typography variant='h4' gutterBottom>
                 Moderator Dashboard
             </Typography>
-
-            {/* <Link to='/admin/dashboard/cohort/create'>
-                <Button color='primary' variant='contained'>
-                    Create Cohort
-                </Button>
-            </Link>
-            <Link to={`/admin/dashboard/cohort/${cohort.id}/edit`}>
-            <Button color='primary' variant='contained'>
-                Edit
-            </Button>
-            </Link>
-            <Button onClick={() => remove()}>Delete</Button> */}
             <ListCohorts />
         </div>
     );

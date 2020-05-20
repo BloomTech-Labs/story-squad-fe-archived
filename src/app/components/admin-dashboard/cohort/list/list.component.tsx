@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { Cohort } from '../../../../models';
@@ -10,6 +11,16 @@ import { useStyles } from './list.component.styles';
 interface ListCohortsProps {
     className?: string;
 }
+
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+        backgroundColor: '#3f51b5',
+        color: theme.palette.common.white,
+    },
+    body: {
+        fontSize: 14,
+    },
+}))(TableCell);
 
 const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
     const classes = useStyles({});
@@ -57,12 +68,12 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Select</TableCell>
-                            <TableCell>Cohort Name</TableCell>
-                            <TableCell>Children</TableCell>
-                            <TableCell>Chapter</TableCell>
-                            <TableCell>Flagged</TableCell>
-                            <TableCell>Status</TableCell>
+                            <StyledTableCell>Select</StyledTableCell>
+                            <StyledTableCell>Cohort Name</StyledTableCell>
+                            <StyledTableCell>Children</StyledTableCell>
+                            <StyledTableCell>Chapter</StyledTableCell>
+                            <StyledTableCell>Flagged</StyledTableCell>
+                            <StyledTableCell>Status</StyledTableCell>
 
                             {/* <TableCell></TableCell> */}
                         </TableRow>

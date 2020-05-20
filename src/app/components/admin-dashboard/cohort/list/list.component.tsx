@@ -1,5 +1,7 @@
 import React from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 import { Cohort } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 import { CohortListItem } from './item.component';
@@ -17,14 +19,52 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
     return (
         <div className={className}>
             <div className={classes.header}>
+                <div>
+                    <Link to='/admin/dashboard/cohort/create'>
+                        <Button className={classes.button} color='primary' variant='contained'>
+                            Create Cohort
+                        </Button>
+                    </Link>
+
+                    {/* <Button onClick={() => } color='primary' variant='contained'>
+                        Edit
+                    </Button> */}
+
+                    <Button
+                        className={classes.button}
+                        color='primary'
+                        variant='contained'
+                        onClick={(e) => {
+                            e.preventDefault();
+                            window.alert('Not Yet Implemented');
+                        }}>
+                        Edit
+                    </Button>
+
+                    {/* <Button onClick={() => remove()}>Delete</Button> */}
+
+                    <Button
+                        className={classes.button}
+                        color='primary'
+                        variant='contained'
+                        onClick={(e) => {
+                            e.preventDefault();
+                            window.alert('Not Yet Implemented');
+                        }}>
+                        Delete
+                    </Button>
+                </div>
                 <Table>
                     <TableHead>
                         <TableRow>
+                            <TableCell>Select</TableCell>
                             <TableCell>Cohort Name</TableCell>
-                            <TableCell>Cohort Week</TableCell>
-                            <TableCell>Cohort Activity</TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
+                            <TableCell>Children</TableCell>
+                            <TableCell>Chapter</TableCell>
+                            <TableCell>Flagged</TableCell>
+                            <TableCell>Status</TableCell>
+
+                            {/* <TableCell></TableCell> */}
                         </TableRow>
                     </TableHead>
                     <TableBody>

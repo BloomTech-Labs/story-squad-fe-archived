@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
             borderRadius: '4px',
             boxShadow: theme.shadows[5],
             textAlign: 'center',
+            padding: '3% 10% 0 10%',
         },
         popupTxt: {
             color: 'black',
@@ -49,11 +50,11 @@ const useStyles = makeStyles((theme: Theme) =>
             fontFamily: 'nunito',
         },
         storyPic: {
-            width: '40%',
+            width: '65%',
             height: '20vh',
-            margin: '0 auto',
+            margin: '2% auto',
             borderRadius: '5%',
-            border: '2px solid #FFCE64',
+            border: '3px solid #FFCE64',
         },
     })
 );

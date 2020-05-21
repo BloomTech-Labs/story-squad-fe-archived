@@ -56,7 +56,7 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
                                     <img
                                         src={page}
                                         className={classes.submissionImg}
-                                        alt={`${username}'s story submission, page ${key}`}
+                                        alt={`story submission, page ${key}`}
                                     />
                                 </div>
                             )

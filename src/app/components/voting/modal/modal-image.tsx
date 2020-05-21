@@ -102,12 +102,7 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                         alt={'user submission'}
                     />
                 </Grid>
-                <Dialog
-                    fullScreen
-                    open={open}
-                    TransitionComponent={Transition}
-                    // TransitionComponent={Transition}
-                >
+                <Dialog fullScreen open={open} TransitionComponent={Transition}>
                     <div className={classes.modalpop}>
                         <div className={classes.iconBox}>
                             <IconButton
@@ -119,8 +114,19 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                                 <CloseIcon className={classes.closeButton} />
                             </IconButton>
                         </div>
+                        {/* {submission[1] !== '' && submission[1] !== null ? (
+                            submission.map((page, index) => (
+                                <div key={key} className={classes.imgDiv}>
+                                    <img src={page} alt={`Page ${index} of ${type}`} />
+                                </div>
+                            ))
+                        ) : (
+                            <div key={key} className={classes.imgDiv}>
+                                <img src={submission[0]} alt={`story submission`} />
+                            </div>
+                        )} */}
                         {submission.map((page, index) =>
-                            page[0] ? (
+                            page && page.length > 0 ? (
                                 <div key={key} className={classes.imgDiv}>
                                     <img src={page} alt={`Page ${index} of ${type}`} />
                                 </div>

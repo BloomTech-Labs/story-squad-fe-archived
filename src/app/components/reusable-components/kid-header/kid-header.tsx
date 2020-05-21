@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 const KidHeader: React.FC<HeaderProps> = ({ title = 'Story Squad' }) => {
     return (
-        <div className='header'>
+        <header className='header'>
             {title ? (
                 <h2 className='title__header__text'>{title}</h2>
             ) : (
@@ -20,7 +20,7 @@ const KidHeader: React.FC<HeaderProps> = ({ title = 'Story Squad' }) => {
             <div className='header__image'>
                 <img src={cityscape} alt='' />
             </div>
-        </div>
+        </header>
     );
 };
 export { KidHeader };

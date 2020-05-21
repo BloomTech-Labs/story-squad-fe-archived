@@ -5,12 +5,15 @@ import { Container, Checkbox, Fade, Backdrop } from '@material-ui/core';
 // import Modal from '../../reusable-components/modal/Modal';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
+import StyledWrapper from '../../reusable-components/wrapper/Wrapper';
 import Read from './icons/read.svg';
 import Write from './icons/write.svg';
 import Draw from './icons/draw.svg';
 import { KidHeader } from '../../reusable-components';
 import Button from '../../reusable-components/button/Button';
 import styled from 'styled-components';
+import Card from '../../reusable-components/card/Card';
+
 // import { useStyles } from './kid-progress-styles';
 
 import './styles.css';
@@ -19,21 +22,20 @@ interface KidProgressProps {
     child: Child;
 }
 
-const StyledTestDiv = styled.div`
-    --primary-color: red;
-    --bg-color: blue;
-    --font-size: 4em;
-    --btn-padding: 10px 15px;
-    width: 40%;
-    button {
-        border-radius: 50px;
-    }
+const ReadCard = styled(Card)`
+    background-color: ${(props) => (props.complete ? 'var(--green)' : 'skyblue')};
+`;
+const WriteCard = styled(Card)`
+    background-color: ${(props) => (props.complete ? 'var(--green)' : 'var(--red)')};
+`;
+const DrawCard = styled(Card)`
+    background-color: ${(props) => (props.complete ? 'var(--green)' : 'var(--gold)')};
 `;
 
 const Modal = ({ children }) => {
     return (
         <div className='modal__overlay'>
-            <div className='modal__card'>
+            <div className='modal__Card'>
                 <Button className='modal__close' onClick={() => console.log('clicked')}>
                     X
                 </Button>
@@ -79,57 +81,35 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     return (
         // <Container className={classes.containerStyle}>
         <>
-            <section className='kid__progress'>
+            <StyledWrapper grid className='kid__progress'>
                 <KidHeader title={'Mission'} />
-
-                <div className='main'>
-                    <div className='read'>
-                        <div>
-                            <Link
-                                to={`/story/${cohort.week}`}
-                                onClick={() => request({ reading: true })}>
-                                <div>
-                                    <img src={Read} alt='' />
-                                </div>
-                            </Link>
-                        </div>
-                        <div className='checkbox_container'>
-                            <Checkbox checked={progress.reading} color='primary' />
-                        </div>
-                    </div>
-                    <div className='write'>
-                        <Checkbox
-                            checked={!!child.stories.length}
-                            // className={classes.writeCheckBox}
-                            color='primary'
-                        />
-                        <Link to={`/kids-dashboard/upload`}>
-                            <div></div>
-                        </Link>
-                    </div>
-                    <div className='draw'>
-                        
-                        <Checkbox
-                            checked={!!child.illustrations.length}
-                            // className={classes.drawCheckBox}
-                            color='primary'
-                        />
-                        <Link to={`/kids-dashboard/drawing-upload`}>
-                            <div></div>
-                        </Link>
-                    </div>
+                <ReadCard complete className='read'>
+                    <Link to={`/story/${cohort.week}`} />
                     <div>
-                        <Button disabled={completedSubmissions && matchInfo} type='button'>
-                            {completedSubmissions
-                                ? 'Team Up'
-                                : !matchInfo
-                                ? 'Submissions needed to proceed!'
-                                : 'Your team will be matched soon!'}
-                        </Button>
+                        <img src={Read} alt='Reading' />
                     </div>
-                    )}
-                </div>
-            </section>
+                </ReadCard>
+
+                <WriteCard className='write'>
+                    <img src={Write} alt='Writing' />
+                    <Link to={`/kids-dashboard/upload`} />
+                </WriteCard>
+                <DrawCard className='draw'>
+                    <img src={Draw} alt='Drawing' />
+                    <Link to={`/kids-dashboard/drawing-upload`} />
+                </DrawCard>
+
+                <Card className='btn__container'>
+                    <Button disabled={completedSubmissions && matchInfo} type='button'>
+                        {completedSubmissions
+                            ? 'Team Up'
+                            : !matchInfo
+                            ? 'Submissions needed to proceed!'
+                            : 'Your team will be matched soon!'}
+                    </Button>
+                </Card>
+            </StyledWrapper>
+
             {open && (
                 <Modal>
                     <h1>Welcome to Emoji town</h1>
@@ -153,7 +133,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                     timeout: 500,
                 }}>
                 <Fade in={open}>
-                    <div>
+                    <Card>
                         <h2 id='transition-modal-title'>Welcome to Story Squad!</h2>
                         <p id='transition-modal-description'>
                             To begin your journey, click the 'READ' icon and start the story!
@@ -161,7 +141,7 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                             Are you ready to accept the mission?
                         </p>
                         <Button onClick={modalClose}>I accept!!</Button>
-                    </div>
+                    </Card>
                 </Fade>
             </Modal> */}
         </>

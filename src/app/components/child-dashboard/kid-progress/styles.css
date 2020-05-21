@@ -1,36 +1,14 @@
-.kid__progress .main {
+.kid__progress {
     display: grid;
     grid-template-areas:
+        'header'
         'read'
         'write'
-        'draw';
-
-    height: 93vh;
+        'draw'
+        'button';
 }
-
-.kid__progress .main > div {
-    border: var(--mediumBorder);
-
-    display: flex;
-    height: 60vh;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-.kid__progress .main div span {
-    transform: scale(1.3, 1.3);
-    max-height: 80px;
-    position: absolute;
-    right: 10%;
-    top: 10%;
-}
-.kid__progress .main div div {
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-.kid__progress .main div img {
-    max-height: 100%;
+header {
+    grid-area: header;
 }
 .read {
     grid-area: read;
@@ -42,20 +20,45 @@
     background-color: var(--red);
 }
 .draw {
+    border-bottom: 0;
     grid-area: draw;
     background-color: var(--gold);
 }
-
+.btn__container {
+    border-top-style: none;
+    grid-area: button;
+    background-color: var(--green);
+}
+.kid__progress div > a {
+    position: absolute;
+    /* background-color: red; */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* display: flex;
+    justify-content: center; */
+}
+.read a {
+    background-color: transparent;
+}
+.write {
+    background-color: orange;
+}
+.draw {
+    background-color: green;
+}
+.kid__progress div div {
+    height: 50%;
+}
 @media only screen and (min-width: 1000px) {
-    .kid__progress .main {
+    .kid__progress {
         grid-template-columns: repeat(2, minmax(50%, 800px));
         grid-template-areas:
+            'header header'
             'read write'
-            'read draw';
-    }
-
-    .kid__progress .main > div {
-        height: auto;
+            'read draw'
+            'read button';
     }
 }
 .modal__overlay {

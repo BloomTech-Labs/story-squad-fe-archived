@@ -3,7 +3,7 @@ import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/c
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
-import { Cohort } from '../../../../models';
+import { Cohort, SelectableCohort } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 import { CohortListItem } from './item.component';
 import { useStyles } from './list.component.styles';
@@ -11,6 +11,10 @@ import { useStyles } from './list.component.styles';
 interface ListCohortsProps {
     className?: string;
 }
+
+// interface SelectableCohort extends Cohort {
+//     selected: boolean;
+// }
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -24,7 +28,11 @@ const StyledTableCell = withStyles((theme) => ({
 
 const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
     const classes = useStyles({});
-    const [response, loading, request] = useAPI<{ cohorts: Cohort[] }>('/cohort/list');
+    const [response, loading, request] = useAPI<{ cohorts: SelectableCohort[] }>('/cohort/list');
+
+    // {response.cohorts.filter((cohort) => (
+    //     return cohort.selected;
+    // ))}
 
     if (!response?.cohorts) return <h4 className={classes.loading}>Loading...</h4>;
     return (
@@ -40,6 +48,12 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
                     {/* <Button onClick={() => } color='primary' variant='contained'>
                         Edit
                     </Button> */}
+
+                    {/* <Link to={`/admin/dashboard/cohort/${cohort.id}/edit`}>
+                        <Button className={classes.button} color='primary' variant='contained'>
+                            Edit
+                        </Button>
+                    </Link> */}
 
                     <Button
                         className={classes.button}

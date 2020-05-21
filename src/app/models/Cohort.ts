@@ -4,3 +4,7 @@ export interface Cohort {
     week: string;
     activity?: string;
 }
+
+export interface SelectableCohort extends Cohort {
+    selected: boolean;
+}

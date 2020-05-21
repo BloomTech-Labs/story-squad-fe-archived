@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, TableRow, TableCell } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
-import { Cohort } from '../../../../models';
+import { Cohort, SelectableCohort } from '../../../../models';
 import { useAPI } from '../../../../hooks';
+// import { SelectableCohort } from './list.component';
 
 interface CohortListItemProps {
-    cohort: Cohort;
+    cohort: SelectableCohort;
     onUpdate?: () => void;
 }
 

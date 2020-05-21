@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const StyledCard = styled.div`
     height: ${(props) => (props.half ? '50% ' : '100%')};
     display: flex;
+    flex-flow: ${(props) => (props.column ? 'column' : 'row')} wrap;
     justify-content: center;
     align-items: center;
     position: relative;

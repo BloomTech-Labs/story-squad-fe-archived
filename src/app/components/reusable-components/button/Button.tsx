@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 const StyledButton = styled.button`
     background-color: ${(props) => (props.secondary ? 'white' : 'var(--bg-color, var(--red))')};
@@ -17,5 +18,13 @@ const StyledButton = styled.button`
 `;
 
 export default function Button({ loading = false, children, ...props }) {
-    return <StyledButton {...props}>{loading ? 'Loading' : children}</StyledButton>;
+    const history = useHistory();
+    console.log(typeof props.click);
+    return (
+        <StyledButton
+            onClick={props.click ? () => history.push(props.click) : props.onClick}
+            {...props}>
+            {loading ? 'Loading' : children}
+        </StyledButton>
+    );
 }

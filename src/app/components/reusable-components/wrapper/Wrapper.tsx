@@ -4,6 +4,8 @@ import styled from 'styled-components';
 const StyledWrapper = styled.div`
     max-height: 100vh;
     height: 100vh;
+    width: calc(100vw - 30px);
+    margin: 0 auto;
     background-color: blue;
     display: ${(props) => (props.grid ? 'grid' : 'flex')};
     flex-flow: ${(props) => (props.column ? 'column' : 'row')} wrap;

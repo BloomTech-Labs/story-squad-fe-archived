@@ -62,7 +62,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             100 - (state.story1Points + state.story2Points + state.pic1Points + state.pic2Points)
         );
     }, [state]);
-
+    console.log(teamReviewTime);
     useEffect(() => {
         if (matchInfo) {
             const { student, teammate } = matchInfo.thisMatch.team;
@@ -70,6 +70,8 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setStudent({ ...student });
             setTeammate({ ...teammate });
             setTeamReviewTime(new Date(matchInfo.thisMatch.teamReviewEndDate));
+            console.log(matchInfo.thisMatch.teamReviewEndDate);
+            console.log( Date.UTC(matchInfo.thisMatch.teamReviewEndDate));
 
             // console.log(new Date(matchInfo.thisMatch.teamReviewEndDate));
             console.log("logan's", matchInfo.thisMatch);
@@ -187,7 +189,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                             <Grid container xs={8} className={classes.nextDiv}>
                                 <div className={classes.button}>
                                     <Button
-                                        disabled={disabledForm}
+                                        // disabled={disabledForm}
                                         className={classes.orangeButton}
                                         type='submit'>
                                         Match Up!

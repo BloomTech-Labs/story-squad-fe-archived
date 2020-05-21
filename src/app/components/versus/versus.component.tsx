@@ -23,11 +23,7 @@ class TemporaryHolder {
     }
 }
 
-interface VersusProps {
-    child: string;
-}
-
-const Versus: React.FC<VersusProps> = ({ child }) => {
+const Versus: React.FC = () => {
     // console.log(child);
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
@@ -86,7 +82,8 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                 <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} />
             </Container>
         );
-    debugger;
+
+    const child = {};
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader

@@ -5,7 +5,6 @@ import { useStyles } from './voting-styles';
 import { Button, Typography, Container, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Radio, { RadioProps } from '@material-ui/core/Radio';
-import { Child, Cohort } from '../../models';
 import story1 from './img/leowriting.jpg';
 import story2 from './img/chancewriting.jpg';
 import { useForm } from '../../hooks';
@@ -27,11 +26,10 @@ const ColoredRadio = withStyles({
 })((props: RadioProps) => <Radio color='default' {...props} />);
 
 interface VotingCardProps {
-    child: Child;
     handleChange: any;
 }
 
-const Voting: React.FC<VotingCardProps> = ({ child }) => {
+const Voting: React.FC<VotingCardProps> = () => {
     const { state, handleInputChange, handleSubmitBuilder } = useForm({
         story1Points: 'something',
         story2Points: 'something',

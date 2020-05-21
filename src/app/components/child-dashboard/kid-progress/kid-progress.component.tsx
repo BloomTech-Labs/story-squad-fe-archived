@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { Container, Checkbox, Fade, Backdrop } from '@material-ui/core';
@@ -13,7 +13,7 @@ import { KidHeader } from '../../reusable-components';
 import Button from '../../reusable-components/button/Button';
 import styled from 'styled-components';
 import Card from '../../reusable-components/card/Card';
-
+import { ChildContext } from '../../../state/Context';
 // import { useStyles } from './kid-progress-styles';
 
 import './styles.css';
@@ -21,16 +21,6 @@ interface KidProgressProps {
     onUpdate?: () => void;
     child: Child;
 }
-
-const ReadCard = styled(Card)`
-    background-color: ${(props) => (props.complete ? 'var(--green)' : 'skyblue')};
-`;
-const WriteCard = styled(Card)`
-    background-color: ${(props) => (props.complete ? 'var(--green)' : 'var(--red)')};
-`;
-const DrawCard = styled(Card)`
-    background-color: ${(props) => (props.complete ? 'var(--green)' : 'var(--gold)')};
-`;
 
 const Modal = ({ children }) => {
     return (
@@ -45,7 +35,8 @@ const Modal = ({ children }) => {
     );
 };
 
-const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
+const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
+    const child = useContext(ChildContext);
     const [response, loading, request] = useAPI('/children/progress', 'POST');
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
     const [open, setOpen] = useState(false);
@@ -60,11 +51,8 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     }, [onUpdate, response]);
 
     const { cohort, progress } = child;
-    const { dueDates: dueDateStrings } = cohort;
-    const dueDates = Object.fromEntries(
-        Object.entries(dueDateStrings).map(([key, date]) => [key, moment(date)])
-    );
-    /* if progress.reading is false the inital modal with continue to open on render */
+
+    //  if progress.reading is false the inital modal with continue to open on render */
     useEffect(() => {
         if (progress.reading === false) {
             setOpen(true);
@@ -83,12 +71,12 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
         <>
             <StyledWrapper grid className='kid__progress'>
                 <KidHeader title={'Mission'} />
-                <ReadCard complete className='read'>
+                <CompleteCard complete className='read'>
                     <Link to={`/story/${cohort.week}`} />
                     <div>
                         <img src={Read} alt='Reading' />
                     </div>
-                </ReadCard>
+                </CompleteCard>
 
                 <WriteCard className='write'>
                     <img src={Write} alt='Writing' />
@@ -100,13 +88,15 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
                 </DrawCard>
 
                 <Card className='btn__container'>
-                    <Button disabled={completedSubmissions && matchInfo} type='button'>
-                        {completedSubmissions
-                            ? 'Team Up'
-                            : !matchInfo
-                            ? 'Submissions needed to proceed!'
-                            : 'Your team will be matched soon!'}
-                    </Button>
+                    <Link to={`/kids-dashboard/team-join`}>
+                        <Button disabled={!completedSubmissions && !matchInfo} type='button'>
+                            {completedSubmissions
+                                ? 'Team Up'
+                                : !matchInfo
+                                ? 'Submissions needed to proceed!'
+                                : 'Your team will be matched soon!'}
+                        </Button>
+                    </Link>
                 </Card>
             </StyledWrapper>
 
@@ -149,3 +139,13 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ child, onUpdate }) => {
     );
 };
 export { KidProgressCard };
+
+const CompleteCard = styled(Card)`
+    background-color: ${(props) => props.complete && 'var(--green) !important'};
+`;
+const WriteCard = styled(Card)`
+    background-color: ${(props) => (props.complete ? 'var(--green)' : 'var(--red)')};
+`;
+const DrawCard = styled(Card)`
+    background-color: ${(props) => (props.complete ? 'var(--green)' : 'var(--gold)')};
+`;

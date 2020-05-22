@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { Cohort, SelectableCohort } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 import { CohortListItem } from './item.component';
 import { useStyles } from './list.component.styles';
+import requestFactory from '../../../../util/requestFactory';
 
 interface ListCohortsProps {
     className?: string;
@@ -29,12 +30,31 @@ const StyledTableCell = withStyles((theme) => ({
 const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
     const classes = useStyles({});
     const [response, loading, request] = useAPI<{ cohorts: SelectableCohort[] }>('/cohort/list');
+    const [cohorts, setCohorts] = useState([]);
+    const history = useHistory();
 
-    // {response.cohorts.filter((cohort) => (
-    //     return cohort.selected;
-    // ))}
+    useEffect(() => {
+        if (!loading && response) {
+            setCohorts(response.cohorts);
+        }
+    }, [loading, response]);
 
-    if (!response?.cohorts) return <h4 className={classes.loading}>Loading...</h4>;
+    const toggleItem = (cohortId) => {
+        const newCohorts = cohorts.map((cohort) => {
+            if (cohortId === cohort.id) {
+                return {
+                    ...cohort,
+                    selected: !cohort.selected,
+                };
+            } else {
+                return cohort;
+            }
+        });
+        setCohorts(newCohorts);
+    };
+
+    if (loading) return <h4 className={classes.loading}>Loading...</h4>;
+    if (cohorts.length < 1) return <h4 className={classes.loading}>There are no Cohorts</h4>;
     return (
         <div className={className}>
             <div className={classes.header}>
@@ -45,30 +65,49 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
                         </Button>
                     </Link>
 
-                    {/* <Button onClick={() => } color='primary' variant='contained'>
-                        Edit
-                    </Button> */}
-
-                    {/* <Link to={`/admin/dashboard/cohort/${cohort.id}/edit`}>
-                        <Button className={classes.button} color='primary' variant='contained'>
-                            Edit
-                        </Button>
-                    </Link> */}
-
                     <Button
                         className={classes.button}
                         color='primary'
                         variant='contained'
                         onClick={(e) => {
-                            e.preventDefault();
-                            window.alert('Not Yet Implemented');
+                            const selectedCohorts = cohorts.filter((cohort) => cohort.selected);
+
+                            if (selectedCohorts.length > 1) {
+                                window.alert('Only one cohort can be edited at a time.');
+                            } else if (selectedCohorts.length === 0) {
+                                window.alert('Please select a cohort to edit');
+                            } else {
+                                history.push(
+                                    `/admin/dashboard/cohort/${selectedCohorts[0].id}/edit`
+                                );
+                            }
                         }}>
                         Edit
                     </Button>
 
-                    {/* <Button onClick={() => remove()}>Delete</Button> */}
-
                     <Button
+                        color='primary'
+                        variant='contained'
+                        onClick={(e) => {
+                            if (window.confirm('Are you sure you wish to delete this item?')) {
+                                const axios = requestFactory();
+                                const selectedCohorts = cohorts.filter((cohort) => cohort.selected);
+                                const deletePromises = selectedCohorts.map((cohort) => {
+                                    return axios.delete(`/cohort/list/${cohort.id}`);
+                                });
+                                Promise.all(deletePromises)
+                                    .then((res) => {
+                                        request();
+                                    })
+                                    .catch((err) => {
+                                        window.alert('There was a problem deleting the cohort(s).');
+                                    });
+                            }
+                        }}>
+                        Delete
+                    </Button>
+
+                    {/* <Button
                         className={classes.button}
                         color='primary'
                         variant='contained'
@@ -77,7 +116,7 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
                             window.alert('Not Yet Implemented');
                         }}>
                         Delete
-                    </Button>
+                    </Button> */}
                 </div>
                 <Table>
                     <TableHead>
@@ -88,16 +127,14 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
                             <StyledTableCell>Chapter</StyledTableCell>
                             <StyledTableCell>Flagged</StyledTableCell>
                             <StyledTableCell>Status</StyledTableCell>
-
-                            {/* <TableCell></TableCell> */}
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {response.cohorts.map((cohort) => (
+                        {cohorts.map((cohort) => (
                             <CohortListItem
                                 key={cohort.id}
                                 cohort={cohort}
-                                onUpdate={() => request()}
+                                toggleItem={toggleItem}
                             />
                         ))}
                     </TableBody>

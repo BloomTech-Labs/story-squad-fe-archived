@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Avatar, Grid } from '@material-ui/core';
 import { SubmissionDisplay } from '../../modals/subDisplay.component';
 import { useStyles } from '../../versus-styles';
-import { ReactComponent as Lock } from '../../img/locked.svg';
+import { ReactComponent as Lock } from '../../img/Lock.svg';
 import ava1 from '../../img/ava1.png';
 import vsImg from '../../img/VS.png';
 import Badge from '@material-ui/core/Badge';
@@ -15,6 +15,7 @@ interface RoundProps {
     matchup: any;
     child: any;
     locked: boolean;
+    alwaysLocked: boolean;
 }
 
 const VersusRound: React.FC<RoundProps> = ({
@@ -23,6 +24,7 @@ const VersusRound: React.FC<RoundProps> = ({
     matchup,
     child,
     locked,
+    alwaysLocked,
 }) => {
     const history = useHistory();
     const classes = useStyles();
@@ -46,6 +48,7 @@ const VersusRound: React.FC<RoundProps> = ({
     }
 
     if (matchup[0].story === undefined && matchup[0].illustration === undefined) return <></>;
+    console.log({ locked });
 
     let b64passLeft = [];
     let b64passRight = [];
@@ -129,8 +132,8 @@ const VersusRound: React.FC<RoundProps> = ({
                                     alt='locked submission'
                                 />
                                 <Lock
-                                    className={classes.lock}
-                                    onClick={() => history.push(`/voting`)}
+                                    className={alwaysLocked ? classes.lock : classes.lockKey}
+                                    onClick={alwaysLocked ? null : () => history.push(`/voting`)}
                                 />
                             </Grid>
                         </Grid>

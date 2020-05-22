@@ -7,7 +7,7 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Slide from '@material-ui/core/Slide';
-import { ReactComponent as Unlocked } from '../img/unlocked.svg';
+// import { ReactComponent as Unlocked } from '../img/unlocked.svg';
 import './animation.css';
 
 interface SubDisplayProps {
@@ -39,26 +39,19 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
     console.log('submission from modal', submission);
     return (
         <Grid container className={classes.gridContainer}>
-            <Grid
-                item
-                md
-                // id={left ? null : 'pulse'}
-            >
+            <Grid item md>
                 <img
+                    id={left ? null : 'pulse'}
                     src={submission[0]}
                     className={left ? classes.imagePreview : classes.imageUnlocked}
                     onClick={handleOpen}
                     alt={`${username}'s Story Preview`}
                 />
-                {locked ? null : <Unlocked className={classes.unlocked} onClick={handleOpen} />}
+                {/* {locked ? null : <Unlocked className={classes.unlocked} onClick={handleOpen} />} */}
             </Grid>
             <Dialog fullScreen open={open} TransitionComponent={Transition}>
                 <div className={classes.iconBox}>
-                    <IconButton
-                        edge='start'
-                        // color='inherit'
-                        onClick={handleClose}
-                        aria-label='close'>
+                    <IconButton edge='start' onClick={handleClose} aria-label='close'>
                         <CloseIcon />
                     </IconButton>
                 </div>
@@ -77,11 +70,7 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
                     )}
                 </Grid>
                 <div className={classes.iconBox}>
-                    <IconButton
-                        edge='start'
-                        // color='inherit'
-                        onClick={handleClose}
-                        aria-label='close'>
+                    <IconButton edge='start' onClick={handleClose} aria-label='close'>
                         <CloseIcon />
                     </IconButton>
                 </div>

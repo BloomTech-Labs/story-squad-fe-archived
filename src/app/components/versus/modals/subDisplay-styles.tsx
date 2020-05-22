@@ -24,7 +24,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             height: '90px',
             borderRadius: '10px',
             cursor: 'pointer',
-            // border: '4px solid lightgreen',
         },
         imageUnlocked: {
             width: '150px',
@@ -75,11 +74,11 @@ export const useStyles = makeStyles((theme: Theme) =>
             margin: '0 auto',
         },
         unlocked: {
-            width: '18%',
-            height: '45%',
+            width: '50%',
+            height: '30%',
             position: 'absolute',
-            top: '54%',
-            left: '79.5%',
+            top: '56%',
+            left: '80%',
             transform: 'translate(-50%, -50%)',
             cursor: 'pointer',
             zIndex: 1,

@@ -172,6 +172,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             height: '90px',
             borderRadius: '10px',
             cursor: 'pointer',
+            filter: 'blur(2.5px)',
             border: '4px solid red',
         },
         gridContainer: {
@@ -180,23 +181,22 @@ export const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
             alignContent: 'center',
         },
-        lock: {
+        lockKey: {
             width: '17%',
+            height: '27%',
             position: 'absolute',
-            top: '54%',
-            left: '79.5%',
+            top: '53.5%',
+            left: '80%',
             transform: 'translate(-50%, -50%)',
             cursor: `URL(${key}) 2 26, default`,
         },
-        // unlocked: {
-        //     width: '18%',
-        //     height: '45%',
-        //     position: 'absolute',
-        //     top: '54%',
-        //     left: '79.5%',
-        //     transform: 'translate(-50%, -50%)',
-        //     cursor: 'pointer',
-        //     border: '2px solid red',
-        // },
+        lock: {
+            width: '17%',
+            height: '27%',
+            position: 'absolute',
+            top: '53.5%',
+            left: '80%',
+            transform: 'translate(-50%, -50%)',
+        },
     })
 );

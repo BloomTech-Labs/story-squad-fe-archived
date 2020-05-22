@@ -87,8 +87,8 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
             </Container>
         );
 
-    console.log('locked', locked['3Votes']);
-    console.log(matchups);
+    // console.log('locked', locked['3Votes']);
+    // console.log(matchups);
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader
@@ -103,6 +103,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     matchup={matchups[0]}
                     child={child}
                     locked={true}
+                    alwaysLocked={true}
                 />
                 <VersusRound
                     roundStyle={classes.story2}
@@ -110,6 +111,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     matchup={matchups[1]}
                     child={child}
                     locked={locked['3Votes']}
+                    alwaysLocked={false}
                 />
             </Grid>
             <Grid className={classes.bottomRow}>
@@ -119,6 +121,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     matchup={matchups[2]}
                     child={child}
                     locked={locked['2Votes']}
+                    alwaysLocked={false}
                 />
                 <VersusRound
                     roundStyle={classes.picture2}
@@ -126,6 +129,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     matchup={matchups[3]}
                     child={child}
                     locked={locked['1Votes']}
+                    alwaysLocked={false}
                 />
                 <VersusButton locked={locked['3Votes']} />
             </Grid>

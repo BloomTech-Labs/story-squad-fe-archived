@@ -1,8 +1,9 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Avatar, Grid } from '@material-ui/core';
 import { SubmissionDisplay } from '../../modals/subDisplay.component';
 import { useStyles } from '../../versus-styles';
-import { ReactComponent as Lock } from '../../img/lock-icon.svg';
+import { ReactComponent as Lock } from '../../img/locked.svg';
 import ava1 from '../../img/ava1.png';
 import vsImg from '../../img/VS.png';
 import Badge from '@material-ui/core/Badge';
@@ -23,6 +24,7 @@ const VersusRound: React.FC<RoundProps> = ({
     child,
     locked,
 }) => {
+    const history = useHistory();
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     // console.log({ matchup }, { child });
@@ -93,7 +95,12 @@ const VersusRound: React.FC<RoundProps> = ({
             <div className={classes.subRow}>
                 {/* High story1 */}
                 <Grid item xs={12} sm={12} md={6}>
-                    <SubmissionDisplay username={matchup[0].username} submission={b64passLeft} />
+                    <SubmissionDisplay
+                        username={matchup[0].username}
+                        submission={b64passLeft}
+                        locked={locked}
+                        left={true}
+                    />
                 </Grid>
                 {nameRowStyle === classes.nameRowBig ? (
                     <div className={classes.totalScoreBig}>
@@ -109,6 +116,8 @@ const VersusRound: React.FC<RoundProps> = ({
                         <SubmissionDisplay
                             username={matchup[1].username}
                             submission={b64passRight}
+                            locked={locked}
+                            left={false}
                         />
                     ) : (
                         <Grid container className={classes.gridContainer}>
@@ -119,7 +128,10 @@ const VersusRound: React.FC<RoundProps> = ({
                                     className={classes.imagePreview}
                                     alt='locked submission'
                                 />
-                                <Lock className={classes.lock} />
+                                <Lock
+                                    className={classes.lock}
+                                    onClick={() => history.push(`/voting`)}
+                                />
                             </Grid>
                         </Grid>
                     )}

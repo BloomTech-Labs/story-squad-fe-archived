@@ -7,10 +7,14 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Slide from '@material-ui/core/Slide';
+import { ReactComponent as Unlocked } from '../img/unlocked.svg';
+import './animation.css';
 
 interface SubDisplayProps {
     submission: any;
     username: string;
+    left: boolean;
+    locked: boolean;
 }
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps,
@@ -18,7 +22,12 @@ const Transition = React.forwardRef(function Transition(
 ) {
     return <Slide direction='up' ref={ref} {...props} />;
 });
-export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, username }) => {
+export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
+    submission,
+    username,
+    left,
+    locked,
+}) => {
     const [open, setOpen] = useState<boolean>(false);
     const classes = useStyles({});
     const handleOpen = () => {
@@ -30,13 +39,18 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
     console.log('submission from modal', submission);
     return (
         <Grid container className={classes.gridContainer}>
-            <Grid item md>
+            <Grid
+                item
+                md
+                // id={left ? null : 'pulse'}
+            >
                 <img
                     src={submission[0]}
-                    className={classes.imagePreview}
+                    className={left ? classes.imagePreview : classes.imageUnlocked}
                     onClick={handleOpen}
                     alt={`${username}'s Story Preview`}
                 />
+                {locked ? null : <Unlocked className={classes.unlocked} onClick={handleOpen} />}
             </Grid>
             <Dialog fullScreen open={open} TransitionComponent={Transition}>
                 <div className={classes.iconBox}>

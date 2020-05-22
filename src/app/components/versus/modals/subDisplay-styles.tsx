@@ -24,6 +24,14 @@ export const useStyles = makeStyles((theme: Theme) =>
             height: '90px',
             borderRadius: '10px',
             cursor: 'pointer',
+            // border: '4px solid lightgreen',
+        },
+        imageUnlocked: {
+            width: '150px',
+            height: '90px',
+            borderRadius: '10px',
+            cursor: 'pointer',
+            border: '4px solid lightgreen',
         },
         gridContainer: {
             flexDirection: 'column',
@@ -59,12 +67,22 @@ export const useStyles = makeStyles((theme: Theme) =>
             },
         },
         submissionImg: {
-            maxWidth: '80%',
+            maxWidth: '70%',
         },
         iconBox: {
             width: '5vh',
             height: '10vh',
             margin: '0 auto',
+        },
+        unlocked: {
+            width: '18%',
+            height: '45%',
+            position: 'absolute',
+            top: '54%',
+            left: '79.5%',
+            transform: 'translate(-50%, -50%)',
+            cursor: 'pointer',
+            zIndex: 1,
         },
     })
 );

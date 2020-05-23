@@ -8,22 +8,22 @@ import { useStyles } from './versus-page-styles';
 
 const VersusPage: React.FC = () => {
     const classes = useStyles({});
-    // const [response, loading, request] = useAPI('/children/me');
+    const [response, loading, request] = useAPI('/children/me');
     // const handleRequest = () => {
     //     request();
     // };
-    // if (!response?.me)
-    //     return (
-    //         <section className={classes.loading}>
-    //             <CircularProgress size={56} />
-    //         </section>
-    //     );
+    if (!response?.me)
+        return (
+            <section className={classes.loading}>
+                <CircularProgress size={56} />
+            </section>
+        );
     return (
         <div className={classes.root}>
             <main className={classes.main}>
                 <Switch>
                     <Route path='/matchup'>
-                        <Versus />
+                        <Versus child={response.me} />
                     </Route>
                 </Switch>
             </main>

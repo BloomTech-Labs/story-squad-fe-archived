@@ -37,15 +37,16 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
         setOpen(false);
     };
 
-    console.log(child);
     return (
+        // renders modal for story with multiple pages
+
         <Grid container className={classes.gridContainer}>
             <Grid item md>
                 <img
                     src={submission[0]}
                     className={classes.imagePreview}
                     onClick={handleOpen}
-                    alt={`${username}'s Story Preview`}
+                    alt={`${username}'s ${type} Preview`}
                 />
             </Grid>
             <TextValidatorComp
@@ -59,19 +60,21 @@ export const SubmissionDisplay: React.FC<SubmissionDisplayProps> = ({
                     <CloseIcon />
                 </IconButton>
                 <DialogTitle className={classes.submissionHeader} id='submission-title'>
-                    {`${username}'s Story!`}
+                    {`${username}'s ${type}!`}
                 </DialogTitle>
-                page && (
                 <Grid className={classes.gridContainer}>
-                    {submission.map((page, key) => (
-                        <div className={classes.viewPageDiv} key={key}>
-                            <img
-                                src={page}
-                                className={classes.submissionImg}
-                                alt={`${username}'s story submission, page ${key}`}
-                            />
-                        </div>
-                    ))}
+                    {submission.map(
+                        (page, key) =>
+                            page && (
+                                <div key={key} className={classes.viewPageDiv}>
+                                    <img
+                                        src={page}
+                                        className={classes.submissionImg}
+                                        alt={`${username}'s story submission, page ${key}`}
+                                    />
+                                </div>
+                            )
+                    )}
                 </Grid>
             </Dialog>
         </Grid>

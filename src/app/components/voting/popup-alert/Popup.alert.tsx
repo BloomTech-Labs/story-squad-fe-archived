@@ -12,6 +12,8 @@ import {
 interface VotingProps {
     open: boolean;
     setOpen: any;
+    dialogTxt: string;
+    btnTxt: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -47,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export const Popup: React.FC<VotingProps> = ({ open, setOpen }) => {
+export const Popup: React.FC<VotingProps> = ({ open, setOpen, dialogTxt, btnTxt }) => {
     // const [open, setOpen] = React.useState(false);
     const classes = useStyles({});
 
@@ -61,30 +63,17 @@ export const Popup: React.FC<VotingProps> = ({ open, setOpen }) => {
 
     return (
         <div>
-            {/* <Button variant='outlined' color='primary' onClick={handleClickOpen}>
-                Open alert dialog
-            </Button> */}
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                // aria-labelledby='alert-dialog-title'
-                aria-describedby='alert-dialog-description'>
-                {/* <DialogTitle id='alert-dialog-title'>
-                    {"Use Google's location service?"}
-                </DialogTitle> */}
+            <Dialog open={open} onClose={handleClose} aria-describedby='alert-dialog-description'>
                 <div className={classes.popup}>
                     <DialogContent>
                         <DialogContentText className={classes.popupTxt}>
-                            Oops! Please select 4-6 emojis for each player
+                            {dialogTxt}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose} className={classes.orangeButton}>
-                            Go Back
+                            {btnTxt}
                         </Button>
-                        {/* <Button onClick={handleClose} color='primary' autoFocus>
-                        Agree
-                    </Button> */}
                     </DialogActions>
                 </div>
             </Dialog>

@@ -68,14 +68,14 @@ const useStyles = makeStyles((theme: Theme) =>
             'background': 'rgba(255, 255, 255, 0.75)',
             'borderRadius': '5px',
             '&::-webkit-scrollbar': {
-                width: '.25em',
+                width: '.8em',
             },
             '&::-webkit-scrollbar-track': {
                 '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)',
             },
             '&::-webkit-scrollbar-thumb': {
                 backgroundColor: 'rgba(0,0,0,.2)',
-                outline: '1px solid slategrey',
+                outline: '1px solid grey',
                 borderRadius: '10px',
             },
         },
@@ -124,7 +124,6 @@ interface VotingStateProps {
     newEmoji: any;
     setNewEmoji: any;
     emojiCondit: any;
-    //emojiCondit: (arr: any) => void;
 }
 
 export const Emoji: React.FC<VotingStateProps> = ({ newEmoji, setNewEmoji, emojiCondit }) => {
@@ -138,11 +137,9 @@ export const Emoji: React.FC<VotingStateProps> = ({ newEmoji, setNewEmoji, emoji
             return null;
         }
     };
-    // console.log('this is emoji state', emojiInput);
 
     useEffect(() => {
         emojiCondit(emojiInput);
-        console.log('this is from the useEffect', newEmoji);
         // eslint-disable-next-line
     }, [emojiInput]);
 

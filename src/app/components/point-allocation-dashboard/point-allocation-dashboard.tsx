@@ -44,6 +44,8 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
         pic2Points: 10,
     });
 
+    // console.log('child', child);
+
     const [remainingPoints, setRemainingPoints] = useState(100);
     const [error, setError] = useState(false);
     const [thisMatch, setThisMatch] = useState();
@@ -71,7 +73,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setTeammate({ ...teammate });
             setTeamReviewTime(new Date(matchInfo.thisMatch.teamReviewEndDate));
             console.log(matchInfo.thisMatch.teamReviewEndDate);
-            console.log( Date.UTC(matchInfo.thisMatch.teamReviewEndDate));
+            // console.log( Date.UTC(matchInfo.thisMatch.teamReviewEndDate));
 
             // console.log(new Date(matchInfo.thisMatch.teamReviewEndDate));
             console.log("logan's", matchInfo.thisMatch);
@@ -102,8 +104,8 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setError(true);
         }
     };
-
-    console.log('updated state', state);
+    window.localStorage.removeItem('visited');
+    // console.log('updated state', state);
     const submissionCheck = (submission) =>
         typeof submission === 'string' ? [submission] : Object.values(submission);
     return (

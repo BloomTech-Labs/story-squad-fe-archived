@@ -2,49 +2,65 @@ import React, { useState } from 'react';
 import { DialogTitle, Grid, Dialog, useMediaQuery } from '@material-ui/core';
 import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
+import { TransitionProps } from '@material-ui/core/transitions';
 import IconButton from '@material-ui/core/IconButton';
-import story2 from '../img/chancewriting.jpg';
+// import story2 from '../img/chancewriting.jpg';
 import Slide from '@material-ui/core/Slide';
 
 interface VotingModalProps {
     submission;
-    username;
+    // username;
     type;
     key;
-    points;
+    // points;
+    response;
 }
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition = React.forwardRef(function Transition(
+    props: TransitionProps,
+    ref: React.Ref<unknown>
+) {
     return <Slide direction='up' ref={ref} {...props} />;
 });
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        iconBox: {
+        'iconBox': {
             width: '5vh',
             height: '10vh',
             margin: '0 auto',
         },
-        imagePreview: {
+        'imagePreview': {
             width: '175px',
             height: '175px',
             borderRadius: '14px',
             cursor: 'pointer',
         },
-        modalpop: {
+        'modalpop': {
+            border: '7px solid black',
             display: 'flex',
             justifyContent: 'center',
             width: '100%',
             flexDirection: 'column',
             alignItems: 'center',
         },
-        imgDiv: {
-            'minWidth': '70%',
+        'modalpop>': {
+            backgroundColor: 'red',
+            padding: '100px',
+        },
+        'imgDiv': {
+            'margin': '0 auto',
+            'width': '70%',
+            'boxSizing': 'border-box',
             '&& img': {
-                minWidth: '100%',
+                maxWidth: '100%',
+                width: '100%',
+                maxHeight: '100%',
+                objectFit: 'contain',
+                margin: '0 auto',
             },
         },
-        subTitle: {
+        'subTitle': {
             textTransform: 'capitalize',
         },
     })
@@ -52,10 +68,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const VotingModal: React.FC<VotingModalProps> = ({
     submission,
-    username,
+    // username,
     type,
     key,
-    points,
+    // points,
+    response,
 }) => {
     const [open, setOpen] = useState(false);
     const theme = useTheme();
@@ -79,17 +96,13 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                 alignContent='center'>
                 <Grid item md>
                     <img
-                        src={submission}
+                        src={submission[0]}
                         className={classes.imagePreview}
                         onClick={handleOpen}
-                        alt={`${username}'s ${type}`}
+                        alt={'user submission'}
                     />
                 </Grid>
-                <Dialog
-                    fullScreen
-                    open={open}
-                    // TransitionComponent={Transition}
-                >
+                <Dialog fullScreen open={open} TransitionComponent={Transition}>
                     <div className={classes.modalpop}>
                         <div className={classes.iconBox}>
                             <IconButton
@@ -101,11 +114,33 @@ export const VotingModal: React.FC<VotingModalProps> = ({
                                 <CloseIcon className={classes.closeButton} />
                             </IconButton>
                         </div>
-                        <DialogTitle className={classes.subTitle} id='submission-title'>
-                            {`${username}'s ${type}`}
-                        </DialogTitle>
-                        <div className={classes.imgDiv}>
-                            <img src={submission} alt={`${username}'s ${type}`} />
+                        {/* {submission[1] !== '' && submission[1] !== null ? (
+                            submission.map((page, index) => (
+                                <div key={key} className={classes.imgDiv}>
+                                    <img src={page} alt={`Page ${index} of ${type}`} />
+                                </div>
+                            ))
+                        ) : (
+                            <div key={key} className={classes.imgDiv}>
+                                <img src={submission[0]} alt={`story submission`} />
+                            </div>
+                        )} */}
+                        {submission.map((page, index) =>
+                            page && page.length > 0 ? (
+                                <div key={key} className={classes.imgDiv}>
+                                    <img src={page} alt={`Page ${index} of ${type}`} />
+                                </div>
+                            ) : null
+                        )}
+                        <div className={classes.iconBox}>
+                            <IconButton
+                                edge='start'
+                                color='inherit'
+                                onClick={handleClose}
+                                aria-label='close'
+                                disableRipple={true}>
+                                <CloseIcon className={classes.closeButton} />
+                            </IconButton>
                         </div>
                     </div>
                 </Dialog>

@@ -118,7 +118,8 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
                     className={classes.orangeButton}
                     type={submitted ? undefined : 'submit'}
                     color='primary'
-                    onClick={submitted ? () => handleDelete() : undefined}>
+                    onClick={submitted ? () => handleDelete() : undefined}
+                    disabled={loadingDrawing}>
                     <Typography className={classes.buttonText}>
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>

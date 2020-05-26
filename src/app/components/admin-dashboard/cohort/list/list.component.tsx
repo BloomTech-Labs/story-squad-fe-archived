@@ -13,10 +13,6 @@ interface ListCohortsProps {
     className?: string;
 }
 
-// interface SelectableCohort extends Cohort {
-//     selected: boolean;
-// }
-
 const StyledTableCell = withStyles((theme) => ({
     head: {
         backgroundColor: '#3f51b5',
@@ -106,17 +102,6 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
                         }}>
                         Delete
                     </Button>
-
-                    {/* <Button
-                        className={classes.button}
-                        color='primary'
-                        variant='contained'
-                        onClick={(e) => {
-                            e.preventDefault();
-                            window.alert('Not Yet Implemented');
-                        }}>
-                        Delete
-                    </Button> */}
                 </div>
                 <Table>
                     <TableHead>

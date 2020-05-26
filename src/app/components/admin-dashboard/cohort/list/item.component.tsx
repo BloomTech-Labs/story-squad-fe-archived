@@ -13,12 +13,6 @@ interface CohortListItemProps {
 }
 
 const CohortListItem: React.FC<CohortListItemProps> = ({ cohort, onUpdate, toggleItem }) => {
-    // const [removeResponse, loading, remove] = useAPI(`/cohort/list/${cohort.id}`, 'DELETE');
-
-    // React.useEffect(() => {
-    //     if (removeResponse?.message && onUpdate) onUpdate();
-    // }, [removeResponse, onUpdate]);
-
     return (
         <TableRow key={cohort.id}>
             <TableCell>

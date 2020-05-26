@@ -62,8 +62,6 @@ const ModeratorDashboardPage: React.FC<CohortListItemProps> = ({ cohort, onUpdat
         setValue(newValue);
     };
 
-    // const [removeResponse, loading, remove] = useAPI(`/cohort/list/${cohort.id}`, 'DELETE');
-
     return (
         <div className={classes.root}>
             <Typography variant='h4' gutterBottom>
@@ -73,44 +71,5 @@ const ModeratorDashboardPage: React.FC<CohortListItemProps> = ({ cohort, onUpdat
         </div>
     );
 };
-
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         display: 'flex',
-//     },
-// }));
-
-// const ModeratorDashboardPage: React.FC = () => {
-//     const classes = useStyles({});
-
-//     return (
-//         <div>
-//             <Typography variant='h4' gutterBottom>
-//                 Moderator Dashboard
-//             </Typography>
-
-//             <Typography>Moderation Options</Typography>
-
-//             <Link to='/admin/dashboard/moderator-dashboard'>
-//                 <Button
-//                     onClick={(e) => {
-//                         e.preventDefault();
-//                         window.alert('Not Yet Implemented');
-//                     }}>
-//                     Parents
-//                 </Button>
-//             </Link>
-//             <Link to='/admin/dashboard/moderator-dashboard'>
-//                 <Button
-//                     onClick={(e) => {
-//                         e.preventDefault();
-//                         window.alert('Not Yet Implemented');
-//                     }}>
-//                     Children
-//                 </Button>
-//             </Link>
-//         </div>
-//     );
-// };
 
 export { ModeratorDashboardPage };

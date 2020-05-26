@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import {
+    Checkbox,
+    Table,
+    TableHead,
+    TableBody,
+    TableFooter,
+    TableRow,
+    TableCell,
+    TablePagination,
+} from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Link, useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
@@ -24,9 +33,11 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
-    const classes = useStyles({});
     const [response, loading, request] = useAPI<{ cohorts: SelectableCohort[] }>('/cohort/list');
+    const classes = useStyles({});
     const [cohorts, setCohorts] = useState([]);
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const history = useHistory();
 
     useEffect(() => {
@@ -47,6 +58,20 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
             }
         });
         setCohorts(newCohorts);
+    };
+
+    const handleChangePage = (
+        event: React.MouseEvent<HTMLButtonElement> | null,
+        newPage: number
+    ) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
     };
 
     if (loading) return <h4 className={classes.loading}>Loading...</h4>;
@@ -115,14 +140,33 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {cohorts.map((cohort) => (
+                        {/* {cohorts.map((cohort) => (
                             <CohortListItem
                                 key={cohort.id}
                                 cohort={cohort}
                                 toggleItem={toggleItem}
                             />
-                        ))}
+                        ))} */}
+                        {cohorts
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((cohort) => {
+                                return (
+                                    <CohortListItem
+                                        key={cohort.id}
+                                        cohort={cohort}
+                                        toggleItem={toggleItem}
+                                    />
+                                );
+                            })}
                     </TableBody>
+
+                    <TablePagination
+                        count={100}
+                        page={page}
+                        onChangePage={handleChangePage}
+                        rowsPerPage={rowsPerPage}
+                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                    />
                 </Table>
             </div>
         </div>

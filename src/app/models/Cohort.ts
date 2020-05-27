@@ -8,3 +8,8 @@ export interface Cohort {
 export interface SelectableCohort extends Cohort {
     selected: boolean;
 }
+
+export interface ChildrenInCohort extends Cohort {
+    dueDates?: {};
+    children: [];
+}

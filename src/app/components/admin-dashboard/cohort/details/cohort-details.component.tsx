@@ -12,11 +12,12 @@ import {
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
-import { Cohort, SelectableCohort } from '../../../../models';
+import { Cohort, ChildrenInCohort } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 //import { CohortListItem } from './item.component';
 //import { useStyles } from './list.component.styles';
 import requestFactory from '../../../../util/requestFactory';
+//import { StudentDetail } from './student-details.component';
 
 interface CohortDetailsProps {
     className?: string;
@@ -34,10 +35,12 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const CohortDetails: React.FC<CohortDetailsProps> = ({ className, id }) => {
-    const [response, loading, request] = useAPI<{ cohorts: SelectableCohort[] }>(
+    const [response, loading, request] = useAPI<{ cohorts: ChildrenInCohort[] }>(
         `/cohort/list/${id}/children`
     );
+
     console.log('This is the response!', response);
+
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -65,19 +68,19 @@ const CohortDetails: React.FC<CohortDetailsProps> = ({ className, id }) => {
                         <StyledTableCell>Drawing</StyledTableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
+                {/* <TableBody>
                     {cohorts
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map((cohort) => {
                             return (
-                                <StudentDetails
+                                <StudentDetail
                                     key={cohort.id}
                                     cohort={cohort}
                                     toggleItem={toggleItem}
                                 />
                             );
                         })}
-                </TableBody>
+                </TableBody> */}
 
                 <TablePagination
                     count={100}

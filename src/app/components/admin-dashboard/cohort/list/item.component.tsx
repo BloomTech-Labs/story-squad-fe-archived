@@ -23,7 +23,10 @@ const CohortListItem: React.FC<CohortListItemProps> = ({ cohort, onUpdate, toggl
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
             </TableCell>
-            <TableCell>{cohort.name}</TableCell>
+
+            <TableCell>
+                <Link to={`/admin/dashboard/cohort/${cohort.id}/details`}>{cohort.name}</Link>
+            </TableCell>
             <TableCell>{cohort.week}</TableCell>
             <TableCell>{cohort.activity}</TableCell>
             {/* <TableCell>

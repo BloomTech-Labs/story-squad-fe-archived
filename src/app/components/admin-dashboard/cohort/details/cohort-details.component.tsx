@@ -20,7 +20,7 @@ import requestFactory from '../../../../util/requestFactory';
 
 interface CohortDetailsProps {
     className?: string;
-    id?: number;
+    id?: string;
 }
 
 const StyledTableCell = withStyles((theme) => ({
@@ -65,19 +65,19 @@ const CohortDetails: React.FC<CohortDetailsProps> = ({ className, id }) => {
                         <StyledTableCell>Drawing</StyledTableCell>
                     </TableRow>
                 </TableHead>
-                {/* <TableBody>
-                        {cohorts
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((cohort) => {
-                                return (
-                                    <CohortListItem
-                                        key={cohort.id}
-                                        cohort={cohort}
-                                        toggleItem={toggleItem}
-                                    />
-                                );
-                            })}
-                    </TableBody> */}
+                <TableBody>
+                    {cohorts
+                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        .map((cohort) => {
+                            return (
+                                <StudentDetails
+                                    key={cohort.id}
+                                    cohort={cohort}
+                                    toggleItem={toggleItem}
+                                />
+                            );
+                        })}
+                </TableBody>
 
                 <TablePagination
                     count={100}

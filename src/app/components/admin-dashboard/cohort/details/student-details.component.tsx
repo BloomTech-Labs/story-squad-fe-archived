@@ -13,6 +13,10 @@ interface CohortListItemProps {
 }
 
 const StudentDetail: React.FC<CohortListItemProps> = ({ cohort, onUpdate, toggleItem }) => {
+    // const [response, loading, request] = useAPI<{ cohorts: SelectableCohort[] }>(
+    //     `/cohort/list/${id}/children`
+    // );
+
     return (
         <TableRow key={cohort.id}>
             <TableCell>
@@ -41,4 +45,4 @@ const StudentDetail: React.FC<CohortListItemProps> = ({ cohort, onUpdate, toggle
     );
 };
 
-export { CohortListItem };
+export { StudentDetail };

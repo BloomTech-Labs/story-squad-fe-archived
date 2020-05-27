@@ -19,8 +19,7 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction='up' ref={ref} {...props} />;
 });
 export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, username }) => {
-    const [open, setOpen] = useState(false);
-    const [pages, setPage] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
     const classes = useStyles({});
     const handleOpen = () => {
         setOpen(true);
@@ -28,14 +27,7 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
     const handleClose = () => {
         setOpen(false);
     };
-    // for story multipage preview
-    const openPage = () => {
-        setPage(true);
-    };
-    const closePage = () => {
-        setPage(false);
-    };
-
+    console.log('submission from modal', submission);
     return (
         <Grid container className={classes.gridContainer}>
             <Grid item md>
@@ -56,44 +48,29 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({ submission, usern
                         <CloseIcon />
                     </IconButton>
                 </div>
-                <DialogTitle className={classes.submissionHeader} id='submission-title'>
-                    {`${username}'s Story!`}
-                </DialogTitle>
-                {submission.map(
-                    (page, key) =>
-                        page && (
-                            <Grid className={classes.gridContainer}>
-                                <Card key={key} className={classes.storyPages}>
-                                    <DialogTitle id='submission-title'>
-                                        {`Page ${key + 1}`}
-                                    </DialogTitle>
+                <Grid className={classes.gridContainer}>
+                    {submission.map(
+                        (page, key) =>
+                            page && (
+                                <div key={key} className={classes.viewPageDiv}>
                                     <img
                                         src={page}
-                                        className={classes.thumbnail}
-                                        onClick={openPage}
+                                        className={classes.submissionImg}
+                                        alt={`story submission, page ${key}`}
                                     />
-                                </Card>
-                                <Dialog fullScreen open={pages}>
-                                    <div className={classes.iconBox}>
-                                        <IconButton
-                                            edge='start'
-                                            color='inherit'
-                                            onClick={closePage}
-                                            aria-label='close'>
-                                            <CloseIcon />
-                                        </IconButton>
-                                    </div>
-                                    <div className={classes.viewPageDiv}>
-                                        <img
-                                            src={page}
-                                            className={classes.submissionImg}
-                                            alt={`${username}'s story submission, page ${key}`}
-                                        />
-                                    </div>
-                                </Dialog>
-                            </Grid>
-                        )
-                )}
+                                </div>
+                            )
+                    )}
+                </Grid>
+                <div className={classes.iconBox}>
+                    <IconButton
+                        edge='start'
+                        // color='inherit'
+                        onClick={handleClose}
+                        aria-label='close'>
+                        <CloseIcon />
+                    </IconButton>
+                </div>
             </Dialog>
         </Grid>
     );

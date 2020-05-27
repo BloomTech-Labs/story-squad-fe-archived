@@ -43,7 +43,7 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
         pic2Points: 10,
     });
 
-    console.log('child', child);
+    // console.log('child', child);
 
     const [remainingPoints, setRemainingPoints] = useState(100);
     const [error, setError] = useState(false);
@@ -100,10 +100,10 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setError(true);
         }
     };
-
-    console.log('updated state', state);
+    window.localStorage.removeItem('visited');
+    // console.log('updated state', state);
     const submissionCheck = (submission) =>
-        typeof submission === 'string' ? submission : Object.values(submission);
+        typeof submission === 'string' ? [submission] : Object.values(submission);
     return (
         <div>
             {/* Container for avatars + inputs + buttons */}

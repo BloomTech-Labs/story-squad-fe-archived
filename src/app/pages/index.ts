@@ -15,3 +15,4 @@ export * from './help-page/help-page';
 export * from './child-home/child-home.page';
 export * from './versus/versus.page';
 export * from './voting/voting.page';
+export * from './waiting-page/waiting.page';

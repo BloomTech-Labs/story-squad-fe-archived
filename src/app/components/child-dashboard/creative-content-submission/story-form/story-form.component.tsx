@@ -155,7 +155,8 @@ const StoryForm: React.FC<StoryFormProps> = ({ week, onUpdate }) => {
                     className={classes.orangeButton}
                     type={submitted ? undefined : 'submit'}
                     color='primary'
-                    onClick={submitted ? () => handleDelete() : undefined}>
+                    onClick={submitted ? () => handleDelete() : undefined}
+                    disabled={loadingStory}>
                     <Typography className={classes.buttonText}>
                         {submitted ? 'refresh' : 'Submit'}
                     </Typography>

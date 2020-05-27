@@ -69,7 +69,7 @@ export const MenuButton: React.FC = () => {
                                     <MenuItem onClick={() => history.push('/child-home')}>
                                         Home
                                     </MenuItem>
-                                    <MenuItem onClick={() => history.push('./dashboard')}>
+                                    <MenuItem onClick={() => history.push('/dashboard')}>
                                         Switch
                                     </MenuItem>
                                     <MenuItem onClick={logout}>Logout</MenuItem>

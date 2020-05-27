@@ -58,7 +58,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
             points: 0,
         },
     ]);
-
+    console.log({ child });
     const [locked, setLocked] = useState({
         '1Votes': true,
         '2Votes': true,
@@ -87,6 +87,8 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
             </Container>
         );
 
+    console.log('locked', locked['3Votes']);
+    console.log(matchups);
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader
@@ -125,7 +127,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     child={child}
                     locked={locked['1Votes']}
                 />
-                <VersusButton />
+                <VersusButton locked={locked['3Votes']} />
             </Grid>
         </Container>
     );

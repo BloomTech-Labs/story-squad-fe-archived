@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
             borderRadius: '4px',
             boxShadow: theme.shadows[5],
             textAlign: 'center',
+            padding: '3% 10% 0 10%',
         },
         popupTxt: {
             color: 'black',
@@ -49,23 +50,25 @@ const useStyles = makeStyles((theme: Theme) =>
             fontFamily: 'nunito',
         },
         storyPic: {
-            width: '40%',
+            width: '65%',
             height: '20vh',
-            margin: '0 auto',
+            margin: '2% auto',
             borderRadius: '5%',
-            border: '2px solid #FFCE64',
+            border: '3px solid #FFCE64',
         },
     })
 );
 
 interface VersusProps {
+    submission: any;
     open: boolean;
     setOpen: any;
+    emojis: any;
 }
 
 // { open, setOpen } in props
 // <VersusProps>
-export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen }) => {
+export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen, submission, emojis }) => {
     // const [open, setOpen] = React.useState(false);
     const classes = useStyles({});
 
@@ -93,9 +96,9 @@ export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen }) => {
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText className={classes.mainContainer}>
-                            <img src={story1} className={classes.storyPic} />
+                            <img src={submission[0]} className={classes.storyPic} />
                             <div className={classes.inputDiv}>
-                                <span className={classes.emojiSpan}>😞😪😴😷😎😕</span>
+                                <span className={classes.emojiSpan}>{emojis}</span>
                             </div>
                         </DialogContentText>
                     </DialogContent>

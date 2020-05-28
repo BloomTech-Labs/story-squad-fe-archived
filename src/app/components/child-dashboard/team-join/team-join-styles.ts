@@ -5,18 +5,18 @@ export const useStyles = makeStyles((theme) => ({
     containerStyle: {
         alignSelf: 'center',
         width: '100%',
-        height: '100vh',
+        // height: '100vh',
     },
     grid: {
         display: 'flex',
-        border: '7px solid black',
-        height: '74vh',
+
+        // height: '74vh',
     },
     player: {
         backgroundColor: '#B5D33D',
         width: '100%',
-        height: '100%',
-        border: '7px solid black',
+        // height: '100%',
+
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -25,8 +25,8 @@ export const useStyles = makeStyles((theme) => ({
     teammate: {
         backgroundColor: '#FED23F',
         width: '100%',
-        height: '100%',
-        border: '7px solid black',
+        // height: '100%',
+
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme) => ({
     avatarDiv: {
         display: 'flex',
         width: '100%',
-        height: '100%',
+        // height: '100%',
         backgroundImage: `url(${explode})`,
         backgroundRepeat: 'no-repeat',
         alignSelf: 'center',
@@ -57,7 +57,6 @@ export const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         padding: '2%',
-        borderRadius: '10px',
     },
     navButton: {
         'backgroundColor': '#FF6B35',

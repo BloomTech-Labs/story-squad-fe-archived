@@ -1,6 +1,8 @@
 /* // @import '../node_modules/modern-normalize/modern-normalize.css'; */
 :root {
-    --green: #b5d33e;
+    --complete: #42f563;
+
+    --green: #b5d33d;
     --red: #eb7d5b;
     --gold: #fed23e;
     --blue: #409bb5;
@@ -19,25 +21,27 @@ body {
     font-family: var(--accent-font) !important;
 }
 p {
-    font-size: (var(--p));
+    font-size: var(--p);
 }
 h5 {
-    font-size: (var(--h5));
+    font-size: var(--h5);
 }
 h4 {
-    font-size: (var(--h4));
+    font-size: var(--h4);
 }
 h3 {
-    font-size: (var(--h3));
+    font-size: var(--h3);
 }
 h2 {
     font-size: var(--h2);
     margin: 0;
 }
 h1 {
-    font-size: (var(--h1));
+    font-size: var(--h1);
 }
-
+.text--large {
+    font-size: calc(var(--base-text) * 1.5);
+}
 body {
     margin: 0;
     overscroll-behavior: none;

@@ -27,7 +27,7 @@ const ChildDashboard: React.FC = () => {
             </section>
         );
     const handleRequest = () => {
-        console.log('clicked');
+        request();
         // request();
     };
     return (
@@ -40,7 +40,7 @@ const ChildDashboard: React.FC = () => {
                             render={() => (
                                 <StoryForm
                                     week={response.me.cohort.week}
-                                    onUpdate={handleRequest}
+                                    onUpdate={() => handleRequest}
                                 />
                             )}
                         />

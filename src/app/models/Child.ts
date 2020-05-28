@@ -23,6 +23,6 @@ export interface Child {
             // results: string;
         };
     };
-    stories: Record<string, any>[];
-    illustrations: Record<string, any>[];
+    story: string[];
+    illustration: string[];
 }

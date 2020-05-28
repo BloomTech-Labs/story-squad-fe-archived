@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
 import ava1 from './img/ava1.png';
-import ava2 from './img/ava2.png';
-import ava3 from './img/ava3.png';
-import ava4 from './img/ava4.png';
-import { Container, Grid } from '@material-ui/core';
-import { useStyles } from './versus-styles';
+import { KidHeader } from '../reusable-components/kid-header/kid-header';
+import { Container } from '@material-ui/core';
 import { useAPI } from '../../hooks';
-import { VersusHeader, VersusRound, VersusButton } from './versusSubComponents';
+import { VersusHeader, VersusRound } from './versusSubComponents';
+import styled from 'styled-components';
+import Wrapper from '../reusable-components/wrapper/Wrapper';
+import Button from '../reusable-components/button/Button';
 
 class TemporaryHolder {
     username;
@@ -22,10 +22,11 @@ class TemporaryHolder {
         this.storypoints = 10;
     }
 }
-
-const Versus: React.FC = () => {
+interface VersusProps {
+    child: any;
+}
+const Versus: React.FC<VersusProps> = ({ child }) => {
     // console.log(child);
-    const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
     console.log('response', response);
     const [votesCasted, setVotesCasted] = useState(0);
@@ -76,57 +77,69 @@ const Versus: React.FC = () => {
     }, [votesCasted]);
 
     if (matchdata.homeTeam === undefined)
-        return (
-            <Container className={classes.containerStyling}>
-                <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} />
-            </Container>
-        );
-
+        return <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} />;
 
     console.log('locked', locked['3Votes']);
     console.log(matchups);
     return (
-        <Container className={classes.containerStyling}>
-            <VersusHeader
-                title={'The MatchUp'}
-                homeTeam={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}!`}
-                awayTeam={`${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
-            />
-            <Grid className={classes.topRow}>
-                <VersusRound
-                    roundStyle={classes.story1}
-                    nameRowStyle={classes.nameRowBig}
-                    matchup={matchups[0]}
-                    child={child}
-                    locked={true}
+        <VersusWrapper>
+            <Wrapper>
+                <KidHeader
+                    title={'The Matchup'}
+                    subtext={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}! vs ${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
                 />
-                <VersusRound
-                    roundStyle={classes.story2}
-                    nameRowStyle={classes.nameRowSmall}
-                    matchup={matchups[1]}
-                    child={child}
-                    locked={locked['3Votes']}
-                />
-            </Grid>
-            <Grid className={classes.bottomRow}>
-                <VersusRound
-                    roundStyle={classes.picture1}
-                    nameRowStyle={classes.nameRowSmall}
-                    matchup={matchups[2]}
-                    child={child}
-                    locked={locked['2Votes']}
-                />
-                <VersusRound
-                    roundStyle={classes.picture2}
-                    nameRowStyle={classes.nameRowBig}
-                    matchup={matchups[3]}
-                    child={child}
-                    locked={locked['1Votes']}
-                />
-                <VersusButton locked={locked['3Votes']} />
-            </Grid>
-        </Container>
+
+                {/* <VersusHeader
+                    title={'The MatchUp'}
+                  
+                    homeTeam={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}!`}
+                    awayTeam={`${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
+                /> */}
+                {matchups
+                    ? matchups.map((round, index) => {
+                          return (
+                              <VersusRound
+                                  key={index}
+                                  index={index + 1}
+                                  matchup={round}
+                                  child={child}
+                                  locked={true}
+                              />
+                          );
+                      })
+                    : null}
+                <div>
+                    <Button>Vote</Button>
+                </div>
+                {/* <VersusButton locked={locked['3Votes']} /> */}
+            </Wrapper>
+        </VersusWrapper>
     );
 };
 
 export { Versus };
+
+const VersusWrapper = styled.div`
+    & .card1 {
+        background-color: var(--green);
+    }
+    & .card2 {
+        background-color: var(--red);
+    }
+    & .card3 {
+        background-color: var(--gold);
+    }
+    & .card4 {
+        background-color: var(--blue);
+    }
+    @media only screen and (min-width: 850px) {
+        .card1,
+        .card4 {
+            --width: 6;
+        }
+        .card2,
+        .card3 {
+            --width: 4;
+        }
+    }
+`;

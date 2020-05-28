@@ -8,18 +8,14 @@ import './styles.css';
 
 interface HeaderProps {
     title?: string;
+    subtext?: string;
 }
-const KidHeader: React.FC<HeaderProps> = ({ title = 'Story Squad' }) => {
+const KidHeader: React.FC<HeaderProps> = ({ title = 'Story Squad', subtext = '' }) => {
     return (
         <header className='header'>
-            {title ? (
-                <h2 className='title__header__text'>{title}</h2>
-            ) : (
-                <img className='title__header__text' src={storysquad} alt='' />
-            )}
-            <div className='header__image'>
-                <img src={cityscape} alt='' />
-            </div>
+            <h2 className='title__header__text'>{title}</h2>
+            <MenuButton />
+            <h3 className='header__subtext'>{subtext}</h3>
         </header>
     );
 };

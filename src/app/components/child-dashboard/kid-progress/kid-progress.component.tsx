@@ -14,8 +14,8 @@ import Button from '../../reusable-components/button/Button';
 import styled from 'styled-components';
 import Card from '../../reusable-components/card/Card';
 import { ChildContext } from '../../../state/Context';
+import Done from './icons/Done.svg';
 // import { useStyles } from './kid-progress-styles';
-
 import './styles.css';
 interface KidProgressProps {
     onUpdate?: () => void;
@@ -71,20 +71,20 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
         <>
             <StyledWrapper grid className='kid__progress'>
                 <KidHeader title={'Mission'} />
-                <CompleteCard complete className='read'>
-                    <Link to={`/story/${cohort.week}`} />
+                <CompleteCard complete={progress.reading} className='read'>
+                    {progress.reading && <Link to={`/story/${cohort.week}`} />}
                     <div>
-                        <img src={Read} alt='Reading' />
+                        <img src={Done} alt='Reading' />
                     </div>
                 </CompleteCard>
 
-                <WriteCard className='write'>
-                    <img src={Write} alt='Writing' />
-                    <Link to={`/kids-dashboard/upload`} />
+                <WriteCard className='write' complete={child.stories.length}>
+                    <img src={Done} alt='Writing' />
+                    {child.stories.length && <Link to={`/kids-dashboard/upload`} />}
                 </WriteCard>
-                <DrawCard className='draw'>
-                    <img src={Draw} alt='Drawing' />
-                    <Link to={`/kids-dashboard/drawing-upload`} />
+                <DrawCard className='draw' complete={child.illustrations.length}>
+                    <img src={child.stories.length ? Done : Write} alt='Drawing' />
+                    {child.illustrations.length && <Link to={`/kids-dashboard/drawing-upload`} />}
                 </DrawCard>
 
                 <Card className='btn__container'>
@@ -140,12 +140,21 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
 };
 export { KidProgressCard };
 
-const CompleteCard = styled(Card)`
-    background-color: ${(props) => props.complete && 'var(--green) !important'};
+const CompleteCard = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) => (props.complete ? 'var(--complete)' : 'var(--blue)')};
 `;
-const WriteCard = styled(Card)`
-    background-color: ${(props) => (props.complete ? 'var(--green)' : 'var(--red)')};
+const WriteCard = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) => (props.complete ? 'var(--complete)' : 'var(--red)')};
 `;
-const DrawCard = styled(Card)`
-    background-color: ${(props) => (props.complete ? 'var(--green)' : 'var(--gold)')};
+const DrawCard = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) => (props.complete ? 'var(--complete)' : 'var(--gold)')};
 `;

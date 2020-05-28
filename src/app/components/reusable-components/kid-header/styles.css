@@ -2,32 +2,28 @@
     border: var(--mediumBorder);
     display: flex;
     width: 100%;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+        '... title menu'
+        'subtext subtext subtext';
     background-color: #6ceae6;
     position: relative;
-    overflow: hidden;
     text-align: center;
 }
-.title__header {
-    display: flex;
-}
 
-.header__image {
-    height: 30vh;
-    width: 100%;
-    display: none;
-    overflow: hidden;
-}
-.header__image img {
-    height: 100%;
-    width: 100%;
-    /* object-fit: cover; */
+.header__subtext {
+    grid-area: subtext;
 }
 .title__header {
     display: flex;
     background-color: #292929;
 }
 .title__header__text {
+    grid-column: 2/3;
+    display: flex;
+    justify-content: center;
+    grid-area: title;
     color: #ffffff;
     /* letter-spacing: 0.08em; */
     font-weight: bold;

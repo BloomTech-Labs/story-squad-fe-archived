@@ -32,7 +32,6 @@ const Voting: React.FC<VotingCardProps> = () => {
     const history = useHistory();
     const [response] = useAPI(`/votingRoutes/voting`, 'GET', false);
     const [postResponse, loading, request] = useAPI(`/votingRoutes/voting`, 'POST');
-    const [dummyData, setDummyData] = useState({ dummy: 'data' });
     const [selectedValue, setSelectedValue] = React.useState<number>();
     const [open, setOpen] = React.useState(false);
     const [openInst, setInst] = React.useState(false);

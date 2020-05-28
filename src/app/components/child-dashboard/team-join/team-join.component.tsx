@@ -15,22 +15,21 @@ interface TeamJoinProps {
     onUpdate?: () => void;
     child: Child;
 }
-const StyledContainer = styled.div`
-    background-color: red;
-`;
+
 const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
     const classes = useStyles({});
     const [matchInfo] = useAPI(`/battlesRoutes/battles`, 'GET', false);
 
     return (
-        <Wrapper className={classes.containerStyling}>
-            <KidHeader title={'Join The Squad!'} />
+        <>
             {!matchInfo ? (
                 <div>
                     <CircularProgress />
                 </div>
             ) : (
-                <>
+                <Wrapper className={classes.containerStyling}>
+                    <KidHeader title={'Join The Squad!'} />
+
                     <TeamPlayer
                         username={matchInfo.thisMatch.team.student.username}
                         ava={avatar1}
@@ -44,10 +43,34 @@ const TeamJoin: React.FC<TeamJoinProps> = ({ child, onUpdate }) => {
                     <StyledContainer>
                         <Button click='./points-dashboard'>Next</Button>
                     </StyledContainer>
-                </>
+                </Wrapper>
             )}
-        </Wrapper>
+        </>
     );
 };
 export { TeamJoin };
 // `history.push('./points-dashboard')`
+const StyledContainer = styled.section`
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    padding-right: 2%;
+    border-left: 3px solid #292929;
+    border-right: 3px solid #292929;
+    border-bottom: 3px solid #292929;
+    justify-content: flex-end;
+    background-color: var(--gold);
+
+    @media only screen and (min-width: 1000px) {
+        background-color: red;
+        background: linear-gradient(
+            90deg,
+            var(--green) 0%,
+            var(--green) 49.8%,
+            black 49.8%,
+            black 50.2%,
+            var(--gold) 50.2%,
+            var(--gold) 100%
+        );
+    }
+`;

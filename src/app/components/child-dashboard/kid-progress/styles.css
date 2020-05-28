@@ -12,22 +12,23 @@ header {
 }
 .read {
     grid-area: read;
-    background-color: var(--green);
+    position: relative;
 }
 
 .write {
     grid-area: write;
-    background-color: var(--red);
+    position: relative;
 }
 .draw {
-    border-bottom: 0;
     grid-area: draw;
-    background-color: var(--gold);
+    position: relative;
 }
 .btn__container {
-    border-top-style: none;
-    grid-area: button;
+    text-align: center;
     background-color: var(--green);
+}
+.btn__container a {
+    padding: 1%;
 }
 .kid__progress div > a {
     position: absolute;
@@ -39,18 +40,7 @@ header {
     /* display: flex;
     justify-content: center; */
 }
-.read a {
-    background-color: transparent;
-}
-.write {
-    background-color: orange;
-}
-.draw {
-    background-color: green;
-}
-.kid__progress div div {
-    height: 50%;
-}
+
 @media only screen and (min-width: 1000px) {
     .kid__progress {
         grid-template-columns: repeat(2, minmax(50%, 800px));
@@ -60,20 +50,4 @@ header {
             'read draw'
             'read button';
     }
-}
-.modal__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
-.modal__card {
-    background: white;
-    color: blue;
 }

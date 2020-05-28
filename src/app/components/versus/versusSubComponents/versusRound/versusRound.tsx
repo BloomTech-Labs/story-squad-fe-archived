@@ -3,26 +3,22 @@ import { Avatar, Grid } from '@material-ui/core';
 import { SubmissionDisplay } from '../../modals/subDisplay.component';
 import { useStyles } from '../../versus-styles';
 import { ReactComponent as Lock } from '../../img/lock-icon.svg';
-import ava1 from '../../img/ava1.png';
-import vsImg from '../../img/VS.png';
+
+import vsImg from '../../img/VS.svg';
 import Badge from '@material-ui/core/Badge';
 import { FeedbackPopup } from '../../emoji-feedback/feedback-popup';
+import Card from '../../../reusable-components/card/Card';
+import Wrapper from '../../../reusable-components/wrapper/Wrapper';
+import styled from 'styled-components';
 
 interface RoundProps {
-    roundStyle: {};
-    nameRowStyle: {};
+    index: number;
     matchup: any;
-    child: any;
-    locked: boolean;
+    child?: any;
+    locked?: boolean;
 }
 
-const VersusRound: React.FC<RoundProps> = ({
-    roundStyle,
-    nameRowStyle,
-    matchup,
-    child,
-    locked,
-}) => {
+const VersusRound: React.FC<RoundProps> = ({ matchup, child, locked, index }) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     // console.log({ matchup }, { child });
@@ -58,76 +54,68 @@ const VersusRound: React.FC<RoundProps> = ({
     console.log(emojiArr);
 
     return (
-        <Grid className={`${roundStyle}`}>
-            <div className={`${classes.nameRow} ${nameRowStyle}`}>
-                <div className={classes.leftPlayer}>
-                    <FeedbackPopup
-                        emojis={emojiArr}
-                        open={open}
-                        setOpen={setOpen}
-                        submission={b64passLeft}
-                    />
-                    {matchup[0].childId === child.id ? (
-                        <Badge
-                            onClick={() => {
-                                setOpen(true);
-                            }}
-                            className={classes.root}
-                            color='error'
-                            badgeContent={matchup[0].emojis.length}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}>
-                            <></>
-                        </Badge>
-                    ) : null}
-                    <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
-                    <div className={classes.playerName}>{matchup[0].username}</div>
-                </div>
-                <div className={classes.rightPlayer}>
-                    <div className={classes.playerName}>{matchup[1].username}</div>
-                    <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
-                </div>
-            </div>
-            <div className={classes.subRow}>
-                {/* High story1 */}
-                <Grid item xs={12} sm={12} md={6}>
-                    <SubmissionDisplay username={matchup[0].username} submission={b64passLeft} />
-                </Grid>
-                {nameRowStyle === classes.nameRowBig ? (
-                    <div className={classes.totalScoreBig}>
+        <>
+            {matchup && (
+                <Round className={`card${index}`}>
+                    <SubmissionDisplay user={matchup[0]} reverse={true} />
+                    <div className='versus__info'>
                         <p>{matchup.points}</p>
                     </div>
-                ) : (
-                    <div className={classes.totalScoreSmall}>
-                        <p>{matchup.points}</p>
-                    </div>
-                )}
-                <Grid item xs={12} sm={12} md={6}>
-                    {!locked ? (
-                        <SubmissionDisplay
-                            username={matchup[1].username}
-                            submission={b64passRight}
+                    <SubmissionDisplay user={matchup[1]} />
+                </Round>
+            )}
+            {/* {nameRowStyle === classes.nameRowBig ? (
+            ) : (
+                <div className={classes.totalScoreSmall}>
+                    <p>{matchup.points}</p>
+                </div>
+            )} */}
+
+            {/* {!locked ? (
+            ) : (
+                <Grid container className={classes.gridContainer}>
+                    <Grid item md>
+                        <img
+                            style={{ cursor: 'auto' }}
+                            src={b64passRight[0]}
+                            className={classes.imagePreview}
+                            alt='locked submission'
                         />
-                    ) : (
-                        <Grid container className={classes.gridContainer}>
-                            <Grid item md>
-                                <img
-                                    style={{ cursor: 'auto' }}
-                                    src={b64passRight[0]}
-                                    className={classes.imagePreview}
-                                    alt='locked submission'
-                                />
-                                <Lock className={classes.lock} />
-                            </Grid>
-                        </Grid>
-                    )}
+                        <Lock className={classes.lock} />
+                    </Grid>
                 </Grid>
-            </div>
-            <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
-        </Grid>
+            )}
+
+            <img className={classes.vs} src={vsImg} alt='vs lightning bolt' /> */}
+        </>
     );
 };
 
+// background: url(${vsImg}) 0 0 no-repeat;
+
+const Round = styled.div`
+    display: grid;
+    grid-template-columns: 1fr minmax(80px, 1.5fr) 1fr;
+    height: 40%;
+    background-image: url(${vsImg});
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 10px;
+    position: relative;
+    @media only screen and (max-width: 800px) {
+        background-image: none;
+    }
+    & .versus__info {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        align-item: start;
+        & > p {
+            height: 30px;
+            margin-left: 30px;
+            padding: 20px;
+        }
+    }
+`;
 export { VersusRound };

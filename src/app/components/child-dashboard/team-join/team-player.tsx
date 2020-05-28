@@ -13,7 +13,7 @@ const TeamPlayer: React.FC<PlayerProps> = ({ username, ava, playerStyles }) => {
     const classes = useStyles();
 
     return (
-        <Card className={`${playerStyles}`}>
+        <div className={`${playerStyles}`}>
             <div className={classes.avatarDiv}>
                 <p className={classes.username}>
                     Hi! My name is {''}
@@ -21,7 +21,7 @@ const TeamPlayer: React.FC<PlayerProps> = ({ username, ava, playerStyles }) => {
                 </p>
                 <img src={ava} className={classes.avatar} alt='child avatar' />
             </div>
-        </Card>
+        </div>
     );
 };
 

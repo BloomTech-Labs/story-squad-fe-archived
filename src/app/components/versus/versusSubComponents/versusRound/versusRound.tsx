@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Avatar, Grid } from '@material-ui/core';
 import { SubmissionDisplay } from '../../modals/subDisplay.component';
 import { useStyles } from '../../versus-styles';
-import { ReactComponent as Lock } from '../../img/Lock.svg';
+import { ReactComponent as Lock } from '../../img/lock-icon.svg';
 import ava1 from '../../img/ava1.png';
 import vsImg from '../../img/VS.png';
 import Badge from '@material-ui/core/Badge';
@@ -16,6 +16,7 @@ interface RoundProps {
     child: any;
     locked: boolean;
     alwaysLocked: boolean;
+    pulseAnim: boolean;
 }
 
 const VersusRound: React.FC<RoundProps> = ({
@@ -25,6 +26,7 @@ const VersusRound: React.FC<RoundProps> = ({
     child,
     locked,
     alwaysLocked,
+    pulseAnim,
 }) => {
     const history = useHistory();
     const classes = useStyles();
@@ -101,8 +103,8 @@ const VersusRound: React.FC<RoundProps> = ({
                     <SubmissionDisplay
                         username={matchup[0].username}
                         submission={b64passLeft}
-                        locked={locked}
                         left={true}
+                        pulseAnim={false}
                     />
                 </Grid>
                 {nameRowStyle === classes.nameRowBig ? (
@@ -119,8 +121,8 @@ const VersusRound: React.FC<RoundProps> = ({
                         <SubmissionDisplay
                             username={matchup[1].username}
                             submission={b64passRight}
-                            locked={locked}
                             left={false}
+                            pulseAnim={pulseAnim}
                         />
                     ) : (
                         <Grid container className={classes.gridContainer}>

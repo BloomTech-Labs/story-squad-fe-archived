@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Avatar, Grid } from '@material-ui/core';
 import { SubmissionDisplay } from '../../modals/subDisplay.component';
 import { useStyles } from '../../versus-styles';
@@ -14,6 +15,8 @@ interface RoundProps {
     matchup: any;
     child: any;
     locked: boolean;
+    alwaysLocked: boolean;
+    pulseAnim: boolean;
 }
 
 const VersusRound: React.FC<RoundProps> = ({
@@ -22,7 +25,10 @@ const VersusRound: React.FC<RoundProps> = ({
     matchup,
     child,
     locked,
+    alwaysLocked,
+    pulseAnim,
 }) => {
+    const history = useHistory();
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     // console.log({ matchup }, { child });
@@ -44,6 +50,7 @@ const VersusRound: React.FC<RoundProps> = ({
     }
 
     if (matchup[0].story === undefined && matchup[0].illustration === undefined) return <></>;
+    console.log({ locked });
 
     let b64passLeft = [];
     let b64passRight = [];
@@ -93,7 +100,12 @@ const VersusRound: React.FC<RoundProps> = ({
             <div className={classes.subRow}>
                 {/* High story1 */}
                 <Grid item xs={12} sm={12} md={6}>
-                    <SubmissionDisplay username={matchup[0].username} submission={b64passLeft} />
+                    <SubmissionDisplay
+                        username={matchup[0].username}
+                        submission={b64passLeft}
+                        left={true}
+                        pulseAnim={false}
+                    />
                 </Grid>
                 {nameRowStyle === classes.nameRowBig ? (
                     <div className={classes.totalScoreBig}>
@@ -109,6 +121,8 @@ const VersusRound: React.FC<RoundProps> = ({
                         <SubmissionDisplay
                             username={matchup[1].username}
                             submission={b64passRight}
+                            left={false}
+                            pulseAnim={pulseAnim}
                         />
                     ) : (
                         <Grid container className={classes.gridContainer}>
@@ -119,7 +133,10 @@ const VersusRound: React.FC<RoundProps> = ({
                                     className={classes.imagePreview}
                                     alt='locked submission'
                                 />
-                                <Lock className={classes.lock} />
+                                <Lock
+                                    className={alwaysLocked ? classes.lock : classes.lockKey}
+                                    onClick={alwaysLocked ? null : () => history.push(`/voting`)}
+                                />
                             </Grid>
                         </Grid>
                     )}

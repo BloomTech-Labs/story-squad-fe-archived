@@ -18,7 +18,7 @@ const VotingHeader: React.FC<HeaderProps> = ({ submissionType, setInst }) => {
     return (
         <Grid container direction='row' className={classes.appBar}>
             <div className={classes.headerMenuDiv}>
-                <Button className={classes.helpBtn} onClick={openHelp}>
+                <Button className={classes.helpBtn} onClick={openHelp} disableRipple={true}>
                     ?
                 </Button>
                 <div className={classes.upperTitleDiv}>

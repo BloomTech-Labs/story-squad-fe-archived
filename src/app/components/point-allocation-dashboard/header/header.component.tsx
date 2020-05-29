@@ -15,7 +15,7 @@ export const Header: React.FC<PointsProps> = ({
     disabledForm,
 }) => {
     const classes = useStyles({});
-    const TimeTill = new Date(teamReviewTime.getTime() - new Date().getTime());
+    const TimeTill = Math.floor(((teamReviewTime.getTime() - Date.now()) / (1000 * 60 * 60)) % 24);
 
     return (
         <>
@@ -26,7 +26,7 @@ export const Header: React.FC<PointsProps> = ({
                             Point Share
                         </Typography>
                         <Typography className={classes.h3Styling} variant='h3'>
-                            {`${TimeTill.getHours()} Hours left`}
+                            {`${TimeTill} Hours left`}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={6} className={classes.remaining}>

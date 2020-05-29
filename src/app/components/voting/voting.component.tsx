@@ -59,11 +59,9 @@ const Voting: React.FC<VotingCardProps> = () => {
         emojiObj[response?.child1.childId] = newEmoji.player1;
         emojiObj[response?.child2.childId] = newEmoji.player2;
         const vote = { matchupID: response?.matchupID, childID: selectedValue, emojiObj };
-        // console.log('vote data', vote);
         if (newEmoji.player1.length < 4 || newEmoji.player2.length < 4) {
             setOpen(true);
         } else {
-            console.log('submitted successfully');
             request(vote);
             history.push('/matchup');
         }

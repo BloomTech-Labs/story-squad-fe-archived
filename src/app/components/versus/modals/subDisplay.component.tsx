@@ -41,17 +41,7 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
     pulseAnim,
     child,
 }) => {
-    // =======
-    // export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
-    //     submission,
-    //     username,
-    //     left,
-    //     pulseAnim,
-    // }) => {
-    // >>>>>>> ba022fc4803a32e50c6010358d3bb7fa4642c23c
     const history = useHistory();
-    console.log({ locked }, { reverse });
-    console.log(!locked && locked != undefined);
     if (user.childId === child.id && user.emojis.length > 0) {
         const max = user.emojis.reduce(function(prev, current) {
             if (+current.id > +prev.id) {
@@ -85,14 +75,6 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
         <>
             {user && (
                 <CardContainer reverse={reverse}>
-                    {/* <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
-            <div className={classes.playerName}>{matchup[0].username}</div>
-            
-                <div className={classes.rightPlayer}>
-                <div className={classes.playerName}>{matchup[1].username}</div>
-                <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
-                </div>
-              </div> */}
                     <div>
                         <p className='text--large'>{user.username} </p>
                         <img src={ava1} alt='Placeholder Avatar' />

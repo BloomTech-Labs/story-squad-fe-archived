@@ -73,6 +73,13 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setTeammate({ ...teammate });
             setTeamReviewTime(new Date(matchInfo.thisMatch.teamReviewEndDate));
             console.log(matchInfo.thisMatch.teamReviewEndDate);
+            console.log(new Date(matchInfo.thisMatch.teamReviewEndDate));
+            const newDate = new Date(matchInfo.thisMatch.teamReviewEndDate);
+            console.log(newDate);
+            console.log(newDate.getTime());
+            console.log(Date.now());
+            console.log(Math.floor(((newDate.getTime() - Date.now()) / (1000 * 60 * 60)) % 24));
+
             // console.log( Date.UTC(matchInfo.thisMatch.teamReviewEndDate));
 
             // console.log(new Date(matchInfo.thisMatch.teamReviewEndDate));
@@ -91,7 +98,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                 { id: teammate.illustration.id, points: state.pic2Points },
             ],
         };
-        console.log('submitting pts', newPoints);
         if (remainingPoints === 0 && child.progress.teamReview === false) {
             updatePoints(newPoints);
             setDisabled(true);
@@ -105,7 +111,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
         }
     };
     window.localStorage.removeItem('visited');
-    // console.log('updated state', state);
     const submissionCheck = (submission) =>
         typeof submission === 'string' ? [submission] : Object.values(submission);
     return (

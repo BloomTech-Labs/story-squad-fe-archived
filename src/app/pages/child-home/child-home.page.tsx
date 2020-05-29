@@ -8,7 +8,6 @@ import { useStyles } from './child-home-styles';
 const ChildHomePage: React.FC = () => {
     const classes = useStyles({});
     const [response, loading, request] = useAPI('/children/me');
-    console.log(response);
     if (!response?.me)
         return (
             <section className={classes.loading}>

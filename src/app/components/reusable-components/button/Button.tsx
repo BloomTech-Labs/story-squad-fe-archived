@@ -19,7 +19,6 @@ const StyledButton = styled.button`
 
 export default function Button({ loading = false, children, ...props }) {
     const history = useHistory();
-    console.log(typeof props.click);
     return (
         <StyledButton
             onClick={props.click ? () => history.push(props.click) : props.onClick}

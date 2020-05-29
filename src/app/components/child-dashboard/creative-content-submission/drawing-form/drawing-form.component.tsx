@@ -47,7 +47,6 @@ const DrawingForm: React.FC<DrawingFormProps> = ({ week, onUpdate }) => {
             setState(illustration);
             setSubmitted(true);
         }
-        console.log('HELLLLo');
     }, [fetchedDrawing, setState]);
 
     useEffect(() => {

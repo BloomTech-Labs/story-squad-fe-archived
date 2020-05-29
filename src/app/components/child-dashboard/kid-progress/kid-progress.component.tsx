@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { Container, Checkbox, Fade, Backdrop } from '@material-ui/core';
+import { Container, Checkbox, Fade, Backdrop, Modal } from '@material-ui/core';
 // import Modal from '../../reusable-components/modal/Modal';
 import { Child } from '../../../models';
 import { useAPI } from '../../../hooks';
@@ -21,19 +21,6 @@ interface KidProgressProps {
     onUpdate?: () => void;
     child: Child;
 }
-
-const Modal = ({ children }) => {
-    return (
-        <div className='modal__overlay'>
-            <div className='modal__Card'>
-                <Button className='modal__close' onClick={() => console.log('clicked')}>
-                    X
-                </Button>
-                {children}
-            </div>
-        </div>
-    );
-};
 
 const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
     const child = useContext(ChildContext);
@@ -65,7 +52,6 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
             setCompletedSubmissions(true);
         }
     }, [child.illustrations.length, child.stories.length, progress.reading]);
-    console.log(`MATCH INFO`, matchInfo);
     return (
         // <Container className={classes.containerStyle}>
         <>
@@ -100,40 +86,32 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
                 </Card>
             </StyledWrapper>
 
+            {/* Conditional modal  */}
             {open && (
-                <Modal>
-                    <h1>Welcome to Emoji town</h1>
-                    <Link to={`/story/${cohort.week}`} onClick={() => request({ reading: true })}>
-                        <div>
-                            <img src={Read} alt='' />
-                        </div>
-                    </Link>
+                <Modal
+                    aria-labelledby='transition-modal-title'
+                    aria-describedby='transition-modal-description'
+                    // className={classes.modal}
+                    open={open}
+                    onClose={modalClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}>
+                    <Fade in={open}>
+                        <Card>
+                            <h2 id='transition-modal-title'>Welcome to Story Squad!</h2>
+                            <p id='transition-modal-description'>
+                                To begin your journey, click the 'READ' icon and start the story!
+                                <br />
+                                Are you ready to accept the mission?
+                            </p>
+                            <Button onClick={modalClose}>I accept!!</Button>
+                        </Card>
+                    </Fade>
                 </Modal>
             )}
-            {/* Conditional modal  */}
-            {/* <Modal
-                aria-labelledby='transition-modal-title'
-                aria-describedby='transition-modal-description'
-                // className={classes.modal}
-                open={open}
-                onClose={modalClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}>
-                <Fade in={open}>
-                    <Card>
-                        <h2 id='transition-modal-title'>Welcome to Story Squad!</h2>
-                        <p id='transition-modal-description'>
-                            To begin your journey, click the 'READ' icon and start the story!
-                            <br />
-                            Are you ready to accept the mission?
-                        </p>
-                        <Button onClick={modalClose}>I accept!!</Button>
-                    </Card>
-                </Fade>
-            </Modal> */}
         </>
         // </Container>
     );

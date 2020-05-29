@@ -28,35 +28,8 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
     const [votesCasted, setVotesCasted] = useState(0);
     const [matchdata, setMatchdata] = useState({} as any);
-    const [temp, setTemp] = useState([]);
     const tempHolding = new TemporaryHolder();
-    const [matchups, setMatchups] = useState([
-        {
-            0: tempHolding,
-            1: tempHolding,
-            points: 0,
-        },
-        {
-            0: tempHolding,
-            1: tempHolding,
-            points: 0,
-        },
-        {
-            0: tempHolding,
-            1: tempHolding,
-            points: 0,
-        },
-        {
-            0: tempHolding,
-            1: tempHolding,
-            points: 0,
-        },
-    ]);
-    const [locked, setLocked] = useState({
-        '1Votes': true,
-        '2Votes': true,
-        '3Votes': true,
-    });
+    const [matchups, setMatchups] = useState([]);
     //student/teammate submissions state
     useEffect(() => {
         // setVotesCasted(1);
@@ -65,19 +38,8 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
         if (response) setMatchups(response.matchups);
     }, [response]);
 
-    useEffect(() => {
-        if (votesCasted === 1) setLocked({ ...locked, '1Votes': false });
-        if (votesCasted === 2) setLocked({ ...locked, '1Votes': false, '2Votes': false });
-        if (votesCasted === 3)
-            setLocked({ ...locked, '1Votes': false, '2Votes': false, '3Votes': false });
-        // eslint-disable-next-line
-    }, [votesCasted]);
-
     if (matchdata.homeTeam === undefined) return <KidHeader title={'Loading!!'} />;
 
-    // console.log('locked', locked['3Votes']);
-    // console.log(matchups);
-    console.log(locked);
     return (
         <VersusWrapper>
             <Wrapper>
@@ -85,13 +47,6 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     title={'The Matchup'}
                     subtext={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}! VS ${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
                 />
-
-                {/* <VersusHeader
-                    title={'The MatchUp'}
-                  
-                    homeTeam={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}!`}
-                    awayTeam={`${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
-                /> */}
                 {Boolean(matchups) &&
                     matchups.map((round, index) => {
                         return (
@@ -100,7 +55,6 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                                 index={index + 1}
                                 matchup={round}
                                 child={child}
-                                locked={true}
                                 votes={votesCasted}
                             />
                         );

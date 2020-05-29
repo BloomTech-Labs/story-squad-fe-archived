@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useStyles } from './versus-button-styles';
+import Button from '../../../reusable-components/button/Button';
 
 interface LockedState {
     locked: boolean;

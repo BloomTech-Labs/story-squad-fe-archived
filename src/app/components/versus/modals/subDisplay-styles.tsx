@@ -14,9 +14,11 @@ export const useStyles = makeStyles((theme: Theme) =>
             position: 'absolute',
             boxShadow: theme.shadows[5],
         },
-        root: {
-            fontFamily: 'nunito',
-            margin: 0,
+
+        badge: {
+            alignSelf: 'center',
+            position: 'absolute',
+            left: 0,
             padding: theme.spacing(2),
         },
         imagePreview: {
@@ -24,6 +26,13 @@ export const useStyles = makeStyles((theme: Theme) =>
             height: '90px',
             borderRadius: '10px',
             cursor: 'pointer',
+        },
+        imageUnlocked: {
+            // width: '150px',
+            // height: '90px',
+            borderRadius: '20px',
+            cursor: 'pointer',
+            border: '3px solid lightgreen',
         },
         gridContainer: {
             flexDirection: 'column',
@@ -59,12 +68,22 @@ export const useStyles = makeStyles((theme: Theme) =>
             },
         },
         submissionImg: {
-            maxWidth: '80%',
+            maxWidth: '70%',
         },
         iconBox: {
             width: '5vh',
             height: '10vh',
             margin: '0 auto',
+        },
+        unlocked: {
+            width: '50%',
+            height: '30%',
+            position: 'absolute',
+            top: '56%',
+            left: '80%',
+            transform: 'translate(-50%, -50%)',
+            cursor: 'pointer',
+            zIndex: 1,
         },
     })
 );

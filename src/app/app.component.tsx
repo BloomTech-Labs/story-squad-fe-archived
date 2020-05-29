@@ -53,12 +53,18 @@ const App: React.FC = () => {
                             only='child'
                             component={VersusPage}
                         />
-                        {/* <PrivateRoute
+                        <PrivateRoute
                             redirect='/child-home'
                             path='/voting'
                             only='child'
                             component={VotingPage}
-                        /> */}
+                        />
+                        <PrivateRoute
+                            redirect='/child-home'
+                            path='/waiting-page'
+                            only='child'
+                            component={waitingPage}
+                        />
                         <PrivateRoute
                             redirect='/'
                             path='/story/:week'
@@ -70,8 +76,6 @@ const App: React.FC = () => {
                             path='/admin/dashboard'
                             component={AdminDashboardPage}
                         />
-                        <Route path='/waiting-page' component={waitingPage} /> {/* make private */}
-                        <Route path='/voting' component={VotingPage} /> {/* make private */}
                         <Route path='/privacy-policy' component={PrivacyPage} />
                         <Route path='/terms-of-service' component={ToSPage} />
                         <Route path='/admin' component={AdminSignInPage} />

@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import 'typeface-nunito';
 import ava1 from './img/ava1.png';
 import { KidHeader } from '../reusable-components/kid-header/kid-header';
-import { Container } from '@material-ui/core';
 import { useAPI } from '../../hooks';
-import { VersusHeader, VersusRound } from './versusSubComponents';
+import { VersusHeader, VersusRound, VersusButton } from './versusSubComponents';
 import styled from 'styled-components';
 import Wrapper from '../reusable-components/wrapper/Wrapper';
 import Button from '../reusable-components/button/Button';
@@ -26,7 +25,7 @@ interface VersusProps {
     child: any;
 }
 const Versus: React.FC<VersusProps> = ({ child }) => {
-    // console.log(child);
+    console.log({ child });
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
     console.log('response', response);
     const [votesCasted, setVotesCasted] = useState(0);
@@ -79,8 +78,9 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
     if (matchdata.homeTeam === undefined)
         return <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} />;
 
-    console.log('locked', locked['3Votes']);
-    console.log(matchups);
+    // console.log('locked', locked['3Votes']);
+    // console.log(matchups);
+    console.log(locked);
     return (
         <VersusWrapper>
             <Wrapper>
@@ -104,18 +104,75 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                                   matchup={round}
                                   child={child}
                                   locked={true}
+                                  votes={votesCasted}
                               />
                           );
                       })
                     : null}
                 <div>
-                    <Button>Vote</Button>
+                    <Button click='/voting'>Vote</Button>
                 </div>
                 {/* <VersusButton locked={locked['3Votes']} /> */}
             </Wrapper>
         </VersusWrapper>
     );
 };
+// =======
+//         <Container className={classes.containerStyling}>
+//             <VersusHeader
+//                 title={'The MatchUp'}
+//                 homeTeam={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}!`}
+//                 awayTeam={`${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
+//             />
+//             <Grid className={classes.topRow}>
+//                 <VersusRound
+//                     roundStyle={classes.story1}
+//                     nameRowStyle={classes.nameRowBig}
+//                     matchup={matchups[0]}
+//                     child={child}
+//                     locked={true}
+//                     alwaysLocked={true}
+//                     pulseAnim={false}
+//                 />
+//                 <VersusRound
+//                     roundStyle={classes.story2}
+//                     nameRowStyle={classes.nameRowSmall}
+//                     matchup={matchups[1]}
+//                     child={child}
+//                     locked={locked['3Votes']}
+//                     alwaysLocked={false}
+//                     pulseAnim={!locked['3Votes']}
+//                 />
+//             </Grid>
+//             <Grid className={classes.bottomRow}>
+//                 <VersusRound
+//                     roundStyle={classes.picture1}
+//                     nameRowStyle={classes.nameRowSmall}
+//                     matchup={matchups[2]}
+//                     child={child}
+//                     locked={locked['2Votes']}
+//                     alwaysLocked={false}
+//                     pulseAnim={
+//                         locked['2Votes'] === false && locked['3Votes'] === true ? true : false
+//                     }
+//                 />
+//                 <VersusRound
+//                     roundStyle={classes.picture2}
+//                     nameRowStyle={classes.nameRowBig}
+//                     matchup={matchups[3]}
+//                     child={child}
+//                     locked={locked['1Votes']}
+//                     alwaysLocked={false}
+//                     pulseAnim={
+//                         locked['1Votes'] === false && locked['2Votes'] === true ? true : false
+//                     }
+//                 />
+//                 <VersusButton locked={locked['3Votes']} />
+//             </Grid>
+//         </Container>
+// >>>>>>> ba022fc4803a32e50c6010358d3bb7fa4642c23c
+//     );
+// };
 
 export { Versus };
 

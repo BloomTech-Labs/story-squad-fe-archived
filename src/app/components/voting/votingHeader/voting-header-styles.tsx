@@ -107,11 +107,14 @@ export const useStyles = makeStyles((theme: Theme) =>
         helpBtn: {
             'fontFamily': 'Bangers',
             'color': 'tomato',
-            'fontSize': '4em',
+            'fontSize': '5em',
             '-webkit-text-stroke': '2px black',
             'height': '60px',
+            '&hover': {
+                backgroundColor: 'transparent',
+            },
             'marginLeft': '-9%',
-            'marginTop': '1.2%',
+            'marginTop': '12%',
         },
     })
 );

@@ -23,6 +23,7 @@ export default function Button({ loading = false, children, ...props }) {
     return (
         <StyledButton
             onClick={props.click ? () => history.push(props.click) : props.onClick}
+            aria-label={children}
             {...props}>
             {loading ? 'Loading' : children}
         </StyledButton>

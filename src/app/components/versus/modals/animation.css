@@ -1,0 +1,12 @@
+#pulse {
+    animation: pulse 1s ease-in;
+    animation-iteration-count: 3;
+}
+@keyframes pulse {
+    25% {
+        transform: scale(0.95);
+    }
+    75% {
+        transform: scale(1.05);
+    }
+}

@@ -1,46 +1,47 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import { Button, TableRow, TableCell } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Cohort, SelectableCohort } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 // import { SelectableCohort } from './list.component';
 
-interface CohortListItemProps {
-    cohort: SelectableCohort;
+interface ChildListItemProps {
+    child: {
+        avatar: null;
+        grade: number;
+        id: number;
+        losses: null;
+        username: string;
+        preferences: {};
+        progress: {};
+        subscription: boolean;
+        total_points: number;
+        votes: number;
+        wins: number;
+    };
     onUpdate?: () => void;
-    toggleItem: (cohortId: number) => void;
+    key: number;
+    // toggleItem: (cohortId: number) => void;
 }
 
-const StudentDetail: React.FC<CohortListItemProps> = ({ cohort, onUpdate, toggleItem }) => {
-    // const [response, loading, request] = useAPI<{ cohorts: SelectableCohort[] }>(
-    //     `/cohort/list/${id}/children`
-    // );
+const StudentDetail: React.FC<ChildListItemProps> = ({ key, child }) => {
+    const [response, loading, request] = useAPI<{ cohorts: SelectableCohort[] }>(
+        `/storyroutes/children/${child.id}/`
+    );
+
+    const route = useRouteMatch();
 
     return (
-        <TableRow key={cohort.id}>
+        <TableRow key={key}>
+            <TableCell>{child.username}</TableCell>
             <TableCell>
-                <Checkbox
-                    checked={cohort.selected}
-                    onChange={() => toggleItem(cohort.id)}
-                    color='primary'
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                />
+                <Link to={`/admin/dashboard/cohort/${child.id}/details/story`}>View Story</Link>
             </TableCell>
 
             <TableCell>
-                <Link to={`/admin/dashboard/cohort/${cohort.id}/details`}>{cohort.name}</Link>
+                <Link to={`/admin/dashboard/cohort/${child.id}/details/drawing`}>View Drawing</Link>
             </TableCell>
-            <TableCell>{cohort.week}</TableCell>
-            <TableCell>{cohort.activity}</TableCell>
-            {/* <TableCell>
-                <Link to={`/admin/dashboard/cohort/${cohort.id}/edit`}>
-                    <Button>Edit</Button>
-                </Link>
-            </TableCell>
-            <TableCell>
-                <Button onClick={() => remove()}>Delete</Button>
-            </TableCell> */}
         </TableRow>
     );
 };

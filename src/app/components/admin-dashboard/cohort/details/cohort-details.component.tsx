@@ -17,7 +17,7 @@ import { useAPI } from '../../../../hooks';
 //import { CohortListItem } from './item.component';
 //import { useStyles } from './list.component.styles';
 import requestFactory from '../../../../util/requestFactory';
-//import { StudentDetail } from './student-details.component';
+import { StudentDetail } from './student-details.component';
 
 interface CohortDetailsProps {
     className?: string;
@@ -35,11 +35,18 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const CohortDetails: React.FC<CohortDetailsProps> = ({ className, id }) => {
-    const [response, loading, request] = useAPI<{ cohorts: ChildrenInCohort[] }>(
+    const [response, loading, request] = useAPI<{ cohort: ChildrenInCohort[] }>(
         `/cohort/list/${id}/children`
     );
+    const [cohort, setCohort] = useState<ChildrenInCohort>();
 
-    console.log('This is the response!', response);
+    useEffect(() => {
+        if (!loading && response) {
+            setCohort(response.cohort[0]);
+        }
+    }, [loading, response]);
+
+    console.log(cohort);
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -68,19 +75,14 @@ const CohortDetails: React.FC<CohortDetailsProps> = ({ className, id }) => {
                         <StyledTableCell>Drawing</StyledTableCell>
                     </TableRow>
                 </TableHead>
-                {/* <TableBody>
-                    {cohorts
-                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        .map((cohort) => {
-                            return (
-                                <StudentDetail
-                                    key={cohort.id}
-                                    cohort={cohort}
-                                    toggleItem={toggleItem}
-                                />
-                            );
-                        })}
-                </TableBody> */}
+                <TableBody>
+                    {cohort &&
+                        cohort.children
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((child: any) => {
+                                return <StudentDetail key={child.id} child={child} />;
+                            })}
+                </TableBody>
 
                 <TablePagination
                     count={100}

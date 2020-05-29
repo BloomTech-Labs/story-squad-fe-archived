@@ -8,6 +8,7 @@ import { ModeratorDashboardPage } from '../moderator/moderator-dashboard.page';
 import { ManageCohortPage } from '../cohort/manage/manage.page';
 import { EditCohortPage } from '../cohort/edit/edit.page';
 import { CohortDetailsPage } from '../cohort/details/details.page';
+import { SubmissionsPage } from '../cohort/submissions/submissions.page';
 import { useStyles } from './admin-dashboard-page-styles';
 const AdminDashboardPage: React.FC = () => {
     const classes = useStyles();
@@ -35,6 +36,14 @@ const AdminDashboardPage: React.FC = () => {
                     <Route path='/admin/dashboard/pdf/create' component={PdfCreate} />
                     <Route path='/admin/dashboard/moderator' component={ModeratorDashboardPage} />
                     <Route path='/admin/dashboard/help' component={HelpPage} />
+                    <Route
+                        path='/admin/dashboard/cohort/:id/details/story'
+                        component={SubmissionsPage}
+                    />
+                    <Route
+                        path='/admin/dashboard/cohort/:id/details/drawing'
+                        component={SubmissionsPage}
+                    />
                     <Route
                         path='/admin/dashboard/cohort/:id/details'
                         component={CohortDetailsPage}

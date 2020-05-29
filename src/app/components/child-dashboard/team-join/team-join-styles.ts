@@ -66,6 +66,7 @@ export const useStyles = makeStyles((theme) => ({
         'color': 'white',
         'width': '200px',
         'border': '3px solid #292929',
+        'borderBottom': 'none',
         'textTransform': 'capitalize',
         'fontFamily': 'nunito',
         'marginBottom': '5%',

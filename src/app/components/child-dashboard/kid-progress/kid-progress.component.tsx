@@ -58,27 +58,27 @@ const KidProgressCard: React.FC<KidProgressProps> = ({ onUpdate }) => {
             <StyledWrapper grid className='kid__progress'>
                 <KidHeader title={'Mission'} />
                 <CompleteCard complete={progress.reading} className='read'>
-                    {progress.reading && <Link to={`/story/${cohort.week}`} />}
+                    {!progress.reading && <Link to={`/story/${cohort.week}`} />}
                     <div>
-                        <img src={Done} alt='Reading' />
+                        <img src={progress.reading ? Done : Read} alt='Reading' />
                     </div>
                 </CompleteCard>
 
                 <WriteCard className='write' complete={child.stories.length}>
-                    <img src={Done} alt='Writing' />
-                    {child.stories.length && <Link to={`/kids-dashboard/upload`} />}
+                    <img src={child.stories.length ? Done : Write} alt='Writing' />
+                    {!child.stories.length && <Link to={`/kids-dashboard/upload`} />}
                 </WriteCard>
                 <DrawCard className='draw' complete={child.illustrations.length}>
-                    <img src={child.stories.length ? Done : Write} alt='Drawing' />
-                    {child.illustrations.length && <Link to={`/kids-dashboard/drawing-upload`} />}
+                    <img src={child.illustrations.length ? Done : Draw} alt='Drawing' />
+                    {!child.illustrations.length && <Link to={`/kids-dashboard/drawing-upload`} />}
                 </DrawCard>
 
                 <Card className='btn__container'>
                     <Link to={`/kids-dashboard/team-join`}>
                         <Button disabled={!completedSubmissions && !matchInfo} type='button'>
-                            {completedSubmissions
+                            {matchInfo
                                 ? 'Team Up'
-                                : !matchInfo
+                                : !completedSubmissions
                                 ? 'Submissions needed to proceed!'
                                 : 'Your team will be matched soon!'}
                         </Button>

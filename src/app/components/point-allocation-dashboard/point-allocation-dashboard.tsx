@@ -72,18 +72,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setStudent({ ...student });
             setTeammate({ ...teammate });
             setTeamReviewTime(new Date(matchInfo.thisMatch.teamReviewEndDate));
-            console.log(matchInfo.thisMatch.teamReviewEndDate);
-            console.log(new Date(matchInfo.thisMatch.teamReviewEndDate));
-            const newDate = new Date(matchInfo.thisMatch.teamReviewEndDate);
-            console.log(newDate);
-            console.log(newDate.getTime());
-            console.log(Date.now());
-            console.log(Math.floor(((newDate.getTime() - Date.now()) / (1000 * 60 * 60)) % 24));
-
-            // console.log( Date.UTC(matchInfo.thisMatch.teamReviewEndDate));
-
-            // console.log(new Date(matchInfo.thisMatch.teamReviewEndDate));
-            console.log("logan's", matchInfo.thisMatch);
         }
     }, [child.progress.teamReview, matchInfo]);
     // console.log(new Date(teamReviewTime.getTime() - new Date().getTime()));

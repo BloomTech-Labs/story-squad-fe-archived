@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, CircularProgress } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import { useAPI } from '../../../hooks';
 import { Child } from '../../../models';
 import { KidHeader } from '../../reusable-components/';
@@ -55,9 +55,8 @@ const StyledContainer = styled.section`
     display: flex;
     align-items: center;
     padding-right: 2%;
-    border-left: 3px solid #292929;
-    border-right: 3px solid #292929;
-    border-bottom: 3px solid #292929;
+    border: 3px solid #292929;
+    border-top: none;
     justify-content: flex-end;
     background-color: var(--gold);
 

@@ -11,6 +11,7 @@ import { Emoji } from './emoji/Emoji.component';
 import { Popup } from '../voting/popup-alert/Popup.alert';
 import { VotingHeader } from './votingHeader/voting-header';
 import { useAPI } from '../../hooks';
+import styled from 'styled-components';
 
 const ColoredRadio = withStyles({
     root: {
@@ -97,76 +98,78 @@ const Voting: React.FC<VotingCardProps> = () => {
                         setInst={setInst}
                     />
                     <Grid className={classes.topRow}>
-                        <Grid className={classes.story1}>
-                            <div className={classes.playerSelection}>
-                                <VotingModal
-                                    key='pic1Points'
-                                    submission={submissionCheck(
-                                        response?.child1.story
-                                            ? response?.child1.story
-                                            : response?.child1.illustration
-                                    )}
-                                    type='Illustration'
-                                    response={response}
-                                />
-                                <ColoredRadio
-                                    className={classes.radioBox}
-                                    checked={selectedValue == response?.child1.childId}
-                                    onChange={handleChange}
-                                    value={response?.child1.childId}
-                                    name='storyA'
-                                    inputProps={{ 'aria-label': 'A' }}
-                                    disableRipple={true}
-                                />
-                                <Emoji
-                                    emojiCondit={emojiSelector1}
-                                    newEmoji={newEmoji.player1}
-                                    setNewEmoji={setNewEmoji}
-                                />
-                            </div>
-                        </Grid>
-                        <Grid className={classes.story2}>
-                            <div className={classes.playerSelection}>
-                                <VotingModal
-                                    key='pic1Points'
-                                    submission={submissionCheck(
-                                        response?.child2.story
-                                            ? response?.child2.story
-                                            : response?.child2.illustration
-                                    )}
-                                    type='Illustration'
-                                    response={response}
-                                />
-                                <ColoredRadio
-                                    className={classes.radioBox}
-                                    checked={selectedValue == response?.child2.childId}
-                                    onChange={handleChange}
-                                    value={response?.child2.childId}
-                                    name='storyB'
-                                    inputProps={{ 'aria-label': 'B' }}
-                                    disableRipple={true}
-                                />
-                                <Emoji
-                                    emojiCondit={emojiSelector2}
-                                    newEmoji={newEmoji.player2}
-                                    setNewEmoji={setNewEmoji}
-                                />
-                                <div className={classes.button}>
-                                    <Button
-                                        className={classes.orangeButton}
-                                        onClick={handleSubmit}
-                                        disabled={!selectedValue}>
-                                        Submit
-                                    </Button>
+                        <Wrapper>
+                            <Grid className={classes.story1}>
+                                <div className={classes.playerSelection}>
+                                    <VotingModal
+                                        key='pic1Points'
+                                        submission={submissionCheck(
+                                            response?.child1.story
+                                                ? response?.child1.story
+                                                : response?.child1.illustration
+                                        )}
+                                        type='Illustration'
+                                        response={response}
+                                    />
+                                    <ColoredRadio
+                                        className={classes.radioBox}
+                                        checked={selectedValue == response?.child1.childId}
+                                        onChange={handleChange}
+                                        value={response?.child1.childId}
+                                        name='storyA'
+                                        inputProps={{ 'aria-label': 'A' }}
+                                        disableRipple={true}
+                                    />
+                                    <Emoji
+                                        emojiCondit={emojiSelector1}
+                                        newEmoji={newEmoji.player1}
+                                        setNewEmoji={setNewEmoji}
+                                    />
                                 </div>
-                            </div>
-                            <Popup
-                                open={open}
-                                setOpen={setOpen}
-                                dialogTxt={'Oops! Please select 4-6 emojis for each player'}
-                                btnTxt={'Go Back'}
-                            />
-                        </Grid>
+                            </Grid>
+                            <Grid className={classes.story2}>
+                                <div className={classes.playerSelection}>
+                                    <VotingModal
+                                        key='pic1Points'
+                                        submission={submissionCheck(
+                                            response?.child2.story
+                                                ? response?.child2.story
+                                                : response?.child2.illustration
+                                        )}
+                                        type='Illustration'
+                                        response={response}
+                                    />
+                                    <ColoredRadio
+                                        className={classes.radioBox}
+                                        checked={selectedValue == response?.child2.childId}
+                                        onChange={handleChange}
+                                        value={response?.child2.childId}
+                                        name='storyB'
+                                        inputProps={{ 'aria-label': 'B' }}
+                                        disableRipple={true}
+                                    />
+                                    <Emoji
+                                        emojiCondit={emojiSelector2}
+                                        newEmoji={newEmoji.player2}
+                                        setNewEmoji={setNewEmoji}
+                                    />
+                                    <div className={classes.button}>
+                                        <Button
+                                            className={classes.orangeButton}
+                                            onClick={handleSubmit}
+                                            disabled={!selectedValue}>
+                                            Submit
+                                        </Button>
+                                    </div>
+                                </div>
+                                <Popup
+                                    open={open}
+                                    setOpen={setOpen}
+                                    dialogTxt={'Oops! Please select 4-6 emojis for each player'}
+                                    btnTxt={'Go Back'}
+                                />
+                            </Grid>
+                        </Wrapper>
                     </Grid>
                 </>
             )}
@@ -175,3 +178,19 @@ const Voting: React.FC<VotingCardProps> = () => {
 };
 
 export { Voting };
+
+const Wrapper = styled.div`
+    width: 100%;
+    display: flex;
+    & > div {
+        width: 50%;
+    }
+    @media only screen and (max-width: 800px) {
+        display: grid;
+        grid-template-columns: 8px calc(100% - 16px) 8px;
+        & > div {
+            grid-column: 2/3;
+            width: 100%;
+        }
+    }
+`;

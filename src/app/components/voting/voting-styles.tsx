@@ -177,7 +177,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         story1: {
             position: 'relative',
             backgroundColor: '#429CB5',
-            width: '50%',
+
             height: '74vh',
             border: '7px solid black',
             borderRight: '3.5px solid black',
@@ -187,9 +187,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
             justifyContent: 'start',
             boxSizing: 'border-box',
-            [theme.breakpoints.only('sm')]: {
-                width: '100%',
-            },
         },
         pictureHover: {
             cursor: 'pointer',

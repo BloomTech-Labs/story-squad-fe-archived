@@ -52,6 +52,10 @@ const emojiSelection = [
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
+        form: {
+            display: 'flex',
+            flexDirection: 'column',
+        },
         emojiContainer: {
             'display': 'flex',
             'alignItems': 'center',
@@ -62,8 +66,8 @@ const useStyles = makeStyles((theme: Theme) =>
             'overflowY': 'auto',
             'overflowX': 'hidden',
             'marginBottom': '1%',
-            'padding': '2%',
-            'paddingRight': '3%',
+            'padding': '%',
+            'paddingRight': '1%',
             'position': 'relative',
             'background': 'rgba(255, 255, 255, 0.75)',
             'borderRadius': '5px',
@@ -96,9 +100,9 @@ const useStyles = makeStyles((theme: Theme) =>
             background: 'rgba(255, 255, 255, 0.75)',
             borderRadius: '5px',
             marginBottom: '3%',
-            padding: '.8%',
+            // padding: '.8%',
             fontSize: '20px',
-            paddingLeft: '7%',
+            // paddingLeft: '7%',
         },
         emojiSpan: {
             letterSpacing: '18px',
@@ -145,7 +149,7 @@ export const Emoji: React.FC<VotingStateProps> = ({ newEmoji, setNewEmoji, emoji
 
     return (
         <div>
-            <form>
+            <form className={classes.form}>
                 <div className={classes.inputDiv}>
                     <span className={classes.emojiSpan}>{emojiInput}</span>
                 </div>

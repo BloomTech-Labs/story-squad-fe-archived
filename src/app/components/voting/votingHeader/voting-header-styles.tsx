@@ -18,6 +18,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             'fontWeight': 'bold',
             '-webkit-text-stroke-width': '1px',
             '-webkit-text-stroke-color': '#000000',
+            'marginTop': '5%',
         },
         h4Styling: {
             'fontFamily': 'Bangers',
@@ -29,7 +30,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             '-webkit-text-stroke-color': '#000000',
             'marginLeft': '3%',
             'marginRight': '4%',
-            'marginTop': '1%',
+            'marginTop': '5%',
             'display': 'flex',
         },
         teamName: {
@@ -102,7 +103,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             width: '20%',
             marginBottom: '18%',
             marginRight: '-3%',
-            marginTop: '2%',
+            marginTop: '5%',
         },
         helpBtn: {
             'fontFamily': 'Bangers',

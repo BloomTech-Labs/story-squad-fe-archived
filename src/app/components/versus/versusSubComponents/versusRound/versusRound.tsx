@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Avatar, Grid } from '@material-ui/core';
 import { SubmissionDisplay } from '../../modals/subDisplay.component';
@@ -35,12 +35,9 @@ const VersusRound: React.FC<RoundProps> = ({
     pulseAnim,
     votes,
 }) => {
-    const [lockedBox, setLockedBox] = useState(3);
-    console.log(votes, index);
+    const unlock = 3 - votes < index - 1;
+    console.log({ unlock }, 3 - votes, index - 1);
 
-    if (matchup[0].story === undefined && matchup[0].illustration === undefined) return <></>;
-    console.log({ locked });
-    console.log(lockedBox - votes);
     let b64passLeft = [];
     let b64passRight = [];
     if (matchup[0].story !== undefined) {
@@ -52,9 +49,7 @@ const VersusRound: React.FC<RoundProps> = ({
     }
     // console.log(matchup[0].emojis);
     // console.log(emojiArr);
-    useEffect(()=>{
-
-    })
+    if (matchup[0].story === undefined && matchup[0].illustration === undefined) return;
 
     return (
         <>
@@ -64,7 +59,13 @@ const VersusRound: React.FC<RoundProps> = ({
                     <div className='versus__info'>
                         <p>{matchup.points}</p>
                     </div>
-                    <SubmissionDisplay user={matchup[1]} child={child} />
+                    <SubmissionDisplay user={matchup[1]} child={child} locked={unlock} />
+                    {/* {!unlock && (
+                        <Lock
+                        // className={alwaysLocked ? classes.lock : classes.lockKey}
+                        // onClick={alwaysLocked ? null : () => history.push(`/voting`)}
+                        />
+                    )} */}
                 </Round>
             )}
             {/* {nameRowStyle === classes.nameRowBig ? (

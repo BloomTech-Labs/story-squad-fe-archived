@@ -11,6 +11,9 @@ import { FeedbackPopup } from '../emoji-feedback/feedback-popup';
 import ava1 from '../img/ava1.svg';
 import Card from '../../reusable-components/card/Card';
 import styled from 'styled-components';
+import { ReactComponent as Lock } from '../img/lock-icon.svg';
+import { useHistory } from 'react-router-dom';
+import key from '../img/Key.png';
 
 import './animation.css';
 
@@ -20,6 +23,7 @@ interface SubDisplayProps {
     left?: boolean;
     pulseAnim?: boolean;
     child?: any;
+    locked?: boolean;
 }
 
 const Transition = React.forwardRef(function Transition(
@@ -33,6 +37,7 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
     user,
     reverse,
     left,
+    locked,
     pulseAnim,
     child,
 }) => {
@@ -44,9 +49,10 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
     //     pulseAnim,
     // }) => {
     // >>>>>>> ba022fc4803a32e50c6010358d3bb7fa4642c23c
-    console.log(user);
+    const history = useHistory();
+    console.log({ locked }, { reverse });
+    console.log(!locked && locked != undefined);
     if (user.childId === child.id && user.emojis.length > 0) {
-        console.log('gottit');
         const max = user.emojis.reduce(function(prev, current) {
             if (+current.id > +prev.id) {
                 return current;
@@ -54,10 +60,9 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
                 return prev;
             }
         });
-        console.log(max);
         user.newEmoji = max.emoji.replace(/[.{.}."]/g, '').split(',');
     }
-    console.log(user.newEmoji);
+
     const [open, setOpen] = useState<boolean>(false);
     const [emojiPopup, setEmojiPopup] = useState<boolean>(false);
     const classes = useStyles({});
@@ -116,6 +121,12 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
                                 onClick={handleOpen}
                                 alt={`${user.username}'s Story Preview`}
                             />
+                            {!locked && locked != undefined ? (
+                                <Lock
+                                    // className={alwaysLocked ? classes.lock : classes.lockKey}
+                                    onClick={() => history.push(`/voting`)}
+                                />
+                            ) : null}
                         </div>
                     </div>
 
@@ -158,8 +169,8 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
 };
 
 const CardContainer = styled.div`
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 20% 80%;
     justify-content: space-around;
     & > div:nth-of-type(1) {
         display: flex;
@@ -174,13 +185,20 @@ const CardContainer = styled.div`
         align-self: center;
     }
     & > .img__container div {
+        display: grid;
+
         height: 100%;
         width: 80%;
         margin: 0 auto;
     }
-    & .img__container img {
+    & .img__container  *{
+        grid-row: 1/2;
+        grid-column 1/2;
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+    & .img__container svg {
+      cursor: url(${key}) 2 26, default
     }
 `;

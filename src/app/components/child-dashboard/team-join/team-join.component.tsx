@@ -62,7 +62,6 @@ const StyledContainer = styled.section`
     background-color: var(--gold);
 
     @media only screen and (min-width: 1000px) {
-        background-color: red;
         background: linear-gradient(
             90deg,
             var(--green) 0%,

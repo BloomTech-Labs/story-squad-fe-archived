@@ -25,9 +25,7 @@ interface VersusProps {
     child: any;
 }
 const Versus: React.FC<VersusProps> = ({ child }) => {
-    console.log({ child });
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
-    console.log('response', response);
     const [votesCasted, setVotesCasted] = useState(0);
     const [matchdata, setMatchdata] = useState({} as any);
     const [temp, setTemp] = useState([]);
@@ -75,8 +73,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
         // eslint-disable-next-line
     }, [votesCasted]);
 
-    if (matchdata.homeTeam === undefined)
-        return <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} />;
+    if (matchdata.homeTeam === undefined) return <KidHeader title={'Loading!!'} />;
 
     // console.log('locked', locked['3Votes']);
     // console.log(matchups);
@@ -86,7 +83,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
             <Wrapper>
                 <KidHeader
                     title={'The Matchup'}
-                    subtext={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}! vs ${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
+                    subtext={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}! VS ${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
                 />
 
                 {/* <VersusHeader
@@ -95,24 +92,22 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                     homeTeam={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}!`}
                     awayTeam={`${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
                 /> */}
-                {matchups
-                    ? matchups.map((round, index) => {
-                          return (
-                              <VersusRound
-                                  key={index}
-                                  index={index + 1}
-                                  matchup={round}
-                                  child={child}
-                                  locked={true}
-                                  votes={votesCasted}
-                              />
-                          );
-                      })
-                    : null}
-                <div>
-                    <Button click='/voting'>Vote</Button>
-                </div>
+                {Boolean(matchups) &&
+                    matchups.map((round, index) => {
+                        return (
+                            <VersusRound
+                                key={index}
+                                index={index + 1}
+                                matchup={round}
+                                child={child}
+                                locked={true}
+                                votes={votesCasted}
+                            />
+                        );
+                    })}
+
                 {/* <VersusButton locked={locked['3Votes']} /> */}
+                <VersusButton locked={votesCasted < 3} />
             </Wrapper>
         </VersusWrapper>
     );

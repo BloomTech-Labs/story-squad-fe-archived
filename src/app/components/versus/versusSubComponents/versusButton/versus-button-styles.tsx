@@ -5,18 +5,12 @@ export const useStyles = makeStyles((theme: Theme) =>
             zIndex: 1,
             display: 'flex',
             justifyContent: 'center',
-            width: '1200px',
+            // width: '1200px',
             maxWidth: '100%',
-            position: 'absolute',
-            height: '37vh',
+            // bottom: 0,
+            // position: 'absolute',
         },
-        btnDiv: {
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-            width: '100%',
-            margin: '0% 2% 1% 2%',
-        },
+
         orangeButton: {
             'backgroundColor': '#FF6B35',
             'fontSize': '24px',

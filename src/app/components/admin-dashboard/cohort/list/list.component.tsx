@@ -79,7 +79,7 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
     };
 
     if (loading) return <h4 className={classes.loading}>Loading...</h4>;
-    if (cohorts.length < 1) return <h4 className={classes.loading}>There are no Cohorts</h4>;
+    // if (cohorts.length < 1) return <h4 className={classes.loading}>There are no Cohorts</h4>;
     return (
         <div className={className}>
             <div className={classes.header}>
@@ -132,46 +132,54 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
                         Delete
                     </Button>
                 </div>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell>Select</StyledTableCell>
-                            <StyledTableCell>Cohort Name</StyledTableCell>
-                            <StyledTableCell>Children</StyledTableCell>
-                            <StyledTableCell>Chapter</StyledTableCell>
-                            <StyledTableCell>Flagged</StyledTableCell>
-                            <StyledTableCell>Status</StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {/* {cohorts.map((cohort) => (
-                            <CohortListItem
-                                key={cohort.id}
-                                cohort={cohort}
-                                toggleItem={toggleItem}
-                            />
-                        ))} */}
-                        {cohorts
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((cohort) => {
-                                return (
+                {(() => {
+                    if (cohorts.length < 1) {
+                        return <h4 className={classes.loading}>There are no Cohorts</h4>;
+                    } else {
+                        return (
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell>Select</StyledTableCell>
+                                        <StyledTableCell>Cohort Name</StyledTableCell>
+                                        <StyledTableCell>Children</StyledTableCell>
+                                        <StyledTableCell>Chapter</StyledTableCell>
+                                        <StyledTableCell>Flagged</StyledTableCell>
+                                        <StyledTableCell>Status</StyledTableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {/* {cohorts.map((cohort) => (
                                     <CohortListItem
                                         key={cohort.id}
                                         cohort={cohort}
                                         toggleItem={toggleItem}
                                     />
-                                );
-                            })}
-                    </TableBody>
+                                ))} */}
+                                    {cohorts
+                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                        .map((cohort) => {
+                                            return (
+                                                <CohortListItem
+                                                    key={cohort.id}
+                                                    cohort={cohort}
+                                                    toggleItem={toggleItem}
+                                                />
+                                            );
+                                        })}
+                                </TableBody>
 
-                    <TablePagination
-                        count={100}
-                        page={page}
-                        onChangePage={handleChangePage}
-                        rowsPerPage={rowsPerPage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                    />
-                </Table>
+                                <TablePagination
+                                    count={100}
+                                    page={page}
+                                    onChangePage={handleChangePage}
+                                    rowsPerPage={rowsPerPage}
+                                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                                />
+                            </Table>
+                        );
+                    }
+                })()}
             </div>
         </div>
     );

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useAPI } from '../../../../hooks';
 import { requestFactory } from '../../../../util';
 
+// import { useStyles } from './submission.styles';
 import { Button } from '@material-ui/core';
 
 // http://localhost:3000/admin/dashboard/cohort/:child_id/details/story
@@ -48,11 +49,13 @@ const StorySubmissions: React.FC = () => {
     const [response, loading, request] = useAPI(`/storyroutes/children/${id}/`);
     const [story, setStory] = useState<Story>();
     const axios = requestFactory();
+    // const classes = useStyles({});
 
     useEffect(() => {
         if (response !== undefined) {
             setStory(response.stories[0]);
         }
+        console.log(response);
     }, [response]);
 
     const handleFlag: any = () => {
@@ -73,17 +76,24 @@ const StorySubmissions: React.FC = () => {
     //     const theStory = story.transcribed_text.t_page1;
     //     const badWords = story.possibleWords.split('"') // ["{", "butt", "heck", "}"]
 
+    //     return (<span>the word here</span>)
     // }
 
     return (
         <>
             <div>
-                <h1>{story && story.possibleWords}</h1>
+                {story && !story.isFlagged ? (
+                    <></>
+                ) : (
+                    <h1>{story && story.possibleWords.split('"')}</h1>
+                )}
                 <p>{story && story.transcribed_text.t_page1}</p>
                 <img style={{ maxWidth: '600px' }} src={story && story.story.page1} alt='' />
             </div>
             <div>
-                <Button onClick={handleFlag}>{story && story.isFlagged ? 'Unflag' : 'Flag'}</Button>
+                <Button color='primary' variant='contained' onClick={handleFlag}>
+                    {story && story.isFlagged ? 'Unflag' : 'Flag'}
+                </Button>
             </div>
         </>
     );

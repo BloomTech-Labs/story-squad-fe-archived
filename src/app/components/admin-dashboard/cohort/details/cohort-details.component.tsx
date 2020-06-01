@@ -69,6 +69,8 @@ const CohortDetails: React.FC<CohortDetailsProps> = ({ className, id }) => {
 
     return (
         <div>
+            <h1>Submissions</h1>
+            <h2>{cohort && cohort.name}</h2>
             <Table>
                 <TableHead>
                     <TableRow>

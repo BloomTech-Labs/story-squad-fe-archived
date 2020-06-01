@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAPI } from '../../../../hooks';
+import { Illustration } from '../../../../models';
 
 import { Button } from '@material-ui/core';
 
 // http://localhost:3000/admin/dashboard/cohort/:child_id/details/drawing
-
-interface Illustration {
-    childId: number;
-    id: number;
-    illustration: string;
-    points: number;
-    votes: number;
-    week: number;
-}
 
 const DrawingSubmissions: React.FC = () => {
     const { id } = useParams();

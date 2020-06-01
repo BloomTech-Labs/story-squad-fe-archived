@@ -12,6 +12,8 @@ interface CohortListItemProps {
     toggleItem: (cohortId: number) => void;
 }
 
+// individual table rows for http://localhost:3000/admin/dashboard/moderator
+
 const CohortListItem: React.FC<CohortListItemProps> = ({ cohort, onUpdate, toggleItem }) => {
     return (
         <TableRow key={cohort.id}>

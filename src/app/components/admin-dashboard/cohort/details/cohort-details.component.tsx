@@ -34,6 +34,8 @@ const StyledTableCell = withStyles((theme) => ({
     },
 }))(TableCell);
 
+// http://localhost:3000/admin/dashboard/cohort/:id/details
+
 const CohortDetails: React.FC<CohortDetailsProps> = ({ className, id }) => {
     const [response, loading, request] = useAPI<{ cohort: ChildrenInCohort[] }>(
         `/cohort/list/${id}/children`
@@ -82,15 +84,14 @@ const CohortDetails: React.FC<CohortDetailsProps> = ({ className, id }) => {
                             .map((child: any) => {
                                 return <StudentDetail key={child.id} child={child} />;
                             })}
+                    <TablePagination
+                        count={100}
+                        page={page}
+                        onChangePage={handleChangePage}
+                        rowsPerPage={rowsPerPage}
+                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                    />
                 </TableBody>
-
-                <TablePagination
-                    count={100}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    rowsPerPage={rowsPerPage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
             </Table>
         </div>
     );

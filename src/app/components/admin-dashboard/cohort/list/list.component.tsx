@@ -32,6 +32,8 @@ const StyledTableCell = withStyles((theme) => ({
     },
 }))(TableCell);
 
+// http://localhost:3000/admin/dashboard/moderator
+
 const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
     const [response, loading, request] = useAPI<{ cohorts: SelectableCohort[] }>('/cohort/list');
     const classes = useStyles({});
@@ -45,6 +47,8 @@ const ListCohorts: React.FC<ListCohortsProps> = ({ className }) => {
             setCohorts(response.cohorts);
         }
     }, [loading, response]);
+
+    console.log(response);
 
     const toggleItem = (cohortId) => {
         const newCohorts = cohorts.map((cohort) => {

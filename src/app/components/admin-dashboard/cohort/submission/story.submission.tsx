@@ -1,50 +1,89 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAPI } from '../../../../hooks';
-import axios from 'axios';
+import { requestFactory } from '../../../../util';
 
 import { Button } from '@material-ui/core';
 
 // http://localhost:3000/admin/dashboard/cohort/:child_id/details/story
 
+interface Story {
+    automated_readability_index: number;
+    childId: number;
+    coleman_liau_index: number;
+    consolidated_score: string;
+    dale_chall_readability_score: number;
+    difficult_words: number;
+    doc_length: number;
+    flesch_kincaid_grade: number;
+    flesch_reading_ease: number;
+    gunning_fog: number;
+    id: number;
+    isFlagged: boolean;
+    linsear_write_formula: number;
+    points: number;
+    possibleWords: string;
+    quote_count: number;
+    smog_index: number;
+    story: {
+        page1: string;
+        page2: string;
+        page3: string;
+        page4: string;
+        page5: string;
+    };
+    transcribed_text: {
+        t_page1: string;
+        t_page2: string;
+        t_page3: string;
+        t_page4: string;
+        t_page5: string;
+    };
+    votes: number;
+    week: number;
+}
+
 const StorySubmissions: React.FC = () => {
     const { id } = useParams();
     const [response, loading, request] = useAPI(`/storyroutes/children/${id}/`);
-    const [story, setStory] = useState();
-
-    console.log('Story response', response);
+    const [story, setStory] = useState<Story>();
+    const axios = requestFactory();
 
     useEffect(() => {
         if (response !== undefined) {
-            setStory(response.stories[0].transcribed_text.t_page1);
+            setStory(response.stories[0]);
         }
     }, [response]);
 
     const handleFlag: any = () => {
-        //const [response, loading, request] = useAPI(`/storyRoutes/children/${id}/`, 'PUT');
         axios
             .put(`/storyRoutes/stories/${response.stories[0].id}`, {
-                isFlagged: !response.stories[0].is_flagged,
+                isFlagged: !story.isFlagged,
             })
             .then((res) => {
-                console.log('Put response', res);
+                console.log('Put response', res.data);
+                setStory(res.data.story);
             })
             .catch((err) => {
                 console.log('Got some errors', err);
             });
-
-        // PUT storyRoutes/stories/:id -- id of the story, body needs to have JSON { "is_flagged": true } or { "is_flagged": false }. edits "is_flagged"
     };
+
+    // function colorize() {
+    //     const theStory = story.transcribed_text.t_page1;
+    //     const badWords = story.possibleWords.split('"') // ["{", "butt", "heck", "}"]
+
+    // }
 
     return (
         <>
             <div>
-                <p>{story && story}</p>
+                <h1>{story && story.possibleWords}</h1>
+                <p>{story && story.transcribed_text.t_page1}</p>
+                <img style={{ maxWidth: '600px' }} src={story && story.story.page1} alt='' />
             </div>
             <div>
-                <Button onClick={handleFlag}>
-                    {response && response.stories[0].is_flagged ? 'Unflag' : 'Flag'}
-                </Button>
+                <Button onClick={handleFlag}>{story && story.isFlagged ? 'Unflag' : 'Flag'}</Button>
             </div>
         </>
     );

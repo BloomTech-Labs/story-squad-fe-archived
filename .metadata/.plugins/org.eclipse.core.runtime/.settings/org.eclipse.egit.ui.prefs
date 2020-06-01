@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+resourcehistory_graph_split=500,500
+resourcehistory_rev_split=700,300
+resourcehistory_selected_ref_filters_.git=HEAD\:refs/**/${git_branch}\:refs/heads/**\:refs/remotes/**\:refs/tags/**

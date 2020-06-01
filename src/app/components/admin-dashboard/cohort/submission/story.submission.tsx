@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAPI } from '../../../../hooks';
 import { requestFactory } from '../../../../util';
-
+import { useStyles } from './story.submission.styles';
 import { Story } from '../../../../models';
 
 // import { useStyles } from './submission.styles';
@@ -15,7 +15,7 @@ const StorySubmissions: React.FC = () => {
     const [response, loading, request] = useAPI(`/storyroutes/children/${id}/`);
     const [story, setStory] = useState<Story>();
     const axios = requestFactory();
-    // const classes = useStyles({});
+    const classes = useStyles({});
 
     useEffect(() => {
         if (response !== undefined) {
@@ -46,22 +46,22 @@ const StorySubmissions: React.FC = () => {
     // }
 
     return (
-        <>
-            <div>
+        <div className={classes.wrapper}>
+            <div className={classes.flagged}>
                 {story && !story.isFlagged ? (
                     <></>
                 ) : (
                     <h1>{story && story.possibleWords.split('"')}</h1>
                 )}
-                <p>{story && story.transcribed_text.t_page1}</p>
-                <img style={{ maxWidth: '600px' }} src={story && story.story.page1} alt='' />
-            </div>
-            <div>
                 <Button color='primary' variant='contained' onClick={handleFlag}>
                     {story && story.isFlagged ? 'Unflag' : 'Flag'}
                 </Button>
             </div>
-        </>
+            <div className={classes.text}>
+                <p>{story && story.transcribed_text.t_page1}</p>
+                <img style={{ maxWidth: '600px' }} src={story && story.story.page1} alt='' />
+            </div>
+        </div>
     );
 };
 

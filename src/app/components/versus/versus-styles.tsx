@@ -172,6 +172,8 @@ export const useStyles = makeStyles((theme: Theme) =>
             height: '90px',
             borderRadius: '10px',
             cursor: 'pointer',
+            filter: 'blur(2.5px)',
+            border: '4px solid red',
         },
         gridContainer: {
             flexDirection: 'column',
@@ -179,12 +181,22 @@ export const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
             alignContent: 'center',
         },
-        lock: {
+        lockKey: {
+            width: '17%',
+            height: '27%',
             position: 'absolute',
-            top: '58%',
-            left: '78%',
+            top: '53.5%',
+            left: '80%',
             transform: 'translate(-50%, -50%)',
-            // cursor: `URL(${key}) 2 26, default`,
+            cursor: `URL(${key}) 2 26, default`,
+        },
+        lock: {
+            width: '17%',
+            height: '27%',
+            position: 'absolute',
+            top: '53.5%',
+            left: '80%',
+            transform: 'translate(-50%, -50%)',
         },
     })
 );

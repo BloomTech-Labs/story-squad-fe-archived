@@ -11,3 +11,5 @@ export * from './BeforeInstall';
 
 export * from './PointsAllocation';
 
+export * from './Story';
+export * from './Illustration';

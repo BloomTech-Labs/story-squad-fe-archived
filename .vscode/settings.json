@@ -10,5 +10,6 @@
     "git.autofetch": true,
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "extensions.ignoreRecommendations": false
 }

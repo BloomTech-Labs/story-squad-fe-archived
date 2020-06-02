@@ -45,11 +45,11 @@ const AdminNavigationDrawer = () => {
                         <ListItemText primary='Help' />
                     </ListItem>
                 </NavLink>
-                <NavLink to='/admin/dashboard/cohort'>
+                {/* <NavLink to='/admin/dashboard/cohort'>
                     <ListItem button>
                         <ListItemText primary='Cohort Management' />
                     </ListItem>
-                </NavLink>
+                </NavLink> */}
             </List>
         </Drawer>
     );

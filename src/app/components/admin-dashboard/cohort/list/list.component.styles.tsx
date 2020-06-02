@@ -13,7 +13,11 @@ export const useStyles = makeStyles(() => ({
     },
     header: {
         display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: '',
+        alignItems: 'flex-end',
+    },
+    button: {
+        margin: '1em',
     },
 }));

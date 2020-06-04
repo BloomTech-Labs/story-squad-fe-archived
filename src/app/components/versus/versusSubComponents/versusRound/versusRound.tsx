@@ -100,14 +100,14 @@ const VersusRound: React.FC<RoundProps> = ({
                 </div>
 
                 {/* left child's submission */}
-                <Grid item xs={12} sm={12} md={6}>
+                <div className={'classes.imageHolder'}>
                     <SubmissionDisplay
                         username={matchup[0].username}
                         submission={b64passLeft}
                         left={true}
                         pulseAnim={false}
                     />
-                </Grid>
+                </div>
             </div>
 
             {/* bottom "row" */}

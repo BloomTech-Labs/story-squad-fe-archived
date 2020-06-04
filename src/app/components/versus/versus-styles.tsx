@@ -13,14 +13,6 @@ export const useStyles = makeStyles((theme: Theme) =>
         bottomRow: {
             display: 'flex',
         },
-        nameRow: {
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            zIndex: 9,
-            width: '100%',
-            height: '40%',
-        },
         nameRowBig: {
             padding: '0 10% 0 10%',
         },
@@ -128,8 +120,23 @@ export const useStyles = makeStyles((theme: Theme) =>
         // located here as conditional styling for totalScore divs wouldn't work if styles located n /// versusRound folder
         leftPlayer: {
             display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            zIndex: 9,
+            width: '100%',
+            height: '40%',
+        },
+        userHero: {
+            display: 'flex',
             marginTop: '3%',
+            width: '50%',
             position: 'relative',
+        },
+        badge: {
+            position: 'absolute',
+            cursor: 'pointer',
+            top: '12px',
+            left: '12px',
         },
         rightPlayer: {
             display: 'flex',
@@ -163,12 +170,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             width: '100%',
             height: '45%',
         },
-        badge: {
-            position: 'absolute',
-            cursor: 'pointer',
-            top: 0,
-            left: 0,
-        },
         imagePreview: {
             marginLeft: '8%',
             width: '150px',
@@ -178,6 +179,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             filter: 'blur(2.5px)',
             border: '4px solid red',
         },
+        imageHolder: {},
         gridContainer: {
             flexDirection: 'column',
             justifyContent: 'space-between',

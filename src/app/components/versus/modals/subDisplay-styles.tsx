@@ -24,6 +24,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             height: '90px',
             borderRadius: '10px',
             cursor: 'pointer',
+            objectFit: 'cover',
         },
         imageUnlocked: {
             width: '150px',
@@ -31,6 +32,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             borderRadius: '10px',
             cursor: 'pointer',
             border: '4px solid lightgreen',
+            objectFit: 'cover',
         },
         gridContainer: {
             flexDirection: 'column',

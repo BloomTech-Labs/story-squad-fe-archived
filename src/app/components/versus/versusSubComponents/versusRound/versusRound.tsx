@@ -71,9 +71,9 @@ const VersusRound: React.FC<RoundProps> = ({
             score
 
             */}
-            <div className={`${classes.nameRow} ${nameRowStyle}`}>
+            <div className={`${classes.leftPlayer} ${nameRowStyle}`}>
                 {/* left child left column */}
-                <div className={classes.leftPlayer}>
+                <div className={classes.leftHero}>
                     <FeedbackPopup
                         emojis={emojiArr}
                         open={open}
@@ -110,43 +110,38 @@ const VersusRound: React.FC<RoundProps> = ({
                 </div>
             </div>
 
-            {/* bottom "row" */}
-            {/* now right column */}
-            {/* right child */}
-            {/* <div className={classes.subRow}>
-                <div className={classes.rightPlayer}>
-                    <div className={classes.playerName}>{matchup[1].username}</div>
+            {/* right column */}
+            <div className={classes.rightPlayer}>
+                <div className={classes.rightHero}>
+                    <div className={classes.playerNameRight}>{matchup[1].username}</div>
                     <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
-
-                    <Grid item xs={12} sm={12} md={6}>
-                        {!locked ? (
-                            <SubmissionDisplay
-                                username={matchup[1].username}
-                                submission={b64passRight}
-                                left={false}
-                                pulseAnim={pulseAnim}
-                            />
-                        ) : (
-                            <Grid container className={classes.gridContainer}>
-                                <Grid item md>
-                                    <img
-                                        style={{ cursor: 'auto' }}
-                                        src={b64passRight[0]}
-                                        className={classes.imagePreview}
-                                        alt='locked submission'
-                                    />
-                                    <Lock
-                                        className={alwaysLocked ? classes.lock : classes.lockKey}
-                                        onClick={
-                                            alwaysLocked ? null : () => history.push(`/voting`)
-                                        }
-                                    />
-                                </Grid>
-                            </Grid>
-                        )}
-                    </Grid>
                 </div>
-            </div> */}
+                <div className={'classes.imageHolder'}>
+                    {!locked ? (
+                        <SubmissionDisplay
+                            username={matchup[1].username}
+                            submission={b64passRight}
+                            left={false}
+                            pulseAnim={pulseAnim}
+                        />
+                    ) : (
+                        <Grid container className={classes.gridContainer}>
+                            <Grid item md>
+                                <img
+                                    style={{ cursor: 'auto' }}
+                                    src={b64passRight[0]}
+                                    className={classes.imagePreview}
+                                    alt='locked submission'
+                                />
+                                <Lock
+                                    className={alwaysLocked ? classes.lock : classes.lockKey}
+                                    onClick={alwaysLocked ? null : () => history.push(`/voting`)}
+                                />
+                            </Grid>
+                        </Grid>
+                    )}
+                </div>
+            </div>
 
             {/* bottom row */}
             {/* High story1 */}

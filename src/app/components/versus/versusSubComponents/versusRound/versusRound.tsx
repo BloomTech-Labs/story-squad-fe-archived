@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Avatar, Grid } from '@material-ui/core';
 import { SubmissionDisplay } from '../../modals/subDisplay.component';
@@ -30,8 +30,7 @@ const VersusRound: React.FC<RoundProps> = ({
 }) => {
     const history = useHistory();
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    // console.log({ matchup }, { child });
+    const [open, setOpen] = useState(false);
     let emojiArr = [];
 
     if (matchup[0].emojis && matchup[0].emojis.length > 0) {
@@ -43,14 +42,11 @@ const VersusRound: React.FC<RoundProps> = ({
 
         const displayedEmojis = allEmojis.filter((emoji) => emoji.id === latestFeedback)[0];
 
-        console.log(latestFeedback);
-        console.log(displayedEmojis);
         if (displayedEmojis) emojiArr = displayedEmojis.emoji.replace(/[.{.}."]/g, '').split(',');
         // allEmojis.filter((emoji) => (emoji.id))
     }
 
     if (matchup[0].story === undefined && matchup[0].illustration === undefined) return <></>;
-    console.log({ locked });
 
     let b64passLeft = [];
     let b64passRight = [];
@@ -61,12 +57,22 @@ const VersusRound: React.FC<RoundProps> = ({
         b64passLeft = [matchup[0].illustration];
         b64passRight = [matchup[1].illustration];
     }
-    console.log(matchup[0].emojis);
-    console.log(emojiArr);
 
     return (
         <Grid className={`${roundStyle}`}>
+            {/* 
+
+            column 1           |    column 2
+            Child 1 avatar     | Child 2 avatar
+            Child 1 submission | Child 2 submission
+
+            
+            lightning bolt
+            score
+
+            */}
             <div className={`${classes.nameRow} ${nameRowStyle}`}>
+                {/* left child left column */}
                 <div className={classes.leftPlayer}>
                     <FeedbackPopup
                         emojis={emojiArr}
@@ -79,9 +85,9 @@ const VersusRound: React.FC<RoundProps> = ({
                             onClick={() => {
                                 setOpen(true);
                             }}
-                            className={classes.root}
+                            className={classes.badge}
                             color='error'
-                            badgeContent={matchup[0].emojis.length}
+                            badgeContent={matchup[0].emojis && matchup[0].emojis.length}
                             anchorOrigin={{
                                 vertical: 'top',
                                 horizontal: 'left',
@@ -92,13 +98,8 @@ const VersusRound: React.FC<RoundProps> = ({
                     <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
                     <div className={classes.playerName}>{matchup[0].username}</div>
                 </div>
-                <div className={classes.rightPlayer}>
-                    <div className={classes.playerName}>{matchup[1].username}</div>
-                    <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
-                </div>
-            </div>
-            <div className={classes.subRow}>
-                {/* High story1 */}
+
+                {/* left child's submission */}
                 <Grid item xs={12} sm={12} md={6}>
                     <SubmissionDisplay
                         username={matchup[0].username}
@@ -107,42 +108,60 @@ const VersusRound: React.FC<RoundProps> = ({
                         pulseAnim={false}
                     />
                 </Grid>
-                {nameRowStyle === classes.nameRowBig ? (
-                    <div className={classes.totalScoreBig}>
-                        <p>{matchup.points}</p>
-                    </div>
-                ) : (
-                    <div className={classes.totalScoreSmall}>
-                        <p>{matchup.points}</p>
-                    </div>
-                )}
-                <Grid item xs={12} sm={12} md={6}>
-                    {!locked ? (
-                        <SubmissionDisplay
-                            username={matchup[1].username}
-                            submission={b64passRight}
-                            left={false}
-                            pulseAnim={pulseAnim}
-                        />
-                    ) : (
-                        <Grid container className={classes.gridContainer}>
-                            <Grid item md>
-                                <img
-                                    style={{ cursor: 'auto' }}
-                                    src={b64passRight[0]}
-                                    className={classes.imagePreview}
-                                    alt='locked submission'
-                                />
-                                <Lock
-                                    className={alwaysLocked ? classes.lock : classes.lockKey}
-                                    onClick={alwaysLocked ? null : () => history.push(`/voting`)}
-                                />
-                            </Grid>
-                        </Grid>
-                    )}
-                </Grid>
             </div>
-            <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
+
+            {/* bottom "row" */}
+            {/* now right column */}
+            {/* right child */}
+            {/* <div className={classes.subRow}>
+                <div className={classes.rightPlayer}>
+                    <div className={classes.playerName}>{matchup[1].username}</div>
+                    <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
+
+                    <Grid item xs={12} sm={12} md={6}>
+                        {!locked ? (
+                            <SubmissionDisplay
+                                username={matchup[1].username}
+                                submission={b64passRight}
+                                left={false}
+                                pulseAnim={pulseAnim}
+                            />
+                        ) : (
+                            <Grid container className={classes.gridContainer}>
+                                <Grid item md>
+                                    <img
+                                        style={{ cursor: 'auto' }}
+                                        src={b64passRight[0]}
+                                        className={classes.imagePreview}
+                                        alt='locked submission'
+                                    />
+                                    <Lock
+                                        className={alwaysLocked ? classes.lock : classes.lockKey}
+                                        onClick={
+                                            alwaysLocked ? null : () => history.push(`/voting`)
+                                        }
+                                    />
+                                </Grid>
+                            </Grid>
+                        )}
+                    </Grid>
+                </div>
+            </div> */}
+
+            {/* bottom row */}
+            {/* High story1 */}
+
+            {/* points */}
+            {/* {nameRowStyle === classes.nameRowBig ? (
+                <div className={classes.totalScoreBig}>
+                    <p>{matchup.points}</p>
+                </div>
+            ) : (
+                <div className={classes.totalScoreSmall}>
+                    <p>{matchup.points}</p>
+                </div>
+            )} */}
+            {/* <img className={classes.vs} src={vsImg} alt='vs lightning bolt' /> */}
         </Grid>
     );
 };

@@ -36,7 +36,6 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
     const handleClose = () => {
         setOpen(false);
     };
-    console.log('submission from modal', submission);
     return (
         <Grid container className={classes.gridContainer}>
             <Grid item md>
@@ -68,11 +67,6 @@ export const SubmissionDisplay: React.FC<SubDisplayProps> = ({
                             )
                     )}
                 </Grid>
-                <div className={classes.iconBox}>
-                    <IconButton edge='start' onClick={handleClose} aria-label='close'>
-                        <CloseIcon />
-                    </IconButton>
-                </div>
             </Dialog>
         </Grid>
     );

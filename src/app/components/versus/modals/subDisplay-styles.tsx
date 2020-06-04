@@ -66,7 +66,8 @@ export const useStyles = makeStyles((theme: Theme) =>
             },
         },
         submissionImg: {
-            maxWidth: '70%',
+            maxHeight: '85vh',
+            objectFit: 'contain',
         },
         iconBox: {
             width: '5vh',

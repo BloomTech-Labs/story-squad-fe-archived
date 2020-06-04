@@ -31,7 +31,6 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
     // console.log(child);
     const classes = useStyles({});
     const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
-    console.log('response', response);
     const [votesCasted, setVotesCasted] = useState(0);
     const [matchdata, setMatchdata] = useState({} as any);
     const [temp, setTemp] = useState([]);
@@ -58,7 +57,6 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
             points: 0,
         },
     ]);
-    console.log({ child });
     const [locked, setLocked] = useState({
         '1Votes': true,
         '2Votes': true,
@@ -88,7 +86,8 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
         );
 
     // console.log('locked', locked['3Votes']);
-    // console.log(matchups);
+    // console.log(matchups); // point totals from here
+    // console.log(child); // currently logged in child
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader

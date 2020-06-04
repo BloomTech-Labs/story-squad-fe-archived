@@ -43,8 +43,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
         pic2Points: 10,
     });
 
-    // console.log('child', child);
-
     const [remainingPoints, setRemainingPoints] = useState(100);
     const [error, setError] = useState(false);
     const [thisMatch, setThisMatch] = useState();
@@ -53,7 +51,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
     const [student, setStudent] = useState<Teammember | undefined>(undefined);
     const [teammate, setTeammate] = useState<Teammember | undefined>(undefined);
 
-    console.log(student, teammate);
     const classes = useStyles({});
 
     useEffect(() => {
@@ -71,12 +68,9 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
             setStudent({ ...student });
             setTeammate({ ...teammate });
             setTeamReviewTime(new Date(matchInfo.thisMatch.teamReviewEndDate));
-
-            // console.log(new Date(matchInfo.thisMatch.teamReviewEndDate));
-            console.log("logan's", matchInfo.thisMatch);
         }
     }, [child.progress.teamReview, matchInfo]);
-    // console.log(new Date(teamReviewTime.getTime() - new Date().getTime()));
+
     const handleSubmit = () => {
         const newPoints = {
             stories: [
@@ -88,20 +82,17 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                 { id: teammate.illustration.id, points: state.pic2Points },
             ],
         };
-        console.log('submitting pts', newPoints);
         if (remainingPoints === 0 && child.progress.teamReview === false) {
             updatePoints(newPoints);
             setDisabled(true);
-            return console.log('Success!');
         } else if (child.progress.teamReview === true) {
             history.push('/matchup');
-            return console.log('Already submitted points!');
         } else {
             setError(true);
         }
     };
     window.localStorage.removeItem('visited');
-    // console.log('updated state', state);
+
     const submissionCheck = (submission) =>
         typeof submission === 'string' ? [submission] : Object.values(submission);
     return (
@@ -111,7 +102,6 @@ const PointDashboard: React.FC<PointCardProps> = ({ child }) => {
                 history.push('/matchup')
             ) : !student || !teammate ? (
                 <div>
-                    {console.log('loading')}
                     <CircularProgress />
                 </div>
             ) : (

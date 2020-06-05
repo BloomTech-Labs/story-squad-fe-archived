@@ -207,18 +207,14 @@ export const useStyles = makeStyles((theme: Theme) =>
             alignContent: 'center',
         },
         lockKey: {
-            width: '17%',
-            height: '27%',
-            position: 'absolute',
-            top: '53.5%',
-            left: '80%',
-            transform: 'translate(-50%, -50%)',
             cursor: `URL(${key}) 2 26, default`,
         },
         lock: {
-            position: 'absolute',
-            top: '0',
-            left: '0',
+            display: 'block',
+            position: 'relative',
+            top: '45px',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
         },
     })
 );

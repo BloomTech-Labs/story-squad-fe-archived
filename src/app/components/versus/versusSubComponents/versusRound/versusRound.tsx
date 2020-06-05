@@ -127,14 +127,23 @@ const VersusRound: React.FC<RoundProps> = ({
                     ) : (
                         <Grid container className={classes.gridContainer}>
                             <Grid item md>
-                                <img
-                                    style={{ cursor: 'auto' }}
-                                    src={b64passRight[0]}
-                                    className={classes.imagePreview}
-                                    alt='locked submission'
-                                />
+                                {/* The following div is set to a height of 0 so that we can overlay the lock svg image on top */}
+                                <div style={{ height: '0px' }}>
+                                    <img
+                                        style={{ cursor: 'auto' }}
+                                        src={b64passRight[0]}
+                                        className={classes.imagePreview}
+                                        alt='locked submission'
+                                    />
+                                </div>
                                 <Lock
-                                    className={alwaysLocked ? classes.lock : classes.lockKey}
+                                    className={
+                                        // Using an interpolated string lets us apply multiple classes to the lock svg. This way we can always have the lock class applied and the lockKey class just applies the cursor change.  https://stackoverflow.com/questions/46066675/how-to-add-multiple-classes-in-material-ui-using-the-classes-props
+
+                                        alwaysLocked
+                                            ? classes.lock
+                                            : `${classes.lockKey} ${classes.lock}`
+                                    }
                                     onClick={alwaysLocked ? null : () => history.push(`/voting`)}
                                 />
                             </Grid>

@@ -131,6 +131,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             marginTop: '3%',
             marginBottom: '35px',
+            marginRight: '50%',
             position: 'relative',
         },
         badge: {
@@ -146,6 +147,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
             width: '50%',
             height: '100%',
+            position: 'relative',
         },
         rightHero: {
             display: 'flex',
@@ -154,6 +156,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
             marginTop: '3%',
             marginBottom: '35px',
+            marginLeft: '50%',
             position: 'relative',
         },
         avatarStyle: {
@@ -184,10 +187,15 @@ export const useStyles = makeStyles((theme: Theme) =>
             top: '20px',
             right: '75px',
         },
+        lightningboi: {
+            position: 'relative',
+            width: 0,
+            transform: 'translate(50%, 50%)',
+        },
         vs: {
-            height: '80%',
-            zIndex: 10,
+            height: '88%',
             position: 'absolute',
+            zIndex: 10,
         },
         imagePreview: {
             width: '150px',
@@ -215,6 +223,20 @@ export const useStyles = makeStyles((theme: Theme) =>
             top: '45px',
             left: '50%',
             transform: 'translate(-50%, -50%)',
+        },
+        totalScore: {
+            'position': 'absolute',
+            'bottom': 0,
+            'fontFamily': 'Nunito',
+            'fontStyle': 'normal',
+            'fontWeight': 'bold',
+            'fontSize': '26px',
+            'color': '#FFFFFF',
+            '-webkit-text-stroke-width': '1px',
+            '-webkit-text-stroke-color': '#000000',
+        },
+        loss: {
+            backgroundColor: 'gray',
         },
     })
 );

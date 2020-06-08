@@ -5,7 +5,7 @@ import { SubmissionDisplay } from '../../modals/subDisplay.component';
 import { useStyles } from '../../versus-styles';
 import { ReactComponent as Lock } from '../../img/lock-icon.svg';
 import ava1 from '../../img/ava1.png';
-import vsImg from '../../img/VS.png';
+import vsImg from '../../img/VSBolt.svg';
 import Badge from '@material-ui/core/Badge';
 import { FeedbackPopup } from '../../emoji-feedback/feedback-popup';
 
@@ -71,7 +71,7 @@ const VersusRound: React.FC<RoundProps> = ({
             score
 
             */}
-            <div className={`${classes.leftPlayer} ${nameRowStyle}`}>
+            <div className={`${classes.leftPlayer} ${nameRowStyle} ${classes.loss}`}>
                 {/* left child left column */}
                 <div className={classes.leftHero}>
                     <FeedbackPopup
@@ -97,6 +97,11 @@ const VersusRound: React.FC<RoundProps> = ({
                     ) : null}
                     <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
                     <div className={classes.playerName}>{matchup[0].username}</div>
+
+                    {/* points */}
+                    <div className={classes.totalScore}>
+                        <p>{matchup.points}</p>
+                    </div>
                 </div>
 
                 {/* left child's submission */}
@@ -108,6 +113,10 @@ const VersusRound: React.FC<RoundProps> = ({
                         pulseAnim={false}
                     />
                 </div>
+            </div>
+
+            <div className='{classes.lightningboi}'>
+                <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
             </div>
 
             {/* right column */}
@@ -151,21 +160,6 @@ const VersusRound: React.FC<RoundProps> = ({
                     )}
                 </div>
             </div>
-
-            {/* bottom row */}
-            {/* High story1 */}
-
-            {/* points */}
-            {/* {nameRowStyle === classes.nameRowBig ? (
-                <div className={classes.totalScoreBig}>
-                    <p>{matchup.points}</p>
-                </div>
-            ) : (
-                <div className={classes.totalScoreSmall}>
-                    <p>{matchup.points}</p>
-                </div>
-            )} */}
-            {/* <img className={classes.vs} src={vsImg} alt='vs lightning bolt' /> */}
         </Grid>
     );
 };

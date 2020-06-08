@@ -188,9 +188,13 @@ export const useStyles = makeStyles((theme: Theme) =>
             right: '75px',
         },
         lightningboi: {
+            display: 'block',
             position: 'relative',
-            width: 0,
-            transform: 'translate(50%, 50%)',
+            top: '45px',
+            left: '50%',
+            transform: 'translate(-50%, -45%)',
+            zIndex: 10,
+            height: '80%',
         },
         vs: {
             height: '88%',

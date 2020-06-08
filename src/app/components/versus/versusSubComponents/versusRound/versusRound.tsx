@@ -115,8 +115,8 @@ const VersusRound: React.FC<RoundProps> = ({
                 </div>
             </div>
 
-            <div className='{classes.lightningboi}'>
-                <img className={classes.vs} src={vsImg} alt='vs lightning bolt' />
+            <div style={{ width: '0px', height: '100%' }} className='{classes.vs}'>
+                <img className={classes.lightningboi} src={vsImg} alt='vs lightning bolt' />
             </div>
 
             {/* right column */}

@@ -138,8 +138,9 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                         locked['1Votes'] === false && locked['2Votes'] === true ? true : false
                     }
                 />
-                <VersusButton locked={locked['3Votes']} />
             </Grid>
+
+            <VersusButton locked={locked['3Votes']} />
         </Container>
     );
 };

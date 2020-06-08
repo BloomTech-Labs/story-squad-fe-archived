@@ -97,11 +97,6 @@ const VersusRound: React.FC<RoundProps> = ({
                     ) : null}
                     <Avatar className={classes.avatarStyle} src={ava1}></Avatar>
                     <div className={classes.playerName}>{matchup[0].username}</div>
-
-                    {/* points */}
-                    <div className={classes.totalScore}>
-                        <p>{matchup.points}</p>
-                    </div>
                 </div>
 
                 {/* left child's submission */}
@@ -117,6 +112,8 @@ const VersusRound: React.FC<RoundProps> = ({
 
             <div style={{ width: '0px', height: '100%' }} className='{classes.vs}'>
                 <img className={classes.lightningboi} src={vsImg} alt='vs lightning bolt' />
+                {/* points */}
+                <p className={classes.totalScore}>{matchup.points}</p>
             </div>
 
             {/* right column */}

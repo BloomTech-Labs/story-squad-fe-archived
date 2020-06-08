@@ -192,7 +192,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             position: 'relative',
             top: '45px',
             left: '50%',
-            transform: 'translate(-50%, -45%)',
+            transform: 'translate(-50%, -17%)',
             zIndex: 10,
             height: '80%',
         },
@@ -238,6 +238,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             'color': '#FFFFFF',
             '-webkit-text-stroke-width': '1px',
             '-webkit-text-stroke-color': '#000000',
+            'transform': 'translate(-25px, 0px)',
         },
         loss: {
             backgroundColor: 'gray',

@@ -46,7 +46,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             backgroundImage: `url(${cityscape})`,
             backgroundRepeat: 'no-repeat',
             border: '7px solid #000000',
-            backgroundSize: '101% 103%',
+            backgroundSize: 'cover',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',

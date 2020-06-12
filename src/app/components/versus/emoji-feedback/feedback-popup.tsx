@@ -96,7 +96,11 @@ export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen, submission
                     </DialogTitle>
                     <DialogContent>
                         <div className={classes.mainContainer}>
-                            <img src={submission[0]} className={classes.storyPic} />
+                            <img
+                                src={submission[0]}
+                                className={classes.storyPic}
+                                alt='Submission'
+                            />
                             <div className={classes.inputDiv}>
                                 <span className={classes.emojiSpan}>{emojis}</span>
                             </div>

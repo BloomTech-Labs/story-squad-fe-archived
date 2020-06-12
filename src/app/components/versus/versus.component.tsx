@@ -64,30 +64,8 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
         '2Votes': true,
         '3Votes': true,
     });
+    const [winners, setWinners] = useState([]);
     const axios = requestFactory();
-
-    useEffect(() => {
-        axios
-            // check if the timer for voting has elapsed
-            .get('/finalRoutes/time')
-            .then((res) => {
-                if (res.data.finalScreen.votingTimeIsOver) {
-                    // if it has, then get the results
-                    axios.get('/finalRoutes/results').then(({ data }) => {
-                        data.Build.map((each) => {
-                            if (each.PictureC1points) {
-                                console.log('picture');
-                                console.log(each.winnerId);
-                            } else {
-                                console.log('story');
-                                console.log(each.winnerId);
-                            }
-                        });
-                    });
-                }
-            })
-            .catch((err) => console.log(err));
-    }, []);
 
     //student/teammate submissions state
     useEffect(() => {
@@ -97,6 +75,45 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
         if (response) setMatchdata(response.matchdata);
         if (response) setMatchups(response.matchups);
     }, [response]);
+
+    useEffect(() => {
+        axios
+            // check if the timer for voting has elapsed
+            .get('/finalRoutes/time')
+            .then((res) => {
+                if (res.data.finalScreen.votingTimeIsOver) {
+                    // if it has, then get the results
+                    axios.get('/finalRoutes/results').then(({ data }) => {
+                        // map over the results to determine winner and picture/story
+                        data.Build.map((each) => {
+                            // cheesy way to get picture or story
+                            if (each.PictureC1points) {
+                                setWinners([
+                                    ...winners,
+                                    {
+                                        isPicture: true,
+                                        winnerID: each.winnerId,
+                                    },
+                                ]);
+                            } else {
+                                setWinners([
+                                    ...winners,
+                                    {
+                                        isPicture: false,
+                                        winnerID: each.winnerId,
+                                    },
+                                ]);
+                            }
+                        });
+                    });
+                }
+            })
+            .catch((err) => console.log(err));
+    }, []);
+
+    useEffect(() => {
+        console.log('winners', winners);
+    }, []);
 
     useEffect(() => {
         if (votesCasted === 1) setLocked({ ...locked, '1Votes': false });

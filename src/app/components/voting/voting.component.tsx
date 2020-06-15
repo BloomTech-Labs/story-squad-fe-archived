@@ -113,7 +113,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                                 />
                                 <ColoredRadio
                                     className={classes.radioBox}
-                                    checked={selectedValue == response?.child1.childId}
+                                    checked={selectedValue === response?.child1.childId}
                                     onChange={handleChange}
                                     value={response?.child1.childId}
                                     name='storyA'
@@ -141,7 +141,7 @@ const Voting: React.FC<VotingCardProps> = ({ child }) => {
                                 />
                                 <ColoredRadio
                                     className={classes.radioBox}
-                                    checked={selectedValue == response?.child2.childId}
+                                    checked={selectedValue === response?.child2.childId}
                                     onChange={handleChange}
                                     value={response?.child2.childId}
                                     name='storyB'

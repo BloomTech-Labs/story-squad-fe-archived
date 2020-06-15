@@ -8,6 +8,9 @@ export const useStyles = makeStyles((theme: Theme) =>
             maxWidth: '100%',
             position: 'relative',
             backgroundColor: '#231F20',
+            borderRight: '7px solid black',
+            borderLeft: '7px solid black',
+            borderBottom: '7px solid black',
         },
         btnDiv: {
             display: 'flex',

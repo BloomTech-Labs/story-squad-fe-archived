@@ -112,12 +112,17 @@ const VersusRound: React.FC<RoundProps> = ({
                         pulseAnim={false}
                     />
                 </div>
+
+                {/* points */}
+                {matchup[0].isLoser ? (
+                    <div></div>
+                ) : (
+                    <p className={classes.totalScore}>{matchup.points}</p>
+                )}
             </div>
 
             <div style={{ width: '0px', height: '100%' }} className='{classes.vs}'>
                 <img className={classes.lightningboi} src={vsImg} alt='vs lightning bolt' />
-                {/* points */}
-                <p className={classes.totalScore}>{matchup.points}</p>
             </div>
 
             {/* right column */}
@@ -160,6 +165,12 @@ const VersusRound: React.FC<RoundProps> = ({
                         </Grid>
                     )}
                 </div>
+                {/* points */}
+                {matchup[1].isLoser ? (
+                    <div></div>
+                ) : (
+                    <p className={classes.totalScore}>{matchup.points}</p>
+                )}
             </div>
         </Grid>
     );

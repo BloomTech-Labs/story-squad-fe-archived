@@ -229,6 +229,9 @@ export const useStyles = makeStyles((theme: Theme) =>
             transform: 'translate(-50%, -50%)',
         },
         totalScore: {
+            'display': 'flex',
+            'flexDirection': 'column',
+            'justifyContent': 'center',
             'position': 'absolute',
             'bottom': 0,
             'fontFamily': 'Nunito',

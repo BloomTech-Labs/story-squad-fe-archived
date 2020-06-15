@@ -9,21 +9,32 @@ import { Container, Grid } from '@material-ui/core';
 import { useStyles } from './versus-styles';
 import { useAPI } from '../../hooks';
 import { VersusHeader, VersusRound, VersusButton } from './versusSubComponents';
-
+import { Child, Illustration, Story } from '../../models';
 import requestFactory from '../../util/requestFactory';
 
-class TemporaryHolder {
-    username;
-    avatar;
-    story;
-    storypoints;
+class VsResponseMatchdata {
+    awayTeam: Child[];
+    homeTeam: Child[];
+    votes: number;
+}
 
-    constructor() {
-        this.username = '';
-        this.avatar = ava1;
-        this.story = '';
-        this.storypoints = 10;
-    }
+class VsResponseMatchup {
+    '0': AnnotatedStory | AnnotatedIllustration;
+    '1': AnnotatedStory | AnnotatedIllustration;
+    'points': number;
+}
+
+class VsResponse {
+    matchdata: VsResponseMatchdata;
+    matchups: VsResponseMatchup[];
+}
+
+interface AnnotatedStory extends Story {
+    isLoser: boolean;
+}
+
+interface AnnotatedIllustration extends Illustration {
+    isLoser: boolean;
 }
 
 interface VersusProps {
@@ -32,49 +43,59 @@ interface VersusProps {
 
 const Versus: React.FC<VersusProps> = ({ child }) => {
     const classes = useStyles({});
-    const [response] = useAPI(`/versusRoutes/versus`, 'GET', false);
+    const [response] = useAPI<VsResponse>(`/versusRoutes/versus`, 'GET', false);
     const [votesCasted, setVotesCasted] = useState(0);
     const [matchdata, setMatchdata] = useState({} as any);
-    const [temp, setTemp] = useState([]);
-    const tempHolding = new TemporaryHolder();
-    const [matchups, setMatchups] = useState([
-        {
-            0: tempHolding,
-            1: tempHolding,
-            points: 0,
-        },
-        {
-            0: tempHolding,
-            1: tempHolding,
-            points: 0,
-        },
-        {
-            0: tempHolding,
-            1: tempHolding,
-            points: 0,
-        },
-        {
-            0: tempHolding,
-            1: tempHolding,
-            points: 0,
-        },
-    ]);
+    const [finalResults, setFinalResults] = useState(null);
+
+    const [matchups, setMatchups] = useState<VsResponseMatchup[]>(null);
     const [locked, setLocked] = useState({
         '1Votes': true,
         '2Votes': true,
         '3Votes': true,
     });
-    const [winners, setWinners] = useState([]);
+
     const axios = requestFactory();
 
     //student/teammate submissions state
     useEffect(() => {
-        // setVotesCasted(1);
-        console.log(response);
-        if (response) setVotesCasted(response.matchdata.votes);
-        if (response) setMatchdata(response.matchdata);
-        if (response) setMatchups(response.matchups);
-    }, [response]);
+        // This if statement has been changed to include finalResults so that
+        // this code will only run when the data for both has been downloaded.
+        // This way we can add the isLoser property to the matchups before we set the matchups state.
+
+        if (response && finalResults) {
+            setVotesCasted(response.matchdata.votes);
+            setMatchdata(response.matchdata);
+
+            // This loop was moved out of the useEffect below so that we can be sure that
+            // the response.matchups and the finalResults are both loaded before it runs
+
+            // looping over the results to determine winner and picture/story
+            finalResults.forEach((each) => {
+                // matching up the matchups with the elements in Build[]
+                const isPicture = each.PictureC1points !== undefined;
+                response.matchups.forEach((matchup) => {
+                    const isPictureMatchup = (matchup[0] as Illustration) !== undefined;
+                    // We used these console logs to compare the matchup childIds to the winnerIds
+                    // console.log('matchup[0]', matchup[0]);
+                    // console.log('comp1', isPicture, isPictureMatchup);
+                    // console.log('comp2', matchup[0].childId, each.winnerId);
+                    // console.log('comp3', matchup[1].childId, each.winnerId);
+                    if (
+                        isPicture === isPictureMatchup &&
+                        (matchup[0].childId === each.winnerId ||
+                            matchup[1].childId === each.winnerId)
+                    ) {
+                        // setting isLoser boolean property on both sides of the matchup, true on children whose id=/=winnerId
+                        // console.log('isLoser');
+                        matchup[0].isLoser = matchup[0].childId !== each.winnerId;
+                        matchup[1].isLoser = matchup[1].childId !== each.winnerId;
+                    }
+                });
+                setMatchups(response.matchups);
+            });
+        }
+    }, [response, finalResults]);
 
     useEffect(() => {
         axios
@@ -83,36 +104,19 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
             .then((res) => {
                 if (res.data.finalScreen.votingTimeIsOver) {
                     // if it has, then get the results
-                    axios.get('/finalRoutes/results').then(({ data }) => {
-                        // map over the results to determine winner and picture/story
-                        data.Build.map((each) => {
-                            // cheesy way to get picture or story
-                            if (each.PictureC1points) {
-                                setWinners([
-                                    ...winners,
-                                    {
-                                        isPicture: true,
-                                        winnerID: each.winnerId,
-                                    },
-                                ]);
-                            } else {
-                                setWinners([
-                                    ...winners,
-                                    {
-                                        isPicture: false,
-                                        winnerID: each.winnerId,
-                                    },
-                                ]);
-                            }
-                        });
-                    });
+                    axios
+                        .get('/finalRoutes/results')
+                        .then(({ data }) => {
+                            setFinalResults(data.Build);
+                        })
+                        .catch((err) => console.log(err));
+                } else {
+                    // this is to deal with the edge case of the voting time not being up
+                    setFinalResults([]);
                 }
             })
             .catch((err) => console.log(err));
-    }, []);
-
-    useEffect(() => {
-        console.log('winners', winners);
+        // The empty dependency array ensures that this will run once and then will not run again
     }, []);
 
     useEffect(() => {
@@ -130,7 +134,6 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
             </Container>
         );
 
-    // console.log('locked', locked['3Votes']);
     // console.log(matchups); // point totals from here
     // console.log(child); // currently logged in child
     return (

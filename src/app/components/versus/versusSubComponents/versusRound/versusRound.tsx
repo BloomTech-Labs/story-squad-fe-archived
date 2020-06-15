@@ -71,7 +71,11 @@ const VersusRound: React.FC<RoundProps> = ({
             score
 
             */}
-            <div className={`${classes.leftPlayer} ${nameRowStyle} ${classes.loss}`}>
+            {/* Below, we are setting the loss class on children whose isLoser property is true */}
+            <div
+                className={`${classes.leftPlayer} ${nameRowStyle} ${
+                    matchup[0].isLoser ? classes.loss : ''
+                }`}>
                 {/* left child left column */}
                 <div className={classes.leftHero}>
                     <FeedbackPopup
@@ -117,7 +121,7 @@ const VersusRound: React.FC<RoundProps> = ({
             </div>
 
             {/* right column */}
-            <div className={classes.rightPlayer}>
+            <div className={`${classes.rightPlayer} ${matchup[1].isLoser ? classes.loss : ''}`}>
                 <div className={classes.rightHero}>
                     <div className={classes.playerNameRight}>{matchup[1].username}</div>
                     <Avatar className={classes.avatarStyle} src={ava1}></Avatar>

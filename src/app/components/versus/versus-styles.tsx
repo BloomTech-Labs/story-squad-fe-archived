@@ -238,6 +238,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             'color': '#FFFFFF',
             '-webkit-text-stroke-width': '1px',
             '-webkit-text-stroke-color': '#000000',
+            'z-index': '10',
         },
         loss: {
             backgroundColor: 'gray',

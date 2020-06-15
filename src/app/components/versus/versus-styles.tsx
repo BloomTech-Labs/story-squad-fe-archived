@@ -230,7 +230,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         totalScore: {
             'display': 'flex',
-            'flexDirection': 'column',
+            'flexDirection': 'row',
             'justifyContent': 'center',
             'position': 'absolute',
             'bottom': 0,

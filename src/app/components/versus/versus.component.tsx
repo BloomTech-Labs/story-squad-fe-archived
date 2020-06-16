@@ -31,10 +31,12 @@ class VsResponse {
 
 interface AnnotatedStory extends Story {
     isLoser: boolean;
+    illustration: string;
 }
 
 interface AnnotatedIllustration extends Illustration {
     isLoser: boolean;
+    illustration: string;
 }
 
 interface VersusProps {
@@ -47,6 +49,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
     const [votesCasted, setVotesCasted] = useState(0);
     const [matchdata, setMatchdata] = useState({} as any);
     const [finalResults, setFinalResults] = useState(null);
+    const [winningScores, setWinningScores] = useState([]);
 
     const [matchups, setMatchups] = useState<VsResponseMatchup[]>(null);
     const [locked, setLocked] = useState({
@@ -59,6 +62,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
 
     //student/teammate submissions state
     useEffect(() => {
+        console.log(response);
         // This if statement has been changed to include finalResults so that
         // this code will only run when the data for both has been downloaded.
         // This way we can add the isLoser property to the matchups before we set the matchups state.
@@ -75,19 +79,31 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                 // matching up the matchups with the elements in Build[]
                 const isPicture = each.PictureC1points !== undefined;
                 response.matchups.forEach((matchup) => {
-                    const isPictureMatchup = (matchup[0] as Illustration) !== undefined;
+                    let isPictureMatchup = false;
+                    if (matchup[0].illustration !== undefined || null) {
+                        isPictureMatchup = true;
+                    }
                     // We used these console logs to compare the matchup childIds to the winnerIds
                     // console.log('matchup[0]', matchup[0]);
                     // console.log('comp1', isPicture, isPictureMatchup);
                     // console.log('comp2', matchup[0].childId, each.winnerId);
                     // console.log('comp3', matchup[1].childId, each.winnerId);
                     if (
-                        isPicture === isPictureMatchup &&
+                        isPicture === true &&
+                        isPictureMatchup === true &&
                         (matchup[0].childId === each.winnerId ||
                             matchup[1].childId === each.winnerId)
                     ) {
                         // setting isLoser boolean property on both sides of the matchup, true on children whose id=/=winnerId
                         // console.log('isLoser');
+                        matchup[0].isLoser = matchup[0].childId !== each.winnerId;
+                        matchup[1].isLoser = matchup[1].childId !== each.winnerId;
+                    } else if (
+                        isPicture === false &&
+                        isPictureMatchup === false &&
+                        (matchup[0].childId === each.winnerId ||
+                            matchup[1].childId === each.winnerId)
+                    ) {
                         matchup[0].isLoser = matchup[0].childId !== each.winnerId;
                         matchup[1].isLoser = matchup[1].childId !== each.winnerId;
                     }
@@ -108,6 +124,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                         .get('/finalRoutes/results')
                         .then(({ data }) => {
                             setFinalResults(data.Build);
+                            console.log(data.Build);
                         })
                         .catch((err) => console.log(err));
                 } else {

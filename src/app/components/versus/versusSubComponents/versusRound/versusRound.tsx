@@ -73,9 +73,8 @@ const VersusRound: React.FC<RoundProps> = ({
             */}
             {/* Below, we are setting the loss class on children whose isLoser property is true */}
             <div
-                className={`${classes.leftPlayer} ${nameRowStyle} ${
-                    matchup[0].isLoser ? classes.loss : ''
-                }`}>
+                className={`${classes.leftPlayer} ${nameRowStyle} 
+                        ${matchup[0].isLoser ? classes.loss : ''}`}>
                 {/* left child left column */}
                 <div className={classes.leftHero}>
                     <FeedbackPopup

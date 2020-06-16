@@ -32,11 +32,21 @@ export const useStyles = makeStyles((theme: Theme) =>
             'marginTop': '1%',
             'display': 'flex',
         },
+        teamInfo: {
+            display: 'flex',
+            flexDirection: 'column',
+        },
         teamName: {
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-evenly',
             alignContent: 'center',
+            width: '80%',
+        },
+        bottomRow: {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
             width: '80%',
         },
         appBar: {

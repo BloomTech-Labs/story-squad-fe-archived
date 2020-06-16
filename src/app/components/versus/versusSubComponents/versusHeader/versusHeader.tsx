@@ -7,9 +7,11 @@ interface HeaderProps {
     title?: string;
     homeTeam: string;
     awayTeam: string;
+    matchup: any;
 }
-const VersusHeader: React.FC<HeaderProps> = ({ homeTeam, awayTeam, title }) => {
+const VersusHeader: React.FC<HeaderProps> = ({ homeTeam, awayTeam, title, matchup }) => {
     const classes = useStyles();
+    console.log('Rendered:', matchup);
     return (
         <Grid container direction='row' className={classes.appBar}>
             <Grid className={classes.headerMenuDiv} container item>
@@ -21,12 +23,21 @@ const VersusHeader: React.FC<HeaderProps> = ({ homeTeam, awayTeam, title }) => {
                 <div className={classes.upperHeaderButtonDiv}>
                     <MenuButton />
                 </div>
-                <div className={classes.teamName}>
-                    <Typography className={classes.h4Styling}>{homeTeam}</Typography>
-                    <Typography className={classes.h4Styling}>VS</Typography>
-                    <Typography className={classes.h4Styling}>{awayTeam}</Typography>
+                <div className={classes.teamInfo}>
+                    <div className={classes.teamName}>
+                        <Typography className={classes.h4Styling}>{homeTeam}</Typography>
+                        <Typography className={classes.h4Styling}>VS</Typography>
+                        <Typography className={classes.h4Styling}>{awayTeam}</Typography>
+                    </div>
+                    <div className={classes.bottomRow}>
+                        <Typography className={classes.h3Styling}>{`${
+                            matchup ? matchup[0].points : 'Test'
+                        }`}</Typography>
+                        <Typography className={classes.h3Styling}>{`${
+                            matchup ? matchup[0].points : 'Test2'
+                        }`}</Typography>
+                    </div>
                 </div>
-                <Typography className={classes.h3Styling}>201 Points Needed To Win!</Typography>
             </Grid>
         </Grid>
     );

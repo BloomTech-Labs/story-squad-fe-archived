@@ -66,7 +66,8 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
         if (response && finalResults) {
             setVotesCasted(response.matchdata.votes);
             setMatchdata(response.matchdata);
-
+            console.log('response: ', response);
+            console.log('finalResults: ', finalResults);
             // This loop was moved out of the useEffect below so that we can be sure that
             // the response.matchups and the finalResults are both loaded before it runs
 
@@ -74,7 +75,9 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
             finalResults.forEach((each) => {
                 // matching up the matchups with the elements in Build[]
                 const isPicture = each.PictureC1points !== undefined;
+                const isStory = each.StoryC1points !== undefined;
                 response.matchups.forEach((matchup) => {
+                    console.log(matchup);
                     const isPictureMatchup = (matchup[0] as Illustration) !== undefined;
                     // We used these console logs to compare the matchup childIds to the winnerIds
                     // console.log('matchup[0]', matchup[0]);
@@ -130,7 +133,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
     if (matchdata.homeTeam === undefined)
         return (
             <Container className={classes.containerStyling}>
-                <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} />
+                <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} matchup={``} />
             </Container>
         );
 
@@ -142,6 +145,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                 title={'The MatchUp'}
                 homeTeam={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}!`}
                 awayTeam={`${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
+                matchup={matchups}
             />
             <Grid className={classes.topRow}>
                 <VersusRound

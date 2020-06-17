@@ -34,14 +34,15 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         teamInfo: {
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: 'row',
+            width: '100%',
         },
         teamName: {
             display: 'flex',
-            flexDirection: 'row',
+            flexDirection: 'column',
             justifyContent: 'space-evenly',
-            alignContent: 'center',
-            width: '80%',
+            alignItems: 'center',
+            width: '100%',
         },
         bottomRow: {
             display: 'flex',

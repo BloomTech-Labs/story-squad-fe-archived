@@ -32,17 +32,25 @@ const VersusHeader: React.FC<HeaderProps> = ({
                 <div className={classes.teamInfo}>
                     <div className={classes.teamName}>
                         <Typography className={classes.h4Styling}>{homeTeam}</Typography>
-                        <Typography className={classes.h4Styling}>VS</Typography>
-                        <Typography className={classes.h4Styling}>{awayTeam}</Typography>
-                    </div>
-                    <div className={classes.bottomRow}>
                         <Typography className={classes.h3Styling}>
                             Home Team Points: {homeTeamPoints}
                         </Typography>
+                    </div>
+                    <div className={classes.teamName}>
+                        <Typography className={classes.h4Styling}>VS</Typography>
+                    </div>
+                    <div className={classes.teamName}>
+                        <Typography className={classes.h4Styling}>{awayTeam}</Typography>
                         <Typography className={classes.h3Styling}>
                             Away Team Points: {awayTeamPoints}
                         </Typography>
                     </div>
+                    {/* <div className={classes.bottomRow}>
+                        <Typography className={classes.h3Styling}>
+                            Home Team Points: {homeTeamPoints}
+                        </Typography>
+                        
+                    </div> */}
                 </div>
             </Grid>
         </Grid>

@@ -7,9 +7,22 @@ interface HeaderProps {
     title?: string;
     homeTeam: string;
     awayTeam: string;
+<<<<<<< HEAD
     matchup: any;
 }
 const VersusHeader: React.FC<HeaderProps> = ({ homeTeam, awayTeam, title, matchup }) => {
+=======
+    homeTeamPoints?: number;
+    awayTeamPoints?: number;
+}
+const VersusHeader: React.FC<HeaderProps> = ({
+    homeTeam,
+    awayTeam,
+    title,
+    homeTeamPoints,
+    awayTeamPoints,
+}) => {
+>>>>>>> 6e6595e81001634d35b68e724719175ab3b6a65a
     const classes = useStyles();
     console.log('Rendered:', matchup);
     return (
@@ -38,6 +51,17 @@ const VersusHeader: React.FC<HeaderProps> = ({ homeTeam, awayTeam, title, matchu
                         }`}</Typography>
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
+                <div>
+                    <Typography className={classes.h3Styling}>
+                        Home Team Points: {homeTeamPoints}
+                    </Typography>
+                    <Typography className={classes.h3Styling}>
+                        Away Team Points: {awayTeamPoints}
+                    </Typography>
+                </div>
+>>>>>>> 6e6595e81001634d35b68e724719175ab3b6a65a
             </Grid>
         </Grid>
     );

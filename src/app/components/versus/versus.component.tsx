@@ -155,13 +155,35 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
 
     // console.log(matchups); // point totals from here
     // console.log(child); // currently logged in child
+
+    let homeTeamPoints = 0;
+    let awayTeamPoints = 0;
+
+    if (finalResults !== null) {
+        finalResults.forEach((result) => {
+            if (
+                matchdata.homeTeam[0].id == result.winnerId ||
+                matchdata.homeTeam[1].id == result.winnerId
+            ) {
+                homeTeamPoints += result.totalPoints;
+            } else {
+                awayTeamPoints += result.totalPoints;
+            }
+        });
+    }
+
     return (
         <Container className={classes.containerStyling}>
             <VersusHeader
                 title={'The MatchUp'}
                 homeTeam={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}!`}
                 awayTeam={`${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
+<<<<<<< HEAD
                 matchup={matchups}
+=======
+                homeTeamPoints={homeTeamPoints}
+                awayTeamPoints={awayTeamPoints}
+>>>>>>> 6e6595e81001634d35b68e724719175ab3b6a65a
             />
             <Grid className={classes.topRow}>
                 <VersusRound

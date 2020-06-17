@@ -45,12 +45,6 @@ const VersusHeader: React.FC<HeaderProps> = ({
                             Away Team Points: {awayTeamPoints}
                         </Typography>
                     </div>
-                    {/* <div className={classes.bottomRow}>
-                        <Typography className={classes.h3Styling}>
-                            Home Team Points: {homeTeamPoints}
-                        </Typography>
-                        
-                    </div> */}
                 </div>
             </Grid>
         </Grid>

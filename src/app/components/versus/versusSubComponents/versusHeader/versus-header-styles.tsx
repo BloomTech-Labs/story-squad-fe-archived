@@ -27,8 +27,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             'fontWeight': 'bold',
             '-webkit-text-stroke-width': '1px',
             '-webkit-text-stroke-color': '#000000',
-            'marginLeft': '3%',
-            'marginRight': '4%',
             'marginTop': '1%',
             'display': 'flex',
         },

@@ -7,8 +7,16 @@ interface HeaderProps {
     title?: string;
     homeTeam: string;
     awayTeam: string;
+    homeTeamPoints?: number;
+    awayTeamPoints?: number;
 }
-const VersusHeader: React.FC<HeaderProps> = ({ homeTeam, awayTeam, title }) => {
+const VersusHeader: React.FC<HeaderProps> = ({
+    homeTeam,
+    awayTeam,
+    title,
+    homeTeamPoints,
+    awayTeamPoints,
+}) => {
     const classes = useStyles();
     return (
         <Grid container direction='row' className={classes.appBar}>
@@ -26,7 +34,14 @@ const VersusHeader: React.FC<HeaderProps> = ({ homeTeam, awayTeam, title }) => {
                     <Typography className={classes.h4Styling}>VS</Typography>
                     <Typography className={classes.h4Styling}>{awayTeam}</Typography>
                 </div>
-                <Typography className={classes.h3Styling}>201 Points Needed To Win!</Typography>
+                <div>
+                    <Typography className={classes.h3Styling}>
+                        Home Team Points: {homeTeamPoints}
+                    </Typography>
+                    <Typography className={classes.h3Styling}>
+                        Away Team Points: {awayTeamPoints}
+                    </Typography>
+                </div>
             </Grid>
         </Grid>
     );

@@ -7,11 +7,6 @@ interface HeaderProps {
     title?: string;
     homeTeam: string;
     awayTeam: string;
-<<<<<<< HEAD
-    matchup: any;
-}
-const VersusHeader: React.FC<HeaderProps> = ({ homeTeam, awayTeam, title, matchup }) => {
-=======
     homeTeamPoints?: number;
     awayTeamPoints?: number;
 }
@@ -22,9 +17,7 @@ const VersusHeader: React.FC<HeaderProps> = ({
     homeTeamPoints,
     awayTeamPoints,
 }) => {
->>>>>>> 6e6595e81001634d35b68e724719175ab3b6a65a
     const classes = useStyles();
-    console.log('Rendered:', matchup);
     return (
         <Grid container direction='row' className={classes.appBar}>
             <Grid className={classes.headerMenuDiv} container item>
@@ -43,25 +36,14 @@ const VersusHeader: React.FC<HeaderProps> = ({
                         <Typography className={classes.h4Styling}>{awayTeam}</Typography>
                     </div>
                     <div className={classes.bottomRow}>
-                        <Typography className={classes.h3Styling}>{`${
-                            matchup ? matchup[0].points : 'Test'
-                        }`}</Typography>
-                        <Typography className={classes.h3Styling}>{`${
-                            matchup ? matchup[0].points : 'Test2'
-                        }`}</Typography>
+                        <Typography className={classes.h3Styling}>
+                            Home Team Points: {homeTeamPoints}
+                        </Typography>
+                        <Typography className={classes.h3Styling}>
+                            Away Team Points: {awayTeamPoints}
+                        </Typography>
                     </div>
                 </div>
-<<<<<<< HEAD
-=======
-                <div>
-                    <Typography className={classes.h3Styling}>
-                        Home Team Points: {homeTeamPoints}
-                    </Typography>
-                    <Typography className={classes.h3Styling}>
-                        Away Team Points: {awayTeamPoints}
-                    </Typography>
-                </div>
->>>>>>> 6e6595e81001634d35b68e724719175ab3b6a65a
             </Grid>
         </Grid>
     );

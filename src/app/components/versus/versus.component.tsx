@@ -149,7 +149,7 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
     if (matchdata.homeTeam === undefined)
         return (
             <Container className={classes.containerStyling}>
-                <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} matchup={``} />
+                <VersusHeader title={'Loading!!'} homeTeam={``} awayTeam={``} />
             </Container>
         );
 
@@ -178,12 +178,8 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
                 title={'The MatchUp'}
                 homeTeam={`${matchdata.homeTeam[0].username} & ${matchdata.homeTeam[1].username}!`}
                 awayTeam={`${matchdata.awayTeam[0].username} & ${matchdata.awayTeam[1].username}!`}
-<<<<<<< HEAD
-                matchup={matchups}
-=======
                 homeTeamPoints={homeTeamPoints}
                 awayTeamPoints={awayTeamPoints}
->>>>>>> 6e6595e81001634d35b68e724719175ab3b6a65a
             />
             <Grid className={classes.topRow}>
                 <VersusRound

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAPI } from '../../../../hooks';
+import { requestFactory } from '../../../../util';
 import { Illustration } from '../../../../models';
 
 import { Button } from '@material-ui/core';
@@ -8,16 +9,29 @@ import { Button } from '@material-ui/core';
 // http://localhost:3000/admin/dashboard/cohort/:child_id/details/drawing
 
 const DrawingSubmissions: React.FC = () => {
-    const { id } = useParams();
-    const [response, loading, request] = useAPI(`illustrationRoutes/children/${id}/`);
+    const { id, week } = useParams();
+    const [response, loading, request] = useAPI(`illustrationRoutes/children/${id}/week/${week}`);
     const [illustration, setIllustration] = useState<Illustration>();
-    console.log('Drawing response', response);
+    const axios = requestFactory();
 
     useEffect(() => {
         if (response !== undefined) {
-            setIllustration(response.illustrations[0]);
+            setIllustration(response.illustration);
         }
     }, [response]);
+
+    const handleFlag: any = () => {
+        axios
+            .put(`/illustrationRoutes/illustrations/${response.illustration.id}`, {
+                isFlagged: !illustration.isFlagged,
+            })
+            .then((res) => {
+                setIllustration(res.data.illustration);
+            })
+            .catch((err) => {
+                console.log('Got some errors', err);
+            });
+    };
 
     return (
         <>
@@ -29,9 +43,13 @@ const DrawingSubmissions: React.FC = () => {
                 />
             </div>
             <div>
-                <Button color='primary' variant='contained'>
-                    Dud button
-                </Button>
+                {illustration ? (
+                    <Button color='primary' variant='contained' onClick={handleFlag}>
+                        {illustration && illustration.isFlagged ? 'Unflag' : 'Flag'}
+                    </Button>
+                ) : (
+                    <p>No illustration found for this week</p>
+                )}
             </div>
         </>
     );

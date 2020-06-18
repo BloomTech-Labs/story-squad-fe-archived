@@ -38,11 +38,11 @@ const AdminDashboardPage: React.FC = () => {
                     <Route path='/admin/dashboard/moderator' component={ModeratorDashboardPage} />
                     <Route path='/admin/dashboard/help' component={HelpPage} />
                     <Route
-                        path='/admin/dashboard/cohort/:id/details/story'
+                        path='/admin/dashboard/cohort/:id/details/story/week/:week'
                         component={StorySubmissionsPage}
                     />
                     <Route
-                        path='/admin/dashboard/cohort/:id/details/drawing'
+                        path='/admin/dashboard/cohort/:id/details/drawing/week/:week'
                         component={DrawingSubmissionsPage}
                     />
                     <Route

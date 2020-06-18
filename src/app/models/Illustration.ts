@@ -5,4 +5,5 @@ export interface Illustration {
     points: number;
     votes: number;
     week: number;
+    isFlagged: boolean;
 }

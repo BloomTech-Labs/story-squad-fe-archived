@@ -62,10 +62,14 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
 
     //student/teammate submissions state
     useEffect(() => {
-        console.log(response);
+        console.log('versus Component response', response);
         // This if statement has been changed to include finalResults so that
         // this code will only run when the data for both has been downloaded.
         // This way we can add the isLoser property to the matchups before we set the matchups state.
+
+        if (response) {
+            setMatchups(response.matchups);
+        }
 
         if (response && finalResults) {
             setVotesCasted(response.matchdata.votes);
@@ -171,6 +175,8 @@ const Versus: React.FC<VersusProps> = ({ child }) => {
             }
         });
     }
+
+    console.log('versus Component matchups', matchups);
 
     return (
         <Container className={classes.containerStyling}>

@@ -12,7 +12,7 @@ import { Button } from '@material-ui/core';
 
 const StorySubmissions: React.FC = () => {
     const { id, week } = useParams();
-    const [response, loading, request] = useAPI(`/storyRoutes/children/${id}/week/2`);
+    const [response, loading, request] = useAPI(`/storyRoutes/children/${id}/week/${week}`);
     const [story, setStory] = useState<Story>();
     const axios = requestFactory();
     const classes = useStyles({});

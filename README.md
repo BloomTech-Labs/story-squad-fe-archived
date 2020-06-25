@@ -186,6 +186,22 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 See [Backend Documentation](https://github.com/Lambda-School-Labs/story-squad-be/blob/master/README.md) for details on the backend of our project.
 
+## Known issues at the end of Labs24 6/24/20
+
+-   Vote Button on Frame 38
+    After the voting time is over, a button saying "vote" is still present at the last page. It should either be removed or replaced with a button that returns the player to the main menu
+
+-   Duplicate points on voting frame
+    When the point allocation time is over, kids will see two intances of the point value for each versus block. There should be only one. https://github.com/Lambda-School-Labs/story-squad-fe/blob/master/src/app/components/versus/versus.component.tsx
+
+-   Incomplete features on the moderator page -
+    The "Children" "Flagged" and "Status" columns in the moderator dashboard have no functionality. They should display the number of children, whether or not a cohort has flagged stories for the current week, and whether or not the stories/illustrations have been viewed, respectively.
+
+-   Styling for moderator page -
+    The moderator view for stories and illustrations could use some styling work, as stories with large amount of profanity will show an overlap between the possible words display and the transcribed text.
+    -   a zoom feature could be implemented for the stories in the moderator page, to be able to more clearly see ant hand writing.
+    -   Only page 1 of the stories will be visible in the stories moderator page. can be fixed here https://github.com/Lambda-School-Labs/story-squad-fe/blob/master/src/app/components/admin-dashboard/cohort/submission/story.submission.tsx#L60-L64
+
 ## Contributors
 
 |                                                                  [Lauren Chandler](https://github.com/)                                                                  |                                             [Eric Banker](https://github.com/)                                             |                                          [Forrest Darabian](https://github.com/Forrestdarabian)                                           |                                       [Shruti Malik](https://github.com/ShrutiMalik123)                                        |                                           [Brittany Moyers](https://github.com/)                                            |                                      [William Sedlacek](https://github.com/wSedlacek)                                      |

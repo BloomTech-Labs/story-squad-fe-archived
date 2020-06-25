@@ -7,8 +7,16 @@ interface HeaderProps {
     title?: string;
     homeTeam: string;
     awayTeam: string;
+    homeTeamPoints?: number;
+    awayTeamPoints?: number;
 }
-const VersusHeader: React.FC<HeaderProps> = ({ homeTeam, awayTeam, title }) => {
+const VersusHeader: React.FC<HeaderProps> = ({
+    homeTeam,
+    awayTeam,
+    title,
+    homeTeamPoints,
+    awayTeamPoints,
+}) => {
     const classes = useStyles();
     return (
         <Grid container direction='row' className={classes.appBar}>
@@ -21,12 +29,24 @@ const VersusHeader: React.FC<HeaderProps> = ({ homeTeam, awayTeam, title }) => {
                 <div className={classes.upperHeaderButtonDiv}>
                     <MenuButton />
                 </div>
-                <div className={classes.teamName}>
-                    <Typography className={classes.h4Styling}>{homeTeam}</Typography>
-                    <Typography className={classes.h4Styling}>VS</Typography>
-                    <Typography className={classes.h4Styling}>{awayTeam}</Typography>
+                {/* The section below is where we are rendering the Team Names as well as the number of points each team earns */}
+                <div className={classes.teamInfo}>
+                    <div className={classes.teamName}>
+                        <Typography className={classes.h4Styling}>{homeTeam}</Typography>
+                        <Typography className={classes.h3Styling}>
+                            Home Team Points: {homeTeamPoints}
+                        </Typography>
+                    </div>
+                    <div className={classes.teamName}>
+                        <Typography className={classes.h4Styling}>VS</Typography>
+                    </div>
+                    <div className={classes.teamName}>
+                        <Typography className={classes.h4Styling}>{awayTeam}</Typography>
+                        <Typography className={classes.h3Styling}>
+                            Away Team Points: {awayTeamPoints}
+                        </Typography>
+                    </div>
                 </div>
-                <Typography className={classes.h3Styling}>201 Points Needed To Win!</Typography>
             </Grid>
         </Grid>
     );

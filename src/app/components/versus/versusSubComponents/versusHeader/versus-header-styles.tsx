@@ -27,16 +27,25 @@ export const useStyles = makeStyles((theme: Theme) =>
             'fontWeight': 'bold',
             '-webkit-text-stroke-width': '1px',
             '-webkit-text-stroke-color': '#000000',
-            'marginLeft': '3%',
-            'marginRight': '4%',
             'marginTop': '1%',
             'display': 'flex',
         },
-        teamName: {
+        teamInfo: {
             display: 'flex',
             flexDirection: 'row',
+            width: '100%',
+        },
+        teamName: {
+            display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'space-evenly',
-            alignContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+        },
+        bottomRow: {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
             width: '80%',
         },
         appBar: {
@@ -46,7 +55,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             backgroundImage: `url(${cityscape})`,
             backgroundRepeat: 'no-repeat',
             border: '7px solid #000000',
-            backgroundSize: '101% 103%',
+            backgroundSize: 'cover',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
     Button,
@@ -17,8 +17,8 @@ export const MenuButton: React.FC = () => {
     const classes = useStyles({});
     const history = useHistory();
     const logout = () => window.dispatchEvent(new Event('logout'));
-    const [menu, setMenu] = React.useState(false);
-    const anchorRef = React.useRef<HTMLButtonElement>(null);
+    const [menu, setMenu] = useState(false);
+    const anchorRef = useRef<HTMLButtonElement>(null);
     // need to add switch account function for menu item!
     const handleToggle = () => {
         setMenu((prevMenu) => !prevMenu);

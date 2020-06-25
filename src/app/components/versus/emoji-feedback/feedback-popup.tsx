@@ -95,12 +95,16 @@ export const FeedbackPopup: React.FC<VersusProps> = ({ open, setOpen, submission
                         {'Here is some feedback about your story'}
                     </DialogTitle>
                     <DialogContent>
-                        <DialogContentText className={classes.mainContainer}>
-                            <img src={submission[0]} className={classes.storyPic} />
+                        <div className={classes.mainContainer}>
+                            <img
+                                src={submission[0]}
+                                className={classes.storyPic}
+                                alt='Submission'
+                            />
                             <div className={classes.inputDiv}>
                                 <span className={classes.emojiSpan}>{emojis}</span>
                             </div>
-                        </DialogContentText>
+                        </div>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>Go Back</Button>

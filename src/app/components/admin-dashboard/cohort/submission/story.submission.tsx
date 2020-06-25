@@ -11,22 +11,22 @@ import { Button } from '@material-ui/core';
 // http://localhost:3000/admin/dashboard/cohort/:child_id/details/story
 
 const StorySubmissions: React.FC = () => {
-    const { id } = useParams();
-    const [response, loading, request] = useAPI(`/storyroutes/children/${id}/`);
+    const { id, week } = useParams();
+    const [response, loading, request] = useAPI(`/storyRoutes/children/${id}/week/${week}`);
     const [story, setStory] = useState<Story>();
     const axios = requestFactory();
     const classes = useStyles({});
 
     useEffect(() => {
         if (response !== undefined) {
-            setStory(response.stories[0]);
+            setStory(response.story);
         }
-        console.log(response);
+        console.log('Story Submission Response', response);
     }, [response]);
 
     const handleFlag: any = () => {
         axios
-            .put(`/storyRoutes/stories/${response.stories[0].id}`, {
+            .put(`/storyRoutes/stories/${response.story.id}`, {
                 isFlagged: !story.isFlagged,
             })
             .then((res) => {
@@ -53,9 +53,13 @@ const StorySubmissions: React.FC = () => {
                 ) : (
                     <h1>{story && story.possibleWords.split('"')}</h1>
                 )}
-                <Button color='primary' variant='contained' onClick={handleFlag}>
-                    {story && story.isFlagged ? 'Unflag' : 'Flag'}
-                </Button>
+                {story ? (
+                    <Button color='primary' variant='contained' onClick={handleFlag}>
+                        {story && story.isFlagged ? 'Unflag' : 'Flag'}
+                    </Button>
+                ) : (
+                    <p>No story found for this week</p>
+                )}
             </div>
             <div className={classes.text}>
                 <p>{story && story.transcribed_text.t_page1}</p>

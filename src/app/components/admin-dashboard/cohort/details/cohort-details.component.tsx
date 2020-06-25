@@ -84,7 +84,9 @@ const CohortDetails: React.FC<CohortDetailsProps> = ({ className, id }) => {
                         cohort.children
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((child: any) => {
-                                return <StudentDetail key={child.id} child={child} />;
+                                return (
+                                    <StudentDetail key={child.id} child={child} cohort={cohort} />
+                                );
                             })}
                     <TablePagination
                         count={100}

@@ -70,7 +70,9 @@ const PdfList: React.FC<PdfListProps> = ({ className }) => {
                     {canon.map((pdf) => (
                         <TableRow key={pdf.week}>
                             <TableCell>
-                                <Button onClick={() => handleMatchmake(pdf.week)}>boop</Button>
+                                <Button onClick={() => handleMatchmake(pdf.week)}>
+                                    Start Matchup
+                                </Button>
                             </TableCell>
                             <TableCell>{pdf.week}</TableCell>
                             <TableCell>

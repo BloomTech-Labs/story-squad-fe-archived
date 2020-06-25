@@ -67,8 +67,8 @@ const VersusRound: React.FC<RoundProps> = ({
             Child 1 submission | Child 2 submission
 
             
-            lightning bolt
-            score
+            lightning bolt -- separating both columns
+            score -- moves to the column of whichever child wins
 
             */}
             {/* Below, we are setting the loss class on children whose isLoser property is true */}
@@ -83,6 +83,7 @@ const VersusRound: React.FC<RoundProps> = ({
                         setOpen={setOpen}
                         submission={b64passLeft}
                     />
+                    {/* This is for the red badge that appears on a child's user icon when they have received emoji feedback */}
                     {matchup[0].childId === child.id ? (
                         <Badge
                             onClick={() => {

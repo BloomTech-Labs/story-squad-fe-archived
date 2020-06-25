@@ -6,6 +6,9 @@ import { Cohort, SelectableCohort } from '../../../../models';
 import { useAPI } from '../../../../hooks';
 // import { SelectableCohort } from './list.component';
 
+// By Setting the cohort as SelectableCohort, we ensure that the cohort will
+// be the same shape as all of the other instances of cohort, but with an
+// additional 'selected' boolean to indicate when a checkbox has been selected
 interface CohortListItemProps {
     cohort: SelectableCohort;
     onUpdate?: () => void;

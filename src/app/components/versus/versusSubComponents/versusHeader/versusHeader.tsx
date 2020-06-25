@@ -29,6 +29,7 @@ const VersusHeader: React.FC<HeaderProps> = ({
                 <div className={classes.upperHeaderButtonDiv}>
                     <MenuButton />
                 </div>
+                {/* The section below is where we are rendering the Team Names as well as the number of points each team earns */}
                 <div className={classes.teamInfo}>
                     <div className={classes.teamName}>
                         <Typography className={classes.h4Styling}>{homeTeam}</Typography>
